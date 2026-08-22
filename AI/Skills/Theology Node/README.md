@@ -47,6 +47,6 @@ Either way, ask Claude to create or rework a node and the skill triggers on its 
 
 ## Adapting it
 
-The skill assumes the vault lives in Google Drive and that Claude cannot write there, so the finished node is posted to chat as a fenced markdown block to copy. If your vault is on disk instead, change step 1 and step 4 of `SKILL.md`. Nothing else depends on Drive except `agents/librarian.md`.
+The skill writes the finished node straight into the vault on disk, then commits it. If your vault lives somewhere Claude cannot write to, like Google Drive, change step 1 and step 4 of `SKILL.md` to fetch the node and post it back as a block to copy. `agents/librarian.md` is the only other file that knows where the vault is.
 
 Source tiers, register definitions and balance rules live in `references/source-policy.md` and `references/balance.md`. Those are the files to edit if you want to point the same pipeline at a different subject.

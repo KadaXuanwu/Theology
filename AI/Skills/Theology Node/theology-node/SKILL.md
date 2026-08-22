@@ -5,9 +5,9 @@ description: Research, write and fact check nodes for the Theology vault (Argume
 
 # Theology Node
 
-Builds one node for the Theology vault at research grade, then hands the finished markdown to the user to paste into Google Drive.
+Builds one node for the Theology vault at research grade, then writes it into the vault.
 
-The vault is Obsidian style markdown. Folders: `Arguments For`, `Arguments Against`, `Claims`, `Evidence`. Nodes cross reference with `[[Exact File Name]]`.
+The vault is the `Theology` folder at the repo root, Obsidian style markdown. Folders: `Arguments For`, `Arguments Against`, `Claims`, `Evidence`. Nodes cross reference with `[[Exact File Name]]`.
 
 Read `references/templates.md`, `references/source-policy.md`, `references/balance.md` and `references/style.md` before running the pipeline. They are short.
 
@@ -17,13 +17,13 @@ Read `references/templates.md`, `references/source-policy.md`, `references/balan
 2. Node body stays between 300 and 1000 words, frontmatter excluded.
 3. The verifier may delete text written in this session. It may not delete text that already existed in the node. Pre-existing problems get reported to the user, never silently cut.
 4. At least half the sources in a node are academic register. Advocacy publishing never carries a fact on its own. See `references/balance.md`.
-5. Output goes into the chat as a fenced markdown block ready to copy. Do not write to Drive.
+5. The finished node is written to its file in the vault, then committed and pushed. Working files never land in the vault.
 
 ## Step 1: Establish the baseline
 
 Ask the user for the node title and folder if not given.
 
-If the node already exists, fetch it from Drive and save it verbatim to `existing.md` in the working directory. This file is the protection list. If the node is new, create an empty `existing.md`.
+If the node already exists, copy it verbatim to `existing.md` in a scratch directory outside the vault before anything touches it. This file is the protection list. If the node is new, create an empty `existing.md`.
 
 Never skip this. The verifier's cut authority depends on it.
 
@@ -45,7 +45,7 @@ Agents start cold and cannot see this conversation. Everything they need goes in
 
 ### Phase 0: Librarian (1 agent, runs first)
 
-`agents/librarian.md`. Reads the existing vault via the Google Drive tools. Returns the list of existing node titles, which ones already cover part of this topic, and which sources are already cited elsewhere.
+`agents/librarian.md`. Reads the existing vault on disk. Returns the list of existing node titles, which ones already cover part of this topic, and which sources are already cited elsewhere.
 
 Its output feeds every later agent so they link instead of re-proving.
 
@@ -62,7 +62,7 @@ Each returns a numbered claim list. Every claim has a source with a URL or full 
 
 ### Phase 2: Writer (1 agent)
 
-`agents/writer.md`. Gets the librarian output, all four researcher lists, the user's notes, and `existing.md`. Produces the node to template and word budget. Saves it as `draft.md` and returns it.
+`agents/writer.md`. Gets the librarian output, all four researcher lists, the user notes, and `existing.md`. Produces the node to template and word budget. Saves it as `draft.md` in the scratch directory and returns it.
 
 The writer decides framing. Do not run parallel framing agents. Merged framings produce longer, blander text.
 
@@ -87,9 +87,11 @@ Then run the checklist in `references/style.md`.
 
 ## Step 4: Deliver
 
-Post to chat:
+Write the finished node to `Theology/<Folder>/<Exact Title>.md`, then commit and push.
 
-1. The finished node in one fenced markdown block, filename stated above it
+Then post to chat:
+
+1. The path of the file written
 2. A short list of what changed and why, if this was a rework
 3. Protected problems the verifier flagged but could not cut, with the reason
 4. The balance ledger as recounted by the verifier, and any failing rule

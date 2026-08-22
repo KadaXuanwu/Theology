@@ -13,7 +13,7 @@ You run first. Everything downstream depends on your output. Your job is to stop
 
 ## Process
 
-1. Find the `Theology` folder in Google Drive. It has four subfolders: `Arguments For`, `Arguments Against`, `Claims`, `Evidence`.
+1. Open the `Theology` folder at the repo root. It has four subfolders: `Arguments For`, `Arguments Against`, `Claims`, `Evidence`.
 2. List every file in all four. Record exact titles without the `.md` extension. These are the only valid link targets.
 3. Read the nodes that plausibly touch this topic. Judge by title first, then open the likely ones. Do not open all of them.
 4. For each relevant node, note: its type, its `status`, what it establishes, and which sources it already cites.
