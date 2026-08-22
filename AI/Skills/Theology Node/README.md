@@ -28,6 +28,8 @@ The verifier never sees the researcher notes or the writer's reasoning. That is 
 
 ## Layout
 
+The skill itself lives at `.claude/skills/theology-node` in the repo root, which is where Claude Code looks for project skills. This file is the documentation for it.
+
 ```
 theology-node/
   SKILL.md                 entry point and pipeline definition
@@ -39,7 +41,7 @@ theology-node/
 
 ## Install
 
-**Claude Code.** Drop the `theology-node` folder into a skills directory. Personal scope is `~/.claude/skills/theology-node`, project scope is `.claude/skills/theology-node` in the repo root. Claude scans both at startup. See the [skills docs](https://code.claude.com/docs/en/skills).
+**Claude Code.** Already installed in this repo at `.claude/skills/theology-node`. Claude scans that folder at startup, so a new session picks it up on its own. To use it in other projects on one machine, copy the folder to `~/.claude/skills/theology-node` instead. See the [skills docs](https://code.claude.com/docs/en/skills).
 
 **claude.ai.** Zip the `theology-node` folder on its own, so `SKILL.md` sits at the top of the archive, then upload it under Settings > Features. This needs a Pro, Max, Team or Enterprise plan with code execution enabled. See the [Agent Skills overview](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview).
 

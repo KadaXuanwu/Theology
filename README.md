@@ -29,9 +29,11 @@ Nothing gets proved twice. If two arguments need the same claim, the claim becom
 ## Layout
 
 ```
-Theology/                 the vault
-AI/Skills/Theology Node/  the skill that writes and fact checks nodes
-CLAUDE.md                 working instructions for Claude
+Theology/                      the vault
+.claude/skills/theology-node/  the skill that writes and fact checks nodes
+AI/Skills/Theology Node/       notes on that skill
+AI/Memory/                     what I should remember across sessions
+CLAUDE.md                      working instructions for Claude
 ```
 
-`AI/Skills/Theology Node` holds `theology-node`, a Claude skill that runs a multi agent pipeline over one node: a librarian reads the existing vault so new work links instead of repeating, four researchers cover primary text, material evidence, scholarly consensus and the strongest opposing case, a writer builds the node to template, and a verifier reopens every source cold and rules on each factual sentence. See its own [README](AI/Skills/Theology%20Node/README.md).
+`.claude/skills/theology-node` is a Claude skill that runs a multi agent pipeline over one node: a librarian reads the existing vault so new work links instead of repeating, four researchers cover primary text, material evidence, scholarly consensus and the strongest opposing case, a writer builds the node to template, and a verifier reopens every source cold and rules on each factual sentence. Claude Code loads it automatically. See its [README](AI/Skills/Theology%20Node/README.md).
