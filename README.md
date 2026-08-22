@@ -35,7 +35,3 @@ CLAUDE.md                 working instructions for Claude
 ```
 
 `AI/Skills/Theology Node` holds `theology-node`, a Claude skill that runs a multi agent pipeline over one node: a librarian reads the existing vault so new work links instead of repeating, four researchers cover primary text, material evidence, scholarly consensus and the strongest opposing case, a writer builds the node to template, and a verifier reopens every source cold and rules on each factual sentence. See its own [README](AI/Skills/Theology%20Node/README.md).
-
-## Note on this copy
-
-The vault lives in Google Drive. The `Theology` folder here is a manual copy and can be behind. Treat Drive as the source of truth.
