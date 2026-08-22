@@ -12,7 +12,7 @@ Whenever people can't explain something, they reach for God as the answer. The a
 - Needs the historical half sourced. The phrase itself comes from Henry Drummond in the 1890s and was pressed hardest by Dietrich Bonhoeffer, both of them Christians warning other Christians off the move, which is worth noting because it means the objection is not originally an atheist one.
 
 # Countered By
-- Needs writing. The standard reply is that the argument attacks a bad version of theism rather than the classical one, where God is the reason there is anything at all rather than the cause of particular unexplained events. That version does not shrink as science advances because it was never occupying a gap.
+- [[God Is the Reason Anything Exists at All]] is the standard reply: the argument attacks a bad version of theism rather than the classical one, where God is the reason there is anything at all rather than the cause of particular unexplained events. That version does not shrink as science advances because it was never occupying a gap. It concedes less than it looks, since what survives covers the contingency argument rather than theism as practised.
 
 # Limits
 - A pattern of past retreats does not guarantee the next one. "Science has explained things before" is an induction, not a proof that everything currently unexplained will be explained.
