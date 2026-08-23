@@ -26,6 +26,41 @@ const FORCES = {
 // read the shape without competing with the real connections.
 const HOP_FADE = { node: 0.22, label: 0.62, link: 0.45 }
 
+// Node names are long here, and one long line stretches a label across a good
+// part of the canvas. Two short lines sit under the circle instead.
+const LABEL = { maxWidth: 92, maxLines: 2, lineGap: 1.12 }
+
+// Wraps on words, and trims the last line rather than dropping the rest.
+export function wrapLabel(measure, text, maxWidth, maxLines) {
+  const words = String(text).split(" ").filter(Boolean)
+  if (words.length === 0) return []
+
+  const lines = []
+  let line = ""
+
+  for (let i = 0; i < words.length; i++) {
+    const candidate = line ? `${line} ${words[i]}` : words[i]
+    if (!line || measure(candidate) <= maxWidth) {
+      line = candidate
+    } else if (lines.length + 1 < maxLines) {
+      lines.push(line)
+      line = words[i]
+    } else {
+      lines.push(ellipsize(measure, `${line} ${words.slice(i).join(" ")}`, maxWidth))
+      return lines
+    }
+  }
+
+  if (line) lines.push(measure(line) > maxWidth ? ellipsize(measure, line, maxWidth) : line)
+  return lines
+}
+
+function ellipsize(measure, text, maxWidth) {
+  let cut = text
+  while (cut.length > 1 && measure(`${cut}…`) > maxWidth) cut = cut.slice(0, -1)
+  return `${cut.trimEnd()}…`
+}
+
 // One step of the simulation. Pure apart from mutating node x/y/vx/vy, which
 // keeps it testable outside a browser.
 export function stepForces(nodes, links, alpha, alphaTarget = 0) {
@@ -284,12 +319,15 @@ export function mount(el, data, options = {}) {
       const showLabel = node === hovered || (near && near.has(node.id)) || (!hovered && labelEveryone)
       if (showLabel) {
         ctx.globalAlpha = faded ? 0.25 : node === hovered ? 1 : 0.85 * fade(node, "label")
-        ctx.font = `${node === hovered ? 600 : 400} ${Math.min(13, 10 + camera.scale)}px system-ui, sans-serif`
+        const size = Math.min(13, 10 + camera.scale)
+        ctx.font = `${node === hovered ? 600 : 400} ${size}px system-ui, sans-serif`
         ctx.textAlign = "center"
         ctx.textBaseline = "top"
         ctx.fillStyle = node === hovered ? colors.text : colors.muted
-        const label = node.id.length > 34 ? `${node.id.slice(0, 33)}…` : node.id
-        ctx.fillText(label, x, y + r + 4)
+        const lines = wrapLabel((t) => ctx.measureText(t).width, node.id, LABEL.maxWidth, LABEL.maxLines)
+        for (const [row, text] of lines.entries()) {
+          ctx.fillText(text, x, y + r + 4 + row * size * LABEL.lineGap)
+        }
       }
     }
     ctx.globalAlpha = 1

@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url"
 
 import { parseFrontmatter, slugify } from "./lib/content.mjs"
 import { createRenderer, htmlToText } from "./lib/markdown.mjs"
-import { neighbourhood, seededRandom, stepForces } from "./assets/graph.js"
+import { neighbourhood, seededRandom, stepForces, wrapLabel } from "./assets/graph.js"
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -390,6 +390,53 @@ console.log("the enlarged graph separates neighbours from context")
   check("the circle recedes furthest", amount("node") < amount("link") && amount("node") < amount("label"), `node ${amount("node")}, link ${amount("link")}, label ${amount("label")}`)
   check("the label stays the most readable of the three", amount("label") > amount("link"), `label ${amount("label")} vs link ${amount("link")}`)
   check("and the drawing actually uses them", ["fade(node, \"node\")","fade(node, \"label\")","fade(link.source, \"link\")"].every((needle) => source.includes(needle)))
+}
+
+console.log("node labels wrap to two short rows")
+{
+  // A rough stand-in for canvas text metrics at the size labels are drawn.
+  const measure = (t) => t.length * 5.6
+  const maxWidth = 92
+  const wrap = (t) => wrapLabel(measure, t, maxWidth, 2)
+
+  const data = await readGraphData()
+  const titles = data.nodes.map((n) => n.id)
+
+  check(
+    "no label runs past the width limit",
+    titles.every((t) => wrap(t).every((line) => measure(line) <= maxWidth)),
+    titles.find((t) => wrap(t).some((line) => measure(line) > maxWidth)) ?? "",
+  )
+  check(
+    "and none runs to a third row",
+    titles.every((t) => wrap(t).length <= 2),
+    titles.find((t) => wrap(t).length > 2) ?? "",
+  )
+  check(
+    "long titles actually use the second row",
+    titles.filter((t) => wrap(t).length === 2).length > 0,
+    `${titles.filter((t) => wrap(t).length === 2).length} of ${titles.length} wrap`,
+  )
+  check(
+    "short titles stay on one row",
+    wrap("Jesus Existed").length === 1,
+    JSON.stringify(wrap("Jesus Existed")),
+  )
+
+  // It splits on spaces. A regex that lost its backslash would split on the
+  // letter s instead, quietly shredding every title that contains one.
+  check("it breaks on words, not on letters", wrap("Jesus Existed")[0] === "Jesus Existed")
+  check(
+    "a title too long for two rows is trimmed, not dropped",
+    wrap("God Punishes Humans for a Flaw He Built into Them").at(-1).endsWith("…"),
+  )
+  check("a single unbreakable word is trimmed too", wrap("Supercalifragilisticexpialidocious").length === 1)
+  check("empty text yields nothing to draw", wrap("").length === 0)
+  check(
+    "punctuation and ampersands survive",
+    wrap("Peoples, Duda & Marlowe 2016").join(" ").startsWith("Peoples, Duda &"),
+    JSON.stringify(wrap("Peoples, Duda & Marlowe 2016")),
+  )
 }
 
 console.log("local graph")
