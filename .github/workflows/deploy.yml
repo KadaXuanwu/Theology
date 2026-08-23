@@ -1,0 +1,102 @@
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Theology/**"
+      - "site/**"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it half way.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  # jackyzha0/quartz, v5 branch. Pinned so an upstream change cannot break the
+  # site overnight. Bump this line to pick up newer Quartz.
+  QUARTZ_REF: 075afd3f712da0088a07f5284a7b3aba37dd61b6
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the vault
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # full history, the note dates are read from it
+          path: vault
+
+      - name: Fetch Quartz at the pinned commit
+        run: |
+          mkdir quartz
+          cd quartz
+          git init -q
+          git remote add origin https://github.com/jackyzha0/quartz.git
+          git fetch -q --depth 1 origin "$QUARTZ_REF"
+          git checkout -q FETCH_HEAD
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: quartz/package-lock.json
+
+      - name: Install Quartz
+        working-directory: quartz
+        run: npm ci
+
+      - name: Copy the vault into Quartz
+        run: |
+          rm -rf quartz/content
+          mkdir -p quartz/content
+          cp -R vault/Theology/. quartz/content/
+          rm -rf quartz/content/.obsidian
+
+      - name: Apply our config
+        run: cp vault/site/quartz.config.yaml quartz/quartz.config.yaml
+
+      - name: Stamp note dates from git history
+        run: node vault/site/stamp-dates.mjs vault Theology quartz/content
+
+      - name: Generate the homepage
+        run: node vault/site/build-index.mjs quartz/content
+
+      - name: Install Quartz plugins
+        working-directory: quartz
+        run: npx quartz plugin install --from-config
+
+      - name: Install the theme package
+        working-directory: quartz
+        # `quartz plugin install` does not pull the package for the theme named
+        # in the @quartz-themes/core options. The build installs it itself but
+        # too late to use on the same run, so the first build would fail.
+        run: npm i --no-save "@quartz-themes/default@^1.0.1"
+
+      - name: Build
+        working-directory: quartz
+        run: npx quartz build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: quartz/public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
