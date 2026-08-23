@@ -878,6 +878,9 @@ a.external::after {
   width: 100%;
   height: 100%;
   cursor: grab;
+  /* Claim touch gestures for the graph. Without this the browser scrolls and
+     zooms the page instead, and panning never reaches the canvas. */
+  touch-action: none;
 }
 .graph-mount canvas:active {
   cursor: grabbing;

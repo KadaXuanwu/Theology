@@ -154,6 +154,8 @@ export function mount(el, data, options = {}) {
   let hovered = null
   let dragging = null
   let panning = null
+  const pointers = new Map()
+  let pinch = null
   let pointerMoved = false
   let frame = null
   let running = false
@@ -298,11 +300,12 @@ export function mount(el, data, options = {}) {
     start()
   }
 
-  function nodeAt(sx, sy) {
+  // Fingers are blunter than a cursor, so touch gets a wider hit area.
+  function nodeAt(sx, sy, slop = 4) {
     for (let i = nodes.length - 1; i >= 0; i--) {
       const node = nodes[i]
       const [x, y] = toScreen(node.x, node.y)
-      const r = Math.max(node.r * camera.scale, 6) + 4
+      const r = Math.max(node.r * camera.scale, 6) + slop
       if ((sx - x) ** 2 + (sy - y) ** 2 <= r * r) return node
     }
     return null
@@ -313,22 +316,79 @@ export function mount(el, data, options = {}) {
     return [event.clientX - rect.left, event.clientY - rect.top]
   }
 
+  const slopFor = (event) => (event.pointerType === "touch" ? 14 : 4)
+
+  // Capture keeps a drag alive if the finger slides off the canvas, but it is
+  // only a convenience and it throws if the pointer has already gone. Letting
+  // that escape would abort the rest of the handler and kill the gesture.
+  const capturePointer = (event) => {
+    try {
+      canvas.setPointerCapture(event.pointerId)
+    } catch {
+      /* the gesture still works without it */
+    }
+  }
+
+  function startPinch() {
+    const [a, b] = [...pointers.values()]
+    pinch = {
+      dist: Math.hypot(a[0] - b[0], a[1] - b[1]) || 1,
+      mid: [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2],
+    }
+    // A two finger gesture is never a node drag and never a tap.
+    if (dragging) {
+      dragging.pinned = false
+      dragging = null
+    }
+    panning = null
+    pointerMoved = true
+  }
+
   function onPointerDown(event) {
-    const [sx, sy] = pointerPos(event)
-    const node = nodeAt(sx, sy)
+    const pos = pointerPos(event)
+    pointers.set(event.pointerId, pos)
+    capturePointer(event)
+
+    if (pointers.size === 2) {
+      startPinch()
+      return
+    }
+    if (pointers.size > 2) return
+
     pointerMoved = false
-    canvas.setPointerCapture(event.pointerId)
+    const node = nodeAt(pos[0], pos[1], slopFor(event))
     if (node) {
       dragging = node
       node.pinned = true
       reheat(0.3)
     } else {
-      panning = { sx, sy, camX: camera.x, camY: camera.y }
+      panning = { sx: pos[0], sy: pos[1], camX: camera.x, camY: camera.y }
     }
   }
 
   function onPointerMove(event) {
-    const [sx, sy] = pointerPos(event)
+    const pos = pointerPos(event)
+    if (pointers.has(event.pointerId)) pointers.set(event.pointerId, pos)
+    const [sx, sy] = pos
+
+    if (pinch && pointers.size >= 2) {
+      const [a, b] = [...pointers.values()]
+      const dist = Math.hypot(a[0] - b[0], a[1] - b[1]) || 1
+      const mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]
+
+      // Whatever sat under the old midpoint should sit under the new one at the
+      // new scale. That is pinch zoom and two finger pan in a single step.
+      const [wx, wy] = toWorld(pinch.mid[0], pinch.mid[1])
+      camera.scale = Math.min(Math.max(camera.scale * (dist / pinch.dist), 0.25), 6)
+      const [nx, ny] = toWorld(mid[0], mid[1])
+      camera.x += wx - nx
+      camera.y += wy - ny
+
+      pinch = { dist, mid }
+      hasFitted = true
+      draw()
+      return
+    }
 
     if (dragging) {
       pointerMoved = true
@@ -343,9 +403,13 @@ export function mount(el, data, options = {}) {
       pointerMoved = true
       camera.x = panning.camX - (sx - panning.sx) / camera.scale
       camera.y = panning.camY - (sy - panning.sy) / camera.scale
+      hasFitted = true
       draw()
       return
     }
+
+    // Touch has no hover state, and leaving one set would strand a highlight.
+    if (event.pointerType === "touch") return
 
     const node = nodeAt(sx, sy)
     if (node !== hovered) {
@@ -358,6 +422,24 @@ export function mount(el, data, options = {}) {
 
   function onPointerUp(event) {
     const [sx, sy] = pointerPos(event)
+    pointers.delete(event.pointerId)
+    try {
+      if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId)
+    } catch {
+      /* already released */
+    }
+
+    if (pinch) {
+      pinch = null
+      // Hand the gesture back to the finger still down instead of jumping.
+      if (pointers.size === 1) {
+        const [p] = [...pointers.values()]
+        panning = { sx: p[0], sy: p[1], camX: camera.x, camY: camera.y }
+        pointerMoved = true
+      }
+      return
+    }
+
     if (dragging) {
       dragging.pinned = false
       if (!pointerMoved) open(dragging)
@@ -365,12 +447,16 @@ export function mount(el, data, options = {}) {
       reheat(0.2)
     } else if (panning) {
       if (!pointerMoved) {
-        const node = nodeAt(sx, sy)
+        const node = nodeAt(sx, sy, slopFor(event))
         if (node) open(node)
       }
       panning = null
     }
-    if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId)
+
+    if (event.pointerType === "touch" && hovered) {
+      hovered = null
+      draw()
+    }
   }
 
   function onPointerLeave() {
