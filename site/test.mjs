@@ -164,6 +164,82 @@ console.log("dragging keeps the layout live")
   check("the held node itself never drifts", a.x === 600 && a.y === 0)
 }
 
+console.log("the layout is settled before it is shown")
+{
+  const data = JSON.parse(await readFile(resolve(repoRoot, "dist/graph.json"), "utf8"))
+  const build = () => {
+    const rand = seededRandom("global")
+    const nodes = data.nodes.map((n, i) => {
+      const angle = (i / data.nodes.length) * Math.PI * 2
+      const spread = 60 + rand() * 90
+      return {
+        ...n,
+        x: Math.cos(angle) * spread + (rand() - 0.5) * 24,
+        y: Math.sin(angle) * spread + (rand() - 0.5) * 24,
+        vx: 0,
+        vy: 0,
+        pinned: false,
+      }
+    })
+    const index = new Map(nodes.map((n) => [n.id, n]))
+    return { nodes, links: data.links.map((l) => ({ source: index.get(l.source), target: index.get(l.target) })) }
+  }
+  const settle = (g) => {
+    let a = 1
+    let steps = 0
+    while (a > 0.004 && steps < 600) {
+      a = stepForces(g.nodes, g.links, a, 0)
+      steps++
+    }
+    return steps
+  }
+
+  const first = build()
+  const started = Date.now()
+  const steps = settle(first)
+  const took = Date.now() - started
+  check("settles within the step budget", steps < 600, `${steps} steps`)
+  check("cheap enough to do before painting", took < 120, `${took}ms`)
+
+  const second = build()
+  settle(second)
+  const same = first.nodes.every(
+    (n, i) => Math.abs(n.x - second.nodes[i].x) < 1e-9 && Math.abs(n.y - second.nodes[i].y) < 1e-9,
+  )
+  check("same layout every time, so the graph does not jump between loads", same)
+
+  // A settled force layout is not the ring it starts from: the distance of each
+  // node from the centre should vary a lot more than it did at the start.
+  const spreadOf = (nodes) => {
+    const cx = nodes.reduce((s, n) => s + n.x, 0) / nodes.length
+    const cy = nodes.reduce((s, n) => s + n.y, 0) / nodes.length
+    const radii = nodes.map((n) => Math.hypot(n.x - cx, n.y - cy))
+    const mean = radii.reduce((s, r) => s + r, 0) / radii.length
+    return Math.sqrt(radii.reduce((s, r) => s + (r - mean) ** 2, 0) / radii.length) / mean
+  }
+  const ringSpread = spreadOf(build().nodes)
+  const settledSpread = spreadOf(first.nodes)
+  check(
+    "settled layout differs from the ring it starts as",
+    settledSpread > ringSpread,
+    `ring ${ringSpread.toFixed(3)} -> settled ${settledSpread.toFixed(3)}`,
+  )
+}
+
+console.log("the graph is never left invisible")
+{
+  // The canvas must not need an animation to become visible. Anywhere the
+  // animation does not progress, an opacity keyframe leaves a blank graph.
+  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+  const canvasRule = sheet.match(/\.graph-mount canvas \{[^}]*}/s)?.[0] ?? ""
+  check("found the canvas rule", canvasRule.length > 0)
+  check(
+    "it does not depend on an animation to be visible",
+    !/animation|opacity/.test(canvasRule),
+    canvasRule.replace(/\s+/g, " ").slice(0, 100),
+  )
+}
+
 console.log("reheating never yanks the camera")
 {
   // The loop auto-fits the view while alpha is above 0.35, which is meant for

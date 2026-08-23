@@ -301,6 +301,23 @@ export function mount(el, data, options = {}) {
     start()
   }
 
+  // Each step is O(n^2), so a large vault gets fewer of them rather than a
+  // frozen page. At this size the whole thing costs a couple of milliseconds.
+  function presettle() {
+    const maxSteps = nodes.length > 150 ? 200 : 600
+    let a = 1
+    let steps = 0
+    while (a > FORCES.alphaMin && steps < maxSteps) {
+      a = stepForces(nodes, links, a, 0)
+      steps++
+    }
+    alpha = 0
+    for (const n of nodes) {
+      n.vx = 0
+      n.vy = 0
+    }
+  }
+
   // Fingers are blunter than a cursor, so touch gets a wider hit area.
   function nodeAt(sx, sy, slop = 4) {
     for (let i = nodes.length - 1; i >= 0; i--) {
@@ -512,8 +529,12 @@ export function mount(el, data, options = {}) {
   })
   themeWatcher.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] })
 
+  // Run the layout to rest before anything is drawn. Watching it scramble into
+  // place reads as a glitch rather than as an animation, so the reader only
+  // ever sees the settled graph. The start positions are seeded, so this lands
+  // in the same place every load.
+  presettle()
   resize()
-  start()
 
   return () => {
     if (frame) cancelAnimationFrame(frame)
