@@ -268,9 +268,11 @@ if (card) {
     { passive: true },
   )
 
-  window.addEventListener("scroll", () => {
+  const hidePreview = () => {
     card.hidden = true
-  })
+  }
+  window.addEventListener("scroll", hidePreview, { passive: true })
+  document.querySelector("main")?.addEventListener("scroll", hidePreview, { passive: true })
 }
 
 async function showPreview(link) {

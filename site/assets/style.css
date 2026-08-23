@@ -14,6 +14,8 @@
   --border-strong: #cfcfcf;
   --accent: #8a5cf5;
   --accent-soft: #efe9ff;
+  --highlight: rgba(255, 208, 0, 0.4);
+  --highlight-strong: rgba(255, 208, 0, 0.6);
   --shadow: 0 1px 2px rgba(20, 20, 30, 0.05), 0 8px 24px rgba(20, 20, 30, 0.07);
 
   --argument-for: #5b6ee8;
@@ -41,6 +43,8 @@
   --border-strong: #454545;
   --accent: #a68af9;
   --accent-soft: #2b2440;
+  --highlight: rgba(255, 208, 0, 0.4);
+  --highlight-strong: rgba(255, 208, 0, 0.6);
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
 
   --argument-for: #7f8df4;
@@ -64,6 +68,10 @@
     --border-strong: #454545;
     --accent: #a68af9;
     --accent-soft: #2b2440;
+    --highlight: rgba(255, 208, 0, 0.4);
+    --highlight-strong: rgba(255, 208, 0, 0.6);
+  --highlight: rgba(255, 208, 0, 0.4);
+  --highlight-strong: rgba(255, 208, 0, 0.6);
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
 
     --argument-for: #7f8df4;
@@ -90,6 +98,8 @@ html {
 
 body {
   margin: 0;
+  height: 100vh;
+  overflow: hidden;
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-ui);
@@ -292,7 +302,8 @@ h3 {
 .layout {
   display: grid;
   grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
-  align-items: start;
+  align-items: stretch;
+  height: calc(100vh - var(--header-h));
   max-width: 100rem;
   margin: 0 auto;
 }
@@ -308,11 +319,15 @@ body.has-right .layout {
 
 main {
   min-width: 0;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 2rem 2.5rem 5rem;
   background: var(--bg-center);
   border: 4px solid var(--bg);
   border-radius: 14px;
-  min-height: calc(100vh - var(--header-h));
+  scroll-behavior: smooth;
+  scroll-padding-top: 1.5rem;
 }
 
 .page,
@@ -323,9 +338,7 @@ main {
 /* Sidebar ----------------------------------------------------------------- */
 
 .sidebar {
-  position: sticky;
-  top: var(--header-h);
-  max-height: calc(100vh - var(--header-h));
+  height: 100%;
   overflow-y: auto;
   padding: 1.5rem 0.75rem 2rem 1.25rem;
   font-size: 0.875rem;
@@ -457,9 +470,7 @@ main {
 /* Right rail -------------------------------------------------------------- */
 
 .sidebar-right {
-  position: sticky;
-  top: var(--header-h);
-  height: calc(100vh - var(--header-h));
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
@@ -599,15 +610,14 @@ main {
 .tag-list a {
   display: inline-block;
   padding: 0.05rem 0.5rem;
-  border-radius: 999px;
-  background: var(--bg-soft);
-  color: var(--muted);
+  border-radius: 4px;
+  background-color: var(--highlight);
+  color: var(--text);
   font-size: 0.76rem;
   text-decoration: none;
 }
 .tag-list a:hover {
-  color: var(--accent);
-  background: var(--accent-soft);
+  background-color: var(--highlight-strong);
 }
 
 .note-body {
@@ -714,11 +724,12 @@ main {
 
 a.wikilink {
   text-decoration: none;
-  border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  background-color: var(--highlight);
+  padding: 0 0.12em;
+  border-radius: 3px;
 }
 a.wikilink:hover {
-  border-bottom-color: var(--accent);
-  background: var(--accent-soft);
+  background-color: var(--highlight-strong);
 }
 .wikilink.is-broken {
   color: var(--argument-against);
@@ -845,8 +856,9 @@ a.external::after {
   font-size: 0.87rem;
 }
 .tag-cloud a:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: transparent;
+  background-color: var(--highlight);
+  color: var(--text);
 }
 
 /* Graph ------------------------------------------------------------------- */
@@ -997,7 +1009,7 @@ a.external::after {
   line-height: 1.45;
 }
 .search-results mark {
-  background: color-mix(in srgb, var(--accent) 25%, transparent);
+  background: var(--highlight);
   color: inherit;
   border-radius: 2px;
 }
@@ -1052,9 +1064,19 @@ a.external::after {
 }
 
 @media (max-width: 820px) {
+  body {
+    height: auto;
+    overflow: visible;
+  }
   .layout,
   body.has-right .layout {
     grid-template-columns: minmax(0, 1fr);
+    height: auto;
+  }
+  main {
+    height: auto;
+    min-height: calc(100vh - var(--header-h));
+    overflow-y: visible;
   }
   .nav-toggle {
     display: inline-grid;
@@ -1076,6 +1098,7 @@ a.external::after {
     left: 0;
     bottom: 0;
     width: min(20rem, 84vw);
+    height: auto;
     max-height: none;
     background: var(--bg);
     z-index: 25;
