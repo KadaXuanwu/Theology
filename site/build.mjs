@@ -14,7 +14,7 @@ import { promisify } from "node:util"
 import { buildAssets } from "./lib/assets.mjs"
 import { readVault, slugify } from "./lib/content.mjs"
 import { createRenderer, htmlToText } from "./lib/markdown.mjs"
-import { graphPage, listPage, notFoundPage, notePage, tagIndexPage } from "./lib/templates.mjs"
+import { graphPage, listPage, nodeGraphPage, notFoundPage, notePage, tagIndexPage } from "./lib/templates.mjs"
 
 const run = promisify(execFile)
 const here = dirname(fileURLToPath(import.meta.url))
@@ -175,6 +175,12 @@ async function build() {
         notes,
         assets,
       }),
+    )
+
+    // The graph view of the same note, reachable from the header switch.
+    await write(
+      `${note.url}/graph/index.html`,
+      nodeGraphPage({ note, root: rootFor(3), sections, notes, assets }),
     )
   }
 

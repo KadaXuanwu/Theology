@@ -22,7 +22,21 @@ export function railGraph({ root, focus = null }) {
 </section>`
 }
 
-export function shell({ title, description, root, current, sections, notes, main, rightRail = "", bodyClass = "", assets }) {
+export function shell({
+  title,
+  description,
+  root,
+  current,
+  sections,
+  notes,
+  main,
+  rightRail = "",
+  bodyClass = "",
+  assets,
+  view = "text",
+  textUrl = "",
+  graphUrl = "graph/",
+}) {
   return `<!doctype html>
 <html lang="en" data-root="${root}">
 <head>
@@ -42,7 +56,7 @@ export function shell({ title, description, root, current, sections, notes, main
 </head>
 <body class="${[rightRail ? "has-right" : "", bodyClass].filter(Boolean).join(" ")}">
 <a class="skip-link" href="#main">Skip to content</a>
-${header(root)}
+${header({ root, view, textUrl, graphUrl })}
 <div class="layout">
 ${explorer({ root, current, sections, notes })}
 <main id="main">${main}</main>
@@ -55,11 +69,18 @@ ${overlays()}
 `
 }
 
-function header(root) {
+// Text and Graph are two views of the same thing, so they read as one control
+// rather than as two separate destinations.
+function header({ root, view, textUrl, graphUrl }) {
+  const tab = (name, label, href, glyph) =>
+    view === name
+      ? `<span class="view-tab is-active" aria-current="page">${icon(glyph)}<span>${label}</span></span>`
+      : `<a class="view-tab" href="${root}${href}">${icon(glyph)}<span>${label}</span></a>`
+
   return `<header class="site-header">
   <button class="icon-button nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="explorer">${icon("menu")}</button>
   <a class="site-title" href="${root}">Theology</a>
-  <a class="graph-button" href="${root}graph/" aria-label="Open the full graph" title="Open the full graph">${icon("graph")}<span>Graph</span></a>
+  <div class="view-switch" role="group" aria-label="View">${tab("text", "Text", textUrl, "text")}${tab("graph", "Graph", graphUrl, "graph")}</div>
   <button class="search-open" aria-label="Search notes">${icon("search")}<span>Search</span><kbd>/</kbd></button>
   <button class="icon-button theme-toggle" aria-label="Switch theme">${icon("sun")}${icon("moon")}</button>
 </header>`
@@ -89,9 +110,11 @@ function explorer({ root, current, sections, notes }) {
     })
     .join("")
 
+  const home = `<li class="tree-home"><a href="${root}"${current === null ? ' aria-current="page"' : ""}>${icon("home")}Theology</a></li>`
+
   return `<aside class="sidebar" id="explorer">
   <nav class="tree" aria-label="Notes">
-    <ul class="tree-root">${groups}</ul>
+    <ul class="tree-root">${home}${groups}</ul>
   </nav>
   <a class="tree-tags" href="${root}tags/">All tags</a>
 </aside>`
@@ -164,6 +187,7 @@ export function notePage({ note, root, dateLabel, sections, notes, assets }) {
     assets,
     main,
     rightRail: toc + railGraph({ root, focus: note.title }),
+    graphUrl: `${note.url}/graph/`,
   })
 }
 
@@ -233,7 +257,7 @@ export function graphPage({ root, sections, notes, assets }) {
     title: "Graph · Theology",
     description: "The whole vault as a link map.",
     root,
-    current: "graph",
+    current: null,
     sections,
     notes,
     assets,
@@ -248,6 +272,38 @@ export function graphPage({ root, sections, notes, assets }) {
   <div class="graph-full graph-mount" data-graph="global"></div>
 </div>`,
     bodyClass: "is-graph",
+    view: "graph",
+  })
+}
+
+// The graph view of a single note: same chrome, same sidebar selection, the
+// note's own neighbourhood filling the column instead of its prose.
+export function nodeGraphPage({ note, root, sections, notes, assets }) {
+  const section = note.section
+  return shell({
+    title: `${note.title} · Graph · Theology`,
+    description: `How ${note.title} connects to the rest of the vault.`,
+    root,
+    current: note.url,
+    sections,
+    notes,
+    assets,
+    view: "graph",
+    textUrl: `${note.url}/`,
+    graphUrl: `${note.url}/graph/`,
+    bodyClass: "is-graph",
+    main: `<div class="page page-graph">
+  <div class="graph-head">
+    <div>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${root}">Theology</a><span aria-hidden="true">/</span><a href="${root}${slugify(section.dir)}/">${escapeHtml(section.label)}</a></nav>
+      <h1><span class="dot dot-${section.kind}"></span>${escapeHtml(note.title)}</h1>
+      <p class="lede">What this note links to, and what links back to it. Drag to move, scroll to zoom, click to open.</p>
+    </div>
+    <ul class="legend">${sections.map((sec) => `<li><span class="dot dot-${sec.kind}"></span>${escapeHtml(sec.label)}</li>`).join("")}</ul>
+  </div>
+  <div class="graph-full graph-mount" data-graph="local" data-depth="2" data-focus="${escapeHtml(note.title)}"></div>
+  <p class="graph-foot"><a href="${root}graph/">See the whole vault</a></p>
+</div>`,
   })
 }
 
@@ -275,6 +331,8 @@ function icon(name) {
     chevron: '<polyline points="6 9 12 15 18 9"/>',
     sun: '<circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="7" y2="7"/><line x1="17" y1="17" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="7" y2="17"/><line x1="17" y1="7" x2="19.1" y2="4.9"/>',
     moon: '<path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/>',
+    home: '<path d="M4 11 12 4l8 7"/><path d="M6.5 9.6V19h11V9.6"/>',
+    text: '<line x1="5" y1="6" x2="19" y2="6"/><line x1="5" y1="10.5" x2="19" y2="10.5"/><line x1="5" y1="15" x2="15" y2="15"/><line x1="5" y1="19" x2="12" y2="19"/>',
     graph:
       '<circle cx="6" cy="7" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="17" r="2.5"/><line x1="7.6" y1="8.9" x2="10.6" y2="15"/><line x1="16.7" y1="8.2" x2="13.4" y2="15"/><line x1="8.4" y1="6.7" x2="15.5" y2="6.2"/>',
   }

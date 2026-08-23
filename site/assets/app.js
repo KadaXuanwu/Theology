@@ -332,7 +332,9 @@ async function showPreview(link) {
         const local = el.dataset.graph === "local"
         mountGraph(el, data, {
           focus: local ? el.dataset.focus : null,
-          depth: 1,
+          // The rail shows immediate neighbours; the full page view goes a hop
+          // further, because one hop leaves most notes looking almost isolated.
+          depth: Number(el.dataset.depth) || 1,
           showLabels: local ? "always" : "hover",
           onNavigate: (node) => {
             window.location.href = url(`${node.url}/`)

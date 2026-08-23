@@ -358,6 +358,75 @@ console.log("local graph")
   check("unknown focus is empty", neighbourhood(data, "No Such Note", 1).nodes.length === 0)
 }
 
+console.log("text and graph are two views of the same note")
+{
+  const { readdir } = await import("node:fs/promises")
+  const dist = resolve(repoRoot, "dist")
+  const read = (p) => readFile(resolve(dist, p), "utf8")
+
+  const notePath = "claims/jesus-existed"
+  const text = await read(`${notePath}/index.html`)
+  const graph = await read(`${notePath}/graph/index.html`)
+
+  const tabs = (html) =>
+    [...html.matchAll(/<(a|span) class="view-tab([^"]*)"([^>]*)>(?:<svg[\s\S]*?<\/svg>)<span>([^<]+)<\/span>/g)].map((m) => ({
+      label: m[4],
+      active: m[2].includes("is-active"),
+      href: m[3].match(/href="([^"]+)"/)?.[1] ?? null,
+    }))
+
+  const onText = tabs(text)
+  const onGraph = tabs(graph)
+
+  check("both views offer both tabs", onText.length === 2 && onGraph.length === 2, `${onText.length} / ${onGraph.length}`)
+  check("text view marks Text active", onText.find((t) => t.label === "Text")?.active === true)
+  check("graph view marks Graph active", onGraph.find((t) => t.label === "Graph")?.active === true)
+  check(
+    "the active tab is not a link, so it cannot navigate to itself",
+    onText.find((t) => t.active)?.href === null && onGraph.find((t) => t.active)?.href === null,
+  )
+  check(
+    "each links to the other view of the same note",
+    onText.find((t) => t.label === "Graph")?.href?.endsWith(`${notePath}/graph/`) === true &&
+      onGraph.find((t) => t.label === "Text")?.href?.endsWith(`${notePath}/`) === true,
+  )
+
+  check("the graph view focuses that note", graph.includes('data-focus="Jesus Existed"'))
+  check("and reaches further than the sidebar graph does", graph.includes('data-depth="2"'))
+  check("the note stays selected in the sidebar", graph.includes('aria-current="page" data-note="Jesus Existed"'))
+  check("the graph view drops the prose", !graph.includes('class="note-body"'))
+
+  // every note gets one
+  const notes = JSON.parse(await readFile(resolve(dist, (await readdir(dist)).find((f) => /^search-index\./.test(f))), "utf8"))
+  let missing = []
+  for (const n of notes) {
+    try {
+      await readFile(resolve(dist, `${n.url}/graph/index.html`), "utf8")
+    } catch {
+      missing.push(n.url)
+    }
+  }
+  check("every note has a graph view", missing.length === 0, missing.join(", "))
+}
+
+console.log("home is reachable and knows when it is current")
+{
+  const dist = resolve(repoRoot, "dist")
+  const read = (p) => readFile(resolve(dist, p), "utf8")
+  const home = await read("index.html")
+  const fullGraph = await read("graph/index.html")
+  const note = await read("claims/jesus-existed/index.html")
+
+  const homeItem = (html) => html.match(/<li class="tree-home"><a href="([^"]*)"([^>]*)>/)
+  check("the tree starts with Home", /<ul class="tree-root"><li class="tree-home">/.test(note))
+  check("home links to the site root from a nested page", homeItem(note)?.[1] === "../../")
+  check("home is marked current on the overview", homeItem(home)?.[2].includes('aria-current="page"'))
+  check("and on the overview's graph view", homeItem(fullGraph)?.[2].includes('aria-current="page"'))
+  check("but not while reading a note", !homeItem(note)?.[2].includes("aria-current"))
+  check("the overview's Graph tab opens the whole vault", home.includes('href="graph/"'))
+  check("and that page graphs everything, not one note", fullGraph.includes('data-graph="global"'))
+}
+
 console.log("cached assets carry a content hash")
 {
   // Without this a deploy leaves returning readers on the old JavaScript: the

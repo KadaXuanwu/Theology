@@ -200,27 +200,45 @@ h3 {
   letter-spacing: -0.01em;
 }
 
-/* Sits next to the title so the full graph is one click from anywhere, which
-   matters most on narrow screens where the rail graph is hidden. */
-.graph-button {
+/* Two views of the same note, so they read as one control rather than as two
+   separate places to go. Sits next to the title, where the reader is already
+   looking to know where they are. */
+.view-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-right: auto;
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 2px);
+  background: var(--surface);
+  flex: none;
+}
+
+.view-tab {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  height: 2.15rem;
-  padding: 0 0.65rem;
-  margin-right: auto;
-  border: 1px solid var(--border);
+  height: 1.85rem;
+  padding: 0 0.6rem;
   border-radius: var(--radius);
-  background: var(--surface);
   color: var(--muted);
   font-size: 0.85rem;
   font-weight: 540;
   text-decoration: none;
-  flex: none;
+  white-space: nowrap;
 }
-.graph-button:hover {
-  border-color: var(--accent);
+.view-tab:hover {
+  color: var(--text);
+  background: var(--bg-soft);
+}
+.view-tab.is-active {
+  background: var(--accent-soft);
   color: var(--accent);
+}
+.view-tab .icon {
+  width: 1rem;
+  height: 1rem;
 }
 
 .icon-button {
@@ -352,6 +370,32 @@ main {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.tree-home {
+  margin-bottom: 0.5rem;
+}
+.tree-home a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.4rem;
+  border-radius: var(--radius);
+  color: var(--text);
+  font-weight: 560;
+  text-decoration: none;
+}
+.tree-home a:hover {
+  background: var(--bg-soft);
+}
+.tree-home a[aria-current="page"] {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.tree-home .icon {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.8;
 }
 
 .tree-folder + .tree-folder {
@@ -929,6 +973,13 @@ body.is-graph .graph-head .lede {
   font-size: 0.9rem;
 }
 
+.graph-foot {
+  margin: 0.6rem 0 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+  flex: none;
+}
+
 .legend {
   list-style: none;
   display: flex;
@@ -1117,11 +1168,11 @@ body.is-graph .graph-head .lede {
   }
   .search-open span,
   .search-open kbd,
-  .graph-button span {
+  .view-tab span {
     display: none;
   }
-  .graph-button {
-    padding: 0 0.55rem;
+  .view-tab {
+    padding: 0 0.5rem;
   }
   .sidebar {
     position: fixed;
