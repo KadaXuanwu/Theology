@@ -294,8 +294,13 @@ h3 {
   margin: 0 auto;
 }
 
+/* Capped so the middle column is only as wide as the text inside it. Any extra
+   width would all pile up on the right, leaving the rail looking further away
+   than the sidebar even though the columns themselves sit flush.
+   sidebar + (padding + content + padding) + rail = 20.5 + 2.5 + 46 + 2.5 + 18 */
 body.has-right .layout {
   grid-template-columns: var(--sidebar-w) minmax(0, 1fr) var(--right-w);
+  max-width: 89.5rem;
 }
 
 main {
