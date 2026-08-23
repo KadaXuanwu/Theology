@@ -13,6 +13,16 @@ import { neighbourhood, seededRandom, stepForces } from "./assets/graph.js"
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
+// The graph data carries a content hash in its name, so find it rather than
+// hard coding a filename that changes with the content.
+const readGraphData = async () => {
+  const dir = resolve(repoRoot, "dist")
+  const { readdir } = await import("node:fs/promises")
+  const name = (await readdir(dir)).find((f) => /^graph.[a-f0-9]+.json$/.test(f))
+  if (!name) throw new Error("no hashed graph.json in dist, run the build first")
+  return JSON.parse(await readFile(resolve(dir, name), "utf8"))
+}
+
 let failures = 0
 const check = (name, condition, detail = "") => {
   if (condition) {
@@ -71,7 +81,7 @@ console.log("wikilinks")
 
 console.log("graph layout")
 {
-  const data = JSON.parse(await readFile(resolve(repoRoot, "dist/graph.json"), "utf8"))
+  const data = await readGraphData()
   check("graph has nodes", data.nodes.length > 0, `${data.nodes.length}`)
   check("graph has links", data.links.length > 0, `${data.links.length}`)
 
@@ -166,7 +176,7 @@ console.log("dragging keeps the layout live")
 
 console.log("the layout is settled before it is shown")
 {
-  const data = JSON.parse(await readFile(resolve(repoRoot, "dist/graph.json"), "utf8"))
+  const data = await readGraphData()
   const build = () => {
     const rand = seededRandom("global")
     const nodes = data.nodes.map((n, i) => {
@@ -259,7 +269,7 @@ console.log("reheating never yanks the camera")
 
 console.log("local graph")
 {
-  const data = JSON.parse(await readFile(resolve(repoRoot, "dist/graph.json"), "utf8"))
+  const data = await readGraphData()
   const focus = data.nodes.find((n) => n.degree > 2).id
   const local = neighbourhood(data, focus, 1)
 
@@ -275,6 +285,41 @@ console.log("local graph")
     local.links.every((l) => expected.has(l.source) && expected.has(l.target)),
   )
   check("unknown focus is empty", neighbourhood(data, "No Such Note", 1).nodes.length === 0)
+}
+
+console.log("cached assets carry a content hash")
+{
+  // Without this a deploy leaves returning readers on the old JavaScript: the
+  // files are served under a fixed name with a ten minute max-age, so a browser
+  // that already has them keeps them. Every cacheable asset must change name
+  // when its bytes change.
+  const { readdir } = await import("node:fs/promises")
+  const dist = resolve(repoRoot, "dist")
+  const assetFiles = await readdir(resolve(dist, "assets"))
+  const rootFiles = await readdir(dist)
+
+  const hashed = /\.[a-f0-9]{10}\.(js|css|json)$/
+  const cacheable = [
+    ...assetFiles.filter((f) => /\.(js|css)$/.test(f)).map((f) => `assets/${f}`),
+    ...rootFiles.filter((f) => /\.json$/.test(f)),
+  ]
+
+  check("found the cacheable assets", cacheable.length >= 4, cacheable.join(", "))
+  check(
+    "every one is content hashed",
+    cacheable.every((f) => hashed.test(f)),
+    cacheable.filter((f) => !hashed.test(f)).join(", ") || "all hashed",
+  )
+
+  const page = await readFile(resolve(dist, "graph/index.html"), "utf8")
+  const referenced = [...page.matchAll(/(?:href|src)="[^"]*assets\/([^"]+)"/g)].map((m) => m[1])
+  const missing = referenced.filter((f) => !assetFiles.includes(f))
+  check("the html points at files that exist", missing.length === 0, missing.join(", "))
+  check(
+    "and at the hashed names, not the bare ones",
+    referenced.filter((f) => /\.(js|css)$/.test(f)).every((f) => hashed.test(f)),
+    referenced.join(", "),
+  )
 }
 
 console.log(failures === 0 ? "\nAll checks passed." : `\n${failures} check(s) failed.`)

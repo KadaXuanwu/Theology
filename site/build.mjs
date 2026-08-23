@@ -11,6 +11,7 @@ import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { promisify } from "node:util"
 
+import { buildAssets } from "./lib/assets.mjs"
 import { readVault, slugify } from "./lib/content.mjs"
 import { createRenderer, htmlToText } from "./lib/markdown.mjs"
 import { graphPage, listPage, notFoundPage, notePage, tagIndexPage } from "./lib/templates.mjs"
@@ -135,6 +136,33 @@ async function build() {
   await rm(outDir, { recursive: true, force: true })
   await mkdir(outDir, { recursive: true })
 
+  const graphData = JSON.stringify({
+    nodes: notes.map((n) => ({
+      id: n.title,
+      url: n.url,
+      kind: n.section.kind,
+      degree: n.links.length + n.backlinks.length,
+    })),
+    links: dedupeLinks(notes),
+  })
+
+  const searchData = JSON.stringify(
+    notes.map((n) => ({
+      title: n.title,
+      url: n.url,
+      kind: n.section.kind,
+      section: n.section.label,
+      status: n.status,
+      tags: n.tags,
+      excerpt: n.shortExcerpt,
+      text: n.text.toLowerCase(),
+    })),
+  )
+
+  // Hashed before any page is written, because each page references them.
+  const { files: assetFiles, refs: assets } = await buildAssets(assetsDir, { graphData, searchData })
+  for (const file of assetFiles) await write(file.name, file.contents)
+
   // Note pages
   for (const note of notes) {
     await write(
@@ -145,6 +173,7 @@ async function build() {
         dateLabel: `Updated ${formatDate(note.dates.modified)}`,
         sections,
         notes,
+        assets,
       }),
     )
   }
@@ -174,6 +203,7 @@ async function build() {
       current: null,
       sections,
       notes,
+      assets,
       extra: summary,
     }),
   )
@@ -192,6 +222,7 @@ async function build() {
         current: slugify(section.dir),
         sections,
         notes,
+        assets,
       }),
     )
   }
@@ -206,7 +237,7 @@ async function build() {
   }
   const tagList = [...tagMap.entries()].sort((a, b) => a[0].localeCompare(b[0], "en"))
 
-  await write("tags/index.html", tagIndexPage({ tags: tagList, root: rootFor(1), sections, notes }))
+  await write("tags/index.html", tagIndexPage({ tags: tagList, root: rootFor(1), sections, notes, assets }))
 
   for (const [tag, list] of tagList) {
     await write(
@@ -226,45 +257,16 @@ async function build() {
         current: `tags/${slugify(tag)}`,
         sections,
         notes,
+        assets,
       }),
     )
   }
 
   // Graph page and 404
-  await write("graph/index.html", graphPage({ root: rootFor(1), sections, notes }))
-  await write("404.html", notFoundPage({ root: "/", sections, notes }))
+  await write("graph/index.html", graphPage({ root: rootFor(1), sections, notes, assets }))
+  await write("404.html", notFoundPage({ root: "/", sections, notes, assets }))
 
-  // Data the client needs
-  await write(
-    "graph.json",
-    JSON.stringify({
-      nodes: notes.map((n) => ({
-        id: n.title,
-        url: n.url,
-        kind: n.section.kind,
-        degree: n.links.length + n.backlinks.length,
-      })),
-      links: dedupeLinks(notes),
-    }),
-  )
-
-  await write(
-    "search-index.json",
-    JSON.stringify(
-      notes.map((n) => ({
-        title: n.title,
-        url: n.url,
-        kind: n.section.kind,
-        section: n.section.label,
-        status: n.status,
-        tags: n.tags,
-        excerpt: n.shortExcerpt,
-        text: n.text.toLowerCase(),
-      })),
-    ),
-  )
-
-  await cp(assetsDir, join(outDir, "assets"), { recursive: true })
+  // Assets and data now carry their content hash, written above.
   await write(".nojekyll", "")
 
   const pages = await countFiles(outDir, ".html")

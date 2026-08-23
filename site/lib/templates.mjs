@@ -22,7 +22,7 @@ export function railGraph({ root, focus = null }) {
 </section>`
 }
 
-export function shell({ title, description, root, current, sections, notes, main, rightRail = "" }) {
+export function shell({ title, description, root, current, sections, notes, main, rightRail = "", assets }) {
   return `<!doctype html>
 <html lang="en" data-root="${root}">
 <head>
@@ -33,8 +33,8 @@ export function shell({ title, description, root, current, sections, notes, main
 <meta property="og:title" content="${escapeHtml(title)}">
 <meta property="og:description" content="${escapeHtml(description)}">
 <meta property="og:type" content="website">
-<link rel="icon" href="${root}assets/favicon.svg">
-<link rel="stylesheet" href="${root}assets/style.css">
+<link rel="icon" href="${root}${assets.favicon}">
+<link rel="stylesheet" href="${root}${assets.css}">
 <script>
 /* Set the theme before first paint so the page never flashes the wrong one. */
 (function(){try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}})()
@@ -49,7 +49,7 @@ ${explorer({ root, current, sections, notes })}
 ${rightRail ? `<aside class="sidebar-right">${rightRail}</aside>` : ""}
 </div>
 ${overlays()}
-<script type="module" src="${root}assets/app.js"></script>
+<script type="module" src="${root}${assets.app}"></script>
 </body>
 </html>
 `
@@ -108,7 +108,7 @@ function overlays() {
 <div class="preview-card" hidden></div>`
 }
 
-export function notePage({ note, root, dateLabel, sections, notes }) {
+export function notePage({ note, root, dateLabel, sections, notes, assets }) {
   const section = note.section
   const kindLabel = KIND_LABEL[section.kind] ?? "Note"
   const extraKind = note.frontmatter.kind ? ` · ${escapeHtml(note.frontmatter.kind)}` : ""
@@ -161,12 +161,13 @@ export function notePage({ note, root, dateLabel, sections, notes }) {
     current: note.url,
     sections,
     notes,
+    assets,
     main,
     rightRail: toc + railGraph({ root, focus: note.title }),
   })
 }
 
-export function listPage({ title, lede, groups, root, current, sections, notes, extra = "" }) {
+export function listPage({ title, lede, groups, root, current, sections, notes, extra = "", assets }) {
   const body = groups
     .map(
       (group) => `<section class="list-section">
@@ -191,6 +192,7 @@ export function listPage({ title, lede, groups, root, current, sections, notes, 
     current,
     sections,
     notes,
+    assets,
     main: `<div class="page">
   <h1>${escapeHtml(title)}</h1>
   <p class="lede">${lede}</p>
@@ -201,7 +203,7 @@ export function listPage({ title, lede, groups, root, current, sections, notes, 
   })
 }
 
-export function tagIndexPage({ tags, root, sections, notes }) {
+export function tagIndexPage({ tags, root, sections, notes, assets }) {
   const items = tags
     .map(
       ([tag, list]) =>
@@ -216,6 +218,7 @@ export function tagIndexPage({ tags, root, sections, notes }) {
     current: "tags",
     sections,
     notes,
+    assets,
     main: `<div class="page">
   <h1>Tags</h1>
   <p class="lede">Every tag used across the vault.</p>
@@ -225,7 +228,7 @@ export function tagIndexPage({ tags, root, sections, notes }) {
   })
 }
 
-export function graphPage({ root, sections, notes }) {
+export function graphPage({ root, sections, notes, assets }) {
   return shell({
     title: "Graph · Theology",
     description: "The whole vault as a link map.",
@@ -233,6 +236,7 @@ export function graphPage({ root, sections, notes }) {
     current: "graph",
     sections,
     notes,
+    assets,
     main: `<div class="page page-graph">
   <div class="graph-head">
     <div>
@@ -246,7 +250,7 @@ export function graphPage({ root, sections, notes }) {
   })
 }
 
-export function notFoundPage({ root, sections, notes }) {
+export function notFoundPage({ root, sections, notes, assets }) {
   return shell({
     title: "Not found · Theology",
     description: "That page does not exist.",
@@ -254,6 +258,7 @@ export function notFoundPage({ root, sections, notes }) {
     current: null,
     sections,
     notes,
+    assets,
     main: `<div class="page">
   <h1>Not found</h1>
   <p class="lede">That page does not exist. Try the search, or start from the <a href="${root}">overview</a>.</p>
