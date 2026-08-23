@@ -73,7 +73,7 @@ export function shell({
 <a class="skip-link" href="#main">Skip to content</a>
 ${header({ root, view, textUrl, graphUrl })}
 <div class="layout">
-${explorer({ root, current, sections, notes })}
+${explorer({ root, current, sections, notes, view })}
 <main id="main">${main}</main>
 ${rightRail ? `<aside class="sidebar-right">${rightRail}</aside>` : ""}
 </div>
@@ -103,7 +103,9 @@ function header({ root, view, textUrl, graphUrl }) {
 
 // The folder tree. Folders render open; the client only ever collapses one the
 // reader collapsed themselves, so navigating never closes anything.
-function explorer({ root, current, sections, notes }) {
+function explorer({ root, current, sections, notes, view }) {
+  // Moving between notes keeps whichever view you are reading in.
+  const suffix = view === "graph" ? "graph/" : ""
   const groups = sections
     .map((section) => {
       const items = notes.filter((n) => n.section.dir === section.dir)
@@ -111,7 +113,7 @@ function explorer({ root, current, sections, notes }) {
       const links = items
         .map(
           (n) =>
-            `<li><a href="${root}${n.url}/"${n.url === current ? ' aria-current="page"' : ""} data-note="${escapeHtml(n.title)}">${escapeHtml(n.title)}</a></li>`,
+            `<li><a href="${root}${n.url}/${suffix}"${n.url === current ? ' aria-current="page"' : ""} data-note="${escapeHtml(n.title)}">${escapeHtml(n.title)}</a></li>`,
         )
         .join("")
       return `<li class="tree-folder" data-folder="${escapeHtml(section.dir)}">

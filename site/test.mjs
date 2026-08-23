@@ -545,6 +545,58 @@ console.log("text and graph are two views of the same note")
   check("every note has a graph view", missing.length === 0, missing.join(", "))
 }
 
+console.log("moving between notes keeps the view you are in")
+{
+  const dist = resolve(repoRoot, "dist")
+  const read = (p) => readFile(resolve(dist, p), "utf8")
+  // The backlinks list carries data-note too, so read only the explorer.
+  const sidebarLinks = (html) => {
+    const from = html.indexOf("<aside class=\"sidebar\" id=\"explorer\">")
+    if (from < 0) return []
+    const tree = html.slice(from, html.indexOf("</aside>", from))
+    return [...tree.matchAll(/<li><a href="([^"]*)"[^>]*data-note=/g)].map((m) => m[1])
+  }
+  // strip the leading ../ hops and any trailing view segment
+  const notePath = (href) => href.replace(/^(\.\.\/)+/, "").replace(/graph\/$/, "")
+
+  const text = await read("claims/jesus-existed/index.html")
+  const graph = await read("claims/jesus-existed/graph/index.html")
+
+  const fromText = sidebarLinks(text)
+  const fromGraph = sidebarLinks(graph)
+
+  check(
+    "both views list every note in the sidebar",
+    fromText.length === fromGraph.length && fromText.length > 20,
+    `${fromText.length} / ${fromGraph.length}`,
+  )
+  check("reading the text, the sidebar goes to text", fromText.every((h) => !h.endsWith("/graph/")), fromText[0])
+  check("reading the graph, the sidebar goes to graph", fromGraph.every((h) => h.endsWith("/graph/")), fromGraph[0])
+  check(
+    "and both point at the same notes, in the same order",
+    fromText.every((h, i) => notePath(h) === notePath(fromGraph[i])),
+    fromText.findIndex((h, i) => notePath(h) !== notePath(fromGraph[i])).toString(),
+  )
+
+  // the note you are on stays marked in both
+  check("the current note is marked while reading it", text.includes('aria-current="page" data-note="Jesus Existed"'))
+  check("and while looking at its graph", graph.includes('aria-current="page" data-note="Jesus Existed"'))
+
+  // clicking a node, and opening a search result, follow the same rule
+  const app = await readFile(resolve(repoRoot, "site/assets/app.js"), "utf8")
+  check("the view is read from the page, not guessed", app.includes('document.body.classList.contains("is-graph")'))
+  check("clicking a node in the graph keeps the graph", app.includes("window.location.href = noteUrl(node.url)"))
+  check("and so does opening a search result", app.includes("${noteUrl(note.url)}"))
+
+  // a folder is not a note and has no graph view, so its links stay put
+  const listPage = await read("arguments-for/index.html")
+  check("list pages are unaffected", sidebarLinks(listPage).every((h) => !h.endsWith("/graph/")))
+
+  // leaving by the breadcrumb still lands on the folder, not a graph
+  const crumbs = graph.match(/<nav class="breadcrumbs"[\s\S]*?<\/nav>/)?.[0] ?? ""
+  check("the breadcrumb still leads out to the folder", /href="[^"]*claims\/"/.test(crumbs), crumbs.replace(/\s+/g, " ").slice(0, 120))
+}
+
 console.log("the legend filters the graph")
 {
   const dist = resolve(repoRoot, "dist")

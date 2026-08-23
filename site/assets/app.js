@@ -6,6 +6,10 @@ import { mount as mountGraph } from "./graph.js"
 const root = document.documentElement.dataset.root ?? ""
 const url = (path) => `${root}${path}`
 
+// Reading in the graph and picking another note keeps you in the graph.
+const inGraphView = document.body.classList.contains("is-graph")
+const noteUrl = (slug) => url(`${slug}/${inGraphView ? "graph/" : ""}`)
+
 /* Theme ------------------------------------------------------------------- */
 
 const themeToggle = document.querySelector(".theme-toggle")
@@ -216,7 +220,7 @@ function renderResults(list, query) {
 
   results.innerHTML = list
     .map(
-      (note, i) => `<li${i === 0 ? ' class="is-active"' : ""}><a href="${url(`${note.url}/`)}">
+      (note, i) => `<li${i === 0 ? ' class="is-active"' : ""}><a href="${noteUrl(note.url)}">
       <span class="result-title"><span class="dot dot-${note.kind}"></span>${escapeHtml(note.title)}<span class="result-where">${escapeHtml(note.section)}</span></span>
       <span class="result-snippet">${snippet(note, query)}</span>
     </a></li>`,
@@ -398,7 +402,7 @@ const writeHidden = (hidden) => {
             showLabels: local ? "always" : "hover",
             kinds: visibleKinds(),
             onNavigate: (node) => {
-              window.location.href = url(`${node.url}/`)
+              window.location.href = noteUrl(node.url)
             },
           }),
         )
