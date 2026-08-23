@@ -621,7 +621,11 @@ console.log("the rail leads with the graph, and the enlarged view can shrink bac
   check("the enlarged view has a shrink control", shrink !== null)
   check("it returns to that note's text", shrink?.href === "../../../claims/jesus-existed/", String(shrink?.href))
   check("and says so", /Back to the text/.test(shrink?.label ?? ""), String(shrink?.label))
-  check("it sits opposite the legend, at the top right", nodeGraph.includes('<div class="graph-head-side">'))
+  const headAt = nodeGraph.indexOf("class=\"graph-head\"")
+  const arrowAt = nodeGraph.indexOf("class=\"panel-expand graph-collapse\"")
+  const legendAt = nodeGraph.indexOf("<ul class=\"legend\"")
+  check("the shrink control sits inside the header", headAt >= 0 && arrowAt > headAt, `head ${headAt}, arrow ${arrowAt}`)
+  check("and the legend follows on its own row below", legendAt > arrowAt, `arrow ${arrowAt}, legend ${legendAt}`)
 
   const fullGraph = await read("graph/index.html")
   const shrinkFull = collapse(fullGraph)
