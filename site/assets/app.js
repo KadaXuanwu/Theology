@@ -26,6 +26,26 @@ themeToggle?.addEventListener("click", () => {
   }
 })
 
+/* Reading font ------------------------------------------------------------
+ * The head script has already applied the stored choice; this only puts the
+ * control in step with it and remembers what the reader picks next.
+ */
+
+const fontSelect = document.querySelector(".font-select")
+if (fontSelect) {
+  const stored = document.documentElement.dataset.font
+  if (stored && [...fontSelect.options].some((o) => o.value === stored)) fontSelect.value = stored
+
+  fontSelect.addEventListener("change", () => {
+    document.documentElement.dataset.font = fontSelect.value
+    try {
+      localStorage.setItem("font", fontSelect.value)
+    } catch {
+      /* private mode, the font just will not stick */
+    }
+  })
+}
+
 /* Folder tree -------------------------------------------------------------
  * Folders render open. Only a folder the reader collapsed themselves stays
  * collapsed, and that is remembered. Navigating never closes anything.

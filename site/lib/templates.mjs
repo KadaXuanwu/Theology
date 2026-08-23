@@ -65,8 +65,9 @@ export function shell({
 <link rel="icon" href="${root}${assets.favicon}">
 <link rel="stylesheet" href="${root}${assets.css}">
 <script>
-/* Set the theme before first paint so the page never flashes the wrong one. */
-(function(){try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}})()
+/* Set the theme and the reading font before first paint, so the page never
+   flashes one and settles on the other. */
+(function(){try{var d=document.documentElement;var t=localStorage.getItem("theme");if(t==="light"||t==="dark")d.dataset.theme=t;var f=localStorage.getItem("font");if(${JSON.stringify(FONT_IDS)}.indexOf(f)>-1)d.dataset.font=f}catch(e){}})()
 </script>
 </head>
 <body class="${[rightRail ? "has-right" : "", bodyClass].filter(Boolean).join(" ")}">
@@ -84,6 +85,24 @@ ${overlays()}
 `
 }
 
+// The reading font is the reader's to pick. Five faces that are already on the
+// machines people read this on, so the choice costs no download and cannot be
+// blocked: the stacks themselves live in the stylesheet, keyed by these ids.
+const FONTS = [
+  { id: "book", label: "Book" },
+  { id: "georgia", label: "Georgia" },
+  { id: "times", label: "Times" },
+  { id: "system", label: "System" },
+  { id: "verdana", label: "Verdana" },
+]
+
+export const FONT_IDS = FONTS.map((f) => f.id)
+
+function fontPicker() {
+  const options = FONTS.map((f) => `<option value="${f.id}">${f.label}</option>`).join("")
+  return `<span class="font-picker"><select class="font-select" aria-label="Reading font">${options}</select></span>`
+}
+
 // Text and Graph are two views of the same thing, so they read as one control
 // rather than as two separate destinations.
 function header({ root, view, textUrl, graphUrl }) {
@@ -96,6 +115,7 @@ function header({ root, view, textUrl, graphUrl }) {
   <button class="icon-button nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="explorer">${icon("menu")}</button>
   <a class="site-title" href="${root}">Theology</a>
   <div class="view-switch" role="group" aria-label="View">${tab("text", "Text", textUrl, "text")}${tab("graph", "Graph", graphUrl, "graph")}</div>
+  ${fontPicker()}
   <button class="search-open" aria-label="Search notes">${icon("search")}<span>Search</span><kbd>/</kbd></button>
   <button class="icon-button theme-toggle" aria-label="Switch theme">${icon("sun")}${icon("moon")}</button>
 </header>`

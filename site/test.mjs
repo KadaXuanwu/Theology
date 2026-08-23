@@ -894,6 +894,73 @@ console.log("home is reachable and knows when it is current")
   check("and that page graphs everything, not one note", fullGraph.includes('data-graph="global"'))
 }
 
+console.log("the reader picks the reading font")
+{
+  const dist = resolve(repoRoot, "dist")
+  const page = await readFile(resolve(dist, "claims/jesus-existed/index.html"), "utf8")
+  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+  const appSource = await readFile(resolve(repoRoot, "site/assets/app.js"), "utf8")
+
+  const picker = page.match(/<span class="font-picker">[\s\S]*?<\/span>/)?.[0] ?? ""
+  const options = [...picker.matchAll(/<option value="([^"]+)">([^<]+)<\/option>/g)]
+
+  check("the header carries the picker", picker.length > 0)
+  check("with five faces to choose from", options.length === 5, `${options.length} options`)
+  check("each one is named", options.every((o) => o[2].trim().length > 0), JSON.stringify(options.map((o) => o[2])))
+  check("and it is labelled for a screen reader", picker.includes('aria-label="Reading font"'))
+
+  // It belongs to the left of the search box, and after the view switch.
+  const at = (needle) => page.indexOf(needle)
+  check(
+    "it sits between the view switch and search",
+    at('class="view-switch"') < at('class="font-picker"') && at('class="font-picker"') < at('class="search-open"'),
+  )
+
+  // Every choice has to actually change something, or it is a dead entry.
+  const stacks = new Map()
+  for (const [, id] of options) {
+    const head = ':root[data-font="' + id + '"] {'
+    const at = sheet.indexOf(head)
+    const rule = at === -1 ? "" : sheet.slice(at, sheet.indexOf("}", at))
+    const from = rule.indexOf("--font-read:")
+    stacks.set(id, from === -1 ? "" : rule.slice(from + "--font-read:".length, rule.indexOf(";", from)).trim())
+  }
+  check("every choice has a stack", [...stacks.values()].every((s) => s.length > 0), JSON.stringify([...stacks]))
+  check(
+    "no two choices are the same font",
+    new Set(stacks.values()).size === stacks.size,
+    JSON.stringify([...stacks.values()]),
+  )
+  check(
+    "each stack ends in a generic family, so it always resolves",
+    [...stacks.values()].every((s) => /(serif|sans-serif|monospace|cursive|fantasy)$/.test(s)),
+    JSON.stringify([...stacks.values()]),
+  )
+  check(
+    "and names more than one face, so a missing one still lands somewhere",
+    [...stacks.values()].every((s) => s.split(",").length >= 3),
+  )
+  check("through the variable the body reads", /\.note-body \{[^}]*font-family: var\(--font-read\)/.test(sheet))
+  check("and there is still a default for a reader who never picks", /:root \{[^}]*--font-read:/.test(sheet))
+
+  // Chosen once, kept everywhere: applied before the page paints, not after.
+  const headScript = page.match(/<script>[\s\S]*?<\/script>/)?.[0] ?? ""
+  check("the choice is applied in the head, before the first paint", headScript.includes('localStorage.getItem("font")'))
+  check(
+    "only a name the site knows is applied",
+    options.every((o) => headScript.includes(`"${o[1]}"`)) && headScript.includes("indexOf(f)>-1"),
+  )
+  // A phone header has no room for the name, so the closed control shows a
+  // mark instead. Opening it still lists the faces in full.
+  check("the closed control shrinks to a mark on a phone", sheet.includes('content: "Aa";'))
+  check("and the list it opens is still coloured for the theme", sheet.includes(".font-select option {"))
+  check("the client remembers the next pick", appSource.includes('localStorage.setItem("font", fontSelect.value)'))
+  check(
+    "and the control opens showing what is applied",
+    appSource.includes("document.documentElement.dataset.font"),
+  )
+}
+
 console.log("cached assets carry a content hash")
 {
   // Without this a deploy leaves returning readers on the old JavaScript: the

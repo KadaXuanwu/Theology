@@ -315,6 +315,72 @@ h3 {
   background: var(--bg-soft);
 }
 
+/* The reader's choice of reading font. Every stack is made of faces that ship
+   with the common desktops, so picking one costs no download. */
+:root[data-font="book"] {
+  --font-read: "Iowan Old Style", "Palatino Linotype", Palatino, Charter, Georgia, serif;
+}
+:root[data-font="georgia"] {
+  --font-read: Georgia, Cambria, "Times New Roman", serif;
+}
+:root[data-font="times"] {
+  --font-read: "Times New Roman", Times, Tinos, "Liberation Serif", serif;
+}
+:root[data-font="system"] {
+  --font-read: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+:root[data-font="verdana"] {
+  --font-read: Verdana, Geneva, Tahoma, "DejaVu Sans", sans-serif;
+}
+
+.font-picker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+}
+/* The caret is drawn here because the select's own is hidden, and it must not
+   swallow the click that opens the menu. */
+.font-picker::after {
+  content: "";
+  position: absolute;
+  right: 0.55rem;
+  width: 0.3rem;
+  height: 0.3rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-0.1rem) rotate(45deg);
+  color: var(--muted);
+  pointer-events: none;
+}
+.font-select {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 2.15rem;
+  padding: 0 1.5rem 0 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.font-select:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+.font-select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+/* The menu itself is drawn by the browser, so it needs the colours spelled out
+   or a dark page opens a white list. */
+.font-select option {
+  background: var(--bg-center);
+  color: var(--text);
+}
+
 /* Layout ------------------------------------------------------------------ */
 
 .layout {
@@ -1251,6 +1317,24 @@ body.is-graph .graph-head .lede {
   .view-tab span {
     display: none;
   }
+  /* No room for the name on a phone. The control keeps its full list when it
+     opens, so only the closed state is shortened to a mark. */
+  .font-select {
+    width: 2.8rem;
+    padding: 0 1.2rem 0 0.5rem;
+    color: transparent;
+  }
+  .font-picker::before {
+    content: "Aa";
+    position: absolute;
+    left: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+    pointer-events: none;
+  }
+  .font-picker::after {
+    right: 0.45rem;
+  }
   .view-tab {
     padding: 0 0.5rem;
   }
@@ -1284,6 +1368,17 @@ body.is-graph .graph-head .lede {
   }
   .graph-full {
     height: 68vh;
+  }
+}
+
+/* Small phones. Everything in the header still has to fit on one line. */
+@media (max-width: 380px) {
+  .site-header {
+    gap: 0.35rem;
+    padding: 0 0.55rem;
+  }
+  .site-title {
+    font-size: 0.95rem;
   }
 }
 
