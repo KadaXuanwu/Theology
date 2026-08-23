@@ -409,6 +409,39 @@ console.log("text and graph are two views of the same note")
   check("every note has a graph view", missing.length === 0, missing.join(", "))
 }
 
+console.log("the sidebar preview can be enlarged")
+{
+  const dist = resolve(repoRoot, "dist")
+  const read = (p) => readFile(resolve(dist, p), "utf8")
+  const panel = (html) => html.match(/<section class="panel panel-graph">[\s\S]*?<\/section>/)?.[0] ?? ""
+  const expandHref = (html) => panel(html).match(/class="panel-expand" href="([^"]*)"/)?.[1] ?? null
+
+  const note = await read("evidence/mesha-stele/index.html")
+  check("the preview has an enlarge control", expandHref(note) !== null)
+  check(
+    "it opens that note's graph, not the whole vault",
+    expandHref(note) === "../../evidence/mesha-stele/graph/",
+    String(expandHref(note)),
+  )
+  check(
+    "it is labelled for a screen reader",
+    /class="panel-expand"[^>]*aria-label="Enlarge the graph for Mesha Stele"/.test(panel(note)),
+  )
+  check("it sits in the heading row, on the preview it belongs to", panel(note).includes('<div class="panel-head">'))
+  check("the whole vault is still one click away", panel(note).includes("See the whole vault"))
+
+  // On a list page there is no note to focus, so enlarging means the full graph.
+  for (const [page, expected] of [
+    ["index.html", "graph/"],
+    ["arguments-for/index.html", "../graph/"],
+    ["tags/historicity/index.html", "../../graph/"],
+  ]) {
+    const html = await read(page)
+    check(`${page} enlarges to the full graph`, expandHref(html) === expected, String(expandHref(html)))
+    check(`${page} does not repeat itself with a second link`, !panel(html).includes("See the whole vault"))
+  }
+}
+
 console.log("home is reachable and knows when it is current")
 {
   const dist = resolve(repoRoot, "dist")

@@ -537,6 +537,35 @@ main {
   flex: none;
 }
 
+/* The heading and the enlarge control share a row, so the control sits on the
+   preview it belongs to rather than floating loose in the rail. */
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.panel-expand {
+  display: inline-grid;
+  place-items: center;
+  width: 1.55rem;
+  height: 1.55rem;
+  margin: 0 0 0.6rem;
+  border-radius: var(--radius);
+  color: var(--muted);
+  text-decoration: none;
+  flex: none;
+}
+.panel-expand:hover {
+  background: var(--bg-soft);
+  color: var(--accent);
+}
+.panel-expand .icon {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
 .sidebar-right h2 {
   font-size: 0.72rem;
   text-transform: uppercase;

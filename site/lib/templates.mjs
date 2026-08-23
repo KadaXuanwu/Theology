@@ -14,11 +14,15 @@ const KIND_LABEL = {
 // The graph that sits in the right rail. Shown on every page that has room for
 // it; the media query hides the whole rail when there is not, and the header
 // button is the way in from there.
-export function railGraph({ root, focus = null }) {
+export function railGraph({ root, focus = null, expandUrl = "graph/" }) {
+  const expandLabel = focus ? `Enlarge the graph for ${focus}` : "Open the full graph"
   return `<section class="panel panel-graph">
-  <h2>${focus ? "Connections" : "Graph"}</h2>
+  <div class="panel-head">
+    <h2>${focus ? "Connections" : "Graph"}</h2>
+    <a class="panel-expand" href="${root}${expandUrl}" aria-label="${escapeHtml(expandLabel)}" title="${escapeHtml(expandLabel)}">${icon("expand")}</a>
+  </div>
   <div class="graph-mount graph-rail" data-graph="${focus ? "local" : "global"}"${focus ? ` data-focus="${escapeHtml(focus)}"` : ""}></div>
-  <a class="panel-link" href="${root}graph/">Open the full graph</a>
+  ${focus ? `<a class="panel-link" href="${root}graph/">See the whole vault</a>` : ""}
 </section>`
 }
 
@@ -186,7 +190,7 @@ export function notePage({ note, root, dateLabel, sections, notes, assets }) {
     notes,
     assets,
     main,
-    rightRail: toc + railGraph({ root, focus: note.title }),
+    rightRail: toc + railGraph({ root, focus: note.title, expandUrl: `${note.url}/graph/` }),
     graphUrl: `${note.url}/graph/`,
   })
 }
@@ -332,6 +336,8 @@ function icon(name) {
     sun: '<circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="7" y2="7"/><line x1="17" y1="17" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="7" y2="17"/><line x1="17" y1="7" x2="19.1" y2="4.9"/>',
     moon: '<path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/>',
     home: '<path d="M4 11 12 4l8 7"/><path d="M6.5 9.6V19h11V9.6"/>',
+    expand:
+      '<polyline points="14 4 20 4 20 10"/><polyline points="10 20 4 20 4 14"/><line x1="20" y1="4" x2="13.5" y2="10.5"/><line x1="4" y1="20" x2="10.5" y2="13.5"/>',
     text: '<line x1="5" y1="6" x2="19" y2="6"/><line x1="5" y1="10.5" x2="19" y2="10.5"/><line x1="5" y1="15" x2="15" y2="15"/><line x1="5" y1="19" x2="12" y2="19"/>',
     graph:
       '<circle cx="6" cy="7" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="17" r="2.5"/><line x1="7.6" y1="8.9" x2="10.6" y2="15"/><line x1="16.7" y1="8.2" x2="13.4" y2="15"/><line x1="8.4" y1="6.7" x2="15.5" y2="6.2"/>',
