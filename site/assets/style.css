@@ -4,16 +4,16 @@
   --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   --font-read: "Iowan Old Style", "Palatino Linotype", Palatino, Charter, Georgia, serif;
 
-  --bg: #f0eee9;
-  --bg-center: #fbfaf8;
-  --bg-soft: #e7e4dd;
-  --surface: #ffffff;
-  --text: #1d2025;
-  --muted: #6c7280;
-  --border: #ddd9d1;
-  --border-strong: #d5d0c7;
-  --accent: #4a56c8;
-  --accent-soft: #e8eaff;
+  --bg: #f6f6f6;
+  --bg-center: #ffffff;
+  --bg-soft: #ececec;
+  --surface: #fafafa;
+  --text: #222222;
+  --muted: #5c5c5c;
+  --border: #e0e0e0;
+  --border-strong: #cfcfcf;
+  --accent: #8a5cf5;
+  --accent-soft: #efe9ff;
   --shadow: 0 1px 2px rgba(20, 20, 30, 0.05), 0 8px 24px rgba(20, 20, 30, 0.07);
 
   --argument-for: #5b6ee8;
@@ -26,21 +26,21 @@
   --sidebar-w: 20.5rem;
   --right-w: 18rem;
   --radius: 0.5rem;
-  --scrollbar: #cdc7bd;
-  --scrollbar-hover: #b0a89b;
+  --scrollbar: #cbcbcb;
+  --scrollbar-hover: #b0b0b0;
 }
 
 :root[data-theme="dark"] {
-  --bg: #1e1f25;
-  --bg-center: #131419;
-  --bg-soft: #272932;
-  --surface: #17181e;
-  --text: #e4e5e7;
-  --muted: #979da7;
-  --border: #2f323a;
-  --border-strong: #3a3e47;
-  --accent: #8d97f0;
-  --accent-soft: #23264a;
+  --bg: #282828;
+  --bg-center: #1c1c1c;
+  --bg-soft: #333333;
+  --surface: #212121;
+  --text: #dadada;
+  --muted: #b3b3b3;
+  --border: #363636;
+  --border-strong: #454545;
+  --accent: #a68af9;
+  --accent-soft: #2b2440;
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
 
   --argument-for: #7f8df4;
@@ -48,22 +48,22 @@
   --claim: #46bcaa;
   --evidence: #b489de;
   --note: #9aa0aa;
-  --scrollbar: #3d424b;
-  --scrollbar-hover: #555c68;
+  --scrollbar: #3d3d3d;
+  --scrollbar-hover: #525252;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #1e1f25;
-    --bg-center: #131419;
-    --bg-soft: #272932;
-    --surface: #17181e;
-    --text: #e4e5e7;
-    --muted: #979da7;
-    --border: #2f323a;
-    --border-strong: #3a3e47;
-    --accent: #8d97f0;
-    --accent-soft: #23264a;
+    --bg: #282828;
+    --bg-center: #1c1c1c;
+    --bg-soft: #333333;
+    --surface: #212121;
+    --text: #dadada;
+    --muted: #b3b3b3;
+    --border: #363636;
+    --border-strong: #454545;
+    --accent: #a68af9;
+    --accent-soft: #2b2440;
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
 
     --argument-for: #7f8df4;
@@ -71,8 +71,8 @@
     --claim: #46bcaa;
     --evidence: #b489de;
     --note: #9aa0aa;
-    --scrollbar: #3d424b;
-    --scrollbar-hover: #555c68;
+    --scrollbar: #3d3d3d;
+    --scrollbar-hover: #525252;
   }
 }
 
@@ -310,6 +310,8 @@ main {
   min-width: 0;
   padding: 2rem 2.5rem 5rem;
   background: var(--bg-center);
+  border: 4px solid var(--bg);
+  border-radius: 14px;
   min-height: calc(100vh - var(--header-h));
 }
 
@@ -609,6 +611,7 @@ main {
 }
 
 .note-body {
+  color: var(--muted);
   font-family: var(--font-read);
   font-size: 1.06rem;
   line-height: 1.75;
@@ -628,11 +631,13 @@ main {
   margin-top: 0;
 }
 .note-body h2 {
+  color: var(--text);
   font-family: var(--font-ui);
   font-size: 1.1rem;
   margin: 2rem 0 0.6rem;
 }
 .note-body h3 {
+  color: var(--text);
   font-family: var(--font-ui);
   font-size: 0.98rem;
   margin: 1.6rem 0 0.5rem;
