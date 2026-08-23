@@ -32,7 +32,7 @@
 :root[data-theme="dark"] {
   --bg: #15161a;
   --bg-soft: #1b1d22;
-  --surface: #1c1e23;
+  --surface: #191a1f;
   --text: #e4e5e7;
   --muted: #979da7;
   --border: #2b2e35;
@@ -54,7 +54,7 @@
   :root:not([data-theme="light"]) {
     --bg: #15161a;
     --bg-soft: #1b1d22;
-    --surface: #1c1e23;
+    --surface: #191a1f;
     --text: #e4e5e7;
     --muted: #979da7;
     --border: #2b2e35;
