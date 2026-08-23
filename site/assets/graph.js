@@ -162,10 +162,11 @@ export function mount(el, data, options = {}) {
   const toScreen = (x, y) => [(x - camera.x) * camera.scale + width / 2, (y - camera.y) * camera.scale + height / 2]
   const toWorld = (sx, sy) => [(sx - width / 2) / camera.scale + camera.x, (sy - height / 2) / camera.scale + camera.y]
 
-  function applySize(nextWidth, nextHeight) {
-    if (nextWidth < 1 || nextHeight < 1) return
+  // Returns true when the backing store actually changed.
+  function syncSize(nextWidth, nextHeight) {
+    if (nextWidth < 1 || nextHeight < 1) return false
     const nextDpr = Math.min(window.devicePixelRatio || 1, 2)
-    if (nextWidth === width && nextHeight === height && nextDpr === dpr) return
+    if (nextWidth === width && nextHeight === height && nextDpr === dpr) return false
 
     dpr = nextDpr
     width = nextWidth
@@ -173,8 +174,14 @@ export function mount(el, data, options = {}) {
     canvas.width = Math.round(width * dpr)
     canvas.height = Math.round(height * dpr)
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-    fit()
-    draw()
+    return true
+  }
+
+  function applySize(nextWidth, nextHeight) {
+    if (syncSize(nextWidth, nextHeight)) {
+      fit()
+      draw()
+    }
   }
 
   function resize() {
@@ -204,6 +211,10 @@ export function mount(el, data, options = {}) {
   }
 
   function draw() {
+    // The observer is the fast path, but it does not fire while the page is not
+    // rendering (background tab, hidden pane). Catching up here means the canvas
+    // can never be left drawing at a stale size.
+    if (syncSize(canvas.clientWidth, canvas.clientHeight)) fit()
     if (width === 0) return
     ctx.clearRect(0, 0, width, height)
 

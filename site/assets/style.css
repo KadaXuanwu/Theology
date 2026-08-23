@@ -22,9 +22,11 @@
   --note: #8a8f98;
 
   --header-h: 3.5rem;
-  --sidebar-w: 17rem;
-  --right-w: 16rem;
+  --sidebar-w: 20.5rem;
+  --right-w: 18rem;
   --radius: 0.5rem;
+  --scrollbar: #cdc7bd;
+  --scrollbar-hover: #b0a89b;
 }
 
 :root[data-theme="dark"] {
@@ -44,6 +46,8 @@
   --claim: #46bcaa;
   --evidence: #b489de;
   --note: #9aa0aa;
+  --scrollbar: #3d424b;
+  --scrollbar-hover: #555c68;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -64,6 +68,8 @@
     --claim: #46bcaa;
     --evidence: #b489de;
     --note: #9aa0aa;
+    --scrollbar: #3d424b;
+    --scrollbar-hover: #555c68;
   }
 }
 
@@ -129,6 +135,34 @@ h3 {
   border-radius: 3px;
 }
 
+
+/* Scrollbars --------------------------------------------------------------- */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-hover);
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 /* Header ------------------------------------------------------------------ */
 
 .site-header {
@@ -151,7 +185,29 @@ h3 {
   color: var(--text);
   text-decoration: none;
   letter-spacing: -0.01em;
+}
+
+/* Sits next to the title so the full graph is one click from anywhere, which
+   matters most on narrow screens where the rail graph is hidden. */
+.graph-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 2.15rem;
+  padding: 0 0.65rem;
   margin-right: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 540;
+  text-decoration: none;
+  flex: none;
+}
+.graph-button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .icon-button {
@@ -392,15 +448,23 @@ main {
 .sidebar-right {
   position: sticky;
   top: var(--header-h);
-  max-height: calc(100vh - var(--header-h));
-  overflow-y: auto;
+  height: calc(100vh - var(--header-h));
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
   padding: 2rem 1.25rem 2rem 0.5rem;
   font-size: 0.84rem;
 }
 
-.panel + .panel,
-.toc + .panel {
-  margin-top: 1.75rem;
+/* The contents list gives up room first so the graph is always on screen. */
+.panel-toc {
+  min-height: 0;
+  overflow-y: auto;
+  flex: 0 1 auto;
+}
+
+.panel-graph {
+  flex: none;
 }
 
 .sidebar-right h2 {
@@ -789,12 +853,8 @@ a.external::after {
 .graph-mount canvas:active {
   cursor: grabbing;
 }
-.graph-local {
-  height: 13rem;
-}
-.graph-home {
-  height: 22rem;
-  margin: 0 0 1rem;
+.graph-rail {
+  height: clamp(11rem, 34vh, 20rem);
 }
 .graph-full {
   height: min(72vh, 46rem);
@@ -968,7 +1028,7 @@ a.external::after {
 
 /* Responsive -------------------------------------------------------------- */
 
-@media (max-width: 1180px) {
+@media (max-width: 1260px) {
   body.has-right .layout {
     grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
   }
@@ -989,8 +1049,12 @@ a.external::after {
     min-width: 0;
   }
   .search-open span,
-  .search-open kbd {
+  .search-open kbd,
+  .graph-button span {
     display: none;
+  }
+  .graph-button {
+    padding: 0 0.55rem;
   }
   .sidebar {
     position: fixed;
@@ -1010,9 +1074,6 @@ a.external::after {
   }
   main {
     padding: 1.5rem 1.15rem 4rem;
-  }
-  .graph-home {
-    height: 16rem;
   }
 }
 

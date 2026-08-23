@@ -162,8 +162,7 @@ async function build() {
   const unfinished = notes.filter((n) => n.status && n.status !== "sourced").length
   const summary = `<p class="summary">${notes.length} notes, ${countLinks(notes)} links between them.${
     unfinished ? ` ${unfinished} are still marked stub or drafted and have not been through source verification.` : ""
-  }</p>
-  <div class="graph-home graph-mount" data-graph="global"></div>`
+  }</p>`
 
   await write(
     "index.html",

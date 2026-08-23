@@ -11,7 +11,18 @@ const KIND_LABEL = {
   note: "Note",
 }
 
-export function shell({ title, description, root, current, sections, notes, main, bodyClass = "" }) {
+// The graph that sits in the right rail. Shown on every page that has room for
+// it; the media query hides the whole rail when there is not, and the header
+// button is the way in from there.
+export function railGraph({ root, focus = null }) {
+  return `<section class="panel panel-graph">
+  <h2>${focus ? "Connections" : "Graph"}</h2>
+  <div class="graph-mount graph-rail" data-graph="${focus ? "local" : "global"}"${focus ? ` data-focus="${escapeHtml(focus)}"` : ""}></div>
+  <a class="panel-link" href="${root}graph/">Open the full graph</a>
+</section>`
+}
+
+export function shell({ title, description, root, current, sections, notes, main, rightRail = "" }) {
   return `<!doctype html>
 <html lang="en" data-root="${root}">
 <head>
@@ -29,12 +40,13 @@ export function shell({ title, description, root, current, sections, notes, main
 (function(){try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}})()
 </script>
 </head>
-<body class="${bodyClass}">
+<body class="${rightRail ? "has-right" : ""}">
 <a class="skip-link" href="#main">Skip to content</a>
 ${header(root)}
 <div class="layout">
 ${explorer({ root, current, sections, notes })}
 <main id="main">${main}</main>
+${rightRail ? `<aside class="sidebar-right">${rightRail}</aside>` : ""}
 </div>
 ${overlays()}
 <script type="module" src="${root}assets/app.js"></script>
@@ -47,8 +59,8 @@ function header(root) {
   return `<header class="site-header">
   <button class="icon-button nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="explorer">${icon("menu")}</button>
   <a class="site-title" href="${root}">Theology</a>
+  <a class="graph-button" href="${root}graph/" aria-label="Open the full graph" title="Open the full graph">${icon("graph")}<span>Graph</span></a>
   <button class="search-open" aria-label="Search notes">${icon("search")}<span>Search</span><kbd>/</kbd></button>
-  <a class="icon-button" href="${root}graph/" aria-label="Open the graph">${icon("graph")}</a>
   <button class="icon-button theme-toggle" aria-label="Switch theme">${icon("sun")}${icon("moon")}</button>
 </header>`
 }
@@ -120,7 +132,7 @@ export function notePage({ note, root, dateLabel, sections, notes }) {
 
   const tocItems = note.headings.filter((h) => h.depth <= 2)
   const toc = tocItems.length
-    ? `<nav class="panel toc" aria-label="On this page">
+    ? `<nav class="panel panel-toc toc" aria-label="On this page">
   <h2>On this page</h2>
   <ol>${tocItems.map((h) => `<li><a href="#${h.id}">${escapeHtml(h.text)}</a></li>`).join("")}</ol>
 </nav>`
@@ -140,15 +152,7 @@ export function notePage({ note, root, dateLabel, sections, notes }) {
     <h2>Linked from</h2>
     ${backlinks}
   </section>
-</article>
-<aside class="sidebar-right">
-  ${toc}
-  <section class="panel">
-    <h2>Connections</h2>
-    <div class="graph-mount graph-local" data-graph="local" data-focus="${escapeHtml(note.title)}"></div>
-    <a class="panel-link" href="${root}graph/">Open the full graph</a>
-  </section>
-</aside>`
+</article>`
 
   return shell({
     title: `${note.title} · Theology`,
@@ -158,7 +162,7 @@ export function notePage({ note, root, dateLabel, sections, notes }) {
     sections,
     notes,
     main,
-    bodyClass: "has-right",
+    rightRail: toc + railGraph({ root, focus: note.title }),
   })
 }
 
@@ -193,6 +197,7 @@ export function listPage({ title, lede, groups, root, current, sections, notes, 
   ${extra}
   ${body}
 </div>`,
+    rightRail: railGraph({ root }),
   })
 }
 
@@ -216,6 +221,7 @@ export function tagIndexPage({ tags, root, sections, notes }) {
   <p class="lede">Every tag used across the vault.</p>
   <ul class="tag-cloud">${items}</ul>
 </div>`,
+    rightRail: railGraph({ root }),
   })
 }
 
@@ -237,7 +243,6 @@ export function graphPage({ root, sections, notes }) {
   </div>
   <div class="graph-full graph-mount" data-graph="global"></div>
 </div>`,
-    bodyClass: "is-graph",
   })
 }
 
