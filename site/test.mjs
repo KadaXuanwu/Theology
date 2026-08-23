@@ -384,8 +384,12 @@ console.log("the enlarged graph separates neighbours from context")
 
   // the drawing has to actually act on the hop
   const source = await readFile(resolve(repoRoot, "site/assets/graph.js"), "utf8")
-  check("nodes past the first hop are drawn faded", /hop > 1 \? 0\.\d+ : 1/.test(source))
-  check("and their links with them", /Math\.min\(hopAlpha\(link\.source\), hopAlpha\(link\.target\)\)/.test(source))
+  const fades = source.match(/const HOP_FADE = {([^}]*)}/)?.[1] ?? ""
+  const amount = (part) => Number(fades.match(new RegExp(part + ": ([0-9.]+)"))?.[1])
+  check("the circle, its label and its links fade by their own amounts", ["node", "label", "link"].every((p) => amount(p) > 0 && amount(p) < 1), fades.trim())
+  check("the circle recedes furthest", amount("node") < amount("link") && amount("node") < amount("label"), `node ${amount("node")}, link ${amount("link")}, label ${amount("label")}`)
+  check("the label stays the most readable of the three", amount("label") > amount("link"), `label ${amount("label")} vs link ${amount("link")}`)
+  check("and the drawing actually uses them", ["fade(node, \"node\")","fade(node, \"label\")","fade(link.source, \"link\")"].every((needle) => source.includes(needle)))
 }
 
 console.log("local graph")

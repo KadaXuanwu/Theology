@@ -20,6 +20,12 @@ const FORCES = {
   restSpeed: 0.15,
 }
 
+// How far a node past the first hop recedes. The circle drops hard because it is
+// only there for context, but its label stays readable: knowing which note it is
+// is the whole reason for showing it at all. Links sit in between, enough to
+// read the shape without competing with the real connections.
+const HOP_FADE = { node: 0.22, label: 0.62, link: 0.45 }
+
 // One step of the simulation. Pure apart from mutating node x/y/vx/vy, which
 // keeps it testable outside a browser.
 export function stepForces(nodes, links, alpha, alphaTarget = 0) {
@@ -233,14 +239,14 @@ export function mount(el, data, options = {}) {
     const near = hovered ? adjacency.get(hovered.id) : null
     const dimmed = (node) => hovered && node !== hovered && !near.has(node.id)
     // Past the first hop a node is context, not a connection of the focus.
-    const hopAlpha = (node) => (node.hop > 1 ? 0.4 : 1)
+    const fade = (node, part) => (node.hop > 1 ? HOP_FADE[part] : 1)
 
     ctx.lineWidth = Math.max(0.8, camera.scale * 0.9)
     for (const link of links) {
       const active = hovered && (link.source === hovered || link.target === hovered)
       const faded = hovered && !active
       ctx.strokeStyle = active ? colors.accent : colors.line
-      const base = 0.5 * Math.min(hopAlpha(link.source), hopAlpha(link.target))
+      const base = 0.5 * Math.min(fade(link.source, "link"), fade(link.target, "link"))
       ctx.globalAlpha = faded ? 0.12 : active ? 0.85 : base
       const [x1, y1] = toScreen(link.source.x, link.source.y)
       const [x2, y2] = toScreen(link.target.x, link.target.y)
@@ -258,7 +264,7 @@ export function mount(el, data, options = {}) {
       const r = node.r * Math.max(camera.scale, 0.55)
       const faded = dimmed(node)
 
-      ctx.globalAlpha = faded ? 0.2 : hopAlpha(node)
+      ctx.globalAlpha = faded ? 0.2 : fade(node, "node")
       ctx.fillStyle = colors[node.kind] ?? colors.note
       ctx.beginPath()
       ctx.arc(x, y, r, 0, Math.PI * 2)
@@ -277,7 +283,7 @@ export function mount(el, data, options = {}) {
 
       const showLabel = node === hovered || (near && near.has(node.id)) || (!hovered && labelEveryone)
       if (showLabel) {
-        ctx.globalAlpha = faded ? 0.25 : node === hovered ? 1 : 0.85 * hopAlpha(node)
+        ctx.globalAlpha = faded ? 0.25 : node === hovered ? 1 : 0.85 * fade(node, "label")
         ctx.font = `${node === hovered ? 600 : 400} ${Math.min(13, 10 + camera.scale)}px system-ui, sans-serif`
         ctx.textAlign = "center"
         ctx.textBaseline = "top"
