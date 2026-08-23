@@ -301,7 +301,7 @@ export function nodeGraphPage({ note, root, sections, notes, assets }) {
     <div>
       <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${root}">Theology</a><span aria-hidden="true">/</span><a href="${root}${slugify(section.dir)}/">${escapeHtml(section.label)}</a></nav>
       <h1><span class="dot dot-${section.kind}"></span>${escapeHtml(note.title)}</h1>
-      <p class="lede">What this note links to, and what links back to it. Drag to move, scroll to zoom, click to open.</p>
+      <p class="lede">What this note links to and what links back to it, solid. What those in turn connect to, dimmed. Drag to move, scroll to zoom, click to open.</p>
     </div>
     <ul class="legend">${sections.map((sec) => `<li><span class="dot dot-${sec.kind}"></span>${escapeHtml(sec.label)}</li>`).join("")}</ul>
   </div>

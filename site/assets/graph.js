@@ -136,6 +136,7 @@ export function mount(el, data, options = {}) {
       y: Math.sin(angle) * spread + (rand() - 0.5) * 24,
       vx: 0,
       vy: 0,
+      hop: n.hop ?? 0,
       r: 4 + Math.sqrt(n.degree || 0) * 2.1 + (n.id === focus ? 2.5 : 0),
       pinned: false,
     }
@@ -231,13 +232,16 @@ export function mount(el, data, options = {}) {
 
     const near = hovered ? adjacency.get(hovered.id) : null
     const dimmed = (node) => hovered && node !== hovered && !near.has(node.id)
+    // Past the first hop a node is context, not a connection of the focus.
+    const hopAlpha = (node) => (node.hop > 1 ? 0.4 : 1)
 
     ctx.lineWidth = Math.max(0.8, camera.scale * 0.9)
     for (const link of links) {
       const active = hovered && (link.source === hovered || link.target === hovered)
       const faded = hovered && !active
       ctx.strokeStyle = active ? colors.accent : colors.line
-      ctx.globalAlpha = faded ? 0.12 : active ? 0.85 : 0.5
+      const base = 0.5 * Math.min(hopAlpha(link.source), hopAlpha(link.target))
+      ctx.globalAlpha = faded ? 0.12 : active ? 0.85 : base
       const [x1, y1] = toScreen(link.source.x, link.source.y)
       const [x2, y2] = toScreen(link.target.x, link.target.y)
       ctx.beginPath()
@@ -254,7 +258,7 @@ export function mount(el, data, options = {}) {
       const r = node.r * Math.max(camera.scale, 0.55)
       const faded = dimmed(node)
 
-      ctx.globalAlpha = faded ? 0.2 : 1
+      ctx.globalAlpha = faded ? 0.2 : hopAlpha(node)
       ctx.fillStyle = colors[node.kind] ?? colors.note
       ctx.beginPath()
       ctx.arc(x, y, r, 0, Math.PI * 2)
@@ -273,7 +277,7 @@ export function mount(el, data, options = {}) {
 
       const showLabel = node === hovered || (near && near.has(node.id)) || (!hovered && labelEveryone)
       if (showLabel) {
-        ctx.globalAlpha = faded ? 0.25 : node === hovered ? 1 : 0.85
+        ctx.globalAlpha = faded ? 0.25 : node === hovered ? 1 : 0.85 * hopAlpha(node)
         ctx.font = `${node === hovered ? 600 : 400} ${Math.min(13, 10 + camera.scale)}px system-ui, sans-serif`
         ctx.textAlign = "center"
         ctx.textBaseline = "top"
@@ -583,14 +587,14 @@ export function neighbourhood(data, focus, depth) {
     adjacency.get(link.target)?.add(link.source)
   }
 
-  const keep = new Set([focus])
+  const hops = new Map([[focus, 0]])
   let edge = [focus]
   for (let step = 0; step < depth; step++) {
     const next = []
     for (const id of edge) {
       for (const other of adjacency.get(id) ?? []) {
-        if (!keep.has(other)) {
-          keep.add(other)
+        if (!hops.has(other)) {
+          hops.set(other, step + 1)
           next.push(other)
         }
       }
@@ -598,8 +602,10 @@ export function neighbourhood(data, focus, depth) {
     edge = next
   }
 
+  // Copies, not the shared nodes: several graphs share one data object and each
+  // focuses somewhere different, so hop counts must not leak between them.
   return {
-    nodes: data.nodes.filter((n) => keep.has(n.id)),
-    links: data.links.filter((l) => keep.has(l.source) && keep.has(l.target)),
+    nodes: data.nodes.filter((n) => hops.has(n.id)).map((n) => ({ ...n, hop: hops.get(n.id) })),
+    links: data.links.filter((l) => hops.has(l.source) && hops.has(l.target)),
   }
 }

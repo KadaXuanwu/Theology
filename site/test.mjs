@@ -338,6 +338,56 @@ console.log("reheating never yanks the camera")
   )
 }
 
+console.log("the enlarged graph separates neighbours from context")
+{
+  const data = await readGraphData()
+  const focus = data.nodes.find((n) => n.degree > 3).id
+
+  const direct = new Set([focus])
+  for (const l of data.links) {
+    if (l.source === focus) direct.add(l.target)
+    if (l.target === focus) direct.add(l.source)
+  }
+
+  const sub = neighbourhood(data, focus, 2)
+  const hopOf = new Map(sub.nodes.map((n) => [n.id, n.hop]))
+
+  check("the focus is hop zero", hopOf.get(focus) === 0)
+  check(
+    "everything it links to is hop one",
+    [...direct].filter((id) => id !== focus).every((id) => hopOf.get(id) === 1),
+  )
+  check(
+    "everything else it pulls in is further out",
+    sub.nodes.filter((n) => !direct.has(n.id)).every((n) => n.hop === 2),
+  )
+  check("there is something to dim", sub.nodes.some((n) => n.hop === 2), `${sub.nodes.length} nodes`)
+
+  // depth 1 must stay exactly what the sidebar shows, all of it undimmed
+  const rail = neighbourhood(data, focus, 1)
+  check("the sidebar view has nothing past the first hop", rail.nodes.every((n) => n.hop <= 1))
+  check("and matches the direct neighbours exactly", rail.nodes.length === direct.size, `${rail.nodes.length} vs ${direct.size}`)
+
+  // several graphs share one data object, so hop counts must not leak
+  const other = data.nodes.find((n) => n.id !== focus && !direct.has(n.id))?.id
+  if (other) {
+    const second = neighbourhood(data, other, 2)
+    check(
+      "focusing elsewhere does not inherit the previous hop counts",
+      second.nodes.find((n) => n.id === other)?.hop === 0,
+    )
+    check(
+      "and the shared data is left untouched",
+      data.nodes.every((n) => n.hop === undefined),
+    )
+  }
+
+  // the drawing has to actually act on the hop
+  const source = await readFile(resolve(repoRoot, "site/assets/graph.js"), "utf8")
+  check("nodes past the first hop are drawn faded", /hop > 1 \? 0\.\d+ : 1/.test(source))
+  check("and their links with them", /Math\.min\(hopAlpha\(link\.source\), hopAlpha\(link\.target\)\)/.test(source))
+}
+
 console.log("local graph")
 {
   const data = await readGraphData()
