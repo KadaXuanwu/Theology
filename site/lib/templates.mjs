@@ -22,7 +22,7 @@ export function railGraph({ root, focus = null }) {
 </section>`
 }
 
-export function shell({ title, description, root, current, sections, notes, main, rightRail = "", assets }) {
+export function shell({ title, description, root, current, sections, notes, main, rightRail = "", bodyClass = "", assets }) {
   return `<!doctype html>
 <html lang="en" data-root="${root}">
 <head>
@@ -40,7 +40,7 @@ export function shell({ title, description, root, current, sections, notes, main
 (function(){try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}})()
 </script>
 </head>
-<body class="${rightRail ? "has-right" : ""}">
+<body class="${[rightRail ? "has-right" : "", bodyClass].filter(Boolean).join(" ")}">
 <a class="skip-link" href="#main">Skip to content</a>
 ${header(root)}
 <div class="layout">
@@ -247,6 +247,7 @@ export function graphPage({ root, sections, notes, assets }) {
   </div>
   <div class="graph-full graph-mount" data-graph="global"></div>
 </div>`,
+    bodyClass: "is-graph",
   })
 }
 

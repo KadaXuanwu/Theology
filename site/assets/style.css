@@ -304,17 +304,18 @@ h3 {
   grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
   align-items: stretch;
   height: calc(100vh - var(--header-h));
-  max-width: 100rem;
+  /* Capped so the middle column is only as wide as the text inside it. Any
+     extra width would pile up on the right, leaving the rail looking further
+     away than the sidebar even though the columns sit flush.
+     sidebar + (padding + content + padding) + rail = 20.5 + 2.5 + 46 + 2.5 + 18
+     The same cap applies to pages with no rail, so opening the graph does not
+     shift the sidebar out from under the reader. */
+  max-width: 89.5rem;
   margin: 0 auto;
 }
 
-/* Capped so the middle column is only as wide as the text inside it. Any extra
-   width would all pile up on the right, leaving the rail looking further away
-   than the sidebar even though the columns themselves sit flush.
-   sidebar + (padding + content + padding) + rail = 20.5 + 2.5 + 46 + 2.5 + 18 */
 body.has-right .layout {
   grid-template-columns: var(--sidebar-w) minmax(0, 1fr) var(--right-w);
-  max-width: 89.5rem;
 }
 
 main {
@@ -889,7 +890,8 @@ a.external::after {
   height: clamp(11rem, 34vh, 20rem);
 }
 .graph-full {
-  height: min(72vh, 46rem);
+  flex: 1;
+  min-height: 20rem;
 }
 
 .graph-head {
@@ -901,7 +903,30 @@ a.external::after {
   margin-bottom: 1.25rem;
 }
 .page-graph {
-  max-width: 74rem;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* The graph takes whatever height the heading leaves, so it gains back some of
+   the width it gives up to the shared layout cap. The page is the graph, so the
+   chrome around it is kept tight and nothing here scrolls. */
+body.is-graph main {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  overflow: hidden;
+}
+body.is-graph .graph-head {
+  margin-bottom: 0.85rem;
+}
+body.is-graph .graph-head h1 {
+  margin: 0 0 0.2rem;
+  font-size: 1.5rem;
+}
+body.is-graph .graph-head .lede {
+  margin: 0;
+  font-size: 0.9rem;
 }
 
 .legend {
@@ -1117,6 +1142,17 @@ a.external::after {
   }
   main {
     padding: 1.5rem 1.15rem 4rem;
+  }
+  body.is-graph main {
+    overflow-y: visible;
+    padding-bottom: 4rem;
+  }
+  .page-graph {
+    display: block;
+    height: auto;
+  }
+  .graph-full {
+    height: 68vh;
   }
 }
 
