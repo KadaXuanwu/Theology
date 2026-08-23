@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url"
 
 import { parseFrontmatter, slugify } from "./lib/content.mjs"
 import { createRenderer, htmlToText } from "./lib/markdown.mjs"
-import { neighbourhood, seededRandom, stepForces, wrapLabel } from "./assets/graph.js"
+import { fitCamera, labelExtent, neighbourhood, seededRandom, stepForces, wrapLabel } from "./assets/graph.js"
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -464,14 +464,140 @@ console.log("labels clear the ring and hold their size")
 
   // Bolding on hover re-measures the text, so the label rewraps and reads as
   // though it grew. The weight stays fixed and hover shows through colour.
-  const font = source.match(/ctx\.font = `[^`]*`/)?.[0] ?? ""
-  check("the label font is declared", font.length > 0, font)
+  const font = source.match(/const labelFont = .*/)?.[0] ?? ""
+  check("the label font is declared in one place", font.length > 0, font)
   check("its weight does not change on hover", !/hovered/.test(font), font)
+  check("and both the drawing and the fit read it from there", source.includes("ctx.font = labelFont(size)"))
   check("hover is still signalled, by colour", source.includes("node === hovered ? colors.text : colors.muted"))
 
   // Leaving the canvas has to drop the tooltip with the highlight.
   const leave = source.match(/function onPointerLeave\(\) \{[\s\S]*?\n  \}/)?.[0] ?? ""
   check("leaving the canvas clears the tooltip", /canvas\.title = ""/.test(leave), leave.replace(/\s+/g, " ").slice(0, 90))
+}
+
+console.log("the opening view leaves room for the labels")
+{
+  const data = await readGraphData()
+
+  // A stand-in for canvas text metrics at the size labels are drawn.
+  const measure = (t) => t.length * 5.6
+  const room = (node, scale) => labelExtent(measure, node.id, Math.min(13, 10 + scale))
+
+  // Same start positions and same settling the graph itself uses, so the
+  // layouts being fitted are the ones a reader actually gets.
+  const layout = (focus) => {
+    const subset = focus ? neighbourhood(data, focus, 1) : data
+    const rand = seededRandom(focus ?? "global")
+    const nodes = subset.nodes.map((n, i) => {
+      const angle = (i / subset.nodes.length) * Math.PI * 2
+      const spread = 60 + rand() * 90
+      return {
+        ...n,
+        x: Math.cos(angle) * spread + (rand() - 0.5) * 24,
+        y: Math.sin(angle) * spread + (rand() - 0.5) * 24,
+        vx: 0,
+        vy: 0,
+        r: 4 + Math.sqrt(n.degree || 0) * 2.1 + (n.id === focus ? 2.5 : 0),
+      }
+    })
+    const index = new Map(nodes.map((n) => [n.id, n]))
+    const links = subset.links
+      .map((l) => ({ source: index.get(l.source), target: index.get(l.target) }))
+      .filter((l) => l.source && l.target)
+    let a = 1
+    for (let step = 0; step < 600 && a > 0.004; step++) a = stepForces(nodes, links, a, 0)
+    return nodes
+  }
+
+  // Every pixel the graph draws for a node, in canvas coordinates.
+  const drawn = (node, camera, width, height) => {
+    const x = (node.x - camera.x) * camera.scale + width / 2
+    const y = (node.y - camera.y) * camera.scale + height / 2
+    const r = node.r * Math.max(camera.scale, 0.55)
+    const { half, drop } = room(node, camera.scale)
+    return { left: x - Math.max(r, half), right: x + Math.max(r, half), top: y - r, bottom: y + r + drop }
+  }
+
+  // The rail runs from 11rem to 20rem tall, the full view is much larger.
+  const canvases = [
+    ["the smallest rail", 236, 176],
+    ["a taller rail", 268, 320],
+    ["the enlarged view", 900, 560],
+    ["a phone", 340, 420],
+  ]
+  const focuses = ["God Is Brutal and Not Merciful", "Jesus Existed", data.nodes[0].id]
+
+  let worstBottom = 0
+  let clipped = []
+  for (const focus of focuses) {
+    const nodes = layout(focus)
+    for (const [name, width, height] of canvases) {
+      const camera = fitCamera(nodes, width, height, room)
+      for (const node of nodes) {
+        const box = drawn(node, camera, width, height)
+        if (box.left < 0 || box.right > width || box.top < 0 || box.bottom > height) {
+          clipped.push(`${focus} on ${name}: ${node.id}`)
+        }
+        worstBottom = Math.max(worstBottom, box.bottom / height)
+      }
+    }
+  }
+
+  check("no label is cut off, on any canvas the rail can be", clipped.length === 0, clipped[0] ?? "")
+  check("and the lowest one still reaches the bottom of the canvas", worstBottom > 0.8, worstBottom.toFixed(3))
+
+  // Without the label allowance the old fit really did cut text off, which is
+  // what this is here to stop happening again.
+  const nodes = layout("God Is Brutal and Not Merciful")
+  const blind = fitCamera(nodes, 236, 176, () => ({ half: 0, drop: 0 }))
+  check(
+    "ignoring labels would push them past the edge",
+    nodes.some((n) => drawn(n, blind, 236, 176).bottom > 176),
+  )
+
+  // The label room is real screen pixels: two rows plus the ring it clears.
+  const twoRows = labelExtent(measure, "The Covenant Changed with Christ", 12)
+  const oneRow = labelExtent(measure, "Sin", 12)
+  check("two rows reserve more than one", twoRows.drop > oneRow.drop, `${twoRows.drop.toFixed(1)} vs ${oneRow.drop.toFixed(1)}`)
+  check("and a label never claims more than its wrap width", twoRows.half <= 92 / 2 + 0.01, twoRows.half.toFixed(1))
+  check("the reserved drop clears the focus ring", oneRow.drop > 3 + 1.5 / 2 + 4)
+
+  // A graph that only labels on hover should not reserve room it never uses.
+  const spread = layout(null)
+  const withLabels = fitCamera(spread, 900, 560, room)
+  const withoutLabels = fitCamera(spread, 900, 560)
+  check("labels cost the view some room", withLabels.scale < withoutLabels.scale, `${withLabels.scale.toFixed(3)} vs ${withoutLabels.scale.toFixed(3)}`)
+
+  // Same input, same camera, every time.
+  const again = fitCamera(layout("Jesus Existed"), 268, 320, room)
+  const once = fitCamera(layout("Jesus Existed"), 268, 320, room)
+  check("the fit is deterministic", again.scale === once.scale && again.x === once.x && again.y === once.y)
+  check("it never zooms past the cap", withoutLabels.scale <= 2.2 && withLabels.scale >= 0.25)
+  // A graph that only labels once you zoom in should not reserve room for text
+  // it never draws. Mirrors what the graph itself does: reserve from the first
+  // pass that crosses the threshold, then keep reserving.
+  const hoverRoom = () => {
+    let on = false
+    return (node, scale) => {
+      on = on || scale > 1.15
+      return on ? room(node, scale) : { half: 0, drop: 0 }
+    }
+  }
+  const small = fitCamera(spread, 340, 420, hoverRoom())
+  check(
+    "a graph too far out to label costs nothing",
+    small.scale === fitCamera(spread, 340, 420).scale && small.scale <= 1.15,
+    small.scale.toFixed(3),
+  )
+  const close = layout("Jesus Existed")
+  check(
+    "one zoomed in far enough still makes room",
+    fitCamera(close, 268, 235, hoverRoom()).scale < fitCamera(close, 268, 235).scale,
+    `${fitCamera(close, 268, 235, hoverRoom()).scale.toFixed(3)} vs ${fitCamera(close, 268, 235).scale.toFixed(3)}`,
+  )
+
+  check("an empty graph has no camera", fitCamera([], 300, 300, room) === null)
+  check("nor does one with no canvas yet", fitCamera(spread, 0, 0, room) === null)
 }
 
 console.log("local graph")

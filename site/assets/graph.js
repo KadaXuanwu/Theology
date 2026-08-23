@@ -27,8 +27,17 @@ const FORCES = {
 const HOP_FADE = { node: 0.22, label: 0.62, link: 0.45 }
 
 // Node names are long here, and one long line stretches a label across a good
-// part of the canvas. Two short lines sit under the circle instead.
-const LABEL = { maxWidth: 92, maxLines: 2, lineGap: 1.12, gap: 4 }
+// part of the canvas. Two short lines sit under the circle instead. Below this
+// zoom a graph that only labels on hover leaves them off entirely.
+const LABEL = { maxWidth: 92, maxLines: 2, lineGap: 1.12, gap: 4, zoom: 1.15 }
+
+// What the opening view is allowed to do: keep this much clear of the canvas
+// edge, and never zoom past these bounds to fill it. The margin is small
+// because the labels bring their own: the room they need is measured in.
+const FIT = { pad: 14, min: 0.25, max: 2.2 }
+
+const labelSize = (scale) => Math.min(13, 10 + scale)
+const labelFont = (size) => `400 ${size}px system-ui, sans-serif`
 
 // The focused and hovered nodes carry a second ring outside the circle. Labels
 // clear it on every node, not just the ringed ones, so hovering never nudges a
@@ -67,6 +76,74 @@ function ellipsize(measure, text, maxWidth) {
   return `${cut.trimEnd()}…`
 }
 
+// Where a label ends up, in screen pixels around the node it belongs to. It is
+// drawn at a fixed size, so this room does not shrink as the graph zooms out.
+export function labelExtent(measure, text, size) {
+  const lines = wrapLabel(measure, text, LABEL.maxWidth, LABEL.maxLines)
+  if (lines.length === 0) return { half: 0, drop: 0 }
+  let widest = 0
+  for (const line of lines) widest = Math.max(widest, measure(line))
+  // A whole line height past the last row, which leaves the descenders room.
+  return { half: widest / 2, drop: RING_EXTENT + LABEL.gap + lines.length * size * LABEL.lineGap }
+}
+
+const noLabel = () => ({ half: 0, drop: 0 })
+
+// How far a node reaches on screen from its own centre. The circle grows with
+// the camera, the label does not, and the label hangs below.
+function extentBox(nodes, scale, labelRoom) {
+  let minX = Infinity
+  let minY = Infinity
+  let maxX = -Infinity
+  let maxY = -Infinity
+  for (const n of nodes) {
+    const r = n.r * Math.max(scale, 0.55)
+    const { half, drop } = labelRoom(n, scale)
+    const side = Math.max(r, half)
+    minX = Math.min(minX, n.x * scale - side)
+    maxX = Math.max(maxX, n.x * scale + side)
+    minY = Math.min(minY, n.y * scale - r)
+    maxY = Math.max(maxY, n.y * scale + r + drop)
+  }
+  return {
+    spanX: Math.max(maxX - minX, 1),
+    spanY: Math.max(maxY - minY, 1),
+    midX: (minX + maxX) / 2,
+    midY: (minY + maxY) / 2,
+  }
+}
+
+// The camera that puts every node inside the canvas, labels included. Node
+// spread scales with the camera while label room stays the same size, so one
+// division cannot answer it: start wide and settle onto the scale that fits.
+export function fitCamera(nodes, width, height, labelRoom = noLabel, pad = FIT.pad) {
+  if (nodes.length === 0 || width < 1 || height < 1) return null
+  const availWidth = Math.max(width - pad * 2, 1)
+  const availHeight = Math.max(height - pad * 2, 1)
+
+  const closer = (scale, room) => {
+    const box = extentBox(nodes, scale, room)
+    const filled = Math.min((scale * availWidth) / box.spanX, (scale * availHeight) / box.spanY)
+    return Math.min(Math.max(filled, FIT.min), FIT.max)
+  }
+  const settle = (scale, room, passes) => {
+    for (let pass = 0; pass < passes; pass++) {
+      const next = closer(scale, room)
+      const done = Math.abs(next - scale) < 0.0005
+      scale = next
+      if (done) break
+    }
+    return scale
+  }
+
+  // The circles alone first. A graph that only labels past a zoom level has to
+  // know whether it even gets there before it reserves room for text.
+  let scale = settle(FIT.max, noLabel, 4)
+  scale = settle(scale, labelRoom, 8)
+
+  const box = extentBox(nodes, scale, labelRoom)
+  return { scale, x: box.midX / scale, y: box.midY / scale }
+}
 // One step of the simulation. Pure apart from mutating node x/y/vx/vy, which
 // keeps it testable outside a browser.
 export function stepForces(nodes, links, alpha, alphaTarget = 0) {
@@ -239,6 +316,7 @@ export function mount(el, data, options = {}) {
   let frame = null
   let running = false
   let hasFitted = false
+  const labelRooms = new Map()
 
   const toScreen = (x, y) => [(x - camera.x) * camera.scale + width / 2, (y - camera.y) * camera.scale + height / 2]
   const toWorld = (sx, sy) => [(sx - width / 2) / camera.scale + camera.x, (sy - height / 2) / camera.scale + camera.y]
@@ -270,24 +348,32 @@ export function mount(el, data, options = {}) {
     applySize(rect.width, rect.height)
   }
 
-  function fit() {
-    if (nodes.length === 0 || width === 0) return
-    let minX = Infinity
-    let minY = Infinity
-    let maxX = -Infinity
-    let maxY = -Infinity
-    for (const n of nodes) {
-      minX = Math.min(minX, n.x - n.r)
-      minY = Math.min(minY, n.y - n.r)
-      maxX = Math.max(maxX, n.x + n.r)
-      maxY = Math.max(maxY, n.y + n.r)
+  // Only reserve room for labels that are actually drawn. Once a pass decides
+  // they are on the rest of the fit keeps them on, or the scale would flip back
+  // and forth across the threshold that switches them.
+  function labelRoom() {
+    let on = showLabels === "always"
+    return (node, scale) => {
+      on = on || scale > LABEL.zoom
+      if (!on) return { half: 0, drop: 0 }
+      const size = Math.round(labelSize(scale) * 10) / 10
+      const key = `${size}|${node.id}`
+      let room = labelRooms.get(key)
+      if (!room) {
+        ctx.font = labelFont(size)
+        room = labelExtent((t) => ctx.measureText(t).width, node.id, size)
+        labelRooms.set(key, room)
+      }
+      return room
     }
-    const pad = 26
-    const spanX = Math.max(maxX - minX, 1)
-    const spanY = Math.max(maxY - minY, 1)
-    camera.scale = Math.min((width - pad * 2) / spanX, (height - pad * 2) / spanY, 2.2)
-    camera.x = (minX + maxX) / 2
-    camera.y = (minY + maxY) / 2
+  }
+
+  function fit() {
+    const placed = fitCamera(nodes, width, height, labelRoom())
+    if (!placed) return
+    camera.scale = placed.scale
+    camera.x = placed.x
+    camera.y = placed.y
     hasFitted = true
   }
 
@@ -330,7 +416,7 @@ export function mount(el, data, options = {}) {
     }
 
     ctx.globalAlpha = 1
-    const labelEveryone = showLabels === "always" || camera.scale > 1.15
+    const labelEveryone = showLabels === "always" || camera.scale > LABEL.zoom
 
     for (const node of nodes) {
       const [x, y] = toScreen(node.x, node.y)
@@ -357,8 +443,8 @@ export function mount(el, data, options = {}) {
       const showLabel = node === hovered || (near && near.has(node.id)) || (!hovered && labelEveryone)
       if (showLabel) {
         ctx.globalAlpha = faded ? 0.25 : node === hovered ? 1 : 0.85 * fade(node, "label")
-        const size = Math.min(13, 10 + camera.scale)
-        ctx.font = `400 ${size}px system-ui, sans-serif`
+        const size = labelSize(camera.scale)
+        ctx.font = labelFont(size)
         ctx.textAlign = "center"
         ctx.textBaseline = "top"
         ctx.fillStyle = node === hovered ? colors.text : colors.muted
