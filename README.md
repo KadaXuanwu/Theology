@@ -32,18 +32,26 @@ Nothing gets proved twice. If two arguments need the same claim, the claim becom
 
 Every push to `main` that touches the vault rebuilds <https://kadaxuanwu.github.io/Theology> and publishes it to GitHub Pages.
 
-The site is built with [Quartz](https://quartz.jzhao.xyz/), which reads the vault as it stands and gives back wikilinks, backlinks, a graph, full text search and hover previews. Quartz is not checked into this repo. The workflow fetches it at a pinned commit, copies `Theology/` into it, and builds. Two files control that:
+The site is built by `site/build.mjs`, a small generator written for this vault. It reads the notes, resolves `[[wikilinks]]`, works out backlinks and the link graph, and writes a plain static site into `dist/`. Nothing is ever written back into the vault.
 
-- `site/quartz.config.yaml` is the Quartz config, so the look and the enabled features live here rather than upstream.
-- `site/build-index.mjs` writes the homepage from whatever is in the vault at build time. Nothing is written back into the vault.
+What the site gives a reader: the folder tree, working note links, backlinks on every note, hover previews, full text search, tag pages, a light and dark theme, and an interactive graph of the whole vault or of one note and its neighbours.
 
-Note dates come from git history, stamped in by `site/stamp-dates.mjs`, because the build copy loses the history Quartz would otherwise read. `_Template.md` files and `.obsidian` are left out of the site.
+The only dependency is [marked](https://marked.js.org/) for the markdown itself. The graph, the search and the rest are in `site/assets`.
+
+```bash
+npm ci
+npm run build      # writes dist/
+npm run serve      # preview at http://localhost:8080
+npm run check      # build, then the tests and the link check CI runs
+```
+
+Note dates come from git history rather than file timestamps. `_Template.md` files and `.obsidian` never reach the site.
 
 ## Layout
 
 ```
 Theology/                      the vault
-site/                          config and scripts for the public website
+site/                          the static site generator and its assets
 .github/workflows/deploy.yml   builds and publishes the site on every push
 .claude/skills/theology-node/  the skill that writes and fact checks nodes
 AI/Skills/Theology Node/       notes on that skill

@@ -1,0 +1,17 @@
+{
+  "name": "theology-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Static site generator for the Theology vault",
+  "scripts": {
+    "build": "node site/build.mjs",
+    "serve": "node site/serve.mjs",
+    "test": "node site/test.mjs",
+    "linkcheck": "node site/linkcheck.mjs",
+    "check": "node site/build.mjs && node site/test.mjs && node site/linkcheck.mjs"
+  },
+  "dependencies": {
+    "marked": "^18.0.10"
+  }
+}
