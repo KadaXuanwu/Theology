@@ -324,22 +324,84 @@ async function showPreview(link) {
 
 /* Graphs ------------------------------------------------------------------- */
 
+/* Category filter ---------------------------------------------------------
+ * The legend switches categories in and out. It applies to every graph on the
+ * page and is remembered, so the choice holds as you move around the site.
+ */
+
+const HIDDEN_KEY = "hiddenGraphKinds"
+
+const readHidden = () => {
+  try {
+    const raw = JSON.parse(localStorage.getItem(HIDDEN_KEY) ?? "[]")
+    return new Set(Array.isArray(raw) ? raw : [])
+  } catch {
+    return new Set()
+  }
+}
+
+const writeHidden = (hidden) => {
+  try {
+    localStorage.setItem(HIDDEN_KEY, JSON.stringify([...hidden]))
+  } catch {
+    /* private mode, the filter just will not be remembered */
+  }
+}
+
 {
   const mounts = [...document.querySelectorAll(".graph-mount")]
+  const toggles = [...document.querySelectorAll(".legend-toggle")]
+  const graphs = []
+  // Most pages show a graph without a legend, so the full list of categories
+  // comes from the data rather than from the buttons.
+  const allKinds = new Set(toggles.map((t) => t.dataset.kind))
+
+  const visibleKinds = () => {
+    if (allKinds.size === 0) return null
+    const hidden = readHidden()
+    return new Set([...allKinds].filter((k) => !hidden.has(k)))
+  }
+
+  const paintToggles = () => {
+    const hidden = readHidden()
+    for (const toggle of toggles) {
+      toggle.setAttribute("aria-pressed", String(!hidden.has(toggle.dataset.kind)))
+    }
+  }
+
+  paintToggles()
+
+  for (const toggle of toggles) {
+    toggle.addEventListener("click", () => {
+      const hidden = readHidden()
+      const kind = toggle.dataset.kind
+      if (hidden.has(kind)) hidden.delete(kind)
+      else hidden.add(kind)
+      writeHidden(hidden)
+      paintToggles()
+      const kinds = visibleKinds()
+      for (const graph of graphs) graph.setVisibleKinds(kinds)
+    })
+  }
+
   if (mounts.length) {
     loadGraph().then((data) => {
+      for (const node of data.nodes) allKinds.add(node.kind)
       for (const el of mounts) {
         const local = el.dataset.graph === "local"
-        mountGraph(el, data, {
-          focus: local ? el.dataset.focus : null,
-          // The rail shows immediate neighbours; the full page view goes a hop
-          // further, because one hop leaves most notes looking almost isolated.
-          depth: Number(el.dataset.depth) || 1,
-          showLabels: local ? "always" : "hover",
-          onNavigate: (node) => {
-            window.location.href = url(`${node.url}/`)
-          },
-        })
+        graphs.push(
+          mountGraph(el, data, {
+            focus: local ? el.dataset.focus : null,
+            // The rail shows immediate neighbours; the full page view goes a hop
+            // further, because one hop leaves most notes looking almost isolated.
+            depth: Number(el.dataset.depth) || 1,
+            showLabels: local ? "always" : "hover",
+            kinds: visibleKinds(),
+            onNavigate: (node) => {
+              window.location.href = url(`${node.url}/`)
+            },
+          }),
+        )
       }
     })
   }

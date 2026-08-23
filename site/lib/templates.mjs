@@ -14,6 +14,17 @@ const KIND_LABEL = {
 // The graph that sits in the right rail. Shown on every page that has room for
 // it; the media query hides the whole rail when there is not, and the header
 // button is the way in from there.
+// The legend doubles as the filter: each entry switches its category in and
+// out of every graph on the site.
+function legend(sections) {
+  return `<ul class="legend" role="group" aria-label="Show or hide categories">${sections
+    .map(
+      (sec) =>
+        `<li><button type="button" class="legend-toggle" data-kind="${sec.kind}" aria-pressed="true"><span class="dot dot-${sec.kind}"></span>${escapeHtml(sec.label)}</button></li>`,
+    )
+    .join("")}</ul>`
+}
+
 export function railGraph({ root, focus = null, expandUrl = "graph/" }) {
   const expandLabel = focus ? `Enlarge the graph for ${focus}` : "Open the full graph"
   return `<section class="panel panel-graph">
@@ -269,13 +280,10 @@ export function graphPage({ root, sections, notes, assets }) {
   <div class="graph-head">
     <div>
       <h1>Graph</h1>
-      <p class="lede">Every note and every link between them. Drag to move, scroll to zoom, click to open.</p>
     </div>
-    <div class="graph-head-side">
-      <a class="panel-expand graph-collapse" href="${root}" aria-label="Back to the overview" title="Back to the overview">${icon("collapse")}</a>
-      <ul class="legend">${sections.map((s) => `<li><span class="dot dot-${s.kind}"></span>${escapeHtml(s.label)}</li>`).join("")}</ul>
-    </div>
+    <a class="panel-expand graph-collapse" href="${root}" aria-label="Back to the overview" title="Back to the overview">${icon("collapse")}</a>
   </div>
+  ${legend(sections)}
   <div class="graph-full graph-mount" data-graph="global"></div>
 </div>`,
     bodyClass: "is-graph",
@@ -304,13 +312,10 @@ export function nodeGraphPage({ note, root, sections, notes, assets }) {
     <div>
       <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${root}">Theology</a><span aria-hidden="true">/</span><a href="${root}${slugify(section.dir)}/">${escapeHtml(section.label)}</a></nav>
       <h1><span class="dot dot-${section.kind}"></span>${escapeHtml(note.title)}</h1>
-      <p class="lede">What this note links to and what links back to it, solid. What those in turn connect to, dimmed. Drag to move, scroll to zoom, click to open.</p>
     </div>
-    <div class="graph-head-side">
-      <a class="panel-expand graph-collapse" href="${root}${note.url}/" aria-label="Back to the text of ${escapeHtml(note.title)}" title="Back to the text">${icon("collapse")}</a>
-      <ul class="legend">${sections.map((sec) => `<li><span class="dot dot-${sec.kind}"></span>${escapeHtml(sec.label)}</li>`).join("")}</ul>
-    </div>
+    <a class="panel-expand graph-collapse" href="${root}${note.url}/" aria-label="Back to the text of ${escapeHtml(note.title)}" title="Back to the text">${icon("collapse")}</a>
   </div>
+  ${legend(sections)}
   <div class="graph-full graph-mount" data-graph="local" data-depth="2" data-focus="${escapeHtml(note.title)}"></div>
   <p class="graph-foot"><a href="${root}graph/">See the whole vault</a></p>
 </div>`,

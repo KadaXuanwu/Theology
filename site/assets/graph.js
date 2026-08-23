@@ -164,7 +164,7 @@ export function mount(el, data, options = {}) {
   const subset = focus ? neighbourhood(data, focus, depth) : data
   if (subset.nodes.length === 0) {
     el.innerHTML = '<p class="graph-empty">Nothing links here yet.</p>'
-    return () => {}
+    return { setVisibleKinds() {}, destroy() {} }
   }
 
   const canvas = document.createElement("canvas")
@@ -174,7 +174,7 @@ export function mount(el, data, options = {}) {
   let colors = readColors(document.documentElement)
   const rand = seededRandom(focus ?? "global")
 
-  const nodes = subset.nodes.map((n, i) => {
+  const allNodes = subset.nodes.map((n, i) => {
     const angle = (i / subset.nodes.length) * Math.PI * 2
     const spread = 60 + rand() * 90
     return {
@@ -189,15 +189,37 @@ export function mount(el, data, options = {}) {
     }
   })
 
-  const index = new Map(nodes.map((n) => [n.id, n]))
-  const links = subset.links
-    .map((l) => ({ source: index.get(l.source), target: index.get(l.target) }))
+  const allIndex = new Map(allNodes.map((n) => [n.id, n]))
+  const allLinks = subset.links
+    .map((l) => ({ source: allIndex.get(l.source), target: allIndex.get(l.target) }))
     .filter((l) => l.source && l.target)
 
-  const adjacency = new Map(nodes.map((n) => [n.id, new Set()]))
-  for (const link of links) {
-    adjacency.get(link.source.id).add(link.target.id)
-    adjacency.get(link.target.id).add(link.source.id)
+  let nodes = allNodes
+  let links = allLinks
+  let adjacency = buildAdjacency(nodes, links)
+
+  function buildAdjacency(ns, ls) {
+    const map = new Map(ns.map((n) => [n.id, new Set()]))
+    for (const link of ls) {
+      map.get(link.source.id)?.add(link.target.id)
+      map.get(link.target.id)?.add(link.source.id)
+    }
+    return map
+  }
+
+  // Hiding a category takes its notes out of the layout entirely, so the links
+  // that ran through them go too and the rest closes up around the gap.
+  function setVisibleKinds(kinds) {
+    nodes = kinds ? allNodes.filter((n) => kinds.has(n.kind)) : allNodes
+    const shown = new Set(nodes.map((n) => n.id))
+    links = allLinks.filter((l) => shown.has(l.source.id) && shown.has(l.target.id))
+    adjacency = buildAdjacency(nodes, links)
+    hovered = null
+    dragging = null
+    canvas.title = ""
+    presettle()
+    fit()
+    draw()
   }
 
   const camera = { x: 0, y: 0, scale: 1 }
@@ -276,6 +298,16 @@ export function mount(el, data, options = {}) {
     if (syncSize(canvas.clientWidth, canvas.clientHeight)) fit()
     if (width === 0) return
     ctx.clearRect(0, 0, width, height)
+
+    if (nodes.length === 0) {
+      ctx.globalAlpha = 1
+      ctx.fillStyle = colors.muted
+      ctx.font = "400 13px system-ui, sans-serif"
+      ctx.textAlign = "center"
+      ctx.textBaseline = "middle"
+      ctx.fillText("Every category is hidden", width / 2, height / 2)
+      return
+    }
 
     const near = hovered ? adjacency.get(hovered.id) : null
     const dimmed = (node) => hovered && node !== hovered && !near.has(node.id)
@@ -619,14 +651,18 @@ export function mount(el, data, options = {}) {
   // place reads as a glitch rather than as an animation, so the reader only
   // ever sees the settled graph. The start positions are seeded, so this lands
   // in the same place every load.
-  presettle()
+  if (options.kinds) setVisibleKinds(options.kinds)
+  else presettle()
   resize()
 
-  return () => {
-    if (frame) cancelAnimationFrame(frame)
-    observer.disconnect()
-    themeWatcher.disconnect()
-    canvas.remove()
+  return {
+    setVisibleKinds,
+    destroy() {
+      if (frame) cancelAnimationFrame(frame)
+      observer.disconnect()
+      themeWatcher.disconnect()
+      canvas.remove()
+    },
   }
 }
 

@@ -545,6 +545,57 @@ console.log("text and graph are two views of the same note")
   check("every note has a graph view", missing.length === 0, missing.join(", "))
 }
 
+console.log("the legend filters the graph")
+{
+  const dist = resolve(repoRoot, "dist")
+  const read = (p) => readFile(resolve(dist, p), "utf8")
+  const nodeGraph = await read("claims/jesus-existed/graph/index.html")
+  const fullGraph = await read("graph/index.html")
+
+  // the standing instructions are gone from both graph views
+  for (const [name, html] of [["node graph", nodeGraph], ["full graph", fullGraph]]) {
+    check(`${name} drops the explanatory paragraph`, !/<p class="lede">/.test(html))
+  }
+
+  // the legend is its own row after the heading, not crammed beside it
+  for (const [name, html] of [["node graph", nodeGraph], ["full graph", fullGraph]]) {
+    check(`${name} puts the legend after the heading block`, /<\/div>\s*<ul class="legend"/.test(html), name)
+    check(`${name} no longer stacks it beside the arrow`, !html.includes("graph-head-side"))
+  }
+
+  // every entry is a real control, on by default
+  const toggles = [...fullGraph.matchAll(/<button type="button" class="legend-toggle" data-kind="([^"]+)" aria-pressed="([^"]+)">/g)]
+  check("each category is a button", toggles.length >= 4, `${toggles.length} toggles`)
+  check("all start switched on", toggles.every((m) => m[2] === "true"))
+  check(
+    "and carry the kind the graph filters by",
+    toggles.map((m) => m[1]).join(",") === "argument-for,argument-against,claim,evidence",
+    toggles.map((m) => m[1]).join(","),
+  )
+
+  // the drawing side has to honour it, links included
+  const graphSource = await readFile(resolve(repoRoot, "site/assets/graph.js"), "utf8")
+  check("the graph exposes a way to change what is shown", graphSource.includes("function setVisibleKinds"))
+  check(
+    "hiding a category drops the links through it",
+    graphSource.includes("shown.has(l.source.id) && shown.has(l.target.id)"),
+  )
+  check("and hiding everything says so rather than going blank", graphSource.includes("Every category is hidden"))
+
+  const appSource = await readFile(resolve(repoRoot, "site/assets/app.js"), "utf8")
+  check("the choice is remembered", appSource.includes("hiddenGraphKinds"))
+  check(
+    "it reaches graphs on pages without a legend",
+    appSource.includes("for (const node of data.nodes) allKinds.add(node.kind)"),
+  )
+  check("and every graph on the page updates together", appSource.includes("for (const graph of graphs) graph.setVisibleKinds(kinds)"))
+
+  // the shrink arrow matches the enlarge arrow: no border of its own
+  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+  const collapseRule = sheet.match(/\.graph-collapse \{[^}]*\}/)?.[0] ?? ""
+  check("the shrink arrow has no border", !/border:/.test(collapseRule), collapseRule.replace(/\s+/g, " "))
+}
+
 console.log("the rail leads with the graph, and the enlarged view can shrink back")
 {
   const dist = resolve(repoRoot, "dist")
