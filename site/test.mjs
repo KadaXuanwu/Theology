@@ -439,6 +439,41 @@ console.log("node labels wrap to two short rows")
   )
 }
 
+console.log("labels clear the ring and hold their size")
+{
+  const source = await readFile(resolve(repoRoot, "site/assets/graph.js"), "utf8")
+
+  // The focused and hovered nodes carry a ring outside the circle. If the label
+  // offset ignores it, it sits hard against that ring.
+  const num = (name, key) => Number(source.match(new RegExp(name + "[^}]*" + key + ":\\s*([0-9.]+)"))?.[1])
+  const ringGap = num("const RING = \\{", "gap")
+  const ringWidth = num("const RING = \\{", "width")
+  const labelGap = num("const LABEL = \\{", "gap")
+
+  check("the ring geometry is declared", Number.isFinite(ringGap) && Number.isFinite(ringWidth), `gap ${ringGap}, width ${ringWidth}`)
+  check("the label gap is declared", Number.isFinite(labelGap), String(labelGap))
+
+  const ringOuter = ringGap + ringWidth / 2
+  check(
+    "the label starts outside the ring, not on it",
+    ringOuter + labelGap > ringOuter,
+    `ring reaches r+${ringOuter}, label starts r+${ringOuter + labelGap}`,
+  )
+  check("and the drawing uses the ring extent, not the bare radius", source.includes("r + RING_EXTENT + LABEL.gap"))
+  check("the ring is drawn at the same radius the label allows for", source.includes("arc(x, y, r + RING.gap"))
+
+  // Bolding on hover re-measures the text, so the label rewraps and reads as
+  // though it grew. The weight stays fixed and hover shows through colour.
+  const font = source.match(/ctx\.font = `[^`]*`/)?.[0] ?? ""
+  check("the label font is declared", font.length > 0, font)
+  check("its weight does not change on hover", !/hovered/.test(font), font)
+  check("hover is still signalled, by colour", source.includes("node === hovered ? colors.text : colors.muted"))
+
+  // Leaving the canvas has to drop the tooltip with the highlight.
+  const leave = source.match(/function onPointerLeave\(\) \{[\s\S]*?\n  \}/)?.[0] ?? ""
+  check("leaving the canvas clears the tooltip", /canvas\.title = ""/.test(leave), leave.replace(/\s+/g, " ").slice(0, 90))
+}
+
 console.log("local graph")
 {
   const data = await readGraphData()

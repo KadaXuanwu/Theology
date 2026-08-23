@@ -28,7 +28,13 @@ const HOP_FADE = { node: 0.22, label: 0.62, link: 0.45 }
 
 // Node names are long here, and one long line stretches a label across a good
 // part of the canvas. Two short lines sit under the circle instead.
-const LABEL = { maxWidth: 92, maxLines: 2, lineGap: 1.12 }
+const LABEL = { maxWidth: 92, maxLines: 2, lineGap: 1.12, gap: 4 }
+
+// The focused and hovered nodes carry a second ring outside the circle. Labels
+// clear it on every node, not just the ringed ones, so hovering never nudges a
+// label down and the spacing stays even across the graph.
+const RING = { gap: 3, width: 1.5 }
+const RING_EXTENT = RING.gap + RING.width / 2
 
 // Wraps on words, and trims the last line rather than dropping the rest.
 export function wrapLabel(measure, text, maxWidth, maxLines) {
@@ -310,9 +316,9 @@ export function mount(el, data, options = {}) {
         ctx.lineWidth = 2
         ctx.stroke()
         ctx.strokeStyle = colors[node.kind] ?? colors.note
-        ctx.lineWidth = 1.5
+        ctx.lineWidth = RING.width
         ctx.beginPath()
-        ctx.arc(x, y, r + 3, 0, Math.PI * 2)
+        ctx.arc(x, y, r + RING.gap, 0, Math.PI * 2)
         ctx.stroke()
       }
 
@@ -320,13 +326,13 @@ export function mount(el, data, options = {}) {
       if (showLabel) {
         ctx.globalAlpha = faded ? 0.25 : node === hovered ? 1 : 0.85 * fade(node, "label")
         const size = Math.min(13, 10 + camera.scale)
-        ctx.font = `${node === hovered ? 600 : 400} ${size}px system-ui, sans-serif`
+        ctx.font = `400 ${size}px system-ui, sans-serif`
         ctx.textAlign = "center"
         ctx.textBaseline = "top"
         ctx.fillStyle = node === hovered ? colors.text : colors.muted
         const lines = wrapLabel((t) => ctx.measureText(t).width, node.id, LABEL.maxWidth, LABEL.maxLines)
         for (const [row, text] of lines.entries()) {
-          ctx.fillText(text, x, y + r + 4 + row * size * LABEL.lineGap)
+          ctx.fillText(text, x, y + r + RING_EXTENT + LABEL.gap + row * size * LABEL.lineGap)
         }
       }
     }
@@ -559,6 +565,10 @@ export function mount(el, data, options = {}) {
   }
 
   function onPointerLeave() {
+    // The tooltip has to go with the highlight. Leaving it set means the last
+    // node's name hangs around over empty canvas.
+    canvas.title = ""
+    canvas.style.cursor = "grab"
     if (hovered) {
       hovered = null
       draw()
