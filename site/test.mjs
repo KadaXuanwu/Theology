@@ -545,6 +545,44 @@ console.log("text and graph are two views of the same note")
   check("every note has a graph view", missing.length === 0, missing.join(", "))
 }
 
+console.log("the rail leads with the graph, and the enlarged view can shrink back")
+{
+  const dist = resolve(repoRoot, "dist")
+  const read = (p) => readFile(resolve(dist, p), "utf8")
+
+  const note = await read("claims/jesus-existed/index.html")
+  const rail = note.match(/<aside class="sidebar-right">[\s\S]*?<\/aside>/)?.[0] ?? ""
+  check("the rail has both panels", rail.includes("panel-graph") && rail.includes("panel-toc"))
+  check(
+    "the graph sits above the contents",
+    rail.indexOf("panel-graph") < rail.indexOf("panel-toc"),
+    `graph at ${rail.indexOf("panel-graph")}, contents at ${rail.indexOf("panel-toc")}`,
+  )
+
+  // the shrink control mirrors the enlarge arrow it came from
+  const collapse = (html) => {
+    const m = html.match(/<a class="panel-expand graph-collapse" href="([^"]*)" aria-label="([^"]*)"/)
+    return m ? { href: m[1], label: m[2] } : null
+  }
+
+  const nodeGraph = await read("claims/jesus-existed/graph/index.html")
+  const shrink = collapse(nodeGraph)
+  check("the enlarged view has a shrink control", shrink !== null)
+  check("it returns to that note's text", shrink?.href === "../../../claims/jesus-existed/", String(shrink?.href))
+  check("and says so", /Back to the text/.test(shrink?.label ?? ""), String(shrink?.label))
+  check("it sits opposite the legend, at the top right", nodeGraph.includes('<div class="graph-head-side">'))
+
+  const fullGraph = await read("graph/index.html")
+  const shrinkFull = collapse(fullGraph)
+  check("the whole vault view has one too", shrinkFull !== null)
+  check("returning to the overview", shrinkFull?.href === "../", String(shrinkFull?.href))
+
+  // enlarge and shrink are a round trip
+  const railPanel = note.match(/<section class="panel panel-graph">[\s\S]*?<\/section>/)?.[0] ?? ""
+  const enlarge = railPanel.match(/class="panel-expand" href="([^"]*)"/)?.[1]
+  check("enlarging and shrinking lead back to each other", enlarge === "../../claims/jesus-existed/graph/", String(enlarge))
+}
+
 console.log("the sidebar preview can be enlarged")
 {
   const dist = resolve(repoRoot, "dist")

@@ -971,7 +971,7 @@ a.external::after {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem 2rem;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 1.25rem;
 }
@@ -1007,6 +1007,33 @@ body.is-graph .graph-head h1 .dot {
 body.is-graph .graph-head .lede {
   margin: 0;
   font-size: 0.9rem;
+}
+
+/* The heading gives way so the control stays pinned to the right instead of
+   pushing the whole stack onto a row of its own. */
+.graph-head > :first-child {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.graph-head-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.7rem;
+  flex: none;
+  max-width: 15rem;
+}
+.graph-head-side .legend {
+  justify-content: flex-end;
+}
+
+.graph-collapse {
+  margin: 0;
+  border: 1px solid var(--border);
+}
+.graph-collapse:hover {
+  border-color: var(--accent);
 }
 
 .graph-foot {

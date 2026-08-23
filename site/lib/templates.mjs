@@ -190,7 +190,7 @@ export function notePage({ note, root, dateLabel, sections, notes, assets }) {
     notes,
     assets,
     main,
-    rightRail: toc + railGraph({ root, focus: note.title, expandUrl: `${note.url}/graph/` }),
+    rightRail: railGraph({ root, focus: note.title, expandUrl: `${note.url}/graph/` }) + toc,
     graphUrl: `${note.url}/graph/`,
   })
 }
@@ -271,7 +271,10 @@ export function graphPage({ root, sections, notes, assets }) {
       <h1>Graph</h1>
       <p class="lede">Every note and every link between them. Drag to move, scroll to zoom, click to open.</p>
     </div>
-    <ul class="legend">${sections.map((s) => `<li><span class="dot dot-${s.kind}"></span>${escapeHtml(s.label)}</li>`).join("")}</ul>
+    <div class="graph-head-side">
+      <a class="panel-expand graph-collapse" href="${root}" aria-label="Back to the overview" title="Back to the overview">${icon("collapse")}</a>
+      <ul class="legend">${sections.map((s) => `<li><span class="dot dot-${s.kind}"></span>${escapeHtml(s.label)}</li>`).join("")}</ul>
+    </div>
   </div>
   <div class="graph-full graph-mount" data-graph="global"></div>
 </div>`,
@@ -303,7 +306,10 @@ export function nodeGraphPage({ note, root, sections, notes, assets }) {
       <h1><span class="dot dot-${section.kind}"></span>${escapeHtml(note.title)}</h1>
       <p class="lede">What this note links to and what links back to it, solid. What those in turn connect to, dimmed. Drag to move, scroll to zoom, click to open.</p>
     </div>
-    <ul class="legend">${sections.map((sec) => `<li><span class="dot dot-${sec.kind}"></span>${escapeHtml(sec.label)}</li>`).join("")}</ul>
+    <div class="graph-head-side">
+      <a class="panel-expand graph-collapse" href="${root}${note.url}/" aria-label="Back to the text of ${escapeHtml(note.title)}" title="Back to the text">${icon("collapse")}</a>
+      <ul class="legend">${sections.map((sec) => `<li><span class="dot dot-${sec.kind}"></span>${escapeHtml(sec.label)}</li>`).join("")}</ul>
+    </div>
   </div>
   <div class="graph-full graph-mount" data-graph="local" data-depth="2" data-focus="${escapeHtml(note.title)}"></div>
   <p class="graph-foot"><a href="${root}graph/">See the whole vault</a></p>
@@ -338,6 +344,8 @@ function icon(name) {
     home: '<path d="M4 11 12 4l8 7"/><path d="M6.5 9.6V19h11V9.6"/>',
     expand:
       '<polyline points="14 4 20 4 20 10"/><polyline points="10 20 4 20 4 14"/><line x1="20" y1="4" x2="13.5" y2="10.5"/><line x1="4" y1="20" x2="10.5" y2="13.5"/>',
+    collapse:
+      '<polyline points="20 10 14 10 14 4"/><polyline points="4 14 10 14 10 20"/><line x1="14" y1="10" x2="20.5" y2="3.5"/><line x1="10" y1="14" x2="3.5" y2="20.5"/>',
     text: '<line x1="5" y1="6" x2="19" y2="6"/><line x1="5" y1="10.5" x2="19" y2="10.5"/><line x1="5" y1="15" x2="15" y2="15"/><line x1="5" y1="19" x2="12" y2="19"/>',
     graph:
       '<circle cx="6" cy="7" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="17" r="2.5"/><line x1="7.6" y1="8.9" x2="10.6" y2="15"/><line x1="16.7" y1="8.2" x2="13.4" y2="15"/><line x1="8.4" y1="6.7" x2="15.5" y2="6.2"/>',
