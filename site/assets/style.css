@@ -994,8 +994,15 @@ body.is-graph .graph-head {
   margin-bottom: 0.85rem;
 }
 body.is-graph .graph-head h1 {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
   margin: 0 0 0.2rem;
   font-size: 1.5rem;
+}
+body.is-graph .graph-head h1 .dot {
+  width: 0.6rem;
+  height: 0.6rem;
 }
 body.is-graph .graph-head .lede {
   margin: 0;
@@ -1005,8 +1012,14 @@ body.is-graph .graph-head .lede {
 .graph-foot {
   margin: 0.6rem 0 0;
   font-size: 0.82rem;
-  color: var(--muted);
   flex: none;
+}
+.graph-foot a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.graph-foot a:hover {
+  color: var(--accent);
 }
 
 .legend {

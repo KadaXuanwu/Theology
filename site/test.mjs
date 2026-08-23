@@ -442,6 +442,33 @@ console.log("the sidebar preview can be enlarged")
   }
 }
 
+console.log("the two whole-vault links look the same")
+{
+  // Setting the colour on the paragraph loses to the global link rule, so the
+  // anchor itself has to carry it. That is what made one of these two identical
+  // links come out accent coloured while the other stayed muted.
+  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+  const footRule = sheet.match(/\.graph-foot a \{[^}]*\}/)?.[0] ?? ""
+  const panelRule = sheet.match(/\.panel-link \{[^}]*\}/)?.[0] ?? ""
+  const colourOf = (rule) => rule.match(/color:\s*(var\([^)]*\))/)?.[1] ?? null
+
+  check("the graph view link colours the anchor, not its wrapper", colourOf(footRule) !== null, footRule.replace(/\s+/g, " "))
+  check(
+    "and matches the same link in the sidebar",
+    colourOf(footRule) === colourOf(panelRule),
+    `${colourOf(footRule)} vs ${colourOf(panelRule)}`,
+  )
+
+  // A tiny inline-block dot baseline-aligned in a 1.5rem heading sits low and
+  // hard against the first letter, so the heading has to lay it out instead.
+  const heading = sheet.match(/body\.is-graph \.graph-head h1 \{[^}]*\}/)?.[0] ?? ""
+  check(
+    "the graph heading lays its dot out rather than leaving it on the baseline",
+    /display:\s*flex/.test(heading) && /gap:/.test(heading) && /align-items:\s*center/.test(heading),
+    heading.replace(/\s+/g, " "),
+  )
+}
+
 console.log("home is reachable and knows when it is current")
 {
   const dist = resolve(repoRoot, "dist")
