@@ -16,7 +16,7 @@ const FORCES = {
 
 // One step of the simulation. Pure apart from mutating node x/y/vx/vy, which
 // keeps it testable outside a browser.
-export function stepForces(nodes, links, alpha) {
+export function stepForces(nodes, links, alpha, alphaTarget = 0) {
   for (let i = 0; i < nodes.length; i++) {
     const a = nodes[i]
     for (let j = i + 1; j < nodes.length; j++) {
@@ -69,7 +69,7 @@ export function stepForces(nodes, links, alpha) {
     n.y += n.vy * alpha
   }
 
-  return alpha * FORCES.alphaDecay
+  return alphaTarget + (alpha - alphaTarget) * FORCES.alphaDecay
 }
 
 // Deterministic start positions, so the layout is the same on every load.
@@ -151,6 +151,7 @@ export function mount(el, data, options = {}) {
   let height = 0
   let dpr = 1
   let alpha = 1
+  let alphaTarget = 0
   let hovered = null
   let dragging = null
   let panning = null
@@ -278,7 +279,7 @@ export function mount(el, data, options = {}) {
 
   function loop() {
     if (alpha > FORCES.alphaMin) {
-      alpha = stepForces(nodes, links, alpha)
+      alpha = stepForces(nodes, links, alpha, alphaTarget)
       if (!hasFitted || alpha > 0.35) fit()
       draw()
       frame = requestAnimationFrame(loop)
@@ -339,6 +340,7 @@ export function mount(el, data, options = {}) {
     if (dragging) {
       dragging.pinned = false
       dragging = null
+      alphaTarget = 0
     }
     panning = null
     pointerMoved = true
@@ -360,6 +362,9 @@ export function mount(el, data, options = {}) {
     if (node) {
       dragging = node
       node.pinned = true
+      // Keep the layout live for the whole drag. Without a target, alpha decays
+      // away after a few seconds and the other nodes stop responding.
+      alphaTarget = 0.3
       reheat(0.3)
     } else {
       panning = { sx: pos[0], sy: pos[1], camX: camera.x, camY: camera.y }
@@ -444,7 +449,8 @@ export function mount(el, data, options = {}) {
       dragging.pinned = false
       if (!pointerMoved) open(dragging)
       dragging = null
-      reheat(0.2)
+      alphaTarget = 0
+      reheat(0.25)
     } else if (panning) {
       if (!pointerMoved) {
         const node = nodeAt(sx, sy, slopFor(event))

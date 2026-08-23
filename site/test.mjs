@@ -135,6 +135,52 @@ console.log("graph layout")
   )
 }
 
+console.log("dragging keeps the layout live")
+{
+  // A held node must keep pulling its neighbours for as long as it is held.
+  // Without an alpha target the simulation cools after a few seconds and the
+  // rest of the graph freezes mid drag.
+  const a = { id: "a", x: 0, y: 0, vx: 0, vy: 0, pinned: true }
+  const b = { id: "b", x: 40, y: 0, vx: 0, vy: 0, pinned: false }
+  const links = [{ source: a, target: b }]
+  const nodes = [a, b]
+
+  let alpha = 1
+  for (let i = 0; i < 600; i++) alpha = stepForces(nodes, links, alpha, 0)
+  check("alpha reaches zero with no target", alpha < 0.004, alpha.toExponential(2))
+
+  let held = 1
+  for (let i = 0; i < 600; i++) held = stepForces(nodes, links, held, 0.3)
+  check("alpha holds at the target while dragging", Math.abs(held - 0.3) < 0.01, held.toFixed(4))
+
+  // drag the pinned node far away; the free one should follow it
+  a.x = 600
+  a.y = 0
+  const startGap = Math.abs(b.x - a.x)
+  let live = 0.3
+  for (let i = 0; i < 400; i++) live = stepForces(nodes, links, live, 0.3)
+  const endGap = Math.abs(b.x - a.x)
+  check("a held node still drags its neighbour along", endGap < startGap, `gap ${startGap.toFixed(0)} -> ${endGap.toFixed(0)}`)
+  check("the held node itself never drifts", a.x === 600 && a.y === 0)
+}
+
+console.log("reheating never yanks the camera")
+{
+  // The loop auto-fits the view while alpha is above 0.35, which is meant for
+  // the first settle only. A reheat above that would re-fit mid gesture and
+  // drag the camera out from under the reader.
+  const source = await readFile(resolve(repoRoot, "site/assets/graph.js"), "utf8")
+  const threshold = Number(source.match(/alpha > ([\d.]+)\) fit\(\)/)?.[1])
+  const reheats = [...source.matchAll(/reheat\(([\d.]+)\)/g)].map((m) => Number(m[1]))
+  check("found the auto-fit threshold", Number.isFinite(threshold), String(threshold))
+  check("found the reheat calls", reheats.length > 0, reheats.join(", "))
+  check(
+    "every reheat stays below it",
+    reheats.every((v) => v < threshold),
+    `${reheats.join(", ")} vs ${threshold}`,
+  )
+}
+
 console.log("local graph")
 {
   const data = JSON.parse(await readFile(resolve(repoRoot, "dist/graph.json"), "utf8"))
