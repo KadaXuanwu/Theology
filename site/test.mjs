@@ -174,6 +174,77 @@ console.log("dragging keeps the layout live")
   check("the held node itself never drifts", a.x === 600 && a.y === 0)
 }
 
+console.log("a released node comes back to the middle")
+{
+  // Dragging a node far out and letting go must not leave it parked there.
+  // Plain alpha decay gives a fixed movement budget, so a long drag ends with
+  // the layout stretched and off centre. Holding a floor until it stops moving
+  // is what brings it home.
+  const data = await readGraphData()
+  const build = () => {
+    const rand = seededRandom("global")
+    const nodes = data.nodes.map((n, i) => {
+      const angle = (i / data.nodes.length) * Math.PI * 2
+      const spread = 60 + rand() * 90
+      return {
+        ...n,
+        x: Math.cos(angle) * spread + (rand() - 0.5) * 24,
+        y: Math.sin(angle) * spread + (rand() - 0.5) * 24,
+        vx: 0,
+        vy: 0,
+        pinned: false,
+      }
+    })
+    const index = new Map(nodes.map((n) => [n.id, n]))
+    return { nodes, links: data.links.map((l) => ({ source: index.get(l.source), target: index.get(l.target) })) }
+  }
+  const radius = (ns) => Math.max(...ns.map((n) => Math.hypot(n.x, n.y)))
+  const centroid = (ns) => Math.hypot(
+    ns.reduce((s, n) => s + n.x, 0) / ns.length,
+    ns.reduce((s, n) => s + n.y, 0) / ns.length,
+  )
+  const fastest = (ns, a) => Math.max(...ns.map((n) => Math.hypot(n.vx, n.vy) * a))
+
+  const g = build()
+  let a = 1
+  while (a > 0.004) a = stepForces(g.nodes, g.links, a, 0)
+  const baseRadius = radius(g.nodes)
+
+  // hold one node far outside the layout, long enough for the rest to follow
+  const victim = g.nodes[0]
+  victim.pinned = true
+  let held = 0.3
+  for (let t = 0; t < 300; t++) {
+    victim.x = 1500
+    victim.y = 900
+    held = stepForces(g.nodes, g.links, held, 0.3)
+  }
+  check("the drag really did pull the layout out of shape", radius(g.nodes) > baseRadius * 3)
+
+  // release, exactly as the code does
+  victim.pinned = false
+  let r = Math.max(held, 0.3)
+  let ticks = 0
+  while (ticks < 6000) {
+    r = stepForces(g.nodes, g.links, r, 0.12)
+    ticks++
+    if (ticks > 30 && fastest(g.nodes, r) < 0.15) break
+  }
+
+  check("it comes to rest rather than running forever", ticks < 3000, `${ticks} ticks`)
+  check(
+    "the layout is compact again",
+    radius(g.nodes) < baseRadius * 1.35,
+    `${radius(g.nodes).toFixed(0)} vs base ${baseRadius.toFixed(0)}`,
+  )
+  check("and centred again", centroid(g.nodes) < 40, `centroid ${centroid(g.nodes).toFixed(0)} from origin`)
+  check(
+    "the dragged node is back inside the layout",
+    Math.hypot(victim.x, victim.y) < baseRadius,
+    `at ${Math.hypot(victim.x, victim.y).toFixed(0)}, layout radius ${baseRadius.toFixed(0)}`,
+  )
+}
+
 console.log("the layout is settled before it is shown")
 {
   const data = await readGraphData()

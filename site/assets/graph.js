@@ -12,6 +12,12 @@ const FORCES = {
   damping: 0.82,
   alphaDecay: 0.981,
   alphaMin: 0.004,
+  // Letting a released node settle under plain decay is not enough: the decay
+  // gives a fixed movement budget, and a long drag spends more than it. Holding
+  // alpha at this floor until the layout stops moving lets it always come back
+  // to a centred arrangement instead of stranding nodes where they were let go.
+  settleFloor: 0.12,
+  restSpeed: 0.15,
 }
 
 // One step of the simulation. Pure apart from mutating node x/y/vx/vy, which
@@ -152,6 +158,8 @@ export function mount(el, data, options = {}) {
   let dpr = 1
   let alpha = 1
   let alphaTarget = 0
+  let settling = false
+  let settleTicks = 0
   let hovered = null
   let dragging = null
   let panning = null
@@ -277,9 +285,25 @@ export function mount(el, data, options = {}) {
     ctx.globalAlpha = 1
   }
 
+  const fastestNode = () => {
+    let fastest = 0
+    for (const n of nodes) fastest = Math.max(fastest, Math.hypot(n.vx, n.vy) * alpha)
+    return fastest
+  }
+
   function loop() {
     if (alpha > FORCES.alphaMin) {
       alpha = stepForces(nodes, links, alpha, alphaTarget)
+
+      // Hold the floor until the layout has actually come to rest, then let it
+      // decay away so an idle graph costs nothing.
+      if (settling) {
+        settleTicks++
+        if ((settleTicks > 30 && fastestNode() < FORCES.restSpeed) || settleTicks > 3000) {
+          settling = false
+          alphaTarget = 0
+        }
+      }
       if (!hasFitted || alpha > 0.35) fit()
       draw()
       frame = requestAnimationFrame(loop)
@@ -357,7 +381,9 @@ export function mount(el, data, options = {}) {
     if (dragging) {
       dragging.pinned = false
       dragging = null
-      alphaTarget = 0
+      alphaTarget = FORCES.settleFloor
+      settling = true
+      settleTicks = 0
     }
     panning = null
     pointerMoved = true
@@ -466,8 +492,10 @@ export function mount(el, data, options = {}) {
       dragging.pinned = false
       if (!pointerMoved) open(dragging)
       dragging = null
-      alphaTarget = 0
-      reheat(0.25)
+      alphaTarget = FORCES.settleFloor
+      settling = true
+      settleTicks = 0
+      reheat(0.3)
     } else if (panning) {
       if (!pointerMoved) {
         const node = nodeAt(sx, sy, slopFor(event))
