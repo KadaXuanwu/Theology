@@ -14,7 +14,15 @@ import { promisify } from "node:util"
 import { buildAssets } from "./lib/assets.mjs"
 import { readVault, slugify } from "./lib/content.mjs"
 import { createRenderer, htmlToText } from "./lib/markdown.mjs"
-import { graphPage, listPage, nodeGraphPage, notFoundPage, notePage, tagIndexPage } from "./lib/templates.mjs"
+import {
+  graphPage,
+  listPage,
+  nodeGraphPage,
+  notFoundPage,
+  notePage,
+  sectionGraphPage,
+  tagIndexPage,
+} from "./lib/templates.mjs"
 
 const run = promisify(execFile)
 const here = dirname(fileURLToPath(import.meta.url))
@@ -214,22 +222,29 @@ async function build() {
     }),
   )
 
-  // Folder pages
+  // Folder pages, each with a graph view of its own so the header switch and
+  // the tree never have to drop the reader back to the whole vault.
   for (const section of sections) {
     const items = notes.filter((n) => n.section.dir === section.dir)
     if (items.length === 0) continue
+    const slug = slugify(section.dir)
     await write(
-      `${slugify(section.dir)}/index.html`,
+      `${slug}/index.html`,
       listPage({
         title: section.label,
         lede: section.blurb ?? `Notes in ${section.label}.`,
         groups: [{ kind: section.kind, label: section.label, blurb: null, items }],
         root: rootFor(1),
-        current: slugify(section.dir),
+        current: slug,
+        graphUrl: `${slug}/graph/`,
         sections,
         notes,
         assets,
       }),
+    )
+    await write(
+      `${slug}/graph/index.html`,
+      sectionGraphPage({ section, root: rootFor(2), sections, notes, assets }),
     )
   }
 

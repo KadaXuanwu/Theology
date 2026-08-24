@@ -238,7 +238,14 @@ function readColors(root) {
 export function mount(el, data, options = {}) {
   const { focus = null, depth = 1, showLabels = "hover", onNavigate } = options
 
-  const subset = focus ? neighbourhood(data, focus, depth) : data
+  // A note's graph starts from that one note and rings it. A section's starts
+  // from every note in the section, which all share a colour, so there is
+  // nothing left for a ring to say and it would only clutter the view.
+  const seeds = focus === null ? [] : Array.isArray(focus) ? focus : [focus]
+  const seeded = new Set(seeds)
+  const ring = seeds.length === 1 ? seeds[0] : null
+
+  const subset = seeds.length ? neighbourhood(data, seeds, depth) : data
   if (subset.nodes.length === 0) {
     el.innerHTML = '<p class="graph-empty">Nothing links here yet.</p>'
     return { setVisibleKinds() {}, destroy() {} }
@@ -249,7 +256,7 @@ export function mount(el, data, options = {}) {
   const ctx = canvas.getContext("2d")
 
   let colors = readColors(document.documentElement)
-  const rand = seededRandom(focus ?? "global")
+  const rand = seededRandom(seeds.join(" ") || "global")
 
   const allNodes = subset.nodes.map((n, i) => {
     const angle = (i / subset.nodes.length) * Math.PI * 2
@@ -261,7 +268,7 @@ export function mount(el, data, options = {}) {
       vx: 0,
       vy: 0,
       hop: n.hop ?? 0,
-      r: 4 + Math.sqrt(n.degree || 0) * 2.1 + (n.id === focus ? 2.5 : 0),
+      r: 4 + Math.sqrt(n.degree || 0) * 2.1 + (seeded.has(n.id) ? 2.5 : 0),
       pinned: false,
     }
   })
@@ -429,7 +436,7 @@ export function mount(el, data, options = {}) {
       ctx.arc(x, y, r, 0, Math.PI * 2)
       ctx.fill()
 
-      if (node.id === focus || node === hovered) {
+      if (node.id === ring || node === hovered) {
         ctx.strokeStyle = colors.surface
         ctx.lineWidth = 2
         ctx.stroke()
@@ -753,9 +760,11 @@ export function mount(el, data, options = {}) {
 }
 
 // Everything within `depth` hops of one note, plus the links among them.
+// The focus is one note's title, or several of them for a whole section.
 export function neighbourhood(data, focus, depth) {
   const byId = new Map(data.nodes.map((n) => [n.id, n]))
-  if (!byId.has(focus)) return { nodes: [], links: [] }
+  const seeds = (Array.isArray(focus) ? focus : [focus]).filter((id) => byId.has(id))
+  if (seeds.length === 0) return { nodes: [], links: [] }
 
   const adjacency = new Map(data.nodes.map((n) => [n.id, new Set()]))
   for (const link of data.links) {
@@ -763,8 +772,8 @@ export function neighbourhood(data, focus, depth) {
     adjacency.get(link.target)?.add(link.source)
   }
 
-  const hops = new Map([[focus, 0]])
-  let edge = [focus]
+  const hops = new Map(seeds.map((id) => [id, 0]))
+  let edge = [...seeds]
   for (let step = 0; step < depth; step++) {
     const next = []
     for (const id of edge) {

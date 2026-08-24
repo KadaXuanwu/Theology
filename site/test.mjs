@@ -917,6 +917,63 @@ console.log("a note's two views share one heading")
   check("and only it uses that", (graph.match(/graph-title/g) ?? []).length === 0)
 }
 
+console.log("a section is somewhere you can be, in either view")
+{
+  const dist = resolve(repoRoot, "dist")
+  const read = (p) => readFile(resolve(dist, p), "utf8")
+  const list = await read("arguments-for/index.html")
+  const graph = await read("arguments-for/graph/index.html")
+
+  // Opening a folder used to leave nothing marked in the tree, because only the
+  // notes and the home entry were ever compared against the current page.
+  const head = (html) => html.match(/<li class="tree-folder[^"]*" data-folder="Arguments For">[\s\S]*?<\/a>/)?.[0] ?? ""
+  for (const [name, html] of [["the list", list], ["its graph", graph]]) {
+    check(`${name} marks the folder it is in`, /class="tree-folder is-current"/.test(html))
+    check(`${name} marks it on the link too`, /class="tree-folder-name" href="[^"]*" aria-current="page"/.test(head(html)), head(html).replace(/\s+/g, " ").slice(-90))
+  }
+  check("and never marks two at once", (list.match(/tree-folder is-current/g) ?? []).length === 1)
+  check("a note's page marks no folder", !/tree-folder is-current/.test(await read("claims/jesus-existed/index.html")))
+
+  // The switch used to answer a folder with the whole vault.
+  const otherTab = (html) => html.match(/<a class="view-tab" href="([^"]*)"/)?.[1]
+  check("the list switches to that section's own graph", otherTab(list) === "../arguments-for/graph/", String(otherTab(list)))
+  check("and the graph switches back to that list", otherTab(graph) === "../../arguments-for/", String(otherTab(graph)))
+
+  // Every destination in the tree keeps the view you are reading in, so nothing
+  // in there can drop you out of the graph.
+  const treeLinks = (html) => {
+    const tree = html.match(/<nav class="tree"[\s\S]*?<\/nav>/)?.[0] ?? ""
+    return [...tree.matchAll(/<a[^>]*href="([^"]*)"/g)].map((m) => m[1])
+  }
+  check("the tree has links to check", treeLinks(graph).length > 10, `${treeLinks(graph).length} links`)
+  check(
+    "in the graph view every one of them stays in it",
+    treeLinks(graph).every((h) => h.endsWith("/graph/")),
+    treeLinks(graph).filter((h) => !h.endsWith("/graph/")).join(", "),
+  )
+  check(
+    "and in the text view none of them leave it",
+    treeLinks(list).every((h) => !h.endsWith("/graph/")),
+    treeLinks(list).filter((h) => h.endsWith("/graph/")).join(", "),
+  )
+
+  // Same heading in both, the way a note's two views are.
+  const heading = (html) => html.match(/<h1[^>]*>[\s\S]*?<\/h1>/)?.[0] ?? ""
+  check("both views carry the same heading", heading(list) === heading(graph), `${heading(list)} vs ${heading(graph)}`)
+
+  // Seeded from the whole section rather than from one note in it.
+  const data = await readGraphData()
+  for (const kind of ["argument-for", "argument-against", "claim", "evidence"]) {
+    const seeds = data.nodes.filter((n) => n.kind === kind).map((n) => n.id)
+    const sub = neighbourhood(data, seeds, 1)
+    const inSection = sub.nodes.filter((n) => n.hop === 0).length
+    check(`${kind} starts from every note in it`, inSection === seeds.length, `${inSection} of ${seeds.length}`)
+    check(`and reaches what they link out to`, sub.nodes.length > seeds.length, `${sub.nodes.length} nodes from ${seeds.length} seeds`)
+  }
+  check("one note on its own still works", neighbourhood(data, "Jesus Existed", 1).nodes.length > 0)
+  check("and a section with nothing in it draws nothing", neighbourhood(data, [], 1).nodes.length === 0)
+}
+
 console.log("home is reachable and knows when it is current")
 {
   const dist = resolve(repoRoot, "dist")
@@ -1063,7 +1120,7 @@ console.log("the graph fits a phone screen")
   check("a phone gets a smaller title", titleRule !== undefined)
   check("sized by a rule the graph view reads too", titleRule?.selector.includes(".graph-title") === true, titleRule?.selector ?? "")
   const phoneSize = Number(titleRule?.body.match(/font-size: ([\d.]+)rem/)?.[1])
-  const deskFloor = Number(sheet.match(/\.note-title \{[^}]*clamp\(([\d.]+)rem/)?.[1])
+  const deskFloor = Number(sheet.match(/\.note-title[^{]*\{[^}]*clamp\(([\d.]+)rem/)?.[1])
   check("and it is smaller than the size a desktop floors at", phoneSize < deskFloor, `${phoneSize}rem vs floor ${deskFloor}rem`)
 
   // Four categories do not fit on one row of a phone, so the legend wraps. The

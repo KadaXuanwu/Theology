@@ -413,9 +413,17 @@ const writeHidden = (hidden) => {
       for (const node of data.nodes) allKinds.add(node.kind)
       for (const el of mounts) {
         const local = el.dataset.graph === "local"
+        // A section's graph names a category rather than a note, and starts
+        // from every note in it.
+        const kind = el.dataset.kind
+        const focus = kind
+          ? data.nodes.filter((n) => n.kind === kind).map((n) => n.id)
+          : local
+            ? el.dataset.focus
+            : null
         graphs.push(
           mountGraph(el, data, {
-            focus: local ? el.dataset.focus : null,
+            focus,
             // The rail shows immediate neighbours; the full page view goes a hop
             // further, because one hop leaves most notes looking almost isolated.
             depth: Number(el.dataset.depth) || 1,

@@ -124,7 +124,8 @@ function header({ root, view, textUrl, graphUrl }) {
 // The folder tree. Folders render open; the client only ever collapses one the
 // reader collapsed themselves, so navigating never closes anything.
 function explorer({ root, current, sections, notes, view }) {
-  // Moving between notes keeps whichever view you are reading in.
+  // Moving anywhere in the tree keeps whichever view you are reading in. Every
+  // destination in here has both, so the switch never has to drop you out.
   const suffix = view === "graph" ? "graph/" : ""
   const groups = sections
     .map((section) => {
@@ -136,10 +137,12 @@ function explorer({ root, current, sections, notes, view }) {
             `<li><a href="${root}${n.url}/${suffix}"${n.url === current ? ' aria-current="page"' : ""} data-note="${escapeHtml(n.title)}">${escapeHtml(n.title)}</a></li>`,
         )
         .join("")
-      return `<li class="tree-folder" data-folder="${escapeHtml(section.dir)}">
+      // A folder is current on its own list page and on the graph of it.
+      const here = slugify(section.dir) === current
+      return `<li class="tree-folder${here ? " is-current" : ""}" data-folder="${escapeHtml(section.dir)}">
   <div class="tree-folder-head">
     <button class="tree-toggle" aria-label="Toggle ${escapeHtml(section.label)}" aria-expanded="true">${icon("chevron")}</button>
-    <a class="tree-folder-name" href="${root}${slugify(section.dir)}/"><span class="dot dot-${section.kind}"></span>${escapeHtml(section.label)}</a>
+    <a class="tree-folder-name" href="${root}${slugify(section.dir)}/${suffix}"${here ? ' aria-current="page"' : ""}><span class="dot dot-${section.kind}"></span>${escapeHtml(section.label)}</a>
     <span class="tree-count">${items.length}</span>
   </div>
   <ul class="tree-children">${links}</ul>
@@ -147,7 +150,7 @@ function explorer({ root, current, sections, notes, view }) {
     })
     .join("")
 
-  const home = `<li class="tree-home"><a href="${root}"${current === null ? ' aria-current="page"' : ""}>${icon("home")}Theology</a></li>`
+  const home = `<li class="tree-home"><a href="${root}${suffix}"${current === null ? ' aria-current="page"' : ""}>${icon("home")}Theology</a></li>`
 
   return `<aside class="sidebar" id="explorer">
   <nav class="tree" aria-label="Notes">
@@ -228,7 +231,7 @@ export function notePage({ note, root, dateLabel, sections, notes, assets }) {
   })
 }
 
-export function listPage({ title, lede, groups, root, current, sections, notes, extra = "", assets }) {
+export function listPage({ title, lede, groups, root, current, sections, notes, extra = "", assets, graphUrl }) {
   const body = groups
     .map(
       (group) => `<section class="list-section">
@@ -254,8 +257,9 @@ export function listPage({ title, lede, groups, root, current, sections, notes, 
     sections,
     notes,
     assets,
+    ...(graphUrl ? { graphUrl } : {}),
     main: `<div class="page">
-  <h1>${escapeHtml(title)}</h1>
+  <h1 class="page-title">${escapeHtml(title)}</h1>
   <p class="lede">${lede}</p>
   ${extra}
   ${body}
@@ -339,6 +343,38 @@ export function nodeGraphPage({ note, root, sections, notes, assets }) {
   </div>
   ${legend(sections)}
   <div class="graph-full graph-mount" data-graph="local" data-depth="2" data-focus="${escapeHtml(note.title)}"></div>
+  <p class="graph-foot"><a href="${root}graph/">See the whole vault</a></p>
+</div>`,
+  })
+}
+
+// The graph view of one section: the same heading its list page carries, and
+// every note in the section plus whatever they link out to. The notes of the
+// section all share a colour, so what belongs to it reads off the graph without
+// anything extra marking them.
+export function sectionGraphPage({ section, root, sections, notes, assets }) {
+  const slug = slugify(section.dir)
+  return shell({
+    title: `${section.label} · Graph · Theology`,
+    description: `How the notes in ${section.label} connect to the rest of the vault.`,
+    root,
+    current: slug,
+    sections,
+    notes,
+    assets,
+    view: "graph",
+    textUrl: `${slug}/`,
+    graphUrl: `${slug}/graph/`,
+    bodyClass: "is-graph",
+    main: `<div class="page page-graph">
+  <div class="graph-head">
+    <div>
+      <h1 class="page-title">${escapeHtml(section.label)}</h1>
+    </div>
+    <a class="panel-expand graph-collapse" href="${root}${slug}/" aria-label="Back to the list of ${escapeHtml(section.label)}" title="Back to the list">${icon("collapse")}</a>
+  </div>
+  ${legend(sections)}
+  <div class="graph-full graph-mount" data-graph="local" data-kind="${section.kind}" data-depth="1"></div>
   <p class="graph-foot"><a href="${root}graph/">See the whole vault</a></p>
 </div>`,
   })

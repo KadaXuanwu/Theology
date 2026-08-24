@@ -513,6 +513,14 @@ main {
 .tree-folder-name:hover {
   color: var(--accent);
 }
+/* Marked on the row rather than the link, because the row is what hover already
+   fills and the count on its right belongs to the same entry. */
+.tree-folder.is-current > .tree-folder-head {
+  background: var(--accent-soft);
+}
+.tree-folder.is-current > .tree-folder-head .tree-folder-name {
+  color: var(--accent);
+}
 
 .tree-count {
   color: var(--muted);
@@ -691,7 +699,8 @@ main {
   color: var(--accent);
 }
 
-.note-title {
+.note-title,
+.page-title {
   margin: 0 0 0.7rem;
   font-size: clamp(1.7rem, 1.2rem + 1.6vw, 2.3rem);
 }
@@ -1401,6 +1410,7 @@ body.is-graph .graph-head .lede {
      a 320px screen; 1.55rem puts three there, which is why it stops here. Both
      views read it from this one rule, so they stay in step. */
   .note-title,
+  .page-title,
   .graph-title {
     font-size: 1.5rem;
   }
