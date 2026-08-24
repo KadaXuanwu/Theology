@@ -969,7 +969,10 @@ console.log("the graph fits a phone screen")
 {
   const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
   const phone = sheet.match(/@media \(max-width: 820px\) \{[\s\S]*?\r?\n\}/)?.[0] ?? ""
-  const rule = (selector) => phone.match(new RegExp(`${selector} \{[^}]*\}`))?.[0] ?? ""
+  // A selector can appear more than once in the block, grouped by what it is
+  // doing, so this collects every declaration of it rather than the first.
+  const rule = (selector) =>
+    [...phone.matchAll(new RegExp(`\n  ${selector} \{[^}]*\}`, "g"))].map((m) => m[0]).join("")
 
   check("there is a phone breakpoint", phone.length > 0)
 
@@ -991,6 +994,28 @@ console.log("the graph fits a phone screen")
 
   // Only the graph page is pinned. Every other page still scrolls.
   check("and every other page still scrolls", /height: auto/.test(rule("body")))
+
+  // The card holds its text closer to its own edge on a phone than on a
+  // desktop, and the two views have to agree on it. A reader switching between
+  // the text and the graph would see the frame jump otherwise.
+  const sideMargin = (selector) => rule(selector).match(/padding: \S+ (\S+)/)?.[1] ?? ""
+  check("the text view has a phone side margin", sideMargin("main").length > 0, sideMargin("main"))
+  check(
+    "and the graph view uses the same one",
+    sideMargin("main") === sideMargin("body\.is-graph main"),
+    `${sideMargin("main")} vs ${sideMargin("body\.is-graph main")}`,
+  )
+
+  // Four categories do not fit on one row of a phone, so the legend wraps. The
+  // rows are tightened through the line height rather than the padding, so each
+  // toggle keeps the width that makes it easy to hit.
+  check("the legend rows are pulled together", /row-gap: 0/.test(rule("\.legend")))
+  check("through the line, not the padding", /line-height:/.test(rule("\.legend-toggle")))
+  check(
+    "so a toggle is no narrower to hit",
+    Number(rule("\.legend-toggle").match(/padding: \S+ ([\d.]+)rem/)?.[1]) >= 0.4,
+    rule("\.legend-toggle"),
+  )
 }
 
 console.log("cached assets carry a content hash")

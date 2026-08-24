@@ -1355,8 +1355,12 @@ body.is-graph .graph-head .lede {
   .sidebar.is-open {
     transform: none;
   }
+  /* A phone has no width to give away, so the card holds its text closer to
+     its own edge than a desktop does. The side margin is the same on both
+     views, so switching between the text and the graph does not shift the
+     frame the reader is looking at. */
   main {
-    padding: 1.5rem 1.15rem 4rem;
+    padding: 1.25rem 0.85rem 4rem;
   }
   /* The graph page keeps the fixed, non-scrolling shape it has on a desktop,
      but measured against the small viewport: the height that is left once the
@@ -1377,7 +1381,7 @@ body.is-graph .graph-head .lede {
     height: 100%;
     min-height: 0;
     overflow: hidden;
-    padding: 1.1rem 1.15rem 1.15rem;
+    padding: 0.9rem 0.85rem 0.95rem;
   }
   /* The chrome around the graph gives up its spacing first, since the graph is
      what the page is for. */
@@ -1386,6 +1390,16 @@ body.is-graph .graph-head .lede {
   }
   body.is-graph .legend {
     margin-bottom: 0.6rem;
+  }
+  /* The legend needs two rows on a phone. They sit close enough to read as one
+     block, tightened through the line rather than the padding so each toggle
+     keeps the width that makes it easy to hit. */
+  .legend {
+    row-gap: 0.1rem;
+  }
+  .legend-toggle {
+    padding: 0.15rem 0.45rem;
+    line-height: 1.4;
   }
   /* No floor here. A floor taller than the room left is the cut off bottom
      coming back. */
