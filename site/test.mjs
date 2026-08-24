@@ -853,7 +853,7 @@ console.log("the sidebar preview can be enlarged")
     /class="panel-expand"[^>]*aria-label="Enlarge the graph for Mesha Stele"/.test(panel(note)),
   )
   check("it sits in the heading row, on the preview it belongs to", panel(note).includes('<div class="panel-head">'))
-  check("the whole vault is still one click away", panel(note).includes("See the whole vault"))
+  check("the overview is still one click away", panel(note).includes("See the overview"))
 
   // On a list page there is no note to focus, so enlarging means the full graph.
   for (const [page, expected] of [
@@ -863,7 +863,7 @@ console.log("the sidebar preview can be enlarged")
   ]) {
     const html = await read(page)
     check(`${page} enlarges to the full graph`, expandHref(html) === expected, String(expandHref(html)))
-    check(`${page} does not repeat itself with a second link`, !panel(html).includes("See the whole vault"))
+    check(`${page} does not repeat itself with a second link`, !panel(html).includes("See the overview"))
   }
 }
 
@@ -911,10 +911,30 @@ console.log("a note's two views share one heading")
   const override = sheet.match(/body\.is-graph[^{]*\bh1\b[^{]*\{[^}]*\}/)?.[0] ?? ""
   check("and no rule resizes it on the graph view", override === "", override.replace(/\s+/g, " "))
 
-  // The whole vault graph is the one heading with no text view to match, so it
-  // keeps a size of its own.
-  check("the whole vault graph keeps its own smaller heading", /\.graph-title \{[^}]*font-size/.test(sheet))
-  check("and only it uses that", (graph.match(/graph-title/g) ?? []).length === 0)
+  // Every page with two views now shares one heading between them, the root
+  // included: it used to read "Theology" as a list and "Graph" as a map, which
+  // named the subject in one view and the format in the other rather than
+  // naming the page. Both say what the page is.
+  const home = await readFile(resolve(dist, "index.html"), "utf8")
+  const homeGraph = await readFile(resolve(dist, "graph/index.html"), "utf8")
+  check("the root is named rather than labelled by its format", heading(home) === '<h1 class="page-title">Overview</h1>', heading(home))
+  check("and its graph view says the same", heading(home) === heading(homeGraph), `${heading(home)} vs ${heading(homeGraph)}`)
+  check("no page is titled after its format any more", !/<h1[^>]*>Graph<\/h1>/.test(homeGraph), heading(homeGraph))
+
+  // One name for one destination. Everything that links to the root or names it
+  // in a sentence uses it, so the reader never meets a second word for it.
+  const named = [
+    ["the tree row", home, /class="tree-home"><a[^>]*>(?:<svg[\s\S]*?<\/svg>)?([^<]+)</],
+    ["the breadcrumb root", text, /<nav class="breadcrumbs"[^>]*><a[^>]*>([^<]+)</],
+  ]
+  for (const [where, html, pattern] of named) {
+    check(`${where} calls it the overview`, html.match(pattern)?.[1].trim() === "Overview", html.match(pattern)?.[1])
+  }
+  check("and nothing reader facing still says vault", !/whole vault/.test(home + homeGraph + text + graph))
+
+  // The site's own name still belongs to the site, not to a page in it.
+  check("the header keeps the site name", /class="site-title"[^>]*>Theology</.test(home))
+  check("and so does the root's browser tab", /<title>Theology<\/title>/.test(home), home.match(/<title>[^<]*<\/title>/)?.[0])
 }
 
 console.log("a section is somewhere you can be, in either view")
@@ -1118,7 +1138,7 @@ console.log("the graph fits a phone screen")
     .map(([, selector, body]) => ({ selector, body }))
     .find((r) => r.selector.includes(".note-title") && /font-size/.test(r.body))
   check("a phone gets a smaller title", titleRule !== undefined)
-  check("sized by a rule the graph view reads too", titleRule?.selector.includes(".graph-title") === true, titleRule?.selector ?? "")
+  check("sized by a rule the graph view reads too", titleRule?.selector.includes(".page-title") === true, titleRule?.selector ?? "")
   const phoneSize = Number(titleRule?.body.match(/font-size: ([\d.]+)rem/)?.[1])
   const deskFloor = Number(sheet.match(/\.note-title[^{]*\{[^}]*clamp\(([\d.]+)rem/)?.[1])
   check("and it is smaller than the size a desktop floors at", phoneSize < deskFloor, `${phoneSize}rem vs floor ${deskFloor}rem`)

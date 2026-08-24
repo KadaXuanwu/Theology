@@ -33,7 +33,7 @@ export function railGraph({ root, focus = null, expandUrl = "graph/" }) {
     <a class="panel-expand" href="${root}${expandUrl}" aria-label="${escapeHtml(expandLabel)}" title="${escapeHtml(expandLabel)}">${icon("expand")}</a>
   </div>
   <div class="graph-mount graph-rail" data-graph="${focus ? "local" : "global"}"${focus ? ` data-focus="${escapeHtml(focus)}"` : ""}></div>
-  ${focus ? `<a class="panel-link" href="${root}graph/">See the whole vault</a>` : ""}
+  ${focus ? `<a class="panel-link" href="${root}graph/">See the overview</a>` : ""}
 </section>`
 }
 
@@ -150,7 +150,7 @@ function explorer({ root, current, sections, notes, view }) {
     })
     .join("")
 
-  const home = `<li class="tree-home"><a href="${root}${suffix}"${current === null ? ' aria-current="page"' : ""}>${icon("home")}Theology</a></li>`
+  const home = `<li class="tree-home"><a href="${root}${suffix}"${current === null ? ' aria-current="page"' : ""}>${icon("home")}Overview</a></li>`
 
   return `<aside class="sidebar" id="explorer">
   <nav class="tree" aria-label="Notes">
@@ -202,7 +202,7 @@ export function notePage({ note, root, dateLabel, sections, notes, assets }) {
     : ""
 
   const main = `<article class="note">
-  <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${root}">Theology</a><span aria-hidden="true">/</span><a href="${root}${slugify(section.dir)}/">${escapeHtml(section.label)}</a></nav>
+  <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${root}">Overview</a><span aria-hidden="true">/</span><a href="${root}${slugify(section.dir)}/">${escapeHtml(section.label)}</a></nav>
   <h1 class="note-title">${escapeHtml(note.title)}</h1>
   <div class="note-meta">
     <span class="pill pill-kind" data-kind="${section.kind}">${kindLabel}${extraKind}</span>
@@ -250,7 +250,9 @@ export function listPage({ title, lede, groups, root, current, sections, notes, 
     .join("")
 
   return shell({
-    title: title === "Theology" ? "Theology" : `${title} · Theology`,
+    // The root keeps the site's name in the tab even though the page itself is
+    // called the overview, so a bookmark of it reads as the site.
+    title: current === null ? "Theology" : `${title} · Theology`,
     description: lede.replace(/<[^>]+>/g, "").slice(0, 180),
     root,
     current,
@@ -295,8 +297,8 @@ export function tagIndexPage({ tags, root, sections, notes, assets }) {
 
 export function graphPage({ root, sections, notes, assets }) {
   return shell({
-    title: "Graph · Theology",
-    description: "The whole vault as a link map.",
+    title: "Overview · Graph · Theology",
+    description: "Every note in the vault and every link between them, as one map.",
     root,
     current: null,
     sections,
@@ -305,9 +307,9 @@ export function graphPage({ root, sections, notes, assets }) {
     main: `<div class="page page-graph">
   <div class="graph-head">
     <div>
-      <h1 class="graph-title">Graph</h1>
+      <h1 class="page-title">Overview</h1>
     </div>
-    <a class="panel-expand graph-collapse" href="${root}" aria-label="Back to the overview" title="Back to the overview">${icon("collapse")}</a>
+    <a class="panel-expand graph-collapse" href="${root}" aria-label="Back to the text of the overview" title="Back to the text">${icon("collapse")}</a>
   </div>
   ${legend(sections)}
   <div class="graph-full graph-mount" data-graph="global"></div>
@@ -336,14 +338,14 @@ export function nodeGraphPage({ note, root, sections, notes, assets }) {
     main: `<div class="page page-graph">
   <div class="graph-head">
     <div>
-      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${root}">Theology</a><span aria-hidden="true">/</span><a href="${root}${slugify(section.dir)}/">${escapeHtml(section.label)}</a></nav>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${root}">Overview</a><span aria-hidden="true">/</span><a href="${root}${slugify(section.dir)}/">${escapeHtml(section.label)}</a></nav>
       <h1 class="note-title">${escapeHtml(note.title)}</h1>
     </div>
     <a class="panel-expand graph-collapse" href="${root}${note.url}/" aria-label="Back to the text of ${escapeHtml(note.title)}" title="Back to the text">${icon("collapse")}</a>
   </div>
   ${legend(sections)}
   <div class="graph-full graph-mount" data-graph="local" data-depth="2" data-focus="${escapeHtml(note.title)}"></div>
-  <p class="graph-foot"><a href="${root}graph/">See the whole vault</a></p>
+  <p class="graph-foot"><a href="${root}graph/">See the overview</a></p>
 </div>`,
   })
 }
@@ -375,7 +377,7 @@ export function sectionGraphPage({ section, root, sections, notes, assets }) {
   </div>
   ${legend(sections)}
   <div class="graph-full graph-mount" data-graph="local" data-kind="${section.kind}" data-depth="1"></div>
-  <p class="graph-foot"><a href="${root}graph/">See the whole vault</a></p>
+  <p class="graph-foot"><a href="${root}graph/">See the overview</a></p>
 </div>`,
   })
 }

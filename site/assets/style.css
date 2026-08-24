@@ -1072,12 +1072,6 @@ body.is-graph main {
 body.is-graph .graph-head {
   margin-bottom: 0;
 }
-/* The whole vault graph has no text view to line up with, so its heading stays
-   small, and carries the gap the head above no longer holds. */
-.graph-title {
-  margin: 0 0 1.05rem;
-  font-size: 1.5rem;
-}
 body.is-graph .graph-head .lede {
   margin: 0;
   font-size: 0.9rem;
@@ -1410,8 +1404,7 @@ body.is-graph .graph-head .lede {
      a 320px screen; 1.55rem puts three there, which is why it stops here. Both
      views read it from this one rule, so they stay in step. */
   .note-title,
-  .page-title,
-  .graph-title {
+  .page-title {
     font-size: 1.5rem;
   }
   /* The trail is one short line of small text. It does not need a desktop's

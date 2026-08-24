@@ -210,7 +210,7 @@ async function build() {
   await write(
     "index.html",
     listPage({
-      title: "Theology",
+      title: "Overview",
       lede: LEDE.split("\n").join("<br>"),
       groups,
       root: rootFor(0),
@@ -223,7 +223,7 @@ async function build() {
   )
 
   // Folder pages, each with a graph view of its own so the header switch and
-  // the tree never have to drop the reader back to the whole vault.
+  // the tree never have to drop the reader back to the overview.
   for (const section of sections) {
     const items = notes.filter((n) => n.section.dir === section.dir)
     if (items.length === 0) continue
