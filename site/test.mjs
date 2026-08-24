@@ -1052,6 +1052,20 @@ console.log("the graph fits a phone screen")
     `${topPad("main")} vs ${topPad("body\.is-graph main")}`,
   )
 
+
+  // The desktop title runs to three lines on the longest notes at 320px, and
+  // the graph below pays for every one of them, so a phone gets a smaller one.
+  // It has to come off the class both views share, or the graph view shrinks
+  // its heading while the text view keeps the big one.
+  const titleRule = [...phone.matchAll(/\n {2}([^{}]+?) \{([^}]*)\}/g)]
+    .map(([, selector, body]) => ({ selector, body }))
+    .find((r) => r.selector.includes(".note-title") && /font-size/.test(r.body))
+  check("a phone gets a smaller title", titleRule !== undefined)
+  check("sized by a rule the graph view reads too", titleRule?.selector.includes(".graph-title") === true, titleRule?.selector ?? "")
+  const phoneSize = Number(titleRule?.body.match(/font-size: ([\d.]+)rem/)?.[1])
+  const deskFloor = Number(sheet.match(/\.note-title \{[^}]*clamp\(([\d.]+)rem/)?.[1])
+  check("and it is smaller than the size a desktop floors at", phoneSize < deskFloor, `${phoneSize}rem vs floor ${deskFloor}rem`)
+
   // Four categories do not fit on one row of a phone, so the legend wraps. The
   // rows are tightened through the line height rather than the padding, so each
   // toggle keeps the width that makes it easy to hit.

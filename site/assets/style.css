@@ -1395,6 +1395,15 @@ body.is-graph .graph-head .lede {
   body.is-graph .legend {
     margin-bottom: 0.6rem;
   }
+  /* A phone gets a smaller title than the clamp's floor gives it. At this width
+     the desktop size runs to three lines on the longest notes, and the graph
+     below pays for every one of them. 1.35rem is where the last three line
+     title falls back to two at 320px, and where most titles fit one line on a
+     412px screen. Both views read it from here, so they stay in step. */
+  .note-title,
+  .graph-title {
+    font-size: 1.35rem;
+  }
   /* The legend needs two rows on a phone. They sit close enough to read as one
      block, tightened through the line rather than the padding so each toggle
      keeps the width that makes it easy to hit. */
