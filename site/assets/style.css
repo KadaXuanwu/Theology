@@ -1288,6 +1288,14 @@ body.is-graph .graph-head .lede {
   .sidebar-right {
     display: none;
   }
+  /* The two arrows are a pair: the rail's enlarges the graph, this one shrinks
+     it back. With the rail gone there is nothing to enlarge from, so a lone
+     shrink arrow is half a control. The view switch in the header does the same
+     job and is always there. Dropping it also gives the heading the full width,
+     which is what the text view gives it. */
+  .graph-collapse {
+    display: none;
+  }
 }
 
 @media (max-width: 820px) {

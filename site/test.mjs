@@ -818,6 +818,20 @@ console.log("the rail leads with the graph, and the enlarged view can shrink bac
   const railPanel = note.match(/<section class="panel panel-graph">[\s\S]*?<\/section>/)?.[0] ?? ""
   const enlarge = railPanel.match(/class="panel-expand" href="([^"]*)"/)?.[1]
   check("enlarging and shrinking lead back to each other", enlarge === "../../claims/jesus-existed/graph/", String(enlarge))
+
+  // The two arrows are a pair, so they go away together. Below the breakpoint
+  // that drops the rail there is nothing left to enlarge from, and a lone
+  // shrink arrow is half a control.
+  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+  const noRail = sheet.match(/@media \(max-width: 1260px\) \{[\s\S]*?\r?\n\}/)?.[0] ?? ""
+  check("the rail is dropped at a breakpoint of its own", /\.sidebar-right \{[^}]*display: none/.test(noRail))
+  check("and the shrink arrow goes with it", /\.graph-collapse \{[^}]*display: none/.test(noRail), noRail.replace(/\s+/g, " "))
+  // Which only works because the header always offers the same trip.
+  check(
+    "leaving the header switch as the way back",
+    nodeGraph.includes('<a class="view-tab" href="../../../claims/jesus-existed/"'),
+    nodeGraph.match(/<a class="view-tab"[^>]*>/)?.[0] ?? "no text tab",
+  )
 }
 
 console.log("the sidebar preview can be enlarged")
