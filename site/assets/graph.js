@@ -40,11 +40,14 @@ const FIT = { pad: 14, min: 0.25, max: 2.2 }
 const labelSize = (scale) => Math.min(13, 10 + scale)
 const labelFont = (size) => `400 ${size}px system-ui, sans-serif`
 
-// The focused and hovered nodes carry a second ring outside the circle. Labels
-// clear it on every node, not just the ringed ones, so hovering never nudges a
-// label down and the spacing stays even across the graph.
+// The focused and hovered nodes carry a second ring outside the circle. Both
+// the gap and the ring are added beyond the circle rather than laid over its
+// edge, so a ringed node shows the same amount of colour as an unringed one and
+// the ring reads as size on top rather than as a bite taken out. Labels clear
+// the whole extent on every node, not just the ringed ones, so hovering never
+// nudges a label down and the spacing stays even across the graph.
 const RING = { gap: 3, width: 1.5 }
-export const RING_EXTENT = RING.gap + RING.width / 2
+export const RING_EXTENT = RING.gap + RING.width
 
 // Wraps on words, and trims the last line rather than dropping the rest.
 export function wrapLabel(measure, text, maxWidth, maxLines) {
@@ -271,7 +274,7 @@ export function mount(el, data, options = {}) {
       vx: 0,
       vy: 0,
       hop: n.hop ?? 0,
-      r: 4 + Math.sqrt(n.degree || 0) * 2.1 + (seeded.has(n.id) ? 2.5 : 0),
+      r: 4 + Math.sqrt(n.degree || 0) * 2.1,
       pinned: false,
     }
   })
@@ -440,13 +443,19 @@ export function mount(el, data, options = {}) {
       ctx.fill()
 
       if (seeded.has(node.id) || node === hovered) {
+        // A stroke straddles its path, so each band is centred half its own
+        // width out from where it starts: the gap runs r to r + gap, the ring
+        // carries on from there. The gap is painted in the surface colour to
+        // hide any link passing underneath.
         ctx.strokeStyle = colors.surface
-        ctx.lineWidth = 2
+        ctx.lineWidth = RING.gap
+        ctx.beginPath()
+        ctx.arc(x, y, r + RING.gap / 2, 0, Math.PI * 2)
         ctx.stroke()
         ctx.strokeStyle = colors[node.kind] ?? colors.note
         ctx.lineWidth = RING.width
         ctx.beginPath()
-        ctx.arc(x, y, r + RING.gap, 0, Math.PI * 2)
+        ctx.arc(x, y, r + RING.gap + RING.width / 2, 0, Math.PI * 2)
         ctx.stroke()
       }
 

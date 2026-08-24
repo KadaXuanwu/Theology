@@ -505,7 +505,7 @@ console.log("the opening view leaves room for the labels")
         y: Math.sin(angle) * spread + (rand() - 0.5) * 24,
         vx: 0,
         vy: 0,
-        r: 4 + Math.sqrt(n.degree || 0) * 2.1 + (seedsOf(focus).has(n.id) ? 2.5 : 0),
+        r: 4 + Math.sqrt(n.degree || 0) * 2.1,
       }
     })
     const index = new Map(nodes.map((n) => [n.id, n]))
@@ -516,8 +516,6 @@ console.log("the opening view leaves room for the labels")
     for (let step = 0; step < 600 && a > 0.004; step++) a = stepForces(nodes, links, a, 0)
     return nodes
   }
-
-  const seedsOf = (focus) => new Set(focus === null || focus === undefined ? [] : Array.isArray(focus) ? focus : [focus])
 
   // Every pixel the graph draws for a node, in canvas coordinates. The ring
   // counts: a section's graph rings every note in the section, so a whole edge
