@@ -25,15 +25,28 @@ function legend(sections) {
     .join("")}</ul>`
 }
 
-export function railGraph({ root, focus = null, expandUrl = "graph/" }) {
-  const expandLabel = focus ? `Enlarge the graph for ${focus}` : "Open the full graph"
+// The rail previews whatever the page is about: one note, one section, or the
+// whole map on the overview, which is about everything. Enlarging it opens that
+// page's own graph view rather than always the overview's.
+export function railGraph({ root, focus = null, kind = null, subject = null, expandUrl = "graph/" }) {
+  const local = Boolean(focus || kind)
+  const expandLabel = local ? `Enlarge the graph for ${subject ?? focus}` : "Open the full graph"
+  // A section brings twenty odd notes into a panel this size, where naming them
+  // all at once is a wall of text over circles too small to read. The preview
+  // labels on hover the way the whole map does, and the section's own page is
+  // where the names have the room.
+  const attrs = focus
+    ? ` data-focus="${escapeHtml(focus)}"`
+    : kind
+      ? ` data-kind="${escapeHtml(kind)}" data-labels="hover"`
+      : ""
   return `<section class="panel panel-graph">
   <div class="panel-head">
-    <h2>${focus ? "Connections" : "Graph"}</h2>
+    <h2>${local ? "Connections" : "Graph"}</h2>
     <a class="panel-expand" href="${root}${expandUrl}" aria-label="${escapeHtml(expandLabel)}" title="${escapeHtml(expandLabel)}">${icon("expand")}</a>
   </div>
-  <div class="graph-mount graph-rail" data-graph="${focus ? "local" : "global"}"${focus ? ` data-focus="${escapeHtml(focus)}"` : ""}></div>
-  ${focus ? `<a class="panel-link" href="${root}graph/">See the overview</a>` : ""}
+  <div class="graph-mount graph-rail" data-graph="${local ? "local" : "global"}"${attrs}></div>
+  ${local ? `<a class="panel-link" href="${root}graph/">See the overview</a>` : ""}
 </section>`
 }
 
@@ -231,7 +244,7 @@ export function notePage({ note, root, dateLabel, sections, notes, assets }) {
   })
 }
 
-export function listPage({ title, lede, groups, root, current, sections, notes, extra = "", assets, graphUrl }) {
+export function listPage({ title, lede, groups, root, current, sections, notes, extra = "", assets, graphUrl, railKind }) {
   const body = groups
     .map(
       (group) => `<section class="list-section">
@@ -266,7 +279,7 @@ export function listPage({ title, lede, groups, root, current, sections, notes, 
   ${extra}
   ${body}
 </div>`,
-    rightRail: railGraph({ root }),
+    rightRail: railGraph({ root, kind: railKind, subject: title, expandUrl: graphUrl }),
   })
 }
 

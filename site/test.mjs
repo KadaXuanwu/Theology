@@ -902,16 +902,32 @@ console.log("the sidebar preview can be enlarged")
   check("it sits in the heading row, on the preview it belongs to", panel(note).includes('<div class="panel-head">'))
   check("the overview is still one click away", panel(note).includes("See the overview"))
 
-  // On a list page there is no note to focus, so enlarging means the full graph.
-  for (const [page, expected] of [
-    ["index.html", "graph/"],
-    ["arguments-for/index.html", "../graph/"],
-    ["tags/historicity/index.html", "../../graph/"],
+  // Enlarging the preview opens whatever that page is about. A section preview
+  // used to show the whole map and enlarge to it, which made the rail the one
+  // place on the page that had not heard of the section.
+  for (const [page, expected, aboutSomething] of [
+    ["index.html", "graph/", false],
+    ["arguments-for/index.html", "../arguments-for/graph/", true],
+    ["tags/historicity/index.html", "../../graph/", false],
   ]) {
     const html = await read(page)
-    check(`${page} enlarges to the full graph`, expandHref(html) === expected, String(expandHref(html)))
-    check(`${page} does not repeat itself with a second link`, !panel(html).includes("See the overview"))
+    check(`${page} enlarges to its own graph`, expandHref(html) === expected, String(expandHref(html)))
+    check(
+      `${page} ${aboutSomething ? "offers the whole map besides" : "does not repeat itself with a second link"}`,
+      panel(html).includes("See the overview") === aboutSomething,
+    )
   }
+
+  const section = await read("arguments-for/index.html")
+  const mount = (html) => panel(html).match(/<div class="graph-mount graph-rail"[^>]*>/)?.[0] ?? ""
+  check("a section previews itself", /data-graph="local" data-kind="argument-for"/.test(mount(section)), mount(section))
+  check(
+    "on hover labels, since a panel that size cannot name twenty notes at once",
+    /data-labels="hover"/.test(mount(section)),
+    mount(section),
+  )
+  check("the overview still previews everything", /data-graph="global"/.test(mount(await read("index.html"))))
+  check("and a tag, having no graph of its own, does too", /data-graph="global"/.test(mount(await read("tags/historicity/index.html"))))
 }
 
 console.log("the two whole-vault links look the same")

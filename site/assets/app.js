@@ -427,7 +427,9 @@ const writeHidden = (hidden) => {
             // The rail shows immediate neighbours; the full page view goes a hop
             // further, because one hop leaves most notes looking almost isolated.
             depth: Number(el.dataset.depth) || 1,
-            showLabels: local ? "always" : "hover",
+            // A mount can ask for hover labels even when it is a local view:
+            // a section in the rail has too many notes to name at that size.
+            showLabels: el.dataset.labels ?? (local ? "always" : "hover"),
             kinds: visibleKinds(),
             onNavigate: (node) => {
               window.location.href = noteUrl(node.url)

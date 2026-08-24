@@ -237,6 +237,7 @@ async function build() {
         root: rootFor(1),
         current: slug,
         graphUrl: `${slug}/graph/`,
+        railKind: section.kind,
         sections,
         notes,
         assets,
