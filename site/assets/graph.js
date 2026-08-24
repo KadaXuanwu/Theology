@@ -262,7 +262,7 @@ export function mount(el, data, options = {}) {
   const ctx = canvas.getContext("2d")
 
   let colors = readColors(document.documentElement)
-  const rand = seededRandom(seeds.join(" ") || "global")
+  const rand = seededRandom(seeds.join("\u0000") || "global")
 
   const allNodes = subset.nodes.map((n, i) => {
     const angle = (i / subset.nodes.length) * Math.PI * 2

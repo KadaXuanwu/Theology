@@ -496,7 +496,7 @@ console.log("the opening view leaves room for the labels")
   // layouts being fitted are the ones a reader actually gets.
   const layout = (focus, depth) => {
     const subset = focus ? neighbourhood(data, focus, depth) : data
-    const rand = seededRandom(Array.isArray(focus) ? focus.join(" ") : (focus ?? "global"))
+    const rand = seededRandom(Array.isArray(focus) ? focus.join("\u0000") : (focus ?? "global"))
     const nodes = subset.nodes.map((n, i) => {
       const angle = (i / subset.nodes.length) * Math.PI * 2
       const spread = 60 + rand() * 90
