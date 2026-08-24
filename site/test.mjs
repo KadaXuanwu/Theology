@@ -9,7 +9,15 @@ import { fileURLToPath } from "node:url"
 
 import { parseFrontmatter, slugify } from "./lib/content.mjs"
 import { createRenderer, htmlToText } from "./lib/markdown.mjs"
-import { fitCamera, labelExtent, neighbourhood, seededRandom, stepForces, wrapLabel } from "./assets/graph.js"
+import {
+  RING_EXTENT,
+  fitCamera,
+  labelExtent,
+  neighbourhood,
+  seededRandom,
+  stepForces,
+  wrapLabel,
+} from "./assets/graph.js"
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -487,7 +495,7 @@ console.log("the opening view leaves room for the labels")
   // layouts being fitted are the ones a reader actually gets.
   const layout = (focus) => {
     const subset = focus ? neighbourhood(data, focus, 1) : data
-    const rand = seededRandom(focus ?? "global")
+    const rand = seededRandom(Array.isArray(focus) ? focus.join(" ") : (focus ?? "global"))
     const nodes = subset.nodes.map((n, i) => {
       const angle = (i / subset.nodes.length) * Math.PI * 2
       const spread = 60 + rand() * 90
@@ -497,7 +505,7 @@ console.log("the opening view leaves room for the labels")
         y: Math.sin(angle) * spread + (rand() - 0.5) * 24,
         vx: 0,
         vy: 0,
-        r: 4 + Math.sqrt(n.degree || 0) * 2.1 + (n.id === focus ? 2.5 : 0),
+        r: 4 + Math.sqrt(n.degree || 0) * 2.1 + (seedsOf(focus).has(n.id) ? 2.5 : 0),
       }
     })
     const index = new Map(nodes.map((n) => [n.id, n]))
@@ -509,45 +517,67 @@ console.log("the opening view leaves room for the labels")
     return nodes
   }
 
-  // Every pixel the graph draws for a node, in canvas coordinates.
+  const seedsOf = (focus) => new Set(focus === null || focus === undefined ? [] : Array.isArray(focus) ? focus : [focus])
+
+  // Every pixel the graph draws for a node, in canvas coordinates. The ring
+  // counts: a section's graph rings every note in the section, so a whole edge
+  // of the layout can be carrying one.
   const drawn = (node, camera, width, height) => {
     const x = (node.x - camera.x) * camera.scale + width / 2
     const y = (node.y - camera.y) * camera.scale + height / 2
-    const r = node.r * Math.max(camera.scale, 0.55)
+    const r = node.r * Math.max(camera.scale, 0.55) + RING_EXTENT
     const { half, drop } = room(node, camera.scale)
-    return { left: x - Math.max(r, half), right: x + Math.max(r, half), top: y - r, bottom: y + r + drop }
+    return { left: x - Math.max(r, half), right: x + Math.max(r, half), top: y - r, bottom: y + Math.max(r, r + drop) }
   }
 
-  // The rail runs from 11rem to 20rem tall, the full view is much larger.
-  const canvases = [
+  // A note appears in the rail as well as on its own page; the rail runs from
+  // 11rem to 20rem tall. Every box here is measured off the built pages.
+  const noteCanvases = [
     ["the smallest rail", 236, 176],
     ["a taller rail", 268, 320],
     ["the enlarged view", 900, 560],
     ["a phone", 340, 420],
-    // The graph page fills whatever the phone chrome leaves, so the box is as
-    // tall as a portrait screen allows and as flat as a landscape one does.
     ["a tall phone", 337, 561],
     ["a phone on its side", 629, 126],
   ]
-  const focuses = ["God Is Brutal and Not Merciful", "Jesus Existed", data.nodes[0].id]
+  // A section is only ever a full page, and its box is a little taller than a
+  // note's: the heading is one line where a note's title takes two.
+  const sectionCanvases = [
+    ["a desktop", 838, 515],
+    ["a phone", 371, 553],
+    ["a phone on its side", 626, 172],
+  ]
+
+  const claims = data.nodes.filter((n) => n.kind === "claim").map((n) => n.id)
+  const against = data.nodes.filter((n) => n.kind === "argument-against").map((n) => n.id)
+  // Each layout against the canvases it actually gets. A section is the shape
+  // the tree opens when a folder is picked: every note of one kind at once.
+  const cases = [
+    ["God Is Brutal and Not Merciful", noteCanvases],
+    ["Jesus Existed", noteCanvases],
+    [data.nodes[0].id, noteCanvases],
+    [claims, sectionCanvases],
+    [against, sectionCanvases],
+  ]
+  const nameOf = (focus) => (Array.isArray(focus) ? `a section of ${focus.length}` : focus)
 
   let worstBottom = 0
   let clipped = []
-  for (const focus of focuses) {
+  for (const [focus, canvases] of cases) {
     const nodes = layout(focus)
     for (const [name, width, height] of canvases) {
       const camera = fitCamera(nodes, width, height, room)
       for (const node of nodes) {
         const box = drawn(node, camera, width, height)
         if (box.left < 0 || box.right > width || box.top < 0 || box.bottom > height) {
-          clipped.push(`${focus} on ${name}: ${node.id}`)
+          clipped.push(`${nameOf(focus)} on ${name}: ${node.id}`)
         }
         worstBottom = Math.max(worstBottom, box.bottom / height)
       }
     }
   }
 
-  check("no label is cut off, on any canvas the rail can be", clipped.length === 0, clipped[0] ?? "")
+  check("nothing is cut off, on any canvas a graph is given", clipped.length === 0, clipped[0] ?? "")
   check("and the lowest one still reaches the bottom of the canvas", worstBottom > 0.8, worstBottom.toFixed(3))
 
   // Without the label allowance the old fit really did cut text off, which is

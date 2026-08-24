@@ -1,8 +1,9 @@
 // Force directed link map on a canvas. No dependencies.
 //
-// mount(el, data, options) draws either the whole vault or the neighbourhood of
-// one note. Drag a node to move it, drag the background to pan, scroll to zoom,
-// click to open. Hovering dims everything that is not a direct neighbour.
+// mount(el, data, options) draws the overview, or the neighbourhood of one note
+// or of a whole section. Drag a node to move it, drag the background to pan,
+// scroll to zoom, click to open. Hovering dims everything that is not a direct
+// neighbour.
 
 const FORCES = {
   repulsion: 5200, // how hard unconnected nodes push apart
@@ -43,7 +44,7 @@ const labelFont = (size) => `400 ${size}px system-ui, sans-serif`
 // clear it on every node, not just the ringed ones, so hovering never nudges a
 // label down and the spacing stays even across the graph.
 const RING = { gap: 3, width: 1.5 }
-const RING_EXTENT = RING.gap + RING.width / 2
+export const RING_EXTENT = RING.gap + RING.width / 2
 
 // Wraps on words, and trims the last line rather than dropping the rest.
 export function wrapLabel(measure, text, maxWidth, maxLines) {
@@ -99,11 +100,14 @@ function extentBox(nodes, scale, labelRoom) {
   for (const n of nodes) {
     const r = n.r * Math.max(scale, 0.55)
     const { half, drop } = labelRoom(n, scale)
-    const side = Math.max(r, half)
+    // Any node can be carrying a ring: the ones the graph was opened for always
+    // are, and any node is while it is hovered. The label allowance already
+    // reserved room for it below the circle, nothing reserved any above.
+    const side = Math.max(r + RING_EXTENT, half)
     minX = Math.min(minX, n.x * scale - side)
     maxX = Math.max(maxX, n.x * scale + side)
-    minY = Math.min(minY, n.y * scale - r)
-    maxY = Math.max(maxY, n.y * scale + r + drop)
+    minY = Math.min(minY, n.y * scale - r - RING_EXTENT)
+    maxY = Math.max(maxY, n.y * scale + r + Math.max(drop, RING_EXTENT))
   }
   return {
     spanX: Math.max(maxX - minX, 1),
@@ -238,12 +242,11 @@ function readColors(root) {
 export function mount(el, data, options = {}) {
   const { focus = null, depth = 1, showLabels = "hover", onNavigate } = options
 
-  // A note's graph starts from that one note and rings it. A section's starts
-  // from every note in the section, which all share a colour, so there is
-  // nothing left for a ring to say and it would only clutter the view.
+  // What the graph was opened for: one note, or every note in a section. All of
+  // them carry the ring, so what the reader picked is what stands out, and a
+  // section reads the same way a single note does.
   const seeds = focus === null ? [] : Array.isArray(focus) ? focus : [focus]
   const seeded = new Set(seeds)
-  const ring = seeds.length === 1 ? seeds[0] : null
 
   const subset = seeds.length ? neighbourhood(data, seeds, depth) : data
   if (subset.nodes.length === 0) {
@@ -436,7 +439,7 @@ export function mount(el, data, options = {}) {
       ctx.arc(x, y, r, 0, Math.PI * 2)
       ctx.fill()
 
-      if (node.id === ring || node === hovered) {
+      if (seeded.has(node.id) || node === hovered) {
         ctx.strokeStyle = colors.surface
         ctx.lineWidth = 2
         ctx.stroke()
