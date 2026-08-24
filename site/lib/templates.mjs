@@ -301,7 +301,7 @@ export function graphPage({ root, sections, notes, assets }) {
     main: `<div class="page page-graph">
   <div class="graph-head">
     <div>
-      <h1>Graph</h1>
+      <h1 class="graph-title">Graph</h1>
     </div>
     <a class="panel-expand graph-collapse" href="${root}" aria-label="Back to the overview" title="Back to the overview">${icon("collapse")}</a>
   </div>
@@ -333,7 +333,7 @@ export function nodeGraphPage({ note, root, sections, notes, assets }) {
   <div class="graph-head">
     <div>
       <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${root}">Theology</a><span aria-hidden="true">/</span><a href="${root}${slugify(section.dir)}/">${escapeHtml(section.label)}</a></nav>
-      <h1><span class="dot dot-${section.kind}"></span>${escapeHtml(note.title)}</h1>
+      <h1 class="note-title">${escapeHtml(note.title)}</h1>
     </div>
     <a class="panel-expand graph-collapse" href="${root}${note.url}/" aria-label="Back to the text of ${escapeHtml(note.title)}" title="Back to the text">${icon("collapse")}</a>
   </div>

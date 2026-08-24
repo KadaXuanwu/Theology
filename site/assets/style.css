@@ -1049,26 +1049,25 @@ a.external::after {
 }
 
 /* The graph takes whatever height the heading leaves, so it gains back some of
-   the width it gives up to the shared layout cap. The page is the graph, so the
-   chrome around it is kept tight and nothing here scrolls. */
+   the width it gives up to the shared layout cap. The page is the graph, so
+   nothing here scrolls.
+
+   The heading is deliberately left alone. A note's graph is a second view of
+   that note, so it carries the note's own heading, at the size and in the place
+   the text view puts it. Anything set here that the text view does not set is a
+   heading that jumps when the reader switches views. */
 body.is-graph main {
-  padding-top: 1.25rem;
   padding-bottom: 1.25rem;
   overflow: hidden;
 }
 body.is-graph .graph-head {
-  margin-bottom: 0.85rem;
+  margin-bottom: 0;
 }
-body.is-graph .graph-head h1 {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  margin: 0 0 0.2rem;
+/* The whole vault graph has no text view to line up with, so its heading stays
+   small, and carries the gap the head above no longer holds. */
+.graph-title {
+  margin: 0 0 1.05rem;
   font-size: 1.5rem;
-}
-body.is-graph .graph-head h1 .dot {
-  width: 0.6rem;
-  height: 0.6rem;
 }
 body.is-graph .graph-head .lede {
   margin: 0;
@@ -1381,13 +1380,10 @@ body.is-graph .graph-head .lede {
     height: 100%;
     min-height: 0;
     overflow: hidden;
-    padding: 0.9rem 0.85rem 0.95rem;
+    padding: 1.25rem 0.85rem 0.95rem;
   }
   /* The chrome around the graph gives up its spacing first, since the graph is
      what the page is for. */
-  body.is-graph .graph-head {
-    margin-bottom: 0.6rem;
-  }
   body.is-graph .legend {
     margin-bottom: 0.6rem;
   }

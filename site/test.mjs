@@ -869,15 +869,38 @@ console.log("the two whole-vault links look the same")
     colourOf(footRule) === colourOf(panelRule),
     `${colourOf(footRule)} vs ${colourOf(panelRule)}`,
   )
+}
 
-  // A tiny inline-block dot baseline-aligned in a 1.5rem heading sits low and
-  // hard against the first letter, so the heading has to lay it out instead.
-  const heading = sheet.match(/body\.is-graph \.graph-head h1 \{[^}]*\}/)?.[0] ?? ""
-  check(
-    "the graph heading lays its dot out rather than leaving it on the baseline",
-    /display:\s*flex/.test(heading) && /gap:/.test(heading) && /align-items:\s*center/.test(heading),
-    heading.replace(/\s+/g, " "),
-  )
+console.log("a note's two views share one heading")
+{
+  const dist = resolve(repoRoot, "dist")
+  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+  const text = await readFile(resolve(dist, "claims/jesus-existed/index.html"), "utf8")
+  const graph = await readFile(resolve(dist, "claims/jesus-existed/graph/index.html"), "utf8")
+
+  // The graph is a second view of the same note, not a page of its own, so the
+  // heading has to stay put when the reader switches to it. The graph view used
+  // to carry a category dot and a smaller size of its own, which pushed the
+  // title right and up the moment you switched.
+  const heading = (html) => html.match(/<h1[^>]*>[\s\S]*?<\/h1>/)?.[0] ?? ""
+  const crumbs = (html) => html.match(/<nav class="breadcrumbs"[\s\S]*?<\/nav>/)?.[0] ?? ""
+
+  check("the text view has a heading", heading(text).length > 0, heading(text))
+  check("the graph view renders the same one", heading(text) === heading(graph), `${heading(text)} vs ${heading(graph)}`)
+  // The links differ by a level of ../, since the graph view sits one deeper.
+  // What the reader sees is what has to match.
+  const trail = (html) => crumbs(html).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim()
+  check("with the same breadcrumbs above it", trail(text) === trail(graph), `${trail(text)} vs ${trail(graph)}`)
+
+  // Matching markup is only half of it: a size set on the graph view alone
+  // moves the title just as surely as a different tag would.
+  const override = sheet.match(/body\.is-graph[^{]*\bh1\b[^{]*\{[^}]*\}/)?.[0] ?? ""
+  check("and no rule resizes it on the graph view", override === "", override.replace(/\s+/g, " "))
+
+  // The whole vault graph is the one heading with no text view to match, so it
+  // keeps a size of its own.
+  check("the whole vault graph keeps its own smaller heading", /\.graph-title \{[^}]*font-size/.test(sheet))
+  check("and only it uses that", (graph.match(/graph-title/g) ?? []).length === 0)
 }
 
 console.log("home is reachable and knows when it is current")
@@ -1004,6 +1027,15 @@ console.log("the graph fits a phone screen")
     "and the graph view uses the same one",
     sideMargin("main") === sideMargin("body\.is-graph main"),
     `${sideMargin("main")} vs ${sideMargin("body\.is-graph main")}`,
+  )
+
+  // The heading starts at the same height in both views, which means the column
+  // above it is padded the same in both.
+  const topPad = (selector) => rule(selector).match(/padding: (\S+)/)?.[1] ?? ""
+  check(
+    "the graph view starts the column level with the text view",
+    topPad("main") === topPad("body\.is-graph main"),
+    `${topPad("main")} vs ${topPad("body\.is-graph main")}`,
   )
 
   // Four categories do not fit on one row of a phone, so the legend wraps. The
