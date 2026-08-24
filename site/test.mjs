@@ -1218,6 +1218,42 @@ console.log("the graph fits a phone screen")
   )
 }
 
+console.log("the contents always say where you are")
+{
+  const app = await readFile(resolve(repoRoot, "site/assets/app.js"), "utf8")
+  const block = app.match(/\{\r?\n {2}const links = \[\.\.\.document\.querySelectorAll\("\.toc a"\)\][\s\S]*?\r?\n\}/)?.[0] ?? ""
+  check("there is a contents block", block.length > 0)
+
+  // It used to ask for a heading inside a band 10% to 25% down the viewport.
+  // At the top of a page no heading is in that band, so nothing was marked
+  // until the reader scrolled; and a heading jumped to lands above the band,
+  // so the section after it got marked instead of the one asked for.
+  check("no heading has to sit in a band to count", !/rootMargin/.test(block), block.match(/rootMargin[^,]*/)?.[0] ?? "")
+  check("and the whole page no longer leans on the observer for this", !/IntersectionObserver/.test(app))
+
+  // Something is marked before any scrolling happens.
+  check("a section is marked as soon as the page is read", /\r?\n {4}mark\(asked \?\? current\(\)\)/.test(block), block.slice(-120))
+
+  // A reader who clicks a link in the contents has named the section, so it is
+  // marked outright rather than inferred from a scroll still in flight.
+  check("clicking a link marks what it names", /hashchange[\s\S]*?if \(asked\) mark\(asked\)/.test(block))
+
+  // On a desktop the middle column scrolls, not the page, and scroll does not
+  // bubble, so a plain window listener would never hear it.
+  check("it hears the column scrolling, not just the page", /"scroll", schedule, \{ capture: true/.test(block))
+
+  // The line a heading has to reach is the one the browser scrolls it to, read
+  // off the CSS rather than guessed, so the two cannot drift apart.
+  check("the line it measures against comes from the scroll padding", /scrollPaddingTop/.test(block))
+  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+  check("which the stylesheet does set", /scroll-padding-top:/.test(sheet))
+
+  // At the bottom the remaining headings cannot reach the line, because there
+  // is no scrolling left to bring them there.
+  check("the end of the scroll is handled rather than left stuck", /atEnd/.test(block))
+  check("and the reader's own choice settles it there", /if \(asked && onScreen\.includes\(asked\)\) return asked/.test(block))
+}
+
 console.log("cached assets carry a content hash")
 {
   // Without this a deploy leaves returning readers on the old JavaScript: the
