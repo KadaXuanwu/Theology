@@ -524,6 +524,10 @@ console.log("the opening view leaves room for the labels")
     ["a taller rail", 268, 320],
     ["the enlarged view", 900, 560],
     ["a phone", 340, 420],
+    // The graph page fills whatever the phone chrome leaves, so the box is as
+    // tall as a portrait screen allows and as flat as a landscape one does.
+    ["a tall phone", 337, 561],
+    ["a phone on its side", 629, 126],
   ]
   const focuses = ["God Is Brutal and Not Merciful", "Jesus Existed", data.nodes[0].id]
 
@@ -959,6 +963,34 @@ console.log("the reader picks the reading font")
     "and the control opens showing what is applied",
     appSource.includes("document.documentElement.dataset.font"),
   )
+}
+
+console.log("the graph fits a phone screen")
+{
+  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+  const phone = sheet.match(/@media \(max-width: 820px\) \{[\s\S]*?\r?\n\}/)?.[0] ?? ""
+  const rule = (selector) => phone.match(new RegExp(`${selector} \{[^}]*\}`))?.[0] ?? ""
+
+  check("there is a phone breakpoint", phone.length > 0)
+
+  // A phone is taller than it is wide and the browser's own bars eat into the
+  // top and the bottom, so a graph given a share of the viewport ran off the
+  // screen. The page is pinned to the small viewport instead, the height left
+  // once those bars are showing, and the graph takes what the chrome does not.
+  check("the graph page is measured against the small viewport", /100svh/.test(rule("body\.is-graph")))
+  check("and does not scroll past it", /overflow: hidden/.test(rule("body\.is-graph")))
+  check("the column inside it is pinned to that height too", /height: 100%/.test(rule("body\.is-graph main")))
+  check(
+    "so the graph is what is left over, not a share of the screen",
+    !/height: [\d.]+(vh|svh|dvh)/.test(rule("\.graph-full")),
+    rule("\.graph-full") || "no .graph-full rule",
+  )
+  // 20rem of graph does not fit under a phone header in landscape, and a floor
+  // taller than the room left is the cut off bottom coming back.
+  check("with no floor to push it off the bottom again", /min-height: 0/.test(rule("\.graph-full")))
+
+  // Only the graph page is pinned. Every other page still scrolls.
+  check("and every other page still scrolls", /height: auto/.test(rule("body")))
 }
 
 console.log("cached assets carry a content hash")

@@ -1358,16 +1358,39 @@ body.is-graph .graph-head .lede {
   main {
     padding: 1.5rem 1.15rem 4rem;
   }
+  /* The graph page keeps the fixed, non-scrolling shape it has on a desktop,
+     but measured against the small viewport: the height that is left once the
+     browser's own bars are showing. Sizing it against the full viewport is what
+     pushed the bottom of the graph under them. Everything above the graph is a
+     fixed height, so the graph takes what is left rather than a share of a
+     screen it may not get. */
+  body.is-graph {
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+  }
+  body.is-graph .layout {
+    height: calc(100vh - var(--header-h));
+    height: calc(100svh - var(--header-h));
+  }
   body.is-graph main {
-    overflow-y: visible;
-    padding-bottom: 4rem;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    padding: 1.1rem 1.15rem 1.15rem;
   }
-  .page-graph {
-    display: block;
-    height: auto;
+  /* The chrome around the graph gives up its spacing first, since the graph is
+     what the page is for. */
+  body.is-graph .graph-head {
+    margin-bottom: 0.6rem;
   }
+  body.is-graph .legend {
+    margin-bottom: 0.6rem;
+  }
+  /* No floor here. A floor taller than the room left is the cut off bottom
+     coming back. */
   .graph-full {
-    height: 68vh;
+    min-height: 0;
   }
 }
 
