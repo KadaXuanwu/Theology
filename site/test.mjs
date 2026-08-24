@@ -1252,6 +1252,17 @@ console.log("the contents always say where you are")
   // is no scrolling left to bring them there.
   check("the end of the scroll is handled rather than left stuck", /atEnd/.test(block))
   check("and the reader's own choice settles it there", /if \(asked && onScreen\.includes\(asked\)\) return asked/.test(block))
+
+  // The scrollport is the padding box, not the border box. The column draws a
+  // border, so a line measured from getBoundingClientRect alone sits above where
+  // the browser actually lands a heading, and the heading jumped to never counts
+  // as having reached it: the section before it stays marked instead.
+  check("the line clears the column's own border", /clientTop/.test(block), block.match(/const border = [^\r\n]*/)?.[0] ?? "no border term")
+  check(
+    "which the column really does draw",
+    /\r?\nmain \{[^}]*border: [\d.]+px/.test(sheet),
+    sheet.match(/\r?\nmain \{[^}]*?border: [^;]*/)?.[0].split(/\r?\n/).pop() ?? "no border on main",
+  )
 }
 
 console.log("cached assets carry a content hash")

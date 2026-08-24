@@ -344,15 +344,21 @@ async function showPreview(link) {
     }
 
     // Where a heading comes to rest once something has scrolled it into place:
-    // the top of whatever scrolls, plus the padding that scroll leaves above it.
+    // the top of the scrollport, plus the padding that scroll leaves above it.
     // Read off the CSS so the mark and the scroll cannot drift apart.
+    //
+    // The scrollport is the padding box, not the border box. The column draws a
+    // 7px border, so measuring from getBoundingClientRect alone puts this line
+    // 7px above where the browser actually lands a heading, and a heading
+    // jumped to never counts as having reached it.
     const geometry = () => {
       const el = scroller()
       const page = el === document.scrollingElement
       const box = page ? { top: 0, bottom: innerHeight } : el.getBoundingClientRect()
+      const border = page ? 0 : el.clientTop
       const pad = parseFloat(getComputedStyle(page ? document.documentElement : el).scrollPaddingTop) || 24
       return {
-        line: box.top + pad + 4,
+        line: box.top + border + pad + 4,
         bottom: box.bottom,
         atEnd: el.scrollTop + el.clientHeight >= el.scrollHeight - 2,
       }
