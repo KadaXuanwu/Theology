@@ -1367,7 +1367,7 @@ body.is-graph .graph-head .lede {
      views, so switching between the text and the graph does not shift the
      frame the reader is looking at. */
   main {
-    padding: 1.25rem 0.85rem 4rem;
+    padding: 0.8rem 0.85rem 4rem;
   }
   /* The graph page keeps the fixed, non-scrolling shape it has on a desktop,
      but measured against the small viewport: the height that is left once the
@@ -1388,7 +1388,7 @@ body.is-graph .graph-head .lede {
     height: 100%;
     min-height: 0;
     overflow: hidden;
-    padding: 1.25rem 0.85rem 0.95rem;
+    padding: 0.8rem 0.85rem 0.95rem;
   }
   /* The chrome around the graph gives up its spacing first, since the graph is
      what the page is for. */
@@ -1396,13 +1396,18 @@ body.is-graph .graph-head .lede {
     margin-bottom: 0.6rem;
   }
   /* A phone gets a smaller title than the clamp's floor gives it. At this width
-     the desktop size runs to three lines on the longest notes, and the graph
-     below pays for every one of them. 1.35rem is where the last three line
-     title falls back to two at 320px, and where most titles fit one line on a
-     412px screen. Both views read it from here, so they stay in step. */
+     the desktop size runs to three lines on seven of the notes, and the graph
+     below pays for every one of them. 1.5rem leaves one title at three lines on
+     a 320px screen; 1.55rem puts three there, which is why it stops here. Both
+     views read it from this one rule, so they stay in step. */
   .note-title,
   .graph-title {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
+  }
+  /* The trail is one short line of small text. It does not need a desktop's
+     room above and below it to read as its own row. */
+  .breadcrumbs {
+    margin-bottom: 0.4rem;
   }
   /* The legend needs two rows on a phone. They sit close enough to read as one
      block, tightened through the line rather than the padding so each toggle
