@@ -351,9 +351,9 @@ export function nodeGraphPage({ note, root, sections, notes, assets }) {
 }
 
 // The graph view of one section: the same heading its list page carries, and
-// every note in the section plus whatever they link out to. The notes of the
-// section all share a colour, so what belongs to it reads off the graph without
-// anything extra marking them.
+// every note in the section plus two hops out from them, the same reach a single
+// note's page has. The section itself is ringed, the first hop is what it links
+// to, and the second is faded back to context.
 export function sectionGraphPage({ section, root, sections, notes, assets }) {
   const slug = slugify(section.dir)
   return shell({
@@ -376,7 +376,7 @@ export function sectionGraphPage({ section, root, sections, notes, assets }) {
     <a class="panel-expand graph-collapse" href="${root}${slug}/" aria-label="Back to the list of ${escapeHtml(section.label)}" title="Back to the list">${icon("collapse")}</a>
   </div>
   ${legend(sections)}
-  <div class="graph-full graph-mount" data-graph="local" data-kind="${section.kind}" data-depth="1"></div>
+  <div class="graph-full graph-mount" data-graph="local" data-kind="${section.kind}" data-depth="2"></div>
   <p class="graph-foot"><a href="${root}graph/">See the overview</a></p>
 </div>`,
   })

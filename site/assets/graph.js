@@ -35,7 +35,7 @@ const LABEL = { maxWidth: 92, maxLines: 2, lineGap: 1.12, gap: 4, zoom: 1.15 }
 // What the opening view is allowed to do: keep this much clear of the canvas
 // edge, and never zoom past these bounds to fill it. The margin is small
 // because the labels bring their own: the room they need is measured in.
-const FIT = { pad: 14, min: 0.25, max: 2.2 }
+export const FIT = { pad: 14, min: 0.25, max: 2.2 }
 
 const labelSize = (scale) => Math.min(13, 10 + scale)
 const labelFont = (size) => `400 ${size}px system-ui, sans-serif`
