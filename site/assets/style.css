@@ -634,7 +634,10 @@ main {
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
-  padding: 2rem 1.25rem 2rem 0.5rem;
+  /* The reading column draws a 7px frame, so its first line starts 7px lower
+     than a column with no frame does. The rail carries the border's worth of
+     padding instead, and the two columns start on the same line. */
+  padding: calc(2rem + 7px) 1.25rem 2rem 0.5rem;
   font-size: 0.84rem;
 }
 
@@ -650,7 +653,15 @@ main {
 }
 
 /* The heading and the enlarge control share a row, so the control sits on the
-   preview it belongs to rather than floating loose in the rail. */
+   preview it belongs to rather than floating loose in the rail.
+
+   It has no opposite number on the enlarged view. A shrink arrow there would
+   have to line up with this one to look like the same control, and it cannot:
+   the rail sits straight on the page, 1.25rem in from the edge, while the
+   enlarged graph sits inside the reading column's frame, held 37px further in
+   by the border, the reserved scrollbar and the padding. The view switch in
+   the header goes back, is always there, and never has to be aligned with
+   anything. Under 1260px the rail is gone and this control goes with it. */
 .panel-head {
   display: flex;
   align-items: center;
@@ -1111,12 +1122,9 @@ a.external::after {
   min-height: 20rem;
 }
 
+/* Nothing sits beside the heading here any more, so this is only the space
+   between the heading and the legend under it. */
 .graph-head {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 2rem;
-  align-items: flex-start;
-  justify-content: space-between;
   margin-bottom: 1.25rem;
 }
 .page-graph {
@@ -1144,16 +1152,6 @@ body.is-graph .graph-head {
 body.is-graph .graph-head .lede {
   margin: 0;
   font-size: 0.9rem;
-}
-
-/* The heading gives way so the control stays pinned to the right. */
-.graph-head > :first-child {
-  flex: 1 1 0;
-  min-width: 0;
-}
-
-.graph-collapse {
-  margin: 0;
 }
 
 .graph-foot {
@@ -1358,14 +1356,6 @@ body.is-graph .graph-head .lede {
     grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
   }
   .sidebar-right {
-    display: none;
-  }
-  /* The two arrows are a pair: the rail's enlarges the graph, this one shrinks
-     it back. With the rail gone there is nothing to enlarge from, so a lone
-     shrink arrow is half a control. The view switch in the header does the same
-     job and is always there. Dropping it also gives the heading the full width,
-     which is what the text view gives it. */
-  .graph-collapse {
     display: none;
   }
 }

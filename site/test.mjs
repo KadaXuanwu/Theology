@@ -823,13 +823,9 @@ console.log("the legend filters the graph")
   )
   check("and every graph on the page updates together", appSource.includes("for (const graph of graphs) graph.setVisibleKinds(kinds)"))
 
-  // the shrink arrow matches the enlarge arrow: no border of its own
-  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
-  const collapseRule = sheet.match(/\.graph-collapse \{[^}]*\}/)?.[0] ?? ""
-  check("the shrink arrow has no border", !/border:/.test(collapseRule), collapseRule.replace(/\s+/g, " "))
 }
 
-console.log("the rail leads with the graph, and the enlarged view can shrink back")
+console.log("the rail leads with the graph, and the header is the way back")
 {
   const dist = resolve(repoRoot, "dist")
   const read = (p) => readFile(resolve(dist, p), "utf8")
@@ -843,45 +839,60 @@ console.log("the rail leads with the graph, and the enlarged view can shrink bac
     `graph at ${rail.indexOf("panel-graph")}, contents at ${rail.indexOf("panel-toc")}`,
   )
 
-  // the shrink control mirrors the enlarge arrow it came from
-  const collapse = (html) => {
-    const m = html.match(/<a class="panel-expand graph-collapse" href="([^"]*)" aria-label="([^"]*)"/)
-    return m ? { href: m[1], label: m[2] } : null
-  }
-
-  const nodeGraph = await read("claims/jesus-existed/graph/index.html")
-  const shrink = collapse(nodeGraph)
-  check("the enlarged view has a shrink control", shrink !== null)
-  check("it returns to that note's text", shrink?.href === "../../../claims/jesus-existed/", String(shrink?.href))
-  check("and says so", /Back to the text/.test(shrink?.label ?? ""), String(shrink?.label))
-  const headAt = nodeGraph.indexOf("class=\"graph-head\"")
-  const arrowAt = nodeGraph.indexOf("class=\"panel-expand graph-collapse\"")
-  const legendAt = nodeGraph.indexOf("<ul class=\"legend\"")
-  check("the shrink control sits inside the header", headAt >= 0 && arrowAt > headAt, `head ${headAt}, arrow ${arrowAt}`)
-  check("and the legend follows on its own row below", legendAt > arrowAt, `arrow ${arrowAt}, legend ${legendAt}`)
-
-  const fullGraph = await read("graph/index.html")
-  const shrinkFull = collapse(fullGraph)
-  check("the whole vault view has one too", shrinkFull !== null)
-  check("returning to the overview", shrinkFull?.href === "../", String(shrinkFull?.href))
-
-  // enlarge and shrink are a round trip
   const railPanel = note.match(/<section class="panel panel-graph">[\s\S]*?<\/section>/)?.[0] ?? ""
   const enlarge = railPanel.match(/class="panel-expand" href="([^"]*)"/)?.[1]
-  check("enlarging and shrinking lead back to each other", enlarge === "../../claims/jesus-existed/graph/", String(enlarge))
+  check("the rail preview can be enlarged", enlarge === "../../claims/jesus-existed/graph/", String(enlarge))
 
-  // The two arrows are a pair, so they go away together. Below the breakpoint
-  // that drops the rail there is nothing left to enlarge from, and a lone
-  // shrink arrow is half a control.
+  // Nothing goes the other way. A shrink arrow on the enlarged view would have
+  // to line up with the rail's to read as the same control, and it cannot: the
+  // rail sits on the page, the enlarged graph sits inside the reading column's
+  // frame, and the two are 37px apart. The header switch has neither problem.
   const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
-  const noRail = sheet.match(/@media \(max-width: 1260px\) \{[\s\S]*?\r?\n\}/)?.[0] ?? ""
-  check("the rail is dropped at a breakpoint of its own", /\.sidebar-right \{[^}]*display: none/.test(noRail))
-  check("and the shrink arrow goes with it", /\.graph-collapse \{[^}]*display: none/.test(noRail), noRail.replace(/\s+/g, " "))
-  // Which only works because the header always offers the same trip.
+  const graphs = ["claims/jesus-existed/graph/index.html", "graph/index.html", "claims/graph/index.html"]
+  for (const path of graphs) {
+    const html = await read(path)
+    check(`${path} carries no shrink arrow`, !html.includes("graph-collapse"))
+  }
+  check("and nothing is left styling one", !sheet.includes("graph-collapse"))
+  check("nor drawing its icon", !(await readFile(resolve(repoRoot, "site/lib/templates.mjs"), "utf8")).includes("icon-collapse"))
+
+  // Which only works because the header always offers the trip back.
+  const nodeGraph = await read("claims/jesus-existed/graph/index.html")
   check(
-    "leaving the header switch as the way back",
+    "the header switch goes back to the note",
     nodeGraph.includes('<a class="view-tab" href="../../../claims/jesus-existed/"'),
     nodeGraph.match(/<a class="view-tab"[^>]*>/)?.[0] ?? "no text tab",
+  )
+  const fullGraph = await read("graph/index.html")
+  check(
+    "and back to the overview from the whole vault view",
+    fullGraph.includes('<a class="view-tab" href="../"'),
+    fullGraph.match(/<a class="view-tab"[^>]*>/)?.[0] ?? "no text tab",
+  )
+
+  // With nothing beside it the heading has the row to itself, so the row is a
+  // plain block again rather than a flex pair.
+  const headRule = sheet.match(/^\.graph-head \{[^}]*\}/m)?.[0] ?? ""
+  check("the heading row holds nothing else", !/display: flex/.test(headRule), headRule.replace(/\s+/g, " "))
+  const headAt = nodeGraph.indexOf('class="graph-head"')
+  const legendAt = nodeGraph.indexOf('<ul class="legend"')
+  check("and the legend still follows on its own row", headAt >= 0 && legendAt > headAt, `head ${headAt}, legend ${legendAt}`)
+
+  // The rail is dropped below a breakpoint of its own, and takes the only
+  // control that was ever paired with the enlarged view with it.
+  const noRail = sheet.match(/@media \(max-width: 1260px\) \{[\s\S]*?\r?\n\}/)?.[0] ?? ""
+  check("the rail is dropped at a breakpoint of its own", /\.sidebar-right \{[^}]*display: none/.test(noRail))
+
+  // The reading column draws a frame and the rail does not, so without this the
+  // rail's first line sits 7px above the column's.
+  const railRule = sheet.match(/^\.sidebar-right \{[^}]*\}/m)?.[0] ?? ""
+  const columnRule = sheet.match(/^main \{[^}]*\}/m)?.[0] ?? ""
+  const frame = columnRule.match(/border: (\d+)px solid var\(--bg\)/)?.[1]
+  check("the reading column draws a frame", frame === "7", String(frame))
+  check(
+    "and the rail carries its width as padding, so both start level",
+    railRule.includes(`padding: calc(2rem + ${frame}px)`),
+    railRule.match(/padding: [^;]+;/)?.[0] ?? "no padding",
   )
 }
 
