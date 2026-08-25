@@ -4,14 +4,21 @@
   --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   --font-read: "Iowan Old Style", "Palatino Linotype", Palatino, Charter, Georgia, serif;
 
-  --bg: #f6f6f6;
-  --bg-center: #ffffff;
-  --bg-soft: #ececec;
-  --surface: #fafafa;
-  --text: #222222;
-  --muted: #5c5c5c;
-  --border: #e0e0e0;
-  --border-strong: #cfcfcf;
+  /* Paper rather than screen white. The reading column is the lightest thing
+     on the page but never #fff, and the page behind it is far enough off it
+     that the column reads as a sheet lying on a desk instead of as a seam.
+     --bg-soft stays the darkest of the three, which is what makes it work as
+     a hover and as the fill behind code either side of the frame. */
+  --bg: #e9e6e0;
+  --bg-center: #fcfbf8;
+  --bg-soft: #dfdbd3;
+  /* Between the two: light enough to read as a chip on the page, tinted enough
+     to read as a card on the sheet. */
+  --surface: #f4f1ec;
+  --text: #232120;
+  --muted: #5e5b56;
+  --border: #dbd6cd;
+  --border-strong: #c5bfb4;
   --accent: #8a5cf5;
   --accent-soft: #efe9ff;
   --highlight: rgba(255, 208, 0, 0.4);
@@ -28,8 +35,8 @@
   --sidebar-w: 20.5rem;
   --right-w: 18rem;
   --radius: 0.5rem;
-  --scrollbar: #cbcbcb;
-  --scrollbar-hover: #b0b0b0;
+  --scrollbar: #c8c2b7;
+  --scrollbar-hover: #aca598;
 }
 
 :root[data-theme="dark"] {
@@ -70,8 +77,6 @@
     --accent-soft: #2b2440;
     --highlight: rgba(255, 208, 0, 0.4);
     --highlight-strong: rgba(255, 208, 0, 0.6);
-  --highlight: rgba(255, 208, 0, 0.4);
-  --highlight-strong: rgba(255, 208, 0, 0.6);
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
 
     --argument-for: #7f8df4;
@@ -689,7 +694,7 @@ main {
   gap: 0.4rem;
   font-size: 0.82rem;
   color: var(--muted);
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.55rem;
 }
 .breadcrumbs a {
   color: var(--muted);

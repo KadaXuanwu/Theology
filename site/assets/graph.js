@@ -298,9 +298,11 @@ export function mount(el, data, options = {}) {
   }
 
   // Hiding a category takes its notes out of the layout entirely, so the links
-  // that ran through them go too and the rest closes up around the gap.
+  // that ran through them go too and the rest closes up around the gap. What
+  // the graph was opened for is exempt: hiding its category would leave the
+  // reader looking at the neighbourhood of a note that is not on screen.
   function setVisibleKinds(kinds) {
-    nodes = kinds ? allNodes.filter((n) => kinds.has(n.kind)) : allNodes
+    nodes = kinds ? allNodes.filter((n) => kinds.has(n.kind) || seeded.has(n.id)) : allNodes
     const shown = new Set(nodes.map((n) => n.id))
     links = allLinks.filter((l) => shown.has(l.source.id) && shown.has(l.target.id))
     adjacency = buildAdjacency(nodes, links)
@@ -571,6 +573,7 @@ export function mount(el, data, options = {}) {
     // A two finger gesture is never a node drag and never a tap.
     if (dragging) {
       dragging.pinned = false
+      if (hovered === dragging) hovered = null
       dragging = null
       alphaTarget = FORCES.settleFloor
       settling = true
@@ -596,6 +599,10 @@ export function mount(el, data, options = {}) {
     if (node) {
       dragging = node
       node.pinned = true
+      // A finger has no hover, so nothing has picked the node out the way a
+      // cursor already would have. Take hold of it here instead, and the drag
+      // shows what it is connected to on a phone as it does on a desktop.
+      hovered = node
       // Keep the layout live for the whole drag. Without a target, alpha decays
       // away after a few seconds and the other nodes stop responding.
       alphaTarget = 0.3

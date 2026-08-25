@@ -810,6 +810,10 @@ console.log("the legend filters the graph")
     graphSource.includes("shown.has(l.source.id) && shown.has(l.target.id)"),
   )
   check("and hiding everything says so rather than going blank", graphSource.includes("Every category is hidden"))
+  check(
+    "but never the note the graph was opened for",
+    graphSource.includes("kinds.has(n.kind) || seeded.has(n.id)"),
+  )
 
   const appSource = await readFile(resolve(repoRoot, "site/assets/app.js"), "utf8")
   check("the choice is remembered", appSource.includes("hiddenGraphKinds"))
@@ -1297,6 +1301,92 @@ console.log("cached assets carry a content hash")
     "and at the hashed names, not the bare ones",
     referenced.filter((f) => /\.(js|css)$/.test(f)).every((f) => hashed.test(f)),
     referenced.join(", "),
+  )
+}
+
+console.log("the reading column is a sheet on a page, not the page itself")
+{
+  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+  const light = sheet.match(/^:root \{([\s\S]*?)^\}/m)?.[1] ?? ""
+  const value = (name) => light.match(new RegExp(`--${name}:\\s*([^;]+);`))?.[1]?.trim() ?? ""
+
+  const page = value("bg")
+  const centre = value("bg-center")
+  check("the light theme sets both", Boolean(page && centre), `${page} / ${centre}`)
+  check("the column is not screen white", centre.toLowerCase() !== "#ffffff", centre)
+
+  // The column is drawn as a card: a 7px border in the page colour around a
+  // fill in the column colour. Put the two close together and it has no edge.
+  const channels = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16))
+  const gap = channels(centre).map((c, i) => c - channels(page)[i])
+  check("and it stands off the page it sits on", Math.min(...gap) >= 12, gap.join(","))
+
+  const frame = sheet.match(/^main \{[^}]*\}/m)?.[0] ?? ""
+  check("which is what the frame around it is for", /border: 7px solid var\(--bg\)/.test(frame))
+
+  // The gap the ring around a node is painted in has to be the colour the
+  // canvas is sitting on, or a ringed node wears a halo.
+  const mount = sheet.match(/\.graph-mount \{[^}]*\}/)?.[0] ?? ""
+  const graphSource = await readFile(resolve(repoRoot, "site/assets/graph.js"), "utf8")
+  check("the graph is mounted on the surface colour", /background: var\(--surface\)/.test(mount))
+  check("and paints the ring gap in the same one", graphSource.includes("ctx.strokeStyle = colors.surface"))
+}
+
+console.log("a finger gets the highlight a cursor gets for free")
+{
+  const graphSource = await readFile(resolve(repoRoot, "site/assets/graph.js"), "utf8")
+  const down = graphSource.match(/function onPointerDown\([\s\S]*?\n  \}/)?.[0] ?? ""
+  check("taking hold of a node hovers it", /dragging = node[\s\S]*?hovered = node/.test(down))
+
+  // Touch never clears a hover by moving away from it, so every way out of a
+  // drag has to put it down again.
+  check("letting go on a touch screen drops it", /event\.pointerType === "touch" && hovered/.test(graphSource))
+  const pinchStart = graphSource.match(/function startPinch\([\s\S]*?\n  \}/)?.[0] ?? ""
+  check("and a second finger arriving drops it too", /if \(hovered === dragging\) hovered = null/.test(pinchStart))
+}
+
+console.log("the tree comes back to the note you are reading")
+{
+  const appSource = await readFile(resolve(repoRoot, "site/assets/app.js"), "utf8")
+  const block = appSource.match(/const here = sidebar\?[\s\S]*?\n\}/)?.[0] ?? ""
+  check("the tree looks for the entry the page marks", block.includes('aria-current="page"'))
+  check("it scrolls the tree, not the page", block.includes("sidebar.scrollTop +="))
+  check("only when the tree has somewhere to scroll", block.includes("sidebar.scrollHeight > sidebar.clientHeight"))
+  check("and never at an entry a collapsed folder is hiding", block.includes("item?.height"))
+
+  // Every page marks its own entry, which is the thing this has to find.
+  const built = await readFile(resolve(repoRoot, "dist/claims/index.html"), "utf8")
+  const tree = built.match(/<aside class="sidebar"[\s\S]*?<\/aside>/)?.[0] ?? ""
+  const marked = tree.match(/aria-current="page"/g) ?? []
+  check("a page really does mark one", marked.length === 1, `${marked.length} marked`)
+}
+
+console.log("a preview waits to be asked for")
+{
+  const appSource = await readFile(resolve(repoRoot, "site/assets/app.js"), "utf8")
+  const delay = Number(appSource.match(/const PREVIEW_DELAY = (\d+)/)?.[1])
+  check("the hover preview has a named delay", Number.isFinite(delay), String(delay))
+  // Long enough that a cursor crossing links on its way somewhere else opens
+  // none of them, short enough that stopping on one still feels answered.
+  check("which is long enough not to fire in passing", delay >= 450, `${delay}ms`)
+  check("and short enough to still feel like hovering", delay <= 700, `${delay}ms`)
+  check(
+    "the timer is the only thing that opens it",
+    appSource.includes("setTimeout(() => showPreview(link), PREVIEW_DELAY)"),
+  )
+}
+
+console.log("the tab icon has no plate behind it")
+{
+  const svg = await readFile(resolve(repoRoot, "site/assets/favicon.svg"), "utf8")
+  check("nothing fills the square", !/<rect[^>]*width="32"/.test(svg), svg.match(/<rect[^>]*>/)?.[0] ?? "no rect")
+  check("the mark itself is still there", (svg.match(/<circle/g) ?? []).length === 3)
+  // With the plate gone the padding it needed goes too, or the mark sits small
+  // in a square of nothing.
+  check(
+    "and it fills the room the plate used to take",
+    /scale\(1\.\d+\)/.test(svg),
+    svg.match(/transform="[^"]*"/)?.[0] ?? "no transform",
   )
 }
 
