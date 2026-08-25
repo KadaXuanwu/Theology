@@ -1332,6 +1332,36 @@ console.log("the reading column is a sheet on a page, not the page itself")
   check("and paints the ring gap in the same one", graphSource.includes("ctx.strokeStyle = colors.surface"))
 }
 
+console.log("a link into the vault is a colour, not a block of colour")
+{
+  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+  const rules = [...sheet.matchAll(/(^|\n)(a\.wikilink[^{]*)\{([^}]*)\}/g)].map((m) => `${m[2]}{${m[3]}}`)
+  check("nothing fills an internal link", rules.length === 0, rules.join(" ").replace(/\s+/g, " ") || "no rule")
+
+  // The fill was the whole of the styling, so the colour is now carrying it on
+  // its own. On the reading column it has to clear the line for body text.
+  const light = sheet.match(/^:root \{([\s\S]*?)^\}/m)?.[1] ?? ""
+  const value = (name) => light.match(new RegExp(`--${name}:\\s*([^;]+);`))?.[1]?.trim() ?? ""
+  const linear = (c) => (c / 255 <= 0.03928 ? c / 255 / 12.92 : ((c / 255 + 0.055) / 1.055) ** 2.4)
+  const luminance = (hex) => {
+    const [r, g, b] = [1, 3, 5].map((i) => linear(parseInt(hex.slice(i, i + 2), 16)))
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+  }
+  const contrast = (a, b) => {
+    const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x)
+    return (hi + 0.05) / (lo + 0.05)
+  }
+  const ratio = contrast(value("accent"), value("bg-center"))
+  check("and it reads against the page it sits on", ratio >= 4.5, `${ratio.toFixed(2)}:1`)
+
+  // The underline is what is left for anyone the hue does not reach, so no
+  // rule may take it away again.
+  check("the underline stays on", !/text-decoration:\s*none/.test(sheet.match(/^a \{[^}]*\}/m)?.[0] ?? ""))
+
+  // The gold still means something, just not this. Tags and search hits keep it.
+  check("the highlight is still spent somewhere", (sheet.match(/var\(--highlight/g) ?? []).length >= 3)
+}
+
 console.log("a finger gets the highlight a cursor gets for free")
 {
   const graphSource = await readFile(resolve(repoRoot, "site/assets/graph.js"), "utf8")

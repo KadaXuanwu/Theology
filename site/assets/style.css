@@ -19,7 +19,10 @@
   --muted: #5e5b56;
   --border: #dbd6cd;
   --border-strong: #c5bfb4;
-  --accent: #8a5cf5;
+  /* A shade down from #8a5cf5, same hue. With no fill behind an internal link
+     the colour is the whole signal, and the lighter violet came in at 4.2:1 on
+     the paper background, under the 4.5:1 a body sized link wants. */
+  --accent: #8155ee;
   --accent-soft: #efe9ff;
   --highlight: rgba(255, 208, 0, 0.4);
   --highlight-strong: rgba(255, 208, 0, 0.6);
@@ -879,15 +882,12 @@ main {
   opacity: 1;
 }
 
-a.wikilink {
-  text-decoration: none;
-  background-color: var(--highlight);
-  padding: 0 0.12em;
-  border-radius: 3px;
-}
-a.wikilink:hover {
-  background-color: var(--highlight-strong);
-}
+/* A link into the vault carries no fill of its own. A note runs to eight or
+   more of them, and a block of colour behind every one shouts over the prose
+   it is sitting in. The accent against muted body text says link on its own,
+   and the underline every link on the site carries does the rest. What tells
+   the two kinds apart is where they go, which the arrow on an external link
+   already says. */
 .wikilink.is-broken {
   color: var(--argument-against);
   border-bottom: 1px dashed currentColor;
