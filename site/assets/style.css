@@ -24,11 +24,22 @@
      the paper background, under the 4.5:1 a body sized link wants. */
   --accent: #8155ee;
   --accent-soft: #efe9ff;
-  /* A link that leaves the site, in the blue the web has always used for one.
-     Weighed against the accent so neither kind of link is the louder one: this
-     reads at 4.8:1 on the reading column to the accent's 4.5:1, both clear of
-     the line for body text and close enough that a paragraph stays even. */
-  --link-out: #1a6ae6;
+  /* Link colours. A link into the vault wears the colour of the node it goes
+     to, so the hue in the prose is the hue of the dot in the tree and of the
+     circle in the graph. The kind colours themselves were drawn to be seen as
+     a dot on a background, not read as a word on one, and none of them clears
+     4.5:1 on the reading column: the blue comes in at 4.2, the orange at 2.9.
+     These are the same hue and saturation taken down until they do, so they
+     stay recognisably the kind's colour and can be read at body size. */
+  --link-argument-for: #5064e6;
+  --link-argument-against: #a46122;
+  --link-claim: #267e72;
+  --link-evidence: #8d58c1;
+  --link-note: #6c717b;
+  /* A link off the site is the one that is not a node, so it takes the one hue
+     none of the kinds do. Deep enough to read as ink rather than as a warning,
+     and the furthest thing on the page from the orange it sits nearest. */
+  --link-out: #b32d43;
   --highlight: rgba(255, 208, 0, 0.4);
   --highlight-strong: rgba(255, 208, 0, 0.6);
   --shadow: 0 1px 2px rgba(20, 20, 30, 0.05), 0 8px 24px rgba(20, 20, 30, 0.07);
@@ -58,7 +69,14 @@
   --border-strong: #454545;
   --accent: #a68af9;
   --accent-soft: #2b2440;
-  --link-out: #58a6ff;
+  /* On a dark ground the kind colours are already 5.7:1 or better as text, so
+     a link into the vault takes them as they are. */
+  --link-argument-for: var(--argument-for);
+  --link-argument-against: var(--argument-against);
+  --link-claim: var(--claim);
+  --link-evidence: var(--evidence);
+  --link-note: var(--note);
+  --link-out: #e8808f;
   --highlight: rgba(255, 208, 0, 0.4);
   --highlight-strong: rgba(255, 208, 0, 0.6);
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
@@ -84,7 +102,12 @@
     --border-strong: #454545;
     --accent: #a68af9;
     --accent-soft: #2b2440;
-    --link-out: #58a6ff;
+    --link-argument-for: var(--argument-for);
+    --link-argument-against: var(--argument-against);
+    --link-claim: var(--claim);
+    --link-evidence: var(--evidence);
+    --link-note: var(--note);
+    --link-out: #e8808f;
     --highlight: rgba(255, 208, 0, 0.4);
     --highlight-strong: rgba(255, 208, 0, 0.6);
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
@@ -889,24 +912,51 @@ main {
   opacity: 1;
 }
 
-/* A link into the vault carries no fill of its own. A note runs to eight or
-   more of them, and a block of colour behind every one shouts over the prose
-   it is sitting in. The accent against muted body text says link on its own,
-   and the underline every link on the site carries does the rest. So it keeps
-   the site's own colour, and a link off the site takes the blue below. */
+/* A link carries no fill of its own. A note runs to eight or more of them, and
+   a block of colour behind every one shouts over the prose it is sitting in.
+   The hue and the underline are the whole of it, and each rule below only has
+   to name a hue: both links read it from --link. */
+a.wikilink,
+a.external {
+  color: var(--link);
+  text-decoration-color: color-mix(in srgb, var(--link) 35%, transparent);
+}
+
+/* A link into the vault is drawn in the colour of the node it goes to, so the
+   word in the prose, the dot in the tree and the circle in the graph are all
+   the same colour. That makes a paragraph readable as a route through the map
+   rather than as a row of identical links. */
+a.wikilink {
+  --link: var(--link-note);
+}
+a.wikilink[data-kind="argument-for"] {
+  --link: var(--link-argument-for);
+}
+a.wikilink[data-kind="argument-against"] {
+  --link: var(--link-argument-against);
+}
+a.wikilink[data-kind="claim"] {
+  --link: var(--link-claim);
+}
+a.wikilink[data-kind="evidence"] {
+  --link: var(--link-evidence);
+}
+
+/* A wikilink with nothing behind it is not a link, so it is not drawn as one.
+   The build already names every one of these in its log; this is only so the
+   gap is visible to a reader who runs into it. */
 .wikilink.is-broken {
-  color: var(--argument-against);
+  color: var(--muted);
   border-bottom: 1px dashed currentColor;
   cursor: help;
 }
 
-/* A source is the one kind of link that takes the reader off the site, so it
-   is the one that gets the colour the web reads as a link by default. The
-   arrow stays: the colour says which of the two this is, the arrow says a new
-   tab is about to open. */
+/* A source is the one link that is not a node, so it takes the one hue no kind
+   uses. The arrow stays: four hues and a fifth is a colour only difference,
+   which is no difference at all to a reader who cannot separate them, and the
+   arrow is also what says a new tab is about to open. */
 a.external {
-  color: var(--link-out);
-  text-decoration-color: color-mix(in srgb, var(--link-out) 35%, transparent);
+  --link: var(--link-out);
 }
 a.external::after {
   content: "↗";

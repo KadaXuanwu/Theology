@@ -60,9 +60,14 @@ export function createRenderer({ resolve, rootPrefix }) {
 
           state.links.add(note.title)
           const anchor = token.anchor ? `#${slugify(token.anchor)}` : ""
-          return `<a class="wikilink" href="${rootPrefix}${note.url}/${anchor}" data-note="${escapeHtml(
-            note.title,
-          )}">${text}</a>`
+          // The kind rides along so the link can wear the colour of the node it
+          // goes to, the same colour its dot carries in the tree and its circle
+          // in the graph. A folder the site does not know about has no kind and
+          // falls back to the neutral one.
+          const kind = note.section?.kind ?? "note"
+          return `<a class="wikilink" href="${rootPrefix}${note.url}/${anchor}" data-kind="${escapeHtml(
+            kind,
+          )}" data-note="${escapeHtml(note.title)}">${text}</a>`
         },
       },
     ],

@@ -1332,48 +1332,90 @@ console.log("the reading column is a sheet on a page, not the page itself")
   check("and paints the ring gap in the same one", graphSource.includes("ctx.strokeStyle = colors.surface"))
 }
 
-console.log("a link into the vault is a colour, not a block of colour")
+console.log("a link wears the colour of what it points at")
 {
   const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
-  const rules = [...sheet.matchAll(/(^|\n)(a\.wikilink[^{]*)\{([^}]*)\}/g)].map((m) => `${m[2]}{${m[3]}}`)
-  check("nothing fills an internal link", rules.length === 0, rules.join(" ").replace(/\s+/g, " ") || "no rule")
+  const KINDS = ["argument-for", "argument-against", "claim", "evidence", "note"]
 
-  // The fill was the whole of the styling, so the colour is now carrying it on
-  // its own. On the reading column it has to clear the line for body text.
-  const light = sheet.match(/^:root \{([\s\S]*?)^\}/m)?.[1] ?? ""
-  const value = (name) => light.match(new RegExp(`--${name}:\\s*([^;]+);`))?.[1]?.trim() ?? ""
   const linear = (c) => (c / 255 <= 0.03928 ? c / 255 / 12.92 : ((c / 255 + 0.055) / 1.055) ** 2.4)
+  const rgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16))
   const luminance = (hex) => {
-    const [r, g, b] = [1, 3, 5].map((i) => linear(parseInt(hex.slice(i, i + 2), 16)))
+    const [r, g, b] = rgb(hex).map(linear)
     return 0.2126 * r + 0.7152 * g + 0.0722 * b
   }
   const contrast = (a, b) => {
     const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x)
     return (hi + 0.05) / (lo + 0.05)
   }
-  const ratio = contrast(value("accent"), value("bg-center"))
-  check("and it reads against the page it sits on", ratio >= 4.5, `${ratio.toFixed(2)}:1`)
+  const hue = (hex) => {
+    const [r, g, b] = rgb(hex).map((c) => c / 255)
+    const max = Math.max(r, g, b)
+    const span = max - Math.min(r, g, b)
+    if (!span) return 0
+    const raw = max === r ? ((g - b) / span) % 6 : max === g ? (b - r) / span + 2 : (r - g) / span + 4
+    return (raw * 60 + 360) % 360
+  }
+  // The shorter way round the wheel, so 350 and 10 are twenty apart, not 340.
+  const apart = (a, b) => {
+    const d = Math.abs(a - b) % 360
+    return Math.min(d, 360 - d)
+  }
 
-  // The underline is what is left for anyone the hue does not reach, so no
-  // rule may take it away again.
+  const light = sheet.match(/^:root \{([\s\S]*?)^\}/m)?.[1] ?? ""
+  const value = (name) => light.match(new RegExp(`--${name}:\\s*([^;]+);`))?.[1]?.trim() ?? ""
+  const page = value("bg-center")
+
+  // No fill. That was the complaint that started this, and nothing about
+  // colouring by kind is a reason to put one back.
+  const wikilinkRules = [...sheet.matchAll(/(^|\n)(a\.wikilink[^{]*)\{([^}]*)\}/g)].map((m) => m[3])
+  const filled = wikilinkRules.filter((body) => /background|padding|border-radius/.test(body))
+  check("nothing fills an internal link", filled.length === 0, filled.join(" ").replace(/\s+/g, " ") || "none")
+
+  // The kind colours were drawn as dots. Read as words they have to clear the
+  // line for body text, which none of them did before these were derived.
+  const ratios = KINDS.map((kind) => contrast(value(`link-${kind}`), page))
+  for (const [i, kind] of KINDS.entries()) {
+    check(`${kind} reads on the page`, ratios[i] >= 4.5, `${ratios[i].toFixed(2)}:1`)
+  }
+  check("and no kind shouts over another", Math.max(...ratios) - Math.min(...ratios) < 0.5)
+
+  // Derived, not invented: a link has to be the colour of the dot it goes to,
+  // or the prose and the tree stop agreeing.
+  const drifted = KINDS.filter((kind) => apart(hue(value(`link-${kind}`)), hue(value(kind))) > 6)
+  check("each is the hue of the kind it belongs to", drifted.length === 0, drifted.join(", ") || "all in step")
+
+  // A source is the link that is not a node, so it needs a hue no kind holds.
+  const out = value("link-out")
+  const nearest = Math.min(...KINDS.filter((k) => k !== "note").map((k) => apart(hue(out), hue(value(k)))))
+  check("a link off the site has a hue of its own", nearest >= 30, `${nearest.toFixed(0)}° from the nearest kind`)
+  check("which reads on the page too", contrast(out, page) >= 4.5, `${contrast(out, page).toFixed(2)}:1`)
+  check("and is never the quiet one", contrast(out, page) >= Math.min(...ratios))
+
+  // Six colours in three palettes, and the dark theme takes the kind colours
+  // as they are, so only the light one derives anything.
+  for (const name of [...KINDS.map((k) => `link-${k}`), "link-out"]) {
+    check(`both themes set --${name}`, (sheet.match(new RegExp(`--${name}:`, "g")) ?? []).length === 3)
+  }
+
+  // Two links apart only by hue is no difference at all to a reader who cannot
+  // separate the hues, so neither of the two things that do not need eyes for
+  // colour may go: the underline under every link, the arrow on an outward one.
   check("the underline stays on", !/text-decoration:\s*none/.test(sheet.match(/^a \{[^}]*\}/m)?.[0] ?? ""))
+  check("and the arrow stays on a link off the site", /^a\.external::after \{/m.test(sheet))
+
+  // A wikilink with nothing behind it is not a link and must not be drawn as
+  // one of the kinds, which is what it used to borrow.
+  const brokenRule = sheet.match(/^\.wikilink\.is-broken \{[^}]*\}/m)?.[0] ?? ""
+  check("a broken one wears no kind's colour", !KINDS.some((k) => brokenRule.includes(`var(--${k})`)), brokenRule.replace(/\s+/g, " "))
 
   // The gold still means something, just not this. Tags and search hits keep it.
   check("the highlight is still spent somewhere", (sheet.match(/var\(--highlight/g) ?? []).length >= 3)
 
-  // A link off the site takes the blue instead, at a weight near enough the
-  // accent's that a paragraph of both stays even.
-  const out = contrast(value("link-out"), value("bg-center"))
-  check("a link off the site has a colour of its own", value("link-out") !== value("accent"), value("link-out"))
-  check("which reads against the page too", out >= 4.5, `${out.toFixed(2)}:1`)
-  check("and neither kind is the louder one", Math.abs(out - ratio) < 1, `${ratio.toFixed(2)} vs ${out.toFixed(2)}`)
-  check("both themes have one", (sheet.match(/--link-out:/g) ?? []).length === 3)
-
-  const external = sheet.match(/^a\.external \{[^}]*\}/m)?.[0] ?? ""
-  check("the underline goes blue with it", /text-decoration-color: color-mix\(in srgb, var\(--link-out\)/.test(external))
-  // Two links of the same weight in different hues is a colour-only difference,
-  // which is no difference at all to a reader who cannot separate the hues.
-  check("and the arrow stays, since colour alone is not a signal", /^a\.external::after \{/m.test(sheet))
+  // And the pages really do carry the kind the colour is read from.
+  const built = await readFile(resolve(repoRoot, "dist/arguments-for/personal-relationship-with-god/index.html"), "utf8")
+  const tagged = [...built.matchAll(/<a class="wikilink"[^>]*data-kind="([^"]+)"/g)].map((m) => m[1])
+  check("every wikilink on a page names its kind", tagged.length > 0, `${tagged.length} tagged`)
+  check("and names one the stylesheet knows", tagged.every((k) => KINDS.includes(k)), [...new Set(tagged)].join(", "))
 }
 
 console.log("a finger gets the highlight a cursor gets for free")
