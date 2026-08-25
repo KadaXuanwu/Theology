@@ -634,10 +634,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
-  /* The reading column draws a 7px frame, so its first line starts 7px lower
-     than a column with no frame does. The rail carries the border's worth of
-     padding instead, and the two columns start on the same line. */
-  padding: calc(2rem + 7px) 1.25rem 2rem 0.5rem;
+  padding: 2rem 1.25rem 2rem 0.5rem;
   font-size: 0.84rem;
 }
 
@@ -652,33 +649,30 @@ main {
   flex: none;
 }
 
-/* The heading and the enlarge control share a row, so the control sits on the
-   preview it belongs to rather than floating loose in the rail.
+/* The control sits in the top right corner of the graph it belongs to: the
+   enlarge one on the rail preview, the shrink one on the enlarged view.
 
-   It has no opposite number on the enlarged view. A shrink arrow there would
-   have to line up with this one to look like the same control, and it cannot:
-   the rail sits straight on the page, 1.25rem in from the edge, while the
-   enlarged graph sits inside the reading column's frame, held 37px further in
-   by the border, the reserved scrollbar and the padding. The view switch in
-   the header goes back, is always there, and never has to be aligned with
-   anything. Under 1260px the rail is gone and this control goes with it. */
-.panel-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-}
-
+   Not beside the heading, which is where it used to be. The two graphs do not
+   share an edge, so no two positions on the page can line up: the rail sits
+   straight on the page, 1.25rem in, while the enlarged graph sits inside the
+   reading column's frame, held 37px further in by the border, the reserved
+   scrollbar and the padding. What lines up instead is the rule, and a control
+   on the corner of its own card reads as one at a glance. */
 .panel-expand {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  z-index: 2;
   display: inline-grid;
   place-items: center;
   width: 1.55rem;
   height: 1.55rem;
-  margin: 0 0 0.6rem;
   border-radius: var(--radius);
   color: var(--muted);
   text-decoration: none;
-  flex: none;
+  /* It is laid over the canvas, so it brings enough of the card's own
+     background to stay legible with a node passing underneath. */
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
 }
 .panel-expand:hover {
   background: var(--bg-soft);
@@ -1122,8 +1116,8 @@ a.external::after {
   min-height: 20rem;
 }
 
-/* Nothing sits beside the heading here any more, so this is only the space
-   between the heading and the legend under it. */
+/* The control that used to share this row now sits on the graph itself, so
+   this is only the space between the heading and the legend under it. */
 .graph-head {
   margin-bottom: 1.25rem;
 }
@@ -1356,6 +1350,14 @@ body.is-graph .graph-head .lede {
     grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
   }
   .sidebar-right {
+    display: none;
+  }
+  /* The two arrows are a pair: the rail's enlarges the graph, this one shrinks
+     it back. With the rail gone there is nothing to enlarge from, so a lone
+     shrink arrow is half a control. The view switch in the header does the same
+     job and is always there. Dropping it also gives the heading the full width,
+     which is what the text view gives it. */
+  .graph-collapse {
     display: none;
   }
 }

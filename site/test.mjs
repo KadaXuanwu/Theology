@@ -823,9 +823,13 @@ console.log("the legend filters the graph")
   )
   check("and every graph on the page updates together", appSource.includes("for (const graph of graphs) graph.setVisibleKinds(kinds)"))
 
+  // the shrink arrow matches the enlarge arrow: no border of its own
+  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+  const collapseRule = sheet.match(/\.graph-collapse \{[^}]*\}/)?.[0] ?? ""
+  check("the shrink arrow has no border", !/border:/.test(collapseRule), collapseRule.replace(/\s+/g, " "))
 }
 
-console.log("the rail leads with the graph, and the header is the way back")
+console.log("the rail leads with the graph, and the enlarged view can shrink back")
 {
   const dist = resolve(repoRoot, "dist")
   const read = (p) => readFile(resolve(dist, p), "utf8")
@@ -839,60 +843,47 @@ console.log("the rail leads with the graph, and the header is the way back")
     `graph at ${rail.indexOf("panel-graph")}, contents at ${rail.indexOf("panel-toc")}`,
   )
 
+  // the shrink control mirrors the enlarge arrow it came from
+  const collapse = (html) => {
+    const m = html.match(/<a class="panel-expand graph-collapse" href="([^"]*)" aria-label="([^"]*)"/)
+    return m ? { href: m[1], label: m[2] } : null
+  }
+
+  const nodeGraph = await read("claims/jesus-existed/graph/index.html")
+  const shrink = collapse(nodeGraph)
+  check("the enlarged view has a shrink control", shrink !== null)
+  check("it returns to that note's text", shrink?.href === "../../../claims/jesus-existed/", String(shrink?.href))
+  check("and says so", /Back to the text/.test(shrink?.label ?? ""), String(shrink?.label))
+  const headAt = nodeGraph.indexOf("class=\"graph-head\"")
+  const legendAt = nodeGraph.indexOf("<ul class=\"legend\"")
+  const mountAt = nodeGraph.indexOf("class=\"graph-full graph-mount\"")
+  const arrowAt = nodeGraph.indexOf("class=\"panel-expand graph-collapse\"")
+  check("the heading row holds nothing but the heading", headAt >= 0 && legendAt > headAt, `head ${headAt}, legend ${legendAt}`)
+  check("the legend follows on its own row below", legendAt > headAt, `head ${headAt}, legend ${legendAt}`)
+  check("and the shrink control sits on the graph", mountAt > legendAt && arrowAt > mountAt, `mount ${mountAt}, arrow ${arrowAt}`)
+
+  const fullGraph = await read("graph/index.html")
+  const shrinkFull = collapse(fullGraph)
+  check("the whole vault view has one too", shrinkFull !== null)
+  check("returning to the overview", shrinkFull?.href === "../", String(shrinkFull?.href))
+
+  // enlarge and shrink are a round trip
   const railPanel = note.match(/<section class="panel panel-graph">[\s\S]*?<\/section>/)?.[0] ?? ""
   const enlarge = railPanel.match(/class="panel-expand" href="([^"]*)"/)?.[1]
-  check("the rail preview can be enlarged", enlarge === "../../claims/jesus-existed/graph/", String(enlarge))
+  check("enlarging and shrinking lead back to each other", enlarge === "../../claims/jesus-existed/graph/", String(enlarge))
 
-  // Nothing goes the other way. A shrink arrow on the enlarged view would have
-  // to line up with the rail's to read as the same control, and it cannot: the
-  // rail sits on the page, the enlarged graph sits inside the reading column's
-  // frame, and the two are 37px apart. The header switch has neither problem.
+  // The two arrows are a pair, so they go away together. Below the breakpoint
+  // that drops the rail there is nothing left to enlarge from, and a lone
+  // shrink arrow is half a control.
   const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
-  const graphs = ["claims/jesus-existed/graph/index.html", "graph/index.html", "claims/graph/index.html"]
-  for (const path of graphs) {
-    const html = await read(path)
-    check(`${path} carries no shrink arrow`, !html.includes("graph-collapse"))
-  }
-  check("and nothing is left styling one", !sheet.includes("graph-collapse"))
-  check("nor drawing its icon", !(await readFile(resolve(repoRoot, "site/lib/templates.mjs"), "utf8")).includes("icon-collapse"))
-
-  // Which only works because the header always offers the trip back.
-  const nodeGraph = await read("claims/jesus-existed/graph/index.html")
-  check(
-    "the header switch goes back to the note",
-    nodeGraph.includes('<a class="view-tab" href="../../../claims/jesus-existed/"'),
-    nodeGraph.match(/<a class="view-tab"[^>]*>/)?.[0] ?? "no text tab",
-  )
-  const fullGraph = await read("graph/index.html")
-  check(
-    "and back to the overview from the whole vault view",
-    fullGraph.includes('<a class="view-tab" href="../"'),
-    fullGraph.match(/<a class="view-tab"[^>]*>/)?.[0] ?? "no text tab",
-  )
-
-  // With nothing beside it the heading has the row to itself, so the row is a
-  // plain block again rather than a flex pair.
-  const headRule = sheet.match(/^\.graph-head \{[^}]*\}/m)?.[0] ?? ""
-  check("the heading row holds nothing else", !/display: flex/.test(headRule), headRule.replace(/\s+/g, " "))
-  const headAt = nodeGraph.indexOf('class="graph-head"')
-  const legendAt = nodeGraph.indexOf('<ul class="legend"')
-  check("and the legend still follows on its own row", headAt >= 0 && legendAt > headAt, `head ${headAt}, legend ${legendAt}`)
-
-  // The rail is dropped below a breakpoint of its own, and takes the only
-  // control that was ever paired with the enlarged view with it.
   const noRail = sheet.match(/@media \(max-width: 1260px\) \{[\s\S]*?\r?\n\}/)?.[0] ?? ""
   check("the rail is dropped at a breakpoint of its own", /\.sidebar-right \{[^}]*display: none/.test(noRail))
-
-  // The reading column draws a frame and the rail does not, so without this the
-  // rail's first line sits 7px above the column's.
-  const railRule = sheet.match(/^\.sidebar-right \{[^}]*\}/m)?.[0] ?? ""
-  const columnRule = sheet.match(/^main \{[^}]*\}/m)?.[0] ?? ""
-  const frame = columnRule.match(/border: (\d+)px solid var\(--bg\)/)?.[1]
-  check("the reading column draws a frame", frame === "7", String(frame))
+  check("and the shrink arrow goes with it", /\.graph-collapse \{[^}]*display: none/.test(noRail), noRail.replace(/\s+/g, " "))
+  // Which only works because the header always offers the same trip.
   check(
-    "and the rail carries its width as padding, so both start level",
-    railRule.includes(`padding: calc(2rem + ${frame}px)`),
-    railRule.match(/padding: [^;]+;/)?.[0] ?? "no padding",
+    "leaving the header switch as the way back",
+    nodeGraph.includes('<a class="view-tab" href="../../../claims/jesus-existed/"'),
+    nodeGraph.match(/<a class="view-tab"[^>]*>/)?.[0] ?? "no text tab",
   )
 }
 
@@ -914,7 +905,11 @@ console.log("the sidebar preview can be enlarged")
     "it is labelled for a screen reader",
     /class="panel-expand"[^>]*aria-label="Enlarge the graph for Mesha Stele"/.test(panel(note)),
   )
-  check("it sits in the heading row, on the preview it belongs to", panel(note).includes('<div class="panel-head">'))
+  check(
+    "it sits on the preview it belongs to, not beside the heading",
+    /<div class="graph-mount graph-rail"[^>]*>\s*<a class="panel-expand"/.test(panel(note)),
+    panel(note).replace(/\s+/g, " ").slice(0, 150),
+  )
   check("the overview is still one click away", panel(note).includes("See the overview"))
 
   // Enlarging the preview opens whatever that page is about. A section preview
@@ -1485,6 +1480,53 @@ console.log("the tab icon has no plate behind it")
     /scale\(1\.\d+\)/.test(svg),
     svg.match(/transform="[^"]*"/)?.[0] ?? "no transform",
   )
+}
+
+console.log("both graph controls sit on the corner of their own graph")
+{
+  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+  const rule = sheet.match(/^\.panel-expand \{[^}]*\}/m)?.[0] ?? ""
+  check("the control is pinned rather than laid out", /position: absolute/.test(rule))
+  check("in the top right corner", /top: 0\.4rem/.test(rule) && /right: 0\.4rem/.test(rule), rule.replace(/\s+/g, " "))
+
+  // Which only lands on the card because the card is what it is measured from.
+  const mount = sheet.match(/^\.graph-mount \{[^}]*\}/m)?.[0] ?? ""
+  check("and the graph card is what it is measured from", /position: relative/.test(mount))
+
+  // It is laid over a canvas, so it cannot be see through.
+  check("it brings its own background", /background: color-mix\(in srgb, var\(--surface\)/.test(rule))
+
+  // The rail's enlarge control and the enlarged view's shrink control are the
+  // same control on two different cards. The two cards do not share an edge, so
+  // the two controls never share a position on the page: what they share is the
+  // corner they sit on, which is the thing that has to hold everywhere.
+  const dist = resolve(repoRoot, "dist")
+  const pages = [
+    "evidence/mesha-stele/index.html",
+    "claims/jesus-existed/graph/index.html",
+    "graph/index.html",
+    "claims/graph/index.html",
+  ]
+  for (const path of pages) {
+    const html = await readFile(resolve(dist, path), "utf8")
+    check(
+      `${path} puts its control inside the graph`,
+      /<div class="[^"]*graph-mount[^"]*"[^>]*>\s*<a class="panel-expand/.test(html),
+      html.match(/<a class="panel-expand[^>]*>/)?.[0]?.slice(0, 50) ?? "no control",
+    )
+  }
+  const templates = await readFile(resolve(repoRoot, "site/lib/templates.mjs"), "utf8")
+  check("and no heading row is left holding one", !templates.includes("panel-head"))
+
+  // The mount used to write over its own contents when a graph came out empty,
+  // which would now take the control with it.
+  const graphSource = await readFile(resolve(repoRoot, "site/assets/graph.js"), "utf8")
+  check(
+    "an empty graph does not wipe the control away",
+    !/el\.innerHTML/.test(graphSource),
+    graphSource.match(/el\.innerHTML[^\n]*/)?.[0] ?? "nothing writes over the mount",
+  )
+  check("it adds the message to the card instead", graphSource.includes("el.appendChild(empty)"))
 }
 
 console.log(failures === 0 ? "\nAll checks passed." : `\n${failures} check(s) failed.`)
