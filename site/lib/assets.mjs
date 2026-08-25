@@ -18,7 +18,7 @@ const stamp = (name, contents) => {
 
 // The order matters: each file is hashed only after every reference inside it
 // has been rewritten, otherwise its name would not describe what it contains.
-export async function buildAssets(assetsDir, { graphData, searchData }) {
+export async function buildAssets(assetsDir, { graphData, searchData, chatEndpoint = "" }) {
   const files = []
 
   const graphJson = stamp("graph.json", graphData)
@@ -43,9 +43,21 @@ export async function buildAssets(assetsDir, { graphData, searchData }) {
   const favicon = await readFile(join(assetsDir, "favicon.svg"), "utf8")
   files.push({ name: "assets/favicon.svg", contents: favicon })
 
+  // The chat is its own module rather than part of app.js, so that with no
+  // endpoint configured the browser never downloads it and the pages carry no
+  // trace of it. That is the state a fork or a CI build is in.
+  let chat = null
+  if (chatEndpoint) {
+    let chatSource = await readFile(join(assetsDir, "chat.js"), "utf8")
+    chatSource = replaceOnce(chatSource, '"__CHAT_ENDPOINT__"', JSON.stringify(chatEndpoint), "chat endpoint")
+    const chatJs = stamp("chat.js", chatSource)
+    files.push({ name: `assets/${chatJs}`, contents: chatSource })
+    chat = `assets/${chatJs}`
+  }
+
   return {
     files,
-    refs: { css: `assets/${cssName}`, app: `assets/${appJs}`, favicon: "assets/favicon.svg" },
+    refs: { css: `assets/${cssName}`, app: `assets/${appJs}`, favicon: "assets/favicon.svg", chat },
   }
 }
 
@@ -53,7 +65,7 @@ export async function buildAssets(assetsDir, { graphData, searchData }) {
 function replaceOnce(source, needle, replacement, what) {
   const target = needle.startsWith("./") ? needle.slice(2) : needle
   if (!source.includes(target)) {
-    throw new Error(`asset rewrite: could not find the ${what} in app.js`)
+    throw new Error(`asset rewrite: could not find the ${what}`)
   }
   return source.replace(target, replacement)
 }

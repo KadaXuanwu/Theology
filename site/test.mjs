@@ -7,6 +7,8 @@ import { readFile } from "node:fs/promises"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
+import { BODY_BUDGET, buildPrompt, catalogue, selectNotes } from "../worker/context.js"
+import { render } from "./assets/chat.js"
 import { parseFrontmatter, slugify } from "./lib/content.mjs"
 import { createRenderer, htmlToText } from "./lib/markdown.mjs"
 import {
@@ -1288,9 +1290,13 @@ console.log("cached assets carry a content hash")
   const rootFiles = await readdir(dist)
 
   const hashed = /\.[a-f0-9]{10}\.(js|css|json)$/
+  // chat-corpus.json is the one deliberate exception: the chat Worker fetches
+  // it by a fixed URL and re-reads it on a timer, which is what lets the notes
+  // change daily while the Worker itself is never redeployed. A hashed name
+  // would mean redeploying the Worker for every edit to a note.
   const cacheable = [
     ...assetFiles.filter((f) => /\.(js|css)$/.test(f)).map((f) => `assets/${f}`),
-    ...rootFiles.filter((f) => /\.json$/.test(f)),
+    ...rootFiles.filter((f) => /\.json$/.test(f) && f !== "chat-corpus.json"),
   ]
 
   check("found the cacheable assets", cacheable.length >= 4, cacheable.join(", "))
@@ -1540,6 +1546,76 @@ console.log("both graph controls take the end of the row above their graph")
     railRule.includes(`padding: calc(2rem + ${frame}px)`),
     railRule.match(/padding: [^;]+;/)?.[0] ?? "no padding",
   )
+}
+
+console.log("the chat only ever shows the model notes from the vault")
+{
+  const corpus = JSON.parse(await readFile(resolve(repoRoot, "dist", "chat-corpus.json"), "utf8"))
+  const notes = corpus.notes
+
+  check("the corpus carries every note", notes.length > 0 && notes.every((n) => n.text && n.url))
+
+  // Every answer has to be able to link the node it came from, so a note
+  // missing from the catalogue is a note the model can mention but not cite.
+  const listed = catalogue(notes)
+  check(
+    "the catalogue carries a url for every note",
+    notes.every((n) => listed.includes(n.url)),
+  )
+
+  // The question a bubble on a page gets asked most is about that page.
+  const somewhere = notes[notes.length - 1]
+  const picked = selectNotes(notes, "what does this argue", somewhere.url)
+  check("the note you are reading is always included", picked[0]?.url === somewhere.url)
+
+  // A word in a title outranks the same word buried in someone else's body.
+  const target = notes.find((n) => n.title.split(" ").length > 2) ?? notes[0]
+  const byTitle = selectNotes(notes, target.title, null)
+  check(`asking by title puts "${target.title}" first`, byTitle[0]?.url === target.url, byTitle[0]?.title)
+
+  // The budget is what keeps this working at 300 notes without a rewrite, so
+  // it has to actually bite when the vault outgrows it.
+  const padded = notes.map((n) => ({ ...n, text: n.text.padEnd(20_000, " x") }))
+  const capped = selectNotes(padded, "god", null, 50_000)
+  const spent = capped.reduce((total, n) => total + n.text.length, 0)
+  check("the body budget caps what gets sent", spent <= 50_000 && capped.length < padded.length, `${spent} chars`)
+  check("the budget is set below any current context window", BODY_BUDGET <= 120_000)
+
+  // The rules that stop it inventing an answer or picking a side are the whole
+  // reason this is safe to put on a research vault.
+  const { system, context, used } = buildPrompt(corpus, { question: "who wrote hebrews", pageUrl: null })
+  check("the prompt refuses to answer beyond the notes", /does not have a note on that yet/.test(system))
+  check("the prompt requires a link to every note named", /markdown link to its url/.test(system))
+  check("the prompt forbids taking a side", /Do not take a side/.test(system))
+  check("the prompt flags unverified notes", /stub or drafted/.test(system))
+  // A question narrows which bodies are sent, so what has to be true is that
+  // every note it did pick actually arrives in full, and that the catalogue
+  // still names the ones it left out.
+  check("a question picks the notes it needs", used.length > 0 && used.length <= notes.length, used.join(", "))
+  check(
+    "and every picked note reaches the model in full",
+    used.every((url) => context.includes(notes.find((n) => n.url === url).text.slice(0, 60))),
+  )
+  check(
+    "notes left out are still in the catalogue, so it can point at them",
+    notes.filter((n) => !used.includes(n.url)).every((n) => context.includes(n.url)),
+  )
+}
+
+console.log("the chat never turns model output into markup of its own")
+{
+  check("a note link becomes a real link", render("[A](claims/x)", "../") === '<p><a href="../claims/x/">A</a></p>')
+  check(
+    "a javascript url stays plain text",
+    !render("[click](javascript:alert(1))").includes("<a"),
+    render("[click](javascript:alert(1))"),
+  )
+  check(
+    "a data url stays plain text",
+    !render("[click](data:text/html,<script>)").includes("<a"),
+  )
+  check("raw html is escaped", render("<img src=x onerror=alert(1)>").includes("&lt;img"))
+  check("an absolute url is not linked", !render("[out](https://example.com)").includes("<a"))
 }
 
 console.log(failures === 0 ? "\nAll checks passed." : `\n${failures} check(s) failed.`)

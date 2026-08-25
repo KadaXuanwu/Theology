@@ -1,0 +1,29 @@
+# Cloudflare Worker config. Nothing secret lives in here, which is why this file
+# is safe in a public repo. The API key is set once with
+#
+#   wrangler secret put GEMINI_API_KEY
+#
+# and is stored by Cloudflare, never written to disk and never committed.
+
+name = "theology-chat"
+main = "index.js"
+compatibility_date = "2026-08-25"
+
+[vars]
+# Where the Worker reads the vault from. This is the published site, so notes
+# update through the normal deploy and this Worker never needs redeploying for
+# a content change.
+CORPUS_URL = "https://kadaxuanwu.github.io/Theology/chat-corpus.json"
+
+# Only the site may call the endpoint. Not a security boundary, since a header
+# is trivially forged, but it stops the URL being casually reused elsewhere.
+ALLOWED_ORIGIN = "https://kadaxuanwu.github.io"
+
+# The swappable part. "gemini" or "workersai". Change, redeploy, compare.
+PROVIDER = "gemini"
+MODEL = "gemini-2.5-flash-lite"
+
+# Uncomment to try the models that run on Cloudflare itself. No API key at all,
+# 10,000 Neurons a day free. Set PROVIDER = "workersai" as well.
+# [ai]
+# binding = "AI"
