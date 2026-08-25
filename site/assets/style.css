@@ -649,30 +649,33 @@ main {
   flex: none;
 }
 
-/* The control sits in the top right corner of the graph it belongs to: the
-   enlarge one on the rail preview, the shrink one on the enlarged view.
+/* The control takes the far end of the row directly above the graph it belongs
+   to: the heading row in the rail, the legend row on the enlarged view. Both
+   rows are the width of the graph under them, so the control ends flush with
+   its own graph's right edge either way.
 
-   Not beside the heading, which is where it used to be. The two graphs do not
-   share an edge, so no two positions on the page can line up: the rail sits
-   straight on the page, 1.25rem in, while the enlarged graph sits inside the
-   reading column's frame, held 37px further in by the border, the reserved
-   scrollbar and the padding. What lines up instead is the rule, and a control
-   on the corner of its own card reads as one at a glance. */
+   Not on the graph itself, and not up beside the page heading. The two graphs
+   do not share an edge, so no two positions on the page can line up: the rail
+   sits straight on the page, 1.25rem in, while the enlarged graph sits inside
+   the reading column's frame, held 37px further in by the border, the reserved
+   scrollbar and the padding. What lines up is the rule. */
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
 .panel-expand {
-  position: absolute;
-  top: 0.4rem;
-  right: 0.4rem;
-  z-index: 2;
   display: inline-grid;
   place-items: center;
   width: 1.55rem;
   height: 1.55rem;
+  margin: 0 0 0.6rem;
   border-radius: var(--radius);
   color: var(--muted);
   text-decoration: none;
-  /* It is laid over the canvas, so it brings enough of the card's own
-     background to stay legible with a node passing underneath. */
-  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  flex: none;
 }
 .panel-expand:hover {
   background: var(--bg-soft);
@@ -1148,6 +1151,12 @@ body.is-graph .graph-head .lede {
   font-size: 0.9rem;
 }
 
+/* The row it sits in carries the space under it, and the legend beside it is
+   only a line of small text, so this one hangs no lower than the row does. */
+.graph-collapse {
+  margin: 0;
+}
+
 .graph-foot {
   margin: 0.6rem 0 0;
   font-size: 0.82rem;
@@ -1161,6 +1170,18 @@ body.is-graph .graph-head .lede {
   color: var(--accent);
 }
 
+/* The legend and the control that leaves the view share this row. The legend
+   takes what it needs and wraps, the control holds the far end. The spacing
+   below the row belongs to the row, not to the legend inside it. */
+.graph-tools {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin: 0 0 0.9rem;
+  flex: none;
+}
+
 .legend {
   list-style: none;
   display: flex;
@@ -1168,10 +1189,9 @@ body.is-graph .graph-head .lede {
   align-items: center;
   gap: 0.25rem 0.4rem;
   padding: 0;
-  margin: 0 0 0.9rem;
+  margin: 0;
   font-size: 0.82rem;
   color: var(--muted);
-  flex: none;
 }
 .legend li {
   display: flex;
@@ -1456,7 +1476,7 @@ body.is-graph .graph-head .lede {
   }
   /* The chrome around the graph gives up its spacing first, since the graph is
      what the page is for. */
-  body.is-graph .legend {
+  body.is-graph .graph-tools {
     margin-bottom: 0.6rem;
   }
   /* A phone gets a smaller title than the clamp's floor gives it. At this width

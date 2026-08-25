@@ -253,18 +253,8 @@ export function mount(el, data, options = {}) {
 
   const subset = seeds.length ? neighbourhood(data, seeds, depth) : data
   if (subset.nodes.length === 0) {
-    // Appended, not written over the element. The mount carries the control
-    // that sits on the graph, and an empty graph still has to be got out of.
-    const empty = document.createElement("p")
-    empty.className = "graph-empty"
-    empty.textContent = "Nothing links here yet."
-    el.appendChild(empty)
-    return {
-      setVisibleKinds() {},
-      destroy() {
-        empty.remove()
-      },
-    }
+    el.innerHTML = '<p class="graph-empty">Nothing links here yet.</p>'
+    return { setVisibleKinds() {}, destroy() {} }
   }
 
   const canvas = document.createElement("canvas")

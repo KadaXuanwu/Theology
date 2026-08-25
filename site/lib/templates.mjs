@@ -14,15 +14,23 @@ const KIND_LABEL = {
 // The graph that sits in the right rail. Shown on every page that has room for
 // it; the media query hides the whole rail when there is not, and the header
 // button is the way in from there.
-// The legend doubles as the filter: each entry switches its category in and
-// out of every graph on the site.
-function legend(sections) {
-  return `<ul class="legend" role="group" aria-label="Show or hide categories">${sections
+// The strip between the heading and the graph. The legend doubles as the
+// filter: each entry switches its category in and out of every graph on the
+// site. The control that leaves the view takes the far end of the same row, so
+// it sits directly above the graph it belongs to and ends flush with its right
+// edge, which is the same place the rail's control ends up over its own graph.
+// It is kept out of the legend's own group: it switches no category.
+function graphTools(sections, control = "") {
+  const items = sections
     .map(
       (sec) =>
         `<li><button type="button" class="legend-toggle" data-kind="${sec.kind}" aria-pressed="true"><span class="dot dot-${sec.kind}"></span>${escapeHtml(sec.label)}</button></li>`,
     )
-    .join("")}</ul>`
+    .join("")
+  return `<div class="graph-tools">
+    <ul class="legend" role="group" aria-label="Show or hide categories">${items}</ul>
+    ${control}
+  </div>`
 }
 
 // The rail previews whatever the page is about: one note, one section, or the
@@ -40,11 +48,15 @@ export function railGraph({ root, focus = null, kind = null, subject = null, exp
     : kind
       ? ` data-kind="${escapeHtml(kind)}" data-labels="hover"`
       : ""
+  // The rail has no legend, so the row directly above its graph is the heading
+  // row. That is where its control goes, at the far end, the same rule the
+  // enlarged view follows on its legend row.
   return `<section class="panel panel-graph">
-  <h2>${local ? "Connections" : "Graph"}</h2>
-  <div class="graph-mount graph-rail" data-graph="${local ? "local" : "global"}"${attrs}>
+  <div class="panel-head">
+    <h2>${local ? "Connections" : "Graph"}</h2>
     <a class="panel-expand" href="${root}${expandUrl}" aria-label="${escapeHtml(expandLabel)}" title="${escapeHtml(expandLabel)}">${icon("expand")}</a>
   </div>
+  <div class="graph-mount graph-rail" data-graph="${local ? "local" : "global"}"${attrs}></div>
   ${local ? `<a class="panel-link" href="${root}graph/">See the overview</a>` : ""}
 </section>`
 }
@@ -320,10 +332,8 @@ export function graphPage({ root, sections, notes, assets }) {
   <div class="graph-head">
     <h1 class="page-title">Overview</h1>
   </div>
-  ${legend(sections)}
-  <div class="graph-full graph-mount" data-graph="global">
-    <a class="panel-expand graph-collapse" href="${root}" aria-label="Back to the text of the overview" title="Back to the text">${icon("collapse")}</a>
-  </div>
+  ${graphTools(sections, `<a class="panel-expand graph-collapse" href="${root}" aria-label="Back to the text of the overview" title="Back to the text">${icon("collapse")}</a>`)}
+  <div class="graph-full graph-mount" data-graph="global"></div>
 </div>`,
     bodyClass: "is-graph",
     view: "graph",
@@ -351,10 +361,8 @@ export function nodeGraphPage({ note, root, sections, notes, assets }) {
     <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${root}">Overview</a><span aria-hidden="true">/</span><a href="${root}${slugify(section.dir)}/">${escapeHtml(section.label)}</a></nav>
     <h1 class="note-title">${escapeHtml(note.title)}</h1>
   </div>
-  ${legend(sections)}
-  <div class="graph-full graph-mount" data-graph="local" data-depth="2" data-focus="${escapeHtml(note.title)}">
-    <a class="panel-expand graph-collapse" href="${root}${note.url}/" aria-label="Back to the text of ${escapeHtml(note.title)}" title="Back to the text">${icon("collapse")}</a>
-  </div>
+  ${graphTools(sections, `<a class="panel-expand graph-collapse" href="${root}${note.url}/" aria-label="Back to the text of ${escapeHtml(note.title)}" title="Back to the text">${icon("collapse")}</a>`)}
+  <div class="graph-full graph-mount" data-graph="local" data-depth="2" data-focus="${escapeHtml(note.title)}"></div>
   <p class="graph-foot"><a href="${root}graph/">See the overview</a></p>
 </div>`,
   })
@@ -382,10 +390,8 @@ export function sectionGraphPage({ section, root, sections, notes, assets }) {
   <div class="graph-head">
     <h1 class="page-title">${escapeHtml(section.label)}</h1>
   </div>
-  ${legend(sections)}
-  <div class="graph-full graph-mount" data-graph="local" data-kind="${section.kind}" data-depth="2">
-    <a class="panel-expand graph-collapse" href="${root}${slug}/" aria-label="Back to the list of ${escapeHtml(section.label)}" title="Back to the list">${icon("collapse")}</a>
-  </div>
+  ${graphTools(sections, `<a class="panel-expand graph-collapse" href="${root}${slug}/" aria-label="Back to the list of ${escapeHtml(section.label)}" title="Back to the list">${icon("collapse")}</a>`)}
+  <div class="graph-full graph-mount" data-graph="local" data-kind="${section.kind}" data-depth="2"></div>
   <p class="graph-foot"><a href="${root}graph/">See the overview</a></p>
 </div>`,
   })

@@ -788,7 +788,8 @@ console.log("the legend filters the graph")
 
   // the legend is its own row after the heading, not crammed beside it
   for (const [name, html] of [["node graph", nodeGraph], ["full graph", fullGraph]]) {
-    check(`${name} puts the legend after the heading block`, /<\/div>\s*<ul class="legend"/.test(html), name)
+    check(`${name} puts the legend row after the heading block`, /<\/div>\s*<div class="graph-tools">/.test(html), name)
+    check(`${name} leads that row with the legend`, /<div class="graph-tools">\s*<ul class="legend"/.test(html), name)
     check(`${name} no longer stacks it beside the arrow`, !html.includes("graph-head-side"))
   }
 
@@ -856,11 +857,11 @@ console.log("the rail leads with the graph, and the enlarged view can shrink bac
   check("and says so", /Back to the text/.test(shrink?.label ?? ""), String(shrink?.label))
   const headAt = nodeGraph.indexOf("class=\"graph-head\"")
   const legendAt = nodeGraph.indexOf("<ul class=\"legend\"")
-  const mountAt = nodeGraph.indexOf("class=\"graph-full graph-mount\"")
   const arrowAt = nodeGraph.indexOf("class=\"panel-expand graph-collapse\"")
+  const mountAt = nodeGraph.indexOf("class=\"graph-full graph-mount\"")
   check("the heading row holds nothing but the heading", headAt >= 0 && legendAt > headAt, `head ${headAt}, legend ${legendAt}`)
-  check("the legend follows on its own row below", legendAt > headAt, `head ${headAt}, legend ${legendAt}`)
-  check("and the shrink control sits on the graph", mountAt > legendAt && arrowAt > mountAt, `mount ${mountAt}, arrow ${arrowAt}`)
+  check("the shrink control takes the end of the legend row", arrowAt > legendAt, `legend ${legendAt}, arrow ${arrowAt}`)
+  check("and the graph follows the whole row", mountAt > arrowAt, `arrow ${arrowAt}, mount ${mountAt}`)
 
   const fullGraph = await read("graph/index.html")
   const shrinkFull = collapse(fullGraph)
@@ -906,8 +907,8 @@ console.log("the sidebar preview can be enlarged")
     /class="panel-expand"[^>]*aria-label="Enlarge the graph for Mesha Stele"/.test(panel(note)),
   )
   check(
-    "it sits on the preview it belongs to, not beside the heading",
-    /<div class="graph-mount graph-rail"[^>]*>\s*<a class="panel-expand"/.test(panel(note)),
+    "it takes the end of the row above the preview",
+    /<div class="panel-head">\s*<h2>[^<]*<\/h2>\s*<a class="panel-expand"/.test(panel(note)),
     panel(note).replace(/\s+/g, " ").slice(0, 150),
   )
   check("the overview is still one click away", panel(note).includes("See the overview"))
@@ -1482,51 +1483,52 @@ console.log("the tab icon has no plate behind it")
   )
 }
 
-console.log("both graph controls sit on the corner of their own graph")
+console.log("both graph controls take the end of the row above their graph")
 {
   const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
-  const rule = sheet.match(/^\.panel-expand \{[^}]*\}/m)?.[0] ?? ""
-  check("the control is pinned rather than laid out", /position: absolute/.test(rule))
-  check("in the top right corner", /top: 0\.4rem/.test(rule) && /right: 0\.4rem/.test(rule), rule.replace(/\s+/g, " "))
-
-  // Which only lands on the card because the card is what it is measured from.
-  const mount = sheet.match(/^\.graph-mount \{[^}]*\}/m)?.[0] ?? ""
-  check("and the graph card is what it is measured from", /position: relative/.test(mount))
-
-  // It is laid over a canvas, so it cannot be see through.
-  check("it brings its own background", /background: color-mix\(in srgb, var\(--surface\)/.test(rule))
-
-  // The rail's enlarge control and the enlarged view's shrink control are the
-  // same control on two different cards. The two cards do not share an edge, so
-  // the two controls never share a position on the page: what they share is the
-  // corner they sit on, which is the thing that has to hold everywhere.
   const dist = resolve(repoRoot, "dist")
-  const pages = [
-    "evidence/mesha-stele/index.html",
-    "claims/jesus-existed/graph/index.html",
-    "graph/index.html",
-    "claims/graph/index.html",
-  ]
-  for (const path of pages) {
-    const html = await readFile(resolve(dist, path), "utf8")
-    check(
-      `${path} puts its control inside the graph`,
-      /<div class="[^"]*graph-mount[^"]*"[^>]*>\s*<a class="panel-expand/.test(html),
-      html.match(/<a class="panel-expand[^>]*>/)?.[0]?.slice(0, 50) ?? "no control",
-    )
-  }
-  const templates = await readFile(resolve(repoRoot, "site/lib/templates.mjs"), "utf8")
-  check("and no heading row is left holding one", !templates.includes("panel-head"))
+  const read = (p) => readFile(resolve(dist, p), "utf8")
 
-  // The mount used to write over its own contents when a graph came out empty,
-  // which would now take the control with it.
-  const graphSource = await readFile(resolve(repoRoot, "site/assets/graph.js"), "utf8")
+  // Neither control is laid over its graph. The canvas takes drags, and a
+  // control sitting on it eats the corner they can start from.
+  const rule = sheet.match(/^\.panel-expand \{[^}]*\}/m)?.[0] ?? ""
+  check("the control is not pinned over the canvas", !/position: absolute/.test(rule), rule.replace(/\s+/g, " "))
+  for (const path of ["evidence/mesha-stele/index.html", "claims/jesus-existed/graph/index.html"]) {
+    const html = await read(path)
+    check(`${path} keeps the graph card empty`, !/graph-mount[^>]*>\s*<a /.test(html))
+  }
+
+  // Both rows push the control to the far end, which is what puts it flush
+  // with the right edge of the graph under it.
+  for (const name of ["panel-head", "graph-tools"]) {
+    const row = sheet.match(new RegExp(`^\\.${name} \\{[^}]*\\}`, "m"))?.[0] ?? ""
+    check(`the ${name} row is a flex row`, /display: flex/.test(row), row.replace(/\s+/g, " "))
+    check(`and holds the control at its far end`, /justify-content: space-between/.test(row))
+  }
+
+  // The rail's row is its heading, the enlarged view's row is its legend, and
+  // on both the row is exactly as wide as the graph beneath it.
+  const railPanel = (await read("evidence/mesha-stele/index.html")).match(
+    /<section class="panel panel-graph">[\s\S]*?<\/section>/,
+  )?.[0] ?? ""
+  check("the rail hangs it off the heading row", /<div class="panel-head">[\s\S]*?class="panel-expand"/.test(railPanel))
+  for (const path of ["claims/jesus-existed/graph/index.html", "graph/index.html", "claims/graph/index.html"]) {
+    const html = await read(path)
+    const row = html.match(/<div class="graph-tools">[\s\S]*?<\/div>/)?.[0] ?? ""
+    check(`${path} hangs it off the legend row`, row.includes("panel-expand graph-collapse"), row.replace(/\s+/g, " ").slice(0, 90))
+    // It switches no category, so it is not inside the group that does.
+    check(`${path} keeps it out of the legend's own group`, !/<ul class="legend"[^>]*>[\s\S]*?panel-expand[\s\S]*?<\/ul>/.test(row))
+  }
+
+  // The spacing under the row belongs to the row now, not to the legend in it.
+  const legendRule = sheet.match(/^\.legend \{[^}]*\}/m)?.[0] ?? ""
+  const toolsRule = sheet.match(/^\.graph-tools \{[^}]*\}/m)?.[0] ?? ""
+  check("the legend carries no margin of its own", /margin: 0;/.test(legendRule), legendRule.replace(/\s+/g, " "))
+  check("the row carries it instead", /margin: 0 0 0\.9rem/.test(toolsRule), toolsRule.replace(/\s+/g, " "))
   check(
-    "an empty graph does not wipe the control away",
-    !/el\.innerHTML/.test(graphSource),
-    graphSource.match(/el\.innerHTML[^\n]*/)?.[0] ?? "nothing writes over the mount",
+    "and the phone rule tightens the row, not the legend",
+    /body\.is-graph \.graph-tools \{\s*margin-bottom: 0\.6rem;/.test(sheet),
   )
-  check("it adds the message to the card instead", graphSource.includes("el.appendChild(empty)"))
 }
 
 console.log(failures === 0 ? "\nAll checks passed." : `\n${failures} check(s) failed.`)
