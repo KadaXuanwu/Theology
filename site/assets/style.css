@@ -24,6 +24,11 @@
      the paper background, under the 4.5:1 a body sized link wants. */
   --accent: #8155ee;
   --accent-soft: #efe9ff;
+  /* A link that leaves the site, in the blue the web has always used for one.
+     Weighed against the accent so neither kind of link is the louder one: this
+     reads at 4.8:1 on the reading column to the accent's 4.5:1, both clear of
+     the line for body text and close enough that a paragraph stays even. */
+  --link-out: #1a6ae6;
   --highlight: rgba(255, 208, 0, 0.4);
   --highlight-strong: rgba(255, 208, 0, 0.6);
   --shadow: 0 1px 2px rgba(20, 20, 30, 0.05), 0 8px 24px rgba(20, 20, 30, 0.07);
@@ -53,6 +58,7 @@
   --border-strong: #454545;
   --accent: #a68af9;
   --accent-soft: #2b2440;
+  --link-out: #58a6ff;
   --highlight: rgba(255, 208, 0, 0.4);
   --highlight-strong: rgba(255, 208, 0, 0.6);
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
@@ -78,6 +84,7 @@
     --border-strong: #454545;
     --accent: #a68af9;
     --accent-soft: #2b2440;
+    --link-out: #58a6ff;
     --highlight: rgba(255, 208, 0, 0.4);
     --highlight-strong: rgba(255, 208, 0, 0.6);
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
@@ -885,15 +892,22 @@ main {
 /* A link into the vault carries no fill of its own. A note runs to eight or
    more of them, and a block of colour behind every one shouts over the prose
    it is sitting in. The accent against muted body text says link on its own,
-   and the underline every link on the site carries does the rest. What tells
-   the two kinds apart is where they go, which the arrow on an external link
-   already says. */
+   and the underline every link on the site carries does the rest. So it keeps
+   the site's own colour, and a link off the site takes the blue below. */
 .wikilink.is-broken {
   color: var(--argument-against);
   border-bottom: 1px dashed currentColor;
   cursor: help;
 }
 
+/* A source is the one kind of link that takes the reader off the site, so it
+   is the one that gets the colour the web reads as a link by default. The
+   arrow stays: the colour says which of the two this is, the arrow says a new
+   tab is about to open. */
+a.external {
+  color: var(--link-out);
+  text-decoration-color: color-mix(in srgb, var(--link-out) 35%, transparent);
+}
 a.external::after {
   content: "↗";
   font-size: 0.75em;

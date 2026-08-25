@@ -1360,6 +1360,20 @@ console.log("a link into the vault is a colour, not a block of colour")
 
   // The gold still means something, just not this. Tags and search hits keep it.
   check("the highlight is still spent somewhere", (sheet.match(/var\(--highlight/g) ?? []).length >= 3)
+
+  // A link off the site takes the blue instead, at a weight near enough the
+  // accent's that a paragraph of both stays even.
+  const out = contrast(value("link-out"), value("bg-center"))
+  check("a link off the site has a colour of its own", value("link-out") !== value("accent"), value("link-out"))
+  check("which reads against the page too", out >= 4.5, `${out.toFixed(2)}:1`)
+  check("and neither kind is the louder one", Math.abs(out - ratio) < 1, `${ratio.toFixed(2)} vs ${out.toFixed(2)}`)
+  check("both themes have one", (sheet.match(/--link-out:/g) ?? []).length === 3)
+
+  const external = sheet.match(/^a\.external \{[^}]*\}/m)?.[0] ?? ""
+  check("the underline goes blue with it", /text-decoration-color: color-mix\(in srgb, var\(--link-out\)/.test(external))
+  // Two links of the same weight in different hues is a colour-only difference,
+  // which is no difference at all to a reader who cannot separate the hues.
+  check("and the arrow stays, since colour alone is not a signal", /^a\.external::after \{/m.test(sheet))
 }
 
 console.log("a finger gets the highlight a cursor gets for free")
