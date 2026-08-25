@@ -1529,6 +1529,17 @@ console.log("both graph controls take the end of the row above their graph")
     "and the phone rule tightens the row, not the legend",
     /body\.is-graph \.graph-tools \{\s*margin-bottom: 0\.6rem;/.test(sheet),
   )
+
+  // The reading column draws a frame and the rail does not, so without this the
+  // rail's row would sit 7px above the column's first line.
+  const railRule = sheet.match(/^\.sidebar-right \{[^}]*\}/m)?.[0] ?? ""
+  const frame = sheet.match(/^main \{[^}]*\}/m)?.[0]?.match(/border: (\d+)px solid var\(--bg\)/)?.[1]
+  check("the reading column draws a frame", frame === "7", String(frame))
+  check(
+    "and the rail carries its width as padding, so both start level",
+    railRule.includes(`padding: calc(2rem + ${frame}px)`),
+    railRule.match(/padding: [^;]+;/)?.[0] ?? "no padding",
+  )
 }
 
 console.log(failures === 0 ? "\nAll checks passed." : `\n${failures} check(s) failed.`)

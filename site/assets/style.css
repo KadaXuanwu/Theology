@@ -634,7 +634,10 @@ main {
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
-  padding: 2rem 1.25rem 2rem 0.5rem;
+  /* The reading column draws a 7px frame, so its first line starts 7px lower
+     than a column with no frame does. The rail carries the border's worth of
+     padding instead, and the two columns start on the same line. */
+  padding: calc(2rem + 7px) 1.25rem 2rem 0.5rem;
   font-size: 0.84rem;
 }
 
