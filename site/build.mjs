@@ -41,10 +41,10 @@ const assetsDir = join(here, "assets")
 const LEDE = `A research vault mapping arguments for and against Christianity, and the claims and evidence each one rests on.
 The goal is not to prove one position over the other. It is to make every argument traceable, so a reader can follow the reasoning back to its sources and judge it themselves.`
 
-// The chat Worker's URL, printed by `wrangler deploy`. Empty means no chat
-// bubble is rendered at all, which is what a fork and a CI build get: the
-// feature costs a contributor nothing and needs no key to build the site.
-const CHAT_ENDPOINT = process.env.CHAT_ENDPOINT ?? ""
+// The chat Worker's URL, printed by `wrangler deploy`. Set CHAT_ENDPOINT="" in
+// the environment to build without it: no bubble is rendered at all, which is
+// what a fork wanting nothing to do with Cloudflare should get.
+const CHAT_ENDPOINT = process.env.CHAT_ENDPOINT ?? "https://theology-chat.kadaxuanwu.workers.dev"
 
 const warnings = []
 const warn = (message) => warnings.push(message)
