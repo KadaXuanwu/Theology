@@ -85,7 +85,12 @@ const gemini = {
             // Gemini 3.x thinks by default. Reading supplied notes and citing
             // them is not a reasoning task, and the thinking was the likeliest
             // source of answers that took the better part of a minute.
-            thinkingLevel: "low",
+            //
+            // snake_case, unlike everything around it: the API rejects
+            // "thinkingLevel" outright. Left out entirely when THINKING_LEVEL
+            // is unset, so a model that does not know the field can be handled
+            // by blanking a variable rather than by editing this file.
+            ...(env.THINKING_LEVEL ? { thinking_level: env.THINKING_LEVEL } : {}),
           },
         }),
       })

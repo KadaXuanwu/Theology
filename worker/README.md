@@ -61,6 +61,7 @@ and needs a site rebuild instead.
 | `maxOutputTokens` | `providers.js` | 800 | Length ceiling on an answer. |
 | `temperature` | `providers.js` | 0.2 | Low, because the job is reading supplied text accurately, not writing something new. |
 | `MODEL`, `PROVIDER` | `wrangler.toml` | `gemini-3.5-flash-lite`, `gemini` | The model. `providers.js` holds one async generator per provider. |
+| `THINKING_LEVEL` | `wrangler.toml` | `low` | Gemini 3.x thinks by default and this task does not need it. Set to `""` to stop sending the field, for a model that rejects it. Note the API wants `thinking_level` in snake_case and rejects `thinkingLevel`. |
 | `RATE_LIMIT`, `RATE_WINDOW_MS` | `index.js` | 12 per minute | Per address. In memory, so a speed bump rather than a guarantee. |
 | `MAX_QUESTION` | `index.js` | 1,000 chars | Longest question accepted. |
 | `MAX_HISTORY`, `MAX_HISTORY_CHARS` | `index.js` | 8 messages, 6,000 chars | How much conversation is sent back. |
