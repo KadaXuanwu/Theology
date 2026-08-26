@@ -476,10 +476,13 @@ main {
   padding: 0;
 }
 
-.tree-home {
+/* The two ways in that are not a folder. They read as one pair at the top of
+   the tree, so the gap sits under the pair rather than between them. */
+.tree-tags {
   margin-bottom: 0.5rem;
 }
-.tree-home a {
+.tree-home a,
+.tree-tags a {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -489,14 +492,20 @@ main {
   font-weight: 560;
   text-decoration: none;
 }
-.tree-home a:hover {
+.tree-home a:hover,
+.tree-tags a:hover {
   background: var(--bg-soft);
 }
-.tree-home a[aria-current="page"] {
+/* A single tag's page is marked here too. The reader reached it through this
+   entry and no folder in the tree can hold the mark for them. */
+.tree-home a[aria-current="page"],
+.tree-tags a[aria-current="page"],
+.tree-tags.is-current a {
   background: var(--accent-soft);
   color: var(--accent);
 }
-.tree-home .icon {
+.tree-home .icon,
+.tree-tags .icon {
   width: 1rem;
   height: 1rem;
   opacity: 0.8;
@@ -593,17 +602,6 @@ main {
   background: var(--accent-soft);
   color: var(--accent);
   font-weight: 560;
-}
-
-.tree-tags {
-  display: inline-block;
-  margin: 1.25rem 0 0 0.4rem;
-  color: var(--muted);
-  font-size: 0.82rem;
-  text-decoration: none;
-}
-.tree-tags:hover {
-  color: var(--accent);
 }
 
 .dot {
@@ -1067,13 +1065,46 @@ a.external::after {
   padding: 0.5rem 0.8rem;
 }
 
+/* Tags --------------------------------------------------------------------
+ * Two windows over the same vault: every tag on top, every note under it.
+ * Picking tags filters the notes in place, so building a combination up one
+ * tag at a time never costs a page load and never moves the reader.
+ */
+
+/* The page itself does not scroll. The tags keep whatever height they need up
+   to a share of the column, and the notes take the rest, so the tags stay in
+   reach while the list under them moves. */
+body.is-tags main {
+  overflow: hidden;
+  padding-bottom: 1.25rem;
+}
+.page-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  height: 100%;
+  min-height: 0;
+}
+.page-tags .page-title {
+  flex: none;
+  margin: 0;
+}
+
+.tag-picker {
+  flex: 0 1 auto;
+  min-height: 3.4rem;
+  max-height: 40%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
 .tag-cloud {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   padding: 0;
-  margin: 2rem 0 0;
+  margin: 0;
 }
 .tag-cloud a {
   display: inline-flex;
@@ -1091,6 +1122,174 @@ a.external::after {
   border-color: transparent;
   background-color: var(--highlight);
   color: var(--text);
+}
+/* A picked tag wears the same violet the tree uses for the page you are on,
+   because it is the same statement: this is what you are looking at. */
+.tag-chip[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+.tag-chip[aria-pressed="true"]:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.tag-chip[aria-pressed="true"] .tree-count {
+  color: inherit;
+  opacity: 0.75;
+}
+/* The picker is a scrollport, so a ring drawn outside a chip is clipped on the
+   first and last rows. Drawn inside, on the chip's own shape, it never is. */
+.tag-picker .tag-chip:focus-visible {
+  outline-offset: -3px;
+  border-radius: 999px;
+}
+
+/* The line between the two windows. It says what is picked, on what terms, and
+   how much is left, which is everything the reader needs to read the list
+   below without scrolling back up to the chips. */
+.tag-bar {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.7rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+.tag-count {
+  flex: none;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+.tag-selected {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.tag-selected button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.1rem 0.45rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 560;
+  cursor: pointer;
+}
+.tag-selected button:hover {
+  background: var(--accent);
+  color: var(--bg-center);
+}
+.tag-selected .icon {
+  width: 0.65rem;
+  height: 0.65rem;
+}
+
+.tag-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+/* All or Any. It only says anything once there are two tags to combine, so it
+   is not shown before then. */
+.tag-mode {
+  display: inline-flex;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.tag-mode[hidden],
+.tag-clear[hidden] {
+  display: none;
+}
+.tag-mode-option {
+  padding: 0.15rem 0.65rem;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+.tag-mode-option:hover {
+  background: var(--bg-soft);
+  color: var(--text);
+}
+.tag-mode-option[aria-pressed="true"] {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+.tag-clear {
+  padding: 0.15rem 0.6rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+.tag-clear:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.tag-results {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  /* The cards lift on hover, so they need room not to be clipped against the
+     scrollport's own edges. */
+  padding: 0.15rem 0.35rem 0.5rem 0.15rem;
+}
+.tag-results .list-section {
+  margin-top: 1.4rem;
+}
+.tag-results .list-section:first-of-type {
+  margin-top: 0;
+}
+.tag-results .card-list a {
+  padding: 0.5rem 0.8rem;
+}
+.tag-results [hidden] {
+  display: none;
+}
+.tag-none {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.result-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.5rem;
+  margin-top: 0.25rem;
+}
+.result-tag {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+/* The tags that put this note in the list, told apart from the rest it carries,
+   so a result explains itself. */
+.result-tag.is-on {
+  color: var(--accent);
+  font-weight: 600;
 }
 
 /* Graph ------------------------------------------------------------------- */
@@ -1510,6 +1709,24 @@ body.is-graph .graph-head .lede {
      coming back. */
   .graph-full {
     min-height: 0;
+  }
+  /* The tags page gives up its second window on a phone: a list that scrolls
+     inside a page that scrolls is a trap for a thumb. The page scrolls as one,
+     and only the chips keep a window of their own, so the notes are never more
+     than a short flick away from the tags that chose them. */
+  body.is-tags main {
+    overflow: visible;
+    padding-bottom: 4rem;
+  }
+  .page-tags {
+    height: auto;
+  }
+  .tag-picker {
+    max-height: 8.5rem;
+  }
+  .tag-results {
+    overflow: visible;
+    padding: 0;
   }
 }
 

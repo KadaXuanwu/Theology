@@ -1068,11 +1068,21 @@ console.log("a section is somewhere you can be, in either view")
   check("the list switches to that section's own graph", otherTab(list) === "../arguments-for/graph/", String(otherTab(list)))
   check("and the graph switches back to that list", otherTab(graph) === "../../arguments-for/", String(otherTab(graph)))
 
-  // Every destination in the tree keeps the view you are reading in, so nothing
-  // in there can drop you out of the graph.
+  // Every destination in the tree that has two views keeps the one you are
+  // reading in, so nothing in there can drop you out of the graph. All tags is
+  // the exception and is taken out here: a tag index has no graph of itself, so
+  // it is the same page from either view.
+  const tagsEntry = (html) => html.match(/<li class="tree-tags[^"]*"><a href="([^"]*)"/)?.[1]
+  check(
+    "the tags index is one page, opened from either view",
+    tagsEntry(graph) === "../../tags/" && tagsEntry(list) === "../tags/",
+    `${tagsEntry(graph)} from the graph, ${tagsEntry(list)} from the list`,
+  )
   const treeLinks = (html) => {
     const tree = html.match(/<nav class="tree"[\s\S]*?<\/nav>/)?.[0] ?? ""
-    return [...tree.matchAll(/<a[^>]*href="([^"]*)"/g)].map((m) => m[1])
+    return [...tree.replace(/<li class="tree-tags[\s\S]*?<\/li>/, "").matchAll(/<a[^>]*href="([^"]*)"/g)].map(
+      (m) => m[1],
+    )
   }
   check("the tree has links to check", treeLinks(graph).length > 10, `${treeLinks(graph).length} links`)
   check(
@@ -1119,6 +1129,74 @@ console.log("home is reachable and knows when it is current")
   check("but not while reading a note", !homeItem(note)?.[2].includes("aria-current"))
   check("the overview's Graph tab opens the whole vault", home.includes('href="graph/"'))
   check("and that page graphs everything, not one note", fullGraph.includes('data-graph="global"'))
+}
+
+console.log("tags are a way in, and they combine")
+{
+  const dist = resolve(repoRoot, "dist")
+  const read = (p) => readFile(resolve(dist, p), "utf8")
+  const index = await read("tags/index.html")
+  const single = await read("tags/hell/index.html")
+  const note = await read("claims/jesus-existed/index.html")
+  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+  const app = await readFile(resolve(repoRoot, "site/assets/app.js"), "utf8")
+
+  // It used to hang off the bottom of the sidebar under the whole tree, small
+  // and grey, where it read as a footnote rather than as a way in.
+  const order = [...note.matchAll(/<li class="(tree-home|tree-tags|tree-folder)[^"]*"/g)].map((m) => m[1])
+  check("the tags entry sits directly under Overview", order.slice(0, 3).join(",") === "tree-home,tree-tags,tree-folder", order.slice(0, 3).join(","))
+  check("and nothing is left hanging under the tree", !/<\/nav>\s*<a class="tree-tags"/.test(note))
+
+  // And it took no mark when you were on it, so the one page the sidebar could
+  // not answer for was the page you were reading.
+  const entry = (html) => html.match(/<li class="tree-tags([^"]*)"><a href="[^"]*"([^>]*)>/)
+  check("it is marked current on the tags index", entry(index)?.[2].includes('aria-current="page"'))
+  check("a single tag's page is marked there too", entry(single)?.[1].includes("is-current"))
+  check("but not while reading a note", !entry(note)?.[1].includes("is-current") && !entry(note)?.[2].includes("aria-current"))
+  check(
+    "the mark is the violet the rest of the sidebar uses",
+    /\.tree-tags a\[aria-current="page"\],\r?\n\.tree-tags\.is-current a \{\r?\n  background: var\(--accent-soft\);\r?\n  color: var\(--accent\);/.test(sheet),
+  )
+
+  // The heading used to be a bare <h1> with a lede under it, so it sat lower and
+  // larger than the title on every other page.
+  check("the title is the one every other page uses", /<h1 class="page-title">Tags<\/h1>/.test(index))
+  check("with no lede under it", !/<div class="page page-tags">[\s\S]*?<p class="lede"/.test(index))
+
+  // Both windows are in the page already, so combining tags costs no fetch and
+  // no navigation.
+  const chips = [...index.matchAll(/<a class="tag-chip" href="([^"]*)" data-tag="([^"]*)"/g)]
+  check("every tag is a chip", chips.length > 20, `${chips.length} chips`)
+  check("and each is still a plain link to its own page, with no script", chips.every(([, href, tag]) => href.endsWith(`tags/${tag}/`)))
+  const rows = [...index.matchAll(/<li data-tags="([^"]*)"/g)].map((m) => m[1])
+  // The tree lists every note in the vault, so it is what the filtered list has
+  // to account for. One short means a note that can never be found by its tag.
+  const inTree = [...(index.match(/<nav class="tree"[\s\S]*?<\/nav>/)?.[0] ?? "").matchAll(/data-note="/g)].length
+  check("every note is in the list to be filtered", rows.length === inTree && inTree > 20, `${rows.length} rows for ${inTree} notes`)
+  check("each one carries its tags where the filter can read them", rows.every((key) => /^\|[^|]+(\|[^|]+)*\|$/.test(key)), rows.find((key) => !/^\|/.test(key)) ?? "")
+  // Delimited on both ends so #sin cannot match a note tagged #sinlessness.
+  check("the filter tests a whole tag, not the start of one", app.includes("row.dataset.tags.includes(`|${tag}|`)"))
+
+  check("a tag can be matched with all the others or with any of them", /mode === "all" \? selected\.every/.test(app) && /: selected\.some/.test(app))
+  check("the selection is read back out of the URL", /params\.get\("tags"\)/.test(app) && /params\.get\("match"\) === "any"/.test(app))
+  // Back belongs to the page the reader came from, not to every chip they tried.
+  check("picking a tag replaces the URL rather than stacking history", /history\.replaceState/.test(app) && !/history\.pushState/.test(app))
+  check("and a tag that no longer exists is dropped from an old link", /filter\(\(t\) => known\.has\(t\)\)/.test(app))
+
+  // Arriving from a note's tag is how most readers get here, so that page says
+  // the tags can be combined at all.
+  check("a single tag's page leads back to the combination", /href="\.\.\/\.\.\/tags\/\?tags=hell"/.test(single))
+  const linkcheck = await readFile(resolve(repoRoot, "site/linkcheck.mjs"), "utf8")
+  check("and the link checker reads that as a page, not a folder", /split\(\/\[\?#\]\/\)/.test(linkcheck))
+
+  // Two scroll windows on a desktop: the tags stay in reach while the notes
+  // under them move.
+  check("the page itself does not scroll", /body\.is-tags main \{\r?\n  overflow: hidden;/.test(sheet))
+  check("the tags get a window of their own", /\.tag-picker \{[^}]*overflow-y: auto;/.test(sheet))
+  check("and the notes take the rest of the column", /\.tag-results \{[^}]*flex: 1 1 auto;[^}]*overflow-y: auto;/.test(sheet))
+  // A list that scrolls inside a page that scrolls is a trap for a thumb.
+  const phone = sheet.slice(sheet.indexOf("@media (max-width: 820px)"))
+  check("a phone keeps only one of them", /body\.is-tags main \{\r?\n    overflow: visible;/.test(phone) && /\.tag-results \{\r?\n    overflow: visible;/.test(phone))
 }
 
 console.log("the reader picks the reading font")

@@ -451,6 +451,154 @@ async function showPreview(link) {
   }
 }
 
+/* Tag filter ---------------------------------------------------------------
+ * The tags page only. Every tag and every note are already in the page, so
+ * combining tags is a matter of hiding rows rather than fetching anything, and
+ * the reader never leaves the page while they build a combination up.
+ *
+ * The chips ship as ordinary links to the single tag pages, which is what they
+ * still are with no script running. This turns them into toggles.
+ */
+
+{
+  const picker = document.querySelector(".tag-cloud")
+  const results = document.querySelector(".tag-results")
+
+  if (picker && results) {
+    const chips = [...picker.querySelectorAll(".tag-chip")]
+    const rows = [...results.querySelectorAll("li[data-tags]")]
+    const groups = [...results.querySelectorAll(".list-section")]
+    const count = document.querySelector(".tag-count")
+    const chosen = document.querySelector(".tag-selected")
+    const modeBox = document.querySelector(".tag-mode")
+    const modeButtons = [...document.querySelectorAll(".tag-mode-option")]
+    const clear = document.querySelector(".tag-clear")
+    const none = results.querySelector(".tag-none")
+    const total = rows.length
+
+    // A tag in the URL that no longer exists is dropped rather than left to
+    // filter everything away, which is what a renamed tag in an old link does.
+    const known = new Set(chips.map((chip) => chip.dataset.tag))
+    const params = new URLSearchParams(location.search)
+    let selected = [
+      ...new Set(
+        (params.get("tags") ?? "")
+          .split(",")
+          .map((t) => t.trim())
+          .filter((t) => known.has(t)),
+      ),
+    ]
+    let mode = params.get("match") === "any" ? "any" : "all"
+
+    const holds = (row, tag) => row.dataset.tags.includes(`|${tag}|`)
+    const matches = (row) =>
+      selected.length === 0 ||
+      (mode === "all" ? selected.every((t) => holds(row, t)) : selected.some((t) => holds(row, t)))
+
+    const closeIcon =
+      '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>'
+
+    function paint() {
+      for (const chip of chips) {
+        chip.setAttribute("aria-pressed", String(selected.includes(chip.dataset.tag)))
+      }
+
+      let shown = 0
+      for (const row of rows) {
+        const on = matches(row)
+        row.hidden = !on
+        if (on) shown++
+        for (const mark of row.querySelectorAll(".result-tag")) {
+          mark.classList.toggle("is-on", selected.includes(mark.dataset.tag))
+        }
+      }
+
+      // A section with nothing left in it is not an empty heading, it is gone.
+      for (const group of groups) {
+        const live = [...group.querySelectorAll("li[data-tags]")].filter((row) => !row.hidden)
+        group.hidden = live.length === 0
+        const label = group.querySelector(".tree-count")
+        if (label) label.textContent = String(live.length)
+      }
+
+      count.textContent = selected.length
+        ? `${shown} of ${total} notes`
+        : `${total} ${total === 1 ? "note" : "notes"}`
+
+      chosen.innerHTML = selected
+        .map(
+          (tag) =>
+            `<li><button type="button" data-tag="${escapeHtml(tag)}" aria-label="Remove ${escapeHtml(tag)}">#${escapeHtml(tag)}${closeIcon}</button></li>`,
+        )
+        .join("")
+
+      // All or Any says nothing until there are two tags to combine.
+      modeBox.hidden = selected.length < 2
+      clear.hidden = selected.length === 0
+      for (const button of modeButtons) {
+        button.setAttribute("aria-pressed", String(button.dataset.mode === mode))
+      }
+
+      none.hidden = shown > 0
+      none.textContent =
+        mode === "all" && selected.length > 1
+          ? "No note carries all of those tags. Try Any."
+          : "Nothing under that tag."
+
+      // The selection is worth linking to, so it lives in the URL. Replaced
+      // rather than pushed: Back belongs to the page the reader came from, not
+      // to every chip they tried on the way.
+      // Written out by hand. URLSearchParams escapes the comma between the
+      // tags into %2C, which turns a link worth sharing into a mess.
+      const parts = []
+      if (selected.length) parts.push(`tags=${selected.map(encodeURIComponent).join(",")}`)
+      if (selected.length > 1 && mode === "any") parts.push("match=any")
+      const search = parts.join("&")
+      history.replaceState(null, "", `${location.pathname}${search ? `?${search}` : ""}`)
+    }
+
+    const toggle = (tag) => {
+      selected = selected.includes(tag) ? selected.filter((t) => t !== tag) : [...selected, tag]
+      paint()
+    }
+
+    for (const chip of chips) {
+      // A link the script has turned into a switch says so, rather than
+      // announcing a destination it no longer goes to.
+      chip.setAttribute("role", "button")
+      chip.addEventListener("click", (event) => {
+        event.preventDefault()
+        toggle(chip.dataset.tag)
+      })
+      // Enter comes free with the link; a button is also expected to take Space.
+      chip.addEventListener("keydown", (event) => {
+        if (event.key !== " ") return
+        event.preventDefault()
+        toggle(chip.dataset.tag)
+      })
+    }
+
+    chosen.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-tag]")
+      if (button) toggle(button.dataset.tag)
+    })
+
+    for (const button of modeButtons) {
+      button.addEventListener("click", () => {
+        mode = button.dataset.mode
+        paint()
+      })
+    }
+
+    clear.addEventListener("click", () => {
+      selected = []
+      paint()
+    })
+
+    paint()
+  }
+}
+
 /* Graphs ------------------------------------------------------------------- */
 
 /* Category filter ---------------------------------------------------------

@@ -49,7 +49,10 @@ for (const file of files) {
       anchors++
       continue
     }
-    const [pathPart] = raw.split("#")
+    // A query string is not part of the path. "tags/?tags=hell" is a link to
+    // tags/index.html with something for the script to read, not to a directory
+    // called "?tags=hell".
+    const [pathPart] = raw.split(/[?#]/)
     if (!pathPart) continue
     internal++
 

@@ -13,7 +13,7 @@ import { promisify } from "node:util"
 
 import { buildAssets } from "./lib/assets.mjs"
 import { readVault, slugify } from "./lib/content.mjs"
-import { createRenderer, htmlToText } from "./lib/markdown.mjs"
+import { createRenderer, escapeHtml, htmlToText } from "./lib/markdown.mjs"
 import {
   graphPage,
   listPage,
@@ -293,7 +293,9 @@ async function build() {
       `tags/${slugify(tag)}/index.html`,
       listPage({
         title: `#${tag}`,
-        lede: `${list.length} ${list.length === 1 ? "note" : "notes"} tagged ${tag}.`,
+        // A tag is usually arrived at from a note, so this is where the reader
+        // finds out the tags can be combined at all.
+        lede: `${list.length} ${list.length === 1 ? "note" : "notes"} tagged #${escapeHtml(tag)}. <a href="${rootFor(2)}tags/?tags=${encodeURIComponent(tag)}">Combine it with other tags</a>.`,
         groups: sections
           .map((section) => ({
             kind: section.kind,

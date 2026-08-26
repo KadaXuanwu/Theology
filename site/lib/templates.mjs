@@ -178,11 +178,17 @@ function explorer({ root, current, sections, notes, view }) {
 
   const home = `<li class="tree-home"><a href="${root}${suffix}"${current === null ? ' aria-current="page"' : ""}>${icon("home")}Overview</a></li>`
 
+  // Tags are a way into the vault, not a footnote to it, so the entry sits with
+  // the other two ways in rather than under the tree it is not part of. A single
+  // tag's own page counts as being here: the reader followed a tag to get there
+  // and nothing else in the tree can hold the mark for them.
+  const onTags = current === "tags" || current?.startsWith("tags/")
+  const tags = `<li class="tree-tags${onTags ? " is-current" : ""}"><a href="${root}tags/"${current === "tags" ? ' aria-current="page"' : ""}>${icon("hash")}All tags</a></li>`
+
   return `<aside class="sidebar" id="explorer">
   <nav class="tree" aria-label="Notes">
-    <ul class="tree-root">${home}${groups}</ul>
+    <ul class="tree-root">${home}${tags}${groups}</ul>
   </nav>
-  <a class="tree-tags" href="${root}tags/">All tags</a>
 </aside>`
 }
 
@@ -314,30 +320,79 @@ export function listPage({ title, lede, groups, root, current, sections, notes, 
   })
 }
 
+// Tags in an attribute the script can test without splitting or a false match
+// on a tag that is the start of another one.
+const tagKey = (list) => (list.length ? `|${list.map((t) => escapeHtml(t)).join("|")}|` : "")
+
+// Two windows over the same thing: every tag on top, every note underneath.
+// Picking tags filters the notes in place rather than moving the reader, so
+// building up a combination never costs a page load.
+//
+// It is built as plain links to the single tag pages and the full list of
+// notes, and the script upgrades that into the filter. With no script the page
+// is still a working index rather than an empty frame.
 export function tagIndexPage({ tags, root, sections, notes, assets }) {
-  const items = tags
+  const chips = tags
     .map(
       ([tag, list]) =>
-        `<li><a href="${root}tags/${slugify(tag)}/">#${escapeHtml(tag)}<span class="tree-count">${list.length}</span></a></li>`,
+        `<li><a class="tag-chip" href="${root}tags/${slugify(tag)}/" data-tag="${escapeHtml(tag)}">#${escapeHtml(tag)}<span class="tree-count">${list.length}</span></a></li>`,
     )
     .join("")
 
+  // Grouped the way every other list on the site is grouped, so a filtered
+  // result still reads as part of the vault rather than as a flat search dump.
+  const groups = sections
+    .map((section) => {
+      const items = notes.filter((n) => n.section.dir === section.dir)
+      if (items.length === 0) return ""
+      const rows = items
+        .map((n) => {
+          const marks = n.tags
+            .map((t) => `<span class="result-tag" data-tag="${escapeHtml(t)}">#${escapeHtml(t)}</span>`)
+            .join("")
+          return `<li data-tags="${tagKey(n.tags)}"><a href="${root}${n.url}/" data-note="${escapeHtml(n.title)}">
+      <span class="card-head"><span class="dot dot-${section.kind}"></span><span class="card-title">${escapeHtml(n.title)}</span></span>
+      <span class="result-tags">${marks}</span>
+    </a></li>`
+        })
+        .join("")
+      return `<section class="list-section">
+  <h2><span class="dot dot-${section.kind}"></span>${escapeHtml(section.label)}<span class="tree-count">${items.length}</span></h2>
+  <ul class="card-list">${rows}</ul>
+</section>`
+    })
+    .join("")
+
+  const total = `${notes.length} ${notes.length === 1 ? "note" : "notes"}`
+
   return shell({
     title: "Tags · Theology",
-    description: "Every tag used across the vault.",
+    description: "Every tag in the vault, and the notes under any combination of them.",
     root,
     current: "tags",
     sections,
     notes,
     assets,
-    main: `<div class="page">
-  <h1>Tags</h1>
-  <p class="lede">Every tag used across the vault.</p>
-  <ul class="tag-cloud">${items}</ul>
+    bodyClass: "is-tags",
+    main: `<div class="page page-tags">
+  <h1 class="page-title">Tags</h1>
+  <div class="tag-picker">
+    <ul class="tag-cloud" aria-label="Tags">${chips}</ul>
+  </div>
+  <div class="tag-bar">
+    <p class="tag-count" role="status" aria-live="polite">${total}</p>
+    <ul class="tag-selected" aria-label="Selected tags"></ul>
+    <div class="tag-actions">
+      <div class="tag-mode" role="group" aria-label="Match selected tags" hidden><button type="button" class="tag-mode-option" data-mode="all" aria-pressed="true">All</button><button type="button" class="tag-mode-option" data-mode="any" aria-pressed="false">Any</button></div>
+      <button type="button" class="tag-clear" hidden>Clear</button>
+    </div>
+  </div>
+  <div class="tag-results"><p class="tag-none" hidden></p>${groups}</div>
 </div>`,
     rightRail: railGraph({ root }),
   })
 }
+
 
 export function graphPage({ root, sections, notes, assets }) {
   return shell({
@@ -442,6 +497,7 @@ function icon(name) {
     sun: '<circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="7" y2="7"/><line x1="17" y1="17" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="7" y2="17"/><line x1="17" y1="7" x2="19.1" y2="4.9"/>',
     moon: '<path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/>',
     home: '<path d="M4 11 12 4l8 7"/><path d="M6.5 9.6V19h11V9.6"/>',
+    hash: '<line x1="9.5" y1="4" x2="7.5" y2="20"/><line x1="16.5" y1="4" x2="14.5" y2="20"/><line x1="4" y1="9" x2="19.5" y2="9"/><line x1="3.5" y1="15" x2="19" y2="15"/>',
     expand:
       '<polyline points="14 4 20 4 20 10"/><polyline points="10 20 4 20 4 14"/><line x1="20" y1="4" x2="13.5" y2="10.5"/><line x1="4" y1="20" x2="10.5" y2="13.5"/>',
     collapse:
