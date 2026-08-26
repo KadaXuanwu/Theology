@@ -1276,6 +1276,22 @@ console.log("tags are a way in, and they combine")
   check("and the second hop is marked so it can be faded back", wider.nodes.some((n) => n.hop === 2))
   check("nothing matched is nothing drawn", neighbourhood(data, [], 2).nodes.length === 0)
 
+  // The map view gives the tags less room than the list view does, because the
+  // graph is what that page is for.
+  check(
+    "the map view keeps its tags shorter than the list view",
+    /\.page-tag-graph \.tag-picker \{\r?\n  flex-basis: 17%;/.test(sheet),
+    sheet.match(/\.page-tag-graph \.tag-picker \{[^}]*/)?.[0].split(/\r?\n/).pop() ?? "",
+  )
+  // The legend row carries its own margin and the page adds a gap on top, so
+  // the space under it was counted twice. On a phone `body.is-graph
+  // .graph-tools` outranked the plain override and put the doubled gap back,
+  // which is why this one has to carry the body class as well.
+  check(
+    "the space under the legend is counted once, on a phone as well",
+    /body\.is-graph \.page-tag-graph \.graph-head,\r?\nbody\.is-graph \.page-tag-graph \.graph-tools \{\r?\n  margin-bottom: 0;/.test(sheet),
+  )
+
   // Same shape on a phone, measured against the small viewport, so the two
   // windows stay the only things that scroll there too.
   const phone = sheet.slice(sheet.indexOf("@media (max-width: 820px)"))
@@ -1638,6 +1654,24 @@ console.log("a finger gets the highlight a cursor gets for free")
   check("letting go on a touch screen drops it", /event\.pointerType === "touch" && hovered/.test(graphSource))
   const pinchStart = graphSource.match(/function startPinch\([\s\S]*?\n  \}/)?.[0] ?? ""
   check("and a second finger arriving drops it too", /if \(hovered === dragging\) hovered = null/.test(pinchStart))
+}
+
+console.log("the sidebar keeps its scrolling to itself")
+{
+  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+  // On a phone the tree is a panel floating over the page. Reaching the bottom
+  // of it used to hand the scroll on to the page underneath, so a reader
+  // looking for a note carried on past the end of the tree into a page they
+  // could not see and had not asked for.
+  check("the tree does not hand its scroll on when it runs out", /\.sidebar \{[^}]*overflow-y: auto;\r?\n  overscroll-behavior: contain;/.test(sheet))
+  // The same rule every other scrollport on the site already carries.
+  for (const [name, rule] of [
+    ["the reading column", /\r?\nmain \{[^}]*overscroll-behavior: contain;/],
+    ["the tag picker", /\.tag-picker \{[^}]*overscroll-behavior: contain;/],
+    ["the filtered notes", /\.tag-results \{[^}]*overscroll-behavior: contain;/],
+  ]) {
+    check(`and so does ${name}`, rule.test(sheet))
+  }
 }
 
 console.log("the tree comes back to the note you are reading")

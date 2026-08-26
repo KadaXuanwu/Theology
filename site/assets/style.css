@@ -466,6 +466,7 @@ main {
 .sidebar {
   height: 100%;
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 1.5rem 0.75rem 2rem 1.25rem;
   font-size: 0.875rem;
 }
@@ -1275,14 +1276,14 @@ body.is-tags main {
 .page-tag-graph {
   gap: 0.8rem;
 }
-.page-tag-graph .graph-head,
-.page-tag-graph .graph-tools {
+body.is-graph .page-tag-graph .graph-head,
+body.is-graph .page-tag-graph .graph-tools {
   margin-bottom: 0;
 }
 /* Less than the list view gives them. There is a legend and a graph under
    these as well, and the graph is what the page is for. */
 .page-tag-graph .tag-picker {
-  flex-basis: 20%;
+  flex-basis: 17%;
 }
 
 .tag-results {
@@ -1768,6 +1769,9 @@ body.is-graph .graph-head .lede {
      notes are what the picking is for. */
   .tag-picker {
     flex-basis: 22%;
+  }
+  .page-tag-graph {
+    gap: 0.6rem;
   }
   .page-tag-graph .tag-picker {
     flex-basis: 18%;
