@@ -8,7 +8,7 @@
 // post half a megabyte of their own text and have it billed to this key.
 
 import { buildPrompt, resolveLinks } from "./context.js"
-import { pickProvider } from "./providers.js"
+import { noAnswer, pickProvider } from "./providers.js"
 
 // Caps. A chat bubble question is a sentence, and the history only exists so
 // follow-ups make sense, so both can be small without anyone noticing.
@@ -18,12 +18,16 @@ const MAX_HISTORY_CHARS = 6000
 
 // Requests one address may make per window, and how long the window is.
 //
-// Six, down from twelve: Gemini's own free tier limit for this model is around
-// five a minute, measured by hitting it twice. Note the mismatch that cannot be
-// fixed here, though. This counter is per address, Gemini's quota is per
-// project, so three readers asking two questions each will exhaust it while
-// none of them comes close to this. That is what the quota message is for; this
-// limit only stops one address spending the whole allowance alone.
+// Six, down from twelve. Flash Lite's free tier allows about fifteen a minute
+// and 500 a day, so this is not really protecting the per-minute limit; it is
+// protecting the daily one from a single visitor. Note the mismatch that cannot
+// be fixed here, though: this counter is per address and Gemini's quota is per
+// project, so three readers asking two questions each will exhaust nothing here
+// and can still hit Google's. That is what the quota message is for.
+//
+// Six a minute is still 360 an hour, so one determined address could spend the
+// day's 500 in under two hours. A daily counter in Workers KV is the answer if
+// that ever happens; the free allowance of 1,000 writes a day covers it.
 const RATE_LIMIT = 6
 const RATE_WINDOW_MS = 60_000
 
@@ -171,6 +175,14 @@ export default {
       first = await answer.next()
     } catch (error) {
       return fail(502, error.message, echo)
+    }
+
+    // A valid stream carrying no text at all. Without this the reader gets an
+    // empty bubble and no idea why, which looks worse than any error message.
+    // A safety filter is the likeliest cause on a vault about religion.
+    if (first.done) {
+      console.log(`no answer, finishReason: ${stats.finishReason ?? "none given"}`)
+      return fail(502, noAnswer(stats.finishReason), echo)
     }
 
     const stream = new ReadableStream({

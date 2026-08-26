@@ -17,7 +17,7 @@ import {
   selectNotes,
 } from "../worker/context.js"
 import { splitAtOpenLink } from "../worker/index.js"
-import { BROKEN, TOO_BUSY, TOO_SLOW } from "../worker/providers.js"
+import { BROKEN, DECLINED, NO_ANSWER, TOO_BUSY, TOO_SLOW, noAnswer } from "../worker/providers.js"
 import { loadHistory, render, saveHistory } from "./assets/chat.js"
 import { parseFrontmatter, slugify } from "./lib/content.mjs"
 import { createRenderer, htmlToText } from "./lib/markdown.mjs"
@@ -1819,6 +1819,17 @@ console.log("a slow or failed answer is handled as a failure, not as an answer")
     )
   }
   check("a quota rejection says when to come back", /try again in a minute/i.test(TOO_BUSY))
+
+  // A model can return a valid stream carrying no text at all, and without a
+  // check for it the reader gets an empty bubble and no idea why. On a vault
+  // about religion a safety filter is the likeliest reason, which deserves
+  // different wording: nothing is broken and asking again will not help.
+  check("a safety block says so", noAnswer("SAFETY") === DECLINED)
+  check("so does a recitation block", noAnswer("RECITATION") === DECLINED)
+  check("anything else is just no answer", noAnswer("MAX_TOKENS") === NO_ANSWER)
+  check("and a missing reason does not throw", noAnswer(undefined) === NO_ANSWER)
+  check("an empty answer is caught rather than streamed", /if \(first\.done\)/.test(worker))
+  check("with the reason kept in the log", /finishReason: \$\{stats\.finishReason/.test(worker))
 
   // The detail is not lost, it moves. A wrong model id used to announce itself
   // in the chat, which is how the thinking_level mistake was caught.

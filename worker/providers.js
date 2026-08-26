@@ -25,6 +25,15 @@ export const TOO_SLOW = "That took too long to come back. Try asking again."
 export const TOO_BUSY = "A lot of questions just now. Try again in a minute."
 export const BROKEN = "The assistant is not working right now. Try again later."
 
+// A model can return a perfectly valid stream carrying no text. On a vault
+// about religion the likeliest reason is a safety filter, which is worth its
+// own wording: nothing is broken and asking the same thing again will not help.
+export const DECLINED = "The model would not answer that one. Try rephrasing it."
+export const NO_ANSWER = "No answer came back. Try asking again."
+
+export const noAnswer = (finishReason) =>
+  /SAFETY|BLOCK|PROHIBITED|RECITATION/i.test(finishReason ?? "") ? DECLINED : NO_ANSWER
+
 // Whatever went wrong, the reader gets a sentence. The status and the API's own
 // text go to the Worker log instead, where `wrangler tail` will show them.
 //
@@ -174,6 +183,11 @@ const gemini = {
       // because the one that reports cache reuse has been renamed before and
       // an undefined here would look exactly like a cache that never hit.
       if (parsed.usageMetadata) stats.usage = parsed.usageMetadata
+
+      // Why the model stopped. Only interesting when no text arrived at all,
+      // where it is the difference between a safety block and a broken call.
+      const reason = parsed.candidates?.[0]?.finishReason
+      if (reason) stats.finishReason = reason
 
       const parts = parsed.candidates?.[0]?.content?.parts ?? []
       for (const part of parts) if (part.text) yield part.text
