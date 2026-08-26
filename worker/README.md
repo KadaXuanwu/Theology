@@ -27,6 +27,30 @@ browser.
 providers live in `providers.js`; adding a third one means adding an async
 generator that yields text.
 
+## Free tier limits, and why the model is a Flash Lite
+
+Google does not publish these. They are on your own dashboard at
+<https://aistudio.google.com/rate-limit>, read 2026-08-26:
+
+| | Gemini 3.6 Flash | Gemini 3.1 Flash Lite |
+| --- | --- | --- |
+| Requests per minute | 5 | ~15 |
+| Requests per **day** | **20** | **500** |
+| Input tokens per minute | ~250K | ~250K |
+
+The daily number is the one that decides it. Full Flash answers more reliably,
+with none of the twenty second stalls Flash Lite has, and it is still the wrong
+model here: twenty questions a day is the whole site's allowance, across every
+visitor. Flash Lite gives 500.
+
+At roughly 1.4 requests per question once retries are counted, 500 a day is
+about 350 questions. Note that `RATE_LIMIT` allows one address 6 a minute, so a
+single determined visitor could spend the day's allowance in under two hours.
+If that ever happens, a daily counter in Workers KV is the answer; the free KV
+allowance of 1,000 writes a day is enough for one counter per day.
+
+Do not switch to a full Flash for reliability without re-reading the RPD column.
+
 ## What a question costs
 
 Measured 2026-08-26 at 28 notes, read off `wrangler tail`.
@@ -61,9 +85,9 @@ and needs a site rebuild instead.
 | `maxOutputTokens` | `providers.js` | 800 | Length ceiling on an answer. |
 | `FIRST_TOKEN_MS`, `ATTEMPTS` | `providers.js` | 12s, 2 | How long a stalled request waits before being abandoned and retried. Measured on the live endpoint, about a quarter of free tier requests take over twenty seconds while the rest answer in two or three, and spacing them out does not change it. Only a stall before any text retries; once a word has been sent, restarting would rewrite what the reader is watching. |
 | `temperature` | `providers.js` | 0.2 | Low, because the job is reading supplied text accurately, not writing something new. |
-| `MODEL`, `PROVIDER` | `wrangler.toml` | `gemini-3.6-flash`, `gemini` | The model. `providers.js` holds one async generator per provider. |
+| `MODEL`, `PROVIDER` | `wrangler.toml` | `gemini-3.5-flash-lite`, `gemini` | The model. `providers.js` holds one async generator per provider. |
 | `THINKING_LEVEL` | `wrangler.toml` | `low` | Gemini 3.x thinks by default and this task does not need it. Set to `""` to stop sending the field, for a model that rejects it. It nests as `generationConfig.thinkingConfig.thinkingLevel`; put directly in `generationConfig` the API says "Cannot find field", which reads like the feature is missing rather than misplaced. Gemini 2.5 models want `thinkingBudget` here instead. |
-| `RATE_LIMIT`, `RATE_WINDOW_MS` | `index.js` | 6 per minute | Per address. In memory, so a speed bump rather than a guarantee. Gemini's own free tier limit for Flash is around five a minute and is per project, not per address, so this cannot fully protect it. |
+| `RATE_LIMIT`, `RATE_WINDOW_MS` | `index.js` | 6 per minute | Per address. In memory, so a speed bump rather than a guarantee. Gemini's quota is per project, not per address, so this cannot fully protect it: three readers asking two questions each never touch this limit and can still exhaust Google's. |
 | `MAX_QUESTION` | `index.js` | 1,000 chars | Longest question accepted. |
 | `MAX_HISTORY`, `MAX_HISTORY_CHARS` | `index.js` | 8 messages, 6,000 chars | How much conversation is sent back. |
 | `CORPUS_TTL_MS` | `index.js` | 10 min | How long a fetched vault is reused. Lower means notes appear sooner and more refetches. |
@@ -120,14 +144,21 @@ automatically. The system prompt and catalogue are identical on every request
 and sit at the front of the prompt for exactly this reason.
 
 It is not firing yet. Gemini 3.x wants a shared prefix of at least 4,096 tokens
-and the catalogue is 2,043. It should start on its own somewhere past roughly
-100 notes, with no code change. Check with `wrangler tail` and look for
-`cachedContentTokenCount` in the logged usage block.
+and the system prompt plus catalogue is 2,000. At 57 tokens per catalogue line
+that threshold is crossed at **65 notes**, with no code change. Check then with
+`wrangler tail` and look for `cachedContentTokenCount` in the logged usage
+block.
 
-If the catalogue is well past 4,096 and there is still no such field, check
-which model is set. Flash Lite is the one family Google's caching docs omit and
-there are open reports of implicit caching not firing on it, so moving `MODEL`
-to a full Flash is the fix in that case.
+Do not pad the prompt to reach it sooner. The discount is on money, this runs
+on the free tier, and the scarce resources here are tokens per minute and
+requests per day, both of which padding makes worse. Even paying, a cache miss
+costs more than a hit saves, so over half the questions would have to arrive
+within minutes of another one just to break even.
+
+If the catalogue is well past 4,096 and there is still no such field, that is
+Flash Lite: it is the one family Google's caching docs omit and there are open
+reports of implicit caching never firing on it. Live with it rather than moving
+to a full Flash, which caps the site at twenty questions a day.
 
 ## Testing locally
 
