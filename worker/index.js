@@ -7,7 +7,7 @@
 // The browser deliberately does not supply the notes. If it did, anyone could
 // post half a megabyte of their own text and have it billed to this key.
 
-import { buildPrompt } from "./context.js"
+import { buildPrompt, resolveLinks } from "./context.js"
 import { pickProvider } from "./providers.js"
 
 // Caps. A chat bubble question is a sentence, and the history only exists so
@@ -77,6 +77,28 @@ async function loadCorpus(env) {
   return data
 }
 
+// A bracket construct can be split across two chunks of the stream, so anything
+// from an unfinished one onward is held back until it completes. Two reasons:
+// the reader would otherwise watch a raw "[[Jesus Exi" appear and vanish, and
+// more importantly the page rebuilds its markup from the whole answer on every
+// chunk, so half a link now and half a link later still assembles into a link
+// there. Holding it here is what lets resolveLinks see it whole.
+const HOLD_LIMIT = 500
+
+export function splitAtOpenLink(buffer) {
+  const lastDouble = buffer.lastIndexOf("[[")
+  const lastSingle = buffer.lastIndexOf("[")
+  // When the final "[" is just the second half of a "[[", judge the pair.
+  const open = lastDouble >= 0 && lastSingle <= lastDouble + 1 ? lastDouble : lastSingle
+  if (open < 0) return [buffer, ""]
+
+  const tail = buffer.slice(open)
+  const finished = /^\[\[[^\][]*\]\]/.test(tail) || /^\[[^\][]*\]\([^)]*\)/.test(tail)
+  // A bracket that never closes would stall the stream, so stop waiting.
+  if (finished || tail.length > HOLD_LIMIT) return [buffer, ""]
+  return [buffer.slice(0, open), tail]
+}
+
 function readRequest(body) {
   const question = typeof body.question === "string" ? body.question.trim() : ""
   if (!question) throw new Error("Ask a question first.")
@@ -118,27 +140,48 @@ export default {
       return fail(400, error.message, echo)
     }
 
+    let corpus
     let prompt
     try {
-      prompt = buildPrompt(await loadCorpus(env), asked)
+      corpus = await loadCorpus(env)
+      prompt = buildPrompt(corpus, asked)
     } catch (error) {
       return fail(502, `Could not read the vault: ${error.message}`, echo)
     }
 
     const provider = pickProvider(env)
+    const stats = {}
     const stream = new ReadableStream({
       async start(controller) {
         const encode = new TextEncoder()
+        const send = (text) => controller.enqueue(encode.encode(resolveLinks(text, corpus.notes)))
+        let held = ""
         try {
-          for await (const chunk of provider.stream({ ...prompt, history: asked.history }, env)) {
-            controller.enqueue(encode.encode(chunk))
+          for await (const chunk of provider.stream({ ...prompt, history: asked.history }, env, stats)) {
+            const [ready, rest] = splitAtOpenLink(held + chunk)
+            held = rest
+            if (ready) send(ready)
           }
+          if (held) send(held)
         } catch (error) {
+          if (held) send(held)
           // The stream has already started by the time most failures happen, so
           // the message goes into the answer rather than into a status code.
           controller.enqueue(encode.encode(`\n\n_Something went wrong: ${error.message}_`))
         }
         controller.close()
+
+        // Read with `wrangler tail`. The catalogue is the same tokens on every
+        // question and sits at the front of the prompt, so it should be served
+        // from the provider's implicit cache. Should. This is how we find out,
+        // and it decides whether trimming the catalogue further is worth doing.
+        console.log(
+          JSON.stringify({
+            notesSent: prompt.used.length,
+            promptChars: prompt.system.length + prompt.context.length,
+            usage: stats.usage ?? null,
+          }),
+        )
       },
     })
 

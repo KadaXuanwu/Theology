@@ -1,21 +1,29 @@
 // Picking what the model gets to read.
 //
-// The catalogue (one line per note) always goes in: it is small, it is the same
-// on every request, and it is what answers "which node covers this?" for a
-// reader who only has a vague idea. Full note bodies are then added in
-// relevance order until a character budget runs out.
+// Two things go to the model. The catalogue is one line per note and is sent
+// every time: it is what answers "which node covers this?" for a reader who
+// only half remembers something, and it is the safety net for everything the
+// keyword scoring below gets wrong. Full note bodies are sent for a handful of
+// notes only.
 //
-// At 32 notes the budget swallows the whole vault, so this behaves like sending
-// everything. At 300 it quietly becomes top-N retrieval with no change here.
-// That is the point: the scaling decision is a number, not a rewrite.
+// The split matters because the two costs scale differently. The catalogue
+// grows with the vault but is identical on every request, so it sits at the
+// front of the prompt where an implicit cache can reuse it. The bodies change
+// with every question, which makes them the part worth being stingy with.
 
-// Roughly 3.7 characters per token for English prose, so 90k characters is
-// about 25k tokens. Well inside any current model, small enough to stay fast
-// and to keep a free tier's per-minute token cap out of the picture.
+// A ceiling on characters, for the rare note that is enormous.
 export const BODY_BUDGET = 90_000
 
-// Words too common to say anything about which note is relevant. Deliberately
-// short: this is a relevance nudge, not a search engine.
+// The real limit. Keyword ranking is good for the first few notes and noise
+// after that, so sending thirty of them buys nothing and costs everything.
+// Eight rather than five because a question phrased entirely in synonyms can
+// push the right note down the list: a description of "Humans Are Primed to
+// See Agents and Purpose" using none of its own words ranked it seventh.
+export const MAX_NOTES = 8
+
+// How much of the previous answer is used to rank notes for a follow-up.
+const HISTORY_CONTEXT = 600
+
 const STOPWORDS = new Set(
   ("a an the and or but if then than that this these those is are was were be been being do does did " +
     "have has had i you he she it we they what which who whom whose when where why how of in on at to " +
@@ -52,22 +60,35 @@ function score(note, terms) {
   return total
 }
 
-// One line per note, cheap enough to send all of them. The url is here because
-// every answer has to be able to link the node it came from.
+// One line per note, cheap enough to send all of them.
+//
+// No url. It is the title and the section run through the same slug rules the
+// site uses, so sending it was the same information twice, and at 300 notes
+// that duplication cost about 3,800 tokens on every question. The model writes
+// [[Title]] instead and the Worker resolves it, which also means a broken link
+// can no longer come from the model mistyping a slug.
 export function catalogue(notes) {
   return notes
     .map((n) => {
       const tags = n.tags.length ? ` [${n.tags.join(", ")}]` : ""
       const status = n.status && n.status !== "sourced" ? ` (${n.status})` : ""
-      return `- ${n.title} | ${n.section}${status}${tags} | ${n.url} | ${n.excerpt}`
+      return `- ${n.title} | ${n.section}${status}${tags} | ${n.excerpt}`
     })
     .join("\n")
 }
 
-// Which note bodies to include, best first, up to the budget. The note the
-// reader is currently looking at always goes first: "what does this page say"
-// is the most common question a chat bubble on a page gets asked.
-export function selectNotes(notes, question, pageUrl, budget = BODY_BUDGET) {
+// The text a follow-up should be ranked against. "Tell me more about that"
+// carries no keywords of its own, so on its own it scores nothing and the very
+// notes under discussion get dropped. The previous answer names them.
+export function rankingText(question, history = []) {
+  const lastAnswer = [...history].reverse().find((m) => m.role === "assistant")
+  return lastAnswer ? `${question} ${lastAnswer.text.slice(0, HISTORY_CONTEXT)}` : question
+}
+
+// Which note bodies to include, best first. The note the reader is currently
+// looking at always goes first: "what does this page say" is the most common
+// question a chat bubble on a page gets asked.
+export function selectNotes(notes, question, pageUrl, budget = BODY_BUDGET, maxNotes = MAX_NOTES) {
   const terms = words(question)
 
   const ranked = notes
@@ -75,13 +96,17 @@ export function selectNotes(notes, question, pageUrl, budget = BODY_BUDGET) {
     .filter((entry) => entry.score > 0)
     .sort((a, b) => b.score - a.score || a.note.title.localeCompare(b.note.title, "en"))
 
-  // Nothing matched any term. Rather than answer from excerpts alone, fall back
-  // to reading order so short vague questions still get real text to work with.
-  const pool = ranked.length ? ranked.map((e) => e.note) : notes
+  // Nothing matched. This used to fall back to reading order, which under a cap
+  // of eight means eight arbitrary notes: tokens spent on text with nothing to
+  // do with the question, and a model invited to answer from it. Sending none
+  // is cheaper and more honest, and the catalogue still lists every note, so it
+  // can name the right one and admit it has not read it.
+  if (ranked.length === 0) return []
 
   const chosen = []
   let used = 0
-  for (const note of pool) {
+  for (const { note } of ranked) {
+    if (chosen.length >= maxNotes) break
     const cost = note.text.length + note.title.length + 20
     if (used + cost > budget && chosen.length > 0) break
     chosen.push(note)
@@ -90,28 +115,28 @@ export function selectNotes(notes, question, pageUrl, budget = BODY_BUDGET) {
   return chosen
 }
 
-export function buildPrompt(corpus, { question, pageUrl = null }) {
+export function buildPrompt(corpus, { question, pageUrl = null, history = [] }) {
   const notes = corpus.notes ?? []
   const page = notes.find((n) => n.url === pageUrl) ?? null
-  const chosen = selectNotes(notes, question, pageUrl)
+  const chosen = selectNotes(notes, rankingText(question, history), pageUrl)
 
-  const bodies = chosen
-    .map((n) => `### ${n.title}\nurl: ${n.url}\n\n${n.text}`)
-    .join("\n\n---\n\n")
+  const bodies = chosen.length
+    ? chosen.map((n) => `### ${n.title}\n\n${n.text}`).join("\n\n---\n\n")
+    : "(None. Nothing in the question matched a note closely enough to quote in full. Work from the catalogue above.)"
 
   const system = `You are a reading assistant for a research vault about arguments for and against Christianity. The vault maps arguments, claims and evidence as linked notes, so that any statement can be traced back to what it rests on.
 
 Rules, in order of importance:
 
 1. Answer only from the notes given below. If they do not cover something, say so plainly: "The vault does not have a note on that yet." Never fill a gap from your own knowledge, and never guess what a note probably says.
-2. Link every note you refer to, as a markdown link to its url, for example [The Sacrifice Requirement Is Arbitrary](arguments-against/the-sacrifice-requirement-is-arbitrary). Use the url exactly as given.
-3. Do not take a side. The vault exists to lay out both cases and show what each rests on, not to settle which is right. Describe what a note argues; do not endorse it or rebut it.
-4. Do not soften or tidy an argument into something the note did not say. If you are paraphrasing, stay close. If precision matters, quote a short phrase.
-5. Be short. A few sentences. This is a chat bubble, not an essay.
-6. If the reader is vaguely describing something and you can tell which note they mean, name it and link it, then give one line on what it says.
+2. Refer to any note by writing its exact title in double square brackets, like [[Jesus Existed]]. Copy the title exactly as the catalogue spells it. Do not write urls or links of your own; the brackets become links on their own.
+3. You are given the full text of only a few notes. The catalogue lists every note that exists. If the catalogue shows a note that would answer the question but its full text is not below, name it in brackets and say plainly that you have not read it, for example: "That sounds like [[Some Note]], though I have not read it here. Ask about it directly and I can."
+4. Do not take a side. The vault exists to lay out both cases and show what each rests on, not to settle which is right. Describe what a note argues; do not endorse it or rebut it.
+5. Do not soften or tidy an argument into something the note did not say. If you are paraphrasing, stay close. If precision matters, quote a short phrase.
+6. Be short. A few sentences. This is a chat bubble, not an essay.
 7. Notes marked stub or drafted have not been source checked. Say so if you lean on one.
 
-The catalogue lists every note in the vault. The full text below it covers only the notes most relevant to this question. If the catalogue shows a note that would answer better than the ones quoted in full, link it and say it is worth opening.`
+Every note in the vault is in the catalogue. The full text section below covers only the notes most relevant to this question.`
 
   const context = `## Catalogue of every note
 
@@ -121,9 +146,27 @@ ${catalogue(notes)}
 
 ${bodies}`
 
-  const asked = page
-    ? `The reader is currently on the note "${page.title}" (${page.url}).\n\n${question}`
-    : question
+  const asked = page ? `The reader is currently on the note "${page.title}".\n\n${question}` : question
 
   return { system, context, question: asked, used: chosen.map((n) => n.url) }
+}
+
+// Turns [[Title]] into a markdown link the page can render. The model is only
+// ever given titles, so this is the single place a title becomes a url, and it
+// is resolved against the corpus rather than against anything the model wrote.
+//
+// The order matters. Any markdown link in the text is flattened to plain words
+// first, because the model was never given a url and so could only have guessed
+// one, and a guessed slug that happens to look right is a broken link the page
+// would render without complaint. Only after that do bracketed titles become
+// links. A title matching no note stays plain text rather than pointing
+// somewhere that does not exist.
+export function resolveLinks(text, notes) {
+  const byTitle = new Map(notes.map((n) => [n.title.toLowerCase(), n]))
+  return text
+    .replace(/\[([^\][]+)\]\([^)]*\)/g, "$1")
+    .replace(/\[\[([^\][]+)\]\]/g, (whole, title) => {
+      const note = byTitle.get(title.trim().toLowerCase())
+      return note ? `[${note.title}](${note.url})` : title.trim()
+    })
 }
