@@ -208,7 +208,7 @@ function chat() {
   </div>
   <div class="chat-log" aria-live="polite"></div>
   <form class="chat-form">
-    <input class="chat-input" type="text" placeholder="Ask anything, or describe a note you half remember" autocomplete="off" aria-label="Your question">
+    <textarea class="chat-input" rows="1" placeholder="Ask anything, or describe a note you half remember" autocomplete="off" aria-label="Your question"></textarea>
     <button class="icon-button chat-send" aria-label="Send">${icon("send")}</button>
   </form>
   <p class="chat-disclaimer">Answers are written by an AI reading the notes, and it can get things wrong. Follow the links and check the sources.</p>

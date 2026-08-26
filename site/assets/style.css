@@ -1572,8 +1572,8 @@ body.is-graph .graph-head .lede {
   z-index: 56;
   display: flex;
   flex-direction: column;
-  width: min(24rem, calc(100vw - 2.5rem));
-  height: min(30rem, calc(100vh - 8rem));
+  width: min(28rem, calc(100vw - 2.5rem));
+  height: min(36rem, calc(100vh - 8rem));
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 0.75rem;
@@ -1647,7 +1647,9 @@ body.is-graph .graph-head .lede {
 
 .chat-form {
   display: flex;
-  align-items: center;
+  /* Bottom, not centre: the box grows upward as you type and the send button
+     should stay put on the last line rather than drift with it. */
+  align-items: flex-end;
   gap: 0.35rem;
   padding: 0.5rem;
   border-top: 1px solid var(--border);
@@ -1664,7 +1666,15 @@ body.is-graph .graph-head .lede {
   border-radius: 0.5rem;
   background: var(--bg-center);
   color: var(--text);
+  /* A textarea inherits neither, so both have to be said out loud or the box
+     renders in the browser monospace default at the wrong size. */
   font: 0.875rem/1.4 var(--font-ui);
+  /* Grows with the text up to here, then scrolls. Roughly six lines, which is
+     more than any question needs and still leaves the log the room. */
+  max-height: 8rem;
+  /* The script sets the height, so the drag handle would only fight it. */
+  resize: none;
+  overflow-y: auto;
 }
 .chat-input:focus-visible {
   outline: 2px solid var(--accent);
@@ -1684,7 +1694,7 @@ body.is-graph .graph-head .lede {
     left: 0.75rem;
     bottom: 0.75rem;
     width: auto;
-    height: min(30rem, calc(100vh - 2rem));
+    height: min(36rem, calc(100vh - 2rem));
   }
   /* The panel covers the whole width on a phone, so the button underneath it
      would only be something to hit by accident. */

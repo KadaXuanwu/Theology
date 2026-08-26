@@ -8,7 +8,7 @@ import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
 import { BODY_BUDGET, buildPrompt, catalogue, selectNotes } from "../worker/context.js"
-import { render } from "./assets/chat.js"
+import { loadHistory, render, saveHistory } from "./assets/chat.js"
 import { parseFrontmatter, slugify } from "./lib/content.mjs"
 import { createRenderer, htmlToText } from "./lib/markdown.mjs"
 import {
@@ -1616,6 +1616,63 @@ console.log("the chat never turns model output into markup of its own")
   )
   check("raw html is escaped", render("<img src=x onerror=alert(1)>").includes("&lt;img"))
   check("an absolute url is not linked", !render("[out](https://example.com)").includes("<a"))
+}
+
+console.log("the conversation survives following a link out of the page")
+{
+  // Every good answer links other notes, so the reader navigates away almost
+  // immediately. Losing the thread at that exact moment is what made the chat
+  // feel like it was throwing history away.
+  const store = new Map()
+  globalThis.sessionStorage = {
+    getItem: (k) => store.get(k) ?? null,
+    setItem: (k, v) => store.set(k, v),
+  }
+
+  const thread = [
+    { role: "user", text: "who wrote hebrews" },
+    { role: "assistant", text: "The vault does not have a note on that yet." },
+  ]
+  saveHistory(thread)
+  check("a thread saved on one page loads on the next", JSON.stringify(loadHistory()) === JSON.stringify(thread))
+
+  store.set("chat-history", "{not json")
+  check("garbage in storage is ignored rather than thrown", loadHistory().length === 0)
+
+  store.set("chat-history", JSON.stringify(["nonsense", { role: "user" }]))
+  check("entries with no text are dropped", loadHistory().length === 0)
+
+  // Private browsing and blocked site data make the accessor itself throw.
+  globalThis.sessionStorage = {
+    getItem() {
+      throw new Error("blocked")
+    },
+    setItem() {
+      throw new Error("blocked")
+    },
+  }
+  check("storage that throws leaves the chat working, just forgetful", loadHistory().length === 0)
+  saveHistory(thread) // must not throw
+  check("and saving into blocked storage is survivable", true)
+  delete globalThis.sessionStorage
+}
+
+console.log("the question box grows with the question")
+{
+  const sheet = await readFile(resolve(repoRoot, "site", "assets", "style.css"), "utf8")
+  const markup = await readFile(resolve(repoRoot, "site", "lib", "templates.mjs"), "utf8")
+
+  // An input never wraps, so a long question scrolls sideways out of sight.
+  check("the box is a textarea, not a single line input", /<textarea class="chat-input"/.test(markup))
+
+  const inputRule = sheet.match(/^\.chat-input \{[^}]*\}/m)?.[0] ?? ""
+  check("it grows only to a ceiling", /max-height: 8rem;/.test(inputRule), inputRule.replace(/\s+/g, " "))
+  check("and scrolls past it", /overflow-y: auto;/.test(inputRule))
+  // The script owns the height, so a drag handle would only fight it.
+  check("the drag handle is off", /resize: none;/.test(inputRule))
+
+  const formRule = sheet.match(/^\.chat-form \{[^}]*\}/m)?.[0] ?? ""
+  check("the send button stays on the last line as the box grows", /align-items: flex-end;/.test(formRule))
 }
 
 console.log(failures === 0 ? "\nAll checks passed." : `\n${failures} check(s) failed.`)
