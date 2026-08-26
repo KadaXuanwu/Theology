@@ -7,11 +7,16 @@
 // well: the only way to find out is to run the same questions through both.
 
 // How long to wait for the first token before giving up. Measured against the
-// live endpoint, the same question answers in 0.7s most of the time and has
-// taken 56s, all with a valid answer at the end. A reader will not wait that
-// long, and a bubble that sits blinking for a minute reads as broken, so a
-// slow answer is turned into a short honest one instead.
-const FIRST_TOKEN_MS = 25_000
+// live endpoint, roughly a quarter of requests take over twenty seconds while
+// the rest answer in two or three, and spacing them out does not change that.
+// It is the free tier, not anything here.
+//
+// So a stall is not waited out, it is abandoned and tried again. With about
+// seven attempts in ten landing in the fast group, two attempts takes outright
+// failures from roughly a third to under a tenth, and the reader waits about
+// fifteen seconds in the bad case rather than twenty five and a dead end.
+const FIRST_TOKEN_MS = 12_000
+const ATTEMPTS = 2
 
 // Shown to the reader, so it says what to do rather than naming a timeout.
 export const TOO_SLOW = "That took too long to come back. Try asking again."
@@ -58,14 +63,21 @@ const gemini = {
     const model = env.MODEL || gemini.defaultModel
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse`
 
-    // Aborts only while waiting for the first token. Once text is flowing the
-    // timer is cleared, so a long answer is never cut off part way.
-    const abort = new AbortController()
-    let waiting = setTimeout(() => abort.abort(), FIRST_TOKEN_MS)
+    for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
+      stats.attempts = attempt
+      const last = attempt === ATTEMPTS
 
-    let response
-    try {
-      response = await fetch(endpoint, {
+      // Aborts only while waiting for the first token. Once text is flowing the
+      // timer is cleared, so a long answer is never cut off part way. It stays
+      // armed across the body read, because fetch resolves as soon as headers
+      // arrive and a stalled answer stalls after that.
+      const abort = new AbortController()
+      let waiting = setTimeout(() => abort.abort(), FIRST_TOKEN_MS)
+      let started = false
+
+      let response
+      try {
+        response = await fetch(endpoint, {
         method: "POST",
         signal: abort.signal,
         headers: {
@@ -96,20 +108,44 @@ const gemini = {
           },
         }),
       })
-    } catch (error) {
-      clearTimeout(waiting)
-      if (error.name === "AbortError") throw new Error(TOO_SLOW)
-      throw error
-    }
+      } catch (error) {
+        clearTimeout(waiting)
+        // A stall is worth one more go: about a quarter of requests to the free
+        // tier take over twenty seconds while the rest answer in two or three,
+        // so a second attempt usually lands in the fast group.
+        if (error.name === "AbortError" && !last) continue
+        if (error.name === "AbortError") throw new Error(TOO_SLOW)
+        throw error
+      }
 
-    if (!response.ok) {
-      clearTimeout(waiting)
-      throw new Error(`Gemini ${response.status}: ${(await response.text()).slice(0, 200)}`)
-    }
+      if (!response.ok) {
+        clearTimeout(waiting)
+        throw new Error(`Gemini ${response.status}: ${(await response.text()).slice(0, 200)}`)
+      }
 
+      try {
+        yield* gemini.read(response, stats, () => {
+          clearTimeout(waiting)
+          waiting = null
+          started = true
+        })
+        return
+      } catch (error) {
+        clearTimeout(waiting)
+        // Only retry a stall before any text existed. Once a word has been
+        // sent the reader is watching it arrive, and starting over would
+        // rewrite what they have already read.
+        if (error.name === "AbortError" && !started && !last) continue
+        if (error.name === "AbortError" && !started) throw new Error(TOO_SLOW)
+        throw error
+      }
+    }
+  },
+
+  // Split out so the retry loop above stays readable.
+  async *read(response, stats, onFirstToken) {
     for await (const payload of sseLines(response)) {
-      clearTimeout(waiting)
-      waiting = null
+      onFirstToken()
       if (payload === "[DONE]") break
       let parsed
       try {

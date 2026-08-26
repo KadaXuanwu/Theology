@@ -1807,6 +1807,35 @@ console.log("a slow or failed answer is handled as a failure, not as an answer")
 
   check("the too-slow message tells the reader what to do", /Try asking again/.test(TOO_SLOW))
   check("and does not talk about timeouts", !/timeout|abort/i.test(TOO_SLOW), TOO_SLOW)
+
+  // Measured on the live endpoint: about a quarter of free tier requests take
+  // over twenty seconds while the rest answer in two or three, and spacing
+  // them out does not change it. Waiting one out is worse than starting over.
+  const providers = await readFile(resolve(repoRoot, "worker", "providers.js"), "utf8")
+  check("a stalled request is retried rather than waited out", /const ATTEMPTS = 2/.test(providers))
+  check("and abandoned well before a reader would give up", /const FIRST_TOKEN_MS = 12_000/.test(providers))
+  check(
+    "but never retried once text has started, which would rewrite the answer",
+    /!started && !last/.test(providers),
+  )
+
+  // The log is scrolled twice on purpose. The immediate assignment forces
+  // layout and is correct for what exists now, and works in a tab the browser
+  // is not painting, where requestAnimationFrame never fires. The deferred one
+  // catches height added after layout, which is what the caret does. Doing
+  // only the deferred half leaves the log stuck wherever it was.
+  const scroller = chat.match(/const scrollToEnd = \(\) => \{[\s\S]*?\n  \}/)?.[0] ?? ""
+  check("the log is scrolled immediately", /^\s*log\.scrollTop = log\.scrollHeight$/m.test(scroller), scroller)
+  check("and again after the next frame", /requestAnimationFrame/.test(scroller))
+  check("a new message always scrolls into view", /\/\/ Unconditional/.test(chat))
+
+  // Following is state, not a per chunk measurement: the deferred scroll means
+  // measuring during streaming reads the position from before it and wrongly
+  // concludes the reader has scrolled away.
+  check("whether to follow is held as state", /let following = true/.test(chat))
+  check("and only a real scroll changes it", /log\.addEventListener\("scroll"/.test(chat))
+  // \s+ rather than \n: git hands these files back with CRLF on Windows.
+  check("asking something always re-follows", /following = true\s+say\("user"/.test(chat))
 }
 
 console.log(failures === 0 ? "\nAll checks passed." : `\n${failures} check(s) failed.`)

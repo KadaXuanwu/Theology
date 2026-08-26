@@ -132,18 +132,48 @@ function init() {
     ask(question)
   })
 
+  // Twice, deliberately. Reading scrollHeight forces layout, so the immediate
+  // assignment is correct for what exists now and works even in a tab the
+  // browser is not painting, where requestAnimationFrame never runs. The
+  // deferred one then catches height that appears after layout, which is what
+  // the streaming caret and the slow notice add.
+  const scrollToEnd = () => {
+    log.scrollTop = log.scrollHeight
+    requestAnimationFrame(() => {
+      log.scrollTop = log.scrollHeight
+    })
+  }
+
+  // Whether arriving text should keep the log pinned to the end. Held as state
+  // rather than measured per chunk: the scroll above is deferred to the next
+  // frame, so measuring during streaming reads the position from before it and
+  // concludes the reader has scrolled away when they have not.
+  //
+  // Only a real scroll changes it, which is also the behaviour worth having:
+  // scroll up to re-read something and the answer stops chasing you, scroll
+  // back to the bottom and it resumes.
+  let following = true
+  const atBottom = () => log.scrollHeight - log.scrollTop - log.clientHeight < 40
+  log.addEventListener("scroll", () => {
+    following = atBottom()
+  })
+
   function say(role, text) {
     const message = document.createElement("div")
     message.className = `chat-message chat-${role}`
     message.innerHTML = render(text, root)
     log.append(message)
-    log.scrollTop = log.scrollHeight
+    // Unconditional: a message you just sent should always be in view.
+    scrollToEnd()
     return message
   }
 
   async function ask(question) {
     waiting = true
     form.classList.add("is-waiting")
+    // Asking something is a decision to watch the reply, whatever the reader
+    // had scrolled to before.
+    following = true
     say("user", question)
 
     const answer = say("assistant", "")
@@ -183,7 +213,7 @@ function init() {
         if (done) break
         text += decoder.decode(value, { stream: true })
         answer.innerHTML = render(text, root)
-        log.scrollTop = log.scrollHeight
+        if (following) scrollToEnd()
       }
     } catch (error) {
       failed = !text
