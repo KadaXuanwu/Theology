@@ -1639,6 +1639,21 @@ body.is-graph .graph-head .lede {
   background: var(--muted);
   animation: chat-caret 1s steps(2) infinite;
 }
+/* A slow answer looks identical to a broken one when all you can see is a
+   blinking caret, so after a few seconds it says so. */
+.chat-assistant[data-slow]::before {
+  content: "Still working, this one is taking a while.";
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* A failure is not something the assistant said, so it should not look like
+   it. Muted and marked, and it is never kept in the conversation. */
+.chat-failed {
+  border-style: dashed;
+  color: var(--muted);
+}
+
 @keyframes chat-caret {
   50% {
     opacity: 0;
