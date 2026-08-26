@@ -82,7 +82,7 @@ and needs a site rebuild instead.
 | Score weights | `context.js` | title 10, tags 5, body 1 (max 5) | How notes are ranked. A word in a title says what a note is about; a word in the body may be one passing mention. |
 | `STOPWORDS` | `context.js` | ~90 words | Words too common to say anything about relevance. |
 | Excerpt length | `site/build.mjs`, `trimTo(..., 155)` | 155 chars | The description in each catalogue line. **Rebuild the site, not the Worker.** |
-| `maxOutputTokens` | `providers.js` | 800 | Length ceiling on an answer. |
+| `maxOutputTokens` | `providers.js` | 3000 | **Not the length of an answer.** Thinking is spent out of the same budget. At 800 the model was measured spending 767 thinking and answering in the 29 left, truncating mid sentence. Answers run 30 to 80 tokens; the rest is headroom for thinking. |
 | `FIRST_TOKEN_MS`, `ATTEMPTS` | `providers.js` | 12s, 2 | How long a stalled request waits before being abandoned and retried. Measured on the live endpoint, about a quarter of free tier requests take over twenty seconds while the rest answer in two or three, and spacing them out does not change it. Only a stall before any text retries; once a word has been sent, restarting would rewrite what the reader is watching. |
 | `temperature` | `providers.js` | 0.2 | Low, because the job is reading supplied text accurately, not writing something new. |
 | `MODEL`, `PROVIDER` | `wrangler.toml` | `gemini-3.5-flash-lite`, `gemini` | The model. `providers.js` holds one async generator per provider. |
@@ -125,6 +125,20 @@ it.
 **Follow-ups rank against the previous answer.** "Tell me more about that"
 carries no keywords, so on its own it scored nothing and dropped the very notes
 under discussion.
+
+**Thinking is paid for out of `maxOutputTokens`.** This is the one that cost the
+most time to find, because it does not look like a bug in anything we wrote. The
+answer simply stops mid sentence, or comes back empty, and the request is a
+perfectly successful 200.
+
+Measured on the live endpoint at a ceiling of 800: as questions got harder,
+`thoughtsTokenCount` climbed 259, 522, 537, 767 while `candidatesTokenCount`
+was squeezed 72, 56, 77, 29. The last two total 796 against the ceiling of 800.
+The answer was being crushed out by the thinking.
+
+`wrangler tail` is what makes this visible: the logged usage block carries both
+counts. If answers ever truncate again, read those two numbers before suspecting
+anything else.
 
 **Errors reach the reader as a sentence, and the log as the truth.** A quota
 rejection used to arrive in the chat bubble as raw API JSON telling a visitor

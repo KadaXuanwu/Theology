@@ -118,7 +118,17 @@ const gemini = {
             // Low, because the job is reading supplied text accurately rather
             // than writing something new.
             temperature: 0.2,
-            maxOutputTokens: 800,
+            // Thinking is spent out of this same budget, so this is not the
+            // length of an answer, it is the length of thinking plus answer.
+            // At 800 the model was measured spending 767 of it thinking and
+            // answering in the 29 that were left, which truncates mid sentence
+            // and sometimes returns nothing at all. Answers run 30 to 80
+            // tokens, so almost all of this is headroom for thinking.
+            //
+            // Raising it does not make answers longer, the prompt does that,
+            // and does not make it think more, thinking_level does that. It
+            // only stops the budget running out before the answer starts.
+            maxOutputTokens: 3000,
             // Gemini 3.x thinks by default. Reading supplied notes and citing
             // them is not a reasoning task, and the thinking was the likeliest
             // source of answers that took the better part of a minute.

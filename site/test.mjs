@@ -1831,6 +1831,14 @@ console.log("a slow or failed answer is handled as a failure, not as an answer")
   check("an empty answer is caught rather than streamed", /if \(first\.done\)/.test(worker))
   check("with the reason kept in the log", /finishReason: \$\{stats\.finishReason/.test(worker))
 
+  // Thinking is spent out of maxOutputTokens, so this is not the length of an
+  // answer. At 800 the model was measured spending 767 thinking and answering
+  // in the 29 that were left, which truncates mid sentence. Answers run 30 to
+  // 80 tokens, so the ceiling has to clear observed thinking by a wide margin.
+  const ceiling = Number(providers.match(/maxOutputTokens: (\d+)/)?.[1])
+  check("the output ceiling leaves room to think", ceiling >= 2000, `maxOutputTokens = ${ceiling}`)
+  check("and the code says why, not just what", /Thinking is spent out of this same budget/.test(providers))
+
   // The detail is not lost, it moves. A wrong model id used to announce itself
   // in the chat, which is how the thinking_level mistake was caught.
   check("the status and the API's own words still reach the log", /console\.log\(`gemini \$\{response\.status\}/.test(providers))
