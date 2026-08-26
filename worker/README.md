@@ -126,6 +126,26 @@ it.
 carries no keywords, so on its own it scored nothing and dropped the very notes
 under discussion.
 
+**No embeddings, and the reason is not that keyword scoring is good.** It is
+not, particularly: a question phrased entirely in synonyms ranked the right note
+seventh. Embeddings would likely have ranked it first, since paraphrase is
+exactly what they are for.
+
+The reason is that the catalogue makes a bad ranking survivable. Every note's
+title, tags and description are in the prompt whatever the scorer picked, so a
+miss costs the note's full text, not the note. In that synonym test the answer
+still found it. Embeddings would improve which bodies get sent, not whether the
+right note can be named, and they cost a second copy of the vault that has to be
+regenerated on every edit and goes quietly stale when it is not.
+
+Revisit on either of two triggers, neither of which has fired. **Around 1,000
+notes**, where the catalogue reaches roughly 57,000 tokens and no longer fits in
+a prompt, so the catalogue itself needs searching. Or **if answers start naming
+confidently wrong notes**, which is retrieval failing in a way the catalogue
+cannot absorb. It would be one build step writing vectors to a file, and one
+extra API call per question to embed it; at this size the Worker can hold the
+vectors in memory and no vector database is involved.
+
 **Thinking is paid for out of `maxOutputTokens`.** This is the one that cost the
 most time to find, because it does not look like a bug in anything we wrote. The
 answer simply stops mid sentence, or comes back empty, and the request is a
