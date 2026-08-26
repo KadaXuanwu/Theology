@@ -86,11 +86,13 @@ const gemini = {
             // them is not a reasoning task, and the thinking was the likeliest
             // source of answers that took the better part of a minute.
             //
-            // snake_case, unlike everything around it: the API rejects
-            // "thinkingLevel" outright. Left out entirely when THINKING_LEVEL
-            // is unset, so a model that does not know the field can be handled
-            // by blanking a variable rather than by editing this file.
-            ...(env.THINKING_LEVEL ? { thinking_level: env.THINKING_LEVEL } : {}),
+            // It nests inside thinkingConfig. Put directly in generationConfig
+            // under either spelling the API answers "Cannot find field", which
+            // reads like the feature is unsupported rather than misplaced.
+            // 3.x takes thinkingLevel; 2.5 models take thinkingBudget instead.
+            // Left out entirely when THINKING_LEVEL is blank, so a model that
+            // does not know the field is a config change, not a code change.
+            ...(env.THINKING_LEVEL ? { thinkingConfig: { thinkingLevel: env.THINKING_LEVEL } } : {}),
           },
         }),
       })
