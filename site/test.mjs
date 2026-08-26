@@ -27,6 +27,7 @@ import {
   fitCamera,
   labelExtent,
   neighbourhood,
+  ringDash,
   seededRandom,
   stepForces,
   wrapLabel,
@@ -482,6 +483,28 @@ console.log("labels clear the ring and hold their size")
   )
   check("and the drawing uses the ring extent, not the bare radius", source.includes("r + RING_EXTENT + LABEL.gap"))
   check("the ring is drawn at the same radius the label allows for", source.includes("arc(x, y, r + RING.gap"))
+
+  // The note the graph was opened for is ringed, and so is whatever the pointer
+  // is on. One solid, one dotted, or the reader cannot tell where they are from
+  // what they are reaching for.
+  const ringBlock = source.match(/if \(seeded\.has\(node\.id\) \|\| touched\) \{[\s\S]*?\n      \}/)?.[0] ?? ""
+  check("hover and drag are the same state to the ring", source.includes("const touched = node === hovered || node === dragging"))
+  check("the dots go on only for that state", /if \(touched\) \{[\s\S]*?setLineDash\(ringDash\(/.test(ringBlock), ringBlock.length > 0 ? "found" : "no ring block")
+  check("and come off again, so the seeded ring stays solid", ringBlock.includes("ctx.setLineDash([])"))
+  check("the round cap is put back too, or the links inherit it", ringBlock.includes('ctx.lineCap = "butt"'))
+
+  // A dash length that does not divide the circumference leaves a long or a
+  // short piece at the seam, and node radii differ, so every ring would show a
+  // different join.
+  for (const radius of [4, 7.5, 11, 26]) {
+    const [ink, gap] = ringDash(radius)
+    const steps = (2 * Math.PI * radius) / (ink + gap)
+    check(
+      `the dots close the ring at r=${radius}`,
+      Math.abs(steps - Math.round(steps)) < 1e-9 && ink > 0 && gap > ink,
+      `${steps.toFixed(6)} steps of ${ink.toFixed(2)} on, ${gap.toFixed(2)} off`,
+    )
+  }
 
   // Bolding on hover re-measures the text, so the label rewraps and reads as
   // though it grew. The weight stays fixed and hover shows through colour.

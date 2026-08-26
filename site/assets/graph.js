@@ -49,6 +49,18 @@ const labelFont = (size) => `400 ${size}px system-ui, sans-serif`
 const RING = { gap: 3, width: 1.5 }
 export const RING_EXTENT = RING.gap + RING.width
 
+// A dotted ring has to close on itself. A fixed dot length would leave a long
+// or a short piece where the circle meets its own start, and node radii differ,
+// so the circumference is split into whole steps instead and a third of each
+// step is inked. Every ring comes out even whatever size the node is.
+const DOT = { step: 5, ink: 0.34 }
+export function ringDash(radius) {
+  const circumference = 2 * Math.PI * radius
+  const steps = Math.max(6, Math.round(circumference / DOT.step))
+  const step = circumference / steps
+  return [step * DOT.ink, step * (1 - DOT.ink)]
+}
+
 // Wraps on words, and trims the last line rather than dropping the rest.
 export function wrapLabel(measure, text, maxWidth, maxLines) {
   const words = String(text).split(" ").filter(Boolean)
@@ -444,7 +456,10 @@ export function mount(el, data, options = {}) {
       ctx.arc(x, y, r, 0, Math.PI * 2)
       ctx.fill()
 
-      if (seeded.has(node.id) || node === hovered) {
+      // Under the pointer, or being dragged. Both mean the same thing to the
+      // reader: this is the node I am touching, not the node I am on.
+      const touched = node === hovered || node === dragging
+      if (seeded.has(node.id) || touched) {
         // A stroke straddles its path, so each band is centred half its own
         // width out from where it starts: the gap runs r to r + gap, the ring
         // carries on from there. The gap is painted in the surface colour to
@@ -454,11 +469,20 @@ export function mount(el, data, options = {}) {
         ctx.beginPath()
         ctx.arc(x, y, r + RING.gap / 2, 0, Math.PI * 2)
         ctx.stroke()
+        // The note the graph was opened for keeps the solid ring. A node the
+        // pointer is on gets a dotted one at the same radius, so reaching for
+        // something never looks like having arrived there.
         ctx.strokeStyle = colors[node.kind] ?? colors.note
         ctx.lineWidth = RING.width
+        if (touched) {
+          ctx.setLineDash(ringDash(r + RING.gap + RING.width / 2))
+          ctx.lineCap = "round"
+        }
         ctx.beginPath()
         ctx.arc(x, y, r + RING.gap + RING.width / 2, 0, Math.PI * 2)
         ctx.stroke()
+        ctx.setLineDash([])
+        ctx.lineCap = "butt"
       }
 
       const showLabel = node === hovered || (near && near.has(node.id)) || (!hovered && labelEveryone)
