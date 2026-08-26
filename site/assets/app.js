@@ -524,9 +524,12 @@ let rebuildGraphs = () => {}
     const closeIcon =
       '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>'
 
-    // Switching between the list and the map, or coming back to the tags from
-    // the tree, keeps whatever combination the reader has built.
-    const carriers = [...document.querySelectorAll(".view-switch a.view-tab, .tree-tags a")]
+    // Every way out of here that leads back into the tags keeps whatever
+    // combination the reader has built: the switch in the header, the arrows
+    // that enlarge and shrink the graph, and the entry in the tree.
+    const carriers = [
+      ...document.querySelectorAll(".view-switch a.view-tab, .panel-expand, .tree-tags a"),
+    ]
     const carrierPath = new Map(carriers.map((link) => [link, link.getAttribute("href").split("?")[0]]))
 
     function paint() {

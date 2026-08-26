@@ -1235,7 +1235,13 @@ console.log("tags are a way in, and they combine")
   check("the map view carries the same controls the list does", /class="tag-picker"/.test(map) && /class="tag-mode"/.test(map) && /class="tag-selected"/.test(map))
   // Otherwise switching views, or going back to the tags from the tree, throws
   // away the combination the reader just built.
-  check("both switches carry the selection with them", /carriers\b[\s\S]*?\.view-switch a\.view-tab, \.tree-tags a/.test(app))
+  check(
+    "both switches carry the selection with them",
+    /carriers\b[\s\S]*?\.view-switch a\.view-tab, \.panel-expand, \.tree-tags a/.test(app),
+  )
+  // The arrows are the other way between the two views, and they used to drop
+  // the combination on the floor while the header switch kept it.
+  check("so do the arrows that enlarge and shrink the graph", /\.panel-expand/.test(app))
   check("and so does the tree entry", /for \(const link of carriers\) link\.setAttribute\("href", `\$\{carrierPath\.get\(link\)\}\$\{search\}`\)/.test(app))
   // It has to happen on load as well as on a change, or a reader who arrives on
   // a shared link and switches views straight away loses what they arrived with.
