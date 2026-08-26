@@ -18,8 +18,24 @@
 const FIRST_TOKEN_MS = 12_000
 const ATTEMPTS = 2
 
-// Shown to the reader, so it says what to do rather than naming a timeout.
+// Shown to the reader, so they say what to do rather than naming a timeout or
+// quoting an API. A quota rejection used to reach the page as a raw JSON blob
+// telling a visitor to go and check somebody else's billing details.
 export const TOO_SLOW = "That took too long to come back. Try asking again."
+export const TOO_BUSY = "A lot of questions just now. Try again in a minute."
+export const BROKEN = "The assistant is not working right now. Try again later."
+
+// Whatever went wrong, the reader gets a sentence. The status and the API's own
+// text go to the Worker log instead, where `wrangler tail` will show them.
+//
+// That is a deliberate trade: a misconfigured model id used to announce itself
+// in the chat bubble, which is how the thinking_level mistake was caught. It is
+// still just as visible, only in the log rather than on the public site.
+function readable(status) {
+  if (status === 429) return TOO_BUSY
+  if (status >= 500) return TOO_SLOW
+  return BROKEN
+}
 
 // Reads an SSE body and yields each `data:` payload as a string. Chunks arrive
 // split at arbitrary byte boundaries, so lines are buffered until complete.
@@ -120,7 +136,8 @@ const gemini = {
 
       if (!response.ok) {
         clearTimeout(waiting)
-        throw new Error(`Gemini ${response.status}: ${(await response.text()).slice(0, 200)}`)
+        console.log(`gemini ${response.status}: ${(await response.text()).slice(0, 400)}`)
+        throw new Error(readable(response.status))
       }
 
       try {

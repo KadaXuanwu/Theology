@@ -17,7 +17,14 @@ const MAX_HISTORY = 8
 const MAX_HISTORY_CHARS = 6000
 
 // Requests one address may make per window, and how long the window is.
-const RATE_LIMIT = 12
+//
+// Six, down from twelve: Gemini's own free tier limit for this model is around
+// five a minute, measured by hitting it twice. Note the mismatch that cannot be
+// fixed here, though. This counter is per address, Gemini's quota is per
+// project, so three readers asking two questions each will exhaust it while
+// none of them comes close to this. That is what the quota message is for; this
+// limit only stops one address spending the whole allowance alone.
+const RATE_LIMIT = 6
 const RATE_WINDOW_MS = 60_000
 
 // How long a fetched corpus is reused before checking for a newer one. Notes

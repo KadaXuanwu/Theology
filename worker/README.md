@@ -63,7 +63,7 @@ and needs a site rebuild instead.
 | `temperature` | `providers.js` | 0.2 | Low, because the job is reading supplied text accurately, not writing something new. |
 | `MODEL`, `PROVIDER` | `wrangler.toml` | `gemini-3.6-flash`, `gemini` | The model. `providers.js` holds one async generator per provider. |
 | `THINKING_LEVEL` | `wrangler.toml` | `low` | Gemini 3.x thinks by default and this task does not need it. Set to `""` to stop sending the field, for a model that rejects it. It nests as `generationConfig.thinkingConfig.thinkingLevel`; put directly in `generationConfig` the API says "Cannot find field", which reads like the feature is missing rather than misplaced. Gemini 2.5 models want `thinkingBudget` here instead. |
-| `RATE_LIMIT`, `RATE_WINDOW_MS` | `index.js` | 12 per minute | Per address. In memory, so a speed bump rather than a guarantee. |
+| `RATE_LIMIT`, `RATE_WINDOW_MS` | `index.js` | 6 per minute | Per address. In memory, so a speed bump rather than a guarantee. Gemini's own free tier limit for Flash is around five a minute and is per project, not per address, so this cannot fully protect it. |
 | `MAX_QUESTION` | `index.js` | 1,000 chars | Longest question accepted. |
 | `MAX_HISTORY`, `MAX_HISTORY_CHARS` | `index.js` | 8 messages, 6,000 chars | How much conversation is sent back. |
 | `CORPUS_TTL_MS` | `index.js` | 10 min | How long a fetched vault is reused. Lower means notes appear sooner and more refetches. |
@@ -101,6 +101,17 @@ it.
 **Follow-ups rank against the previous answer.** "Tell me more about that"
 carries no keywords, so on its own it scored nothing and dropped the very notes
 under discussion.
+
+**Errors reach the reader as a sentence, and the log as the truth.** A quota
+rejection used to arrive in the chat bubble as raw API JSON telling a visitor
+to go and check somebody else's billing details. The status and the API's own
+text now go to `console.log`, which means `wrangler tail`, and the reader gets
+one plain line.
+
+Worth knowing when something breaks: a wrong model id or a misplaced field used
+to announce itself in the chat, which is how the `thinking_level` mistake was
+caught. It is still just as visible, only in the log now rather than on the
+public site. Run `wrangler tail` before assuming a deploy went cleanly.
 
 ## Caching
 

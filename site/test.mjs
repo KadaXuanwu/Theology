@@ -17,7 +17,7 @@ import {
   selectNotes,
 } from "../worker/context.js"
 import { splitAtOpenLink } from "../worker/index.js"
-import { TOO_SLOW } from "../worker/providers.js"
+import { BROKEN, TOO_BUSY, TOO_SLOW } from "../worker/providers.js"
 import { loadHistory, render, saveHistory } from "./assets/chat.js"
 import { parseFrontmatter, slugify } from "./lib/content.mjs"
 import { createRenderer, htmlToText } from "./lib/markdown.mjs"
@@ -1787,6 +1787,7 @@ console.log("a slow or failed answer is handled as a failure, not as an answer")
   const sheet = await readFile(resolve(repoRoot, "site", "assets", "style.css"), "utf8")
   const chat = await readFile(resolve(repoRoot, "site", "assets", "chat.js"), "utf8")
   const worker = await readFile(resolve(repoRoot, "worker", "index.js"), "utf8")
+  const providers = await readFile(resolve(repoRoot, "worker", "providers.js"), "utf8")
 
   // The same question has answered in 0.7s and in 56s against the live
   // endpoint. A blinking caret alone cannot tell those apart from a hang.
@@ -1808,10 +1809,29 @@ console.log("a slow or failed answer is handled as a failure, not as an answer")
   check("the too-slow message tells the reader what to do", /Try asking again/.test(TOO_SLOW))
   check("and does not talk about timeouts", !/timeout|abort/i.test(TOO_SLOW), TOO_SLOW)
 
+  // A quota rejection used to arrive in the bubble as raw API JSON telling a
+  // visitor to go and check somebody else's billing details.
+  for (const [name, message] of [["too busy", TOO_BUSY], ["broken", BROKEN], ["too slow", TOO_SLOW]]) {
+    check(
+      `the "${name}" message is a sentence, not an API response`,
+      !/[{}]|quota|billing|http|gemini|\d{3}/i.test(message),
+      message,
+    )
+  }
+  check("a quota rejection says when to come back", /try again in a minute/i.test(TOO_BUSY))
+
+  // The detail is not lost, it moves. A wrong model id used to announce itself
+  // in the chat, which is how the thinking_level mistake was caught.
+  check("the status and the API's own words still reach the log", /console\.log\(`gemini \$\{response\.status\}/.test(providers))
+
+  // Gemini's free tier limit for Flash is around five a minute, measured. Ours
+  // was twelve, so it was not protecting the quota at all.
+  const limit = Number(worker.match(/const RATE_LIMIT = (\d+)/)?.[1])
+  check("our own limit is not looser than the model's", limit <= 6, `RATE_LIMIT = ${limit}`)
+
   // Measured on the live endpoint: about a quarter of free tier requests take
   // over twenty seconds while the rest answer in two or three, and spacing
   // them out does not change it. Waiting one out is worse than starting over.
-  const providers = await readFile(resolve(repoRoot, "worker", "providers.js"), "utf8")
   check("a stalled request is retried rather than waited out", /const ATTEMPTS = 2/.test(providers))
   check("and abandoned well before a reader would give up", /const FIRST_TOKEN_MS = 12_000/.test(providers))
   check(
