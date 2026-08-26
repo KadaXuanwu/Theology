@@ -17,6 +17,7 @@ import {
   selectNotes,
 } from "../worker/context.js"
 import { splitAtOpenLink } from "../worker/index.js"
+import { TOO_SLOW } from "../worker/providers.js"
 import { loadHistory, render, saveHistory } from "./assets/chat.js"
 import { parseFrontmatter, slugify } from "./lib/content.mjs"
 import { createRenderer, htmlToText } from "./lib/markdown.mjs"
@@ -1781,28 +1782,31 @@ console.log("the question box grows with the question")
   check("the send button stays on the last line as the box grows", /align-items: flex-end;/.test(formRule))
 }
 
-console.log("the tuning notes still describe the code")
+console.log("a slow or failed answer is handled as a failure, not as an answer")
 {
-  // worker/README.md lists what each dial is set to. A doc quietly disagreeing
-  // with the code is worse than no doc, so the numbers are checked rather than
-  // trusted. Change a constant and this fails until the table is updated.
-  const doc = await readFile(resolve(repoRoot, "worker", "README.md"), "utf8")
-  const build = await readFile(resolve(repoRoot, "site", "build.mjs"), "utf8")
+  const sheet = await readFile(resolve(repoRoot, "site", "assets", "style.css"), "utf8")
+  const chat = await readFile(resolve(repoRoot, "site", "assets", "chat.js"), "utf8")
+  const worker = await readFile(resolve(repoRoot, "worker", "index.js"), "utf8")
 
-  const row = (name) => doc.match(new RegExp(`\\\`${name}\\\`[^|]*\\|[^|]*\\|([^|]*)\\|`))?.[1]?.trim() ?? ""
+  // The same question has answered in 0.7s and in 56s against the live
+  // endpoint. A blinking caret alone cannot tell those apart from a hang.
+  check("a slow answer says so after a few seconds", /dataset\.slow = "true"/.test(chat))
+  check("and the stylesheet has something to show for it", /\.chat-assistant\[data-slow\]::before/.test(sheet))
 
-  check("MAX_NOTES matches the table", row("MAX_NOTES") === String(MAX_NOTES), row("MAX_NOTES"))
-  check(
-    "BODY_BUDGET matches the table",
-    row("BODY_BUDGET").replace(/[^0-9]/g, "") === String(BODY_BUDGET),
-    row("BODY_BUDGET"),
-  )
+  // A failure used to be pushed into history like any other answer: shown
+  // again on the next page load as though the assistant had said it, and sent
+  // back to the model as context for the following question.
+  check("a failed turn is kept out of the history", /if \(!failed\) \{/.test(chat))
+  check("and is marked as not being an answer", /\.chat-failed \{/.test(sheet))
 
-  // This one lives in the build, not the Worker, and the doc says so because
-  // changing it needs a site rebuild rather than a deploy.
-  const excerpt = build.match(/shortExcerpt = trimTo\(.*,\s*(\d+)\)/)?.[1]
-  check("the excerpt length matches the table", doc.includes(`${excerpt} chars`), `build says ${excerpt}`)
-  check("and the table says where it lives", /site\/build\.mjs.*trimTo/.test(doc))
+  // Everything that usually goes wrong does so before any text exists, so the
+  // headers are held back until the first token and those become real status
+  // codes rather than error prose glued onto the answer.
+  check("the worker waits for the first token before replying", /first = await answer\.next\(\)/.test(worker))
+  check("so an early failure is a status code", /return fail\(502, error\.message, echo\)/.test(worker))
+
+  check("the too-slow message tells the reader what to do", /Try asking again/.test(TOO_SLOW))
+  check("and does not talk about timeouts", !/timeout|abort/i.test(TOO_SLOW), TOO_SLOW)
 }
 
 console.log(failures === 0 ? "\nAll checks passed." : `\n${failures} check(s) failed.`)

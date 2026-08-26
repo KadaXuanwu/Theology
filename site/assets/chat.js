@@ -149,7 +149,19 @@ function init() {
     const answer = say("assistant", "")
     answer.classList.add("is-streaming")
 
+    // A failed turn must not join the conversation. It used to be pushed into
+    // history like any other answer, which meant "Something went wrong" was
+    // saved, shown again on the next page load as though the assistant had
+    // said it, and sent back to the model as context for the next question.
+    let failed = false
     let text = ""
+
+    // Nothing arrives for a while on a slow answer, and a blinking caret alone
+    // reads as frozen rather than working.
+    const slow = setTimeout(() => {
+      if (!text) answer.dataset.slow = "true"
+    }, 4000)
+
     try {
       const response = await fetch(ENDPOINT, {
         method: "POST",
@@ -162,6 +174,8 @@ function init() {
         throw new Error(body.error ?? `The assistant is unavailable (${response.status}).`)
       }
 
+      if (!response.body) throw new Error("The assistant sent nothing back. Try again.")
+
       const reader = response.body.getReader()
       const decoder = new TextDecoder()
       while (true) {
@@ -172,15 +186,26 @@ function init() {
         log.scrollTop = log.scrollHeight
       }
     } catch (error) {
-      text = text || `Something went wrong: ${error.message}`
+      failed = !text
+      // A dropped connection surfaces as "Failed to fetch", which tells a
+      // reader nothing. Anything the Worker sent deliberately is already
+      // written for them.
+      const dropped = error instanceof TypeError
+      text = text || (dropped ? "Could not reach the assistant. Check your connection and try again." : error.message)
       answer.innerHTML = render(text, root)
+      answer.classList.add("chat-failed")
     }
 
+    clearTimeout(slow)
+    delete answer.dataset.slow
     answer.classList.remove("is-streaming")
-    history.push({ role: "user", text: question }, { role: "assistant", text })
-    // Only the last few turns are worth keeping; the Worker trims anyway.
-    if (history.length > 8) history.splice(0, history.length - 8)
-    saveHistory(history)
+
+    if (!failed) {
+      history.push({ role: "user", text: question }, { role: "assistant", text })
+      // Only the last few turns are worth keeping; the Worker trims anyway.
+      if (history.length > 8) history.splice(0, history.length - 8)
+      saveHistory(history)
+    }
 
     waiting = false
     form.classList.remove("is-waiting")

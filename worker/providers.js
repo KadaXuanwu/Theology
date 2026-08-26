@@ -6,6 +6,16 @@
 // because no benchmark can tell you which model reads this particular vault
 // well: the only way to find out is to run the same questions through both.
 
+// How long to wait for the first token before giving up. Measured against the
+// live endpoint, the same question answers in 0.7s most of the time and has
+// taken 56s, all with a valid answer at the end. A reader will not wait that
+// long, and a bubble that sits blinking for a minute reads as broken, so a
+// slow answer is turned into a short honest one instead.
+const FIRST_TOKEN_MS = 25_000
+
+// Shown to the reader, so it says what to do rather than naming a timeout.
+export const TOO_SLOW = "That took too long to come back. Try asking again."
+
 // Reads an SSE body and yields each `data:` payload as a string. Chunks arrive
 // split at arbitrary byte boundaries, so lines are buffered until complete.
 async function* sseLines(response) {
@@ -48,31 +58,51 @@ const gemini = {
     const model = env.MODEL || gemini.defaultModel
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse`
 
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        // Header rather than the documented ?key= query parameter, so the key
-        // never appears in a URL that something downstream might log.
-        "x-goog-api-key": env.GEMINI_API_KEY,
-      },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: `${system}\n\n${context}` }] },
-        contents: geminiContents(history, question),
-        generationConfig: {
-          // Low, because the job is reading supplied text accurately rather
-          // than writing something new.
-          temperature: 0.2,
-          maxOutputTokens: 800,
+    // Aborts only while waiting for the first token. Once text is flowing the
+    // timer is cleared, so a long answer is never cut off part way.
+    const abort = new AbortController()
+    let waiting = setTimeout(() => abort.abort(), FIRST_TOKEN_MS)
+
+    let response
+    try {
+      response = await fetch(endpoint, {
+        method: "POST",
+        signal: abort.signal,
+        headers: {
+          "content-type": "application/json",
+          // Header rather than the documented ?key= query parameter, so the key
+          // never appears in a URL that something downstream might log.
+          "x-goog-api-key": env.GEMINI_API_KEY,
         },
-      }),
-    })
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: `${system}\n\n${context}` }] },
+          contents: geminiContents(history, question),
+          generationConfig: {
+            // Low, because the job is reading supplied text accurately rather
+            // than writing something new.
+            temperature: 0.2,
+            maxOutputTokens: 800,
+            // Gemini 3.x thinks by default. Reading supplied notes and citing
+            // them is not a reasoning task, and the thinking was the likeliest
+            // source of answers that took the better part of a minute.
+            thinkingLevel: "low",
+          },
+        }),
+      })
+    } catch (error) {
+      clearTimeout(waiting)
+      if (error.name === "AbortError") throw new Error(TOO_SLOW)
+      throw error
+    }
 
     if (!response.ok) {
+      clearTimeout(waiting)
       throw new Error(`Gemini ${response.status}: ${(await response.text()).slice(0, 200)}`)
     }
 
     for await (const payload of sseLines(response)) {
+      clearTimeout(waiting)
+      waiting = null
       if (payload === "[DONE]") break
       let parsed
       try {

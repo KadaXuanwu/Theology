@@ -151,22 +151,40 @@ export default {
 
     const provider = pickProvider(env)
     const stats = {}
+    const answer = provider.stream({ ...prompt, history: asked.history }, env, stats)[Symbol.asyncIterator]()
+
+    // Wait for the first token before replying at all. Everything that usually
+    // goes wrong, a slow model, a bad key, a rejected model id, goes wrong
+    // before any text exists, and holding the headers back until then means
+    // those become a real status code the page can treat as a failure. Once
+    // headers are sent the only way to report a problem is to write it into
+    // the answer, where it reads as something the assistant said.
+    let first
+    try {
+      first = await answer.next()
+    } catch (error) {
+      return fail(502, error.message, echo)
+    }
+
     const stream = new ReadableStream({
       async start(controller) {
         const encode = new TextEncoder()
         const send = (text) => controller.enqueue(encode.encode(resolveLinks(text, corpus.notes)))
         let held = ""
+        const take = (chunk) => {
+          const [ready, rest] = splitAtOpenLink(held + chunk)
+          held = rest
+          if (ready) send(ready)
+        }
+
         try {
-          for await (const chunk of provider.stream({ ...prompt, history: asked.history }, env, stats)) {
-            const [ready, rest] = splitAtOpenLink(held + chunk)
-            held = rest
-            if (ready) send(ready)
-          }
+          if (!first.done) take(first.value)
+          for (let step = await answer.next(); !step.done; step = await answer.next()) take(step.value)
           if (held) send(held)
         } catch (error) {
           if (held) send(held)
-          // The stream has already started by the time most failures happen, so
-          // the message goes into the answer rather than into a status code.
+          // Only reachable once text is already flowing, so there is no status
+          // code left to use.
           controller.enqueue(encode.encode(`\n\n_Something went wrong: ${error.message}_`))
         }
         controller.close()
