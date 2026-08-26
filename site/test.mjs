@@ -7,7 +7,16 @@ import { readFile } from "node:fs/promises"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
-import { BODY_BUDGET, buildPrompt, catalogue, selectNotes } from "../worker/context.js"
+import {
+  BODY_BUDGET,
+  MAX_NOTES,
+  buildPrompt,
+  catalogue,
+  rankingText,
+  resolveLinks,
+  selectNotes,
+} from "../worker/context.js"
+import { splitAtOpenLink } from "../worker/index.js"
 import { loadHistory, render, saveHistory } from "./assets/chat.js"
 import { parseFrontmatter, slugify } from "./lib/content.mjs"
 import { createRenderer, htmlToText } from "./lib/markdown.mjs"
@@ -1555,13 +1564,14 @@ console.log("the chat only ever shows the model notes from the vault")
 
   check("the corpus carries every note", notes.length > 0 && notes.every((n) => n.text && n.url))
 
-  // Every answer has to be able to link the node it came from, so a note
-  // missing from the catalogue is a note the model can mention but not cite.
+  // Every answer has to be able to name the node it came from, so a note
+  // missing from the catalogue is a note the model can neither find nor cite.
   const listed = catalogue(notes)
-  check(
-    "the catalogue carries a url for every note",
-    notes.every((n) => listed.includes(n.url)),
-  )
+  check("the catalogue names every note", notes.every((n) => listed.includes(n.title)))
+
+  // A url is the title and section under the site's own slug rules, so sending
+  // it was the same thing twice: about 3,800 tokens per question at 300 notes.
+  check("and carries no urls, because the title already is one", notes.every((n) => !listed.includes(n.url)))
 
   // The question a bubble on a page gets asked most is about that page.
   const somewhere = notes[notes.length - 1]
@@ -1585,7 +1595,8 @@ console.log("the chat only ever shows the model notes from the vault")
   // reason this is safe to put on a research vault.
   const { system, context, used } = buildPrompt(corpus, { question: "who wrote hebrews", pageUrl: null })
   check("the prompt refuses to answer beyond the notes", /does not have a note on that yet/.test(system))
-  check("the prompt requires a link to every note named", /markdown link to its url/.test(system))
+  check("the prompt requires bracketed titles, not urls", /double square brackets/.test(system))
+  check("the prompt tells it to own up to notes it has not read", /have not read it here/.test(system))
   check("the prompt forbids taking a side", /Do not take a side/.test(system))
   check("the prompt flags unverified notes", /stub or drafted/.test(system))
   // A question narrows which bodies are sent, so what has to be true is that
@@ -1598,8 +1609,103 @@ console.log("the chat only ever shows the model notes from the vault")
   )
   check(
     "notes left out are still in the catalogue, so it can point at them",
-    notes.filter((n) => !used.includes(n.url)).every((n) => context.includes(n.url)),
+    notes.filter((n) => !used.includes(n.url)).every((n) => context.includes(n.title)),
   )
+}
+
+console.log("the chat sends a handful of notes, not everything that matched")
+{
+  const corpus = JSON.parse(await readFile(resolve(repoRoot, "dist", "chat-corpus.json"), "utf8"))
+  const notes = corpus.notes
+
+  // Keyword ranking is useful for the first few notes and noise after that.
+  // Before the cap a single question pulled in thirty-odd full note bodies,
+  // roughly half the token cost of a question at 300 notes, for nothing.
+  const wide = selectNotes(notes, "god evidence claim argument bible jesus", null)
+  check(`never more than ${MAX_NOTES} bodies`, wide.length <= MAX_NOTES, `${wide.length} notes`)
+  check("the cap is what bites, not the character budget", MAX_NOTES * 3000 < BODY_BUDGET)
+
+  // A description in nobody's vocabulary matches nothing. Reading order used to
+  // fill the gap, which under a cap means arbitrary notes: tokens spent on text
+  // unrelated to the question, and a model invited to answer from it.
+  const nothing = selectNotes(notes, "zzzqqq wobble frobnicate", null)
+  check("a question matching nothing sends no bodies at all", nothing.length === 0)
+
+  const { context: noneCtx } = buildPrompt(corpus, { question: "zzzqqq wobble frobnicate" })
+  check("and says so, rather than leaving the model to guess why", /Work from the catalogue above/.test(noneCtx))
+  check("while still listing every note", notes.every((n) => noneCtx.includes(n.title)))
+
+  // "Tell me more" has no keywords of its own. Without the previous answer it
+  // scores nothing and drops the very notes under discussion.
+  const thread = [
+    { role: "user", text: "what evidence is there for the resurrection" },
+    { role: "assistant", text: "See Jesus Resurrected, which sets out the case." },
+  ]
+  check("a follow-up is ranked against the last answer too", rankingText("tell me more", thread).includes("Jesus Resurrected"))
+  const followUp = buildPrompt(corpus, { question: "tell me more about that", history: thread })
+  check(
+    "so a bare follow-up still reaches the right note",
+    followUp.used.some((url) => url.includes("jesus-resurrected")),
+    followUp.used.join(", "),
+  )
+}
+
+console.log("a bracketed title becomes a link, and only a real one")
+{
+  const corpus = JSON.parse(await readFile(resolve(repoRoot, "dist", "chat-corpus.json"), "utf8"))
+  const notes = corpus.notes
+  const real = notes[0]
+
+  check(
+    "a real title resolves to its url",
+    resolveLinks(`See [[${real.title}]].`, notes) === `See [${real.title}](${real.url}).`,
+  )
+  // The model never sees a url now, so it cannot invent one. A title it made up
+  // must not become a link to somewhere that does not exist.
+  check("an invented title stays plain text", resolveLinks("See [[No Such Note]].", notes) === "See No Such Note.")
+  check("case and stray spaces still resolve", resolveLinks(`[[ ${real.title.toUpperCase()} ]]`, notes).includes(real.url))
+
+  // If it writes a markdown link anyway, the url can only have been guessed,
+  // and a guessed slug that looks plausible is a broken link the page would
+  // render without complaint. Flattened to words before titles are resolved.
+  check(
+    "a url the model invented is stripped, not linked",
+    resolveLinks("See [Jesus Existed](claims/wrong-slug).", notes) === "See Jesus Existed.",
+  )
+  check(
+    "and stripping does not damage the links we just made",
+    resolveLinks(`[[${real.title}]]`, notes) === `[${real.title}](${real.url})`,
+  )
+
+  // A [[Title]] arrives split across stream chunks, so the half-written bracket
+  // has to be held back or the reader watches "[[Jesus Exi" appear and vanish.
+  check("an unclosed bracket is held back", JSON.stringify(splitAtOpenLink("see [[Jesus Exi")) === '["see ","[[Jesus Exi"]')
+  check("a closed one flows straight through", splitAtOpenLink("see [[A]] ok")[1] === "")
+  check("two closed ones in a row also flow", splitAtOpenLink("[[A]] and [[B]] done")[1] === "")
+  check("a lone trailing bracket is held too", splitAtOpenLink("trailing [")[1] === "[")
+  // A half written markdown link matters as much: the page rebuilds its markup
+  // from the whole answer each chunk, so the two halves would meet there.
+  check("half a markdown link is held", splitAtOpenLink("see [Jesus](claims/je")[1] === "[Jesus](claims/je")
+  check("a whole one is not", splitAtOpenLink("see [Jesus](claims/x) ok")[1] === "")
+  // A bracket that never closes must not stall the stream forever.
+  check("but holding gives up eventually", splitAtOpenLink(`[[${"x".repeat(600)}`)[1] === "")
+
+  // The property that actually matters: however the network happens to slice
+  // the answer, the reader must end up with exactly what resolving it in one
+  // go would have given. Tested at chunk sizes down to a single character.
+  const answer = `That is [[${real.title}]] and [[Nope]]. Ignore [x](claims/bad).`
+  const whole = resolveLinks(answer, notes)
+  const mismatched = [1, 2, 3, 5, 7, 13, 50].filter((size) => {
+    let held = ""
+    let out = ""
+    for (let i = 0; i < answer.length; i += size) {
+      const [ready, rest] = splitAtOpenLink(held + answer.slice(i, i + size))
+      held = rest
+      if (ready) out += resolveLinks(ready, notes)
+    }
+    return out + (held ? resolveLinks(held, notes) : "") !== whole
+  })
+  check("streaming in any chunk size gives the same answer", mismatched.length === 0, `broke at ${mismatched}`)
 }
 
 console.log("the chat never turns model output into markup of its own")

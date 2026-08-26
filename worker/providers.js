@@ -44,7 +44,7 @@ const gemini = {
   // Override with MODEL in wrangler.toml.
   defaultModel: "gemini-3.5-flash-lite",
 
-  async *stream({ system, context, question, history }, env) {
+  async *stream({ system, context, question, history }, env, stats = {}) {
     const model = env.MODEL || gemini.defaultModel
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse`
 
@@ -80,6 +80,11 @@ const gemini = {
       } catch {
         continue // a keepalive or a partial frame, nothing to show
       }
+      // Arrives on the last chunk. Kept whole rather than picking out a field,
+      // because the one that reports cache reuse has been renamed before and
+      // an undefined here would look exactly like a cache that never hit.
+      if (parsed.usageMetadata) stats.usage = parsed.usageMetadata
+
       const parts = parsed.candidates?.[0]?.content?.parts ?? []
       for (const part of parts) if (part.text) yield part.text
     }
@@ -90,7 +95,7 @@ const workersAi = {
   label: "Workers AI",
   defaultModel: "@cf/meta/llama-3.1-8b-instruct",
 
-  async *stream({ system, context, question, history }, env) {
+  async *stream({ system, context, question, history }, env, stats = {}) {
     if (!env.AI) throw new Error("Workers AI binding is not configured")
 
     const messages = [
