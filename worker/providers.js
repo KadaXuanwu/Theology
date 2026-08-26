@@ -40,8 +40,9 @@ const geminiContents = (history, question) => [
 
 const gemini = {
   label: "Gemini",
-  // Cheapest current Flash Lite. Override with MODEL in wrangler.toml.
-  defaultModel: "gemini-2.5-flash-lite",
+  // Flash Lite. 2.5 was cheaper but Google has closed it to new accounts.
+  // Override with MODEL in wrangler.toml.
+  defaultModel: "gemini-3.5-flash-lite",
 
   async *stream({ system, context, question, history }, env) {
     const model = env.MODEL || gemini.defaultModel
