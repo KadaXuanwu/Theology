@@ -453,22 +453,23 @@ async function showPreview(link) {
 
 /* What the filter and the graphs share -------------------------------------
  * Two things steer the graphs on a page: the legend, which switches categories
- * in and out, and the tags page filter, which rings whatever it has picked.
- * The graphs mount once their data arrives, which is after the filter has
- * already painted, so the two sides meet here rather than one waiting on the
- * other.
+ * in and out, and the tags filter. Picking a tag changes which notes are on the
+ * map, not just how they are drawn, so the graphs are rebuilt rather than
+ * repainted. They are rebuilt when their data lands too, which is after the
+ * filter has already painted once, so the two sides meet here rather than one
+ * waiting on the other.
  */
 
 const graphs = []
-let ringedNotes = null
-const ringGraphs = () => {
-  for (const graph of graphs) graph.setRinged(ringedNotes)
-}
+// null is the whole map. A list, even an empty one, is a selection: an empty
+// one means the reader picked a combination no note carries.
+let tagFocus = null
+let rebuildGraphs = () => {}
 
 /* Tag filter ---------------------------------------------------------------
- * The tags page only. Every tag and every note are already in the page, so
- * combining tags is a matter of hiding rows rather than fetching anything, and
- * the reader never leaves the page while they build a combination up.
+ * Both views of the tags. Every tag is on the page already, and each chip
+ * carries the notes it covers, so a combination is worked out here rather than
+ * fetched, and the reader never leaves the page while they build one up.
  *
  * The chips ship as ordinary links to the single tag pages, which is what they
  * still are with no script running. This turns them into toggles.
@@ -476,60 +477,68 @@ const ringGraphs = () => {
 
 {
   const picker = document.querySelector(".tag-cloud")
-  const results = document.querySelector(".tag-results")
 
-  if (picker && results) {
+  if (picker) {
     const chips = [...picker.querySelectorAll(".tag-chip")]
-    const rows = [...results.querySelectorAll("li[data-tags]")]
-    const groups = [...results.querySelectorAll(".list-section")]
+    // The list view has the notes on the page; the map view does not. Everything
+    // below has to work either way.
+    const results = document.querySelector(".tag-results")
+    const rows = results ? [...results.querySelectorAll(".card-list > li")] : []
+    const groups = results ? [...results.querySelectorAll(".list-section")] : []
+    const none = results?.querySelector(".tag-none")
     const count = document.querySelector(".tag-count")
     const chosen = document.querySelector(".tag-selected")
-    const modeBox = document.querySelector(".tag-mode")
     const modeButtons = [...document.querySelectorAll(".tag-mode-option")]
     const clear = document.querySelector(".tag-clear")
-    const none = results.querySelector(".tag-none")
-    const total = rows.length
+    const total = Number(picker.dataset.total) || rows.length
+
+    // Every tag, and the notes under it. This is the whole index the filter
+    // works from, which is why the map view needs no list of notes to count.
+    const covers = new Map(
+      chips.map((chip) => [chip.dataset.tag, new Set(chip.dataset.notes.split("|").filter(Boolean))]),
+    )
+    const titleOf = new Map(rows.map((row) => [row, row.querySelector("a")?.dataset.note ?? ""]))
 
     // A tag in the URL that no longer exists is dropped rather than left to
     // filter everything away, which is what a renamed tag in an old link does.
-    const known = new Set(chips.map((chip) => chip.dataset.tag))
     const params = new URLSearchParams(location.search)
     let selected = [
       ...new Set(
         (params.get("tags") ?? "")
           .split(",")
           .map((t) => t.trim())
-          .filter((t) => known.has(t)),
+          .filter((t) => covers.has(t)),
       ),
     ]
     let mode = params.get("match") === "any" ? "any" : "all"
 
-    // Read once. Each paint rings the notes that survived the filter, and
-    // asking the DOM for the title again every time is work for nothing.
-    const titles = new Map(rows.map((row) => [row, row.querySelector("a")?.dataset.note ?? ""]))
-
-    const holds = (row, tag) => row.dataset.tags.includes(`|${tag}|`)
-    const matches = (row) =>
-      selected.length === 0 ||
-      (mode === "all" ? selected.every((t) => holds(row, t)) : selected.some((t) => holds(row, t)))
+    // Null means no tags picked, which is every note rather than none of them.
+    const matching = () => {
+      if (selected.length === 0) return null
+      const sets = selected.map((tag) => covers.get(tag))
+      return mode === "all"
+        ? new Set([...sets[0]].filter((title) => sets.every((set) => set.has(title))))
+        : new Set(sets.flatMap((set) => [...set]))
+    }
 
     const closeIcon =
       '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>'
 
+    // Switching between the list and the map, or coming back to the tags from
+    // the tree, keeps whatever combination the reader has built.
+    const carriers = [...document.querySelectorAll(".view-switch a.view-tab, .tree-tags a")]
+    const carrierPath = new Map(carriers.map((link) => [link, link.getAttribute("href").split("?")[0]]))
+
     function paint() {
+      const matched = matching()
+
       for (const chip of chips) {
         chip.setAttribute("aria-pressed", String(selected.includes(chip.dataset.tag)))
       }
 
-      let shown = 0
-      const matched = []
       for (const row of rows) {
-        const on = matches(row)
+        const on = !matched || matched.has(titleOf.get(row))
         row.hidden = !on
-        if (on) {
-          shown++
-          matched.push(titles.get(row))
-        }
         for (const mark of row.querySelectorAll(".result-tag")) {
           mark.classList.toggle("is-on", selected.includes(mark.dataset.tag))
         }
@@ -537,18 +546,19 @@ const ringGraphs = () => {
 
       // A section with nothing left in it is not an empty heading, it is gone.
       for (const group of groups) {
-        const live = [...group.querySelectorAll("li[data-tags]")].filter((row) => !row.hidden)
+        const live = [...group.querySelectorAll(".card-list > li")].filter((row) => !row.hidden)
         group.hidden = live.length === 0
         const label = group.querySelector(".tree-count")
         if (label) label.textContent = String(live.length)
       }
 
+      const shown = matched ? matched.size : total
       count.textContent = selected.length
         ? `${shown} of ${total} notes`
         : `${total} ${total === 1 ? "note" : "notes"}`
 
-      // Its own row under the controls, at a fixed height whether it holds
-      // anything or not, so picking a tag never shifts the list below it.
+      // Its own row under the controls, wrapping onto the next line, and a
+      // fixed height either way so picking a tag never shifts what is below.
       chosen.innerHTML = selected.length
         ? selected
             .map(
@@ -562,27 +572,32 @@ const ringGraphs = () => {
         button.setAttribute("aria-pressed", String(button.dataset.mode === mode))
       }
 
-      // The graph in the rail rings what came through, so a combination has a
-      // shape as well as a list. Nothing picked leaves the map as it was.
-      ringedNotes = selected.length ? matched : null
-      ringGraphs()
+      if (none) {
+        none.hidden = shown > 0
+        none.textContent =
+          mode === "all" && selected.length > 1
+            ? "No note carries all of those tags. Try Any."
+            : "Nothing under that tag."
+      }
 
-      none.hidden = shown > 0
-      none.textContent =
-        mode === "all" && selected.length > 1
-          ? "No note carries all of those tags. Try Any."
-          : "Nothing under that tag."
+      // The map answers the same picking the list does: what came through, and
+      // what it links to. One hop out in the rail, two on the page that is only
+      // the map, which is how a single note's two graphs already read.
+      tagFocus = matched ? [...matched] : null
+      rebuildGraphs()
 
       // The selection is worth linking to, so it lives in the URL. Replaced
       // rather than pushed: Back belongs to the page the reader came from, not
       // to every chip they tried on the way.
+      //
       // Written out by hand. URLSearchParams escapes the comma between the
       // tags into %2C, which turns a link worth sharing into a mess.
       const parts = []
       if (selected.length) parts.push(`tags=${selected.map(encodeURIComponent).join(",")}`)
       if (selected.length > 1 && mode === "any") parts.push("match=any")
-      const search = parts.join("&")
-      history.replaceState(null, "", `${location.pathname}${search ? `?${search}` : ""}`)
+      const search = parts.length ? `?${parts.join("&")}` : ""
+      history.replaceState(null, "", `${location.pathname}${search}`)
+      for (const link of carriers) link.setAttribute("href", `${carrierPath.get(link)}${search}`)
     }
 
     const toggle = (tag) => {
@@ -610,19 +625,6 @@ const ringGraphs = () => {
       const button = event.target.closest("button[data-tag]")
       if (button) toggle(button.dataset.tag)
     })
-
-    // The strip is one row with no scrollbar, so a plain wheel moves it
-    // sideways. Without this a mouse cannot reach a chip that has run off the
-    // end of it.
-    chosen.addEventListener(
-      "wheel",
-      (event) => {
-        if (event.deltaY === 0 || chosen.scrollWidth <= chosen.clientWidth) return
-        event.preventDefault()
-        chosen.scrollLeft += event.deltaY
-      },
-      { passive: false },
-    )
 
     for (const button of modeButtons) {
       button.addEventListener("click", () => {
@@ -704,34 +706,58 @@ const writeHidden = (hidden) => {
   if (mounts.length) {
     loadGraph().then((data) => {
       for (const node of data.nodes) allKinds.add(node.kind)
-      for (const el of mounts) {
-        const local = el.dataset.graph === "local"
-        // A section's graph names a category rather than a note, and starts
-        // from every note in it.
-        const kind = el.dataset.kind
-        const focus = kind
-          ? data.nodes.filter((n) => n.kind === kind).map((n) => n.id)
-          : local
-            ? el.dataset.focus
-            : null
-        graphs.push(
-          mountGraph(el, data, {
-            focus,
-            // The rail shows immediate neighbours; the full page view goes a hop
-            // further, because one hop leaves most notes looking almost isolated.
-            depth: Number(el.dataset.depth) || 1,
-            // A mount can ask for hover labels even when it is a local view:
-            // a section in the rail has too many notes to name at that size.
-            showLabels: el.dataset.labels ?? (local ? "always" : "hover"),
-            kinds: visibleKinds(),
-            onNavigate: (node) => {
-              window.location.href = noteUrl(node.url)
-            },
-          }),
-        )
+
+      // Every mount is built from scratch. Only the tags pages ever ask for
+      // that twice, and there it is the honest answer: a different combination
+      // is a different set of notes, so it is a different graph rather than the
+      // same one drawn differently.
+      const build = () => {
+        for (const graph of graphs) graph.destroy()
+        graphs.length = 0
+
+        for (const el of mounts) {
+          // A mount the tags filter drives is told what to focus on from the
+          // page. The rest carry it in their markup.
+          const driven = el.dataset.graph === "tags"
+          const local = el.dataset.graph === "local"
+          // A section's graph names a category rather than a note, and starts
+          // from every note in it.
+          const kind = el.dataset.kind
+          // A tag's rail names its notes outright, the way a note's names one.
+          const listed = el.dataset.focusList
+          const focus = driven
+            ? tagFocus
+            : kind
+              ? data.nodes.filter((n) => n.kind === kind).map((n) => n.id)
+              : listed
+                ? listed.split("|").filter(Boolean)
+                : local
+                  ? el.dataset.focus
+                  : null
+          graphs.push(
+            mountGraph(el, data, {
+              focus,
+              // The rail shows immediate neighbours; the full page view goes a
+              // hop further, because one hop leaves most notes looking almost
+              // isolated.
+              depth: Number(el.dataset.depth) || 1,
+              // A mount can ask for hover labels even when it is a local view:
+              // a section in the rail has too many notes to name at that size.
+              showLabels: el.dataset.labels ?? (local || (driven && focus) ? "always" : "hover"),
+              kinds: visibleKinds(),
+              emptyLabel: driven ? "No note carries that combination." : undefined,
+              onNavigate: (node) => {
+                window.location.href = noteUrl(node.url)
+              },
+            }),
+          )
+        }
       }
-      // A filter that painted before the data arrived still gets its rings.
-      ringGraphs()
+
+      rebuildGraphs = build
+      // A filter that painted before the data arrived still gets its notes on
+      // the map.
+      build()
     })
   }
 }

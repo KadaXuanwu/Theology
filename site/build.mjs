@@ -21,6 +21,7 @@ import {
   notFoundPage,
   notePage,
   sectionGraphPage,
+  tagGraphPage,
   tagIndexPage,
 } from "./lib/templates.mjs"
 
@@ -287,6 +288,13 @@ async function build() {
   const tagList = [...tagMap.entries()].sort((a, b) => a[0].localeCompare(b[0], "en"))
 
   await write("tags/index.html", tagIndexPage({ tags: tagList, root: rootFor(1), sections, notes, assets }))
+  // The tags have two views like everything else the site can be on, so
+  // enlarging their graph stays with the tags instead of dropping the reader on
+  // the overview with their combination thrown away.
+  await write(
+    "tags/graph/index.html",
+    tagGraphPage({ tags: tagList, root: rootFor(2), sections, notes, assets }),
+  )
 
   for (const [tag, list] of tagList) {
     await write(
@@ -306,6 +314,12 @@ async function build() {
           .filter((g) => g.items.length > 0),
         root: rootFor(2),
         current: `tags/${slugify(tag)}`,
+        // The map of one tag is the tags graph with that tag picked, so the
+        // switch lands somewhere the reader can carry on picking from.
+        graphUrl: `tags/graph/?tags=${encodeURIComponent(tag)}`,
+        // The rail previews what the page is about, which here is the notes
+        // under this one tag rather than the whole vault.
+        railNotes: list.map((n) => n.title),
         sections,
         notes,
         assets,

@@ -36,18 +36,38 @@ function graphTools(sections, control = "") {
 // The rail previews whatever the page is about: one note, one section, or the
 // whole map on the overview, which is about everything. Enlarging it opens that
 // page's own graph view rather than always the overview's.
-export function railGraph({ root, focus = null, kind = null, subject = null, expandUrl = "graph/" }) {
-  const local = Boolean(focus || kind)
-  const expandLabel = local ? `Enlarge the graph for ${subject ?? focus}` : "Open the full graph"
+export function railGraph({
+  root,
+  focus = null,
+  focusList = null,
+  kind = null,
+  subject = null,
+  expandUrl = "graph/",
+  driven = false,
+}) {
+  const local = Boolean(focus || focusList || kind)
+  const expandLabel = driven
+    ? "Enlarge the graph for these tags"
+    : local
+      ? `Enlarge the graph for ${subject ?? focus}`
+      : "Open the full graph"
   // A section brings twenty odd notes into a panel this size, where naming them
   // all at once is a wall of text over circles too small to read. The preview
   // labels on hover the way the whole map does, and the section's own page is
   // where the names have the room.
-  const attrs = focus
-    ? ` data-focus="${escapeHtml(focus)}"`
-    : kind
-      ? ` data-kind="${escapeHtml(kind)}" data-labels="hover"`
-      : ""
+  // A driven mount takes its focus from the page rather than from the markup:
+  // the tags filter names the notes, and it names different ones every time the
+  // reader picks a tag. Labels on hover for the same reason a section's do, the
+  // panel is too small to name a dozen notes at once.
+  const attrs = driven
+    ? ` data-labels="hover"`
+    : focus
+      ? ` data-focus="${escapeHtml(focus)}"`
+      : focusList
+        ? ` data-focus-list="|${focusList.map((t) => escapeHtml(t)).join("|")}|" data-labels="hover"`
+        : kind
+          ? ` data-kind="${escapeHtml(kind)}" data-labels="hover"`
+          : ""
   // The rail has no legend, so the row directly above its graph is the heading
   // row. That is where its control goes, at the far end, the same rule the
   // enlarged view follows on its legend row.
@@ -56,7 +76,7 @@ export function railGraph({ root, focus = null, kind = null, subject = null, exp
     <h2>${local ? "Connections" : "Graph"}</h2>
     <a class="panel-expand" href="${root}${expandUrl}" aria-label="${escapeHtml(expandLabel)}" title="${escapeHtml(expandLabel)}">${icon("expand")}</a>
   </div>
-  <div class="graph-mount graph-rail" data-graph="${local ? "local" : "global"}"${attrs}></div>
+  <div class="graph-mount graph-rail" data-graph="${driven ? "tags" : local ? "local" : "global"}"${attrs}></div>
   ${local ? `<a class="panel-link" href="${root}graph/">See the overview</a>` : ""}
 </section>`
 }
@@ -183,7 +203,7 @@ function explorer({ root, current, sections, notes, view }) {
   // tag's own page counts as being here: the reader followed a tag to get there
   // and nothing else in the tree can hold the mark for them.
   const onTags = current === "tags" || current?.startsWith("tags/")
-  const tags = `<li class="tree-tags${onTags ? " is-current" : ""}"><a href="${root}tags/"${current === "tags" ? ' aria-current="page"' : ""}>${icon("hash")}All tags</a></li>`
+  const tags = `<li class="tree-tags${onTags ? " is-current" : ""}"><a href="${root}tags/${suffix}"${current === "tags" ? ' aria-current="page"' : ""}>${icon("hash")}All Tags</a></li>`
 
   return `<aside class="sidebar" id="explorer">
   <nav class="tree" aria-label="Notes">
@@ -281,7 +301,20 @@ export function notePage({ note, root, dateLabel, sections, notes, assets }) {
   })
 }
 
-export function listPage({ title, lede, groups, root, current, sections, notes, extra = "", assets, graphUrl, railKind }) {
+export function listPage({
+  title,
+  lede,
+  groups,
+  root,
+  current,
+  sections,
+  notes,
+  extra = "",
+  assets,
+  graphUrl,
+  railKind,
+  railNotes,
+}) {
   const body = groups
     .map(
       (group) => `<section class="list-section">
@@ -316,29 +349,50 @@ export function listPage({ title, lede, groups, root, current, sections, notes, 
   ${extra}
   ${body}
 </div>`,
-    rightRail: railGraph({ root, kind: railKind, subject: title, expandUrl: graphUrl }),
+    rightRail: railGraph({ root, kind: railKind, focusList: railNotes, subject: title, expandUrl: graphUrl }),
   })
 }
 
-// Tags in an attribute the script can test without splitting or a false match
-// on a tag that is the start of another one.
-const tagKey = (list) => (list.length ? `|${list.map((t) => escapeHtml(t)).join("|")}|` : "")
+// The tag picker, and the two rows of controls under it. The same block heads
+// both views of the tags, because picking is the same act whether the answer is
+// a list of notes or a map of them.
+//
+// Each chip carries the notes it covers. That is the whole index the filter
+// needs, so the map view can answer "how many, and which" without a list of
+// notes on the page to count.
+function tagControls({ tags, root, total }) {
+  const chips = tags
+    .map(
+      ([tag, list]) =>
+        `<li><a class="tag-chip" href="${root}tags/${slugify(tag)}/" data-tag="${escapeHtml(tag)}" data-notes="${noteKey(list)}">#${escapeHtml(tag)}<span class="tree-count">${list.length}</span></a></li>`,
+    )
+    .join("")
 
-// Two windows over the same thing: every tag on top, every note underneath.
-// Picking tags filters the notes in place rather than moving the reader, so
-// building up a combination never costs a page load.
+  return `<div class="tag-picker">
+    <ul class="tag-cloud" aria-label="Tags" data-total="${total}">${chips}</ul>
+  </div>
+  <div class="tag-bar">
+    <p class="tag-count" role="status" aria-live="polite">${total} ${total === 1 ? "note" : "notes"}</p>
+    <div class="tag-actions">
+      <div class="tag-mode" role="group" aria-label="Match selected tags"><button type="button" class="tag-mode-option" data-mode="all" aria-pressed="true">All</button><button type="button" class="tag-mode-option" data-mode="any" aria-pressed="false">Any</button></div>
+      <button type="button" class="tag-clear">Clear</button>
+    </div>
+  </div>
+  <ul class="tag-selected" aria-label="Selected tags"><li class="tag-hint">No tags selected</li></ul>`
+}
+
+// Note titles in an attribute, delimited at both ends so a title can never be
+// matched by half of another one. Titles carry no bar character.
+const noteKey = (list) => `|${list.map((n) => escapeHtml(n.title)).join("|")}|`
+
+// The text view of the tags: every tag on top, every note underneath, and the
+// picking filters the notes in place rather than moving the reader, so building
+// a combination up one tag at a time never costs a page load.
 //
 // It is built as plain links to the single tag pages and the full list of
 // notes, and the script upgrades that into the filter. With no script the page
 // is still a working index rather than an empty frame.
 export function tagIndexPage({ tags, root, sections, notes, assets }) {
-  const chips = tags
-    .map(
-      ([tag, list]) =>
-        `<li><a class="tag-chip" href="${root}tags/${slugify(tag)}/" data-tag="${escapeHtml(tag)}">#${escapeHtml(tag)}<span class="tree-count">${list.length}</span></a></li>`,
-    )
-    .join("")
-
   // Grouped the way every other list on the site is grouped, so a filtered
   // result still reads as part of the vault rather than as a flat search dump.
   const groups = sections
@@ -350,7 +404,7 @@ export function tagIndexPage({ tags, root, sections, notes, assets }) {
           const marks = n.tags
             .map((t) => `<span class="result-tag" data-tag="${escapeHtml(t)}">#${escapeHtml(t)}</span>`)
             .join("")
-          return `<li data-tags="${tagKey(n.tags)}"><a href="${root}${n.url}/" data-note="${escapeHtml(n.title)}">
+          return `<li><a href="${root}${n.url}/" data-note="${escapeHtml(n.title)}">
       <span class="card-head"><span class="dot dot-${section.kind}"></span><span class="card-title">${escapeHtml(n.title)}</span></span>
       <span class="result-tags">${marks}</span>
     </a></li>`
@@ -363,8 +417,6 @@ export function tagIndexPage({ tags, root, sections, notes, assets }) {
     })
     .join("")
 
-  const total = `${notes.length} ${notes.length === 1 ? "note" : "notes"}`
-
   return shell({
     title: "Tags · Theology",
     description: "Every tag in the vault, and the notes under any combination of them.",
@@ -374,25 +426,42 @@ export function tagIndexPage({ tags, root, sections, notes, assets }) {
     notes,
     assets,
     bodyClass: "is-tags",
+    graphUrl: "tags/graph/",
     main: `<div class="page page-tags">
   <h1 class="page-title">Tags</h1>
-  <div class="tag-picker">
-    <ul class="tag-cloud" aria-label="Tags">${chips}</ul>
-  </div>
-  <div class="tag-bar">
-    <p class="tag-count" role="status" aria-live="polite">${total}</p>
-    <div class="tag-actions">
-      <div class="tag-mode" role="group" aria-label="Match selected tags"><button type="button" class="tag-mode-option" data-mode="all" aria-pressed="true">All</button><button type="button" class="tag-mode-option" data-mode="any" aria-pressed="false">Any</button></div>
-      <button type="button" class="tag-clear">Clear</button>
-    </div>
-  </div>
-  <ul class="tag-selected" aria-label="Selected tags"><li class="tag-hint">No tags selected</li></ul>
+  ${tagControls({ tags, root, total: notes.length })}
   <div class="tag-results"><p class="tag-none" hidden></p>${groups}</div>
 </div>`,
-    rightRail: railGraph({ root }),
+    rightRail: railGraph({ root, driven: true, expandUrl: "tags/graph/" }),
   })
 }
 
+// The map view of the same picking. The controls are the ones the list view
+// carries, in the same order and the same place, and the graph stands where the
+// list of notes stands: what came through, and what it connects to.
+export function tagGraphPage({ tags, root, sections, notes, assets }) {
+  return shell({
+    title: "Tags · Graph · Theology",
+    description: "The notes under any combination of tags, and how they connect.",
+    root,
+    current: "tags",
+    sections,
+    notes,
+    assets,
+    view: "graph",
+    textUrl: "tags/",
+    graphUrl: "tags/graph/",
+    bodyClass: "is-graph",
+    main: `<div class="page page-graph page-tag-graph">
+  <div class="graph-head">
+    <h1 class="page-title">Tags</h1>
+  </div>
+  ${tagControls({ tags, root, total: notes.length })}
+  ${graphTools(sections, `<a class="panel-expand graph-collapse" href="${root}tags/" aria-label="Back to the list of notes" title="Back to the list">${icon("collapse")}</a>`)}
+  <div class="graph-full graph-mount" data-graph="tags" data-depth="2"></div>
+</div>`,
+  })
+}
 
 export function graphPage({ root, sections, notes, assets }) {
   return shell({

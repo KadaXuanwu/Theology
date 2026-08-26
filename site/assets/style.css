@@ -1091,10 +1091,11 @@ body.is-tags main {
   margin: 0;
 }
 
-/* A third of the column. Enough for four or five rows of tags at this width,
-   which is most of them, and the rest are a short scroll away. */
+/* A quarter of the column, which is three or four rows of tags at this width.
+   The rest are a short scroll away, and the notes get the room instead: the
+   picking is for reading them. */
 .tag-picker {
-  flex: 0 0 34%;
+  flex: 0 0 25%;
   overflow-y: auto;
   overscroll-behavior: contain;
 }
@@ -1166,32 +1167,25 @@ body.is-tags main {
   font-size: 0.85rem;
   font-variant-numeric: tabular-nums;
 }
-/* Under the controls rather than beside them, on one line that never wraps: a
-   row that grew with the selection would push the list below it about. Past
-   what fits, the strip scrolls sideways. */
+/* Under the controls rather than beside them, wrapping onto a second line, and
+   two lines tall whether it holds nothing or a dozen: a row that grew with the
+   selection would push the list below it about. Past two lines it scrolls. */
 .tag-selected {
   flex: none;
-  height: 1.75rem;
+  height: 3.5rem;
   list-style: none;
   display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
+  flex-wrap: wrap;
+  align-content: flex-start;
   gap: 0.35rem;
   margin: 0;
   padding: 0;
   min-width: 0;
-  overflow-x: auto;
-  overflow-y: hidden;
-  overscroll-behavior-x: contain;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
-/* A scrollbar in a row this short takes more of it than the chips have left,
-   and clips them. It is left off: a chip cut at the edge already says there is
-   more, and every pick is also lit up in the picker above. */
 .tag-selected {
-  scrollbar-width: none;
-}
-.tag-selected::-webkit-scrollbar {
-  display: none;
+  align-items: flex-start;
 }
 .tag-selected li {
   flex: none;
@@ -1199,6 +1193,9 @@ body.is-tags main {
 .tag-hint {
   color: var(--muted);
   font-size: 0.78rem;
+  /* Sits on the same line a chip would, so the row does not shift the moment
+     the first tag is picked. */
+  line-height: 1.6rem;
 }
 .tag-selected button {
   display: inline-flex;
@@ -1268,6 +1265,22 @@ body.is-tags main {
 .tag-clear:hover {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+/* The map view of the tags. The controls above it are the ones the list view
+   carries, in the same order and at the same heights, so switching views moves
+   nothing the reader was looking at. The graph stands where the notes stand. */
+.page-tag-graph {
+  gap: 0.8rem;
+}
+.page-tag-graph .graph-head,
+.page-tag-graph .graph-tools {
+  margin-bottom: 0;
+}
+/* Less than the list view gives them. There is a legend and a graph under
+   these as well, and the graph is what the page is for. */
+.page-tag-graph .tag-picker {
+  flex-basis: 20%;
 }
 
 .tag-results {
@@ -1752,7 +1765,10 @@ body.is-graph .graph-head .lede {
   /* Less of a short screen goes to the tags than a tall one gives them: the
      notes are what the picking is for. */
   .tag-picker {
-    flex-basis: 28%;
+    flex-basis: 22%;
+  }
+  .page-tag-graph .tag-picker {
+    flex-basis: 18%;
   }
   .tag-results {
     padding: 0.15rem 0.2rem 0.5rem 0.15rem;

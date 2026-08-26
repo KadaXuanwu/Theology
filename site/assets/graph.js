@@ -255,7 +255,13 @@ function readColors(root) {
 }
 
 export function mount(el, data, options = {}) {
-  const { focus = null, depth = 1, showLabels = "hover", onNavigate } = options
+  const {
+    focus = null,
+    depth = 1,
+    showLabels = "hover",
+    onNavigate,
+    emptyLabel = "Nothing links here yet.",
+  } = options
 
   // What the graph was opened for: one note, or every note in a section. All of
   // them carry the ring, so what the reader picked is what stands out, and a
@@ -263,16 +269,20 @@ export function mount(el, data, options = {}) {
   const seeds = focus === null ? [] : Array.isArray(focus) ? focus : [focus]
   const seeded = new Set(seeds)
 
-  // Which nodes wear the ring. It starts as whatever the graph was opened for
-  // and stays there unless something else on the page takes it over, which is
-  // how the tags page marks what its filter picked without touching the map
-  // itself: the same graph, with the matches ringed.
-  let ringed = seeded
-
-  const subset = seeds.length ? neighbourhood(data, seeds, depth) : data
+  // A focus of null is the whole map. A focus that is an empty list is not the
+  // same thing: it is a selection that came back with nothing, and the honest
+  // answer to that is an empty graph rather than every note in the vault.
+  const subset = focus === null ? data : neighbourhood(data, seeds, depth)
   if (subset.nodes.length === 0) {
-    el.innerHTML = '<p class="graph-empty">Nothing links here yet.</p>'
-    return { setVisibleKinds() {}, setRinged() {}, destroy() {} }
+    el.innerHTML = `<p class="graph-empty">${emptyLabel}</p>`
+    // The message is this mount's, so tearing the mount down takes it away.
+    // Without that a later mount draws its canvas underneath the old notice.
+    return {
+      setVisibleKinds() {},
+      destroy() {
+        el.innerHTML = ""
+      },
+    }
   }
 
   const canvas = document.createElement("canvas")
@@ -465,7 +475,7 @@ export function mount(el, data, options = {}) {
       // Under the pointer, or being dragged. Both mean the same thing to the
       // reader: this is the node I am touching, not the node I am on.
       const touched = node === hovered || node === dragging
-      if (ringed.has(node.id) || touched) {
+      if (seeded.has(node.id) || touched) {
         // A stroke straddles its path, so each band is centred half its own
         // width out from where it starts: the gap runs r to r + gap, the ring
         // carries on from there. The gap is painted in the surface colour to
@@ -797,17 +807,8 @@ export function mount(el, data, options = {}) {
   else presettle()
   resize()
 
-  // Ring a set of nodes picked somewhere else on the page. Passing nothing
-  // hands the ring back to whatever the graph was opened for, which on a page
-  // that was opened for nothing means no rings at all.
-  function setRinged(ids) {
-    ringed = ids && ids.length ? new Set(ids) : seeded
-    draw()
-  }
-
   return {
     setVisibleKinds,
-    setRinged,
     destroy() {
       if (frame) cancelAnimationFrame(frame)
       observer.disconnect()

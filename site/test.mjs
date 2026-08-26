@@ -487,7 +487,7 @@ console.log("labels clear the ring and hold their size")
   // The note the graph was opened for is ringed, and so is whatever the pointer
   // is on. One solid, one dotted, or the reader cannot tell where they are from
   // what they are reaching for.
-  const ringBlock = source.match(/if \(ringed\.has\(node\.id\) \|\| touched\) \{[\s\S]*?\n      \}/)?.[0] ?? ""
+  const ringBlock = source.match(/if \(seeded\.has\(node\.id\) \|\| touched\) \{[\s\S]*?\n      \}/)?.[0] ?? ""
   check("hover and drag are the same state to the ring", source.includes("const touched = node === hovered || node === dragging"))
   check("the dots go on only for that state", /if \(touched\) \{[\s\S]*?setLineDash\(ringDash\(/.test(ringBlock), ringBlock.length > 0 ? "found" : "no ring block")
   check("and come off again, so the seeded ring stays solid", ringBlock.includes("ctx.setLineDash([])"))
@@ -954,7 +954,7 @@ console.log("the sidebar preview can be enlarged")
   for (const [page, expected, aboutSomething] of [
     ["index.html", "graph/", false],
     ["arguments-for/index.html", "../arguments-for/graph/", true],
-    ["tags/historicity/index.html", "../../graph/", false],
+    ["tags/historicity/index.html", "../../tags/graph/?tags=historicity", true],
   ]) {
     const html = await read(page)
     check(`${page} enlarges to its own graph`, expandHref(html) === expected, String(expandHref(html)))
@@ -973,7 +973,11 @@ console.log("the sidebar preview can be enlarged")
     mount(section),
   )
   check("the overview still previews everything", /data-graph="global"/.test(mount(await read("index.html"))))
-  check("and a tag, having no graph of its own, does too", /data-graph="global"/.test(mount(await read("tags/historicity/index.html"))))
+  // A tag used to preview the whole vault and enlarge to it, which left the
+  // rail as the one part of the page that had not heard of the tag.
+  const tagRail = mount(await read("tags/historicity/index.html"))
+  check("a tag previews the notes under it", /data-focus-list="\|[^"]+\|"/.test(tagRail), tagRail)
+  check("on hover labels, for the same reason a section does", /data-labels="hover"/.test(tagRail), tagRail)
 }
 
 console.log("the two whole-vault links look the same")
@@ -1068,21 +1072,18 @@ console.log("a section is somewhere you can be, in either view")
   check("the list switches to that section's own graph", otherTab(list) === "../arguments-for/graph/", String(otherTab(list)))
   check("and the graph switches back to that list", otherTab(graph) === "../../arguments-for/", String(otherTab(graph)))
 
-  // Every destination in the tree that has two views keeps the one you are
-  // reading in, so nothing in there can drop you out of the graph. All tags is
-  // the exception and is taken out here: a tag index has no graph of itself, so
-  // it is the same page from either view.
+  // Every destination in the tree keeps the view you are reading in, so nothing
+  // in there can drop you out of the graph. The tags used to be the one entry
+  // that could, because there was no graph of them to keep you in.
   const tagsEntry = (html) => html.match(/<li class="tree-tags[^"]*"><a href="([^"]*)"/)?.[1]
   check(
-    "the tags index is one page, opened from either view",
-    tagsEntry(graph) === "../../tags/" && tagsEntry(list) === "../tags/",
+    "the tags follow the same rule as everything else in the tree",
+    tagsEntry(graph) === "../../tags/graph/" && tagsEntry(list) === "../tags/",
     `${tagsEntry(graph)} from the graph, ${tagsEntry(list)} from the list`,
   )
   const treeLinks = (html) => {
     const tree = html.match(/<nav class="tree"[\s\S]*?<\/nav>/)?.[0] ?? ""
-    return [...tree.replace(/<li class="tree-tags[\s\S]*?<\/li>/, "").matchAll(/<a[^>]*href="([^"]*)"/g)].map(
-      (m) => m[1],
-    )
+    return [...tree.matchAll(/<a[^>]*href="([^"]*)"/g)].map((m) => m[1])
   }
   check("the tree has links to check", treeLinks(graph).length > 10, `${treeLinks(graph).length} links`)
   check(
@@ -1136,23 +1137,34 @@ console.log("tags are a way in, and they combine")
   const dist = resolve(repoRoot, "dist")
   const read = (p) => readFile(resolve(dist, p), "utf8")
   const index = await read("tags/index.html")
+  const map = await read("tags/graph/index.html")
   const single = await read("tags/hell/index.html")
   const note = await read("claims/jesus-existed/index.html")
   const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
   const app = await readFile(resolve(repoRoot, "site/assets/app.js"), "utf8")
+  const graph = await readFile(resolve(repoRoot, "site/assets/graph.js"), "utf8")
 
   // It used to hang off the bottom of the sidebar under the whole tree, small
   // and grey, where it read as a footnote rather than as a way in.
   const order = [...note.matchAll(/<li class="(tree-home|tree-tags|tree-folder)[^"]*"/g)].map((m) => m[1])
-  check("the tags entry sits directly under Overview", order.slice(0, 3).join(",") === "tree-home,tree-tags,tree-folder", order.slice(0, 3).join(","))
+  check(
+    "the tags entry sits directly under Overview",
+    order.slice(0, 3).join(",") === "tree-home,tree-tags,tree-folder",
+    order.slice(0, 3).join(","),
+  )
   check("and nothing is left hanging under the tree", !/<\/nav>\s*<a class="tree-tags"/.test(note))
+  check("it is called All Tags", /class="tree-tags[^"]*"><a [^>]*>.*?All Tags<\/a>/.test(note))
 
   // And it took no mark when you were on it, so the one page the sidebar could
   // not answer for was the page you were reading.
   const entry = (html) => html.match(/<li class="tree-tags([^"]*)"><a href="[^"]*"([^>]*)>/)
   check("it is marked current on the tags index", entry(index)?.[2].includes('aria-current="page"'))
+  check("and on the map of them", entry(map)?.[2].includes('aria-current="page"'))
   check("a single tag's page is marked there too", entry(single)?.[1].includes("is-current"))
-  check("but not while reading a note", !entry(note)?.[1].includes("is-current") && !entry(note)?.[2].includes("aria-current"))
+  check(
+    "but not while reading a note",
+    !entry(note)?.[1].includes("is-current") && !entry(note)?.[2].includes("aria-current"),
+  )
   check(
     "the mark is the violet the rest of the sidebar uses",
     /\.tree-tags a\[aria-current="page"\],\r?\n\.tree-tags\.is-current a \{\r?\n  background: var\(--accent-soft\);\r?\n  color: var\(--accent\);/.test(sheet),
@@ -1163,25 +1175,29 @@ console.log("tags are a way in, and they combine")
   check("the title is the one every other page uses", /<h1 class="page-title">Tags<\/h1>/.test(index))
   check("with no lede under it", !/<div class="page page-tags">[\s\S]*?<p class="lede"/.test(index))
 
-  // Both windows are in the page already, so combining tags costs no fetch and
-  // no navigation.
-  const chips = [...index.matchAll(/<a class="tag-chip" href="([^"]*)" data-tag="([^"]*)"/g)]
+  // Everything the filter needs is in the page: the chips carry the notes they
+  // cover, so a combination costs no fetch and no navigation, and the map view
+  // can say how many came through without a list of notes to count.
+  const chips = [...index.matchAll(/<a class="tag-chip" href="([^"]*)" data-tag="([^"]*)" data-notes="([^"]*)"/g)]
   check("every tag is a chip", chips.length > 20, `${chips.length} chips`)
   check("and each is still a plain link to its own page, with no script", chips.every(([, href, tag]) => href.endsWith(`tags/${tag}/`)))
-  const rows = [...index.matchAll(/<li data-tags="([^"]*)"/g)].map((m) => m[1])
+  check("each one carries the notes under it", chips.every(([, , , notes]) => /^\|[^|]+(\|[^|]+)*\|$/.test(notes)))
+  // Delimited at both ends so one title can never be matched by half of another.
+  check("the filter tests a whole title, not the start of one", app.includes('chip.dataset.notes.split("|").filter(Boolean)'))
+  check("the map view carries the same chips", /data-notes="/.test(map) && !/class="tag-results"/.test(map))
+
+  const resultList = index.match(/<div class="tag-results">[\s\S]*?<\/div>\s*<\/div>/)?.[0] ?? ""
+  const rows = [...resultList.matchAll(/<li><a href="[^"]*" data-note="([^"]*)"/g)]
   // The tree lists every note in the vault, so it is what the filtered list has
   // to account for. One short means a note that can never be found by its tag.
   const inTree = [...(index.match(/<nav class="tree"[\s\S]*?<\/nav>/)?.[0] ?? "").matchAll(/data-note="/g)].length
   check("every note is in the list to be filtered", rows.length === inTree && inTree > 20, `${rows.length} rows for ${inTree} notes`)
-  check("each one carries its tags where the filter can read them", rows.every((key) => /^\|[^|]+(\|[^|]+)*\|$/.test(key)), rows.find((key) => !/^\|/.test(key)) ?? "")
-  // Delimited on both ends so #sin cannot match a note tagged #sinlessness.
-  check("the filter tests a whole tag, not the start of one", app.includes("row.dataset.tags.includes(`|${tag}|`)"))
 
-  check("a tag can be matched with all the others or with any of them", /mode === "all" \? selected\.every/.test(app) && /: selected\.some/.test(app))
+  check("a tag can be matched with all the others or with any of them", /mode === "all"\r?\n\s*\? new Set/.test(app) && /: new Set\(sets\.flatMap/.test(app))
   check("the selection is read back out of the URL", /params\.get\("tags"\)/.test(app) && /params\.get\("match"\) === "any"/.test(app))
   // Back belongs to the page the reader came from, not to every chip they tried.
   check("picking a tag replaces the URL rather than stacking history", /history\.replaceState/.test(app) && !/history\.pushState/.test(app))
-  check("and a tag that no longer exists is dropped from an old link", /filter\(\(t\) => known\.has\(t\)\)/.test(app))
+  check("and a tag that no longer exists is dropped from an old link", /filter\(\(t\) => covers\.has\(t\)\)/.test(app))
 
   // Arriving from a note's tag is how most readers get here, so that page says
   // the tags can be combined at all.
@@ -1199,34 +1215,62 @@ console.log("tags are a way in, and they combine")
   // every pick nudged the list underneath somewhere else.
   check(
     "the tags box is a fixed share of the column, not its contents",
-    /\.tag-picker \{[^}]*flex: 0 0 34%;/.test(sheet),
+    /\.tag-picker \{[^}]*flex: 0 0 25%;/.test(sheet),
     sheet.match(/\.tag-picker \{[^}]*flex: [^;]*/)?.[0].split(/\r?\n/).pop() ?? "",
   )
   check("and it no longer shrinks to fit fewer tags", !/\.tag-picker \{[^}]*max-height:/.test(sheet))
   check("the picked tags sit on a row of their own", /<\/div>\s*<ul class="tag-selected"/.test(index))
-  check("which is one line high whatever is on it", /\.tag-selected \{[^}]*height: 1\.75rem;[^}]*flex-wrap: nowrap;/.test(sheet))
-  check("and says so when it is empty", index.includes('<li class="tag-hint">No tags selected</li>'))
+  check("they wrap onto a second line rather than running off the end", /\.tag-selected \{[^}]*flex-wrap: wrap;/.test(sheet))
+  check("and the row is the same height either way", /\.tag-selected \{[^}]*height: 3\.5rem;/.test(sheet))
+  check("it says so when it is empty", index.includes('<li class="tag-hint">No tags selected</li>'))
   check("All, Any and Clear are always on the page", !/class="tag-mode"[^>]*hidden/.test(index) && !/class="tag-clear"[^>]*hidden/.test(index))
   check("and the script never takes them away again", !/modeBox\.hidden/.test(app) && !/clear\.hidden/.test(app))
 
-  // The map answers the filter: the same graph it always shows, with whatever
-  // came through the filter ringed on it.
-  const graph = await readFile(resolve(repoRoot, "site/assets/graph.js"), "utf8")
-  check("the graph can be told what to ring", /function setRinged\(ids\)/.test(graph))
-  check("the ring is drawn from that, not from what the graph was opened for", /if \(ringed\.has\(node\.id\) \|\| touched\)/.test(graph))
-  check("and hands it back when nothing is picked", /ringed = ids && ids\.length \? new Set\(ids\) : seeded/.test(graph))
-  check("the filter rings whatever survived it", /ringedNotes = selected\.length \? matched : null/.test(app))
-  // Picking a tag must not cut the map down to the matches: the point of the
-  // ring is seeing where they sit in the whole thing.
-  check("and never narrows the map to them", !/setRinged[\s\S]{0,200}neighbourhood/.test(app))
-  // The graphs mount when their data lands, which is after the first paint.
-  check("a graph that arrives late still gets the rings", /graphs\.push\([\s\S]*?\r?\n      ringGraphs\(\)/.test(app))
+  // The tags have two views like everything else the site can be on. Enlarging
+  // the graph used to drop the reader on the overview with the combination
+  // thrown away.
+  check("the list switches to the map of the same tags", /<a class="view-tab" href="\.\.\/tags\/graph\/"/.test(index))
+  check("and the map switches back to the list", /<a class="view-tab" href="\.\.\/\.\.\/tags\/"/.test(map))
+  check("enlarging the rail stays with the tags", /class="panel-expand" href="\.\.\/tags\/graph\/"/.test(index))
+  check("the map view carries the same controls the list does", /class="tag-picker"/.test(map) && /class="tag-mode"/.test(map) && /class="tag-selected"/.test(map))
+  // Otherwise switching views, or going back to the tags from the tree, throws
+  // away the combination the reader just built.
+  check("both switches carry the selection with them", /carriers\b[\s\S]*?\.view-switch a\.view-tab, \.tree-tags a/.test(app))
+  check("and so does the tree entry", /for \(const link of carriers\) link\.setAttribute\("href", `\$\{carrierPath\.get\(link\)\}\$\{search\}`\)/.test(app))
+
+  // The map answers the picking the way a single note's graph answers the note:
+  // what was picked, ringed, and what it links to. One hop in the rail, two on
+  // the page that is only the map.
+  check("the map is driven by the filter, not by the markup", /data-graph="tags"/.test(index) && /data-graph="tags" data-depth="2"/.test(map))
+  check("the rail shows direct links only", /class="graph-mount graph-rail" data-graph="tags" data-labels="hover">/.test(index))
+  check("picking again rebuilds the map rather than repainting it", /for \(const graph of graphs\) graph\.destroy\(\)/.test(app) && /rebuildGraphs = build/.test(app))
+  check("the notes it was given are what it focuses on", /const focus = driven\r?\n\s*\? tagFocus/.test(app))
+  // A combination no note carries is an empty graph. Reading an empty focus as
+  // "no focus" would answer it with the whole vault instead.
+  check("a combination nothing matches gives an empty map", /const subset = focus === null \? data : neighbourhood\(data, seeds, depth\)/.test(graph))
+  check("and says why", /emptyLabel: driven \? "No note carries that combination\." : undefined/.test(app))
+  // The notice belongs to the mount that wrote it, or the next mount draws its
+  // canvas underneath a message about a selection that is over.
+  check("the notice goes when that mount does", /el\.innerHTML = `<p class="graph-empty">\$\{emptyLabel\}<\/p>`[\s\S]*?destroy\(\) \{\r?\n\s*el\.innerHTML = ""/.test(graph))
+
+  // What the two depths actually come to, against the real graph.
+  const data = await readGraphData()
+  const hell = chips.find(([, , tag]) => tag === "hell")?.[3].split("|").filter(Boolean) ?? []
+  check("the tag really does cover more than one note", hell.length > 1, `${hell.length} notes`)
+  const near = neighbourhood(data, hell, 1)
+  const wider = neighbourhood(data, hell, 2)
+  check("one hop out is smaller than two", near.nodes.length < wider.nodes.length, `${near.nodes.length} then ${wider.nodes.length}`)
+  check("and two is smaller than the whole vault", wider.nodes.length < data.nodes.length, `${wider.nodes.length} of ${data.nodes.length}`)
+  check("the picked notes are the ones ringed", hell.every((title) => near.nodes.some((n) => n.id === title && n.hop === 0)))
+  check("and the second hop is marked so it can be faded back", wider.nodes.some((n) => n.hop === 2))
+  check("nothing matched is nothing drawn", neighbourhood(data, [], 2).nodes.length === 0)
 
   // Same shape on a phone, measured against the small viewport, so the two
   // windows stay the only things that scroll there too.
   const phone = sheet.slice(sheet.indexOf("@media (max-width: 820px)"))
   check("a phone holds the same fixed shape", /body\.is-tags \{\r?\n    height: 100vh;\r?\n    height: 100svh;\r?\n    overflow: hidden;/.test(phone))
-  check("with less of a short screen given to the tags", /\.tag-picker \{\r?\n    flex-basis: 28%;/.test(phone))
+  check("with less of a short screen given to the tags", /\.tag-picker \{\r?\n    flex-basis: 22%;/.test(phone))
+  check("and less again where a graph is under them too", /\.page-tag-graph \.tag-picker \{\r?\n    flex-basis: 18%;/.test(phone))
 }
 
 console.log("the reader picks the reading font")
