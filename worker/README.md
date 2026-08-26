@@ -61,7 +61,7 @@ and needs a site rebuild instead.
 | `maxOutputTokens` | `providers.js` | 800 | Length ceiling on an answer. |
 | `FIRST_TOKEN_MS`, `ATTEMPTS` | `providers.js` | 12s, 2 | How long a stalled request waits before being abandoned and retried. Measured on the live endpoint, about a quarter of free tier requests take over twenty seconds while the rest answer in two or three, and spacing them out does not change it. Only a stall before any text retries; once a word has been sent, restarting would rewrite what the reader is watching. |
 | `temperature` | `providers.js` | 0.2 | Low, because the job is reading supplied text accurately, not writing something new. |
-| `MODEL`, `PROVIDER` | `wrangler.toml` | `gemini-3.5-flash-lite`, `gemini` | The model. `providers.js` holds one async generator per provider. |
+| `MODEL`, `PROVIDER` | `wrangler.toml` | `gemini-3.6-flash`, `gemini` | The model. `providers.js` holds one async generator per provider. |
 | `THINKING_LEVEL` | `wrangler.toml` | `low` | Gemini 3.x thinks by default and this task does not need it. Set to `""` to stop sending the field, for a model that rejects it. It nests as `generationConfig.thinkingConfig.thinkingLevel`; put directly in `generationConfig` the API says "Cannot find field", which reads like the feature is missing rather than misplaced. Gemini 2.5 models want `thinkingBudget` here instead. |
 | `RATE_LIMIT`, `RATE_WINDOW_MS` | `index.js` | 12 per minute | Per address. In memory, so a speed bump rather than a guarantee. |
 | `MAX_QUESTION` | `index.js` | 1,000 chars | Longest question accepted. |
@@ -113,10 +113,10 @@ and the catalogue is 2,043. It should start on its own somewhere past roughly
 100 notes, with no code change. Check with `wrangler tail` and look for
 `cachedContentTokenCount` in the logged usage block.
 
-If the catalogue is well past 4,096 and there is still no such field, the cause
-is Flash Lite: it is the one family Google's caching docs omit, and there are
-open reports of implicit caching not firing on it. Moving `MODEL` to a full
-Flash would be the fix.
+If the catalogue is well past 4,096 and there is still no such field, check
+which model is set. Flash Lite is the one family Google's caching docs omit and
+there are open reports of implicit caching not firing on it, so moving `MODEL`
+to a full Flash is the fix in that case.
 
 ## Testing locally
 

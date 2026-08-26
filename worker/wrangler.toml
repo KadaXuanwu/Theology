@@ -21,7 +21,7 @@ ALLOWED_ORIGIN = "https://kadaxuanwu.github.io"
 
 # The swappable part. "gemini" or "workersai". Change, redeploy, compare.
 PROVIDER = "gemini"
-MODEL = "gemini-3.5-flash-lite"
+MODEL = "gemini-3.6-flash"
 
 # Gemini 3.x thinks by default, which is wasted on reading supplied notes and
 # was the likeliest cause of answers taking the better part of a minute.
