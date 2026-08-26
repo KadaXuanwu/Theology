@@ -1087,19 +1087,21 @@ body.is-tags main {
   height: 100%;
   min-height: 0;
 }
-/* The three joints that separate one part of the page from another. What is
-   left on the tight gap is the picked row, which belongs to the controls above
-   it rather than sitting between them and the notes. */
+/* The title takes the room it takes on every other page, 0.7rem, of which the
+   row gap is already part. */
 .page-tags .page-title,
-.page-tag-graph .graph-head,
-.tag-picker {
-  margin-bottom: 0.5rem;
+.page-tag-graph .graph-head {
+  margin-bottom: 0.4rem;
 }
 .page-tags .page-title {
   flex: none;
 }
-.tag-selected {
-  margin-bottom: 0.15rem;
+
+/* The joints that separate one part of the page from the next. The gap between
+   the controls and the row of picked tags is left on the tight setting, because
+   those two belong together rather than standing either side of a joint. */
+.tag-picker {
+  margin-bottom: 0.5rem;
 }
 
 /* A quarter of the column, which is three or four rows of tags at this width.
@@ -1189,7 +1191,9 @@ body.is-tags main {
   flex-wrap: nowrap;
   align-items: center;
   gap: 0.35rem;
-  margin: 0;
+  /* The joint under this row is set here rather than up with the others, where
+     the reset on this line would flatten it. */
+  margin: 0 0 0.25rem;
   padding: 0;
   min-width: 0;
   overflow-x: auto;
@@ -1286,12 +1290,20 @@ body.is-tags main {
 .page-tag-graph {
   gap: 0.3rem;
 }
-/* Carries the body class so it outranks `body.is-graph .graph-tools`, which
-   sets its own margin on a phone and would otherwise put back a doubled gap
-   under the legend. */
-body.is-graph .page-tag-graph .graph-head,
+/* Carries the body class so it outranks `body.is-graph .graph-head` and
+   `body.is-graph .graph-tools`, which set their own margins and would otherwise
+   put back a doubled gap under the legend on a phone. */
+body.is-graph .page-tag-graph .graph-head {
+  margin-bottom: 0.4rem;
+}
 body.is-graph .page-tag-graph .graph-tools {
   margin-bottom: 0.5rem;
+}
+/* The wrapper carries the space under the heading here, the way the list view's
+   title carries it there. Left alone the title adds its own on top, and the
+   tags start lower on the map view than on the list. */
+.page-tag-graph .graph-head .page-title {
+  margin-bottom: 0;
 }
 /* Less than the list view gives them. There is a legend and a graph under
    these as well, and the graph is what the page is for. */
@@ -1779,18 +1791,16 @@ body.is-graph .graph-head .lede {
     padding: 0.8rem 0.85rem 0.95rem;
   }
   /* Less of a short screen goes to the tags than a tall one gives them: the
-     notes are what the picking is for. */
-  .tag-picker {
-    flex-basis: 22%;
-  }
-  .page-tags .page-title,
+     notes are what the picking is for. Both views get the same, so switching
+     between them moves nothing above the fold. A desktop has the room to give
+     the list view more, and does. */
   .tag-picker,
-  body.is-graph .page-tag-graph .graph-head,
-  body.is-graph .page-tag-graph .graph-tools {
-    margin-bottom: 0.35rem;
-  }
   .page-tag-graph .tag-picker {
     flex-basis: 18%;
+  }
+  .tag-picker,
+  body.is-graph .page-tag-graph .graph-tools {
+    margin-bottom: 0.35rem;
   }
   .tag-results {
     padding: 0.15rem 0.2rem 0.5rem 0.15rem;

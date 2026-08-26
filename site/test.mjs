@@ -1283,31 +1283,54 @@ console.log("tags are a way in, and they combine")
     /\.page-tag-graph \.tag-picker \{\r?\n  flex-basis: 17\.5%;/.test(sheet),
     sheet.match(/\.page-tag-graph \.tag-picker \{[^}]*/)?.[0].split(/\r?\n/).pop() ?? "",
   )
-  // The legend row carries its own margin and the page adds a gap on top, so
-  // the space under it was counted twice. On a phone `body.is-graph
-  // .graph-tools` outranked the plain override and put the doubled gap back,
-  // which is why this one has to carry the body class as well.
+  // The legend row and the graph heading carry their own margins and the page
+  // adds a gap on top, so the space under them was counted twice. On a phone
+  // `body.is-graph .graph-tools` outranked a plain override and put the doubled
+  // gap back, which is why these have to carry the body class as well.
   check(
-    "the space under the legend is set in one place, on a phone as well",
-    /body\.is-graph \.page-tag-graph \.graph-head,\r?\nbody\.is-graph \.page-tag-graph \.graph-tools \{\r?\n  margin-bottom: 0\.5rem;/.test(sheet),
+    "the space under the heading and the legend is set past the is-graph rules",
+    /body\.is-graph \.page-tag-graph \.graph-head \{\r?\n  margin-bottom: 0\.4rem;\r?\n\}\r?\nbody\.is-graph \.page-tag-graph \.graph-tools \{\r?\n  margin-bottom: 0\.5rem;/.test(sheet),
   )
 
-  // The rows used to sit in three equal bands, so the picked tags floated
-  // between the controls and the notes instead of belonging to the controls,
-  // and the space under them read as a hole.
-  check("the rows sit on a tight gap by default", /\.page-tags \{[^}]*gap: 0\.3rem;/.test(sheet) && /\.page-tag-graph \{\r?\n  gap: 0\.3rem;/.test(sheet))
+  // The rows used to sit in equal bands, so the picked tags floated between the
+  // controls and the notes instead of belonging to the controls, and the space
+  // under them read as a hole.
   check(
-    "and only the joints between one part and the next open up",
-    /\.page-tags \.page-title,\r?\n\.page-tag-graph \.graph-head,\r?\n\.tag-picker \{\r?\n  margin-bottom: 0\.5rem;/.test(sheet),
+    "the rows sit on a tight gap by default",
+    /\.page-tags \{[^}]*gap: 0\.3rem;/.test(sheet) && /\.page-tag-graph \{\r?\n  gap: 0\.3rem;/.test(sheet),
   )
-  check("so the picked tags stay with the controls above them", /\.tag-selected \{\r?\n  margin-bottom: 0\.15rem;/.test(sheet))
+  check("the joint under the tags is the wider one", /\.tag-picker \{\r?\n  margin-bottom: 0\.5rem;/.test(sheet))
+  // Set inside the element's own block, where the reset on its margin line
+  // would otherwise flatten it and leave the row with only the bare gap.
+  check("and the picked tags carry a small one of their own", /\.tag-selected \{[^}]*margin: 0 0 0\.25rem;/.test(sheet))
+
+  // The title takes the room it takes everywhere else on the site, of which the
+  // row gap is already part.
+  const titleRule = sheet.match(/\.note-title,\r?\n\.page-title \{[^}]*margin: 0 0 ([\d.]+)rem;/)?.[1]
+  check("the site gives a page title 0.7rem under it", titleRule === "0.7", String(titleRule))
+  check(
+    "and the tags spend the same, gap included",
+    /\.page-tags \.page-title,\r?\n\.page-tag-graph \.graph-head \{\r?\n  margin-bottom: 0\.4rem;/.test(sheet) && titleRule === "0.7",
+  )
+  // The map view's heading is a wrapper round the same title. Left alone the
+  // title adds its own margin inside it, and the tags start lower there than on
+  // the list view for no reason the reader can see.
+  check(
+    "the heading wrapper is the only thing spending it on the map view",
+    /\.page-tag-graph \.graph-head \.page-title \{\r?\n  margin-bottom: 0;/.test(sheet),
+  )
 
   // Same shape on a phone, measured against the small viewport, so the two
   // windows stay the only things that scroll there too.
   const phone = sheet.slice(sheet.indexOf("@media (max-width: 820px)"))
   check("a phone holds the same fixed shape", /body\.is-tags \{\r?\n    height: 100vh;\r?\n    height: 100svh;\r?\n    overflow: hidden;/.test(phone))
-  check("with less of a short screen given to the tags", /\.tag-picker \{\r?\n    flex-basis: 22%;/.test(phone))
-  check("and less again where a graph is under them too", /\.page-tag-graph \.tag-picker \{\r?\n    flex-basis: 18%;/.test(phone))
+  // A desktop can afford to give the list view more; a phone cannot, and two
+  // views that differ there move the page under the reader when they switch.
+  check(
+    "and gives both views the same tags box, unlike a desktop",
+    /\.tag-picker,\r?\n  \.page-tag-graph \.tag-picker \{\r?\n    flex-basis: 18%;/.test(phone),
+  )
+  check("with less of a short screen given to them than a tall one gives", /\.tag-picker \{[^}]*flex: 0 0 25%;/.test(sheet))
 }
 
 console.log("the reader picks the reading font")
