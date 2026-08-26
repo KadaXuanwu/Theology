@@ -1220,8 +1220,8 @@ console.log("tags are a way in, and they combine")
   )
   check("and it no longer shrinks to fit fewer tags", !/\.tag-picker \{[^}]*max-height:/.test(sheet))
   check("the picked tags sit on a row of their own", /<\/div>\s*<ul class="tag-selected"/.test(index))
-  check("they wrap onto a second line rather than running off the end", /\.tag-selected \{[^}]*flex-wrap: wrap;/.test(sheet))
-  check("and the row is the same height either way", /\.tag-selected \{[^}]*height: 3\.5rem;/.test(sheet))
+  check("on one line that scrolls rather than growing", /\.tag-selected \{[^}]*height: 1\.75rem;[^}]*flex-wrap: nowrap;/.test(sheet))
+  check("which a mouse can move, there being no scrollbar to grab", /chosen\.scrollLeft \+= event\.deltaY/.test(app))
   check("it says so when it is empty", index.includes('<li class="tag-hint">No tags selected</li>'))
   check("All, Any and Clear are always on the page", !/class="tag-mode"[^>]*hidden/.test(index) && !/class="tag-clear"[^>]*hidden/.test(index))
   check("and the script never takes them away again", !/modeBox\.hidden/.test(app) && !/clear\.hidden/.test(app))
@@ -1237,6 +1237,11 @@ console.log("tags are a way in, and they combine")
   // away the combination the reader just built.
   check("both switches carry the selection with them", /carriers\b[\s\S]*?\.view-switch a\.view-tab, \.tree-tags a/.test(app))
   check("and so does the tree entry", /for \(const link of carriers\) link\.setAttribute\("href", `\$\{carrierPath\.get\(link\)\}\$\{search\}`\)/.test(app))
+  // It has to happen on load as well as on a change, or a reader who arrives on
+  // a shared link and switches views straight away loses what they arrived with.
+  const paintBlock = app.match(/function paint\(\) \{[\s\S]*?\r?\n    \}/)?.[0] ?? ""
+  check("the rewrite belongs to the paint, not to the click", /for \(const link of carriers\)/.test(paintBlock))
+  check("and the page paints once before anything is touched", /\r?\n    paint\(\)\r?\n  \}\r?\n\}/.test(app))
 
   // The map answers the picking the way a single note's graph answers the note:
   // what was picked, ringed, and what it links to. One hop in the rail, two on

@@ -1167,25 +1167,30 @@ body.is-tags main {
   font-size: 0.85rem;
   font-variant-numeric: tabular-nums;
 }
-/* Under the controls rather than beside them, wrapping onto a second line, and
-   two lines tall whether it holds nothing or a dozen: a row that grew with the
-   selection would push the list below it about. Past two lines it scrolls. */
+/* Under the controls rather than beside them, on one line that never wraps: a
+   row that grew with the selection would push the notes below it about. Past
+   what fits, the strip scrolls sideways. */
 .tag-selected {
   flex: none;
-  height: 3.5rem;
+  height: 1.75rem;
   list-style: none;
   display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
+  flex-wrap: nowrap;
+  align-items: center;
   gap: 0.35rem;
   margin: 0;
   padding: 0;
   min-width: 0;
-  overflow-y: auto;
-  overscroll-behavior: contain;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  /* A scrollbar in a row this short takes more of it than the chips have left,
+     and clips them. It is left off: a chip cut at the edge already says there
+     is more, and every pick is also lit up in the picker above. */
+  scrollbar-width: none;
 }
-.tag-selected {
-  align-items: flex-start;
+.tag-selected::-webkit-scrollbar {
+  display: none;
 }
 .tag-selected li {
   flex: none;
@@ -1193,9 +1198,6 @@ body.is-tags main {
 .tag-hint {
   color: var(--muted);
   font-size: 0.78rem;
-  /* Sits on the same line a chip would, so the row does not shift the moment
-     the first tag is picked. */
-  line-height: 1.6rem;
 }
 .tag-selected button {
   display: inline-flex;

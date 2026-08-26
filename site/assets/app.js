@@ -557,8 +557,8 @@ let rebuildGraphs = () => {}
         ? `${shown} of ${total} notes`
         : `${total} ${total === 1 ? "note" : "notes"}`
 
-      // Its own row under the controls, wrapping onto the next line, and a
-      // fixed height either way so picking a tag never shifts what is below.
+      // Its own row under the controls, one line high whether it holds nothing
+      // or a dozen, so picking a tag never shifts what is below it.
       chosen.innerHTML = selected.length
         ? selected
             .map(
@@ -625,6 +625,19 @@ let rebuildGraphs = () => {}
       const button = event.target.closest("button[data-tag]")
       if (button) toggle(button.dataset.tag)
     })
+
+    // The strip is one row with no scrollbar, so a plain wheel moves it
+    // sideways. Without this a mouse cannot reach a chip that has run off the
+    // end of it.
+    chosen.addEventListener(
+      "wheel",
+      (event) => {
+        if (event.deltaY === 0 || chosen.scrollWidth <= chosen.clientWidth) return
+        event.preventDefault()
+        chosen.scrollLeft += event.deltaY
+      },
+      { passive: false },
+    )
 
     for (const button of modeButtons) {
       button.addEventListener("click", () => {
