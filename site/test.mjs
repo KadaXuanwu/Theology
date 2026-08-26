@@ -1280,7 +1280,7 @@ console.log("tags are a way in, and they combine")
   // graph is what that page is for.
   check(
     "the map view keeps its tags shorter than the list view",
-    /\.page-tag-graph \.tag-picker \{\r?\n  flex-basis: 17%;/.test(sheet),
+    /\.page-tag-graph \.tag-picker \{\r?\n  flex-basis: 17\.5%;/.test(sheet),
     sheet.match(/\.page-tag-graph \.tag-picker \{[^}]*/)?.[0].split(/\r?\n/).pop() ?? "",
   )
   // The legend row carries its own margin and the page adds a gap on top, so
@@ -1288,9 +1288,19 @@ console.log("tags are a way in, and they combine")
   // .graph-tools` outranked the plain override and put the doubled gap back,
   // which is why this one has to carry the body class as well.
   check(
-    "the space under the legend is counted once, on a phone as well",
-    /body\.is-graph \.page-tag-graph \.graph-head,\r?\nbody\.is-graph \.page-tag-graph \.graph-tools \{\r?\n  margin-bottom: 0;/.test(sheet),
+    "the space under the legend is set in one place, on a phone as well",
+    /body\.is-graph \.page-tag-graph \.graph-head,\r?\nbody\.is-graph \.page-tag-graph \.graph-tools \{\r?\n  margin-bottom: 0\.5rem;/.test(sheet),
   )
+
+  // The rows used to sit in three equal bands, so the picked tags floated
+  // between the controls and the notes instead of belonging to the controls,
+  // and the space under them read as a hole.
+  check("the rows sit on a tight gap by default", /\.page-tags \{[^}]*gap: 0\.3rem;/.test(sheet) && /\.page-tag-graph \{\r?\n  gap: 0\.3rem;/.test(sheet))
+  check(
+    "and only the joints between one part and the next open up",
+    /\.page-tags \.page-title,\r?\n\.page-tag-graph \.graph-head,\r?\n\.tag-picker \{\r?\n  margin-bottom: 0\.5rem;/.test(sheet),
+  )
+  check("so the picked tags stay with the controls above them", /\.tag-selected \{\r?\n  margin-bottom: 0\.15rem;/.test(sheet))
 
   // Same shape on a phone, measured against the small viewport, so the two
   // windows stay the only things that scroll there too.
