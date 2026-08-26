@@ -94,7 +94,7 @@ export function shell({
 (function(){try{var d=document.documentElement;var t=localStorage.getItem("theme");if(t==="light"||t==="dark")d.dataset.theme=t;var f=localStorage.getItem("font");if(${JSON.stringify(FONT_IDS)}.indexOf(f)>-1)d.dataset.font=f}catch(e){}})()
 </script>
 </head>
-<body class="${[rightRail ? "has-right" : "", bodyClass].filter(Boolean).join(" ")}">
+<body class="${[rightRail ? "has-right" : "", bodyClass].filter(Boolean).join(" ")}"${notes.some((n) => n.url === current) ? ` data-note-url="${escapeHtml(current)}"` : ""}>
 <a class="skip-link" href="#main">Skip to content</a>
 ${header({ root, view, textUrl, graphUrl })}
 <div class="layout">
@@ -103,7 +103,9 @@ ${explorer({ root, current, sections, notes, view })}
 ${rightRail ? `<aside class="sidebar-right">${rightRail}</aside>` : ""}
 </div>
 ${overlays()}
+${assets.chat ? chat() : ""}
 <script type="module" src="${root}${assets.app}"></script>
+${assets.chat ? `<script type="module" src="${root}${assets.chat}"></script>` : ""}
 </body>
 </html>
 `
@@ -193,6 +195,24 @@ function overlays() {
   </div>
 </div>
 <div class="preview-card" hidden></div>`
+}
+
+// Only rendered when a chat endpoint is configured, so the pages of a fork
+// carry no dead button.
+function chat() {
+  return `<button class="chat-open" aria-label="Ask about these notes" aria-expanded="false">${icon("chat")}</button>
+<div class="chat-panel" hidden role="dialog" aria-label="Ask about these notes">
+  <div class="chat-head">
+    <span class="chat-heading">Ask about these notes</span>
+    <button class="icon-button chat-close" aria-label="Close">${icon("close")}</button>
+  </div>
+  <div class="chat-log" aria-live="polite"></div>
+  <form class="chat-form">
+    <input class="chat-input" type="text" placeholder="Ask anything, or describe a note you half remember" autocomplete="off" aria-label="Your question">
+    <button class="icon-button chat-send" aria-label="Send">${icon("send")}</button>
+  </form>
+  <p class="chat-disclaimer">Answers are written by an AI reading the notes, and it can get things wrong. Follow the links and check the sources.</p>
+</div>`
 }
 
 export function notePage({ note, root, dateLabel, sections, notes, assets }) {
@@ -429,6 +449,8 @@ function icon(name) {
     text: '<line x1="5" y1="6" x2="19" y2="6"/><line x1="5" y1="10.5" x2="19" y2="10.5"/><line x1="5" y1="15" x2="15" y2="15"/><line x1="5" y1="19" x2="12" y2="19"/>',
     graph:
       '<circle cx="6" cy="7" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="17" r="2.5"/><line x1="7.6" y1="8.9" x2="10.6" y2="15"/><line x1="16.7" y1="8.2" x2="13.4" y2="15"/><line x1="8.4" y1="6.7" x2="15.5" y2="6.2"/>',
+    chat: '<path d="M20 15.5a2.5 2.5 0 0 1-2.5 2.5H8l-4 3V6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5z"/>',
+    send: '<line x1="5" y1="12" x2="18" y2="12"/><polyline points="12.5 6.5 19 12 12.5 17.5"/>',
   }
   return `<svg class="icon icon-${name}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name]}</svg>`
 }

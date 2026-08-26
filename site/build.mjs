@@ -41,6 +41,11 @@ const assetsDir = join(here, "assets")
 const LEDE = `A research vault mapping arguments for and against Christianity, and the claims and evidence each one rests on.
 The goal is not to prove one position over the other. It is to make every argument traceable, so a reader can follow the reasoning back to its sources and judge it themselves.`
 
+// The chat Worker's URL, printed by `wrangler deploy`. Empty means no chat
+// bubble is rendered at all, which is what a fork and a CI build get: the
+// feature costs a contributor nothing and needs no key to build the site.
+const CHAT_ENDPOINT = process.env.CHAT_ENDPOINT ?? ""
+
 const warnings = []
 const warn = (message) => warnings.push(message)
 
@@ -167,9 +172,31 @@ async function build() {
     })),
   )
 
+  // What the chat Worker reads. Deliberately not content hashed: the Worker
+  // fetches it by a fixed URL and re-reads it every ten minutes, which is what
+  // lets notes change daily while the Worker itself sits untouched. Original
+  // case, unlike the search index, because a model reads this.
+  const chatCorpus = JSON.stringify({
+    notes: notes.map((n) => ({
+      title: n.title,
+      url: n.url,
+      section: n.section.label,
+      kind: n.section.kind,
+      status: n.status,
+      tags: n.tags,
+      excerpt: n.shortExcerpt,
+      text: n.text,
+    })),
+  })
+
   // Hashed before any page is written, because each page references them.
-  const { files: assetFiles, refs: assets } = await buildAssets(assetsDir, { graphData, searchData })
+  const { files: assetFiles, refs: assets } = await buildAssets(assetsDir, {
+    graphData,
+    searchData,
+    chatEndpoint: CHAT_ENDPOINT,
+  })
   for (const file of assetFiles) await write(file.name, file.contents)
+  await write("chat-corpus.json", chatCorpus)
 
   // Note pages
   for (const note of notes) {

@@ -1533,3 +1533,162 @@ body.is-graph .graph-head .lede {
     animation-duration: 0.01ms !important;
   }
 }
+
+/* Chat --------------------------------------------------------------------- */
+
+/* Sits opposite the sidebar, low enough that it never covers the reading
+   column and high enough to clear a mobile browser's own bottom furniture. */
+.chat-open {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 55;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--accent) 70%, #000);
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.chat-open:hover {
+  transform: translateY(-1px);
+  background: color-mix(in srgb, var(--accent) 88%, #000);
+}
+.chat-open .icon {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.chat-panel {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 5rem;
+  z-index: 56;
+  display: flex;
+  flex-direction: column;
+  width: min(24rem, calc(100vw - 2.5rem));
+  height: min(30rem, calc(100vh - 8rem));
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.chat-panel[hidden] {
+  display: none;
+}
+
+.chat-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.6rem 0.6rem 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+.chat-heading {
+  font: 600 0.9rem/1.2 var(--font-ui);
+  color: var(--text);
+}
+
+.chat-log {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.9rem;
+  overflow-y: auto;
+  font: 0.875rem/1.55 var(--font-ui);
+}
+.chat-message {
+  max-width: 90%;
+  padding: 0.5rem 0.7rem;
+  border-radius: 0.6rem;
+}
+.chat-message p {
+  margin: 0;
+}
+.chat-message p + p {
+  margin-top: 0.5rem;
+}
+.chat-user {
+  align-self: flex-end;
+  background: var(--accent-soft);
+  color: var(--text);
+}
+.chat-assistant {
+  align-self: flex-start;
+  background: var(--bg-center);
+  border: 1px solid var(--border);
+}
+/* A caret while the text is still arriving, so a slow first token reads as
+   working rather than as broken. */
+.chat-assistant.is-streaming::after {
+  content: "";
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.9rem;
+  margin-left: 0.15rem;
+  vertical-align: text-bottom;
+  background: var(--muted);
+  animation: chat-caret 1s steps(2) infinite;
+}
+@keyframes chat-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+.chat-form {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem;
+  border-top: 1px solid var(--border);
+}
+.chat-form.is-waiting {
+  opacity: 0.6;
+  pointer-events: none;
+}
+.chat-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--bg-center);
+  color: var(--text);
+  font: 0.875rem/1.4 var(--font-ui);
+}
+.chat-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.chat-disclaimer {
+  margin: 0;
+  padding: 0 0.9rem 0.7rem;
+  color: var(--muted);
+  font: 0.7rem/1.4 var(--font-ui);
+}
+
+@media (max-width: 34rem) {
+  .chat-panel {
+    right: 0.75rem;
+    left: 0.75rem;
+    bottom: 0.75rem;
+    width: auto;
+    height: min(30rem, calc(100vh - 2rem));
+  }
+  /* The panel covers the whole width on a phone, so the button underneath it
+     would only be something to hit by accident. */
+  .chat-is-open .chat-open {
+    display: none;
+  }
+}
