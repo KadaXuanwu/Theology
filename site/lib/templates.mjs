@@ -381,12 +381,12 @@ export function tagIndexPage({ tags, root, sections, notes, assets }) {
   </div>
   <div class="tag-bar">
     <p class="tag-count" role="status" aria-live="polite">${total}</p>
-    <ul class="tag-selected" aria-label="Selected tags"></ul>
     <div class="tag-actions">
-      <div class="tag-mode" role="group" aria-label="Match selected tags" hidden><button type="button" class="tag-mode-option" data-mode="all" aria-pressed="true">All</button><button type="button" class="tag-mode-option" data-mode="any" aria-pressed="false">Any</button></div>
-      <button type="button" class="tag-clear" hidden>Clear</button>
+      <div class="tag-mode" role="group" aria-label="Match selected tags"><button type="button" class="tag-mode-option" data-mode="all" aria-pressed="true">All</button><button type="button" class="tag-mode-option" data-mode="any" aria-pressed="false">Any</button></div>
+      <button type="button" class="tag-clear">Clear</button>
     </div>
   </div>
+  <ul class="tag-selected" aria-label="Selected tags"><li class="tag-hint">No tags selected</li></ul>
   <div class="tag-results"><p class="tag-none" hidden></p>${groups}</div>
 </div>`,
     rightRail: railGraph({ root }),

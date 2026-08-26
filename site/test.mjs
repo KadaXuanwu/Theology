@@ -487,7 +487,7 @@ console.log("labels clear the ring and hold their size")
   // The note the graph was opened for is ringed, and so is whatever the pointer
   // is on. One solid, one dotted, or the reader cannot tell where they are from
   // what they are reaching for.
-  const ringBlock = source.match(/if \(seeded\.has\(node\.id\) \|\| touched\) \{[\s\S]*?\n      \}/)?.[0] ?? ""
+  const ringBlock = source.match(/if \(ringed\.has\(node\.id\) \|\| touched\) \{[\s\S]*?\n      \}/)?.[0] ?? ""
   check("hover and drag are the same state to the ring", source.includes("const touched = node === hovered || node === dragging"))
   check("the dots go on only for that state", /if \(touched\) \{[\s\S]*?setLineDash\(ringDash\(/.test(ringBlock), ringBlock.length > 0 ? "found" : "no ring block")
   check("and come off again, so the seeded ring stays solid", ringBlock.includes("ctx.setLineDash([])"))
@@ -1189,14 +1189,44 @@ console.log("tags are a way in, and they combine")
   const linkcheck = await readFile(resolve(repoRoot, "site/linkcheck.mjs"), "utf8")
   check("and the link checker reads that as a page, not a folder", /split\(\/\[\?#\]\/\)/.test(linkcheck))
 
-  // Two scroll windows on a desktop: the tags stay in reach while the notes
-  // under them move.
+  // Two scroll windows: the tags stay in reach while the notes under them move.
   check("the page itself does not scroll", /body\.is-tags main \{\r?\n  overflow: hidden;/.test(sheet))
   check("the tags get a window of their own", /\.tag-picker \{[^}]*overflow-y: auto;/.test(sheet))
   check("and the notes take the rest of the column", /\.tag-results \{[^}]*flex: 1 1 auto;[^}]*overflow-y: auto;/.test(sheet))
-  // A list that scrolls inside a page that scrolls is a trap for a thumb.
+
+  // Neither window is allowed to size itself from what is in it. The tags used
+  // to shrink to their own content and the controls used to come and go, so
+  // every pick nudged the list underneath somewhere else.
+  check(
+    "the tags box is a fixed share of the column, not its contents",
+    /\.tag-picker \{[^}]*flex: 0 0 34%;/.test(sheet),
+    sheet.match(/\.tag-picker \{[^}]*flex: [^;]*/)?.[0].split(/\r?\n/).pop() ?? "",
+  )
+  check("and it no longer shrinks to fit fewer tags", !/\.tag-picker \{[^}]*max-height:/.test(sheet))
+  check("the picked tags sit on a row of their own", /<\/div>\s*<ul class="tag-selected"/.test(index))
+  check("which is one line high whatever is on it", /\.tag-selected \{[^}]*height: 1\.75rem;[^}]*flex-wrap: nowrap;/.test(sheet))
+  check("and says so when it is empty", index.includes('<li class="tag-hint">No tags selected</li>'))
+  check("All, Any and Clear are always on the page", !/class="tag-mode"[^>]*hidden/.test(index) && !/class="tag-clear"[^>]*hidden/.test(index))
+  check("and the script never takes them away again", !/modeBox\.hidden/.test(app) && !/clear\.hidden/.test(app))
+
+  // The map answers the filter: the same graph it always shows, with whatever
+  // came through the filter ringed on it.
+  const graph = await readFile(resolve(repoRoot, "site/assets/graph.js"), "utf8")
+  check("the graph can be told what to ring", /function setRinged\(ids\)/.test(graph))
+  check("the ring is drawn from that, not from what the graph was opened for", /if \(ringed\.has\(node\.id\) \|\| touched\)/.test(graph))
+  check("and hands it back when nothing is picked", /ringed = ids && ids\.length \? new Set\(ids\) : seeded/.test(graph))
+  check("the filter rings whatever survived it", /ringedNotes = selected\.length \? matched : null/.test(app))
+  // Picking a tag must not cut the map down to the matches: the point of the
+  // ring is seeing where they sit in the whole thing.
+  check("and never narrows the map to them", !/setRinged[\s\S]{0,200}neighbourhood/.test(app))
+  // The graphs mount when their data lands, which is after the first paint.
+  check("a graph that arrives late still gets the rings", /graphs\.push\([\s\S]*?\r?\n      ringGraphs\(\)/.test(app))
+
+  // Same shape on a phone, measured against the small viewport, so the two
+  // windows stay the only things that scroll there too.
   const phone = sheet.slice(sheet.indexOf("@media (max-width: 820px)"))
-  check("a phone keeps only one of them", /body\.is-tags main \{\r?\n    overflow: visible;/.test(phone) && /\.tag-results \{\r?\n    overflow: visible;/.test(phone))
+  check("a phone holds the same fixed shape", /body\.is-tags \{\r?\n    height: 100vh;\r?\n    height: 100svh;\r?\n    overflow: hidden;/.test(phone))
+  check("with less of a short screen given to the tags", /\.tag-picker \{\r?\n    flex-basis: 28%;/.test(phone))
 }
 
 console.log("the reader picks the reading font")

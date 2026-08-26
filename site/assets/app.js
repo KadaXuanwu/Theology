@@ -451,6 +451,20 @@ async function showPreview(link) {
   }
 }
 
+/* What the filter and the graphs share -------------------------------------
+ * Two things steer the graphs on a page: the legend, which switches categories
+ * in and out, and the tags page filter, which rings whatever it has picked.
+ * The graphs mount once their data arrives, which is after the filter has
+ * already painted, so the two sides meet here rather than one waiting on the
+ * other.
+ */
+
+const graphs = []
+let ringedNotes = null
+const ringGraphs = () => {
+  for (const graph of graphs) graph.setRinged(ringedNotes)
+}
+
 /* Tag filter ---------------------------------------------------------------
  * The tags page only. Every tag and every note are already in the page, so
  * combining tags is a matter of hiding rows rather than fetching anything, and
@@ -490,6 +504,10 @@ async function showPreview(link) {
     ]
     let mode = params.get("match") === "any" ? "any" : "all"
 
+    // Read once. Each paint rings the notes that survived the filter, and
+    // asking the DOM for the title again every time is work for nothing.
+    const titles = new Map(rows.map((row) => [row, row.querySelector("a")?.dataset.note ?? ""]))
+
     const holds = (row, tag) => row.dataset.tags.includes(`|${tag}|`)
     const matches = (row) =>
       selected.length === 0 ||
@@ -504,10 +522,14 @@ async function showPreview(link) {
       }
 
       let shown = 0
+      const matched = []
       for (const row of rows) {
         const on = matches(row)
         row.hidden = !on
-        if (on) shown++
+        if (on) {
+          shown++
+          matched.push(titles.get(row))
+        }
         for (const mark of row.querySelectorAll(".result-tag")) {
           mark.classList.toggle("is-on", selected.includes(mark.dataset.tag))
         }
@@ -525,19 +547,25 @@ async function showPreview(link) {
         ? `${shown} of ${total} notes`
         : `${total} ${total === 1 ? "note" : "notes"}`
 
-      chosen.innerHTML = selected
-        .map(
-          (tag) =>
-            `<li><button type="button" data-tag="${escapeHtml(tag)}" aria-label="Remove ${escapeHtml(tag)}">#${escapeHtml(tag)}${closeIcon}</button></li>`,
-        )
-        .join("")
+      // Its own row under the controls, at a fixed height whether it holds
+      // anything or not, so picking a tag never shifts the list below it.
+      chosen.innerHTML = selected.length
+        ? selected
+            .map(
+              (tag) =>
+                `<li><button type="button" data-tag="${escapeHtml(tag)}" aria-label="Remove ${escapeHtml(tag)}">#${escapeHtml(tag)}${closeIcon}</button></li>`,
+            )
+            .join("")
+        : '<li class="tag-hint">No tags selected</li>'
 
-      // All or Any says nothing until there are two tags to combine.
-      modeBox.hidden = selected.length < 2
-      clear.hidden = selected.length === 0
       for (const button of modeButtons) {
         button.setAttribute("aria-pressed", String(button.dataset.mode === mode))
       }
+
+      // The graph in the rail rings what came through, so a combination has a
+      // shape as well as a list. Nothing picked leaves the map as it was.
+      ringedNotes = selected.length ? matched : null
+      ringGraphs()
 
       none.hidden = shown > 0
       none.textContent =
@@ -582,6 +610,19 @@ async function showPreview(link) {
       const button = event.target.closest("button[data-tag]")
       if (button) toggle(button.dataset.tag)
     })
+
+    // The strip is one row with no scrollbar, so a plain wheel moves it
+    // sideways. Without this a mouse cannot reach a chip that has run off the
+    // end of it.
+    chosen.addEventListener(
+      "wheel",
+      (event) => {
+        if (event.deltaY === 0 || chosen.scrollWidth <= chosen.clientWidth) return
+        event.preventDefault()
+        chosen.scrollLeft += event.deltaY
+      },
+      { passive: false },
+    )
 
     for (const button of modeButtons) {
       button.addEventListener("click", () => {
@@ -628,7 +669,6 @@ const writeHidden = (hidden) => {
 {
   const mounts = [...document.querySelectorAll(".graph-mount")]
   const toggles = [...document.querySelectorAll(".legend-toggle")]
-  const graphs = []
   // Most pages show a graph without a legend, so the full list of categories
   // comes from the data rather than from the buttons.
   const allKinds = new Set(toggles.map((t) => t.dataset.kind))
@@ -690,6 +730,8 @@ const writeHidden = (hidden) => {
           }),
         )
       }
+      // A filter that painted before the data arrived still gets its rings.
+      ringGraphs()
     })
   }
 }
