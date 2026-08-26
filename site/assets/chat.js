@@ -5,8 +5,8 @@
 // far: the notes are read by the Worker from the published site, so a visitor
 // cannot decide what the model gets fed.
 //
-// `render` is exported and takes its root as an argument so the link
-// sanitiser can be tested in node, away from any DOM.
+// `render` takes its root as an argument, and the history helpers read storage
+// only when called, so all three can be tested in node away from any DOM.
 
 const ENDPOINT = "__CHAT_ENDPOINT__"
 
@@ -37,6 +37,30 @@ export function render(text, root = "") {
     .join("")
 }
 
+// The conversation outlives the page. Every answer links other notes, so the
+// first thing a reader does with a good answer is click out of the page they
+// asked it on, and losing the thread at exactly that moment makes the chat feel
+// broken. sessionStorage rather than localStorage: it should survive following
+// a link, not still be sitting there next week.
+const STORE = "chat-history"
+
+export function loadHistory() {
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(STORE) ?? "[]")
+    return Array.isArray(saved) ? saved.filter((m) => m && typeof m.text === "string") : []
+  } catch {
+    return [] // private browsing, or something else wrote to the key
+  }
+}
+
+export const saveHistory = (history) => {
+  try {
+    sessionStorage.setItem(STORE, JSON.stringify(history))
+  } catch {
+    // Storage full or blocked. The chat still works, it just forgets.
+  }
+}
+
 function init() {
   const bubble = document.querySelector(".chat-open")
   const panel = document.querySelector(".chat-panel")
@@ -47,7 +71,7 @@ function init() {
 
   const root = document.documentElement.dataset.root ?? ""
   const pageUrl = document.body.dataset.noteUrl ?? null
-  const history = []
+  const history = loadHistory()
   let waiting = false
 
   const open = () => {
@@ -55,11 +79,16 @@ function init() {
     bubble.setAttribute("aria-expanded", "true")
     document.body.classList.add("chat-is-open")
     if (log.childElementCount === 0) {
-      say(
-        "assistant",
-        "Ask about anything in the vault. If you only half remember a note, describe it and I will try to find it.",
-      )
+      if (history.length) {
+        for (const message of history) say(message.role, message.text)
+      } else {
+        say(
+          "assistant",
+          "Ask about anything in the vault. If you only half remember a note, describe it and I will try to find it.",
+        )
+      }
     }
+    grow()
     input.focus()
   }
 
@@ -75,11 +104,31 @@ function init() {
     if (event.key === "Escape" && !panel.hidden) close()
   })
 
+  // The box is one line until the text needs more, then grows to a ceiling set
+  // in the stylesheet and scrolls beyond it. Height has to be reset first or it
+  // can only ever grow, never shrink back when text is deleted.
+  function grow() {
+    input.style.height = "auto"
+    input.style.height = `${input.scrollHeight}px`
+  }
+
+  input.addEventListener("input", grow)
+
+  // Enter sends, because this is a chat box. Shift+Enter is the newline, which
+  // is the convention every other chat box has taught people to expect.
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault()
+      form.requestSubmit()
+    }
+  })
+
   form.addEventListener("submit", (event) => {
     event.preventDefault()
     const question = input.value.trim()
     if (!question || waiting) return
     input.value = ""
+    grow()
     ask(question)
   })
 
@@ -131,6 +180,7 @@ function init() {
     history.push({ role: "user", text: question }, { role: "assistant", text })
     // Only the last few turns are worth keeping; the Worker trims anyway.
     if (history.length > 8) history.splice(0, history.length - 8)
+    saveHistory(history)
 
     waiting = false
     form.classList.remove("is-waiting")
