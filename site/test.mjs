@@ -1781,5 +1781,29 @@ console.log("the question box grows with the question")
   check("the send button stays on the last line as the box grows", /align-items: flex-end;/.test(formRule))
 }
 
+console.log("the tuning notes still describe the code")
+{
+  // worker/README.md lists what each dial is set to. A doc quietly disagreeing
+  // with the code is worse than no doc, so the numbers are checked rather than
+  // trusted. Change a constant and this fails until the table is updated.
+  const doc = await readFile(resolve(repoRoot, "worker", "README.md"), "utf8")
+  const build = await readFile(resolve(repoRoot, "site", "build.mjs"), "utf8")
+
+  const row = (name) => doc.match(new RegExp(`\\\`${name}\\\`[^|]*\\|[^|]*\\|([^|]*)\\|`))?.[1]?.trim() ?? ""
+
+  check("MAX_NOTES matches the table", row("MAX_NOTES") === String(MAX_NOTES), row("MAX_NOTES"))
+  check(
+    "BODY_BUDGET matches the table",
+    row("BODY_BUDGET").replace(/[^0-9]/g, "") === String(BODY_BUDGET),
+    row("BODY_BUDGET"),
+  )
+
+  // This one lives in the build, not the Worker, and the doc says so because
+  // changing it needs a site rebuild rather than a deploy.
+  const excerpt = build.match(/shortExcerpt = trimTo\(.*,\s*(\d+)\)/)?.[1]
+  check("the excerpt length matches the table", doc.includes(`${excerpt} chars`), `build says ${excerpt}`)
+  check("and the table says where it lives", /site\/build\.mjs.*trimTo/.test(doc))
+}
+
 console.log(failures === 0 ? "\nAll checks passed." : `\n${failures} check(s) failed.`)
 process.exitCode = failures === 0 ? 0 : 1
