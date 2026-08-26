@@ -1300,6 +1300,12 @@ console.log("tags are a way in, and they combine")
     /\.page-tags \{[^}]*gap: 0\.3rem;/.test(sheet) && /\.page-tag-graph \{\r?\n  gap: 0\.3rem;/.test(sheet),
   )
   check("the joint under the tags is the wider one", /\.tag-picker \{\r?\n  margin-bottom: 0\.5rem;/.test(sheet))
+  // A group the filter emptied is display:none, but it is still the first
+  // section in the markup, so `:first-of-type` zeroed its margin and not the
+  // margin of the group the reader can actually see. Whenever Arguments For had
+  // no match, whatever came first instead sat visibly lower than it should.
+  check("the space between groups goes under each one", /\.tag-results \.list-section \{\r?\n  margin: 0 0 1\.4rem;/.test(sheet))
+  check("so an emptied group takes no room at all", !/\.tag-results \.list-section:first-of-type/.test(sheet))
   // Set inside the element's own block, where the reset on its margin line
   // would otherwise flatten it and leave the row with only the bare gap.
   check("and the picked tags carry a small one of their own", /\.tag-selected \{[^}]*margin: 0 0 0\.25rem;/.test(sheet))

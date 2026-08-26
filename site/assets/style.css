@@ -1320,11 +1320,13 @@ body.is-graph .page-tag-graph .graph-tools {
      scrollport's own edges. */
   padding: 0.15rem 0.35rem 0.5rem 0.15rem;
 }
+/* The space between one group and the next goes under each of them rather than
+   above, so a group the filter emptied takes no room at all and whichever group
+   is showing first starts flush against the picked tags. `:first-of-type` could
+   not do this: it picks the first group in the markup whether it is showing or
+   not, and every other group kept a margin the reader could see. */
 .tag-results .list-section {
-  margin-top: 1.4rem;
-}
-.tag-results .list-section:first-of-type {
-  margin-top: 0;
+  margin: 0 0 1.4rem;
 }
 .tag-results .card-list a {
   padding: 0.5rem 0.8rem;
