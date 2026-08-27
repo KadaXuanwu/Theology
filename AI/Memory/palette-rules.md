@@ -7,7 +7,7 @@ metadata:
 
 Rebuilt 2026-08-27. The stylesheet's tokens follow three rules, and `site/test.mjs` measures all three, so a colour changed by eye will fail the build rather than quietly break the system.
 
-**Colour means the map. Ink means a source.** The four kinds own every hue in the prose: a coloured word goes to a node, and which colour says which kind. A link off the site carries no hue at all, only ink, a firmer underline and the arrow. It used to be a fifth hue (a red), which is exactly what made it read as a fifth kind of node instead of as the way out.
+**Colour means the map. Ink means a source.** The four kinds own every hue in the prose: a coloured word goes to a node, and which colour says which kind. A link off the site carries no hue at all: ink, a firmer underline and the arrow. It used to be a fifth hue (a red), which is exactly what made it read as a fifth kind of node instead of as the way out. With the hue gone, weight is the only thing left to make it visible, so it takes the strongest ink the page has, darkest on paper and brightest on the dark side. Ink at the prose's own weight disappears into the prose, which is what the first attempt did.
 
 **A dot and a word are different jobs.** The dot is the only thing naming a kind in the graph and the tree, so the five `--<kind>` tokens are spaced in lightness as well as hue and clear 3:1 as graphics. The `--link-<kind>` tokens are the same hues levelled to one contrast (5.5:1 light, 6.4:1 dark) so no kind shouts in a paragraph carrying several. Anywhere a kind's colour becomes text, it takes the link token: that is what the pill under a note title got wrong, at 4:1.
 

@@ -45,10 +45,11 @@
   --link-note: #69635d;
   /* A source is the link that is not a node. It carries no hue at all: colour
      in the prose means the map, and a fifth colour only reads as a fifth kind
-     of node. Ink, a firmer underline and the arrow say the rest. Barely any
-     hue at all in it: the ochre kind is itself a brown once it is taken to
-     link weight, and a warm ink beside it was too close a thing. */
-  --link-out: #4f4d49;
+     of node. What it carries instead is weight. Ink at the same weight as the
+     prose disappears into it, so a source takes the strongest ink the page
+     has: the darkest on paper, the brightest on the dark side. Its underline
+     and the arrow do the rest. */
+  --link-out: #14120e;
   --highlight: rgba(255, 208, 0, 0.4);
   --highlight-strong: rgba(255, 208, 0, 0.6);
   /* The gold a search hit wears is too loud for a row of chips that is on the
@@ -96,7 +97,7 @@
   --link-claim: #4eb08d;
   --link-evidence: #d386be;
   --link-note: #a39e98;
-  --link-out: #bcbab7;
+  --link-out: #f0eeeb;
   --highlight: rgba(255, 208, 0, 0.4);
   --highlight-strong: rgba(255, 208, 0, 0.6);
   --tag-fill: var(--highlight);
@@ -130,7 +131,7 @@
     --link-claim: #4eb08d;
     --link-evidence: #d386be;
     --link-note: #a39e98;
-    --link-out: #bcbab7;
+    --link-out: #f0eeeb;
     --highlight: rgba(255, 208, 0, 0.4);
     --highlight-strong: rgba(255, 208, 0, 0.6);
     --tag-fill: var(--highlight);

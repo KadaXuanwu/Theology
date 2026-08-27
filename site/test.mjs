@@ -1752,6 +1752,18 @@ console.log("a link wears the colour of what it points at")
   check("which reads on the page too", contrast(out, page) >= 4.5, `${contrast(out, page).toFixed(2)}:1`)
   check("and is never the quiet one", contrast(out, page) >= Math.min(...ratios))
 
+  // With no hue to carry it, the only thing left telling a source from the
+  // words around it is weight, and ink at the prose's own weight vanishes into
+  // the prose. So it takes the strongest ink the page has: the darkest on
+  // paper, the brightest on the dark side, either way a step off the reading
+  // ink rather than a shade of it.
+  for (const theme of ["light", "dark"]) {
+    const ink = read(theme, "ink-read")
+    const prose = ink.startsWith("#") ? ink : read(theme, "muted")
+    const step = contrast(read(theme, "link-out"), prose)
+    check(`the ${theme} source steps off the reading ink`, step >= 1.3, `${step.toFixed(2)}:1 against the prose`)
+  }
+
   // Six colours in three palettes: the light block, and the dark one twice
   // over, once for the toggle and once for the system setting.
   for (const name of [...KINDS.map((k) => `link-${k}`), "link-out"]) {
