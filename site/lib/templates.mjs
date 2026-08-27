@@ -3,6 +3,10 @@
 import { escapeHtml } from "./markdown.mjs"
 import { slugify } from "./content.mjs"
 
+// The vault this site is built from. Linked in the header so a reader can go
+// read the notes as files, and see the history behind any line of them.
+const REPO_URL = "https://github.com/KadaXuanwu/Theology"
+
 const KIND_LABEL = {
   "argument-for": "Argument for",
   "argument-against": "Argument against",
@@ -164,6 +168,7 @@ function header({ root, view, textUrl, graphUrl }) {
   ${fontPicker()}
   <button class="search-open" aria-label="Search notes">${icon("search")}<span>Search</span><kbd>/</kbd></button>
   <button class="icon-button theme-toggle" aria-label="Switch theme">${icon("sun")}${icon("moon")}</button>
+  <a class="icon-button github-link" href="${REPO_URL}" target="_blank" rel="noopener" aria-label="Source on GitHub" title="Source on GitHub">${icon("github")}</a>
 </header>`
 }
 
@@ -576,6 +581,12 @@ function icon(name) {
       '<circle cx="6" cy="7" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="17" r="2.5"/><line x1="7.6" y1="8.9" x2="10.6" y2="15"/><line x1="16.7" y1="8.2" x2="13.4" y2="15"/><line x1="8.4" y1="6.7" x2="15.5" y2="6.2"/>',
     chat: '<path d="M20 15.5a2.5 2.5 0 0 1-2.5 2.5H8l-4 3V6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5z"/>',
     send: '<line x1="5" y1="12" x2="18" y2="12"/><polyline points="12.5 6.5 19 12 12.5 17.5"/>',
+    github:
+      '<path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.55v-2.13c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.29-1.68-1.29-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.4-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>',
   }
+  // The GitHub mark is only itself as a solid shape, so it is the one icon
+  // here drawn in fill rather than in stroke.
+  if (name === "github")
+    return `<svg class="icon icon-github" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${paths[name]}</svg>`
   return `<svg class="icon icon-${name}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name]}</svg>`
 }

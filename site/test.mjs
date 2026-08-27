@@ -1409,6 +1409,38 @@ console.log("the reader picks the reading font")
   )
 }
 
+console.log("the header points back at the vault it is built from")
+{
+  const dist = resolve(repoRoot, "dist")
+  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+  const pages = ["index.html", "claims/jesus-existed/index.html", "arguments-for/index.html", "tags/index.html"]
+  const html = await Promise.all(pages.map((p) => readFile(resolve(dist, p), "utf8")))
+
+  const link = html[0].match(/<a class="icon-button github-link"[^>]*>/)?.[0] ?? ""
+  check("the header carries the link", link.length > 0)
+  check("it goes to the repository", link.includes('href="https://github.com/KadaXuanwu/Theology"'), link)
+  check("it opens away from the page being read", link.includes('target="_blank"') && link.includes('rel="noopener"'))
+  check("and it says what it is, having no words of its own", link.includes('aria-label="Source on GitHub"'))
+  check(
+    "every page carries it, not just the front one",
+    html.every((h) => h.includes('class="icon-button github-link"')),
+  )
+
+  // Off site, so it sits past the controls that act on the page itself.
+  const at = (needle) => html[0].indexOf(needle)
+  check("it sits last in the row", at('class="icon-button theme-toggle"') < at('class="icon-button github-link"'))
+
+  // The mark only reads as itself filled, so it is the one icon here that is
+  // not drawn in stroke.
+  const mark = html[0].match(/<svg class="icon icon-github"[^>]*>/)?.[0] ?? ""
+  check("the mark is drawn solid", mark.includes('fill="currentColor"') && !mark.includes("stroke="), mark)
+
+  // A phone header is already full. Below the width where an eighth thing
+  // stops fitting the link is dropped rather than crushing what is beside it.
+  check("and it is dropped where the line runs out of room", /max-width: 400px\) \{\s*\.github-link \{\s*display: none/.test(sheet))
+}
+
+
 console.log("the graph fits a phone screen")
 {
   const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
