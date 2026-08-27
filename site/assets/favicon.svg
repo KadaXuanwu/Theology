@@ -3,13 +3,13 @@
        strip with, so it reads on a light and a dark one alike. With the plate
        gone the padding it needed goes too, and the mark fills the square. -->
   <g transform="translate(16 16) scale(1.34) translate(-15.7 -16.2)">
-    <g stroke="#8a8f98" stroke-width="1.6" stroke-linecap="round">
+    <g stroke="#8b857f" stroke-width="1.6" stroke-linecap="round">
       <line x1="9" y1="10" x2="23" y2="9"/>
       <line x1="10.5" y1="12" x2="16" y2="22"/>
       <line x1="22" y1="11" x2="17" y2="22"/>
     </g>
-    <circle cx="9" cy="10" r="4" fill="#5b6ee8"/>
-    <circle cx="23" cy="9" r="3.4" fill="#d4802f"/>
-    <circle cx="16.2" cy="23" r="3.4" fill="#2f9e8f"/>
+    <circle cx="9" cy="10" r="4" fill="#5375cd"/>
+    <circle cx="23" cy="9" r="3.4" fill="#bd6c01"/>
+    <circle cx="16.2" cy="23" r="3.4" fill="#009a73"/>
   </g>
 </svg>

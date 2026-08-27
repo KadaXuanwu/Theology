@@ -4,58 +4,69 @@
   --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   --font-read: "Iowan Old Style", "Palatino Linotype", Palatino, Charter, Georgia, serif;
 
-  /* Paper rather than screen white. The reading column is the lightest thing
-     on the page but never #fff, and the page behind it is far enough off it
-     that the column reads as a sheet lying on a desk instead of as a seam.
-     --bg-soft stays the darkest of the three, which is what makes it work as
-     a hover and as the fill behind code either side of the frame. */
-  --bg: #e9e6e0;
-  --bg-center: #fcfbf8;
-  --bg-soft: #dfdbd3;
+  /* Paper, not screen. One warm hue runs through every neutral on this side,
+     so the sheet, the desk it lies on and the ink are all the same material at
+     different depths. The old set was a neutral grey, which is what made it
+     look dirty next to warm accents rather than quiet. The reading column is
+     the lightest thing on the page and never #fff; --bg-soft stays the darkest
+     of the three, which is what makes it work as a hover. */
+  --bg: #eae1d3;
+  --bg-center: #fbf7f2;
+  --bg-soft: #dfd5c6;
   /* Between the two: light enough to read as a chip on the page, tinted enough
      to read as a card on the sheet. */
-  --surface: #f4f1ec;
-  --text: #232120;
-  --muted: #5e5b56;
-  --border: #dbd6cd;
-  --border-strong: #c5bfb4;
-  /* A shade down from #8a5cf5, same hue. With no fill behind an internal link
-     the colour is the whole signal, and the lighter violet came in at 4.2:1 on
-     the paper background, under the 4.5:1 a body sized link wants. */
-  --accent: #8155ee;
-  --accent-soft: #efe9ff;
+  --surface: #f4eee5;
+  --text: #24201a;
+  --muted: #615b54;
+  /* The reading column's ink, and the one place the two themes want different
+     weights. A serif at this size in grey is most of why a light theme reads as
+     washed out, so on paper the prose is nearly the full weight of the text
+     colour, with grey left to the labels and the metadata around it. The same
+     weight on a dark ground glares, so that side keeps the softer ink. */
+  --ink-read: #312d27;
+  --border: #d9cfc0;
+  --border-strong: #bdb3a3;
+  /* The chrome's one colour: what you are on, what you picked, what has focus.
+     Deeper than the violet it replaces, which came in at 4.4:1 on the new paper
+     and is asked to carry small text. */
+  --accent: #6949ba;
+  --accent-soft: #f1e6ff;
   /* Link colours. A link into the vault wears the colour of the node it goes
      to, so the hue in the prose is the hue of the dot in the tree and of the
-     circle in the graph. The kind colours themselves were drawn to be seen as
-     a dot on a background, not read as a word on one, and none of them clears
-     4.5:1 on the reading column: the blue comes in at 4.2, the orange at 2.9.
-     These are the same hue and saturation taken down until they do, so they
-     stay recognisably the kind's colour and can be read at body size. */
-  --link-argument-for: #5064e6;
-  --link-argument-against: #a46122;
-  --link-claim: #267e72;
-  --link-evidence: #8d58c1;
-  --link-note: #6c717b;
-  /* A link off the site is the one that is not a node, so it takes the one hue
-     none of the kinds do. Deep enough to read as ink rather than as a warning,
-     and the furthest thing on the page from the orange it sits nearest. */
-  --link-out: #b32d43;
+     circle in the graph. The kind colours themselves are drawn to be seen as a
+     dot on a background, not read as a word on one, so these are the same hues
+     taken to a common 5.5:1 on the column: every kind reads, no kind shouts
+     over the others in a paragraph carrying several, and none of them falls so
+     far under the weight of the prose around them that it reads as faded. */
+  --link-argument-for: #4060b6;
+  --link-argument-against: #965400;
+  --link-claim: #007255;
+  --link-evidence: #9a4587;
+  --link-note: #69635d;
+  /* A source is the link that is not a node. It carries no hue at all: colour
+     in the prose means the map, and a fifth colour only reads as a fifth kind
+     of node. Ink, a firmer underline and the arrow say the rest. */
+  --link-out: #524c43;
   --highlight: rgba(255, 208, 0, 0.4);
   --highlight-strong: rgba(255, 208, 0, 0.6);
-  --shadow: 0 1px 2px rgba(20, 20, 30, 0.05), 0 8px 24px rgba(20, 20, 30, 0.07);
+  --shadow: 0 1px 2px rgba(58, 44, 24, 0.07), 0 8px 24px rgba(58, 44, 24, 0.11);
 
-  --argument-for: #5b6ee8;
-  --argument-against: #d4802f;
-  --claim: #2f9e8f;
-  --evidence: #9a6bc8;
-  --note: #8a8f98;
+  /* The four kinds, and a fifth for anything outside them. Hue carries which
+     kind it is; lightness is spaced as well, because the two common kinds of
+     colour blindness flatten hue and lightness is what is left to tell four
+     circles apart. Measured in site/test.mjs rather than trusted by eye. */
+  --argument-for: #5375cd;
+  --argument-against: #bd6c01;
+  --claim: #009a73;
+  --evidence: #9c4789;
+  --note: #8b857f;
 
   --header-h: 2.9rem;
   --sidebar-w: 20.5rem;
   --right-w: 18rem;
   --radius: 0.5rem;
-  --scrollbar: #c8c2b7;
-  --scrollbar-hover: #aca598;
+  --scrollbar: #c9bfae;
+  --scrollbar-hover: #ab9f8c;
 }
 
 :root[data-theme="dark"] {
@@ -65,27 +76,29 @@
   --surface: #212121;
   --text: #dadada;
   --muted: #b3b3b3;
+  --ink-read: var(--muted);
   --border: #363636;
   --border-strong: #454545;
   --accent: #a68af9;
   --accent-soft: #2b2440;
-  /* On a dark ground the kind colours are already 5.7:1 or better as text, so
-     a link into the vault takes them as they are. */
-  --link-argument-for: var(--argument-for);
-  --link-argument-against: var(--argument-against);
-  --link-claim: var(--claim);
-  --link-evidence: var(--evidence);
-  --link-note: var(--note);
-  --link-out: #e8808f;
+  /* A dot and a word are different jobs here too. The dots below keep the
+     lightness spacing that tells four circles apart; these are levelled to a
+     common 6.4:1 so no kind shouts in a paragraph carrying several. */
+  --link-argument-for: #7d9eea;
+  --link-argument-against: #d68f4d;
+  --link-claim: #4eb08d;
+  --link-evidence: #d386be;
+  --link-note: #a39e98;
+  --link-out: #bfbab2;
   --highlight: rgba(255, 208, 0, 0.4);
   --highlight-strong: rgba(255, 208, 0, 0.6);
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
 
-  --argument-for: #7f8df4;
-  --argument-against: #e2a05a;
-  --claim: #46bcaa;
-  --evidence: #b489de;
-  --note: #9aa0aa;
+  --argument-for: #85a8fc;
+  --argument-against: #eea057;
+  --claim: #61cca5;
+  --evidence: #cd7bb8;
+  --note: #bcb6b0;
   --scrollbar: #3d3d3d;
   --scrollbar-hover: #525252;
 }
@@ -98,25 +111,26 @@
     --surface: #212121;
     --text: #dadada;
     --muted: #b3b3b3;
+    --ink-read: var(--muted);
     --border: #363636;
     --border-strong: #454545;
     --accent: #a68af9;
     --accent-soft: #2b2440;
-    --link-argument-for: var(--argument-for);
-    --link-argument-against: var(--argument-against);
-    --link-claim: var(--claim);
-    --link-evidence: var(--evidence);
-    --link-note: var(--note);
-    --link-out: #e8808f;
+    --link-argument-for: #7d9eea;
+    --link-argument-against: #d68f4d;
+    --link-claim: #4eb08d;
+    --link-evidence: #d386be;
+    --link-note: #a39e98;
+    --link-out: #bfbab2;
     --highlight: rgba(255, 208, 0, 0.4);
     --highlight-strong: rgba(255, 208, 0, 0.6);
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
 
-    --argument-for: #7f8df4;
-    --argument-against: #e2a05a;
-    --claim: #46bcaa;
-    --evidence: #b489de;
-    --note: #9aa0aa;
+    --argument-for: #85a8fc;
+    --argument-against: #eea057;
+    --claim: #61cca5;
+    --evidence: #cd7bb8;
+    --note: #bcb6b0;
     --scrollbar: #3d3d3d;
     --scrollbar-hover: #525252;
   }
@@ -777,25 +791,30 @@ main {
   color: var(--muted);
 }
 
+/* The pill names the kind, so it wears the kind's colour, but the word in it is
+   12px: it takes the readable version, the one the prose uses. The dot's own
+   colour is drawn to clear 3:1 as a circle, which is under the line for text
+   this small. The fill and the border are graphics, so those keep the dot. */
+.pill-kind[data-kind] {
+  color: var(--link);
+  border-color: color-mix(in srgb, var(--dot) 45%, transparent);
+  background: color-mix(in srgb, var(--dot) 10%, transparent);
+}
 .pill-kind[data-kind="argument-for"] {
-  color: var(--argument-for);
-  border-color: color-mix(in srgb, var(--argument-for) 45%, transparent);
-  background: color-mix(in srgb, var(--argument-for) 10%, transparent);
+  --link: var(--link-argument-for);
+  --dot: var(--argument-for);
 }
 .pill-kind[data-kind="argument-against"] {
-  color: var(--argument-against);
-  border-color: color-mix(in srgb, var(--argument-against) 45%, transparent);
-  background: color-mix(in srgb, var(--argument-against) 10%, transparent);
+  --link: var(--link-argument-against);
+  --dot: var(--argument-against);
 }
 .pill-kind[data-kind="claim"] {
-  color: var(--claim);
-  border-color: color-mix(in srgb, var(--claim) 45%, transparent);
-  background: color-mix(in srgb, var(--claim) 10%, transparent);
+  --link: var(--link-claim);
+  --dot: var(--claim);
 }
 .pill-kind[data-kind="evidence"] {
-  color: var(--evidence);
-  border-color: color-mix(in srgb, var(--evidence) 45%, transparent);
-  background: color-mix(in srgb, var(--evidence) 10%, transparent);
+  --link: var(--link-evidence);
+  --dot: var(--evidence);
 }
 .pill-status[data-status="stub"],
 .pill-status[data-status="drafted"] {
@@ -824,7 +843,7 @@ main {
 }
 
 .note-body {
-  color: var(--muted);
+  color: var(--ink-read);
   font-family: var(--font-read);
   font-size: 1.06rem;
   line-height: 1.75;
@@ -933,6 +952,7 @@ a.wikilink,
 a.external {
   color: var(--link);
   text-decoration-color: color-mix(in srgb, var(--link) 35%, transparent);
+  text-underline-offset: 0.14em;
 }
 
 /* A link into the vault is drawn in the colour of the node it goes to, so the
@@ -964,19 +984,23 @@ a.wikilink[data-kind="evidence"] {
   cursor: help;
 }
 
-/* A source is the one link that is not a node, so it takes the one hue no kind
-   uses. The arrow stays: four hues and a fifth is a colour only difference,
-   which is no difference at all to a reader who cannot separate them, and the
-   arrow is also what says a new tab is about to open. */
+/* A source is the one link that is not a node, and it used to be told apart by
+   being a fifth hue. That is the wrong signal: every other colour in the prose
+   names a kind of node, so a fifth colour reads as a fifth kind rather than as
+   the way out of the vault. It is ink now. Colour means the map, ink means a
+   source, and the two things that need no colour at all carry the difference:
+   an underline at nearly full strength where a node's is a tint of its hue, and
+   the arrow, which is also what says a new tab is about to open. */
 a.external {
   --link: var(--link-out);
+  text-decoration-color: color-mix(in srgb, var(--link) 65%, transparent);
 }
 a.external::after {
   content: "↗";
-  font-size: 0.75em;
-  margin-left: 0.15em;
+  font-size: 0.8em;
+  margin-left: 0.12em;
   vertical-align: super;
-  opacity: 0.55;
+  opacity: 0.8;
 }
 
 /* Cards and lists --------------------------------------------------------- */
@@ -1510,7 +1534,7 @@ body.is-graph .graph-head .lede {
   position: fixed;
   inset: 0;
   z-index: 60;
-  background: color-mix(in srgb, #0b0c10 45%, transparent);
+  background: color-mix(in srgb, #17120c 45%, transparent);
   backdrop-filter: blur(2px);
   display: flex;
   justify-content: center;

@@ -241,16 +241,16 @@ function readColors(root) {
   const style = getComputedStyle(root)
   const get = (name, fallback) => style.getPropertyValue(name).trim() || fallback
   return {
-    "argument-for": get("--argument-for", "#5b6ee8"),
-    "argument-against": get("--argument-against", "#d4802f"),
-    claim: get("--claim", "#2f9e8f"),
-    evidence: get("--evidence", "#9a6bc8"),
-    note: get("--note", "#8a8f98"),
-    line: get("--border-strong", "#d5d0c7"),
-    text: get("--text", "#1d2025"),
-    muted: get("--muted", "#6c7280"),
-    accent: get("--accent", "#4a56c8"),
-    surface: get("--surface", "#ffffff"),
+    "argument-for": get("--argument-for", "#5375cd"),
+    "argument-against": get("--argument-against", "#bd6c01"),
+    claim: get("--claim", "#009a73"),
+    evidence: get("--evidence", "#9c4789"),
+    note: get("--note", "#8b857f"),
+    line: get("--border-strong", "#bdb3a3"),
+    text: get("--text", "#24201a"),
+    muted: get("--muted", "#615b54"),
+    accent: get("--accent", "#6949ba"),
+    surface: get("--surface", "#f4eee5"),
   }
 }
 

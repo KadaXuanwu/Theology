@@ -1625,8 +1625,53 @@ console.log("a link wears the colour of what it points at")
     return Math.min(d, 360 - d)
   }
 
-  const light = sheet.match(/^:root \{([\s\S]*?)^\}/m)?.[1] ?? ""
-  const value = (name) => light.match(new RegExp(`--${name}:\\s*([^;]+);`))?.[1]?.trim() ?? ""
+  // OKLab, so "how far apart do these two look" is one number instead of a
+  // guess off three channels that do not weigh the same.
+  const oklab = (hex) => {
+    const [R, G, B] = rgb(hex).map(linear)
+    const l = Math.cbrt(0.4122214708 * R + 0.5363325363 * G + 0.0514459929 * B)
+    const m = Math.cbrt(0.2119034982 * R + 0.6806995451 * G + 0.1073969566 * B)
+    const s = Math.cbrt(0.0883024619 * R + 0.2817188376 * G + 0.6299787005 * B)
+    return [
+      0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s,
+      1.9779984951 * l - 2.428592205 * m + 0.4505937099 * s,
+      0.0259040371 * l + 0.7827717662 * m - 0.808675766 * s,
+    ]
+  }
+  const chroma = (hex) => Math.hypot(oklab(hex)[1], oklab(hex)[2])
+  const gap = (a, b) => {
+    const [x, y] = [oklab(a), oklab(b)]
+    return Math.hypot(x[0] - y[0], x[1] - y[1], x[2] - y[2])
+  }
+  // Machado, Oliveira and Fernandes (2009) at full severity, in linear light.
+  // Deutan and protan only: between them about one man in twelve, where tritan
+  // is rarer than one in a thousand and drags a palette toward a blue that
+  // helps nobody else.
+  const CVD = {
+    deutan: [0.367322, 0.860646, -0.227968, 0.280085, 0.672501, 0.047413, -0.01182, 0.04294, 0.968881],
+    protan: [0.152286, 1.052583, -0.204868, 0.114503, 0.786281, 0.099216, -0.003882, -0.048116, 1.051998],
+  }
+  const byte = (c) => {
+    const v = c <= 0.0031308 ? 12.92 * c : 1.055 * c ** (1 / 2.4) - 0.055
+    return Math.round(Math.min(1, Math.max(0, v)) * 255)
+  }
+  const through = (hex, kind) => {
+    const m = CVD[kind]
+    const [r, g, b] = rgb(hex).map(linear)
+    const out = [
+      m[0] * r + m[1] * g + m[2] * b,
+      m[3] * r + m[4] * g + m[5] * b,
+      m[6] * r + m[7] * g + m[8] * b,
+    ]
+    return "#" + out.map((c) => byte(c).toString(16).padStart(2, "0")).join("")
+  }
+
+  const themes = {
+    light: sheet.match(/^:root \{([\s\S]*?)^\}/m)?.[1] ?? "",
+    dark: sheet.match(/^:root\[data-theme="dark"\] \{([\s\S]*?)^\}/m)?.[1] ?? "",
+  }
+  const read = (theme, name) => themes[theme].match(new RegExp(`--${name}:\\s*([^;]+);`))?.[1]?.trim() ?? ""
+  const value = (name) => read("light", name)
   const page = value("bg-center")
 
   // No fill. That was the complaint that started this, and nothing about
@@ -1636,36 +1681,100 @@ console.log("a link wears the colour of what it points at")
   check("nothing fills an internal link", filled.length === 0, filled.join(" ").replace(/\s+/g, " ") || "none")
 
   // The kind colours were drawn as dots. Read as words they have to clear the
-  // line for body text, which none of them did before these were derived.
-  const ratios = KINDS.map((kind) => contrast(value(`link-${kind}`), page))
-  for (const [i, kind] of KINDS.entries()) {
-    check(`${kind} reads on the page`, ratios[i] >= 4.5, `${ratios[i].toFixed(2)}:1`)
+  // line for body text, which none of them did before these were derived, and
+  // they have to clear it by the same margin: one kind at 7:1 among others at
+  // 4.6:1 reads as emphasis rather than as a kind.
+  for (const theme of ["light", "dark"]) {
+    const ground = read(theme, "bg-center")
+    const ratios = KINDS.map((kind) => contrast(read(theme, `link-${kind}`), ground))
+    for (const [i, kind] of KINDS.entries()) {
+      check(`${kind} reads on the ${theme} page`, ratios[i] >= 4.5, `${ratios[i].toFixed(2)}:1`)
+    }
+    check(`and no kind shouts over another there`, Math.max(...ratios) - Math.min(...ratios) < 0.5)
   }
-  check("and no kind shouts over another", Math.max(...ratios) - Math.min(...ratios) < 0.5)
+  const ratios = KINDS.map((kind) => contrast(value(`link-${kind}`), page))
 
   // Derived, not invented: a link has to be the colour of the dot it goes to,
   // or the prose and the tree stop agreeing.
-  const drifted = KINDS.filter((kind) => apart(hue(value(`link-${kind}`)), hue(value(kind))) > 6)
-  check("each is the hue of the kind it belongs to", drifted.length === 0, drifted.join(", ") || "all in step")
+  for (const theme of ["light", "dark"]) {
+    const drifted = KINDS.filter((kind) => apart(hue(read(theme, `link-${kind}`)), hue(read(theme, kind))) > 6)
+    check(`each is the hue of the kind it belongs to in ${theme}`, drifted.length === 0, drifted.join(", ") || "all in step")
+  }
 
-  // A source is the link that is not a node, so it needs a hue no kind holds.
+  // A dot is the only thing saying which kind a circle in the graph is, so the
+  // four have to survive the two common kinds of colour blindness. Hue alone
+  // does not: both flatten it, and four hues on one lightness collapse to two
+  // or three shapes of the same grey. The lightness spacing in the palette is
+  // what this is measuring, and it is the reason the four are not all equally
+  // bright. 0.09 in OKLab is about the gap between two neighbouring greys on a
+  // ten step ramp: small, but never "did that just move".
+  const four = KINDS.filter((k) => k !== "note")
+  for (const theme of ["light", "dark"]) {
+    for (const eyes of ["deutan", "protan"]) {
+      let worst = Infinity
+      let worstPair = ""
+      for (let i = 0; i < four.length; i++) {
+        for (let j = i + 1; j < four.length; j++) {
+          const d = gap(through(read(theme, four[i]), eyes), through(read(theme, four[j]), eyes))
+          if (d < worst) [worst, worstPair] = [d, `${four[i]}/${four[j]}`]
+        }
+      }
+      check(`the ${theme} dots stay apart through ${eyes} eyes`, worst >= 0.09, `${worstPair} ${worst.toFixed(3)}`)
+    }
+  }
+
+  // A dot is a graphic, not text, so the line it has to clear is 3:1 against
+  // whatever it is drawn on. The graph paints on the surface colour.
+  for (const theme of ["light", "dark"]) {
+    const ground = read(theme, "surface")
+    const dim = KINDS.filter((k) => contrast(read(theme, k), ground) < 3)
+    check(`every ${theme} dot stands off the canvas`, dim.length === 0, dim.join(", ") || "all clear")
+  }
+
+  // A source is the link that is not a node. It used to be told apart by being
+  // a fifth hue, which is the wrong signal: every other colour in the prose
+  // names a kind, so a fifth colour reads as a fifth kind. It is ink now, and
+  // carries no hue worth the name.
+  for (const theme of ["light", "dark"]) {
+    const out = read(theme, "link-out")
+    const kinds = four.map((k) => chroma(read(theme, `link-${k}`)))
+    check(`the ${theme} link off the site carries no hue`, chroma(out) < 0.04, `chroma ${chroma(out).toFixed(3)}`)
+    // Ink against pigment, not one pigment against four. An achromatic colour
+    // can only ever sit about one chroma away from a coloured one, so the test
+    // that means anything is how much colour each of them holds.
+    check(
+      `and holds a fraction of the colour a kind does`,
+      Math.min(...kinds) > 3 * chroma(out),
+      `${chroma(out).toFixed(3)} against ${Math.min(...kinds).toFixed(3)} at the quietest kind`,
+    )
+  }
   const out = value("link-out")
-  const nearest = Math.min(...KINDS.filter((k) => k !== "note").map((k) => apart(hue(out), hue(value(k)))))
-  check("a link off the site has a hue of its own", nearest >= 30, `${nearest.toFixed(0)}° from the nearest kind`)
   check("which reads on the page too", contrast(out, page) >= 4.5, `${contrast(out, page).toFixed(2)}:1`)
   check("and is never the quiet one", contrast(out, page) >= Math.min(...ratios))
 
-  // Six colours in three palettes, and the dark theme takes the kind colours
-  // as they are, so only the light one derives anything.
+  // Six colours in three palettes: the light block, and the dark one twice
+  // over, once for the toggle and once for the system setting.
   for (const name of [...KINDS.map((k) => `link-${k}`), "link-out"]) {
     check(`both themes set --${name}`, (sheet.match(new RegExp(`--${name}:`, "g")) ?? []).length === 3)
   }
 
-  // Two links apart only by hue is no difference at all to a reader who cannot
-  // separate the hues, so neither of the two things that do not need eyes for
-  // colour may go: the underline under every link, the arrow on an outward one.
+  // With the hue gone, everything telling a source from a node is something
+  // that does not need eyes for colour: the arrow after it, and an underline
+  // drawn at nearly full strength where a node's is a tint of its own hue.
   check("the underline stays on", !/text-decoration:\s*none/.test(sheet.match(/^a \{[^}]*\}/m)?.[0] ?? ""))
   check("and the arrow stays on a link off the site", /^a\.external::after \{/m.test(sheet))
+  const mix = (rule) => Number(sheet.match(rule)?.[1]?.match(/var\(--link\) (\d+)%/)?.[1] ?? 0)
+  const bothLinks = mix(/^a\.wikilink,\na\.external \{([^}]*)\}/m)
+  // Not `^a\.external \{`: that line also ends the selector list above, so it
+  // would read the shared rule's underline back as the outward one's.
+  const outward = mix(/a\.external \{([^}]*--link:[^}]*)\}/)
+  check("the outward underline is the firmer of the two", outward > bothLinks, `${outward}% against ${bothLinks}%`)
+
+  // The prose is not the only place a kind's colour becomes a word. The pill
+  // under a note's title was drawn in the dot's colour at 12px, which is 4:1
+  // on the page and under the line for text that size.
+  const pill = sheet.match(/^\.pill-kind\[data-kind\] \{[^}]*\}/m)?.[0] ?? ""
+  check("the kind pill takes the readable colour, not the dot", /color: var\(--link\)/.test(pill), pill.replace(/\s+/g, " ") || "no rule")
 
   // A wikilink with nothing behind it is not a link and must not be drawn as
   // one of the kinds, which is what it used to borrow.
