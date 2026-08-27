@@ -8,13 +8,9 @@
 // `render` takes its root as an argument, and the history helpers read storage
 // only when called, so all three can be tested in node away from any DOM.
 
-const ENDPOINT = "__CHAT_ENDPOINT__"
+import { escapeHtml } from "./text.js"
 
-export const escapeHtml = (value) =>
-  value.replace(
-    /[&<>"']/g,
-    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
-  )
+const ENDPOINT = "__CHAT_ENDPOINT__"
 
 // A deliberately tiny markdown subset: links, bold, italic, paragraphs. The
 // text is escaped first and only these shapes are put back, so nothing the
