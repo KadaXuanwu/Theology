@@ -19,7 +19,7 @@ import {
 import { splitAtOpenLink } from "../worker/index.js"
 import { BROKEN, DECLINED, NO_ANSWER, TOO_BUSY, TOO_SLOW, noAnswer } from "../worker/providers.js"
 import { loadHistory, render, saveHistory } from "./assets/chat.js"
-import { parseFrontmatter, slugify } from "./lib/content.mjs"
+import { SECTIONS, parseFrontmatter, slugify } from "./lib/content.mjs"
 import { createRenderer, htmlToText } from "./lib/markdown.mjs"
 import {
   FIT,
@@ -832,9 +832,12 @@ console.log("the legend filters the graph")
   const toggles = [...fullGraph.matchAll(/<button type="button" class="legend-toggle" data-kind="([^"]+)" aria-pressed="([^"]+)">/g)]
   check("each category is a button", toggles.length >= 4, `${toggles.length} toggles`)
   check("all start switched on", toggles.every((m) => m[2] === "true"))
+  // Read off SECTIONS rather than written out here: the legend, the tree and
+  // the overview all take that one order, and reordering the vault should not
+  // fail a check that is about the toggles carrying a kind at all.
   check(
-    "and carry the kind the graph filters by",
-    toggles.map((m) => m[1]).join(",") === "argument-for,argument-against,claim,evidence",
+    "and carry the kind the graph filters by, in the vault's own order",
+    toggles.map((m) => m[1]).join(",") === SECTIONS.map((s) => s.kind).join(","),
     toggles.map((m) => m[1]).join(","),
   )
 

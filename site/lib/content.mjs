@@ -7,16 +7,16 @@ import { basename, join } from "node:path"
 // A folder not listed here still gets built, it just sorts last and has no blurb.
 export const SECTIONS = [
   {
-    dir: "Arguments For",
-    kind: "argument-for",
-    label: "Arguments For",
-    blurb: "Arguments that support the Christian position.",
-  },
-  {
     dir: "Arguments Against",
     kind: "argument-against",
     label: "Arguments Against",
-    blurb: "Arguments that challenge it.",
+    blurb: "Arguments that challenge the Christian position.",
+  },
+  {
+    dir: "Arguments For",
+    kind: "argument-for",
+    label: "Arguments For",
+    blurb: "Arguments that support it.",
   },
   {
     dir: "Claims",
