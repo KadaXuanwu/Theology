@@ -9,7 +9,7 @@
       <line x1="22" y1="11" x2="17" y2="22"/>
     </g>
     <circle cx="9" cy="10" r="4" fill="#5375cd"/>
-    <circle cx="23" cy="9" r="3.4" fill="#bd6c01"/>
+    <circle cx="23" cy="9" r="3.4" fill="#c6701e"/>
     <circle cx="16.2" cy="23" r="3.4" fill="#009a73"/>
   </g>
 </svg>

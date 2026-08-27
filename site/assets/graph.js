@@ -242,7 +242,7 @@ function readColors(root) {
   const get = (name, fallback) => style.getPropertyValue(name).trim() || fallback
   return {
     "argument-for": get("--argument-for", "#5375cd"),
-    "argument-against": get("--argument-against", "#bd6c01"),
+    "argument-against": get("--argument-against", "#c6701e"),
     claim: get("--claim", "#009a73"),
     evidence: get("--evidence", "#9c4789"),
     note: get("--note", "#8b857f"),

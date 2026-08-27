@@ -39,16 +39,23 @@
      over the others in a paragraph carrying several, and none of them falls so
      far under the weight of the prose around them that it reads as faded. */
   --link-argument-for: #4060b6;
-  --link-argument-against: #965400;
+  --link-argument-against: #9a5100;
   --link-claim: #007255;
   --link-evidence: #9a4587;
   --link-note: #69635d;
   /* A source is the link that is not a node. It carries no hue at all: colour
      in the prose means the map, and a fifth colour only reads as a fifth kind
-     of node. Ink, a firmer underline and the arrow say the rest. */
-  --link-out: #524c43;
+     of node. Ink, a firmer underline and the arrow say the rest. Barely any
+     hue at all in it: the ochre kind is itself a brown once it is taken to
+     link weight, and a warm ink beside it was too close a thing. */
+  --link-out: #4f4d49;
   --highlight: rgba(255, 208, 0, 0.4);
   --highlight-strong: rgba(255, 208, 0, 0.6);
+  /* The gold a search hit wears is too loud for a row of chips that is on the
+     page whether or not anyone is looking for it. On paper it comes down; on
+     the dark side the same gold is already quiet, so it stays. */
+  --tag-fill: rgba(255, 208, 0, 0.2);
+  --tag-fill-hover: rgba(255, 208, 0, 0.42);
   --shadow: 0 1px 2px rgba(58, 44, 24, 0.07), 0 8px 24px rgba(58, 44, 24, 0.11);
 
   /* The four kinds, and a fifth for anything outside them. Hue carries which
@@ -56,7 +63,7 @@
      colour blindness flatten hue and lightness is what is left to tell four
      circles apart. Measured in site/test.mjs rather than trusted by eye. */
   --argument-for: #5375cd;
-  --argument-against: #bd6c01;
+  --argument-against: #c6701e;
   --claim: #009a73;
   --evidence: #9c4789;
   --note: #8b857f;
@@ -85,17 +92,19 @@
      lightness spacing that tells four circles apart; these are levelled to a
      common 6.4:1 so no kind shouts in a paragraph carrying several. */
   --link-argument-for: #7d9eea;
-  --link-argument-against: #d68f4d;
+  --link-argument-against: #d88d51;
   --link-claim: #4eb08d;
   --link-evidence: #d386be;
   --link-note: #a39e98;
-  --link-out: #bfbab2;
+  --link-out: #bcbab7;
   --highlight: rgba(255, 208, 0, 0.4);
   --highlight-strong: rgba(255, 208, 0, 0.6);
+  --tag-fill: var(--highlight);
+  --tag-fill-hover: var(--highlight-strong);
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
 
   --argument-for: #85a8fc;
-  --argument-against: #eea057;
+  --argument-against: #f19e5c;
   --claim: #61cca5;
   --evidence: #cd7bb8;
   --note: #bcb6b0;
@@ -117,17 +126,19 @@
     --accent: #a68af9;
     --accent-soft: #2b2440;
     --link-argument-for: #7d9eea;
-    --link-argument-against: #d68f4d;
+    --link-argument-against: #d88d51;
     --link-claim: #4eb08d;
     --link-evidence: #d386be;
     --link-note: #a39e98;
-    --link-out: #bfbab2;
+    --link-out: #bcbab7;
     --highlight: rgba(255, 208, 0, 0.4);
     --highlight-strong: rgba(255, 208, 0, 0.6);
+    --tag-fill: var(--highlight);
+    --tag-fill-hover: var(--highlight-strong);
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
 
     --argument-for: #85a8fc;
-    --argument-against: #eea057;
+    --argument-against: #f19e5c;
     --claim: #61cca5;
     --evidence: #cd7bb8;
     --note: #bcb6b0;
@@ -833,13 +844,13 @@ main {
   display: inline-block;
   padding: 0.05rem 0.5rem;
   border-radius: 4px;
-  background-color: var(--highlight);
+  background-color: var(--tag-fill);
   color: var(--text);
   font-size: 0.76rem;
   text-decoration: none;
 }
 .tag-list a:hover {
-  background-color: var(--highlight-strong);
+  background-color: var(--tag-fill-hover);
 }
 
 .note-body {
@@ -1000,7 +1011,7 @@ a.external::after {
   font-size: 0.8em;
   margin-left: 0.12em;
   vertical-align: super;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 /* Cards and lists --------------------------------------------------------- */
