@@ -2063,6 +2063,17 @@ body.is-graph .graph-head .lede {
 }
 
 @media (max-width: 34rem) {
+  /* A phone has less room to spare beside the reading column, so the button
+     takes a little less of it. It stops at 44px, which is the smallest a
+     thumb should have to hit. */
+  .chat-open {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+  .chat-open .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
   .chat-panel {
     right: 0.75rem;
     left: 0.75rem;
