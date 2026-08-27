@@ -1215,7 +1215,7 @@ console.log("tags are a way in, and they combine")
   // every pick nudged the list underneath somewhere else.
   check(
     "the tags box is a fixed share of the column, not its contents",
-    /\.tag-picker \{[^}]*flex: 0 0 25%;/.test(sheet),
+    /\.tag-picker \{[^}]*flex: 0 0 22%;/.test(sheet),
     sheet.match(/\.tag-picker \{[^}]*flex: [^;]*/)?.[0].split(/\r?\n/).pop() ?? "",
   )
   check("and it no longer shrinks to fit fewer tags", !/\.tag-picker \{[^}]*max-height:/.test(sheet))
@@ -1280,7 +1280,7 @@ console.log("tags are a way in, and they combine")
   // graph is what that page is for.
   check(
     "the map view keeps its tags shorter than the list view",
-    /\.page-tag-graph \.tag-picker \{\r?\n  flex-basis: 17\.5%;/.test(sheet),
+    /\.page-tag-graph \.tag-picker \{\r?\n  flex-basis: 16%;/.test(sheet),
     sheet.match(/\.page-tag-graph \.tag-picker \{[^}]*/)?.[0].split(/\r?\n/).pop() ?? "",
   )
   // The legend row and the graph heading carry their own margins and the page
@@ -1336,7 +1336,7 @@ console.log("tags are a way in, and they combine")
     "and gives both views the same tags box, unlike a desktop",
     /\.tag-picker,\r?\n  \.page-tag-graph \.tag-picker \{\r?\n    flex-basis: 18%;/.test(phone),
   )
-  check("with less of a short screen given to them than a tall one gives", /\.tag-picker \{[^}]*flex: 0 0 25%;/.test(sheet))
+  check("where a tall screen gives the list view more", /\.tag-picker \{[^}]*flex: 0 0 22%;/.test(sheet))
 }
 
 console.log("the reader picks the reading font")
@@ -1808,13 +1808,30 @@ console.log("both graph controls take the end of the row above their graph")
   // The reading column draws a frame and the rail does not, so without this the
   // rail's row would sit 7px above the column's first line.
   const railRule = sheet.match(/^\.sidebar-right \{[^}]*\}/m)?.[0] ?? ""
-  const frame = sheet.match(/^main \{[^}]*\}/m)?.[0]?.match(/border: (\d+)px solid var\(--bg\)/)?.[1]
+  const mainRule = sheet.match(/^main \{[^}]*\}/m)?.[0] ?? ""
+  const frame = mainRule.match(/border: (\d+)px solid var\(--bg\)/)?.[1]
+  const columnTop = mainRule.match(/padding: (\S+)/)?.[1] ?? ""
   check("the reading column draws a frame", frame === "7", String(frame))
   check(
     "and the rail carries its width as padding, so both start level",
-    railRule.includes(`padding: calc(2rem + ${frame}px)`),
+    railRule.includes(`padding: calc(${columnTop} + ${frame}px)`),
     railRule.match(/padding: [^;]+;/)?.[0] ?? "no padding",
   )
+
+  // A page that does not scroll has both its edges in view at once, so an
+  // uneven top and bottom reads as the page having slipped upwards. The pages
+  // that do scroll keep the longer tail, which is scroll room, not a margin.
+  for (const [view, name] of [
+    ["is-graph", "the graph view"],
+    ["is-tags", "the tags view"],
+  ]) {
+    const fixed = sheet.match(new RegExp(String.raw`^body\.${view} main \{[^}]*\}`, "m"))?.[0] ?? ""
+    check(
+      `${name} closes the column with the space it opens with`,
+      fixed.match(/padding-bottom: (\S+);/)?.[1] === columnTop,
+      `${fixed.match(/padding-bottom: [^;]+/)?.[0] ?? "no padding-bottom"} against ${columnTop} on top`,
+    )
+  }
 }
 
 console.log("the chat only ever shows the model notes from the vault")

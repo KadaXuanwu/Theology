@@ -5,3 +5,4 @@ Index of things to remember across sessions. One line per memory file.
 - [Commit cadence](commit-cadence.md) — commit finished work, not once per prompt; branch only when it earns one
 - [Site build](site-build.md) — our own generator in site/, and why we dropped Quartz
 - [Chat worker](chat-worker.md) — the chat bubble deploys by hand, and where its key and model id live
+- [Evidence nodes are facts](evidence-nodes-are-facts.md) — no opinions, no links out to arguments or claims

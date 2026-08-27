@@ -448,7 +448,10 @@ main {
      padding only and the text sits off centre inside the frame. */
   scrollbar-gutter: stable both-edges;
   overscroll-behavior: contain;
-  padding: 2rem 2.5rem 5rem;
+  /* The top matches the bottom the pages that do not scroll carry, so the
+     frame reads even on them. A page that does scroll keeps a longer tail, so
+     the last line is not sitting on the bottom edge. */
+  padding: 1.25rem 2.5rem 5rem;
   background: var(--bg-center);
   border: 7px solid var(--bg);
   border-radius: 16px;
@@ -636,7 +639,7 @@ main {
   /* The reading column draws a 7px frame, so its first line starts 7px lower
      than a column with no frame does. The rail carries the border's worth of
      padding instead, and the two columns start on the same line. */
-  padding: calc(2rem + 7px) 1.25rem 2rem 0.5rem;
+  padding: calc(1.25rem + 7px) 1.25rem 2rem 0.5rem;
   font-size: 0.84rem;
 }
 
@@ -1104,11 +1107,11 @@ body.is-tags main {
   margin-bottom: 0.5rem;
 }
 
-/* A quarter of the column, which is three or four rows of tags at this width.
-   The rest are a short scroll away, and the notes get the room instead: the
-   picking is for reading them. */
+/* A fifth of the column, which is three rows of tags at this width. The rest
+   are a short scroll away, and the notes get the room instead: the picking is
+   for reading them. */
 .tag-picker {
-  flex: 0 0 25%;
+  flex: 0 0 22%;
   overflow-y: auto;
   overscroll-behavior: contain;
 }
@@ -1308,7 +1311,7 @@ body.is-graph .page-tag-graph .graph-tools {
 /* Less than the list view gives them. There is a legend and a graph under
    these as well, and the graph is what the page is for. */
 .page-tag-graph .tag-picker {
-  flex-basis: 17.5%;
+  flex-basis: 16%;
 }
 
 .tag-results {
@@ -1792,10 +1795,9 @@ body.is-graph .graph-head .lede {
     min-height: 0;
     padding: 0.8rem 0.85rem 0.95rem;
   }
-  /* Less of a short screen goes to the tags than a tall one gives them: the
-     notes are what the picking is for. Both views get the same, so switching
-     between them moves nothing above the fold. A desktop has the room to give
-     the list view more, and does. */
+  /* Both views get the same share here, so switching between them moves
+     nothing above the fold. A desktop splits them instead: the list view has
+     the room for another row of tags, the map view hands it to the graph. */
   .tag-picker,
   .page-tag-graph .tag-picker {
     flex-basis: 18%;

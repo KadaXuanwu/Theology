@@ -73,7 +73,7 @@ export function railGraph({
   // enlarged view follows on its legend row.
   return `<section class="panel panel-graph">
   <div class="panel-head">
-    <h2>${local ? "Connections" : "Graph"}</h2>
+    <h2>Graph</h2>
     <a class="panel-expand" href="${root}${expandUrl}" aria-label="${escapeHtml(expandLabel)}" title="${escapeHtml(expandLabel)}">${icon("expand")}</a>
   </div>
   <div class="graph-mount graph-rail" data-graph="${driven ? "tags" : local ? "local" : "global"}"${attrs}></div>
