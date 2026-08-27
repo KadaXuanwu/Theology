@@ -15,4 +15,4 @@ Rebuilt 2026-08-27. The stylesheet's tokens follow three rules, and `site/test.m
 
 **How to change one.** Work in OKLCH, solve for the contrast you want, then run `npm run check`. The scratch scripts that generated the current set are gone; the constraints they were solving are all in the test block "a link wears the colour of what it points at", which is the thing to read first.
 
-**The light side is warm paper**, one hue through every neutral, and the reading column's ink is nearly full weight (`--ink-read`, about 13:1). Grey prose is most of why the light theme read as washed out. The dark side keeps the softer ink, because the same weight glares on a dark ground. See [[site-build]].
+**The light side is warm paper**, one hue through every neutral, and the reading column's ink is close to full weight (`--ink-read`, about 10.5:1, a step under the title). Grey prose is most of why the light theme read as washed out. The dark side keeps the softer ink, because the same weight glares on a dark ground. See [[site-build]].

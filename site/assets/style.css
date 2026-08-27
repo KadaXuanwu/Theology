@@ -20,10 +20,13 @@
   --muted: #615b54;
   /* The reading column's ink, and the one place the two themes want different
      weights. A serif at this size in grey is most of why a light theme reads as
-     washed out, so on paper the prose is nearly the full weight of the text
-     colour, with grey left to the labels and the metadata around it. The same
-     weight on a dark ground glares, so that side keeps the softer ink. */
-  --ink-read: #312d27;
+     washed out, so on paper the prose is close to the weight of the text
+     colour, with grey left to the labels and the metadata around it. Not the
+     whole of it: at full weight a serif this size on warm paper is harder than
+     it needs to be, and the title loses the step that says it is the title.
+     The same weight on a dark ground glares, so that side keeps a softer ink
+     still. */
+  --ink-read: #3e3a33;
   --border: #d9cfc0;
   --border-strong: #bdb3a3;
   /* The chrome's one colour: what you are on, what you picked, what has focus.
@@ -97,7 +100,7 @@
   --link-claim: #4eb08d;
   --link-evidence: #d386be;
   --link-note: #a39e98;
-  --link-out: #f0eeeb;
+  --link-out: #e6e4e1;
   --highlight: rgba(255, 208, 0, 0.4);
   --highlight-strong: rgba(255, 208, 0, 0.6);
   --tag-fill: var(--highlight);
@@ -131,7 +134,7 @@
     --link-claim: #4eb08d;
     --link-evidence: #d386be;
     --link-note: #a39e98;
-    --link-out: #f0eeeb;
+    --link-out: #e6e4e1;
     --highlight: rgba(255, 208, 0, 0.4);
     --highlight-strong: rgba(255, 208, 0, 0.6);
     --tag-fill: var(--highlight);
