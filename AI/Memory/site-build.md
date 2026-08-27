@@ -5,7 +5,7 @@ metadata:
   type: project
 ---
 
-The vault is published at <https://kadaxuanwu.github.io/Theology> by `.github/workflows/deploy.yml` on every push to `main` that touches `Theology/`, `site/` or the build files. Built by `site/build.mjs`, written for this vault. Only dependency is `marked`.
+The vault is published at <https://kadaxuanwu.github.io/Theology> by `.github/workflows/deploy.yml` on every push to `main` that touches `Theology/`, `site/` or the build files. Built by `site/build.mjs`, written for this vault, with the steps it runs in `site/lib`. Only dependency is `marked`.
 
 It ran on Quartz v5 first, from 2026-08-23. Replaced the same week.
 
@@ -17,5 +17,5 @@ It ran on Quartz v5 first, from 2026-08-23. Replaced the same week.
 - `site/test.mjs` covers frontmatter parsing, slugs, wikilink resolution and whether the force layout settles without NaN or collapsing. `site/linkcheck.mjs` walks every built page and fails on a dead internal link, which catches a renamed note.
 - `npm run serve` previews `dist/` the way GitHub Pages serves it, including the 404 fallback.
 - Folder state in the sidebar is deliberate: folders render open and only a folder the reader collapsed stays collapsed, remembered in localStorage. Never make navigation change it, that was the Quartz bug.
-- Note dates come from git history in `site/build.mjs`, so never commit dates into frontmatter to fix a date.
+- Note dates come from git history in `site/lib/dates.mjs`, so never commit dates into frontmatter to fix a date.
 - See [[commit-message-style]] for how to commit.

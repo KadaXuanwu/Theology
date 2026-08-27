@@ -7,10 +7,10 @@ import { readdir, readFile, stat } from "node:fs/promises"
 import { dirname, join, normalize, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
+import { readFlags } from "./lib/args.mjs"
+
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..")
-const args = process.argv.slice(2)
-const i = args.indexOf("--dir")
-const dist = resolve(repoRoot, i >= 0 && args[i + 1] ? args[i + 1] : "dist")
+const dist = resolve(repoRoot, readFlags()("dir", "dist"))
 
 async function htmlFiles(dir, found = []) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {

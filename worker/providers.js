@@ -78,6 +78,42 @@ const geminiContents = (history, question) => [
   { role: "user", parts: [{ text: question }] },
 ]
 
+// Everything about a request that does not change between attempts. It is
+// forty lines of settings, and inline it buried the retry loop it sits in.
+function geminiBody({ system, context, question, history }, env) {
+  return {
+    systemInstruction: { parts: [{ text: `${system}\n\n${context}` }] },
+    contents: geminiContents(history, question),
+    generationConfig: {
+      // Low, because the job is reading supplied text accurately rather
+      // than writing something new.
+      temperature: 0.2,
+      // Thinking is spent out of this same budget, so this is not the
+      // length of an answer, it is the length of thinking plus answer.
+      // At 800 the model was measured spending 767 of it thinking and
+      // answering in the 29 that were left, which truncates mid sentence
+      // and sometimes returns nothing at all. Answers run 30 to 80
+      // tokens, so almost all of this is headroom for thinking.
+      //
+      // Raising it does not make answers longer, the prompt does that,
+      // and does not make it think more, thinking_level does that. It
+      // only stops the budget running out before the answer starts.
+      maxOutputTokens: 3000,
+      // Gemini 3.x thinks by default. Reading supplied notes and citing
+      // them is not a reasoning task, and the thinking was the likeliest
+      // source of answers that took the better part of a minute.
+      //
+      // It nests inside thinkingConfig. Put directly in generationConfig
+      // under either spelling the API answers "Cannot find field", which
+      // reads like the feature is unsupported rather than misplaced.
+      // 3.x takes thinkingLevel; 2.5 models take thinkingBudget instead.
+      // Left out entirely when THINKING_LEVEL is blank, so a model that
+      // does not know the field is a config change, not a code change.
+      ...(env.THINKING_LEVEL ? { thinkingConfig: { thinkingLevel: env.THINKING_LEVEL } } : {}),
+    },
+  }
+}
+
 const gemini = {
   label: "Gemini",
   // Flash Lite. 2.5 was cheaper but Google has closed it to new accounts.
@@ -103,46 +139,16 @@ const gemini = {
       let response
       try {
         response = await fetch(endpoint, {
-        method: "POST",
-        signal: abort.signal,
-        headers: {
-          "content-type": "application/json",
-          // Header rather than the documented ?key= query parameter, so the key
-          // never appears in a URL that something downstream might log.
-          "x-goog-api-key": env.GEMINI_API_KEY,
-        },
-        body: JSON.stringify({
-          systemInstruction: { parts: [{ text: `${system}\n\n${context}` }] },
-          contents: geminiContents(history, question),
-          generationConfig: {
-            // Low, because the job is reading supplied text accurately rather
-            // than writing something new.
-            temperature: 0.2,
-            // Thinking is spent out of this same budget, so this is not the
-            // length of an answer, it is the length of thinking plus answer.
-            // At 800 the model was measured spending 767 of it thinking and
-            // answering in the 29 that were left, which truncates mid sentence
-            // and sometimes returns nothing at all. Answers run 30 to 80
-            // tokens, so almost all of this is headroom for thinking.
-            //
-            // Raising it does not make answers longer, the prompt does that,
-            // and does not make it think more, thinking_level does that. It
-            // only stops the budget running out before the answer starts.
-            maxOutputTokens: 3000,
-            // Gemini 3.x thinks by default. Reading supplied notes and citing
-            // them is not a reasoning task, and the thinking was the likeliest
-            // source of answers that took the better part of a minute.
-            //
-            // It nests inside thinkingConfig. Put directly in generationConfig
-            // under either spelling the API answers "Cannot find field", which
-            // reads like the feature is unsupported rather than misplaced.
-            // 3.x takes thinkingLevel; 2.5 models take thinkingBudget instead.
-            // Left out entirely when THINKING_LEVEL is blank, so a model that
-            // does not know the field is a config change, not a code change.
-            ...(env.THINKING_LEVEL ? { thinkingConfig: { thinkingLevel: env.THINKING_LEVEL } } : {}),
+          method: "POST",
+          signal: abort.signal,
+          headers: {
+            "content-type": "application/json",
+            // Header rather than the documented ?key= query parameter, so the
+            // key never appears in a URL that something downstream might log.
+            "x-goog-api-key": env.GEMINI_API_KEY,
           },
-        }),
-      })
+          body: JSON.stringify(geminiBody({ system, context, question, history }, env)),
+        })
       } catch (error) {
         clearTimeout(waiting)
         // A stall is worth one more go: about a quarter of requests to the free

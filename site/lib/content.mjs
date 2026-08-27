@@ -143,7 +143,6 @@ export async function readVault(vaultDir, warn) {
 
       notes.push({
         title,
-        file,
         path,
         url,
         section,

@@ -7,19 +7,14 @@
 
 import { createServer } from "node:http"
 import { readFile, stat } from "node:fs/promises"
-import { extname, join, normalize, resolve } from "node:path"
-import { dirname } from "node:path"
+import { dirname, extname, join, normalize, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
-const here = dirname(fileURLToPath(import.meta.url))
-const repoRoot = resolve(here, "..")
+import { readFlags } from "./lib/args.mjs"
 
-const args = process.argv.slice(2)
-const flag = (name, fallback) => {
-  const i = args.indexOf(`--${name}`)
-  return i >= 0 && args[i + 1] ? args[i + 1] : fallback
-}
+const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
+const flag = readFlags()
 const dir = resolve(repoRoot, flag("dir", "dist"))
 const port = Number(flag("port", "8080"))
 

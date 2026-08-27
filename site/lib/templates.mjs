@@ -1,11 +1,12 @@
-// Every page the site emits. Plain string building, no framework.
+// Every page the site emits, as html. Plain string building, no framework.
+//
+// Each page hands its middle column and its right rail to `shell`, which is
+// what makes the header, the tree and the overlays the same on all of them.
 
-import { escapeHtml } from "./markdown.mjs"
+import { shell } from "./chrome.mjs"
 import { slugify } from "./content.mjs"
-
-// The vault this site is built from. Linked in the header so a reader can go
-// read the notes as files, and see the history behind any line of them.
-const REPO_URL = "https://github.com/KadaXuanwu/Theology"
+import { icon } from "./icons.mjs"
+import { escapeHtml } from "./markdown.mjs"
 
 const KIND_LABEL = {
   "argument-for": "Argument for",
@@ -83,167 +84,6 @@ export function railGraph({
   <div class="graph-mount graph-rail" data-graph="${driven ? "tags" : local ? "local" : "global"}"${attrs}></div>
   ${local ? `<a class="panel-link" href="${root}graph/">See the overview</a>` : ""}
 </section>`
-}
-
-export function shell({
-  title,
-  description,
-  root,
-  current,
-  sections,
-  notes,
-  main,
-  rightRail = "",
-  bodyClass = "",
-  assets,
-  view = "text",
-  textUrl = "",
-  graphUrl = "graph/",
-}) {
-  return `<!doctype html>
-<html lang="en" data-root="${root}">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${escapeHtml(title)}</title>
-<meta name="description" content="${escapeHtml(description)}">
-<meta property="og:title" content="${escapeHtml(title)}">
-<meta property="og:description" content="${escapeHtml(description)}">
-<meta property="og:type" content="website">
-<link rel="icon" href="${root}${assets.favicon}">
-<link rel="stylesheet" href="${root}${assets.css}">
-<script>
-/* Set the theme and the reading font before first paint, so the page never
-   flashes one and settles on the other. */
-(function(){try{var d=document.documentElement;var t=localStorage.getItem("theme");if(t==="light"||t==="dark")d.dataset.theme=t;var f=localStorage.getItem("font");if(${JSON.stringify(FONT_IDS)}.indexOf(f)>-1)d.dataset.font=f}catch(e){}})()
-</script>
-</head>
-<body class="${[rightRail ? "has-right" : "", bodyClass].filter(Boolean).join(" ")}"${notes.some((n) => n.url === current) ? ` data-note-url="${escapeHtml(current)}"` : ""}>
-<a class="skip-link" href="#main">Skip to content</a>
-${header({ root, view, textUrl, graphUrl })}
-<div class="layout">
-${explorer({ root, current, sections, notes, view })}
-<main id="main">${main}</main>
-${rightRail ? `<aside class="sidebar-right">${rightRail}</aside>` : ""}
-</div>
-${overlays()}
-${assets.chat ? chat() : ""}
-<script type="module" src="${root}${assets.app}"></script>
-${assets.chat ? `<script type="module" src="${root}${assets.chat}"></script>` : ""}
-</body>
-</html>
-`
-}
-
-// The reading font is the reader's to pick. Five faces that are already on the
-// machines people read this on, so the choice costs no download and cannot be
-// blocked: the stacks themselves live in the stylesheet, keyed by these ids.
-const FONTS = [
-  { id: "book", label: "Book" },
-  { id: "georgia", label: "Georgia" },
-  { id: "times", label: "Times" },
-  { id: "system", label: "System" },
-  { id: "verdana", label: "Verdana" },
-]
-
-export const FONT_IDS = FONTS.map((f) => f.id)
-
-function fontPicker() {
-  const options = FONTS.map((f) => `<option value="${f.id}">${f.label}</option>`).join("")
-  return `<span class="font-picker"><select class="font-select" aria-label="Reading font">${options}</select></span>`
-}
-
-// Text and Graph are two views of the same thing, so they read as one control
-// rather than as two separate destinations.
-function header({ root, view, textUrl, graphUrl }) {
-  const tab = (name, label, href, glyph) =>
-    view === name
-      ? `<span class="view-tab is-active" aria-current="page">${icon(glyph)}<span>${label}</span></span>`
-      : `<a class="view-tab" href="${root}${href}">${icon(glyph)}<span>${label}</span></a>`
-
-  return `<header class="site-header">
-  <button class="icon-button nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="explorer">${icon("menu")}</button>
-  <a class="site-title" href="${root}">Theology</a>
-  <div class="view-switch" role="group" aria-label="View">${tab("text", "Text", textUrl, "text")}${tab("graph", "Graph", graphUrl, "graph")}</div>
-  ${fontPicker()}
-  <button class="search-open" aria-label="Search notes">${icon("search")}<span>Search</span><kbd>/</kbd></button>
-  <button class="icon-button theme-toggle" aria-label="Switch theme">${icon("sun")}${icon("moon")}</button>
-  <a class="icon-button github-link" href="${REPO_URL}" target="_blank" rel="noopener" aria-label="Source on GitHub" title="Source on GitHub">${icon("github")}</a>
-</header>`
-}
-
-// The folder tree. Folders render open; the client only ever collapses one the
-// reader collapsed themselves, so navigating never closes anything.
-function explorer({ root, current, sections, notes, view }) {
-  // Moving anywhere in the tree keeps whichever view you are reading in. Every
-  // destination in here has both, so the switch never has to drop you out.
-  const suffix = view === "graph" ? "graph/" : ""
-  const groups = sections
-    .map((section) => {
-      const items = notes.filter((n) => n.section.dir === section.dir)
-      if (items.length === 0) return ""
-      const links = items
-        .map(
-          (n) =>
-            `<li><a href="${root}${n.url}/${suffix}"${n.url === current ? ' aria-current="page"' : ""} data-note="${escapeHtml(n.title)}">${escapeHtml(n.title)}</a></li>`,
-        )
-        .join("")
-      // A folder is current on its own list page and on the graph of it.
-      const here = slugify(section.dir) === current
-      return `<li class="tree-folder${here ? " is-current" : ""}" data-folder="${escapeHtml(section.dir)}">
-  <div class="tree-folder-head">
-    <button class="tree-toggle" aria-label="Toggle ${escapeHtml(section.label)}" aria-expanded="true">${icon("chevron")}</button>
-    <a class="tree-folder-name" href="${root}${slugify(section.dir)}/${suffix}"${here ? ' aria-current="page"' : ""}><span class="dot dot-${section.kind}"></span>${escapeHtml(section.label)}</a>
-    <span class="tree-count">${items.length}</span>
-  </div>
-  <ul class="tree-children">${links}</ul>
-</li>`
-    })
-    .join("")
-
-  const home = `<li class="tree-home"><a href="${root}${suffix}"${current === null ? ' aria-current="page"' : ""}>${icon("home")}Overview</a></li>`
-
-  // Tags are a way into the vault, not a footnote to it, so the entry sits with
-  // the other two ways in rather than under the tree it is not part of. A single
-  // tag's own page counts as being here: the reader followed a tag to get there
-  // and nothing else in the tree can hold the mark for them.
-  const onTags = current === "tags" || current?.startsWith("tags/")
-  const tags = `<li class="tree-tags${onTags ? " is-current" : ""}"><a href="${root}tags/${suffix}"${current === "tags" ? ' aria-current="page"' : ""}>${icon("hash")}All Tags</a></li>`
-
-  return `<aside class="sidebar" id="explorer">
-  <nav class="tree" aria-label="Notes">
-    <ul class="tree-root">${home}${tags}${groups}</ul>
-  </nav>
-</aside>`
-}
-
-function overlays() {
-  return `<div class="search-overlay" hidden>
-  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search">
-    <div class="search-field">${icon("search")}<input type="search" class="search-input" placeholder="Search notes" autocomplete="off" spellcheck="false" aria-label="Search notes"><button class="icon-button search-close" aria-label="Close search">${icon("close")}</button></div>
-    <ul class="search-results"></ul>
-    <p class="search-hint">Searches titles, tags and body text.</p>
-  </div>
-</div>
-<div class="preview-card" hidden></div>`
-}
-
-// Only rendered when a chat endpoint is configured, so the pages of a fork
-// carry no dead button.
-function chat() {
-  return `<button class="chat-open" aria-label="Ask about these notes" aria-expanded="false">${icon("chat")}</button>
-<div class="chat-panel" hidden role="dialog" aria-label="Ask about these notes">
-  <div class="chat-head">
-    <span class="chat-heading">Ask about these notes</span>
-    <button class="icon-button chat-close" aria-label="Close">${icon("close")}</button>
-  </div>
-  <div class="chat-log" aria-live="polite"></div>
-  <form class="chat-form">
-    <textarea class="chat-input" rows="1" placeholder="Ask anything, or describe a note you half remember" autocomplete="off" aria-label="Your question"></textarea>
-    <button class="icon-button chat-send" aria-label="Send">${icon("send")}</button>
-  </form>
-  <p class="chat-disclaimer">Answers are written by an AI reading the notes, and it can get things wrong. Follow the links and check the sources.</p>
-</div>`
 }
 
 export function notePage({ note, root, dateLabel, sections, notes, assets }) {
@@ -560,33 +400,4 @@ export function notFoundPage({ root, sections, notes, assets }) {
   <p class="lede">That page does not exist. Try the search, or start from the <a href="${root}">overview</a>.</p>
 </div>`,
   })
-}
-
-function icon(name) {
-  const paths = {
-    menu: '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>',
-    search: '<circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/>',
-    close: '<line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/>',
-    chevron: '<polyline points="6 9 12 15 18 9"/>',
-    sun: '<circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="7" y2="7"/><line x1="17" y1="17" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="7" y2="17"/><line x1="17" y1="7" x2="19.1" y2="4.9"/>',
-    moon: '<path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/>',
-    home: '<path d="M4 11 12 4l8 7"/><path d="M6.5 9.6V19h11V9.6"/>',
-    hash: '<line x1="9.5" y1="4" x2="7.5" y2="20"/><line x1="16.5" y1="4" x2="14.5" y2="20"/><line x1="4" y1="9" x2="19.5" y2="9"/><line x1="3.5" y1="15" x2="19" y2="15"/>',
-    expand:
-      '<polyline points="14 4 20 4 20 10"/><polyline points="10 20 4 20 4 14"/><line x1="20" y1="4" x2="13.5" y2="10.5"/><line x1="4" y1="20" x2="10.5" y2="13.5"/>',
-    collapse:
-      '<polyline points="20 10 14 10 14 4"/><polyline points="4 14 10 14 10 20"/><line x1="14" y1="10" x2="20.5" y2="3.5"/><line x1="10" y1="14" x2="3.5" y2="20.5"/>',
-    text: '<line x1="5" y1="6" x2="19" y2="6"/><line x1="5" y1="10.5" x2="19" y2="10.5"/><line x1="5" y1="15" x2="15" y2="15"/><line x1="5" y1="19" x2="12" y2="19"/>',
-    graph:
-      '<circle cx="6" cy="7" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="17" r="2.5"/><line x1="7.6" y1="8.9" x2="10.6" y2="15"/><line x1="16.7" y1="8.2" x2="13.4" y2="15"/><line x1="8.4" y1="6.7" x2="15.5" y2="6.2"/>',
-    chat: '<path d="M20 15.5a2.5 2.5 0 0 1-2.5 2.5H8l-4 3V6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5z"/>',
-    send: '<line x1="5" y1="12" x2="18" y2="12"/><polyline points="12.5 6.5 19 12 12.5 17.5"/>',
-    github:
-      '<path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.55v-2.13c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.29-1.68-1.29-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.4-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>',
-  }
-  // The GitHub mark is only itself as a solid shape, so it is the one icon
-  // here drawn in fill rather than in stroke.
-  if (name === "github")
-    return `<svg class="icon icon-github" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${paths[name]}</svg>`
-  return `<svg class="icon icon-${name}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name]}</svg>`
 }

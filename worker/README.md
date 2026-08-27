@@ -81,17 +81,17 @@ and needs a site rebuild instead.
 | `HISTORY_CONTEXT` | `context.js` | 600 chars | How much of the last answer is used to rank notes for a follow-up. |
 | Score weights | `context.js` | title 10, tags 5, body 1 (max 5) | How notes are ranked. A word in a title says what a note is about; a word in the body may be one passing mention. |
 | `STOPWORDS` | `context.js` | ~90 words | Words too common to say anything about relevance. |
-| Excerpt length | `site/build.mjs`, `trimTo(..., 155)` | 155 chars | The description in each catalogue line. **Rebuild the site, not the Worker.** |
+| Excerpt length | `site/lib/notes.mjs`, `EXCERPT` | 155 chars | The description in each catalogue line. **Rebuild the site, not the Worker.** |
 | `maxOutputTokens` | `providers.js` | 3000 | **Not the length of an answer.** Thinking is spent out of the same budget. At 800 the model was measured spending 767 thinking and answering in the 29 left, truncating mid sentence. Answers run 30 to 80 tokens; the rest is headroom for thinking. |
 | `FIRST_TOKEN_MS`, `ATTEMPTS` | `providers.js` | 12s, 2 | How long a stalled request waits before being abandoned and retried. Measured on the live endpoint, about a quarter of free tier requests take over twenty seconds while the rest answer in two or three, and spacing them out does not change it. Only a stall before any text retries; once a word has been sent, restarting would rewrite what the reader is watching. |
 | `temperature` | `providers.js` | 0.2 | Low, because the job is reading supplied text accurately, not writing something new. |
 | `MODEL`, `PROVIDER` | `wrangler.toml` | `gemini-3.5-flash-lite`, `gemini` | The model. `providers.js` holds one async generator per provider. |
 | `THINKING_LEVEL` | `wrangler.toml` | `low` | Gemini 3.x thinks by default and this task does not need it. Set to `""` to stop sending the field, for a model that rejects it. It nests as `generationConfig.thinkingConfig.thinkingLevel`; put directly in `generationConfig` the API says "Cannot find field", which reads like the feature is missing rather than misplaced. Gemini 2.5 models want `thinkingBudget` here instead. |
-| `RATE_LIMIT`, `RATE_WINDOW_MS` | `index.js` | 6 per minute | Per address. In memory, so a speed bump rather than a guarantee. Gemini's quota is per project, not per address, so this cannot fully protect it: three readers asking two questions each never touch this limit and can still exhaust Google's. |
+| `RATE_LIMIT`, `RATE_WINDOW_MS` | `index.js`, counted in `rate-limit.js` | 6 per minute | Per address. In memory, so a speed bump rather than a guarantee. Gemini's quota is per project, not per address, so this cannot fully protect it: three readers asking two questions each never touch this limit and can still exhaust Google's. |
 | `MAX_QUESTION` | `index.js` | 1,000 chars | Longest question accepted. |
 | `MAX_HISTORY`, `MAX_HISTORY_CHARS` | `index.js` | 8 messages, 6,000 chars | How much conversation is sent back. |
-| `CORPUS_TTL_MS` | `index.js` | 10 min | How long a fetched vault is reused. Lower means notes appear sooner and more refetches. |
-| `HOLD_LIMIT` | `index.js` | 500 chars | How long an unclosed bracket is held before giving up and flushing. |
+| `CORPUS_TTL_MS` | `index.js`, cached in `corpus.js` | 10 min | How long a fetched vault is reused. Lower means notes appear sooner and more refetches. |
+| `HOLD_LIMIT` | `stream.js` | 500 chars | How long an unclosed bracket is held before giving up and flushing. |
 
 ## Why it is set up this way
 
@@ -203,6 +203,11 @@ wrangler dev
 Needs a `.dev.vars` file next to this one holding `GEMINI_API_KEY=...`. That
 file is gitignored.
 
-The parts that decide what the model reads are in `context.js` and have no
-Cloudflare dependencies, so they are covered by `site/test.mjs` and run in CI
-without any of the above.
+The parts that decide what the model reads are in `context.js`, and the one
+that decides what reaches the page is `splitAtOpenLink` in `stream.js`. Neither
+has a Cloudflare dependency, so both are covered by `site/test.mjs` and run in
+CI without any of the above.
+
+The rest of the folder splits by what it is responsible for: `index.js` is the
+request itself, `rate-limit.js` counts, `corpus.js` fetches and caches the
+vault, `stream.js` assembles the reply, `providers.js` talks to a model.

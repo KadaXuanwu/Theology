@@ -17,7 +17,7 @@ Every note is a node. Nodes link to each other with Obsidian style `[[Exact File
 | `Theology/Claims` | Statements an argument depends on, used by both categories |
 | `Theology/Evidence` | Artefacts, studies and texts a claim can point to |
 
-Each folder has a `_Template.md` with the section headings for that node type. Frontmatter carries `type`, `status` (`stub` or `sourced`) and `tags`.
+Each folder has a `_Template.md` with the section headings for that node type. Frontmatter carries `type`, `status` (`stub`, `drafted` or `sourced`) and `tags`.
 
 Nothing gets proved twice. If two arguments need the same claim, the claim becomes its own node and both link to it.
 
@@ -34,9 +34,9 @@ Every push to `main` that touches the vault rebuilds <https://kadaxuanwu.github.
 
 The site is built by `site/build.mjs`, a small generator written for this vault. It reads the notes, resolves `[[wikilinks]]`, works out backlinks and the link graph, and writes a plain static site into `dist/`. Nothing is ever written back into the vault.
 
-What the site gives a reader: the folder tree, working note links, backlinks on every note, hover previews, full text search, tag pages, a light and dark theme, and an interactive graph of the whole vault or of one note and its neighbours.
+What the site gives a reader: the folder tree, working note links, backlinks on every note, hover previews, full text search, tag pages where any combination of tags can be picked, a light and dark theme, a choice of reading font, and an interactive graph of the whole vault, of one folder, or of one note and its neighbours.
 
-The only dependency is [marked](https://marked.js.org/) for the markdown itself. The graph, the search and the rest are in `site/assets`.
+The only dependency is [marked](https://marked.js.org/) for the markdown itself. `site/lib` reads the vault and writes the pages; `site/assets` is what runs in the browser.
 
 ```bash
 npm ci
@@ -47,11 +47,18 @@ npm run check      # build, then the tests and the link check CI runs
 
 Note dates come from git history rather than file timestamps. `_Template.md` files and `.obsidian` never reach the site.
 
+## Chat
+
+The bubble on the site answers questions from the notes. It runs on a Cloudflare Worker in `worker/`, which holds the API key, reads the published vault, picks which notes the model may read, and streams the answer back. The browser only ever sends the question.
+
+The Worker is deployed by hand rather than by CI, so no Cloudflare token is stored in this repo, and a change under `worker/` is not live until someone runs `wrangler deploy`. Building with `CHAT_ENDPOINT=""` leaves the bubble out of the site entirely, which is what a fork gets. See [worker/README.md](worker/README.md).
+
 ## Layout
 
 ```
 Theology/                      the vault
 site/                          the static site generator and its assets
+worker/                        the Cloudflare Worker behind the chat bubble
 .github/workflows/deploy.yml   builds and publishes the site on every push
 .claude/skills/theology-node/  the skill that writes and fact checks nodes
 AI/Skills/Theology Node/       notes on that skill

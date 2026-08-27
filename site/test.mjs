@@ -16,7 +16,7 @@ import {
   resolveLinks,
   selectNotes,
 } from "../worker/context.js"
-import { splitAtOpenLink } from "../worker/index.js"
+import { splitAtOpenLink } from "../worker/stream.js"
 import { BROKEN, DECLINED, NO_ANSWER, TOO_BUSY, TOO_SLOW, noAnswer } from "../worker/providers.js"
 import { loadHistory, render, saveHistory } from "./assets/chat.js"
 import { SECTIONS, parseFrontmatter, slugify } from "./lib/content.mjs"
@@ -43,6 +43,17 @@ const readGraphData = async () => {
   const name = (await readdir(dir)).find((f) => /^graph.[a-f0-9]+.json$/.test(f))
   if (!name) throw new Error("no hashed graph.json in dist, run the build first")
   return JSON.parse(await readFile(resolve(dir, name), "utf8"))
+}
+
+// The client is a handful of modules that app.js pulls together, so a check on
+// what a page does reads the module that owns the behaviour. `wholeClient` is
+// for the few rules that are only true across several of them at once.
+const clientDir = resolve(repoRoot, "site/assets")
+const client = (name) => readFile(resolve(clientDir, name), "utf8")
+const wholeClient = async () => {
+  const { readdir } = await import("node:fs/promises")
+  const names = (await readdir(clientDir)).filter((f) => f.endsWith(".js"))
+  return (await Promise.all(names.map(client))).join("\n\n")
 }
 
 let failures = 0
@@ -795,7 +806,7 @@ console.log("moving between notes keeps the view you are in")
   check("and while looking at its graph", graph.includes('aria-current="page" data-note="Jesus Existed"'))
 
   // clicking a node, and opening a search result, follow the same rule
-  const app = await readFile(resolve(repoRoot, "site/assets/app.js"), "utf8")
+  const app = await wholeClient()
   check("the view is read from the page, not guessed", app.includes('document.body.classList.contains("is-graph")'))
   check("clicking a node in the graph keeps the graph", app.includes("window.location.href = noteUrl(node.url)"))
   check("and so does opening a search result", app.includes("${noteUrl(note.url)}"))
@@ -854,7 +865,7 @@ console.log("the legend filters the graph")
     graphSource.includes("kinds.has(n.kind) || seeded.has(n.id)"),
   )
 
-  const appSource = await readFile(resolve(repoRoot, "site/assets/app.js"), "utf8")
+  const appSource = await client("graphs.js")
   check("the choice is remembered", appSource.includes("hiddenGraphKinds"))
   check(
     "it reaches graphs on pages without a legend",
@@ -1144,7 +1155,7 @@ console.log("tags are a way in, and they combine")
   const single = await read("tags/hell/index.html")
   const note = await read("claims/jesus-existed/index.html")
   const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
-  const app = await readFile(resolve(repoRoot, "site/assets/app.js"), "utf8")
+  const app = await client("tags.js")
   const graph = await readFile(resolve(repoRoot, "site/assets/graph.js"), "utf8")
 
   // It used to hang off the bottom of the sidebar under the whole tree, small
@@ -1248,21 +1259,29 @@ console.log("tags are a way in, and they combine")
   check("and so does the tree entry", /for \(const link of carriers\) link\.setAttribute\("href", `\$\{carrierPath\.get\(link\)\}\$\{search\}`\)/.test(app))
   // It has to happen on load as well as on a change, or a reader who arrives on
   // a shared link and switches views straight away loses what they arrived with.
-  const paintBlock = app.match(/function paint\(\) \{[\s\S]*?\r?\n    \}/)?.[0] ?? ""
-  check("the rewrite belongs to the paint, not to the click", /for \(const link of carriers\)/.test(paintBlock))
-  check("and the page paints once before anything is touched", /\r?\n    paint\(\)\r?\n  \}\r?\n\}/.test(app))
+  const paintBlock = app.match(/function paint\(\) \{[\s\S]*?\r?\n  \}/)?.[0] ?? ""
+  check(
+    "the rewrite belongs to the paint, not to the click",
+    /writeUrl\(\)/.test(paintBlock) && /function writeUrl\(\) \{[\s\S]*?for \(const link of carriers\)/.test(app),
+  )
+  check("and the page paints once before anything is touched", /\r?\n  paint\(\)\r?\n\}/.test(app))
 
   // The map answers the picking the way a single note's graph answers the note:
   // what was picked, ringed, and what it links to. One hop in the rail, two on
   // the page that is only the map.
   check("the map is driven by the filter, not by the markup", /data-graph="tags"/.test(index) && /data-graph="tags" data-depth="2"/.test(map))
   check("the rail shows direct links only", /class="graph-mount graph-rail" data-graph="tags" data-labels="hover">/.test(index))
-  check("picking again rebuilds the map rather than repainting it", /for \(const graph of graphs\) graph\.destroy\(\)/.test(app) && /rebuildGraphs = build/.test(app))
-  check("the notes it was given are what it focuses on", /const focus = driven\r?\n\s*\? tagFocus/.test(app))
+  const mounts = await client("graphs.js")
+  check(
+    "picking again rebuilds the map rather than repainting it",
+    /for \(const graph of graphs\) graph\.destroy\(\)/.test(mounts) && /rebuild = build/.test(mounts),
+  )
+  check("the filter is what tells it which notes", /export function setTagFocus/.test(mounts) && /setTagFocus\(matched \? \[\.\.\.matched\] : null\)/.test(app))
+  check("the notes it was given are what it focuses on", /if \(el\.dataset\.graph === "tags"\) return tagFocus/.test(mounts))
   // A combination no note carries is an empty graph. Reading an empty focus as
   // "no focus" would answer it with the whole vault instead.
   check("a combination nothing matches gives an empty map", /const subset = focus === null \? data : neighbourhood\(data, seeds, depth\)/.test(graph))
-  check("and says why", /emptyLabel: driven \? "No note carries that combination\." : undefined/.test(app))
+  check("and says why", /emptyLabel: driven \? "No note carries that combination\." : undefined/.test(mounts))
   // The notice belongs to the mount that wrote it, or the next mount draws its
   // canvas underneath a message about a selection that is over.
   check("the notice goes when that mount does", /el\.innerHTML = `<p class="graph-empty">\$\{emptyLabel\}<\/p>`[\s\S]*?destroy\(\) \{\r?\n\s*el\.innerHTML = ""/.test(graph))
@@ -1347,7 +1366,7 @@ console.log("the reader picks the reading font")
   const dist = resolve(repoRoot, "dist")
   const page = await readFile(resolve(dist, "claims/jesus-existed/index.html"), "utf8")
   const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
-  const appSource = await readFile(resolve(repoRoot, "site/assets/app.js"), "utf8")
+  const appSource = await client("theme.js")
 
   const picker = page.match(/<span class="font-picker">[\s\S]*?<\/span>/)?.[0] ?? ""
   const options = [...picker.matchAll(/<option value="([^"]+)">([^<]+)<\/option>/g)]
@@ -1402,7 +1421,7 @@ console.log("the reader picks the reading font")
   // mark instead. Opening it still lists the faces in full.
   check("the closed control shrinks to a mark on a phone", sheet.includes('content: "Aa";'))
   check("and the list it opens is still coloured for the theme", sheet.includes(".font-select option {"))
-  check("the client remembers the next pick", appSource.includes('localStorage.setItem("font", fontSelect.value)'))
+  check("the client remembers the next pick", appSource.includes('writeText("font", select.value)'))
   check(
     "and the control opens showing what is applied",
     appSource.includes("document.documentElement.dataset.font"),
@@ -1519,8 +1538,8 @@ console.log("the graph fits a phone screen")
 
 console.log("the contents always say where you are")
 {
-  const app = await readFile(resolve(repoRoot, "site/assets/app.js"), "utf8")
-  const block = app.match(/\{\r?\n {2}const links = \[\.\.\.document\.querySelectorAll\("\.toc a"\)\][\s\S]*?\r?\n\}/)?.[0] ?? ""
+  const block = await client("toc.js")
+  const app = await wholeClient()
   check("there is a contents block", block.length > 0)
 
   // It used to ask for a heading inside a band 10% to 25% down the viewport.
@@ -1531,7 +1550,7 @@ console.log("the contents always say where you are")
   check("and the whole page no longer leans on the observer for this", !/IntersectionObserver/.test(app))
 
   // Something is marked before any scrolling happens.
-  check("a section is marked as soon as the page is read", /\r?\n {4}mark\(asked \?\? current\(\)\)/.test(block), block.slice(-120))
+  check("a section is marked as soon as the page is read", /\r?\n {2}mark\(asked \?\? current\(\)\)/.test(block), block.slice(-120))
 
   // A reader who clicks a link in the contents has named the section, so it is
   // marked outright rather than inferred from a scroll still in flight.
@@ -1871,11 +1890,10 @@ console.log("the sidebar keeps its scrolling to itself")
 
 console.log("the tree comes back to the note you are reading")
 {
-  const appSource = await readFile(resolve(repoRoot, "site/assets/app.js"), "utf8")
-  const block = appSource.match(/const here = sidebar\?[\s\S]*?\n\}/)?.[0] ?? ""
+  const block = await client("tree.js")
   check("the tree looks for the entry the page marks", block.includes('aria-current="page"'))
   check("it scrolls the tree, not the page", block.includes("sidebar.scrollTop +="))
-  check("only when the tree has somewhere to scroll", block.includes("sidebar.scrollHeight > sidebar.clientHeight"))
+  check("only when the tree has somewhere to scroll", block.includes("sidebar.scrollHeight <= sidebar.clientHeight"))
   check("and never at an entry a collapsed folder is hiding", block.includes("item?.height"))
 
   // Every page marks its own entry, which is the thing this has to find.
@@ -1887,7 +1905,7 @@ console.log("the tree comes back to the note you are reading")
 
 console.log("a preview waits to be asked for")
 {
-  const appSource = await readFile(resolve(repoRoot, "site/assets/app.js"), "utf8")
+  const appSource = await client("preview.js")
   const delay = Number(appSource.match(/const PREVIEW_DELAY = (\d+)/)?.[1])
   check("the hover preview has a named delay", Number.isFinite(delay), String(delay))
   // Long enough that a cursor crossing links on its way somewhere else opens
@@ -2199,7 +2217,7 @@ console.log("the conversation survives following a link out of the page")
 console.log("the question box grows with the question")
 {
   const sheet = await readFile(resolve(repoRoot, "site", "assets", "style.css"), "utf8")
-  const markup = await readFile(resolve(repoRoot, "site", "lib", "templates.mjs"), "utf8")
+  const markup = await readFile(resolve(repoRoot, "site", "lib", "chrome.mjs"), "utf8")
 
   // An input never wraps, so a long question scrolls sideways out of sight.
   check("the box is a textarea, not a single line input", /<textarea class="chat-input"/.test(markup))
@@ -2235,7 +2253,7 @@ console.log("a slow or failed answer is handled as a failure, not as an answer")
   // Everything that usually goes wrong does so before any text exists, so the
   // headers are held back until the first token and those become real status
   // codes rather than error prose glued onto the answer.
-  check("the worker waits for the first token before replying", /first = await answer\.next\(\)/.test(worker))
+  check("the worker waits for the first token before replying", /first = await chunks\.next\(\)/.test(worker))
   check("so an early failure is a status code", /return fail\(502, error\.message, echo\)/.test(worker))
 
   check("the too-slow message tells the reader what to do", /Try asking again/.test(TOO_SLOW))
