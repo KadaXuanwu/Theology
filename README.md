@@ -21,6 +21,20 @@ Each folder has a `_Template.md` with the section headings for that node type. F
 
 Nothing gets proved twice. If two arguments need the same claim, the claim becomes its own node and both link to it.
 
+## Link direction
+
+Links never run up the stack.
+
+| A node in | May link to |
+| --- | --- |
+| `Arguments For`, `Arguments Against` | `Claims`, `Evidence`, and other arguments |
+| `Claims` | `Claims`, `Evidence` |
+| `Evidence` | `Evidence` |
+
+One extra restriction: the `Description` of an argument may not link another argument. The argument gets stated on its own terms before anything is thrown at it. Every other section may link across.
+
+Nothing points upward by hand, because the site fills that direction in. It works out who links to a note and lists them under "Linked from", which is why a claim does not name the arguments that lean on it.
+
 ## Rules for a node
 
 - Every factual sentence carries a source someone else can open.

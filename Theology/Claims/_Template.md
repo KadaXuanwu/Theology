@@ -5,7 +5,7 @@ tags: []
 ---
 # Description
 # Origins
-# Evidence
-# Supports
+# Based On
+# Carries
 # Disputed By
 # Limits

@@ -34,3 +34,5 @@ Run every item before delivering.
 12. No dashes as punctuation
 13. Nothing unchecked is presented as checked
 14. Every source read only at snippet, abstract or none access is listed in the delivery notes with its level
+15. No `[[link]]` runs up the stack, per the link direction table in `references/templates.md`, and the Description of an argument links no other argument
+16. Nothing outside the target node was edited. A change another node needs is written out for the user, not applied

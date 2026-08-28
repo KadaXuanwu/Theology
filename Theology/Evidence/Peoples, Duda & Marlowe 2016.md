@@ -1,7 +1,7 @@
 ---
 type: evidence
 kind: study
-status: sourced
+status: drafted
 tags: [anthropology, religion-origins]
 ---
 # Description

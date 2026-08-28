@@ -18,6 +18,8 @@ Read `references/templates.md`, `references/source-policy.md`, `references/balan
 3. The verifier may delete text written in this session. It may not delete text that already existed in the node. Pre-existing problems get reported to the user, never silently cut.
 4. At least half the sources in a node are academic register. Advocacy publishing never carries a fact on its own. See `references/balance.md`.
 5. The finished node is written to its file in the vault, then committed and pushed. Working files never land in the vault.
+6. Only the target node is written. A change any other node needs is reported to the user as a block to paste, never applied. This covers backlinks, links the new node breaks, and errors the research turned up elsewhere.
+7. Links never run up the stack. An argument may link claims, evidence and other arguments, but not another argument in its `Description`. A claim may link claims and evidence. An evidence note may link only other evidence. See `references/templates.md`.
 
 ## Step 1: Establish the baseline
 
@@ -96,7 +98,8 @@ Then post to chat:
 3. Protected problems the verifier flagged but could not cut, with the reason
 4. The balance ledger as recounted by the verifier, and any failing rule
 5. Any new Claim or Evidence node the research surfaced that is worth splitting out, with a one line reason
-6. Anything that could not be independently checked, named plainly, with its access level
+6. Any change another node needs, written out as a block the user can paste
+7. Anything that could not be independently checked, named plainly, with its access level
 
 Keep this wrap up short. The node is the deliverable.
 

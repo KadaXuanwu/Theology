@@ -9,19 +9,19 @@ Everything written in the Bible is correct. Some passages, such as [Genesis 1:3â
 # Origins
 Needs writing. The modern formulation runs through the Chicago Statement on Biblical Inerrancy (1978), but the older doctrine of scriptural authority is much earlier and is not the same claim.
 
-# Evidence
+# Based On
 - [2 Timothy 3:16](https://www.biblegateway.com/passage/?search=2%20Timothy%203:16&version=NIV) all scripture is God-breathed. Note this is the text testifying about itself.
 - [2 Peter 1:20â€“21](https://www.biblegateway.com/passage/?search=2%20Peter%201:20-21&version=NIV) prophecy came from God, not human will.
 
-# Supports
+# Carries
 - [[Jesus Resurrected]] but see Limits.
 - [[Jesus Existed]] as a weak internal support only.
 
 # Disputed By
-- [[Joshua's Conquest Lacks Archaeological Evidence]] is a direct empirical challenge to a passage this claim covers.
+- The archaeology of the conquest narratives is a direct empirical challenge to passages this claim covers.
 - [[Conquest Texts Use Ancient War Hyperbole]] complicates it in a different way. The genre reading rescues the texts from being false, but only by saying they do not mean what they appear to say, which the symbolic-reading escape clause in the Description already concedes.
 
 # Limits
-- The escape clause is the weak point. If any passage that fails can be reclassified as symbolic, nothing can count against the claim. That is the same untestability problem flagged under [[General Revelation Leaves People Without Excuse]]. This node needs a rule stated in advance for when a passage is symbolic, otherwise it is unfalsifiable.
+- The escape clause is the weak point. If any passage that fails can be reclassified as symbolic, nothing can count against the claim. This node needs a rule stated in advance for when a passage is symbolic, otherwise it is unfalsifiable.
 - Circular with [[Jesus Resurrected]] as currently written. Each supports the other and neither has independent footing. Broken on the other side by giving the resurrection its own evidence.
-- The two verses under Evidence are the Bible vouching for the Bible. They establish what the text claims about itself, not whether the claim is true.
+- The two verses under Based On are the Bible vouching for the Bible. They establish what the text claims about itself, not whether the claim is true.

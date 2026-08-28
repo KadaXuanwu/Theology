@@ -1,6 +1,6 @@
 ---
 name: evidence-nodes-are-facts
-description: Evidence notes hold facts only. No opinions, and no links to arguments or claims.
+description: Evidence notes hold facts only. No opinions, and no links up to a claim or an argument.
 metadata:
   type: feedback
 ---
@@ -15,3 +15,4 @@ A note in `Theology/Evidence` says what the study found or what the artefact is,
 - Reporting what the paper itself argues is a fact about the paper and belongs in Description. Judging whether the paper is right does not belong in the note at all.
 - Before cutting an interpretive line, check the argument or claim that uses the evidence already carries the point. If it does not, move it there rather than deleting it.
 - Cleared out of all four evidence notes on 2026-08-27. See [[site-build]] for how the pages are built.
+- Part of the wider rule in [[link-direction]], set on 2026-08-28: nothing in the vault links up the stack.

@@ -1,7 +1,7 @@
 ---
 type: evidence
 kind: study
-status: sourced
+status: drafted
 tags: [psychology, cognitive-science-of-religion]
 ---
 # Description

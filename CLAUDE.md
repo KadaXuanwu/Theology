@@ -4,12 +4,18 @@ This Theology Folder is a research of both arguments for and against Christianit
 
 You can edit the files yourself, so make the change in the repo. When I ask for a suggestion instead of an edit, print it into the chat and format it so that I can just copy and paste it.
 
-Make sure it doesn't sound AI written, and don't use dashes unless for passage references like Genesis 2:16–17 and use plain and simple wording. Keep your answers short and concise. Think hard about your answers and do your best not to hallucinate. Don't ever assume anything, but research facts. Treat this project as research-grade. Whenever you make a statement about something that would need proof in a paper, show the sources.
+Make sure it doesn't sound AI written, and don't use dashes unless for passage references like Genesis 2:16–17 and use plain and simple wording. Think hard about your answers and do your best not to hallucinate. Don't ever assume anything, but research facts. Treat this project as research-grade. Whenever you make a statement about something that would need proof in a paper, show the sources.
+
+Keep answers short. Tell me what I need to know and what I need to decide on, and cut the rest. No recaps of work I can see in the diff, no walking me through what you considered and dropped.
 
 Always build on top of what is already present and feel free to change or add anything. In case you want to remove or change something, explain what and why. When making arguments, claims or reasoning, try to connect them to other already existing ones, or suggest if new ones could be created out of the arguments we list. This especially makes sense if they could be cross referenced in other nodes to not have to explain or proof the same thing twice.
 
 Don't mention "sides" or similar inside arguments like "Both sides use it, which is why it sits here rather than inside one argument." It's clear by which category the node sits in.
 Claims & Evidence used by both sides.
+
+Links never run up the stack. An argument may link claims, evidence and other arguments, except in its Description, which may not link another argument. A claim may link other claims and evidence, never an argument. An evidence note may link other evidence and nothing above it. The upward direction never gets written by hand. The site works it out and shows it under "Linked from" on every note.
+
+Work on one node at a time. Only the node I name gets edited. If the work needs a change in another node, print that change in chat and wait for me to approve it. Never edit a node you were not asked to edit. This is research grade, so a quiet edit I did not ask for is worse than no edit at all.
 
 Commit and push when a piece of work is finished, not after every edit. Pushes to main that touch Theology/ or site/ redeploy the site.
 

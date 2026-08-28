@@ -1,7 +1,7 @@
 ---
 type: evidence
 kind: artefact
-status: sourced
+status: drafted
 tags: [ancient-near-east, hyperbole, archaeology]
 ---
 # Description

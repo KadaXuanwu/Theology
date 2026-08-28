@@ -33,17 +33,17 @@ tags: []
 ---
 # Description
 # Origins
-# Evidence
-# Supports
+# Based On
+# Carries
 # Disputed By
 # Limits
 ```
 
 - **Description**: the claim stated in two or three sentences.
 - **Origins**: who made this claim and where. Named scholars, book titles, publishers, years.
-- **Evidence**: the evidence nodes and passages behind it. Link them.
-- **Supports**: which arguments can lean on this claim. Link them.
-- **Disputed By**: named opponents and where they published the objection.
+- **Based On**: the evidence nodes, passages and other claims it rests on. Link them.
+- **Carries**: what the claim licenses and how far it goes. Link the claims that lean on it, never an argument. The arguments that use it link down to here and the site lists them under "Linked from".
+- **Disputed By**: named opponents and where they published the objection. Claims and evidence may be linked, arguments never.
 - **Limits**: what the claim does not reach.
 
 ## Evidence (`Evidence/`)
@@ -64,11 +64,25 @@ tags: []
 `kind` is `artefact` for physical finds and inscriptions, `study` for papers and datasets.
 
 - **Description**: what the thing physically is and what it literally says or measured. No interpretation here at all. Include date, find spot, current location and catalogue number for artefacts. Include sample, method and result for studies.
-- **Shows**: the interpretation. Every reading here names who holds it, or is marked as the obvious one. Link the claims and arguments it bears on.
+- **Shows**: what the evidence establishes, stated flat. A reading that is not the obvious one names who holds it. Links only to other evidence, never up to a claim or an argument. The claims that use it link down to here.
 - **Limits**: reconstruction problems, disputed readings, sample size, replication status, and what the evidence simply does not reach.
 - **Source**: catalogue entry, publication, translation, in that order. Links where they exist.
 
 The Description and Shows split is the load bearing rule of the whole vault. Description is what we actually have. Shows is what people make of it. Do not blur them.
+
+## Link direction
+
+Links never run up the stack.
+
+| A node in | May link to |
+| --- | --- |
+| `Arguments For`, `Arguments Against` | `Claims`, `Evidence`, and other arguments |
+| `Claims` | `Claims`, `Evidence` |
+| `Evidence` | `Evidence` |
+
+The `Description` of an argument may not link another argument. Every other section may.
+
+Upward links are not written by hand. The site builds them and shows them under "Linked from", so a claim never lists the arguments that use it.
 
 ## Field values in use
 

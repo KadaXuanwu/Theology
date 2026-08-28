@@ -1,6 +1,6 @@
 ---
 type: argument
-status: sourced
+status: drafted
 tags: [conquest, morality, old-testament]
 ---
 # Description
