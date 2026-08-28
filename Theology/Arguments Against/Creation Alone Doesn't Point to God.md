@@ -20,7 +20,7 @@ Daniel Everett's fieldwork with the Pirahã is the closest anyone has come to ru
 - [[Peoples, Duda & Marlowe 2016]] the forager numbers. Animism in all 33 societies, a creator in 39%.
 - [[Kelemen 2004]] the instinct itself is real, which is worth conceding rather than fighting. The gap between purpose-detection and a creator is where this argument lives.
 - [[Humans Are Primed to See Agents and Purpose]] the claim those two studies sit under.
-- J. L. Schellenberg, *Divine Hiddenness and Human Reason* (1993), summarised at the [SEP](https://plato.stanford.edu/entries/divine-hiddenness/). Names the guesswork point: nonresistant nonbelief, people not fighting God who still do not believe.
+- J. L. Schellenberg, *The Wisdom to Doubt* (Cornell University Press, 2007), summarised at the [SEP](https://plato.stanford.edu/entries/divine-hiddenness/). Names the guesswork point: nonresistant nonbelief, people not fighting God who still do not believe. The term is his 2007 framing, not the 1993 book's.
 - Daniel Everett went to the Amazon in 1977 to translate the Bible for the Pirahã. Asked who made the world, they asked him back whether he had been there when there were no trees. When he spoke about Jesus they asked whether he had seen him, then asked why he was telling them about things he had never seen. He lost his faith and is now an atheist. In his own words [here](https://ffrf.org/fttoday/april-2010/articles-april-2010/the-pirahae-people-who-define-happiness-without-god/) and in *Don't Sleep, There Are Snakes* (2008). It cost him his marriage and contact with two of his three children ([FFRF](https://ffrf.org/publications/day/daniel-everett/)), which rules out the reply that he took a convenient exit.
 
 # Countered By

@@ -14,7 +14,7 @@ So the standard reply, that visible proof would destroy free choice, does not ho
 - [1 Kings 18:38–39](https://www.biblegateway.com/passage/?search=1%20Kings%2018:38-39&version=NIV) fire falls in front of a crowd and the people respond.
 - [John 20:27–29](https://www.biblegateway.com/passage/?search=John%2020:27-29&version=NIV) Thomas is given physical proof on request.
 - [Acts 9:3–6](https://www.biblegateway.com/passage/?search=Acts%209:3-6&version=NIV) Paul is given a direct appearance while actively persecuting Christians.
-- J. L. Schellenberg's nonresistant nonbelief, from *Divine Hiddenness and Human Reason* (1993), summarised at the [SEP](https://plato.stanford.edu/entries/divine-hiddenness/). People not resisting God who still do not believe. Note the sharp version: Paul was resisting and got evidence anyway.
+- J. L. Schellenberg's nonresistant nonbelief, the term load bearing from *The Wisdom to Doubt* (Cornell University Press, 2007) rather than the 1993 book, summarised at the [SEP](https://plato.stanford.edu/entries/divine-hiddenness/). People not resisting God who still do not believe. Note the sharp version: Paul was resisting and got evidence anyway.
 
 # Countered By
 - [[Obedience Comes Before Evidence]] argues the sequence is deliberate, evidence after the step rather than before it.
