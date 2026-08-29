@@ -23,7 +23,7 @@ Calvin grants the next step himself. On Romans 1:20 he writes that reason conclu
 - [[Kelemen 2004]] the instinct is real, worth conceding.
 - [[Some Unbelief Isn't Resistance]] people not fighting God who still do not believe.
 - Paul Dundas, *The Jains*, 2nd edn (Routledge 2002), p. 90, for the Jain denial of a creator.
-- Daniel Everett reports that the Pirahã have no creation stories or myths, and that pressed on it they say only that everything is the same, nothing was created (*Current Anthropology* 46:4 (2005), 632–633). He went to Brazil in 1977 with the Summer Institute of Linguistics to translate the Bible, and later declared himself an atheist (John Colapinto, "The Interpreter", *The New Yorker*, 16 April 2007).
+- Daniel Everett reports that the Pirahã have no creation stories or myths, and that pressed on it they say only that everything is the same, nothing was created (*Current Anthropology* 46:4 (2005), 632–633). He went to Brazil in 1977 with the Summer Institute of Linguistics to translate the Bible, and later declared himself an atheist (John Colapinto, "The Interpreter", *The New Yorker*, 16 April 2007). Losing his faith wrecked his marriage and estranged him from two of his three children, who resumed contact in 2008 (Patrick Barkham, "The power of speech", *The Guardian*, 10 November 2008).
 
 # Countered By
 - [[General Revelation Leaves People Without Excuse]] is the argument this one is aimed at.
