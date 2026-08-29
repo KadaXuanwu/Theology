@@ -1,44 +1,48 @@
 ---
 type: argument
-status: drafted
+status: sourced
 tags: [hiddenness, natural-theology, anthropology]
 ---
 # Description
-[Romans 1:20](https://www.biblegateway.com/passage/?search=Romans%201:20&version=NIV) says God's power and nature have been clear since creation, so people are without excuse. [Romans 2:14–15](https://www.biblegateway.com/passage/?search=Romans%202:14-15&version=NIV) extends this to people who never had the Law, so the claim covers someone who never heard of Jesus.
+[Romans 1:20](https://www.biblegateway.com/passage/?search=Romans%201:20&version=NIV) says God's eternal power and divine nature have been clear from what he made, so people are without excuse. The weight sits on availability: the evidence is there, so ignorance is no defence.
 
-Paul is partly right about the instinct. Human minds do reach for agents and purpose. But the instinct does not land on a creator. Across a sample of 33 hunter-gatherer societies, animism was present in all of them and a creator deity in 39%. Theravāda Buddhism and Jainism are built without a creator at all. The one thing creation supposedly makes clear is the thing that keeps not showing up.
+The instinct half of that holds up. [[Kelemen 2004]] shows the purpose bias appears early and is not taught. What [[Humans Are Primed to See Agents and Purpose]] describes produces spirits, ancestors and design reasoning, and a single creator with moral demands is one output among many. In [[Peoples, Duda & Marlowe 2016]] animism was present in all 33 forager societies and a single all-powerful creator in 39%. Jainism denies a creator outright, a position its philosophers argue for rather than inherit.
 
-Two further problems. Even granting a faint pull, sensing that something is behind the world is not knowing which God or what he wants. Acting on it stays guesswork among hundreds of options, and punishing a wrong guess made on evidence that thin is not justice. Second, [Romans 1:18](https://www.biblegateway.com/passage/?search=Romans%201:18&version=NIV) says people suppress the truth, so a group reporting no sense of God counts as suppressing it. Every result confirms the claim, which means no result tests it.
+Calvin grants the next step himself. On Romans 1:20 he writes that reason concludes there is a Deity who ought to be worshipped, then fails, "because it cannot ascertain who or what sort of being God is". Sensing something behind the world is not knowing which God, and [[Experiential Confirmation Doesn't Distinguish Religions]] covers attempts to close that gap afterwards.
 
-Daniel Everett's fieldwork with the Pirahã is the closest anyone has come to running the test in practice, though it is one contested case and should be used as illustration, not proof.
+[Romans 1:18](https://www.biblegateway.com/passage/?search=Romans%201:18&version=NIV) says people hold the truth down, so a society reporting no sense of God counts as suppressing it rather than lacking it. Evan Fales presses the point against Alvin Plantinga in *Noûs* 37/2 (2003), 361 and 364: unbelief is explained by a damaged faculty which is itself identified by belief, so nothing independent is left to show the faculty is there.
 
 # Based On
 - [Romans 1:20](https://www.biblegateway.com/passage/?search=Romans%201:20&version=NIV) creation makes God's power and nature clear, so people are without excuse.
 - [Romans 1:18](https://www.biblegateway.com/passage/?search=Romans%201:18&version=NIV) people suppress the truth.
 - [Romans 1:21–23](https://www.biblegateway.com/passage/?search=Romans%201:21-23&version=NIV) the target is idol worship, so Paul is arguing with religious people, not atheists.
-- [Romans 2:14–15](https://www.biblegateway.com/passage/?search=Romans%202:14-15&version=NIV) people without the Law still have its work on their conscience.
-- [[Peoples, Duda & Marlowe 2016]] the forager numbers. Animism in all 33 societies, a creator in 39%.
-- [[Kelemen 2004]] the instinct itself is real, which is worth conceding rather than fighting. The gap between purpose-detection and a creator is where this argument lives.
-- [[Humans Are Primed to See Agents and Purpose]] the claim those two studies sit under.
-- [[Some Unbelief Isn't Resistance]] names the guesswork point: people not fighting God who still do not believe.
-- Daniel Everett went to the Amazon in 1977 to translate the Bible for the Pirahã. Asked who made the world, they asked him back whether he had been there when there were no trees. When he spoke about Jesus they asked whether he had seen him, then asked why he was telling them about things he had never seen. He lost his faith and is now an atheist. In his own words [here](https://ffrf.org/fttoday/april-2010/articles-april-2010/the-pirahae-people-who-define-happiness-without-god/) and in *Don't Sleep, There Are Snakes* (2008). It cost him his marriage and contact with two of his three children ([FFRF](https://ffrf.org/publications/day/daniel-everett/)), which rules out the reply that he took a convenient exit.
+- [Romans 2:14–15](https://www.biblegateway.com/passage/?search=Romans%202:14-15&version=NIV) gets stretched to cover everyone who never had the Law. Joseph Fitzmyer reads the article-less "Gentiles" as some of them, not all (*Romans*, Anchor Bible 33, Doubleday 1993, note on 2:14).
+- John Calvin, *Commentary on Romans*, on 1:20, for the quotation above. His *Institutes* I.iii argues the innate sense of God from universal religious practice and cites no scripture, so cross-cultural data tests his grounds.
+- [[Peoples, Duda & Marlowe 2016]] the forager numbers. "High gods" there means single, all-powerful creator deities, so a lesser creator figure counts as absent.
+- [[Kelemen 2004]] the instinct is real, worth conceding.
+- [[Some Unbelief Isn't Resistance]] people not fighting God who still do not believe.
+- Paul Dundas, *The Jains*, 2nd edn (Routledge 2002), p. 90, for the Jain denial of a creator.
+- Daniel Everett reports that the Pirahã have no creation stories or myths, and that pressed on it they say only that everything is the same, nothing was created (*Current Anthropology* 46:4 (2005), 632–633). He went to Brazil in 1977 with the Summer Institute of Linguistics to translate the Bible, and later declared himself an atheist (John Colapinto, "The Interpreter", *The New Yorker*, 16 April 2007).
 
 # Countered By
 - [[General Revelation Leaves People Without Excuse]] is the argument this one is aimed at.
-- [[Personal Relationship with God]] relocates the evidence to after the commitment rather than before it.
-- [[Obedience Comes Before Evidence]] gives that relocation its scriptural case.
-- [[Hell as Self-Chosen Separation]] answers the fairness half rather than the empirical half.
-- Paul's claim may be about culpability, not about everyone succeeding at the inference. That blunts the "nobody found it" objection but leaves the fairness objection intact.
-- Everett's cultural claims are disputed. Nevins, Pesetsky and Rodrigues, [Pirahã Exceptionality: A Reassessment](https://dspace.mit.edu/handle/1721.1/94631), *Language* 85 (2009), 355–404, cite Marco Antônio Gonçalves, who spent about 18 months with the Pirahã between 1986 and 1993 and documented myths including the world being re-created after a cataclysm by a demiurge called Igagaí. Everett replied in the same issue that Gonçalves is misread. "No creation story" is one fieldworker's reading, not settled fact.
-- The Pirahã are not irreligious. They talk about spirits constantly and count those encounters as things they have seen. What is missing is a creator, which is narrower than no God-belief.
+- The strongest counter is Richard Alan Young, "The Knowledge of God in Romans 1:18–23", *JETS* 43/4 (2000), 695–707. He grants at p. 704 that the awareness "does not fully disclose the Creator", then relocates the culpability: it is enough to prompt someone to ask, so the failure is never asking rather than answering wrongly. He does not discuss cross-cultural numbers.
+- Max Baker-Hytch, "Mutual epistemic dependence and the demographic divine hiddenness problem", *Religious Studies* 52/3 (2016), 375–394, argues people depend on each other for nearly everything they know, so belief clusters geographically either way. Read here through Andrew Blanton's reply, *Religious Studies* (2023).
+- Elisa Järnefelt, Caitlin Canfield and Deborah Kelemen, "The divided mind of a disbeliever", *Cognition* 140 (2015), 72–88, answer it empirically: non-religious adults under time pressure default to judging natural things as purposefully made by some being. The samples are Western.
+- Nevins, Pesetsky and Rodrigues argue the Pirahã do have myths about a mythic past, and print one from Gonçalves in which a demiurge called Igagaí remakes the world after a cataclysm. They still grant there is no creation myth, since Igagaí's own origin is never given (*Language* 85:2 (2009), 392). At 393 n. 54 they ask why a Pirahã could not be possessed by a creator and recount one anyway.
+- Marco Antônio Gonçalves, another Pirahã fieldworker, argues in *Current Anthropology* 46:4 (2005), 636, that their stress on personal experience is a general Amazonian epistemology, so they may be no exception.
+- [[Personal Relationship with God]] and [[Obedience Comes Before Evidence]] move the evidence to after the commitment. [[Hell as Self-Chosen Separation]] answers only the fairness half.
 
 # Limits
-- The forager evidence has its own problems, kept in [[Peoples, Duda & Marlowe 2016]] rather than repeated here. Short version: 33 recent societies, and the paper itself calls the high-gods trait the least stable one it measured.
-- Matthew Braddock, [Natural Nonbelief in God](https://philpapers.org/rec/BRANNI), argues the empirical jury is still out on what prehistoric humans believed.
-- The Pirahã case is one contested ethnography. Illustration, not proof.
+- The forager evidence has its own problems, kept in [[Peoples, Duda & Marlowe 2016]]. Its reconstruction leaves open a single inactive creator among ancestral hunter-gatherers.
+- Matthew Braddock questions whether prehistoric humans really were natural nonbelievers (in Diego Machuca (ed.), *Evolutionary Debunking Arguments*, Routledge 2022, 160–184). His chapter could not be opened here.
+- Theravāda Buddhism is the weaker partner to Jainism. The Brahmajāla Sutta (Dīgha Nikāya 1) has Brahmā believing himself the creator, and the Buddha traces where that belief comes from and sets it aside. The inference gets made and then dropped.
+- The fairness point, that punishing a wrong guess on evidence this thin is not justice, is a moral premise, not a result of the studies above.
+- Lari Launonen, working sympathetically on the suppression thesis, grants that the universal version "seems hopeless" (*Religious Studies* 61 (2025), 263–279). His partial version survives this.
+- The Pirahã are not irreligious. They talk about spirits constantly and count those encounters as things they have seen. What is missing is a creator, which is narrower than no God-belief. They are also one small society and a contested ethnography. Illustration, not proof.
 
 # Related
-- [[Demanding Belief Without the Proof]] is the other half. This node says the evidence God supposedly left does not work. That one says he could have left better.
+- [[Demanding Belief Without the Proof]] the other half: God could have left better evidence.
 - [[Condemned for One Honest Mistake]]
 - [[Blame Belongs to the Parent, Not the Child]]
 - [[God of the Gaps]]
