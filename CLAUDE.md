@@ -20,3 +20,5 @@ Work on one node at a time. Only the node I name gets edited. If the work needs 
 Commit and push when a piece of work is finished, not after every edit. Pushes to main that touch Theology/ or site/ redeploy the site.
 
 Anything you should remember across sessions goes in AI/Memory, not in your local memory folder, since I work on more than one PC. One file per fact, plus a one line pointer in AI/Memory/MEMORY.md. Read that folder at the start of a session.
+
+Never use the in-app browser preview on this machine. Claude Desktop runs here as an MSIX package, and the preview crashes the GPU process and leaves the whole app unlaunchable, which only a manual re-install fixes. So don't call preview_start, don't open the preview or browser pane, and don't ask me to approve it either. Pick an alternative and say which one you used. To show me a running dev server, print the URL or run Start-Process "http://localhost:5173" so it opens in my real browser. To read a page, use WebFetch or curl instead of a rendered browser. To verify UI changes, run headless Playwright or Vitest in the terminal. Never load Cloudflare challenged or bot checked pages in any in-app surface.
