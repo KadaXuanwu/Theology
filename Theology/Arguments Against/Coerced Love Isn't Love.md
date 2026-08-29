@@ -7,6 +7,7 @@ tags: [free-will, hell, love]
 God claims to give us free will so our love for him can be freely chosen, since forced love is not love. Yet he frames the choice as love me or be punished forever. A decision made under threat of eternal torment is not free, it is coerced. The ultimatum cancels out the very freedom that was supposed to make real love possible.
 
 # Based On
+- [[No Finite Life Deserves Infinite Punishment]] the size of the penalty is what makes the ultimatum coercive rather than a plain choice.
 - Needs sources. Candidate texts: [Deuteronomy 30:19](https://www.biblegateway.com/passage/?search=Deuteronomy%2030:19&version=NIV) choose life or death, put as a choice with a stated penalty; [Mark 16:16](https://www.biblegateway.com/passage/?search=Mark%2016:16&version=NIV) whoever does not believe will be condemned.
 
 # Countered By

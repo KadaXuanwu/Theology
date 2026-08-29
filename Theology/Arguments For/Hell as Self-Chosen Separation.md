@@ -19,10 +19,11 @@ Hell is not a torture chamber God sends people to, but the state of living apart
 - [[Coerced Love Isn't Love]] the choice is not free if refusing it carries an eternal penalty.
 - [[Condemned for One Honest Mistake]] someone who never rejected God, only failed to be convinced, has not chosen anything.
 - [[Demanding Belief Without the Proof]] the same point from the evidence side. A choice made without adequate information is not the informed refusal this argument describes.
+- [[No Finite Life Deserves Infinite Punishment]] presses the size of the outcome. This argument answers by denying it is a penalty at all.
 
 # Limits
 - The New Testament also uses active punishment language: fire, weeping, and in [Matthew 25:41](https://www.biblegateway.com/passage/?search=Matthew%2025:41,46&version=NIV) a place prepared. The separation reading has to treat that as metaphor while treating the separation language as literal, and it does not have an independent rule for which is which.
-- "Chose it" only works for someone who understood what they were refusing. It does not cover the honest doubter, which is the case the argument is most often used against.
+- "Chose it" only works for someone who understood what they were refusing. It does not cover the honest doubter, see [[Some Unbelief Isn't Resistance]], which is the case the argument is most often used against.
 - The doors-locked-from-the-inside line is Lewis's image, not a biblical statement, and it does more work in popular use than the texts support.
 
 # Related
