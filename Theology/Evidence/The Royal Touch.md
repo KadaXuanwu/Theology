@@ -24,7 +24,6 @@ The bacterial cause of tuberculosis was identified in 1882, when Robert Koch ann
 - Koch 1882 and 1884 were read at abstract level only for this draft. The dates and venue are from catalogue records, not from the papers.
 - Marc Bloch's *Les Rois thaumaturges* (1924) is the foundational study of the practice and was not read. Anything here that Bloch would qualify is unqualified.
 - This is England only. The French rite ran on a different timeline and is not covered.
-- The `kind: record` value in the frontmatter is new to the vault. The existing values are `artefact` for physical finds and inscriptions and `study` for papers and datasets, and this note is neither. It needs a decision before the note goes past draft.
 
 # Source
 - David L. Smith, "The King's Evil Without the King: The Royal Touch during the Interregnum", *Journal of Religious History* 49, no. 4 (2025), 439–454, DOI 10.1111/1467-9809.13158. Peer reviewed and open access. Every date and both quotations above come from the article text, read in full.

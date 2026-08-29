@@ -61,7 +61,7 @@ tags: []
 # Source
 ```
 
-`kind` is `artefact` for physical finds and inscriptions, `study` for papers and datasets.
+`kind` is `artefact` for physical finds and inscriptions, `study` for papers and datasets, `record` for documented practices, rites and institutional acts. The list is open. Add a value when nothing fits rather than forcing the note into the wrong one, and say in the delivery notes that you added it.
 
 - **Description**: what the thing physically is and what it literally says or measured. No interpretation here at all. Include date, find spot, current location and catalogue number for artefacts. Include sample, method and result for studies.
 - **Shows**: what the evidence establishes, stated flat. A reading that is not the obvious one names who holds it. Links only to other evidence, never up to a claim or an argument. The claims that use it link down to here.
@@ -87,7 +87,7 @@ Upward links are not written by hand. The site builds them and shows them under 
 ## Field values in use
 
 - `status`: `stub`, `drafted`, `sourced`
-- `kind`: `artefact`, `study`
+- `kind`: `artefact`, `study`, `record`. Open list, see above.
 
 Set `status: sourced` only when every factual sentence passed the verifier.
 
