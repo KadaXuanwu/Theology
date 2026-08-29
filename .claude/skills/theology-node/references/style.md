@@ -20,7 +20,7 @@ Neutrality is about sourcing and framing, not about conclusions. If the scholarl
 
 Run every item before delivering.
 
-1. If the node is going to `sourced`, the body is between 300 and 1000 words. A stub or a draft is exempt
+1. If the node is going to `sourced`, the body is between 500 and 2000 words, and near 1000 unless the material needs more. Any other status is exempt. Nothing is padded to reach a number, and nothing that matters is dropped to stay under one
 2. Frontmatter matches the template exactly, `status` is honest
 3. Every heading from the template is present, in order, none empty
 4. Every factual sentence has a source at the required tier

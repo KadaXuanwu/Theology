@@ -14,7 +14,8 @@ Read `references/templates.md`, `references/source-policy.md`, `references/balan
 ## Non negotiables
 
 1. Every factual sentence carries a source the verifier can open. No retrievable source, no entry into the node.
-2. A node marked `sourced` keeps its body between 300 and 1000 words, frontmatter excluded. A stub or a draft can be any length.
+2. A node marked `sourced` keeps its body between 500 and 2000 words, frontmatter excluded. Aim for about 1000. Go past that only when there is more that genuinely has to be said. Any other status has no limit.
+   Optimise in both directions: at equal content, shorter is better, so cut every phrase that does not earn its place. At equal length, more good sourced facts and arguments is better. Never pad to reach a number.
 3. The verifier may delete text written in this session. It may not delete text that already existed in the node. Pre-existing problems get reported to the user, never silently cut.
 4. At least half the sources in a node are academic register. Advocacy publishing never carries a fact on its own. See `references/balance.md`.
 5. The finished node is written to its file in the vault, then committed and pushed. Working files never land in the vault.
@@ -81,7 +82,7 @@ Apply the verifier's report:
 - `cut` on session-written text: remove it
 - `cut` on protected text: keep it, list it for the user with the reason
 - `fix`: apply the correction, or drop the sentence if the fix cannot be sourced
-- Re-check the word count after edits. Under 300 means the node is thin, say so rather than padding it.
+- Re-check the word count after edits. Under 500 means the node is thin, say so rather than padding it.
 
 Then handle the balance audit. Failing rules are reported to the user, not silently patched. Never pad a section, invent a counter position or hedge a well supported finding to make the numbers balance. If the academic share is under half, say which points could only be reached through advocacy sources and what was tried. An honest gap beats a manufactured debate.
 

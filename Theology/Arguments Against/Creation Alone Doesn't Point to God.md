@@ -17,6 +17,7 @@ Calvin grants the next step himself. On Romans 1:20 he writes that reason conclu
 - [Romans 1:18](https://www.biblegateway.com/passage/?search=Romans%201:18&version=NIV) people suppress the truth.
 - [Romans 1:21–23](https://www.biblegateway.com/passage/?search=Romans%201:21-23&version=NIV) the target is idol worship, so Paul is arguing with religious people, not atheists.
 - [Romans 2:14–15](https://www.biblegateway.com/passage/?search=Romans%202:14-15&version=NIV) gets stretched to cover everyone who never had the Law. Joseph Fitzmyer reads the article-less "Gentiles" as some of them, not all (*Romans*, Anchor Bible 33, Doubleday 1993, note on 2:14).
+- Paul's argument tracks [Wisdom of Solomon 13:1–9](https://www.biblegateway.com/passage/?search=Wisdom%20of%20Solomon%2013:1-9&version=NRSVUE), a parallel Joseph Fitzmyer draws at his note on 1:20. Wisdom grants that people who mistake creation for God "are little to be blamed, for perhaps they go astray while seeking God" (13:6), then rules that "not even they are to be excused" (13:8). The mitigation and the override both sit inside Paul's own source.
 - John Calvin, *Commentary on Romans*, on 1:20, for the quotation above. His *Institutes* I.iii argues the innate sense of God from universal religious practice and cites no scripture, so cross-cultural data tests his grounds.
 - [[Peoples, Duda & Marlowe 2016]] the forager numbers. "High gods" there means single, all-powerful creator deities, so a lesser creator figure counts as absent.
 - [[Kelemen 2004]] the instinct is real, worth conceding.
@@ -37,7 +38,7 @@ Calvin grants the next step himself. On Romans 1:20 he writes that reason conclu
 - The forager evidence has its own problems, kept in [[Peoples, Duda & Marlowe 2016]]. Its reconstruction leaves open a single inactive creator among ancestral hunter-gatherers.
 - Matthew Braddock questions whether prehistoric humans really were natural nonbelievers (in Diego Machuca (ed.), *Evolutionary Debunking Arguments*, Routledge 2022, 160–184). His chapter could not be opened here.
 - Theravāda Buddhism is the weaker partner to Jainism. The Brahmajāla Sutta (Dīgha Nikāya 1) has Brahmā believing himself the creator, and the Buddha traces where that belief comes from and sets it aside. The inference gets made and then dropped.
-- The fairness point, that punishing a wrong guess on evidence this thin is not justice, is a moral premise, not a result of the studies above.
+- The fairness point, that punishing a wrong guess on evidence this thin is not justice, is a moral premise, not a result of the studies above. Wisdom of Solomon 13:6 concedes the mitigating half of it and overrides it anyway.
 - Lari Launonen, working sympathetically on the suppression thesis, grants that the universal version "seems hopeless" (*Religious Studies* 61 (2025), 263–279). His partial version survives this.
 - The Pirahã are not irreligious. They talk about spirits constantly and count those encounters as things they have seen. What is missing is a creator, which is narrower than no God-belief. They are also one small society and a contested ethnography. Illustration, not proof.
 
