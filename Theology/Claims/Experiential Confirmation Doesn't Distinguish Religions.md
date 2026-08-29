@@ -12,7 +12,7 @@ Not a religious claim but an epistemological objection to one. The general form 
 # Based On
 - [Moroni 10:4](https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/10?lang=eng) is nearly word for word the same promise for the Book of Mormon: ask with a sincere heart, with real intent, having faith in Christ, and God "will manifest the truth of it unto you". The confirmation is promised on the same conditions and reported as delivered by millions of people whose conclusion contradicts the Christian one.
 - The structure repeats outside the Abrahamic religions. Practice-first, verification-after is the standard shape in Buddhist meditative traditions too, with practitioners reporting confirmation of a framework that has no creator in it.
-- Failure is explained the same way in every case: insufficient sincerity, insufficient faith, insufficient practice. No outcome is allowed to count as a negative result.
+- Failure is explained the same way in every case: insufficient sincerity, insufficient faith, insufficient practice. No outcome is allowed to count as a negative result, which is the move set out in [[No Outcome Counts Against It]].
 
 # Carries
 - Anything resting on personal experience as its main support needs an answer here first, whether the experience is offered as a relationship or as the payoff for obeying.

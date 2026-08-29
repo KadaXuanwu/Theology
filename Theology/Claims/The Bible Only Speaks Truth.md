@@ -22,6 +22,6 @@ Needs writing. The modern formulation runs through the Chicago Statement on Bibl
 - [[Conquest Texts Use Ancient War Hyperbole]] complicates it in a different way. The genre reading rescues the texts from being false, but only by saying they do not mean what they appear to say, which the symbolic-reading escape clause in the Description already concedes.
 
 # Limits
-- The escape clause is the weak point. If any passage that fails can be reclassified as symbolic, nothing can count against the claim. This node needs a rule stated in advance for when a passage is symbolic, otherwise it is unfalsifiable.
+- The escape clause is the weak point. If any passage that fails can be reclassified as symbolic, nothing can count against the claim. This node needs a rule stated in advance for when a passage is symbolic, otherwise it is unfalsifiable. [[No Outcome Counts Against It]] is the general form of the problem.
 - Circular with [[Jesus Resurrected]] as currently written. Each supports the other and neither has independent footing. Broken on the other side by giving the resurrection its own evidence.
 - The two verses under Based On are the Bible vouching for the Bible. They establish what the text claims about itself, not whether the claim is true.
