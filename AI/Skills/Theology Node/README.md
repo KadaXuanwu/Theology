@@ -21,7 +21,7 @@ The verifier never sees the researcher notes or the writer's reasoning. That is 
 ## Rules the pipeline enforces
 
 - Every factual sentence carries a source the verifier can open. No retrievable source, no entry.
-- Node body stays between 300 and 1000 words.
+- A `sourced` node's body stays between 300 and 1000 words. A stub or a draft can be any length.
 - At least half the sources are academic register. Advocacy publishing never carries a fact on its own.
 - The verifier may cut text written in the current session. It may not cut text that already existed in the node. Pre-existing problems get reported, never silently removed.
 - Gaps are stated plainly instead of padded. A missing counter position is reported, not manufactured.

@@ -86,7 +86,7 @@ Failing rules: <list, or none>
 
 ## Rules
 
-- 300 to 1000 words in the body. Under 300 means say the node is thin rather than padding it.
+- 300 to 1000 words in the body if the node is going to `sourced`. A stub or a draft can be any length. Under 300 on a node meant to be sourced means say it is thin rather than padding it.
 - Every factual sentence maps to a line in the source list. If it does not map, it does not belong.
 - `[[links]]` only to titles the librarian confirmed exist.
 - Do not add a fact no researcher returned. You are not a research agent.

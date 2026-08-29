@@ -39,7 +39,7 @@ Nothing points upward by hand, because the site fills that direction in. It work
 
 - Every factual sentence carries a source someone else can open.
 - Limits go in the node, not left out. A weak step in an argument is written down as a weak step.
-- Body stays between 300 and 1000 words.
+- A `sourced` node's body stays between 300 and 1000 words. A stub or a draft can be any length.
 - At least half the sources are academic register. Advocacy publishing never carries a fact on its own.
 
 ## Website

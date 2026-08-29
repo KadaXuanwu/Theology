@@ -14,7 +14,7 @@ Read `references/templates.md`, `references/source-policy.md`, `references/balan
 ## Non negotiables
 
 1. Every factual sentence carries a source the verifier can open. No retrievable source, no entry into the node.
-2. Node body stays between 300 and 1000 words, frontmatter excluded.
+2. A node marked `sourced` keeps its body between 300 and 1000 words, frontmatter excluded. A stub or a draft can be any length.
 3. The verifier may delete text written in this session. It may not delete text that already existed in the node. Pre-existing problems get reported to the user, never silently cut.
 4. At least half the sources in a node are academic register. Advocacy publishing never carries a fact on its own. See `references/balance.md`.
 5. The finished node is written to its file in the vault, then committed and pushed. Working files never land in the vault.

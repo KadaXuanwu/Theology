@@ -50,7 +50,7 @@ If a source cannot be opened at all, that is `fix` with reason `unopened`, never
 
 ### 4. Structural checks
 
-- Body word count between 300 and 1000, frontmatter excluded
+- Body word count between 300 and 1000, frontmatter excluded, but only on a node marked `sourced`. A stub or a draft is exempt
 - Frontmatter and heading order match the template
 - No heading left empty
 - On evidence nodes, Description carries no interpretation
