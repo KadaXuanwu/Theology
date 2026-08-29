@@ -25,7 +25,7 @@ God has made himself knowable through what he created, so no one can plead total
 # Limits
 - Paul describes working it out from the world, not an inner feeling. The feeling version is Calvin's addition and should not be quoted as Paul's.
 - [Acts 17:27](https://www.biblegateway.com/passage/?search=Acts%2017:27&version=NIV) says "perhaps" reach out and find him. That is weaker than the reading usually put on Romans 1.
-- The suppression clause in [Romans 1:18](https://www.biblegateway.com/passage/?search=Romans%201:18&version=NIV) makes the claim untestable. If someone reports no sense of God, that counts as suppressing it, so no possible finding could count against the claim. This protects the doctrine at the cost of it being evidence for anything.
+- The suppression clause in [Romans 1:18](https://www.biblegateway.com/passage/?search=Romans%201:18&version=NIV) is what carries the weight when someone reports no sense of God, and [[The Suppression Thesis Rests on Possibility]] is where that move gets examined. Its best placed defenders now reject the universal version of it.
 - Calvin's stronger version has the harder job. If there is an implanted sense of God in everyone from the womb, honest lifelong unbelief should be rare, and it isn't.
 - It sits awkwardly next to [[Obedience Comes Before Evidence]]. If God's nature is already plain from creation to everyone, it is not clear why a prior act of obedience should be needed to see it. Worth deciding which of the two carries the weight.
 
