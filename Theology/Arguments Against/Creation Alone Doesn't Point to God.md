@@ -32,7 +32,7 @@ The instinct half of that holds up. [[Kelemen 2004]] shows the purpose bias appe
 # Countered By
 - [[General Revelation Leaves People Without Excuse]] is the argument this one is aimed at.
 - The strongest counter is [[Richard Alan Young]]'s.[^young-2000] He grants at p. 704 that the awareness "does not fully disclose the Creator", then relocates the culpability: it is enough to prompt someone to ask, so the failure is never asking rather than answering wrongly. He does not discuss cross-cultural numbers.
-- [[Max Baker-Hytch]] argues people depend on each other for nearly everything they know, so belief clusters geographically either way.[^baker-hytch-2016] Read here through [[Andrew Blanton]]'s reply.[^blanton-2023]
+- [[Max Baker-Hytch]] argues people rely on testimony for much of what they know, so belief clusters geographically either way.[^baker-hytch-2016] Read here through [[Andrew Blanton]]'s reply.[^blanton-2025]
 - [[Elisa Järnefelt]], [[Caitlin Canfield]] and [[Deborah Kelemen]] answer it empirically: non-religious adults under time pressure default to judging natural things as purposefully made by some being.[^jarnefelt-2015] The samples are Western.
 - [[Andrew Nevins|Nevins]], [[David Pesetsky|Pesetsky]] and [[Cilene Rodrigues|Rodrigues]] argue the Pirahã do have myths about a mythic past, and print one from [[Marco Antônio Gonçalves|Gonçalves]] in which a demiurge called Igagaí remakes the world after a cataclysm. They still grant there is no creation myth, since Igagaí's own origin is never given, at p. 392.[^nevins-2009] At 393 n. 54 they ask why a Pirahã could not be possessed by a creator and recount one anyway.
 - Marco Antônio Gonçalves, another Pirahã fieldworker, argues at p. 636 that their stress on personal experience is a general Amazonian epistemology, so they may be no exception.[^goncalves-2005]
@@ -62,7 +62,7 @@ The instinct half of that holds up. [[Kelemen 2004]] shows the purpose bias appe
 [^barkham-2008]: Patrick Barkham, "The power of speech", *The Guardian*, 10 November 2008.
 [^young-2000]: Richard Alan Young, "The Knowledge of God in Romans 1:18–23", *JETS* 43/4 (2000), 695–707.
 [^baker-hytch-2016]: Max Baker-Hytch, "Mutual epistemic dependence and the demographic divine hiddenness problem", *Religious Studies* 52/3 (2016), 375–394.
-[^blanton-2023]: Andrew Blanton, reply to Baker-Hytch, *Religious Studies* (2023).
+[^blanton-2025]: Andrew Blanton, "Divine hiddenness, the demographics of theism, and mutual epistemic dependence: a response to Max Baker-Hytch", *Religious Studies* 61/3 (2025), 700–716.
 [^jarnefelt-2015]: Elisa Järnefelt, Caitlin Canfield and Deborah Kelemen, "The divided mind of a disbeliever", *Cognition* 140 (2015), 72–88.
 [^nevins-2009]: Andrew Nevins, David Pesetsky and Cilene Rodrigues, *Language* 85/2 (2009).
 [^goncalves-2005]: Marco Antônio Gonçalves, *Current Anthropology* 46/4 (2005).

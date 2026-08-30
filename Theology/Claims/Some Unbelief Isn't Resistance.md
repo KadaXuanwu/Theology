@@ -45,7 +45,7 @@ The encyclopedia lists the cases in view: honest seekers, members of cultures wi
 [^launonen-2025]: Lari Launonen, "Non-belief as self-deception?", *Religious Studies* 61 (2025), 263–279, open access.
 [^pew-2024]: Pew Research Center, "Religious 'Nones' in America", 24 January 2024.
 [^pew-2025]: Pew Research Center, "Why Do Some Americans Leave Their Religion While Others Stay?", 15 December 2025.
-[^bradley-2014]: *The Reasons of Atheists/Agnostics for Nonbelief in God's Existence Scale* (Case Western Reserve University, 2014).
+[^bradley-2014]: David F. Bradley, [*The Reasons of Atheists/Agnostics for Nonbelief in God's Existence Scale: Development and Initial Validation*](http://rave.ohiolink.edu/etdc/view?acc_num=case1396559920), MA thesis, Department of Psychology, Case Western Reserve University, 2014.
 [^rea-2018]: Michael Rea, *The Hiddenness of God* (Oxford University Press, 2018).
 [^anderson-2019]: Charity Anderson, review of Rea, *Notre Dame Philosophical Reviews*, 14 May 2019.
 [^napier-2023]: Stephen Napier, "Is there non-resistant non-belief?", *Religious Studies* 59/4 (2023), 572–588.

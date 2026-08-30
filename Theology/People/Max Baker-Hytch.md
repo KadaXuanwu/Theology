@@ -12,8 +12,8 @@ tags:
 Max Baker-Hytch is a philosopher at Wycliffe Hall, Oxford, who works on religious epistemology, on the demographics of belief and on sin based accounts of non-belief.[^wycliffe-baker-hytch][^oxford-baker-hytch]
 
 # Work
-- "Mutual Epistemic Dependence and the Demographic Divine Hiddenness Problem", *Religious Studies* (2016).[^oxford-baker-hytch]
-- "On Sin-Based Responses to Divine Hiddenness", *Religious Studies* (2023).[^oxford-baker-hytch]
+- "Mutual epistemic dependence and the demographic divine hiddenness problem", *Religious Studies* 52/3 (2016), 375–394.[^oxford-baker-hytch]
+- "On sin-based responses to divine hiddenness", *Religious Studies* 61/3 (2025), 650–664.[^oxford-baker-hytch]
 - *God and the Problem of Evidential Ambiguity* (2023).[^cup-baker-hytch]
 
 # Stated Position
