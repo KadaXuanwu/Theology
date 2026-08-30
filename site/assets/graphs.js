@@ -10,10 +10,7 @@ import { mount as mountGraph } from "./graph.js"
 import { noteUrl } from "./nav.js"
 import { readSet, writeSet } from "./store.js"
 
-// The key carries a version because the default changed after readers already
-// had a set stored. Reusing the old name would leave anyone who had ever
-// touched the legend with people switched on for ever.
-const HIDDEN_KEY = "hiddenGraphKinds2"
+const HIDDEN_KEY = "hiddenGraphKinds"
 
 // People are a reference layer, not a step in an argument, and there are more
 // of them than of everything else put together. The rail is too small to carry
