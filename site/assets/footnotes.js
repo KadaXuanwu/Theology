@@ -45,13 +45,11 @@ export function initFootnotes() {
   const copy = card.querySelector(".fn-copy")
   let openTimer = null
   let closeTimer = null
-  let anchor = null
 
   const hide = () => {
     clearTimeout(openTimer)
     clearTimeout(closeTimer)
     card.hidden = true
-    anchor = null
     delete copy.dataset.copied
     copy.textContent = "Copy"
   }
@@ -61,7 +59,6 @@ export function initFootnotes() {
     const source = item?.querySelector(".fn-text")
     if (!source) return
 
-    anchor = ref
     text.innerHTML = source.innerHTML
     delete copy.dataset.copied
     copy.textContent = "Copy"
@@ -114,9 +111,8 @@ export function initFootnotes() {
     { passive: true },
   )
 
-  // A tap has no hover to offer, so the click opens the card instead of jumping
-  // to the foot of the note. Clicking the same marker again lets the jump
-  // happen, so the list is still reachable.
+  // Clicking is navigation, in both directions, and the destination says where
+  // it is for a moment afterwards.
   document.addEventListener("click", (event) => {
     // The arrow at the end of a citation goes back up to where it was used.
     const back = event.target.closest(".fn-back")
@@ -128,17 +124,12 @@ export function initFootnotes() {
 
     const ref = event.target.closest(".fn-ref")
     if (ref) {
-      if (anchor === ref && !card.hidden) {
-        // Second click on a marker whose card is already open: the jump goes
-        // through, so mark the citation it lands on.
-        flash(document.getElementById(`fn-${ref.dataset.fn}`))
-        hide()
-        return
-      }
-      event.preventDefault()
-      clearTimeout(openTimer)
-      clearTimeout(closeTimer)
-      show(ref)
+      // The click is the jump, always. The card is a hover affordance and
+      // nothing else, so a click never has to be spent opening it first.
+      // On a touch screen, where there is no hover, the tap jumps to the
+      // citation at the foot of the note, which is where it was going anyway.
+      flash(document.getElementById(`fn-${ref.dataset.fn}`))
+      hide()
       return
     }
     if (!event.target.closest(".footnote-card")) hide()

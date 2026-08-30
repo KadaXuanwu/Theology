@@ -55,6 +55,13 @@
   --link-out: #14120e;
   --highlight: rgba(255, 208, 0, 0.4);
   --highlight-strong: rgba(255, 208, 0, 0.6);
+  /* Where a jump landed. Not the search gold: gold at a strength you can see
+     leaves the citation text on it at 1.54:1 in dark mode, which is why a
+     marked reference was unreadable for the three seconds it was marked. Each
+     side washes away from its own ink instead. Paper takes a pale lilac, so the
+     mid grey the footnote list is set in still reads on it. Measured against
+     --muted, the softer of the two inks, in site/test.mjs. */
+  --flash: rgba(201, 179, 255, 0.26);
   /* The gold a search hit wears is too loud for a row of chips that is on the
      page whether or not anyone is looking for it. On paper it comes down; on
      the dark side the same gold is already quiet, so it stays. */
@@ -103,6 +110,8 @@
   --link-out: #e6e4e1;
   --highlight: rgba(255, 208, 0, 0.4);
   --highlight-strong: rgba(255, 208, 0, 0.6);
+  /* The dark side washes the other way, down, for the same reason. */
+    --flash: rgba(166, 138, 249, 0.2);
   --tag-fill: var(--highlight);
   --tag-fill-hover: var(--highlight-strong);
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
@@ -137,6 +146,8 @@
     --link-out: #e6e4e1;
     --highlight: rgba(255, 208, 0, 0.4);
     --highlight-strong: rgba(255, 208, 0, 0.6);
+    /* The dark side washes the other way, down, for the same reason. */
+    --flash: rgba(166, 138, 249, 0.2);
     --tag-fill: var(--highlight);
     --tag-fill-hover: var(--highlight-strong);
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
@@ -1731,8 +1742,8 @@ sup.fn.is-broken {
 @keyframes fn-flash {
   0%,
   66% {
-    background-color: var(--highlight-strong);
-    box-shadow: 0 0 0 2px var(--highlight-strong);
+    background-color: var(--flash);
+    box-shadow: 0 0 0 2px var(--flash);
   }
   100% {
     background-color: transparent;
@@ -1748,8 +1759,8 @@ sup.fn.is-broken {
   /* No fade, but it still has to end: the class comes off on a timer. */
   .fn-flash {
     animation: none;
-    background-color: var(--highlight-strong);
-    box-shadow: 0 0 0 2px var(--highlight-strong);
+    background-color: var(--flash);
+    box-shadow: 0 0 0 2px var(--flash);
   }
 }
 .fn-back {

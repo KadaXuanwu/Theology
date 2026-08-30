@@ -1918,6 +1918,86 @@ console.log("a preview waits to be asked for")
   )
 }
 
+console.log("the mark on a jump target is still readable text")
+{
+  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+
+  const linear = (c) => (c / 255 <= 0.03928 ? c / 255 / 12.92 : ((c / 255 + 0.055) / 1.055) ** 2.4)
+  const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16))
+  const luminance = (rgb) => {
+    const [r, g, b] = rgb.map(linear)
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+  }
+  const contrast = (a, b) => {
+    const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x)
+    return (hi + 0.05) / (lo + 0.05)
+  }
+  // The flash is a translucent wash, so what the reader actually sees is it
+  // composited onto the page behind it, not the token on its own.
+  const over = (fg, alpha, bg) => bg.map((c, i) => c * (1 - alpha) + fg[i] * alpha)
+
+  // OKLab, so "how far apart do these two look" is one number rather than a
+  // guess off three channels that do not weigh the same.
+  const oklab = (rgb) => {
+    const [R, G, B] = rgb.map(linear)
+    const l = Math.cbrt(0.4122214708 * R + 0.5363325363 * G + 0.0514459929 * B)
+    const m = Math.cbrt(0.2119034982 * R + 0.6806995451 * G + 0.1073969566 * B)
+    const s = Math.cbrt(0.0883024619 * R + 0.2817188376 * G + 0.6299787005 * B)
+    return [
+      0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s,
+      1.9779984951 * l - 2.428592205 * m + 0.4505937099 * s,
+      0.0259040371 * l + 0.7827717662 * m - 0.808675766 * s,
+    ]
+  }
+  const apart = (a, b) => {
+    const [x, y] = [oklab(a), oklab(b)]
+    return Math.hypot(x[0] - y[0], x[1] - y[1], x[2] - y[2])
+  }
+
+  const rgba = (block, name) => {
+    const m = sheet.slice(sheet.indexOf(block)).match(
+      new RegExp(`--${name}: rgba\\((\\d+), (\\d+), (\\d+), ([0-9.]+)\\)`),
+    )
+    return m ? { rgb: [+m[1], +m[2], +m[3]], alpha: +m[4] } : null
+  }
+  const solid = (block, name) => {
+    const m = sheet.slice(sheet.indexOf(block)).match(new RegExp(`--${name}: (#[0-9a-f]{6})`))
+    return m ? hex(m[1]) : null
+  }
+
+  // Worst case in each theme: the footnote list is set in --muted, which is the
+  // softer of the two inks, and the flash sits on the page background.
+  const themes = [
+    { name: "light", block: ":root {", page: "bg", ink: "muted" },
+    { name: "dark", block: ':root[data-theme="dark"] {', page: "bg", ink: "muted" },
+  ]
+
+  for (const t of themes) {
+    const flash = rgba(t.block, "flash")
+    check(`${t.name} defines a flash colour`, flash !== null)
+    if (!flash) continue
+    const behind = solid(t.block, t.page)
+    const ink = solid(t.block, t.ink)
+    const ratio = contrast(over(flash.rgb, flash.alpha, behind), ink)
+    // The gold this replaced came out at 1.54:1 in dark, which is why a
+    // citation was unreadable for the three seconds it was marked.
+    check(`${t.name} keeps the citation readable while it is marked`, ratio >= 4.5, `${ratio.toFixed(2)}:1`)
+    // It also has to be visible, or marking the landing spot achieves nothing.
+    // Not a contrast ratio: the paper wash shifts hue at nearly the same
+    // lightness, which a ratio cannot see. It scored 1.10:1 and read as
+    // invisible while being plainly there. OKLab distance is what the rest of
+    // this file uses for how far apart two colours look, and the bar is the gap
+    // the site's own hover state already opens.
+    const seen = apart(over(flash.rgb, flash.alpha, behind), behind)
+    const hover = apart(solid(":root {", "bg-soft"), solid(":root {", "bg"))
+    check(
+      `${t.name} makes the mark at least as visible as a hover`,
+      seen >= hover,
+      `${seen.toFixed(4)} vs ${hover.toFixed(4)}`,
+    )
+  }
+}
+
 console.log("a jump between a marker and its citation says where it landed")
 {
   const source = await client("footnotes.js")
@@ -2067,9 +2147,12 @@ console.log("the citation card can be reached and taken away")
   check("but not so fast the card cannot be entered", close > 0 && close < open, `${close}ms close vs ${open}ms open`)
   check("and entering the card cancels the close", source.includes('event.target.closest(".footnote-card")'))
 
-  // A touch screen has no hover to offer, so the tap has to do it.
-  check("a tap opens the card instead of jumping", source.includes("event.preventDefault()"))
-  check("tapping the same marker again lets the jump happen", source.includes("anchor === ref"))
+  // The card is a hover affordance and nothing else. A click is navigation, so
+  // it is never spent opening the card first, and on a touch screen the tap
+  // goes straight to the citation at the foot of the note.
+  check("clicking a marker never opens the card", !source.includes("event.preventDefault()"))
+  check("the click navigates instead", source.includes("flash(document.getElementById(`fn-${ref.dataset.fn}`))"))
+  check("and only hovering opens it", source.includes("setTimeout(() => show(ref), OPEN_DELAY)"))
 
   check("the card reads the citation from the list", source.includes("getElementById(`fn-${ref.dataset.fn}`)"))
   // Refusing the clipboard silently would look exactly like copying worked.
