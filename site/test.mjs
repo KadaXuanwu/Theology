@@ -158,8 +158,12 @@ console.log("graph layout")
   }
   check("nodes do not collapse together", minGap > 12, `closest pair ${minGap.toFixed(1)}`)
 
+  // Repulsion spreads a layout as the square root of the node count, so the
+  // bound has to scale the same way. A fixed number silently gets stricter
+  // every time the vault grows, and fails on a layout that is fine.
   const span = Math.max(...nodes.map((n) => Math.hypot(n.x, n.y)))
-  check("layout stays bounded", span < 3000, `furthest node at ${span.toFixed(0)}`)
+  const bound = 520 * Math.sqrt(nodes.length)
+  check("layout stays bounded", span < bound, `furthest node at ${span.toFixed(0)}, bound ${bound.toFixed(0)}`)
 
   const linkedAvg = links.reduce((s, l) => s + Math.hypot(l.source.x - l.target.x, l.source.y - l.target.y), 0) / links.length
   let allSum = 0
@@ -244,12 +248,16 @@ console.log("a released node comes back to the middle")
   const baseRadius = radius(g.nodes)
 
   // hold one node far outside the layout, long enough for the rest to follow
+  // Held four layout radii out, in a fixed direction. A fixed coordinate stops
+  // being outside the layout once the vault is big enough, and then the test
+  // passes without ever having dragged anything.
   const victim = g.nodes[0]
   victim.pinned = true
+  const far = baseRadius * 4
   let held = 0.3
   for (let t = 0; t < 300; t++) {
-    victim.x = 1500
-    victim.y = 900
+    victim.x = far * 0.858
+    victim.y = far * 0.515
     held = stepForces(g.nodes, g.links, held, 0.3)
   }
   check("the drag really did pull the layout out of shape", radius(g.nodes) > baseRadius * 3)
