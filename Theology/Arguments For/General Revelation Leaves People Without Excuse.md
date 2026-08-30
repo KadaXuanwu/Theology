@@ -35,5 +35,5 @@ God has made himself knowable through what he created, so no one can plead total
 - [[Personal Relationship with God]]
 - [[Obedience Comes Before Evidence]]
 
-[^calvin-institutes]: John Calvin, *Institutes of the Christian Religion* I.3–5.
+[^calvin-institutes]: John Calvin, *Institutes of the Christian Religion* I.3–5, the implanted knowledge of God, its smothering, and the knowledge conspicuous in creation.
 [^plantinga-wcb]: Alvin Plantinga, *Warranted Christian Belief* (Oxford University Press, 2000).

@@ -21,7 +21,7 @@ The instinct half of that holds up. [[Kelemen 2004]] shows the purpose bias appe
 - [Romans 1:21–23](https://www.biblegateway.com/passage/?search=Romans%201:21-23&version=NIV) the target is idol worship, so Paul is arguing with religious people, not atheists.
 - [Romans 2:14–15](https://www.biblegateway.com/passage/?search=Romans%202:14-15&version=NIV) gets stretched to cover everyone who never had the Law. [[Joseph Fitzmyer]] reads the article-less "Gentiles" as some of them, not all, in his note on 2:14.[^fitzmyer-1993]
 - Paul's argument tracks [Wisdom of Solomon 13:1–9](https://www.biblegateway.com/passage/?search=Wisdom%20of%20Solomon%2013:1-9&version=NRSVUE), a parallel Joseph Fitzmyer draws at his note on 1:20.[^fitzmyer-1993] Wisdom grants that people who mistake creation for God "are little to be blamed, for perhaps they go astray while seeking God" (13:6), then rules that "not even they are to be excused" (13:8). The mitigation and the override both sit inside Paul's own source.
-- Calvin's *Institutes* I.iii argues the innate sense of God from universal religious practice and cites no scripture, so cross-cultural data tests his grounds.[^calvin-romans][^calvin-institutes]
+- Calvin's *Institutes* I.3 argues the innate sense of God from universal religious practice and cites no scripture, so cross-cultural data tests his grounds.[^calvin-romans][^calvin-institutes]
 - [[Peoples, Duda & Marlowe 2016]] the forager numbers. "High gods" there means single, all-powerful creator deities, so a lesser creator figure counts as absent.
 - [[Kelemen 2004]] the instinct is real, worth conceding.
 - [[Some Unbelief Isn't Resistance]] people not fighting God who still do not believe.
@@ -55,7 +55,7 @@ The instinct half of that holds up. [[Kelemen 2004]] shows the purpose bias appe
 [^fales-2003]: Evan Fales, "Alvin Plantinga's *Warranted Christian Belief*", *Noûs* 37/2 (2003), 353–370.
 [^fitzmyer-1993]: Joseph Fitzmyer, *Romans*, Anchor Bible 33 (Doubleday, 1993).
 [^calvin-romans]: John Calvin, *Commentary on Romans*, on 1:20.
-[^calvin-institutes]: John Calvin, *Institutes of the Christian Religion* I.iii.
+[^calvin-institutes]: John Calvin, *Institutes of the Christian Religion* I.3, "The Knowledge of God Naturally Implanted in the Human Mind".
 [^dundas-2002]: Paul Dundas, *The Jains*, 2nd edn (Routledge, 2002), p. 90.
 [^everett-2005]: Daniel Everett, *Current Anthropology* 46/4 (2005), 632–633.
 [^colapinto-2007]: John Colapinto, "The Interpreter", *The New Yorker*, 16 April 2007.
