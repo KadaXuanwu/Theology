@@ -16,5 +16,6 @@ Answers in chat stay short and concise. This is in `CLAUDE.md` already; it is he
 - No recap of options already discussed and decided, and no restating a plan that was just carried out.
 - Anything worth keeping goes in a comment next to the code or in a check in `site/test.mjs`, not in the reply. See [[site-build]].
 - Flag real caveats in one sentence each. Do not build a section around them.
+- Never narrate the work. Problems hit, bugs found in your own code, near misses and how they were fixed are all noise. Fix it and move on. Sharpened in `CLAUDE.md` on 2026-08-30 after a run of replies that reported every issue solved along the way.
 - Never list an absence. A bullet reading "nothing else", "no other issues" or "no decisions pending" is padding dressed as thoroughness. If there is nothing, the list just ends. Called out on 2026-08-30, after a three item list of what was needed from the user whose third item was "nothing else".
 - A request for a suggestion is different: print the suggestion formatted to copy and paste, per `CLAUDE.md`.

@@ -8,6 +8,16 @@ Make sure it doesn't sound AI written, and don't use dashes unless for passage r
 
 Keep answers short. Tell me what I need to know and what I need to decide on, and cut the rest. No recaps of work I can see in the diff, no walking me through what you considered and dropped.
 
+Do not narrate the work. I do not need to hear the problems you hit, the bugs you found in your own code, the things you nearly got wrong, or how you fixed any of it. Fix it and move on. A few lines is the normal length of a reply.
+
+Three things earn a mention, nothing else:
+
+- A decision that is mine to make, stated as a question.
+- Something that is wrong, unverified or left undone, so I do not assume otherwise.
+- A change I did not ask for, and why.
+
+If you are unsure whether something belongs, leave it out. I will ask.
+
 Always build on top of what is already present and feel free to change or add anything. In case you want to remove or change something, explain what and why. When making arguments, claims or reasoning, try to connect them to other already existing ones, or suggest if new ones could be created out of the arguments we list. This especially makes sense if they could be cross referenced in other nodes to not have to explain or proof the same thing twice.
 
 Don't mention "sides" or similar inside arguments like "Both sides use it, which is why it sits here rather than inside one argument." It's clear by which category the node sits in.
