@@ -7,7 +7,7 @@ tags: [epistemology, religious-experience]
 "Commit first, and you will know it is true" is a method other religions run in the same form, with the same reported result. If the same procedure produces confident confirmation of incompatible claims, it can produce conviction but cannot sort true from false. Whatever the experience is worth to the person having it, it does not work as an argument to someone outside, because the identical argument is available to the person across the street.
 
 # Origins
-Not a religious claim but an epistemological objection to one. The general form goes back to Hume on competing miracle reports; the modern version is usually put as the problem of religious diversity, and John Hick made it central.
+Not a religious claim but an epistemological objection to one. The general form goes back to Hume on competing miracle reports; the modern version is usually put as the problem of religious diversity, and [[John Hick]] made it central.
 
 # Based On
 - [Moroni 10:4](https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/10?lang=eng) is nearly word for word the same promise for the Book of Mormon: ask with a sincere heart, with real intent, having faith in Christ, and God "will manifest the truth of it unto you". The confirmation is promised on the same conditions and reported as delivered by millions of people whose conclusion contradicts the Christian one.

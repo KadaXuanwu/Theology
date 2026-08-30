@@ -11,7 +11,7 @@ The best way to confirm that Christianity is true is by experiencing it by yours
 - [Psalm 34:8](https://www.biblegateway.com/passage/?search=Psalm%2034:8&version=NIV) taste and see that the Lord is good. The invitation is to try it, not to be argued into it.
 - [Jeremiah 29:13](https://www.biblegateway.com/passage/?search=Jeremiah%2029:13&version=NIV) you will find me when you seek me with all your heart. Conditional on the seeking.
 - [John 7:17](https://www.biblegateway.com/passage/?search=John%207:17&version=NIV) do the will first, then you find out where the teaching came from.
-- Needs a philosophical source. Alvin Plantinga, *Warranted Christian Belief* (2000), is the obvious one, arguing belief formed this way can be warranted without argument. Already cited in [[General Revelation Leaves People Without Excuse]].
+- Needs a philosophical source. [[Alvin Plantinga]], *Warranted Christian Belief* (2000), is the obvious one, arguing belief formed this way can be warranted without argument. Already cited in [[General Revelation Leaves People Without Excuse]].
 
 # Countered By
 - [[Experiential Confirmation Doesn't Distinguish Religions]] is the main objection and this node has no answer to it yet. The same method, with the same promise attached, produces confident confirmation of incompatible claims.

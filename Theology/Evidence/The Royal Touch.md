@@ -7,16 +7,16 @@ tags: [history, medicine]
 # Description
 The royal touch was a healing rite in which the monarch of England or France laid hands on people suffering from scrofula, known as the King's Evil. Scrofula is a tubercular infection of the lymph glands of the neck, though the term was applied loosely at the time and the symptoms could remit on their own.
 
-The power was stated as divine and as belonging to the crown alone. Thomas Allen wrote that "the power of curing this Evil" was "vouchsafed solely to the Kings, by the Grace of God".[^smith-2025]
+The power was stated as divine and as belonging to the crown alone. [[Thomas Allen]] wrote that "the power of curing this Evil" was "vouchsafed solely to the Kings, by the Grace of God".[^smith-2025]
 
 The rite was official and printed. Charles I annexed a liturgy for the touching to the additional materials of the Book of Common Prayer in 1634. Queen Anne touched the infant Samuel Johnson in 1712 and continued to touch until shortly before her death in 1714. The rite was dropped from the supplemental materials of the Book of Common Prayer in 1732.[^smith-2025]
 
-The bacterial cause of tuberculosis was identified in 1882, when Robert Koch announced the tubercle bacillus to the Berlin Physiological Society on 24 March and published in *Berliner klinische Wochenschrift* that year, followed by "Die Aetiologie der Tuberkulose" in 1884.[^koch-1884]
+The bacterial cause of tuberculosis was identified in 1882, when [[Robert Koch]] announced the tubercle bacillus to the Berlin Physiological Society on 24 March and published in *Berliner klinische Wochenschrift* that year, followed by "Die Aetiologie der Tuberkulose" in 1884.[^koch-1884]
 
 # Shows
 - A specific supernatural mechanism for a specific named illness was set out in an official printed liturgy of a state church, practised by named monarchs on datable occasions, and later removed from that liturgy.
 - The sequence is: rite annexed 1634, last touchings 1714, rite removed from the printed materials 1732, bacterial cause identified 1882. The claim was dropped roughly 150 years before the natural explanation of the illness existed.
-- David Smith gives the end of the practice as following the Hanoverian succession rather than following any medical finding.[^smith-2025]
+- [[David L. Smith|David Smith]] gives the end of the practice as following the Hanoverian succession rather than following any medical finding.[^smith-2025]
 
 # Limits
 - Cure reports from the rite are not measurements. Scrofula was a loose category at the time, and its symptoms could remit without treatment, so recovery after touching establishes nothing about the touching.

@@ -10,7 +10,7 @@ tags:
 "Leave nothing alive" and "no survivors" were standard victory wording across the ancient Near East, used by kings whose enemies clearly survived. Read that way, the conquest texts claim a decisive win rather than report a body count.
 
 # Origins
-K. Lawson Younger Jr., *Ancient Conquest Accounts* (Sheffield 1990), a comparative study of Joshua against Hittite, Egyptian and Assyrian war reports. Taken up by Kenneth Kitchen, *On the Reliability of the Old Testament* (Eerdmans 2003), and by Paul Copan and Matthew Flannagan, *Did God Really Command Genocide?* (Baker 2014).
+[[K. Lawson Younger Jr]]., *Ancient Conquest Accounts* (Sheffield 1990), a comparative study of Joshua against Hittite, Egyptian and Assyrian war reports. Taken up by [[Kenneth Kitchen]], *On the Reliability of the Old Testament* (Eerdmans 2003), and by [[Paul Copan]] and [[Matthew Flannagan]], *Did God Really Command Genocide?* (Baker 2014).
 
 # Based On
 - [[Merneptah Stele]] Egypt, c. 1208 BCE. "Israel is laid waste, its seed is no more." Israel is still there afterwards.
@@ -23,7 +23,7 @@ K. Lawson Younger Jr., *Ancient Conquest Accounts* (Sheffield 1990), a comparati
 - Anything resting on a flat literal reading of these texts has to answer the genre question first, whether it reads them as history or as an atrocity.
 
 # Disputed By
-- Wesley Morriston has pressed the command/report distinction against Copan and Flannagan. See Limits.
+- [[Wesley Morriston]] has pressed the command/report distinction against Copan and Flannagan. See Limits.
 
 # Limits
 - It works on victory reports, not on commands. [Deuteronomy 20:16–18](https://www.biblegateway.com/passage/?search=Deuteronomy%2020:16-18&version=NIV) and [1 Samuel 15:2–3](https://www.biblegateway.com/passage/?search=1%20Samuel%2015:2-3&version=NIV) tell someone what to do, and an order is not softened by the fact that the later brag was overstated. This is the strongest objection to the claim.

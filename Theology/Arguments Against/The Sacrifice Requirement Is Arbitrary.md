@@ -14,7 +14,7 @@ There is no coherent reason a just and all-powerful God would require sacrifice,
 # Countered By
 - [[God Can't Accept Sin]] the requirement follows from what God is rather than from a rule he chose, so it is not arbitrary even though it is not negotiable.
 - [[The Covenant Changed with Christ]] the animal system is presented as provisional from the start and is ended, which answers the "why keep doing it" half but not the "why any of it" half.
-- Needs the standard atonement theories written up. Penal substitution, satisfaction (Anselm) and Christus Victor give different answers here and the argument currently treats them as one target.
+- Needs the standard atonement theories written up. Penal substitution, satisfaction ([[Anselm]]) and Christus Victor give different answers here and the argument currently treats them as one target.
 
 # Limits
 - The Bible itself says the animal sacrifices never worked ([Hebrews 10:4](https://www.biblegateway.com/passage/?search=Hebrews%2010:4&version=NIV)). That is a point for the argument on the ritual half, but it also means the tradition is not claiming the mechanism was transactional in the way the argument assumes.

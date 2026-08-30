@@ -7,7 +7,7 @@ tags: [psychology, cognitive-science-of-religion]
 Human minds reach for agents and purpose by default. People see intent behind ambiguous events, and children explain natural things by what they are for. This is a claim about how minds work, not about whether anything is out there.
 
 # Origins
-Cognitive science of religion, roughly 1993 onwards. Stewart Guthrie proposed that religion is systematic anthropomorphism, seeing the world as humanlike. Justin Barrett formalised the agent half as the Hyperactive Agency Detection Device (HADD), the tendency to assume an agent behind unexplained events because missing a real predator costs more than a false alarm. Deborah Kelemen developed the purpose half. Pascal Boyer added why some supernatural ideas spread better than others.
+Cognitive science of religion, roughly 1993 onwards. [[Stewart Guthrie]] proposed that religion is systematic anthropomorphism, seeing the world as humanlike. [[Justin Barrett]] formalised the agent half as the Hyperactive Agency Detection Device (HADD), the tendency to assume an agent behind unexplained events because missing a real predator costs more than a false alarm. [[Deborah Kelemen]] developed the purpose half. [[Pascal Boyer]] added why some supernatural ideas spread better than others.
 
 # Based On
 - [[Kelemen 2004]] children default to purpose-based explanations of natural things, and the bias persists in trained scientists under time pressure.
