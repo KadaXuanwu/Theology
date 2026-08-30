@@ -30,14 +30,13 @@ export const SECTIONS = [
     label: "Evidence",
     blurb: "Artefacts, studies and texts a claim can point to.",
   },
-  // People are a reference layer rather than a step in the reasoning, so they
-  // take the grey the palette already keeps for anything outside the four
-  // kinds. `pill` overrides the label under the title, which would otherwise
-  // read "Note".
+  // People are a reference layer rather than a step in the reasoning: they
+  // carry no argument and nothing links up out of them. They take a grey
+  // rather than a hue for that reason, and the graphs leave them out until
+  // they are asked for.
   {
     dir: "People",
-    kind: "note",
-    pill: "Person",
+    kind: "person",
     label: "People",
     blurb: "The people the nodes name, and what they published.",
   },

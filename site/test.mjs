@@ -855,7 +855,18 @@ console.log("the legend filters the graph")
   // every entry is a real control, on by default
   const toggles = [...fullGraph.matchAll(/<button type="button" class="legend-toggle" data-kind="([^"]+)" aria-pressed="([^"]+)">/g)]
   check("each category is a button", toggles.length >= 4, `${toggles.length} toggles`)
-  check("all start switched on", toggles.every((m) => m[2] === "true"))
+  // Every kind that is part of the argument map starts on. People do not:
+  // there are more of them than of everything else, and they carry no
+  // argument, so a graph that opened with them would be mostly reference.
+  check(
+    "every kind but People starts switched on",
+    toggles.filter((m) => m[1] !== "person").every((m) => m[2] === "true"),
+  )
+  check(
+    "and People starts switched off",
+    toggles.find((m) => m[1] === "person")?.[2] === "false",
+    toggles.find((m) => m[1] === "person")?.[2] ?? "no People toggle",
+  )
   // Read off SECTIONS rather than written out here: the legend, the tree and
   // the overview all take that one order, and reordering the vault should not
   // fail a check that is about the toggles carrying a kind at all.
@@ -884,7 +895,18 @@ console.log("the legend filters the graph")
     "it reaches graphs on pages without a legend",
     appSource.includes("for (const node of data.nodes) allKinds.add(node.kind)"),
   )
-  check("and every graph on the page updates together", appSource.includes("for (const graph of graphs) graph.setVisibleKinds(kinds)"))
+  check(
+    "and every graph on the page updates together",
+    appSource.includes("for (const { el, graph } of graphs) graph.setVisibleKinds(kindsFor(el))"),
+  )
+  // The rail is small enough that the reference layer would crowd out the
+  // argument, so it drops people whatever the legend is set to.
+  check("the rail never carries the reference layer", /shown\.delete\(PERSON\)/.test(appSource))
+  check("and the full graphs start without it", /HIDDEN_BY_DEFAULT = \[PERSON\]/.test(appSource))
+  check(
+    "a reader who switches it on is remembered",
+    appSource.includes("readSet(HIDDEN_KEY, HIDDEN_BY_DEFAULT)"),
+  )
 
   // the shrink arrow matches the enlarge arrow: no border of its own
   const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
@@ -1287,7 +1309,7 @@ console.log("tags are a way in, and they combine")
   const mounts = await client("graphs.js")
   check(
     "picking again rebuilds the map rather than repainting it",
-    /for \(const graph of graphs\) graph\.destroy\(\)/.test(mounts) && /rebuild = build/.test(mounts),
+    /for \(const \{ graph \} of graphs\) graph\.destroy\(\)/.test(mounts) && /rebuild = build/.test(mounts),
   )
   check("the filter is what tells it which notes", /export function setTagFocus/.test(mounts) && /setTagFocus\(matched \? \[\.\.\.matched\] : null\)/.test(app))
   check("the notes it was given are what it focuses on", /if \(el\.dataset\.graph === "tags"\) return tagFocus/.test(mounts))
@@ -1666,7 +1688,7 @@ console.log("the reading column is a sheet on a page, not the page itself")
 console.log("a link wears the colour of what it points at")
 {
   const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
-  const KINDS = ["argument-for", "argument-against", "claim", "evidence", "note"]
+  const KINDS = ["argument-for", "argument-against", "claim", "evidence", "person", "note"]
 
   const linear = (c) => (c / 255 <= 0.03928 ? c / 255 / 12.92 : ((c / 255 + 0.055) / 1.055) ** 2.4)
   const rgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16))
@@ -1775,7 +1797,10 @@ console.log("a link wears the colour of what it points at")
   // what this is measuring, and it is the reason the four are not all equally
   // bright. 0.09 in OKLab is about the gap between two neighbouring greys on a
   // ten step ramp: small, but never "did that just move".
-  const four = KINDS.filter((k) => k !== "note")
+  // Both greys are outside the four the map is made of: a person and a note
+  // from an unknown folder are reference, not a step in an argument, and they
+  // are meant to read as the same kind of thing.
+  const four = KINDS.filter((k) => k !== "note" && k !== "person")
   for (const theme of ["light", "dark"]) {
     for (const eyes of ["deutan", "protan"]) {
       let worst = Infinity

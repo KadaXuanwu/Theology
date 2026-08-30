@@ -16,12 +16,14 @@ export function writeText(key, value) {
 // A set of names: which folders the reader collapsed, which categories they
 // switched off. Anything that is not a list of strings is treated as nothing
 // stored, so a key another script wrote to cannot break the page.
-export function readSet(key) {
+export function readSet(key, fallback = []) {
   try {
-    const raw = JSON.parse(localStorage.getItem(key) ?? "[]")
-    return new Set(Array.isArray(raw) ? raw : [])
+    const stored = localStorage.getItem(key)
+    if (stored === null) return new Set(fallback)
+    const raw = JSON.parse(stored)
+    return new Set(Array.isArray(raw) ? raw : fallback)
   } catch {
-    return new Set()
+    return new Set(fallback)
   }
 }
 

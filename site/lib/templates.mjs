@@ -13,6 +13,7 @@ const KIND_LABEL = {
   "argument-against": "Argument against",
   claim: "Claim",
   evidence: "Evidence",
+  person: "Person",
   note: "Note",
 }
 
@@ -26,10 +27,13 @@ const KIND_LABEL = {
 // edge, which is the same place the rail's control ends up over its own graph.
 // It is kept out of the legend's own group: it switches no category.
 function graphTools(sections, control = "") {
+  // People start switched off, because that is the state the graph loads in.
+  // Rendering them on and letting the script correct it would flash the whole
+  // reference layer onto every graph for a frame.
   const items = sections
     .map(
       (sec) =>
-        `<li><button type="button" class="legend-toggle" data-kind="${sec.kind}" aria-pressed="true"><span class="dot dot-${sec.kind}"></span>${escapeHtml(sec.label)}</button></li>`,
+        `<li><button type="button" class="legend-toggle" data-kind="${sec.kind}" aria-pressed="${sec.kind === "person" ? "false" : "true"}"><span class="dot dot-${sec.kind}"></span>${escapeHtml(sec.label)}</button></li>`,
     )
     .join("")
   return `<div class="graph-tools">
@@ -109,7 +113,7 @@ function lifeLine(note) {
 
 export function notePage({ note, root, dateLabel, sections, notes, assets }) {
   const section = note.section
-  const kindLabel = section.pill ?? KIND_LABEL[section.kind] ?? "Note"
+  const kindLabel = KIND_LABEL[section.kind] ?? "Note"
   const extraKind = note.frontmatter.kind ? ` · ${escapeHtml(note.frontmatter.kind)}` : ""
 
   const tags = note.tags.length

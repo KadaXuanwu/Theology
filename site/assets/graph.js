@@ -245,6 +245,7 @@ function readColors(root) {
     "argument-against": get("--argument-against", "#c6701e"),
     claim: get("--claim", "#009a73"),
     evidence: get("--evidence", "#9c4789"),
+    person: get("--person", "#8b857f"),
     note: get("--note", "#8b857f"),
     line: get("--border-strong", "#bdb3a3"),
     text: get("--text", "#24201a"),

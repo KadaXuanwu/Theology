@@ -12,6 +12,13 @@ import { readSet, writeSet } from "./store.js"
 
 const HIDDEN_KEY = "hiddenGraphKinds"
 
+// People are a reference layer, not a step in an argument, and there are more
+// of them than of everything else put together. The rail is too small to carry
+// them at all, and the full graphs start without them; the legend switches
+// them on, and that choice is remembered like any other.
+const PERSON = "person"
+const HIDDEN_BY_DEFAULT = [PERSON]
+
 const graphs = []
 // null is the whole map. A list, even an empty one, is a selection: an empty
 // one means the reader picked a combination no note carries.
@@ -46,12 +53,23 @@ export function initGraphs() {
 
   const visibleKinds = () => {
     if (allKinds.size === 0) return null
-    const hidden = readSet(HIDDEN_KEY)
+    const hidden = readSet(HIDDEN_KEY, HIDDEN_BY_DEFAULT)
     return new Set([...allKinds].filter((k) => !hidden.has(k)))
   }
 
+  // The rail never shows people, whatever the legend says: at that size the
+  // reference layer would be most of the circles. A graph the reader opened on
+  // a person still shows that person, because a seeded node is never filtered.
+  const kindsFor = (el) => {
+    const kinds = visibleKinds()
+    if (!el.classList.contains("graph-rail")) return kinds
+    const shown = new Set(kinds ?? allKinds)
+    shown.delete(PERSON)
+    return shown
+  }
+
   const paintToggles = () => {
-    const hidden = readSet(HIDDEN_KEY)
+    const hidden = readSet(HIDDEN_KEY, HIDDEN_BY_DEFAULT)
     for (const toggle of toggles) {
       toggle.setAttribute("aria-pressed", String(!hidden.has(toggle.dataset.kind)))
     }
@@ -61,14 +79,13 @@ export function initGraphs() {
 
   for (const toggle of toggles) {
     toggle.addEventListener("click", () => {
-      const hidden = readSet(HIDDEN_KEY)
+      const hidden = readSet(HIDDEN_KEY, HIDDEN_BY_DEFAULT)
       const kind = toggle.dataset.kind
       if (hidden.has(kind)) hidden.delete(kind)
       else hidden.add(kind)
       writeSet(HIDDEN_KEY, hidden)
       paintToggles()
-      const kinds = visibleKinds()
-      for (const graph of graphs) graph.setVisibleKinds(kinds)
+      for (const { el, graph } of graphs) graph.setVisibleKinds(kindsFor(el))
     })
   }
 
@@ -82,15 +99,16 @@ export function initGraphs() {
     // different set of notes, so it is a different graph rather than the same
     // one drawn differently.
     const build = () => {
-      for (const graph of graphs) graph.destroy()
+      for (const { graph } of graphs) graph.destroy()
       graphs.length = 0
 
       for (const el of mounts) {
         const driven = el.dataset.graph === "tags"
         const local = el.dataset.graph === "local"
         const focus = focusOf(el, data)
-        graphs.push(
-          mountGraph(el, data, {
+        graphs.push({
+          el,
+          graph: mountGraph(el, data, {
             focus,
             // The rail shows immediate neighbours; the full page view goes a
             // hop further, because one hop leaves most notes looking almost
@@ -99,13 +117,13 @@ export function initGraphs() {
             // A mount can ask for hover labels even when it is a local view: a
             // section in the rail has too many notes to name at that size.
             showLabels: el.dataset.labels ?? (local || (driven && focus) ? "always" : "hover"),
-            kinds: visibleKinds(),
+            kinds: kindsFor(el),
             emptyLabel: driven ? "No note carries that combination." : undefined,
             onNavigate: (node) => {
               window.location.href = noteUrl(node.url)
             },
           }),
-        )
+        })
       }
     }
 

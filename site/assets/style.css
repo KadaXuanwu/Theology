@@ -45,6 +45,7 @@
   --link-argument-against: #9a5100;
   --link-claim: #007255;
   --link-evidence: #9a4587;
+  --link-person: #69635d;
   --link-note: #69635d;
   /* A source is the link that is not a node. It carries no hue at all: colour
      in the prose means the map, and a fifth colour only reads as a fifth kind
@@ -77,6 +78,9 @@
   --argument-against: #c6701e;
   --claim: #009a73;
   --evidence: #9c4789;
+  /* Two greys, and they are meant to look alike: a person and a note from an
+     unknown folder are both outside the four kinds the map is made of. */
+  --person: #8b857f;
   --note: #8b857f;
 
   --header-h: 2.9rem;
@@ -106,6 +110,7 @@
   --link-argument-against: #d88d51;
   --link-claim: #4eb08d;
   --link-evidence: #d386be;
+  --link-person: #a39e98;
   --link-note: #a39e98;
   --link-out: #e6e4e1;
   --highlight: rgba(255, 208, 0, 0.4);
@@ -120,6 +125,7 @@
   --argument-against: #f19e5c;
   --claim: #61cca5;
   --evidence: #cd7bb8;
+  --person: #bcb6b0;
   --note: #bcb6b0;
   --scrollbar: #3d3d3d;
   --scrollbar-hover: #525252;
@@ -142,6 +148,7 @@
     --link-argument-against: #d88d51;
     --link-claim: #4eb08d;
     --link-evidence: #d386be;
+    --link-person: #a39e98;
     --link-note: #a39e98;
     --link-out: #e6e4e1;
     --highlight: rgba(255, 208, 0, 0.4);
@@ -156,6 +163,7 @@
     --argument-against: #f19e5c;
     --claim: #61cca5;
     --evidence: #cd7bb8;
+    --person: #bcb6b0;
     --note: #bcb6b0;
     --scrollbar: #3d3d3d;
     --scrollbar-hover: #525252;
@@ -680,6 +688,9 @@ main {
 .dot-evidence {
   background: var(--evidence);
 }
+.dot-person {
+  background: var(--person);
+}
 
 /* Right rail -------------------------------------------------------------- */
 
@@ -1016,6 +1027,9 @@ a.wikilink[data-kind="argument-against"] {
 }
 a.wikilink[data-kind="claim"] {
   --link: var(--link-claim);
+}
+a.wikilink[data-kind="person"] {
+  --link: var(--link-person);
 }
 a.wikilink[data-kind="evidence"] {
   --link: var(--link-evidence);
