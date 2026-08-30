@@ -15,8 +15,7 @@ Read `references/templates.md`, `references/source-policy.md`, `references/citat
 
 1. Every factual sentence carries a source the verifier can open. No retrievable source, no entry into the node.
 2. Every sentence carries a fact, a source or a limit. A sentence that carries none of the three gets cut however well it reads, and the Description opens on the claim itself with no setup in front of it. This is the rule a finished node fails most often. See the density section in `references/style.md`.
-3. A node marked `sourced` keeps its body between 500 and 2000 words, frontmatter excluded. Those are a floor and a ceiling, not a target. There is no length to write up to. Length follows the sourced content: say what the sources carry, then stop. Any other status has no limit.
-   At equal content, shorter is better, so cut every phrase that does not earn its place. At equal length, more good sourced facts and arguments is better. Never pad to reach a number.
+3. Length is set in `references/style.md`. It is a real gate on a `sourced` node, not a style note. At equal content, shorter is better. At equal length, more good sourced facts and arguments is better.
 4. The verifier may delete text written in this session. It may not delete text that already existed in the node. Pre-existing problems get reported to the user, never silently cut.
 5. At least half the sources in a node are academic register. Advocacy publishing never carries a fact on its own. See `references/balance.md`.
 6. The finished node is written to its file in the vault, then committed and pushed. Working files never land in the vault.

@@ -65,7 +65,7 @@ This pass is the one most likely to be skipped because the prose reads well. Rea
 
 ### 5. Structural checks
 
-- Body word count between 500 and 2000, frontmatter excluded, but only on a node marked `sourced`. Any other status is exempt. Flag padding, and flag a node sitting near 2000 that could say the same in less
+- Body word count within the range in `references/style.md`, on a `sourced` node only. Flag padding, and flag a node near 2000 that could say the same in less
 - Frontmatter and heading order match the template
 - No heading left empty
 - On evidence nodes, Description carries no interpretation

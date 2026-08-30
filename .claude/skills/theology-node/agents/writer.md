@@ -54,7 +54,7 @@ Follow `references/style.md`. Plain wording, short sentences, no dashes as punct
 
 Read the density section in `references/style.md` first. Every sentence carries a fact, a source or a limit, and the Description opens on the claim. Padding gets cut by the verifier anyway, so writing it is wasted work.
 
-The word range is a floor and a ceiling, not a target. Say what the sources carry, then stop.
+Length is in `references/style.md`. Around 1000 words is the normal shape.
 
 No section has a share to fill. Each one runs as long as its content, so a simple claim gets a short Description even when Based On and Countered By run long.
 

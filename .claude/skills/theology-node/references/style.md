@@ -18,6 +18,14 @@ Cut on sight:
 
 The test is deletion. Take out the paragraph. If the node still carries every fact, source and limit it carried before, it stays out.
 
+## Length
+
+A `sourced` node's body runs 500 to 2000 words, frontmatter excluded. Around 1000 is where most of them sit, so treat that as the shape of a normal node rather than a limit. Longer is fine when the material earns it. A node that keeps growing is usually two nodes.
+
+Nothing is ever added to reach a length. Say what the sources carry, then stop.
+
+Any other status has no limit.
+
 ## Voice
 
 Plain, direct, short sentences. Write the way a well read person explains something to a friend, not the way a paper opens.
@@ -38,7 +46,7 @@ Neutrality is about sourcing and framing, not about conclusions. If the scholarl
 
 Run every item before delivering.
 
-1. If the node is going to `sourced`, the body is between 500 and 2000 words, and near 1000 unless the material needs more. Any other status is exempt. Nothing is padded to reach a number, and nothing that matters is dropped to stay under one
+1. Length as the Length section says, on `sourced` nodes only
 2. Frontmatter matches the template exactly, `status` is honest
 3. Every heading from the template is present, in order, none empty
 4. Every factual sentence has a source at the required tier
