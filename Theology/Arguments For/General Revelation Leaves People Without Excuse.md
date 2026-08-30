@@ -12,8 +12,8 @@ God has made himself knowable through what he created, so no one can plead total
 - [Psalm 19:1](https://www.biblegateway.com/passage/?search=Psalm%2019:1&version=NIV) the heavens declare God's glory.
 - [Acts 14:17](https://www.biblegateway.com/passage/?search=Acts%2014:17&version=NIV) God left a witness in rain and harvests, said to a pagan crowd.
 - [Acts 17:26–27](https://www.biblegateway.com/passage/?search=Acts%2017:26-27&version=NIV) God set out where people would live so they would reach for him and perhaps find him.
-- John Calvin, *Institutes of the Christian Religion* I.3–5. Argues for a natural sense of God in everyone from birth, which is why he says there is no honest unbelief.
-- Alvin Plantinga, *Warranted Christian Belief* (Oxford University Press, 2000). Rebuilds Calvin's sense of God as a belief-forming faculty, so belief in God can be rational without being argued for.
+- Calvin argues for a natural sense of God in everyone from birth, which is why he says there is no honest unbelief.[^calvin-institutes]
+- Alvin Plantinga rebuilds Calvin's sense of God as a belief-forming faculty, so belief in God can be rational without being argued for.[^plantinga-wcb]
 - [[Humans Are Primed to See Agents and Purpose]] is the empirical support usually cited for this today.
 - [[Kelemen 2004]] the specific finding that carries most of the weight: the purpose instinct is early and not taught.
 
@@ -32,3 +32,6 @@ God has made himself knowable through what he created, so no one can plead total
 # Related
 - [[Personal Relationship with God]]
 - [[Obedience Comes Before Evidence]]
+
+[^calvin-institutes]: John Calvin, *Institutes of the Christian Religion* I.3–5.
+[^plantinga-wcb]: Alvin Plantinga, *Warranted Christian Belief* (Oxford University Press, 2000).

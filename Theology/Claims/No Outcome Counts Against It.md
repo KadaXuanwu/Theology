@@ -11,11 +11,11 @@ This is not the charge that such a claim is false. It is the charge that the evi
 The usual shape is an escape clause added after the fact. A promise is made, the promise fails, and the failure is attributed to a shortfall in the person rather than to the promise. Insufficient sincerity, insufficient faith, insufficient obedience, a passage that turns out to be symbolic, a faculty that turns out to have been suppressed. Each of these is a reasonable thing to say once. Stated as the standing answer to every failure, it means the claim can no longer be reached by anything.
 
 # Origins
-Karl Popper is the usual starting point for the demand that a claim rule something out, in *Logik der Forschung* (1934), translated as *The Logic of Scientific Discovery* (1959). Popper's own target was Marxism and psychoanalysis rather than theology, and how far he meant the criterion to reach is itself disputed, so the framing here is provisional.
+Karl Popper is the usual starting point for the demand that a claim rule something out.[^popper-1934] Popper's own target was Marxism and psychoanalysis rather than theology, and how far he meant the criterion to reach is itself disputed, so the framing here is provisional.
 
-Antony Flew turned it on theology in "Theology and Falsification", in *New Essays in Philosophical Theology*, ed. Flew and Alasdair MacIntyre (SCM Press, 1955), with the parable of the invisible gardener and the phrase usually quoted from it, death by a thousand qualifications. Neither the wording nor the page is given here, so neither is quoted.
+Antony Flew turned it on theology, with the parable of the invisible gardener and the phrase usually quoted from it, death by a thousand qualifications.[^flew-1955] Neither the wording nor the page is given here, so neither is quoted.
 
-The objection is still in working use. Michiel van Elk objects to a recent statistical model of religious belief on exactly this ground, that it is hard to test "given the model's flexibility in accommodating contradictory evidence" (*The International Journal for the Psychology of Religion* 35 (2025), 139–144).
+The objection is still in working use. Michiel van Elk objects to a recent statistical model of religious belief on exactly this ground, that it is hard to test "given the model's flexibility in accommodating contradictory evidence".[^van-elk-2025]
 
 # Based On
 - [[The Suppression Thesis Rests on Possibility]] is the one worked case in the vault that is already sourced end to end, and it is the cleanest illustration of the pattern. Alvin Plantinga claims for his model "only that it is (1) possible", and James Dominic Rooney that a defender needs to show "only that it is possible some such culpable resistance to God occurred". A claim retreated that far has stopped competing with anything.
@@ -33,7 +33,7 @@ The objection is still in working use. Michiel van Elk objects to a recent stati
 
 # Disputed By
 - Needs writing, and this section is the reason the node is a draft rather than sourced. Three real replies exist and none of them is checked yet.
-- Falsifiability failed as a line between science and everything else. The demarcation project is not the consensus position in current philosophy of science, and Larry Laudan's "The Demise of the Demarcation Problem" (1983) is the paper usually cited for that. If it holds, the Popper framing above has to go and the Bayesian framing has to carry the node on its own.
+- Falsifiability failed as a line between science and everything else. The demarcation project is not the consensus position in current philosophy of science, and Larry Laudan's paper is the one usually cited for that.[^laudan-1983] If it holds, the Popper framing above has to go and the Bayesian framing has to carry the node on its own.
 - No claim is tested alone. On the point Duhem and Quine press, any prediction depends on a bundle of background assumptions, so a failed prediction never tells you which member of the bundle to give up. Adding an auxiliary assumption to save a theory is something every working science does, which means the escape clause cannot be illegitimate merely for being an escape clause. What is needed is a rule separating a principled auxiliary from an ad hoc one, and that rule is the whole difficulty.
 - Unfalsifiable is not the same as unsupported. Historical and existence claims often rule nothing out about the future yet are still settled by evidence.
 
@@ -42,3 +42,8 @@ The objection is still in working use. Michiel van Elk objects to a recent stati
 - It can be run in both directions, and often is. Any position can be protected by enough qualification, and the accusation is cheap enough that it gets used where a plainer objection would do.
 - Applied to a whole tradition it overreaches. It is an objection to a particular formulation offered by a particular person, and it has to be shown each time rather than assumed.
 - One qualification is not the pattern. What makes the move a problem is that it is the standing answer to every failure, and showing that takes more than one instance.
+
+[^popper-1934]: Karl Popper, *Logik der Forschung* (1934), translated as *The Logic of Scientific Discovery* (1959).
+[^flew-1955]: Antony Flew, "Theology and Falsification", in Antony Flew and Alasdair MacIntyre (eds.), *New Essays in Philosophical Theology* (SCM Press, 1955).
+[^van-elk-2025]: Michiel van Elk, *The International Journal for the Psychology of Religion* 35 (2025), 139–144.
+[^laudan-1983]: Larry Laudan, "The Demise of the Demarcation Problem" (1983).

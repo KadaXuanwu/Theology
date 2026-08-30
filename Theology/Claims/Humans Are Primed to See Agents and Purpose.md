@@ -12,9 +12,9 @@ Cognitive science of religion, roughly 1993 onwards. Stewart Guthrie proposed th
 # Based On
 - [[Kelemen 2004]] children default to purpose-based explanations of natural things, and the bias persists in trained scientists under time pressure.
 - [[Peoples, Duda & Marlowe 2016]] what the instinct produces at population level: animism everywhere, a creator in a minority of societies.
-- Stewart Guthrie, *Faces in the Clouds: A New Theory of Religion* (Oxford University Press, 1993).
-- Justin Barrett, "Exploring the Natural Foundations of Religion", *Trends in Cognitive Sciences* 4 (2000), 29–34, and *Why Would Anyone Believe in God?* (2004). Source of the HADD model. Also written as Hypersensitive Agency Detection Device, same idea.
-- Pascal Boyer, *Religion Explained* (2001). Ideas that are mostly ordinary with one counterintuitive feature are remembered and passed on best, which predicts the shape of gods people actually believe in.
+- Stewart Guthrie put the case that religion begins in reading the world as if it were a person.[^guthrie-1993]
+- Justin Barrett is the source of the HADD model, also written as Hypersensitive Agency Detection Device, the same idea.[^barrett-2000][^barrett-2004]
+- Pascal Boyer argues that ideas which are mostly ordinary with one counterintuitive feature are remembered and passed on best, which predicts the shape of gods people actually believe in.[^boyer-2001]
 - Oxford's £1.9m Cognition, Religion and Theology Project, [40+ studies across 20 countries, 2007–2010](https://www.sciencedaily.com/releases/2011/07/110714103828.htm). Its director Justin Barrett stated plainly that the project does not set out to prove gods exist, and that finding something easy to think does not make it true.
 
 # Carries
@@ -30,3 +30,8 @@ Cognitive science of religion, roughly 1993 onwards. Stewart Guthrie proposed th
 - Kelemen's work is heavily Western in origin. The China replication helps but the sample base is still narrow compared to the size of the claim.
 - HADD is a model, not a measured brain mechanism. It is widely used and widely criticised as being hard to falsify.
 - "Primed for agents" is a long way from "primed for God". Do not let this claim get stretched in either direction.
+
+[^guthrie-1993]: Stewart Guthrie, *Faces in the Clouds: A New Theory of Religion* (Oxford University Press, 1993).
+[^barrett-2000]: Justin Barrett, "Exploring the Natural Foundations of Religion", *Trends in Cognitive Sciences* 4 (2000), 29–34.
+[^barrett-2004]: Justin Barrett, *Why Would Anyone Believe in God?* (2004).
+[^boyer-2001]: Pascal Boyer, *Religion Explained* (2001).
