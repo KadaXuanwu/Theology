@@ -21,7 +21,7 @@ The bacterial cause of tuberculosis was identified in 1882, when [[Robert Koch]]
 # Limits
 - Cure reports from the rite are not measurements. Scrofula was a loose category at the time, and its symptoms could remit without treatment, so recovery after touching establishes nothing about the touching.
 - The record here is of an official rite and of named royal occasions. It does not establish what ordinary people believed the mechanism to be, nor how widely the official account was held.
-- This is England only. The French rite ran on a different timeline and is not covered, though Marc Bloch's study treats the two together.[^bloch-1924]
+- This is England only. The French rite ran on a different timeline and is not covered, though [[Marc Bloch]]'s study treats the two together.[^bloch-1924]
 
 # Source
 - Source checks still open on this note are tracked in the repo under `Verification/`.

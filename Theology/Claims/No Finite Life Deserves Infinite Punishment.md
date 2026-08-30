@@ -23,8 +23,8 @@ What Adams argues against is what she calls Anselm's principle, that liability t
 
 # Carries
 - Any defence of endless torment running through Anselm's principle needs another ground.
-- The models that make the penalty finite stay standing. [[Jonathan Kvanvig]] argues against a retributive model and for love as the divine motivation,[^kvanvig-1993] as Ragland's *Internet Encyclopedia of Philosophy* entry on Hell describes it.[^ragland-iep]
-- So does annihilationism, or conditional immortality, on which the penalty is destruction rather than unending torment. [[Edward Fudge]] argues it in *The Fire That Consumes*, which Richard Bauckham's foreword calls the fullest exposition and defence of the view.[^fudge-2011] The Evangelical Alliance ACUTE report recognised conditional immortality as a significant minority evangelical view.[^acute-2000]
+- The models that make the penalty finite stay standing. [[Jonathan Kvanvig]] argues against a retributive model and for love as the divine motivation,[^kvanvig-1993] as [[C. P. Ragland|Ragland]]'s *Internet Encyclopedia of Philosophy* entry on Hell describes it.[^ragland-iep]
+- So does annihilationism, or conditional immortality, on which the penalty is destruction rather than unending torment. [[Edward Fudge]] argues it in *The Fire That Consumes*, which [[Richard Bauckham]]'s foreword calls the fullest exposition and defence of the view.[^fudge-2011] The Evangelical Alliance ACUTE report recognised conditional immortality as a significant minority evangelical view.[^acute-2000]
 - Both exits need a reading of [Matthew 25:46](https://www.biblegateway.com/passage/?search=Matthew%2025:46&version=NIV), where the adjective αἰώνιον stands in the same construction over the punishment and over the life.
 
 # Disputed By

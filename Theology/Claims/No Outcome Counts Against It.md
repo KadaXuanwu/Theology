@@ -33,7 +33,7 @@ The objection is still in working use. [[Michiel van Elk]] objects to a recent s
 
 # Disputed By
 - Needs writing, and this section is the reason the node is a draft rather than sourced. Three real replies exist and none of them is checked yet.
-- Falsifiability failed as a line between science and everything else. The demarcation project is not the consensus position in current philosophy of science, and Larry Laudan's paper is the one usually cited for that.[^laudan-1983] If it holds, the Popper framing above has to go and the Bayesian framing has to carry the node on its own.
+- Falsifiability failed as a line between science and everything else. The demarcation project is not the consensus position in current philosophy of science, and [[Larry Laudan]]'s paper is the one usually cited for that.[^laudan-1983] If it holds, the Popper framing above has to go and the Bayesian framing has to carry the node on its own.
 - No claim is tested alone. On the point Duhem and Quine press, any prediction depends on a bundle of background assumptions, so a failed prediction never tells you which member of the bundle to give up. Adding an auxiliary assumption to save a theory is something every working science does, which means the escape clause cannot be illegitimate merely for being an escape clause. What is needed is a rule separating a principled auxiliary from an ad hoc one, and that rule is the whole difficulty.
 - Unfalsifiable is not the same as unsupported. Historical and existence claims often rule nothing out about the future yet are still settled by evidence.
 

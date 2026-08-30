@@ -19,7 +19,7 @@ Philosophers call this case non-resistant non-belief, meaning unbelief that does
 - [John 9:41](https://www.biblegateway.com/passage/?search=John%209:41&version=NIV) and [John 15:22,24](https://www.biblegateway.com/passage/?search=John%2015:22,24&version=NIV) guilt tracks what a person was given.
 - Aquinas writes on unbelief in "those who have heard nothing about the faith".[^aquinas-st-ii-ii-10] *Lumen Gentium* and the Catechism at §847 and §1260 run against §846, which conditions condemnation on knowing and refusing.[^lumen-gentium][^catechism]
 - [[No Finite Life Deserves Infinite Punishment]] carries the size half, with [[Marilyn McCord Adams|Adams]] on why guilt tracks the offender rather than the one offended.
-- [[Some Unbelief Isn't Resistance]] carries the honesty half, including where Schellenberg's term actually comes from.
+- [[Some Unbelief Isn't Resistance]] carries the honesty half, including where [[J. L. Schellenberg|Schellenberg]]'s term actually comes from.
 - [[Demanding Belief Without the Proof]] supplies what the person was working with, and [[God Is Brutal and Not Merciful]] one route to an honest no.
 
 # Countered By

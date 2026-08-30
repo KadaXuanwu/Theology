@@ -21,7 +21,7 @@ The encyclopedia lists the cases in view: honest seekers, members of cultures wi
 
 # Carries
 - It supplies the existence premise the hiddenness problem needs and reaches no further. Blanton notes the argument needs only one such person.
-- What follows from it is contested by people who grant it. Michael Rea's *The Hiddenness of God* goes after the assumption that divine love must resemble idealised human love.[^rea-2018] Charity Anderson's review reports his line as divine love being perfect love without being ideal love.[^anderson-2019]
+- What follows from it is contested by people who grant it. [[Michael Rea]]'s *The Hiddenness of God* goes after the assumption that divine love must resemble idealised human love.[^rea-2018] [[Charity Anderson]]'s review reports his line as divine love being perfect love without being ideal love.[^anderson-2019]
 - If some unbelief is not a refusal, treating every case as a refusal misdescribes those people, which is where this meets [[No Finite Life Deserves Infinite Punishment]].
 
 # Disputed By

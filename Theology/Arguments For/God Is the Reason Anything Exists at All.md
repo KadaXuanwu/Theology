@@ -18,7 +18,7 @@ What the argument reaches for is a being that could not have failed to exist, wi
 
 # Countered By
 - [[God of the Gaps]] is the argument this one answers.
-- The strong counter is [[Herman Philipse]], who argues that theism has no significant predictive power.[^philipse-2012] Andrew Pinsent's review notes it is ambiguous whether Philipse is attacking proofs of a first cause or an expanded understanding of God that includes personal attributes, which is the distinction this node runs on.
+- The strong counter is [[Herman Philipse]], who argues that theism has no significant predictive power.[^philipse-2012] [[Andrew Pinsent]]'s review notes it is ambiguous whether Philipse is attacking proofs of a first cause or an expanded understanding of God that includes personal attributes, which is the distinction this node runs on.
 - [[Gregory W. Dawes|Gregory Dawes]] grants that divine action could in principle explain something, then argues it scores badly on ordinary explanatory virtues.[^dawes-2009]
 - [[Graham Oppy]] argues theism moves the unexplained fact rather than removing it, since God's choice to create this universe rather than another is itself contingent.[^oppy-2006] [[Edward Feser]] replied.[^feser-2021]
 - Even if it works it delivers a necessary being, not the God of Christianity. Kant argued that the step from a necessary being to God relies on the ontological argument, and the Stanford Encyclopedia notes that a recent version of the argument reaches "a very powerful and intelligent designer-creator, not the all-perfect God of [[Anselm]]". This concedes the point about gaps and still leaves the argument short of the creed.
