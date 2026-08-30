@@ -30,7 +30,7 @@ Any other status has no limit, and neither does a person node. A person node run
 
 A name a reader does not already know tells them nothing. A person named in the prose links to their node in `People/`, and the site shows who they are on hover, so the prose spends no words on it. A name that appears only in a footnote citation stays a footnote: Metzger cited once for a manuscript point is not a node.
 
-Where the person has no node yet, gloss them in a clause on first mention and report the missing node in the delivery. "Thomas Aquinas, the 13th century theologian behind the *Summa Theologiae*". "The Second Vatican Council, the assembly of Catholic bishops that met from 1962 to 1965." Later mentions in the same node use the short form.
+Where the person has no node yet, gloss them in a clause on first mention and report the missing node in the delivery. "Thomas Aquinas, the 13th century theologian behind the *Summa theologiae*". "The Second Vatican Council, the assembly of Catholic bishops that met from 1962 to 1965." Later mentions in the same node use the short form.
 
 A clause is the budget for anything that is not a person: councils, documents, institutions.
 

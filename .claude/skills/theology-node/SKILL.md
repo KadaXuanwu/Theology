@@ -1,6 +1,6 @@
 ---
 name: theology-node
-description: Research, write and fact check nodes for the Theology vault (Arguments For, Arguments Against, Claims, Evidence). Use when the user asks to create a new theology node, rework an existing one, add sources to a node, check a node for accuracy, or turn rough notes on a religious argument into a sourced node. Runs a multi agent research and verification pipeline.
+description: Research, write and fact check nodes for the Theology vault (Arguments For, Arguments Against, Claims, Evidence, People). Use when the user asks to create a new theology node, rework an existing one, add sources to a node, check a node for accuracy, or turn rough notes on a religious argument into a sourced node. Runs a multi agent research and verification pipeline.
 ---
 
 # Theology Node
