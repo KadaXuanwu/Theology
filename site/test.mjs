@@ -1918,6 +1918,36 @@ console.log("a preview waits to be asked for")
   )
 }
 
+console.log("a reference marker sits at the end of what it supports")
+{
+  const { readdir } = await import("node:fs/promises")
+  const vault = resolve(repoRoot, "Theology")
+  const folders = (await readdir(vault, { withFileTypes: true })).filter((e) => e.isDirectory())
+  const stray = []
+
+  for (const folder of folders) {
+    const files = (await readdir(resolve(vault, folder.name))).filter(
+      (f) => f.endsWith(".md") && !f.startsWith("_"),
+    )
+    for (const file of files) {
+      const lines = (await readFile(resolve(vault, folder.name, file), "utf8")).split(/\r?\n/)
+      lines.forEach((line, i) => {
+        if (line.startsWith("[^")) return // the citation itself, not a marker
+        for (const match of line.matchAll(/\[\^[^\]]+\]/g)) {
+          const before = line.slice(0, match.index).trimEnd()
+          // A marker belongs after the punctuation that closes the thought it
+          // supports. Dropped mid-sentence it reads as a number welded into the
+          // prose, which is exactly what moving citations out was meant to fix.
+          if (!before || /[.,;:!?"'\)\]]$/.test(before)) return
+          stray.push(`${file}:${i + 1} ...${before.slice(-45)}${match[0]}`)
+        }
+      })
+    }
+  }
+
+  check("no marker interrupts a sentence", stray.length === 0, stray.slice(0, 5).join("  |  "))
+}
+
 console.log("a citation is written once and pointed at")
 {
   const { extractFootnotes } = await import("./lib/markdown.mjs")
