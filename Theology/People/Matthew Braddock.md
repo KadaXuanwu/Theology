@@ -12,7 +12,7 @@ Matthew Braddock is a philosopher at the University of Tennessee at Martin who w
 
 # Work
 - "An Evidential Argument for Theism from the Cognitive Science of Religion", in *New Developments in the Cognitive Science of Religion* (2018), 171–198.[^philpeople-braddock]
-- "Natural Nonbelief in God: Prehistoric Humans, Divine Hiddenness, and Debunking", in *Evolutionary Debunking Arguments* (2023), 160–184.[^philpeople-braddock]
+- "Natural Nonbelief in God: Prehistoric Humans, Divine Hiddenness, and Debunking", in *Evolutionary Debunking Arguments* (2022), 160–184.[^philpeople-braddock]
 - "Resuscitating the Common Consent Argument for Theism", *International Journal for Philosophy of Religion* 93/3 (2023), 189–210.[^philpeople-braddock]
 
 # Stated Position

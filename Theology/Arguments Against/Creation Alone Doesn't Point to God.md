@@ -52,7 +52,7 @@ The instinct half of that holds up. [[Kelemen 2004]] shows the purpose bias appe
 - [[Blame Belongs to the Parent, Not the Child]]
 - [[God of the Gaps]]
 
-[^fales-2003]: Evan Fales, *Noûs* 37/2 (2003), 353–370.
+[^fales-2003]: Evan Fales, "Alvin Plantinga's *Warranted Christian Belief*", *Noûs* 37/2 (2003), 353–370.
 [^fitzmyer-1993]: Joseph Fitzmyer, *Romans*, Anchor Bible 33 (Doubleday, 1993).
 [^calvin-romans]: John Calvin, *Commentary on Romans*, on 1:20.
 [^calvin-institutes]: John Calvin, *Institutes of the Christian Religion* I.iii.
@@ -67,4 +67,4 @@ The instinct half of that holds up. [[Kelemen 2004]] shows the purpose bias appe
 [^nevins-2009]: Andrew Nevins, David Pesetsky and Cilene Rodrigues, *Language* 85/2 (2009).
 [^goncalves-2005]: Marco Antônio Gonçalves, *Current Anthropology* 46/4 (2005).
 [^braddock-2022]: Matthew Braddock, in Diego Machuca (ed.), *Evolutionary Debunking Arguments* (Routledge, 2022), 160–184.
-[^launonen-2025]: Lari Launonen, "Non-belief as self-deception?", *Religious Studies* 61 (2025), 263–279.
+[^launonen-2025]: Lari Launonen, "Non-belief as self-deception?", *Religious Studies* 61/2 (2025), 263–279.

@@ -42,7 +42,7 @@ The encyclopedia lists the cases in view: honest seekers, members of cultures wi
 [^schellenberg-2007]: J. L. Schellenberg, *The Wisdom to Doubt* (Cornell University Press, 2007).
 [^schellenberg-2015]: J. L. Schellenberg, *The Hiddenness Argument* (Oxford University Press, 2015).
 [^sep-hiddenness]: Daniel Howard-Snyder and Adam Green, ["Hiddenness of God"](https://plato.stanford.edu/entries/divine-hiddenness/), *Stanford Encyclopedia of Philosophy*, revised 8 July 2022.
-[^launonen-2025]: Lari Launonen, "Non-belief as self-deception?", *Religious Studies* 61 (2025), 263–279, open access.
+[^launonen-2025]: Lari Launonen, "Non-belief as self-deception?", *Religious Studies* 61/2 (2025), 263–279.
 [^pew-2024]: Pew Research Center, "Religious 'Nones' in America", 24 January 2024.
 [^pew-2025]: Pew Research Center, "Why Do Some Americans Leave Their Religion While Others Stay?", 15 December 2025.
 [^bradley-2014]: David F. Bradley, [*The Reasons of Atheists/Agnostics for Nonbelief in God's Existence Scale: Development and Initial Validation*](http://rave.ohiolink.edu/etdc/view?acc_num=case1396559920), MA thesis, Department of Psychology, Case Western Reserve University, 2014.

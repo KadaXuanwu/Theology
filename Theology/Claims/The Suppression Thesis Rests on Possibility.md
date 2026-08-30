@@ -41,9 +41,9 @@ Baker-Hytch states it from inside the tradition.[^baker-hytch-2025] Of the autho
 - Launonen never calls the thesis untestable. He rejects it because it is unclear what would motivate the self deception, and because lifelong seekers and former believers are hard to explain away. He reports the move that buries theistic intuitions "too deep in the subconscious layers of the mind", at p. 268, without endorsing it.[^launonen-2025]
 - [[Cortney Hitzeman]] and [[Colin Wastell]] report that the priming effect in atheists tracked earlier exposure to religious behaviour rather than atheism itself.[^hitzeman-2017] The sharpest test here, but on 88 students.
 
-[^launonen-2025]: Lari Launonen, "Non-belief as self-deception?", *Religious Studies* 61 (2025), 263–279.
+[^launonen-2025]: Lari Launonen, "Non-belief as self-deception?", *Religious Studies* 61/2 (2025), 263–279.
 [^schellenberg-1993]: J. L. Schellenberg, *Divine Hiddenness and Human Reason* (Cornell University Press, 1993).
-[^fales-2003]: Evan Fales, *Noûs* 37/2 (2003), 353–370.
+[^fales-2003]: Evan Fales, "Alvin Plantinga's *Warranted Christian Belief*", *Noûs* 37/2 (2003), 353–370.
 [^baker-hytch-2025]: Max Baker-Hytch, "On sin-based responses to divine hiddenness", *Religious Studies* 61/3 (2025), 650–664.
 [^plantinga-wcb]: Alvin Plantinga, *Warranted Christian Belief* (Oxford University Press, 2000).
 [^rooney-2024]: James Dominic Rooney, *New Blackfriars* 105 (2024).
