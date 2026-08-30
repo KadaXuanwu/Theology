@@ -25,7 +25,7 @@ The complaint's second half, that the penalty falls on everyone regardless, is p
 - [John 20:27–28](https://www.biblegateway.com/passage/?search=John%2020:27-28&version=NIV) Thomas is offered what he asked for, and no touching is narrated. [[Raymond E. Brown|Brown]] writes at p. 1046 that Thomas comes to belief without probing the wounds, and traces the touching to later writers.[^brown-1970]
 - [Acts 9:1–2](https://www.biblegateway.com/passage/?search=Acts%209:1-2&version=NIV) has Paul breathing out murderous threats, so he is hostile when the evidence arrives. Acts 9:3–6 narrates a light and a voice; the seeing language is Luke's own at 9:17 and 26:16 and Paul's at [1 Corinthians 15:8](https://www.biblegateway.com/passage/?search=1%20Corinthians%2015:8&version=NIV), where the verb is the one used of the other resurrection appearances.
 - [Matthew 28:17](https://www.biblegateway.com/passage/?search=Matthew%2028:17&version=NIV) worship and doubt in one verse. [[Keith H. Reeves|Reeves]] argues the eleven are the subject throughout, and notes the verb for doubt occurs only twice in the New Testament, here and at Matthew 14:31 where Jesus glosses it as little faith.[^reeves-1998] The subject is contested; on either reading doubt and sight sit in one sentence.
-- The argument needs belief not to be directly chosen. Direct doxastic control is widely rejected in current epistemology, while indirect influence over what one ends up believing is uncontroversial.[^boespflug-jackson-2024] A defender of the freedom reply can grant the first and still hold that people control which evidence they seek out.
+- [[Belief Isn't Directly Chosen]] carries the premise the argument needs, and the limit on it: a defender of the freedom reply can grant that belief is not chosen and still hold that people control which evidence they seek out.
 - Source checks still open on this node are tracked in the repo under `Verification/`.
 
 # Countered By
@@ -66,7 +66,6 @@ The complaint's second half, that the penalty falls on everyone regardless, is p
 [^lumen-gentium]: *Lumen Gentium* 16 (1964).
 [^brown-1970]: Raymond E. Brown, *The Gospel According to John XIII–XXI*, Anchor Bible 29A (Doubleday, 1970).
 [^reeves-1998]: Keith H. Reeves, ["They Worshipped Him, and They Doubted: Matthew 28.17"](https://translation.bible/wp-content/uploads/2024/06/reeves-1998-they-worshipped-him-and-they-doubted-matthew-28-17.pdf), *The Bible Translator* 49/3 (1998), 344–349.
-[^boespflug-jackson-2024]: Mark Boespflug and Elizabeth Jackson, ["Doxastic Voluntarism"](https://plato.stanford.edu/entries/doxastic-voluntarism/), *Stanford Encyclopedia of Philosophy*, 1 October 2024.
 [^vaninwagen-2002]: Peter van Inwagen, "What Is the Problem of the Hiddenness of God?", in Daniel Howard-Snyder and Paul K. Moser (eds), *Divine Hiddenness: New Essays* (Cambridge University Press, 2002), 24–32. The chapter is written as a dialogue between a theist and an atheist.
 [^dumsday-2015]: Travis Dumsday, ["C. S. Lewis on the Problem of Divine Hiddenness"](https://www.anglicantheologicalreview.org/wp-content/uploads/2020/02/dumsday_97.1.pdf), *Anglican Theological Review* 97/1 (2015), 33–51, at 37 n. 8.
 [^paytas-2017]: Tyler Paytas, "God's Awful Majesty Before Our Eyes: Kant's Moral Justification for Divine Hiddenness", *Kantian Review* 22/1 (2017), 133–157.
