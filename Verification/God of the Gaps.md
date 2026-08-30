@@ -2,7 +2,7 @@
 
 Open source checks for `Theology/Arguments Against/God of the Gaps.md`. Format is in [README.md](README.md).
 
-Nine open. The first four are the ones that would change what the node says.
+Ten open. The first four are the ones that would change what the node says.
 
 ---
 
@@ -22,8 +22,8 @@ Nine open. The first four are the ones that would change what the node says.
 **Status:** open
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** E. W. Barnes, *Scientific Theory and Religion* (Cambridge University Press, 1933)
-**What the node says:** the earliest fixed use of the phrase found, on men who looked for God at the first appearance of life or mind: "They have made him God of the gaps in human knowledge."
-**What is open:** search inside hits in three separate scans, all lending restricted, all 403 on the API. No page established at all. The fuller passage circulates in secondary quotation as "Men have thought to find God at the special creation of their own species, or active when mind or life first appeared on earth. They have made him God of the gaps in human knowledge", which matches, but that is not the page either. Separately: Barnes delivered the Gifford Lectures at Aberdeen in 1927 to 1929 and the book is the 1933 printed form, so whether this sentence was spoken or added for print is unknown.
+**What the node says:** the earliest known fixed use of the phrase, on men who looked for God at the first appearance of life or mind: "They have made him God of the gaps in human knowledge."
+**What is open:** two things. First, "earliest known" rests on what this pipeline searched, not on a source that dates the phrase, and nobody cited here calls Barnes the first. The node used to read "the earliest fixed use found here", which said the same thing in process language, so the hedge was moved to this entry on 30 August 2026 and the node now says "earliest known". Second, the page. Search inside hits in three separate scans, all lending restricted, all 403 on the API. No page established at all. The fuller passage circulates in secondary quotation as "Men have thought to find God at the special creation of their own species, or active when mind or life first appeared on earth. They have made him God of the gaps in human knowledge", which matches, but that is not the page either. Separately: Barnes delivered the Gifford Lectures at Aberdeen in 1927 to 1929 and the book is the 1933 printed form, so whether this sentence was spoken or added for print is unknown.
 **What would settle it:** the 1933 Cambridge printing in hand. Page, and whether the sentence appears in the delivered lectures.
 **Verdict:**
 **Checked by:**
@@ -109,5 +109,17 @@ Nine open. The first four are the ones that would change what the node says.
 **What the node says:** McKie called the Wöhler urea story a legend. Legare and colleagues report natural and supernatural explanations coexisting in the same people, the supernatural ones often growing with age. Torrance is not cited.
 **What is open:** McKie's claim is carried by his own title, so the risk is low, but the article was not read. Legare is a review rather than a single study and both halves of the claim are verbatim in the abstract, but the body was not read. Torrance argues that the god of the gaps reading of Newton is a caricature originating with Leibniz, and that Newton "never points to God as the direct cause of any specific physical processes"; only the abstract was reached, so she is left out of a node whose central example is Newton.
 **What would settle it:** any of the three. Torrance is the one that could change the node, since she bears directly on the worked example.
+**Verdict:**
+**Checked by:**
+
+---
+
+### V10. Drummond does not use the fixed phrase
+**Status:** open
+**Node:** `Arguments Against/God of the Gaps`
+**Source:** Henry Drummond, *The Lowell Lectures on the Ascent of Man* (James Pott, 1894), ch. X, p. 333
+**What the node says:** "Drummond never writes the fixed phrase in the book." The two quotations around it, on reverent minds scanning for gaps and on where we shall be when the gaps are filled up, were read at full access and are exact.
+**What is open:** a negative claim about a whole book. The basis was a full text search of an 1894 printing which returned no hit for the fixed phrase, and that sentence used to sit in the node itself before being moved here on 30 August 2026. Which scan was searched is not recorded, OCR misses are possible, and the 1894 James Pott printing is one of several. Kojonen naming Drummond as the earliest known English source of the criticism is consistent with this but does not settle the wording either way.
+**What would settle it:** a clean text of the 1894 edition searched for "God of the gaps" and near variants, or a scholar stating that the fixed phrase is not Drummond's.
 **Verdict:**
 **Checked by:**
