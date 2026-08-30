@@ -5,7 +5,9 @@ born: 7 November 1832, Homer, New York
 died: 4 November 1918, Ithaca, New York
 location: Cornell University, Ithaca, and the University of Michigan, Ann Arbor
 status: sourced
-tags: [history-of-science, conflict-thesis]
+tags:
+  - history-of-science
+  - conflict-thesis
 ---
 # Description
 Andrew Dickson White was a historian, the first president of Cornell, and a United States minister to Germany and Russia. His two volume history of the warfare of science with theology is one of the two books the conflict thesis rests on.[^britannica-white]

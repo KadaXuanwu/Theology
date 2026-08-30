@@ -5,7 +5,9 @@ born: 13 March 1733, Birstall Fieldhead, near Leeds
 died: 6 February 1804, Northumberland, Pennsylvania
 location: Birmingham, Leeds, Warrington, London and Pennsylvania
 status: sourced
-tags: [science-and-religion, unitarian]
+tags:
+  - science-and-religion
+  - unitarian
 ---
 # Description
 Joseph Priestley was a chemist and a dissenting minister who isolated oxygen and wrote the standard history of electricity. He was a Unitarian who denied the Trinity, the atonement and Christ's divinity while arguing for Christianity itself.[^britannica-priestley][^iep-priestley]

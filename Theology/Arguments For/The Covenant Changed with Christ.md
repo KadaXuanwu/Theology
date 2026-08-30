@@ -1,7 +1,10 @@
 ---
 type: argument
 status: drafted
-tags: [covenant, conquest, new-testament]
+tags:
+  - covenant
+  - conquest
+  - new-testament
 ---
 # Description
 The Bible presents the old covenant as a stage that Christ ends and replaces, not as God changing his mind. Under the new terms, judgment is God's alone and is held back until the end, while people are told to love enemies rather than remove them. This is why the conquest commands are not treated as a standing rule by any later biblical writer.

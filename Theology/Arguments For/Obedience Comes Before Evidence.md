@@ -1,7 +1,10 @@
 ---
 type: argument
 status: drafted
-tags: [hiddenness, epistemology, faith]
+tags:
+  - hiddenness
+  - epistemology
+  - faith
 ---
 # Description
 The order runs obedience first, confirmation after. Peter has fished all night and caught nothing. Jesus tells him to put out again. Peter is a career fisherman, says so plainly, and lets the nets down anyway on the strength of who is asking. The catch follows the obedience, not the other way round.

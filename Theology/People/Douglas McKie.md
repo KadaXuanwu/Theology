@@ -5,7 +5,8 @@ born: 15 July 1896, Tredegar, Monmouthshire
 died: 28 August 1967, London
 location: University College London
 status: sourced
-tags: [history-of-science]
+tags:
+  - history-of-science
 ---
 # Description
 Douglas McKie was a historian of chemistry at University College London, where he held the chair in history and philosophy of science from 1957. He co-founded *Annals of Science* and edited it until his death.[^acs-mckie]

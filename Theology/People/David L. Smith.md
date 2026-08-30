@@ -4,7 +4,8 @@ kind: historian
 born: 1963
 location: Selwyn College, Cambridge
 status: sourced
-tags: [history]
+tags:
+  - history
 ---
 # Description
 David L. Smith is a historian of seventeenth century Britain, a fellow of Selwyn College, Cambridge, since 1988. He works on parliaments, the constitution and the civil wars.[^selwyn-smith][^ca-smith]

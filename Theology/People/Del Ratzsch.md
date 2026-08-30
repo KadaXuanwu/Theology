@@ -4,7 +4,9 @@ kind: philosopher
 born: 1945
 location: Calvin University, Grand Rapids, Michigan
 status: sourced
-tags: [philosophy-of-science, design]
+tags:
+  - philosophy-of-science
+  - design
 ---
 # Description
 Del Ratzsch is a philosopher of science, emeritus at Calvin University, who works on design arguments and on the limits of what natural science settles.[^calvin-ratzsch][^loc-ratzsch]

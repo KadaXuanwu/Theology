@@ -3,7 +3,9 @@ type: person
 kind: philosopher
 location: Palm Beach Atlantic University, Florida
 status: sourced
-tags: [apologetics, conquest]
+tags:
+  - apologetics
+  - conquest
 ---
 # Description
 Paul Copan is a philosopher at Palm Beach Atlantic University, where he holds the Pledger Family chair in philosophy and ethics. He works on the moral objections to the Old Testament and on the conquest texts.[^pba-copan][^copan-cv]

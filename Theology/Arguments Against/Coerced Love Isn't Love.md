@@ -1,7 +1,10 @@
 ---
 type: argument
 status: stub
-tags: [free-will, hell, love]
+tags:
+  - free-will
+  - hell
+  - love
 ---
 # Description
 God claims to give us free will so our love for him can be freely chosen, since forced love is not love. Yet he frames the choice as love me or be punished forever. A decision made under threat of eternal torment is not free, it is coerced. The ultimatum cancels out the very freedom that was supposed to make real love possible.

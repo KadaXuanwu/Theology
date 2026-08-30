@@ -3,7 +3,9 @@ type: person
 kind: philosopher
 location: Saint Louis University
 status: sourced
-tags: [hell, philosophy-of-religion]
+tags:
+  - hell
+  - philosophy-of-religion
 ---
 # Description
 C. P. Ragland is a philosopher at Saint Louis University, where he chairs the department. Most of his work is on Descartes, and a second strand is on hell and divine justice.[^slu-ragland]

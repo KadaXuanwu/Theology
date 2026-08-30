@@ -4,7 +4,9 @@ kind: biblical scholar
 born: 1957
 location: University of Evansville, Indiana
 status: sourced
-tags: [new-testament, resurrection]
+tags:
+  - new-testament
+  - resurrection
 ---
 # Description
 James Ware is a New Testament scholar, emeritus at the University of Evansville, who works on Paul and on the resurrection texts.[^evansville-ware][^loc-ware]

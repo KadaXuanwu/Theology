@@ -1,7 +1,9 @@
 ---
 type: claim
 status: drafted
-tags: [psychology, cognitive-science-of-religion]
+tags:
+  - psychology
+  - cognitive-science-of-religion
 ---
 # Description
 Human minds reach for agents and purpose by default. People see intent behind ambiguous events, and children explain natural things by what they are for. This is a claim about how minds work, not about whether anything is out there.

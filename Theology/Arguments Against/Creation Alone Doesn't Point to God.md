@@ -1,7 +1,10 @@
 ---
 type: argument
 status: sourced
-tags: [hiddenness, natural-theology, anthropology]
+tags:
+  - hiddenness
+  - natural-theology
+  - anthropology
 ---
 # Description
 [Romans 1:20](https://www.biblegateway.com/passage/?search=Romans%201:20&version=NIV) says God's eternal power and divine nature have been clear from what he made, so people are without excuse. The weight sits on availability: the evidence is there, so ignorance is no defence.

@@ -4,7 +4,9 @@ kind: philosopher
 born: 1959
 location: Mount Saint Vincent University, Halifax
 status: sourced
-tags: [hiddenness, nonbelief]
+tags:
+  - hiddenness
+  - nonbelief
 ---
 # Description
 J. L. Schellenberg is a philosopher at Mount Saint Vincent University in Halifax. The hiddenness argument is his, and so is the term non-resistant non-belief that the vault's material on honest unbelief turns on.[^schellenberg-site]

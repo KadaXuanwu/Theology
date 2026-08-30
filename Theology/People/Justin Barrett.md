@@ -4,7 +4,9 @@ kind: psychologist
 born: 1971
 location: Blueprint 1543, and the University of St Andrews
 status: sourced
-tags: [cognition, agency-detection]
+tags:
+  - cognition
+  - agency-detection
 ---
 # Description
 Justin Barrett is a psychologist working in the cognitive science of religion, founder of Blueprint 1543 and an honorary professor at St Andrews. He was at Oxford's Institute of Cognitive and Evolutionary Anthropology and then Fuller Theological Seminary.[^standrews-barrett][^loc-barrett]

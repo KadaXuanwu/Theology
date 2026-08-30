@@ -3,7 +3,9 @@ type: person
 kind: psychologist
 location: Macquarie University, Sydney
 status: sourced
-tags: [psychology, nonbelief]
+tags:
+  - psychology
+  - nonbelief
 ---
 # Description
 Colin Wastell is a psychologist at Macquarie University, where he founded the counselling psychology programme. His research is on reasoning, including the implicit reasoning behind religious and non-religious belief.[^conversation-wastell]

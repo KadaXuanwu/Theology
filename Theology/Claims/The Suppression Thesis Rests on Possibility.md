@@ -1,7 +1,10 @@
 ---
 type: claim
 status: sourced
-tags: [hiddenness, natural-theology, epistemology]
+tags:
+  - hiddenness
+  - natural-theology
+  - epistemology
 ---
 # Description
 [Romans 1:18](https://www.biblegateway.com/passage/?search=Romans%201:18&version=NIV) says people suppress the truth by their wickedness. Taken as a general account of unbelief, that gives what [[Lari Launonen]] labels the suppression thesis: "the theological claim that theistic non-belief results from culpable mistreatment of one's knowledge of God".[^launonen-2025] [[Max Baker-Hytch]] calls the wider family sin-based accounts, and separates universal ones, where every case of unbelief is sinful resistance, from partial ones.

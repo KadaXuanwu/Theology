@@ -4,7 +4,9 @@ kind: philosopher
 born: 21 April 1955
 location: Houston Christian University, and Asbury Theological Seminary, Kentucky
 status: sourced
-tags: [hell, heaven]
+tags:
+  - hell
+  - heaven
 ---
 # Description
 Jerry Walls is a philosopher who taught at Asbury Theological Seminary from 1987 and then at Houston Christian University until his retirement in 2025. His trilogy on hell, heaven and purgatory is the standard analytic treatment of the free choice reading of damnation.[^wiki-walls][^loc-walls]

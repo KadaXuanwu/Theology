@@ -5,7 +5,9 @@ born: c. 1225, Aquino
 died: 7 March 1274, Fossanova
 location: Paris, Cologne, Rome, Naples
 status: sourced
-tags: [catholic, scholasticism]
+tags:
+  - catholic
+  - scholasticism
 ---
 # Description
 Thomas Aquinas was an Italian Dominican friar who held a chair of theology at Paris and taught in Cologne, Rome and Naples. Robert Pasnau calls him the greatest figure of thirteenth century Europe in philosophy and theology.[^pasnau-sep]

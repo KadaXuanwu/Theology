@@ -4,7 +4,9 @@ kind: philosopher
 born: 13 May 1951, The Hague
 location: Utrecht University, and Leiden University
 status: sourced
-tags: [atheism, philosophy-of-religion]
+tags:
+  - atheism
+  - philosophy-of-religion
 ---
 # Description
 Herman Philipse is a philosopher, emeritus at Utrecht, who held a chair at Leiden from 1985 to 2003. *God in the Age of Science?* argues that religious belief fails as an explanation on the standards used everywhere else.[^utrecht-philipse][^leiden-philipse]

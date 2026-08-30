@@ -4,7 +4,9 @@ kind: physicist
 born: 27 June 1974
 location: Brick Court Chambers, London, and the Ian Ramsey Centre, University of Oxford
 status: sourced
-tags: [divine-action, science-and-religion]
+tags:
+  - divine-action
+  - science-and-religion
 ---
 # Description
 Nicholas Saunders studied physics and theology, worked at CERN and lectured at Cambridge before becoming a barrister in London. *Divine Action and Modern Science* is his one monograph, and its conclusion is that the quantum route to divine action does not work.[^brickcourt-saunders][^ramsey-saunders]

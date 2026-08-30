@@ -3,7 +3,9 @@ type: person
 kind: philosopher
 location: University of Otago, Dunedin
 status: sourced
-tags: [naturalism, philosophy-of-science]
+tags:
+  - naturalism
+  - philosophy-of-science
 ---
 # Description
 Gregory W. Dawes is a philosopher at the University of Otago, appointed jointly in philosophy and religion. He defends a naturalism that is provisional and answerable to evidence rather than assumed, and keeps it apart from the procedural rule that science does not appeal to the supernatural.[^otago-dawes]

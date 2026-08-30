@@ -4,7 +4,9 @@ kind: anthropologist
 born: 1960
 location: Federal University of Rio de Janeiro
 status: sourced
-tags: [anthropology, amazonia]
+tags:
+  - anthropology
+  - amazonia
 ---
 # Description
 Marco Antônio Gonçalves is an anthropologist at the Federal University of Rio de Janeiro. *O mundo inacabado* is his ethnography of the Pirahã, and he wrote the Pirahã entry in the Instituto Socioambiental encyclopedia.[^ufrj-goncalves][^isa-piraha]

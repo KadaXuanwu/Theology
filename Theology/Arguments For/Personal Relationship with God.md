@@ -1,7 +1,9 @@
 ---
 type: argument
 status: stub
-tags: [experience, epistemology]
+tags:
+  - experience
+  - epistemology
 ---
 # Description
 The best way to confirm that Christianity is true is by experiencing it by yourself, be that through miracles, prayer, and by experiencing a personal relationship with God. Starting this relationship requires a "leap of faith".

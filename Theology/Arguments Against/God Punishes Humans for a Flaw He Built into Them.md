@@ -1,7 +1,10 @@
 ---
 type: argument
 status: drafted
-tags: [sin, free-will, genesis]
+tags:
+  - sin
+  - free-will
+  - genesis
 ---
 # Description
 God created humans inherently incapable of avoiding sin, then punished them for sinning, and despite seeing this fail with the first humans, never revised the design. This points to either incompetence or injustice, not the wisdom and goodness attributed to him.

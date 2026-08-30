@@ -4,7 +4,9 @@ kind: biblical scholar
 born: 1953
 location: Trinity Lutheran Seminary, Columbus, Ohio
 status: sourced
-tags: [new-testament, historical-jesus]
+tags:
+  - new-testament
+  - historical-jesus
 ---
 # Description
 Mark Allan Powell is a New Testament scholar who taught at Trinity Lutheran Seminary from 1987 until 2018 and held its Leatherman chair. He works on narrative criticism and on the historical Jesus.[^loc-powell][^workingpreacher-powell]

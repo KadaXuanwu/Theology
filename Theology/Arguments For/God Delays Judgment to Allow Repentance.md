@@ -1,7 +1,10 @@
 ---
 type: argument
 status: drafted
-tags: [judgment, mercy, old-testament]
+tags:
+  - judgment
+  - mercy
+  - old-testament
 ---
 # Description
 Judgment in the Bible arrives after long warning and is called off when people change. God is described as preferring repentance over punishment, which makes the harsh outcomes late rather than quick or impulsive.

@@ -4,7 +4,9 @@ kind: philosopher
 born: 1943
 location: University of Iowa, Iowa City
 status: sourced
-tags: [philosophy-of-religion, epistemology]
+tags:
+  - philosophy-of-religion
+  - epistemology
 ---
 # Description
 Evan Fales is a philosopher, emeritus at the University of Iowa, who works on causation, perception and religious experience. He is one of the standing critics of Plantinga's reformed epistemology.[^iowa-fales][^loc-fales]

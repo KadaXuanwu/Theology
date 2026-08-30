@@ -3,7 +3,9 @@ type: person
 kind: psychologist
 location: Coventry University, the University of Oxford, and the Center of Theological Inquiry, Princeton
 status: sourced
-tags: [psychology, religious-belief]
+tags:
+  - psychology
+  - religious-belief
 ---
 # Description
 Jonathan Jong is a psychologist of religion who works on death anxiety and belief, and an Anglican priest. He now publishes as Jonathan Lewis-Jong.[^jong-site][^newatlantis-jong]

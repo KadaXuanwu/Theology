@@ -3,7 +3,9 @@ type: person
 kind: philosopher
 location: Baylor University, Waco, Texas
 status: sourced
-tags: [hiddenness, epistemology]
+tags:
+  - hiddenness
+  - epistemology
 ---
 # Description
 Charity Anderson is a philosopher at Baylor University who works on evidence and on divine hiddenness. Her position is that the evidential force of hiddenness is weaker than the argument needs.[^baylor-anderson]

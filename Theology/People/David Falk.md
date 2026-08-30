@@ -3,7 +3,9 @@ type: person
 kind: Egyptologist
 location: University of British Columbia and Vancouver School of Theology, Vancouver
 status: sourced
-tags: [egypt, archaeology]
+tags:
+  - egypt
+  - archaeology
 ---
 # Description
 David Falk is an Egyptologist who works on ancient Egyptian ritual objects and on the Egyptian background to the Hebrew Bible. He took his doctorate at Liverpool and holds posts at the University of British Columbia and the Vancouver School of Theology.[^hendrickson-falk]

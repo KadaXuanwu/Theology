@@ -5,7 +5,8 @@ born: 1 April 1874
 died: 29 November 1953, Sussex
 location: Trinity College, Cambridge, and the Diocese of Birmingham
 status: sourced
-tags: [science-and-religion]
+tags:
+  - science-and-religion
 ---
 # Description
 Ernest William Barnes was a Cambridge mathematician who became Bishop of Birmingham in 1924 and held the see until 1952. His Gifford Lectures at Aberdeen were printed in 1933 as *Scientific Theory and Religion*, which carries the earliest known fixed use of the phrase god of the gaps.[^mactutor-barnes][^gifford-barnes]

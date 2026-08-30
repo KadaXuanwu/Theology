@@ -5,7 +5,8 @@ born: 24 April 1933, Boston
 died: 9 July 2015, Sturgeon Bay, Wisconsin
 location: University of Chicago, Field Museum of Natural History, University of Rochester
 status: sourced
-tags: [science]
+tags:
+  - science
 ---
 # Description
 David Raup was a palaeontologist who worked on extinction and on what the fossil record can and cannot show about it. He taught at Rochester and Chicago and was dean of science at the Field Museum.[^uchicago-raup]

@@ -3,7 +3,9 @@ type: person
 kind: anthropologist
 location: Washington University in St Louis
 status: sourced
-tags: [cognition, anthropology]
+tags:
+  - cognition
+  - anthropology
 ---
 # Description
 Pascal Boyer is an anthropologist and cognitive scientist at Washington University in St Louis, with earlier posts at the CNRS in Lyon and at King's College, Cambridge. *Religion Explained* is the standard statement of the case that religious concepts spread because they fit how minds already work.[^boyer-cv][^amacad-boyer]

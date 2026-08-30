@@ -4,7 +4,9 @@ kind: anthropologist
 born: 1941
 location: Fordham University, New York
 status: sourced
-tags: [anthropology, agency-detection]
+tags:
+  - anthropology
+  - agency-detection
 ---
 # Description
 Stewart Guthrie is an anthropologist, emeritus at Fordham University. *Faces in the Clouds* is the case that religion is a by-product of anthropomorphism, the habit of reading human agency into the world.[^fordham-guthrie][^loc-guthrie]

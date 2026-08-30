@@ -4,7 +4,9 @@ kind: physician
 died: 1684
 location: London, and Bethlem Hospital
 status: sourced
-tags: [royal-touch, medicine]
+tags:
+  - royal-touch
+  - medicine
 ---
 # Description
 Thomas Allen was a physician at Bethlem Hospital and physician in ordinary to Charles II. The 1665 pamphlet on the royal hand is attributed to him, though the attribution rests on later secondary sources.[^munk-allen][^wellcome-allen]

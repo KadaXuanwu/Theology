@@ -3,7 +3,9 @@ type: person
 kind: anthropologist
 location: Department of Archaeology and Anthropology, University of Cambridge
 status: sourced
-tags: [anthropology, foragers]
+tags:
+  - anthropology
+  - foragers
 ---
 # Description
 Hervey C. Peoples is a molecular geneticist and evolutionary anthropologist who worked at Cambridge with Frank W. Marlowe. She is lead author of the survey of religion across forager societies that the vault's material on animism rests on.[^peoples-site][^peoples-2016]

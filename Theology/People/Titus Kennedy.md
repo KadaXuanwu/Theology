@@ -3,7 +3,9 @@ type: person
 kind: archaeologist
 location: Discovery Institute, Seattle, and Biola University, La Mirada, California
 status: sourced
-tags: [archaeology, bible]
+tags:
+  - archaeology
+  - bible
 ---
 # Description
 Titus Kennedy is an archaeologist who writes on the archaeology of the biblical world. He is a research fellow at the Discovery Institute's Center for Science and Culture and an adjunct professor at Biola University.[^discovery-kennedy]

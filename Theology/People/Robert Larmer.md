@@ -4,7 +4,9 @@ kind: philosopher
 born: 1954
 location: University of New Brunswick, Fredericton
 status: sourced
-tags: [miracles, gaps]
+tags:
+  - miracles
+  - gaps
 ---
 # Description
 Robert Larmer is a philosopher at the University of New Brunswick who works on miracles and on divine agency. His argument is that god of the gaps reasoning is not automatically fallacious, and that the progress of science could in principle widen a gap rather than close it.[^unb-larmer][^larmer-2002]

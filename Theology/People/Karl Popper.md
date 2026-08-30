@@ -5,7 +5,9 @@ born: 28 July 1902, Vienna
 died: 17 September 1994, Croydon
 location: the London School of Economics, and Canterbury University College, Christchurch
 status: sourced
-tags: [philosophy-of-science, falsification]
+tags:
+  - philosophy-of-science
+  - falsification
 ---
 # Description
 Karl Popper was a philosopher of science who spent the war years in New Zealand and then held the chair in logic and scientific method at the London School of Economics from 1949 to 1969. Falsifiability is his, and so is most of what the vault says about what makes a claim testable.[^britannica-popper][^sep-popper]

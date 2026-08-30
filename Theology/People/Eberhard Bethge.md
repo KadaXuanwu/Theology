@@ -5,7 +5,9 @@ born: 28 August 1909, Warchau
 died: 18 March 2000, Wachtberg
 location: Finkenwalde, Berlin, London, and the University of Bonn
 status: sourced
-tags: [theology, confessing-church]
+tags:
+  - theology
+  - confessing-church
 ---
 # Description
 Eberhard Bethge was a German theologian, one of the first ordinands under Bonhoeffer at Finkenwalde, and the friend the prison letters were written to. He edited and published them, and wrote the standard biography.[^dewiki-bethge][^gnd-bethge]

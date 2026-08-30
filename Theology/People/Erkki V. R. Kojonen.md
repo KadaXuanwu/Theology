@@ -3,7 +3,9 @@ type: person
 kind: theologian
 location: University of Helsinki
 status: sourced
-tags: [design, science-and-religion]
+tags:
+  - design
+  - science-and-religion
 ---
 # Description
 Erkki V. R. Kojonen is a theologian at the University of Helsinki who works on design arguments and on how much the god of the gaps objection actually reaches. He also edits Areiopagi.[^helsinki-kojonen][^esssat-kojonen]

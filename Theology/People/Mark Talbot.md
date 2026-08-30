@@ -4,7 +4,9 @@ kind: philosopher
 born: 3 January 1950
 location: Wheaton College, Illinois
 status: sourced
-tags: [suffering, reformed]
+tags:
+  - suffering
+  - reformed
 ---
 # Description
 Mark Talbot is a philosopher, emeritus at Wheaton College, who writes on suffering and on the philosophical implications of Reformed theology.[^wheaton-talbot][^loc-talbot]

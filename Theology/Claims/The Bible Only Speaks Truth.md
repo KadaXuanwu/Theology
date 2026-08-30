@@ -1,7 +1,9 @@
 ---
 type: claim
 status: stub
-tags: [scripture, inerrancy]
+tags:
+  - scripture
+  - inerrancy
 ---
 # Description
 Everything written in the Bible is correct. Some passages, such as [Genesis 1:3–5](https://www.biblegateway.com/passage/?search=Genesis%201:3-5&version=NIV), may describe events as symbolic references rather than literal descriptions.

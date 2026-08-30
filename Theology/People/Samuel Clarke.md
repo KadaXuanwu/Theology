@@ -5,7 +5,9 @@ born: 11 October 1675, Norwich
 died: 17 May 1729, London
 location: St James's, Westminster, London, and Gonville and Caius College, Cambridge
 status: sourced
-tags: [natural-theology, newton]
+tags:
+  - natural-theology
+  - newton
 ---
 # Description
 Samuel Clarke was an English philosopher and clergyman, rector of St James's Westminster from 1709 and chaplain to Queen Anne. He answered Leibniz on Newton's behalf, and his Boyle Lectures are a standard piece of eighteenth century natural theology.[^sep-clarke][^dnb-clarke]

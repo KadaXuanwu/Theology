@@ -2,7 +2,9 @@
 type: evidence
 kind: study
 status: drafted
-tags: [anthropology, religion-origins]
+tags:
+  - anthropology
+  - religion-origins
 ---
 # Description
 A comparative study of religious traits across 33 hunter-gatherer societies, coding which beliefs are present in each and reconstructing which came first.

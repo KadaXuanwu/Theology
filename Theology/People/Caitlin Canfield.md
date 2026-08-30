@@ -3,7 +3,8 @@ type: person
 kind: psychologist
 location: NYU Grossman School of Medicine, New York
 status: sourced
-tags: [psychology]
+tags:
+  - psychology
 ---
 # Description
 Caitlin Canfield is a developmental psychologist at NYU, working on parenting, poverty and school readiness. Her one paper in the cognitive science of religion was written during her doctorate at Boston University.[^nyu-canfield][^jarnefelt-2015]

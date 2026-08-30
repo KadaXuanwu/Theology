@@ -3,7 +3,9 @@ type: person
 kind: philosopher
 location: Bethel University, St Paul, Minnesota
 status: sourced
-tags: [hell, hiddenness]
+tags:
+  - hell
+  - hiddenness
 ---
 # Description
 Raymond VanArragon is a philosopher at Bethel University in Minnesota, where he is also dean of faculty. He works on hell, on religious diversity and on whether someone could freely reject God for ever.[^bethel-vanarragon]

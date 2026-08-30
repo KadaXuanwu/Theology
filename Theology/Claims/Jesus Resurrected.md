@@ -1,7 +1,10 @@
 ---
 type: claim
 status: drafted
-tags: [historicity, jesus, resurrection]
+tags:
+  - historicity
+  - jesus
+  - resurrection
 ---
 # Description
 Three days after his crucifixion, Jesus was raised to life.

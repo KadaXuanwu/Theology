@@ -118,6 +118,18 @@ The `Description` of an argument may not link another argument. Every other sect
 
 Upward links are not written by hand. The site builds them and shows them under "Linked from", so a claim never lists the arguments that use it.
 
+## Tags
+
+An empty tag list is written `tags: []`. A list with something in it is written the way Obsidian writes it, one per line indented two spaces:
+
+```
+tags:
+  - hell
+  - justice
+```
+
+Not `tags: [hell, justice]`. Obsidian rewrites an inline list into the block form the moment the note is opened, which turns every note the vault touches into a diff nobody made.
+
 ## Field values in use
 
 - `status`: `stub`, `drafted`, `sourced`

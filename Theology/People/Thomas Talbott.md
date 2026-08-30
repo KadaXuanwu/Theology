@@ -4,7 +4,9 @@ kind: philosopher
 born: 1941
 location: Willamette University, Salem, Oregon
 status: sourced
-tags: [universalism, hell]
+tags:
+  - universalism
+  - hell
 ---
 # Description
 Thomas Talbott is a philosopher, emeritus at Willamette University, where he taught for thirty four years. *The Inescapable Love of God* is the analytic case for Christian universalism, that no one is finally lost.[^willamette-talbott][^loc-talbott]

@@ -4,7 +4,9 @@ kind: theologian
 born: 2 October 1931, Mertzwiller, Alsace
 location: Faculty of Catholic Theology, University of Strasbourg
 status: sourced
-tags: [catholic, marx]
+tags:
+  - catholic
+  - marx
 ---
 # Description
 Charles Wackenheim is a Catholic priest of the diocese of Strasbourg and was professor of fundamental theology in the university's faculty of Catholic theology from 1975 to 1992. His first book is a study of Marx's critique of religion.[^netdba-wackenheim][^idref-wackenheim]

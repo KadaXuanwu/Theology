@@ -3,7 +3,9 @@ type: person
 kind: psychologist
 location: Boston University
 status: sourced
-tags: [cognition, psychology]
+tags:
+  - cognition
+  - psychology
 ---
 # Description
 Deborah Kelemen is a psychologist at Boston University and directs its Child Cognition Laboratory. Her work is on how children and adults reason about purpose and design in nature.[^bu-kelemen]

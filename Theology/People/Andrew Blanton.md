@@ -3,7 +3,9 @@ type: person
 kind: philosopher
 location: University of Birmingham
 status: sourced
-tags: [hiddenness, nonbelief]
+tags:
+  - hiddenness
+  - nonbelief
 ---
 # Description
 Andrew Blanton is a doctoral researcher in philosophy at the University of Birmingham, working on empirically informed answers to the problem of divine hiddenness.[^birmingham-blanton]

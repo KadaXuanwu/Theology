@@ -5,7 +5,9 @@ born: 11 December 1843, Clausthal
 died: 27 May 1910, Baden-Baden
 location: the Royal Prussian Institute for Infectious Diseases, Berlin
 status: sourced
-tags: [medicine, science]
+tags:
+  - medicine
+  - science
 ---
 # Description
 Robert Koch was a German bacteriologist who identified the organisms behind anthrax, tuberculosis and cholera, and set out the postulates for showing that a microbe causes a disease. He took the 1905 Nobel Prize in Physiology or Medicine for the tuberculosis work.[^nobel-koch][^rki-koch]

@@ -5,7 +5,9 @@ born: 17 September 1948, Auburn, Washington
 died: 11 December 1995
 location: Reformed Theological Seminary, Jackson, Mississippi, and Orange County, California
 status: sourced
-tags: [presuppositionalism, reformed]
+tags:
+  - presuppositionalism
+  - reformed
 ---
 # Description
 Greg Bahnsen was a Reformed apologist and minister in the Orthodox Presbyterian Church who taught apologetics and ethics at Reformed Theological Seminary. He is the best known defender of the presuppositional argument, that Christianity has to be true for anything to be provable at all.[^opc-bahnsen]

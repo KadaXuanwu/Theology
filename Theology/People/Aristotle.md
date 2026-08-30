@@ -5,7 +5,9 @@ born: 384 BCE, Stagira
 died: 322 BCE, Chalcis
 location: Athens, Assos, Lesbos and the Macedonian court
 status: sourced
-tags: [antiquity, philosophy]
+tags:
+  - antiquity
+  - philosophy
 ---
 # Description
 Aristotle studied under Plato at the Academy, tutored Alexander, and founded the Lyceum in Athens. His explanations of weather and the sky give no god a causal role, which is why the *Meteorologica* turns up in arguments about what counts as a gap.[^sep-aristotle]

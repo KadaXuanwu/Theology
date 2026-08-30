@@ -5,7 +5,9 @@ born: 13 July 1944
 died: 25 November 2017, Houston
 location: Houston, Texas
 status: sourced
-tags: [hell, annihilationism]
+tags:
+  - hell
+  - annihilationism
 ---
 # Description
 Edward Fudge was a theologian and lawyer who made the modern case for conditional immortality, the view that the lost are destroyed rather than kept alive in torment. He preached in Churches of Christ before practising law in Houston.[^chronicle-fudge][^loc-fudge]

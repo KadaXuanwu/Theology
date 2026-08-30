@@ -5,7 +5,9 @@ born: c. AD 56
 died: c. AD 120
 location: Rome, and the province of Asia
 status: sourced
-tags: [antiquity, sources]
+tags:
+  - antiquity
+  - sources
 ---
 # Description
 Publius Cornelius Tacitus was a Roman historian, suffect consul in 97 and proconsul of Asia around 112. *Annals* 15.44 is the earliest non-Christian account of the execution of Christ under Pontius Pilate.[^britannica-tacitus]

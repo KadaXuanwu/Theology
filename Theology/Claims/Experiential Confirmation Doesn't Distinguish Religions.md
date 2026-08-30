@@ -1,7 +1,9 @@
 ---
 type: claim
 status: drafted
-tags: [epistemology, religious-experience]
+tags:
+  - epistemology
+  - religious-experience
 ---
 # Description
 "Commit first, and you will know it is true" is a method other religions run in the same form, with the same reported result. If the same procedure produces confident confirmation of incompatible claims, it can produce conviction but cannot sort true from false. Whatever the experience is worth to the person having it, it does not work as an argument to someone outside, because the identical argument is available to the person across the street.

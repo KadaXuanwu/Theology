@@ -5,7 +5,9 @@ born: 17 April 1954, Forney, Texas
 died: 25 September 2019, Athens, Georgia
 location: Harvard University, Florida State University, Durham University, and the University of Cambridge
 status: sourced
-tags: [anthropology, foragers]
+tags:
+  - anthropology
+  - foragers
 ---
 # Description
 Frank W. Marlowe was a human behavioural ecologist who spent years in the field with the Hadza of Tanzania. His work on forager societies is the base much of the comparative work on religion among hunter gatherers rests on.[^marlowe-memoriam]

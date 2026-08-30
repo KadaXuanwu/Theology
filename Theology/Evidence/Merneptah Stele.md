@@ -2,7 +2,10 @@
 type: evidence
 kind: artefact
 status: drafted
-tags: [ancient-near-east, hyperbole, archaeology]
+tags:
+  - ancient-near-east
+  - hyperbole
+  - archaeology
 ---
 # Description
 A granite victory stele of Pharaoh Merneptah, c. 1208 BCE, found at Thebes in 1896 and now in the Egyptian Museum, Cairo (JE 31408). Line 27 reads "Israel is laid waste, its seed is no more." It is the earliest known mention of Israel outside the Bible.

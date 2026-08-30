@@ -2,7 +2,9 @@
 type: evidence
 kind: study
 status: drafted
-tags: [psychology, cognitive-science-of-religion]
+tags:
+  - psychology
+  - cognitive-science-of-religion
 ---
 # Description
 [[Deborah Kelemen|Kelemen]] reviews her own and others' work showing children default to purpose-based explanations of natural things: rocks are pointy so animals won't sit on them, rain exists so plants can grow. She calls this promiscuous teleology. The paper asks whether this makes children "intuitive theists", meaning whether the bias sets them up to infer a designer, and argues the developmental evidence points that way.

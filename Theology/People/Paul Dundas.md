@@ -4,7 +4,9 @@ kind: indologist
 died: 5 April 2023
 location: University of Edinburgh
 status: sourced
-tags: [jainism, religion]
+tags:
+  - jainism
+  - religion
 ---
 # Description
 Paul Dundas was an indologist at the University of Edinburgh, where he taught Sanskrit from 1976 and later headed Asian Studies. *The Jains* is the standard English introduction to a tradition that denies a creator god and argues the point.[^soas-dundas][^edinburgh-dundas]

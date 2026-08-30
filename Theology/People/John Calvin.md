@@ -5,7 +5,9 @@ born: 10 July 1509, Noyon
 died: 27 May 1564, Geneva
 location: Geneva, Strasbourg and Basel
 status: sourced
-tags: [reformation, general-revelation]
+tags:
+  - reformation
+  - general-revelation
 ---
 # Description
 John Calvin was a French reformer who led the church in Geneva from 1541 until his death, with an earlier spell there and three years in Strasbourg. The *Institutes* and his commentary on Romans are where the vault's material on general revelation and the sense of the divine comes from.[^britannica-calvin][^loc-calvin]

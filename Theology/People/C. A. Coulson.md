@@ -5,7 +5,9 @@ born: 13 December 1910, Dudley
 died: 7 January 1974, Oxford
 location: University of Oxford, and King's College London
 status: sourced
-tags: [science-and-religion, gaps]
+tags:
+  - science-and-religion
+  - gaps
 ---
 # Description
 Charles Alfred Coulson was a theoretical chemist, Rouse Ball Professor of Mathematics at Oxford from 1952 and then its first professor of theoretical chemistry. He was an accredited Methodist lay preacher from 1929, sat on the central committee of the World Council of Churches and chaired Oxfam.[^mactutor-coulson][^kalthoff-coulson]

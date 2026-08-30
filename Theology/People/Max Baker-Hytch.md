@@ -4,7 +4,9 @@ kind: philosopher
 born: 30 July 1986
 location: Wycliffe Hall, University of Oxford
 status: sourced
-tags: [hiddenness, epistemology]
+tags:
+  - hiddenness
+  - epistemology
 ---
 # Description
 Max Baker-Hytch is a philosopher at Wycliffe Hall, Oxford, who works on religious epistemology, on the demographics of belief and on sin based accounts of non-belief.[^wycliffe-baker-hytch][^oxford-baker-hytch]

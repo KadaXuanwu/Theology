@@ -1,7 +1,9 @@
 ---
 type: argument
 status: drafted
-tags: [natural-theology, hiddenness]
+tags:
+  - natural-theology
+  - hiddenness
 ---
 # Description
 God has made himself knowable through what he created, so no one can plead total ignorance. This is called general revelation and it is distinguished from special revelation, which is scripture and Christ. The classic form of the claim is that general revelation is enough to make someone accountable but not enough to save them, which is why missions still matter. [[John Calvin|Calvin]] went further and argued for an implanted sense of God (sensus divinitatis), a stronger claim than Paul makes.

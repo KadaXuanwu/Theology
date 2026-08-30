@@ -5,7 +5,9 @@ born: 1920, Philadelphia
 died: 24 December 2016, Merion Station, Pennsylvania
 location: the Catholic University of America, Washington, and Woodstock College
 status: sourced
-tags: [new-testament, catholic]
+tags:
+  - new-testament
+  - catholic
 ---
 # Description
 Joseph Fitzmyer was a Jesuit biblical scholar and a member of the Pontifical Biblical Commission. His Anchor Bible commentaries on Luke, Romans and Acts are standard reference works.[^ncr-fitzmyer][^america-fitzmyer]

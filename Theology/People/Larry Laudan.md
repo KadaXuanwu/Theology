@@ -5,7 +5,9 @@ born: 1941, Austin, Texas
 died: 23 August 2022, Lexington, Kentucky
 location: the University of Pittsburgh, Virginia Tech, the University of Hawaii and the National Autonomous University of Mexico
 status: sourced
-tags: [philosophy-of-science, demarcation]
+tags:
+  - philosophy-of-science
+  - demarcation
 ---
 # Description
 Larry Laudan was a philosopher of science who founded the department of history and philosophy of science at Pittsburgh. His argument that no proposed criterion cleanly separates science from non-science is the standing objection to demarcation.[^laudan-obituary]

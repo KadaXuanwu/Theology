@@ -3,7 +3,9 @@ type: person
 kind: philosopher
 location: Hong Kong Baptist University
 status: sourced
-tags: [hell, hiddenness]
+tags:
+  - hell
+  - hiddenness
 ---
 # Description
 James Dominic Rooney is a philosopher at Hong Kong Baptist University and a Dominican friar. He works on metaphysics and on the analytic defence of hell and of divine hiddenness.[^hkbu-rooney][^orcid-rooney]

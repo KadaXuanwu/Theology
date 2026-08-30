@@ -5,7 +5,9 @@ born: 1928, London
 died: 17 May 2013
 location: the Open University, Milton Keynes
 status: sourced
-tags: [history-of-science, conflict-thesis]
+tags:
+  - history-of-science
+  - conflict-thesis
 ---
 # Description
 Colin A. Russell was a historian of science who founded and led the Open University's department of history of science and technology. His chapter in Ferngren's *Science and Religion* is the standard short statement of why the conflict thesis fails as history.[^faraday-russell][^ou-russell]

@@ -3,7 +3,9 @@ type: person
 kind: religion scholar
 location: University of Helsinki, and Boston University
 status: sourced
-tags: [cognition, nonbelief]
+tags:
+  - cognition
+  - nonbelief
 ---
 # Description
 Elisa Järnefelt studies whether people who reject creation still read nature as made on purpose. Her doctorate is in the study of religion at Helsinki, and the experimental work behind it was done at Boston University with Deborah Kelemen.[^jarnefelt-site]

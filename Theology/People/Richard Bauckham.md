@@ -4,7 +4,9 @@ kind: biblical scholar
 born: 1946, London
 location: Ridley Hall, Cambridge, and the University of St Andrews
 status: sourced
-tags: [new-testament, eyewitnesses]
+tags:
+  - new-testament
+  - eyewitnesses
 ---
 # Description
 Richard Bauckham is a New Testament scholar, emeritus at St Andrews, now a senior scholar at Ridley Hall in Cambridge. *Jesus and the Eyewitnesses* is the case that the gospels rest on named eyewitness testimony rather than on anonymous tradition.[^bauckham-cv][^ridley-bauckham]

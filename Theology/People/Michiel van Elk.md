@@ -4,7 +4,9 @@ kind: psychologist
 born: 17 September 1980, Alphen aan den Rijn
 location: Leiden University
 status: sourced
-tags: [psychology, religious-experience]
+tags:
+  - psychology
+  - religious-experience
 ---
 # Description
 Michiel van Elk is a cognitive psychologist at Leiden University who works on the psychology and neuroscience of religious and psychedelic experience. He founded its PRSM lab.[^leiden-van-elk][^loc-van-elk]

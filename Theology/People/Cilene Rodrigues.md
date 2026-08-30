@@ -2,7 +2,8 @@
 type: person
 kind: linguist
 status: sourced
-tags: [linguistics]
+tags:
+  - linguistics
 ---
 # Description
 Cilene Rodrigues is a Brazilian linguist who took her doctorate at Maryland and works on the syntax of Brazilian Portuguese and on language and cognition. When the Pirahã reassessment was published she was at the University of Brasília and Emmanuel College in Boston.[^nevins-2009][^pucrio-rodrigues]

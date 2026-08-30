@@ -1,7 +1,10 @@
 ---
 type: argument
 status: drafted
-tags: [hiddenness, epistemology, free-will]
+tags:
+  - hiddenness
+  - epistemology
+  - free-will
 ---
 # Description
 God stays hidden, gives no clear proof, and still holds people responsible for not believing. The unfairness is not that proof is impossible in principle. By the Bible's own account God repeatedly gives it. Thomas got to touch the wounds. Paul, who was actively hostile, got a direct appearance on the road. Elijah got fire from the sky in front of a crowd. Exodus even states the purpose out loud, that people would hear and trust.

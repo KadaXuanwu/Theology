@@ -5,7 +5,9 @@ born: c. 4 BCE, Corduba
 died: 65 CE, Rome
 location: Rome, and Corsica in exile from 41 to 49 CE
 status: sourced
-tags: [stoicism, antiquity]
+tags:
+  - stoicism
+  - antiquity
 ---
 # Description
 Seneca the Younger was a Roman Stoic philosopher, tutor and then adviser to Nero, who ordered his death after the Pisonian conspiracy. His *Naturales Quaestiones* sets out natural explanations of weather and the sky alongside the religious readings of the same events.[^sep-seneca][^iep-seneca]

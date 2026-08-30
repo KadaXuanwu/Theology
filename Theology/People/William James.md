@@ -5,7 +5,9 @@ born: 11 January 1842, New York City
 died: 26 August 1910, Chocorua, New Hampshire
 location: Harvard University, Cambridge, Massachusetts
 status: sourced
-tags: [psychology, religious-experience]
+tags:
+  - psychology
+  - religious-experience
 ---
 # Description
 William James was a psychologist and philosopher who taught at Harvard for most of his career, first in physiology, then in philosophy and psychology. His Gifford Lectures on religious experience are the standard reference point for treating conversion and mysticism as things to be studied rather than settled.[^sep-james][^iep-james]

@@ -5,7 +5,9 @@ born: 20 January 1922, Scarborough
 died: 9 February 2012, Birmingham
 location: the University of Birmingham, and Claremont Graduate University, California
 status: sourced
-tags: [pluralism, problem-of-evil]
+tags:
+  - pluralism
+  - problem-of-evil
 ---
 # Description
 John Hick was a philosopher of religion who held the H. G. Wood chair at Birmingham and the Danforth chair at Claremont. He built the soul making answer to the problem of evil, and the pluralist account on which the religions are different human responses to one transcendent reality.[^the-hick][^iep-hick]

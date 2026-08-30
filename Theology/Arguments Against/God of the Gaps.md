@@ -1,7 +1,9 @@
 ---
 type: argument
 status: sourced
-tags: [epistemology, science]
+tags:
+  - epistemology
+  - science
 ---
 # Description
 Where an explanation is missing, God gets put in the empty slot. When the explanation turns up, the slot is filled by something else. So the appeal was never an explanation. It marked the place where one was still needed.

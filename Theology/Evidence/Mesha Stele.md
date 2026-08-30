@@ -2,7 +2,10 @@
 type: evidence
 kind: artefact
 status: drafted
-tags: [ancient-near-east, hyperbole, archaeology]
+tags:
+  - ancient-near-east
+  - hyperbole
+  - archaeology
 ---
 # Description
 A basalt stele set up by King Mesha of Moab, c. 840 BCE, found at Dhiban in 1868 and now in the Louvre (AO 5066). Line 7 reads "and Israel has perished; it has perished forever."

@@ -4,7 +4,9 @@ kind: philosopher
 born: 1960
 location: Monash University, Melbourne
 status: sourced
-tags: [atheism, philosophy-of-religion]
+tags:
+  - atheism
+  - philosophy-of-religion
 ---
 # Description
 Graham Oppy is a philosopher at Monash University who works on arguments for and against the existence of God. *The Best Argument against God* runs on parsimony rather than on any of the usual complaints.[^monash-oppy][^loc-oppy]

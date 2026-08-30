@@ -4,7 +4,9 @@ kind: philosopher
 born: 6 November 1957
 location: the Catholic University of America, Washington
 status: sourced
-tags: [ethics, gospels]
+tags:
+  - ethics
+  - gospels
 ---
 # Description
 Michael Pakaluk is a philosopher at the Catholic University of America and a member of the Pontifical Academy of St Thomas Aquinas. He works on Aristotle's ethics and on the gospels.[^cua-pakaluk][^loc-pakaluk]

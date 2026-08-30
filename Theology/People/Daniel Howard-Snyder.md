@@ -3,7 +3,9 @@ type: person
 kind: philosopher
 location: Western Washington University, Bellingham
 status: sourced
-tags: [hiddenness, problem-of-evil]
+tags:
+  - hiddenness
+  - problem-of-evil
 ---
 # Description
 Daniel Howard-Snyder is a philosopher at Western Washington University who works on the problem of evil, on divine hiddenness and on the nature of faith. He writes the Stanford Encyclopedia entry on hiddenness with Adam Green.[^wwu-howard-snyder][^sep-hiddenness]

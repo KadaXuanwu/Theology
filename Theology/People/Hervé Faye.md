@@ -5,7 +5,9 @@ born: 1 October 1814, Saint-Benoît-du-Sault
 died: 4 July 1902, Paris
 location: the Paris Observatory, the École polytechnique and the Académie de Nancy
 status: sourced
-tags: [astronomy, history-of-science]
+tags:
+  - astronomy
+  - history-of-science
 ---
 # Description
 Hervé Faye was a French astronomer who worked under Arago at the Paris Observatory, held the chair of astronomy at the École polytechnique and presided over the Bureau des longitudes. His *Sur l'origine du monde* is where the Laplace and Napoleon anecdote is denied.[^bnf-faye][^newadvent-faye]

@@ -2,7 +2,9 @@
 type: evidence
 kind: record
 status: drafted
-tags: [history, medicine]
+tags:
+  - history
+  - medicine
 ---
 # Description
 The royal touch was a healing rite in which the monarch of England or France laid hands on people suffering from scrofula, known as the King's Evil. Scrofula is a tubercular infection of the lymph glands of the neck, though the term was applied loosely at the time and the symptoms could remit on their own.

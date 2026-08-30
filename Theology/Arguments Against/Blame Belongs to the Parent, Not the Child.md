@@ -1,7 +1,10 @@
 ---
 type: argument
 status: stub
-tags: [morality, hiddenness, parenthood]
+tags:
+  - morality
+  - hiddenness
+  - parenthood
 ---
 # Description
 When children don't love their parents, we usually see it as a failure of the parents, not the child. If God is a father, the same standard should apply. Yet, when people fail to love God, the fault is placed entirely on them, never on him, even though he supposedly designed us, set the terms, and presents himself in ways many find harsh or frightening. A good parent whose children universally struggle to love him would be held responsible. God is not, which is a double standard.

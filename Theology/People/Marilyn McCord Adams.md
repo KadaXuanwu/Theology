@@ -5,7 +5,9 @@ born: 12 October 1943, Oak Park, Illinois
 died: 22 March 2017, Princeton, New Jersey
 location: UCLA, Yale, and the University of Oxford
 status: sourced
-tags: [hell, problem-of-evil]
+tags:
+  - hell
+  - problem-of-evil
 ---
 # Description
 Marilyn McCord Adams was a philosopher and an Episcopal priest who held chairs at UCLA and Yale and was Regius Professor of Divinity at Oxford from 2004 to 2009. Her work on horrendous evils and on the justice of hell is what the vault's material on proportionality rests on.[^uc-adams]

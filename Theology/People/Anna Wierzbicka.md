@@ -4,7 +4,9 @@ kind: linguist
 born: 10 March 1938, Warsaw
 location: Australian National University, Canberra
 status: sourced
-tags: [linguistics, semantics]
+tags:
+  - linguistics
+  - semantics
 ---
 # Description
 Anna Wierzbicka is a linguist, emerita at the Australian National University, who built the natural semantic metalanguage: a small set of concepts she argues are present in every language. Her later books apply it to the sayings of Jesus and to Christian doctrine.[^anu-wierzbicka][^anu-press-wierzbicka]

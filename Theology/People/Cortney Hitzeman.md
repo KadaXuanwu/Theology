@@ -3,7 +3,9 @@ type: person
 kind: psychologist
 location: Justice Health and Forensic Mental Health Network, New South Wales
 status: sourced
-tags: [psychology, nonbelief]
+tags:
+  - psychology
+  - nonbelief
 ---
 # Description
 Cortney Hitzeman is a psychologist who now works in forensic mental health in New South Wales. She is first author of the implicit theism study written at Macquarie University.[^hitzeman-2017]

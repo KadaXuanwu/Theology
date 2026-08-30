@@ -3,7 +3,9 @@ type: person
 kind: philosopher
 location: Saginaw Valley State University, Michigan
 status: sourced
-tags: [philosophy-of-science, divine-action]
+tags:
+  - philosophy-of-science
+  - divine-action
 ---
 # Description
 Jeffrey Koperski is a philosopher at Saginaw Valley State University who works on physics, divine action and the laws of nature. He writes the Stanford Encyclopedia entry on teleological arguments with Del Ratzsch.[^svsu-koperski][^sep-teleological]

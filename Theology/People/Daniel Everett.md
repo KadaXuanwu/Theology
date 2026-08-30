@@ -4,7 +4,9 @@ kind: linguist
 born: 26 July 1951
 location: Bentley University, Waltham, Massachusetts, and field work with the Pirahã in Amazonas
 status: sourced
-tags: [linguistics, amazonia]
+tags:
+  - linguistics
+  - amazonia
 ---
 # Description
 Daniel Everett is a linguist at Bentley University who spent decades with the Pirahã of the Amazon. He went as a missionary and left without his religion, and his claim that the language has no recursion is contested.[^everett-about]

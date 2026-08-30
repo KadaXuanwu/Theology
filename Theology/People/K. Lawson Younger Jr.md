@@ -4,7 +4,9 @@ kind: Assyriologist
 born: 1953
 location: Trinity Evangelical Divinity School, Deerfield, Illinois
 status: sourced
-tags: [ancient-near-east, conquest]
+tags:
+  - ancient-near-east
+  - conquest
 ---
 # Description
 K. Lawson Younger Jr is an Assyriologist and biblical scholar, emeritus at Trinity Evangelical Divinity School. *Ancient Conquest Accounts* is the study that put the biblical conquest narratives beside Assyrian, Hittite and Egyptian ones and found the same conventions.[^tiu-younger][^bas-younger]

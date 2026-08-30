@@ -1,7 +1,10 @@
 ---
 type: argument
 status: sourced
-tags: [hell, justice, hiddenness]
+tags:
+  - hell
+  - justice
+  - hiddenness
 ---
 # Description
 Someone hears the Christian claim, looks into it, and is not convinced. [John 3:18](https://www.biblegateway.com/passage/?search=John%203:18&version=NIV) says whoever does not believe stands condemned already. Taken at face value, that lands on a person whose only failing was reaching an honest conclusion, and an honest conclusion cannot deserve a penalty without end.

@@ -5,7 +5,9 @@ born: 25 December 1642, Woolsthorpe, Lincolnshire
 died: 20 March 1727, Kensington, London
 location: Trinity College, Cambridge, and the Royal Mint, London
 status: sourced
-tags: [science-and-religion, gaps]
+tags:
+  - science-and-religion
+  - gaps
 ---
 # Description
 Isaac Newton was Lucasian Professor of Mathematics at Cambridge, then Warden and Master of the Royal Mint, and president of the Royal Society from 1703. Query 31 of the *Opticks*, where the planetary system is said to need reformation, is the passage Leibniz attacked and the standard worked example of a gap that later closed.[^sep-newton][^abbey-newton]

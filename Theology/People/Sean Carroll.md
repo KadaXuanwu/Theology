@@ -4,7 +4,9 @@ kind: physicist
 born: 5 October 1966
 location: Johns Hopkins University, Baltimore, and previously Caltech
 status: sourced
-tags: [cosmology, naturalism]
+tags:
+  - cosmology
+  - naturalism
 ---
 # Description
 Sean M. Carroll is a theoretical physicist and cosmologist, Homewood Professor of Natural Philosophy at Johns Hopkins. He argues that theism has been progressively stripped of explanatory work in the natural world and fails as a scientific hypothesis.[^carroll-cv]

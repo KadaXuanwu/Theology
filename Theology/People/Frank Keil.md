@@ -4,7 +4,9 @@ kind: psychologist
 born: 23 May 1952
 location: Yale University, New Haven, and Cornell University, Ithaca
 status: sourced
-tags: [cognition, psychology]
+tags:
+  - cognition
+  - psychology
 ---
 # Description
 Frank Keil is a psychologist at Yale who works on how concepts develop and on how much of an explanation people believe they hold. He taught at Cornell for over twenty years before moving to Yale in 1998.[^yale-keil][^yale-news-keil]

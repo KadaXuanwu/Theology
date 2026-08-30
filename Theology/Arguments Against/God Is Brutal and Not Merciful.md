@@ -1,7 +1,10 @@
 ---
 type: argument
 status: drafted
-tags: [conquest, morality, old-testament]
+tags:
+  - conquest
+  - morality
+  - old-testament
 ---
 # Description
 The same God worshipped today commanded Israel to exterminate the Canaanites entirely, leaving no survivors [Deuteronomy 20:16–18](https://www.biblegateway.com/passage/?search=Deuteronomy%2020:16-18&version=NIV), and issued numerous comparable orders throughout the Old Testament. This reveals a brutal deity, not the merciful God he is claimed to be.

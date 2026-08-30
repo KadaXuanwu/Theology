@@ -1,7 +1,10 @@
 ---
 type: argument
 status: sourced
-tags: [cosmology, natural-theology, epistemology]
+tags:
+  - cosmology
+  - natural-theology
+  - epistemology
 ---
 # Description
 God is offered as the reason there is a universe at all, not as the cause of some event inside it. The objection that God gets slotted in wherever an explanation is missing, so that every advance in science takes ground back, is aimed at a different claim. A finished physics would say how things behave once there are things to behave. A law of gravity is already something on this account, and the something is what still needs accounting for.

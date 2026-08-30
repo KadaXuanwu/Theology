@@ -3,7 +3,8 @@ type: person
 kind: philosopher
 location: University of Colorado Boulder
 status: sourced
-tags: [philosophy-of-religion]
+tags:
+  - philosophy-of-religion
 ---
 # Description
 Wesley Morriston is a philosopher of religion, emeritus at the University of Colorado Boulder. He writes on divine command ethics, on the kalam cosmological argument and on the conquest texts.[^colorado-morriston]

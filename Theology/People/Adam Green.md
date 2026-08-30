@@ -4,7 +4,9 @@ kind: philosopher
 born: 1981
 location: University of Oklahoma, Norman
 status: sourced
-tags: [philosophy-of-religion, hiddenness]
+tags:
+  - philosophy-of-religion
+  - hiddenness
 ---
 # Description
 Adam Green is a philosopher at the University of Oklahoma who works on divine hiddenness and on social epistemology. He writes the Stanford Encyclopedia entry on hiddenness with Daniel Howard-Snyder.[^ou-green][^sep-hiddenness]

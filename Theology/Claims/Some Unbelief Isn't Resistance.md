@@ -1,7 +1,10 @@
 ---
 type: claim
 status: drafted
-tags: [hiddenness, epistemology, psychology]
+tags:
+  - hiddenness
+  - epistemology
+  - psychology
 ---
 # Description
 Some people fail to believe in God without resisting God. That covers people who looked and came out unconvinced, and people who never had the idea to accept or reject. Philosophy of religion calls this non-resistant non-belief, and the label describes how the unbelief came about, not the person's moral character.

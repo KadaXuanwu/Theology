@@ -5,7 +5,9 @@ born: AD 37 or 38, Jerusalem
 died: c. AD 100, Rome
 location: Jerusalem, Galilee and Rome
 status: sourced
-tags: [antiquity, sources]
+tags:
+  - antiquity
+  - sources
 ---
 # Description
 Flavius Josephus was a Jewish priest who commanded in Galilee during the revolt, surrendered to the Romans and wrote his histories in Rome under imperial patronage. The *Antiquities* carries the two passages about Jesus that the vault's material on non-Christian sources turns on.[^britannica-josephus]

@@ -3,7 +3,9 @@ type: person
 kind: biblical scholar
 location: Assumption College, Massachusetts, and the University of Chester
 status: sourced
-tags: [resurrection, new-testament]
+tags:
+  - resurrection
+  - new-testament
 ---
 # Description
 Jake O'Connell is a New Testament scholar who has written on the resurrection appearances and on divine hiddenness. His argument is that collective hallucinations are documented and so cannot be ruled out in advance as an explanation of the appearances.[^oconnell-2009]

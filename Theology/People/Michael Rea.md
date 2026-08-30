@@ -4,7 +4,9 @@ kind: philosopher
 born: 1968
 location: University of Notre Dame, and the University of St Andrews
 status: sourced
-tags: [hiddenness, analytic-theology]
+tags:
+  - hiddenness
+  - analytic-theology
 ---
 # Description
 Michael Rea is a philosopher at Notre Dame, where he directs the Center for Philosophy of Religion. He gave the Gifford Lectures in 2017, and his answer to hiddenness is that divine love need not take the form a person expects.[^nd-rea][^loc-rea]

@@ -4,7 +4,9 @@ kind: philosopher
 born: 1968
 location: Pasadena City College, California
 status: sourced
-tags: [classical-theism, aquinas]
+tags:
+  - classical-theism
+  - aquinas
 ---
 # Description
 Edward Feser is a philosopher at Pasadena City College who argues for classical theism in the Aristotelian and Thomist line, against both the new atheism and much of contemporary theistic personalism.[^feser-about][^gnd-feser]

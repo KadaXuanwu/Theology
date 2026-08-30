@@ -3,7 +3,9 @@ type: person
 kind: philosopher
 location: Auckland, New Zealand
 status: sourced
-tags: [divine-command, conquest]
+tags:
+  - divine-command
+  - conquest
 ---
 # Description
 Matthew Flannagan is a New Zealand philosopher and theologian who works on divine command ethics and on the conquest texts. He wrote *Did God Really Command Genocide?* with Paul Copan.[^mandm-flannagan][^orcid-flannagan]

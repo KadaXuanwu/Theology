@@ -5,7 +5,9 @@ born: 6 July 1886, Lyon
 died: 16 June 1944, Saint-Didier-de-Formans
 location: the universities of Strasbourg, Paris and Montpellier
 status: sourced
-tags: [history, royal-touch]
+tags:
+  - history
+  - royal-touch
 ---
 # Description
 Marc Bloch was a French historian who co-founded the *Annales* with Lucien Febvre, joined the resistance and was shot by the Germans in 1944. *Les Rois thaumaturges* is the foundational study of the royal touch.[^britannica-bloch][^cercleshoah-bloch]

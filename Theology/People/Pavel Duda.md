@@ -3,7 +3,9 @@ type: person
 kind: anthropologist
 location: University of South Bohemia, České Budějovice
 status: sourced
-tags: [anthropology, phylogenetics]
+tags:
+  - anthropology
+  - phylogenetics
 ---
 # Description
 Pavel Duda is an evolutionary anthropologist at the University of South Bohemia who applies phylogenetic methods to human cultural history. He is a co-author of the survey of religion in forager societies.[^jcu-duda][^peoples-2016]

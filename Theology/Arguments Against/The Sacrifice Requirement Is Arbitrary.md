@@ -1,7 +1,10 @@
 ---
 type: argument
 status: drafted
-tags: [atonement, sacrifice, justice]
+tags:
+  - atonement
+  - sacrifice
+  - justice
 ---
 # Description
 There is no coherent reason a just and all-powerful God would require sacrifice, whether animal offerings under the old covenant or the death of Jesus, as a precondition for forgiveness. A God able to forgive freely could simply do so; demanding blood first makes the mechanism look like an arbitrary or invented ritual rather than a moral necessity.

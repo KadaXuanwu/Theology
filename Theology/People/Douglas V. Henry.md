@@ -4,7 +4,9 @@ kind: philosopher
 born: 1971
 location: Baylor University, Waco, Texas
 status: sourced
-tags: [hiddenness, nonbelief]
+tags:
+  - hiddenness
+  - nonbelief
 ---
 # Description
 Douglas V. Henry is a philosopher at Baylor University and dean of its Honors College. His two papers on reasonable non-belief are the standing challenge to Schellenberg's claim that such non-belief exists.[^baylor-henry][^baylor-phil-henry]

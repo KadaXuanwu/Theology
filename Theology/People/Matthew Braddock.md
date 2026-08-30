@@ -3,7 +3,9 @@ type: person
 kind: philosopher
 location: University of Tennessee at Martin
 status: sourced
-tags: [nonbelief, cognition]
+tags:
+  - nonbelief
+  - cognition
 ---
 # Description
 Matthew Braddock is a philosopher at the University of Tennessee at Martin who works on what the cognitive science of religion supports. He argues both against the problem of natural non-belief and for theism from common consent.[^philpeople-braddock]

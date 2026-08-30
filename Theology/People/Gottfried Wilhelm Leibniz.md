@@ -5,7 +5,9 @@ born: 1 July 1646, Leipzig
 died: 14 November 1716, Hanover
 location: the court of Mainz, Paris, and the court of Brunswick at Hanover
 status: sourced
-tags: [metaphysics, theodicy]
+tags:
+  - metaphysics
+  - theodicy
 ---
 # Description
 Gottfried Wilhelm Leibniz was a philosopher and mathematician who spent forty years as librarian and court historian at Hanover. His correspondence with Samuel Clarke is where Newton's need for God to correct the planets is attacked, and the *Theodicy* is where the goodness of God is defended against the evil in the world.[^sep-leibniz][^iep-leibniz]

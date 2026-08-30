@@ -1,7 +1,9 @@
 ---
 type: argument
 status: drafted
-tags: [hell, free-will]
+tags:
+  - hell
+  - free-will
 ---
 # Description
 Hell is not a torture chamber God sends people to, but the state of living apart from God's presence, which is what a person who rejects him has chosen. C.S. [[C. S. Lewis|Lewis]] summed it up by saying the doors of hell are locked from the inside: no one is dragged there against their will; they receive the separation from God they insisted on. Since heaven simply is life in God's presence, someone who genuinely doesn't want God wouldn't want heaven either. On this view God isn't coercing love or punishing honest doubt, but respecting a person's freedom enough to let them have the life without him that they chose.

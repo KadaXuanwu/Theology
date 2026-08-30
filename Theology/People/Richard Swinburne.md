@@ -4,7 +4,9 @@ kind: philosopher
 born: 26 December 1934
 location: the University of Oxford, and the University of Keele
 status: sourced
-tags: [philosophy-of-religion, probability]
+tags:
+  - philosophy-of-religion
+  - probability
 ---
 # Description
 Richard Swinburne was Nolloth Professor of the Philosophy of the Christian Religion at Oxford from 1985 to 2002. His case for theism is cumulative and probabilistic, and it is the standard reference point for treating God's existence as a hypothesis to be weighed.[^oxford-swinburne][^swinburne-site]

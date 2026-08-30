@@ -1,7 +1,9 @@
 ---
 type: claim
 status: drafted
-tags: [epistemology, science]
+tags:
+  - epistemology
+  - science
 ---
 # Description
 Some claims are stated so that nothing that happens could count as a negative result. Whatever comes out, the claim absorbs it. The point of this node is that absorption runs both ways. A claim that could not have been embarrassed by any outcome is not supported by the outcome that arrived either, because the outcome was never at risk of going the other way. Confirmation and disconfirmation are the same coin. Remove one and the other goes with it.

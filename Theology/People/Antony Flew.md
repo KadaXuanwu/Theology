@@ -5,7 +5,9 @@ born: 11 February 1923, London
 died: 8 April 2010, Reading
 location: the universities of Keele and Reading
 status: sourced
-tags: [atheism, falsification]
+tags:
+  - atheism
+  - falsification
 ---
 # Description
 Antony Flew was a philosopher who held chairs at Keele and Reading. "Theology and Falsification" is his, and so is the argument that atheism should be the default until theism is shown, which he later gave up.[^ebsco-flew][^reading-flew]

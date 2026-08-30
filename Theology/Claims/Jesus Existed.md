@@ -1,7 +1,9 @@
 ---
 type: claim
 status: drafted
-tags: [historicity, jesus]
+tags:
+  - historicity
+  - jesus
 ---
 # Description
 A historical figure known as Jesus of Nazareth lived in the early first century CE, whether understood as a prophet, the incarnate Son of God, or another figure of religious significance within the Christian tradition.

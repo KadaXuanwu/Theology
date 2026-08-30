@@ -3,7 +3,9 @@ type: person
 kind: philosopher
 location: Baylor University, Waco, Texas
 status: sourced
-tags: [metaphysics, necessary-existence]
+tags:
+  - metaphysics
+  - necessary-existence
 ---
 # Description
 Joshua L. Rasmussen is a philosopher at Baylor University, and was at Azusa Pacific before 2024. He works on necessary existence and on arguments from contingency.[^baylor-rasmussen][^dailynous-rasmussen]

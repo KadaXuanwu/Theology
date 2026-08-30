@@ -3,7 +3,9 @@ type: person
 kind: philosopher
 location: University of Helsinki
 status: sourced
-tags: [cognition, nonbelief]
+tags:
+  - cognition
+  - nonbelief
 ---
 # Description
 Lari Launonen is a philosopher of religion at the University of Helsinki, working on what the cognitive science of religion does and does not license. He is the source of the vault's material on the suppression thesis and on non-belief as self deception.[^helsinki-launonen]
