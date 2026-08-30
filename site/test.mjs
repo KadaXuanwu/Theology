@@ -1938,7 +1938,7 @@ console.log("a reference marker sits at the end of what it supports")
           // A marker belongs after the punctuation that closes the thought it
           // supports. Dropped mid-sentence it reads as a number welded into the
           // prose, which is exactly what moving citations out was meant to fix.
-          if (!before || /[.,;:!?"'\)\]]$/.test(before)) return
+          if (!before || /[.,;:!?"'\)\]]$/.test(before)) continue
           stray.push(`${file}:${i + 1} ...${before.slice(-45)}${match[0]}`)
         }
       })
