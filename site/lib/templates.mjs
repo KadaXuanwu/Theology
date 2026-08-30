@@ -86,6 +86,27 @@ export function railGraph({
 </section>`
 }
 
+// Born, died and where, on a person's note. The same three facts sit on every
+// one of them, so they are frontmatter and get rendered in one shape rather
+// than written into the prose in whatever order each note felt like.
+//
+// No `died` means no death was recorded when the note was last updated, which
+// is all anyone can honestly say. The date that qualifies it is already on the
+// line below, so the word carries the detail in its tooltip instead of in six
+// more words of prose.
+function lifeLine(note) {
+  const { born, died, location } = note.frontmatter
+  if (!born && !died && !location) return ""
+
+  const parts = []
+  if (born) parts.push(`Born ${escapeHtml(born)}`)
+  if (died) parts.push(`died ${escapeHtml(died)}`)
+  else if (born) parts.push('<span title="No death recorded when this note was last updated">living</span>')
+  if (location) parts.push(escapeHtml(location))
+
+  return `<p class="life">${parts.join('<span aria-hidden="true"> · </span>')}</p>`
+}
+
 export function notePage({ note, root, dateLabel, sections, notes, assets }) {
   const section = note.section
   const kindLabel = section.pill ?? KIND_LABEL[section.kind] ?? "Note"
@@ -125,6 +146,7 @@ export function notePage({ note, root, dateLabel, sections, notes, assets }) {
     <span class="muted">${dateLabel}</span>
   </div>
   ${tags}
+  ${lifeLine(note)}
   <div class="note-body">${note.html}</div>
   <section class="backlinks">
     <h2>Linked from</h2>

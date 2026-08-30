@@ -2569,5 +2569,53 @@ console.log("a slow or failed answer is handled as a failure, not as an answer")
   check("asking something always re-follows", /following = true\s+say\("user"/.test(chat))
 }
 
+console.log("a person's dates are read off the note, not written into it")
+{
+  const { notePage } = await import("./lib/templates.mjs")
+  const dist = resolve(repoRoot, "dist")
+  const page = await readFile(resolve(dist, "people/thomas-aquinas/index.html"), "utf8")
+  const life = (html) => html.match(/<p class="life">[\s\S]*?<\/p>/)?.[0] ?? ""
+  const words = (html) => life(html).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim()
+
+  check("the line is on the page", life(page).length > 0, life(page))
+  check("with the dates in it", /Born c\. 1225, Aquino/.test(words(page)), words(page))
+  check("and where they worked", /Paris, Cologne, Rome, Naples/.test(words(page)), words(page))
+
+  // The same three keys on every person, rendered in one shape. Written into
+  // the prose instead, they come out in a different order on every note, and
+  // the hover card spends its 155 characters on dates.
+  const sample = (frontmatter) =>
+    notePage({
+      note: {
+        title: "X",
+        frontmatter,
+        status: null,
+        tags: [],
+        html: "",
+        headings: [],
+        backlinks: [],
+        section: { dir: "People", kind: "note", pill: "Person", label: "People" },
+      },
+      root: "../../",
+      dateLabel: "Updated today",
+      sections: SECTIONS,
+      notes: [],
+      assets: {},
+    })
+
+  // Someone still alive has no death to record, and the honest statement is
+  // about the note rather than about them: nobody rechecks a birth year every
+  // week. The date it is true as of is the one already under the title.
+  const living = sample({ born: "1962, Helsinki" })
+  check("a living person is not given a death", !/died/.test(words(living)), words(living))
+  check("and the word says what it rests on", /title="No death recorded when this note was last updated"/.test(living))
+  check("the qualifying date is already on the page", /Updated today/.test(living))
+
+  // Every other kind of note has none of these keys and gets no line at all.
+  check("a note with no dates carries no line", life(sample({})) === "", life(sample({})))
+  const claim = await readFile(resolve(dist, "claims/jesus-existed/index.html"), "utf8")
+  check("nor does a claim", life(claim) === "", life(claim))
+}
+
 console.log(failures === 0 ? "\nAll checks passed." : `\n${failures} check(s) failed.`)
 process.exitCode = failures === 0 ? 0 : 1

@@ -817,6 +817,14 @@ main {
   margin-bottom: 0.85rem;
 }
 
+/* The three facts every person's note carries. Muted, because they are the
+   frame around the note rather than the first thing to read in it. */
+.life {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
 .pill {
   display: inline-flex;
   align-items: center;

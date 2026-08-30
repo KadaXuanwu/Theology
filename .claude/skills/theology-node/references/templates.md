@@ -76,25 +76,32 @@ The Description and Shows split is the load bearing rule of the whole vault. Des
 ---
 type: person
 kind: theologian
+born: c. 1225, Aquino
+died: 7 March 1274, Fossanova
+location: Paris, Cologne, Rome, Naples
 status: stub
 tags: []
 ---
 # Description
 # Work
 # Stated Position
-# Related
 ```
 
 `kind` is what the person is by trade: `theologian`, `philosopher`, `historian`, `archaeologist`, `psychologist`. Open list, same rule as evidence.
 
-- **Description**: who they are, when they lived, what they worked on. Two sentences at most. This is what the site shows when someone hovers a link to them anywhere in the vault, so it carries the weight the prose no longer has to.
+`born`, `died` and `location` are the three facts every person has, so they are frontmatter rather than prose. Date then place, in that order. The site renders them in one shape under the title, which is why they are not written into the Description as well.
+
+Leave `died` out for someone still alive. The site says "living" and its tooltip says no death was recorded when the note was last updated, which is the honest version: nobody rechecks a living person every week, and the date it is true as of is already on the page.
+
+`location` is where they worked, not where they were born.
+
+- **Description**: who they are and what they worked on. Two sentences at most, and no dates, since the line above the note already carries those. This is what the site shows when someone hovers a link to them anywhere in the vault, so it carries the weight the prose no longer has to.
 - **Work**: what they published, dated. The works the vault cites, plus the ones they are known for. Link an evidence node where a work already has one.
 - **Stated Position**: what they said in their own words about the question, quoted and cited. If they never stated one, say so. Nothing here is inferred from someone's research, and there is no for, against or neutral label: most working scholars have never published a position on the truth of Christianity, and guessing one from their subject matter is the error this vault exists to avoid.
-- **Related**: other people, one clause each. Teachers, opponents, whoever answered whom.
 
-A person node never says who is right. What the vault uses them for is already on their page under "Linked from", built by the site, so nothing there is maintained by hand.
+There is no Related section. A person node links another person inline where it matters, and everything else is the graph's job: what the vault uses someone for is already on their page under "Linked from", built by the site.
 
-Word limits do not apply to a person node.
+A person node never says who is right, and no word limit applies to it.
 
 ## Link direction
 
