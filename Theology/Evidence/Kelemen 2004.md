@@ -22,4 +22,4 @@ Deborah Kelemen, [Are Children "Intuitive Theists"? Reasoning About Purpose and 
 Follow-ups: Kelemen, Rottman and Seston on scientists under time pressure,[^kelemen-2013] and Rottman and colleagues on the China replication.[^rottman-2017]
 
 [^kelemen-2013]: Kelemen, Rottman and Seston, *Journal of Experimental Psychology: General* 142 (2013).
-[^rottman-2017]: Rottman and colleagues, *Religion, Brain & Behavior* 7 (2017).
+[^rottman-2017]: Rottman et al., *Religion, Brain & Behavior* 7 (2017).

@@ -44,8 +44,8 @@ Philosophy has a name for this case, non-resistant non-belief, meaning non-belie
 [^lumen-gentium]: *Lumen Gentium* 16 (1964).
 [^catechism]: *Catechism of the Catholic Church*, §846, §847 and §1260.
 [^plantinga-wcb]: Alvin Plantinga, *Warranted Christian Belief* (Oxford University Press, 2000).
-[^launonen-2025]: Lari Launonen, *Religious Studies* 61 (2025).
-[^napier-2023]: Stephen Napier, "Is there non-resistant non-belief?", *Religious Studies* 59:4 (2023).
+[^launonen-2025]: Lari Launonen, "Non-belief as self-deception?", *Religious Studies* 61 (2025), 263–279.
+[^napier-2023]: Stephen Napier, "Is there non-resistant non-belief?", *Religious Studies* 59/4 (2023), 572–588.
 [^anselm-cdh]: Anselm, *Cur Deus Homo* I.21.
-[^adams-1975]: Marilyn McCord Adams, "Hell and the God of Justice", *Religious Studies* 11:4 (1975).
+[^adams-1975]: Marilyn McCord Adams, "Hell and the God of Justice", *Religious Studies* 11/4 (1975), 433–447.
 [^metzger-1994]: Bruce M. Metzger, *A Textual Commentary on the Greek New Testament*, 2nd edn (1994).

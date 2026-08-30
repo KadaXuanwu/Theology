@@ -41,7 +41,7 @@ What Adams argues against is what she calls Anselm's principle, that liability t
 - The sourcing is lopsided. The ACUTE report is 26 years old, and the claims that conditionalism is gaining ground come from advocacy: Bauckham's foreword, and ACUTE reporting others' concerns.
 - It says nothing about whether anyone is in hell, or whether God is just on other counts.
 
-[^adams-1975]: Marilyn McCord Adams, "Hell and the God of Justice", *Religious Studies* 11:4 (December 1975), 433–447.
+[^adams-1975]: Marilyn McCord Adams, "Hell and the God of Justice", *Religious Studies* 11/4 (December 1975), 433–447.
 [^adams-1993]: Marilyn McCord Adams, "The Problem of Hell: A Problem of Evil for Christians", in Eleonore Stump (ed.), *A Reasoned Faith* (Cornell University Press, 1993), 301–327.
 [^talbott-sep]: Thomas Talbott, "Heaven and Hell in Christian Thought", *Stanford Encyclopedia of Philosophy*, revised 10 May 2025.
 [^kvanvig-1993]: Jonathan Kvanvig, *The Problem of Hell* (Oxford University Press, 1993).
@@ -49,6 +49,6 @@ What Adams argues against is what she calls Anselm's principle, that liability t
 [^fudge-2011]: Edward Fudge, *The Fire That Consumes*, 3rd edn (Cascade Books, 2011), with a foreword by Richard Bauckham.
 [^acute-2000]: Evangelical Alliance ACUTE, *The Nature of Hell* (Paternoster, 2000).
 [^walls-1992]: Jerry Walls, *Hell: The Logic of Damnation* (University of Notre Dame Press, 1992).
-[^crisp-2003]: Oliver D. Crisp, "Divine Retribution: A Defence", *Sophia* 42:2 (2003), 35–52.
+[^crisp-2003]: Oliver D. Crisp, "Divine Retribution: A Defence", *Sophia* 42/2 (2003), 35–52.
 [^wierzbicka-2024]: Anna Wierzbicka, *Cognitive Semantics* 10 (2024).
 [^bmcr-2009]: Reader comment under Ramelli and Konstan's response, *Bryn Mawr Classical Review* 2009.02.51.

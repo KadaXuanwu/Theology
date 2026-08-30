@@ -61,7 +61,7 @@ Put in current terms by Sean Carroll: "Over the past five hundred years, the pro
 [^kojonen-2016]: Erkki V. R. Kojonen, "The God of the Gaps, Natural Theology, and Intelligent Design", *Journal of Analytic Theology* 4 (2016), 291–316.
 [^kojonen-2016-302]: Kojonen, *Journal of Analytic Theology* 4 (2016), at 302.
 [^sep-teleological]: Del Ratzsch and Jeffrey Koperski, "Teleological Arguments for God's Existence", *Stanford Encyclopedia of Philosophy*, substantive revision 5 April 2023.
-[^plantinga-1997]: Alvin Plantinga, "Methodological Naturalism? Part 2", *Origins & Design* 18:2 (1997), 22–34.
+[^plantinga-1997]: Alvin Plantinga, "Methodological Naturalism? Part 2", *Origins & Design* 18/2 (1997), 22–34.
 [^aristotle-meteor]: Aristotle, *Meteorologica* II.9, 369a10–369b11.
 [^seneca-nq]: Seneca, *Naturales Quaestiones* 2.32.2.
 [^schlegel-2024]: K. Schlegel, "Lightning and thunder explanations in encyclopedias", *History of Geo- and Space Sciences* 15 (2024), 71–80.
@@ -70,5 +70,5 @@ Put in current terms by Sean Carroll: "Over the past five hundred years, the pro
 [^russell-2002]: Colin A. Russell, "The Conflict of Science and Religion", in Gary B. Ferngren (ed.), *Science and Religion: A Historical Introduction* (Johns Hopkins University Press, 2002).
 [^mckie-1944]: Douglas McKie, "Wöhler's 'Synthetic' Urea and the Rejection of Vitalism: A Chemical Legend", *Nature* 153 (1944), 608–610.
 [^legare-2012]: Cristine H. Legare, E. Margaret Evans, Karl S. Rosengren and Paul L. Harris, "The coexistence of natural and supernatural explanations across cultures and development", *Child Development* 83 (2012), 779–793.
-[^sanchez-2017]: Clinton Sanchez, Brian Sundermeier, Kenneth Gray and Robert J. Calin-Jageman, "Direct replication of Gervais & Norenzayan (2012)", *PLOS ONE* 12:2 (2017), e0172636.
-[^gervais-2018]: Will M. Gervais and others, "Analytic atheism: A cross-culturally weak and fickle phenomenon?", *Judgment and Decision Making* 13:3 (2018), 268–274.
+[^sanchez-2017]: Clinton Sanchez, Brian Sundermeier, Kenneth Gray and Robert J. Calin-Jageman, "Direct replication of Gervais & Norenzayan (2012)", *PLOS ONE* 12/2 (2017), e0172636.
+[^gervais-2018]: Will M. Gervais et al., "Analytic atheism: A cross-culturally weak and fickle phenomenon?", *Judgment and Decision Making* 13/3 (2018), 268–274.

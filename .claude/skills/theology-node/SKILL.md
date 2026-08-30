@@ -9,7 +9,7 @@ Builds one node for the Theology vault at research grade, then writes it into th
 
 The vault is the `Theology` folder at the repo root, Obsidian style markdown. Folders: `Arguments For`, `Arguments Against`, `Claims`, `Evidence`. Nodes cross reference with `[[Exact File Name]]`.
 
-Read `references/templates.md`, `references/source-policy.md`, `references/balance.md` and `references/style.md` before running the pipeline. They are short.
+Read `references/templates.md`, `references/source-policy.md`, `references/citation-style.md`, `references/balance.md` and `references/style.md` before running the pipeline. They are short.
 
 ## Non negotiables
 

@@ -15,3 +15,15 @@ Carried over from a disclosure the node itself made. Nothing else in this node h
 **What would settle it:** the chapter. What exactly he disputes, and whether it reaches the forager data the node leans on or only the inference drawn from it.
 **Verdict:**
 **Checked by:**
+
+---
+
+### V2. Two citations with no page range
+**Status:** open
+**Node:** `Arguments Against/Creation Alone Doesn't Point to God`
+**Source:** Andrew Nevins, David Pesetsky and Cilene Rodrigues, *Language* 85/2 (2009); Marco Antonio Goncalves, *Current Anthropology* 46/4 (2005)
+**What the node says:** it cites both by the page it argues from, p. 392 and 393 n. 54 for the first, p. 636 for the second, but neither citation carries the article's own page range.
+**What is open:** the ranges were never recorded. The house style asks for one on every journal article, and guessing it would be inventing bibliographic data.
+**What would settle it:** the first page and last page of each article. A journal contents page or any database record carries both.
+**Verdict:**
+**Checked by:**

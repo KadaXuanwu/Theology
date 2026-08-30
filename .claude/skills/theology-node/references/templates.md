@@ -95,4 +95,4 @@ Set `status: sourced` only when every factual sentence passed the verifier.
 
 - Internal: `[[Exact File Name Without Extension]]`. Get the exact titles from the librarian. A link to a node that does not exist is a broken link, not a to do.
 - Bible passages: `[Joshua 6:20–21](https://www.biblegateway.com/passage/?search=Joshua%206:20-21&version=NIV)`. En dash in the display text, plain hyphen in the URL.
-- Books: *Title* (Publisher Year), author named in the sentence.
+- Citations: a footnote, `[^surname-year]`, defined at the foot of the note. Form is in `references/citation-style.md`, which is the only place citation format is decided.

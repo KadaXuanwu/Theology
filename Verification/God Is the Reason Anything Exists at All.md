@@ -27,3 +27,15 @@ Carried over from disclosures the node itself made. Nothing else in this node ha
 **What would settle it:** the book, or a named review. The specific thing wanted is whether Saunders' verdict is as negative as the node implies, and whether he leaves any route open.
 **Verdict:**
 **Checked by:**
+
+---
+
+### V3. Barrett and Keil cited without title or page range
+**Status:** open
+**Node:** `Arguments For/God Is the Reason Anything Exists at All`
+**Source:** Justin Barrett and Frank Keil, *Cognitive Psychology* 31 (1996)
+**What the node says:** they found people using an anthropomorphic God concept inconsistent with their own stated theology, across three studies with 52, 81 and 13 subjects.
+**What is open:** the citation has no article title and no page range. The subject counts came from the vault, not from the paper.
+**What would settle it:** the article. Title, page range, and whether the three subject counts are right.
+**Verdict:**
+**Checked by:**

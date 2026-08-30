@@ -27,3 +27,15 @@ Carried over from disclosures the node itself made. Nothing else in this node ha
 **What would settle it:** any current academic defence of the principle, read properly, so the two sides sit at the same access level.
 **Verdict:**
 **Checked by:**
+
+---
+
+### V3. Wierzbicka cited without a page range
+**Status:** open
+**Node:** `Claims/No Finite Life Deserves Infinite Punishment`
+**Source:** Anna Wierzbicka, *Cognitive Semantics* 10 (2024)
+**What the node says:** she reports Augustine's argument from the parallel in Matthew 25:46 at pp. 321 to 322, accepts the parallelism, and paraphrases the adjective as "no end in view".
+**What is open:** the pages the node argues from are recorded, but the article's own page range is not, and neither is its title.
+**What would settle it:** the article record. Title and page range.
+**Verdict:**
+**Checked by:**

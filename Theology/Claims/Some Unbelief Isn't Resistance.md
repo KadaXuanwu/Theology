@@ -45,7 +45,7 @@ The encyclopedia lists the cases in view: honest seekers, members of cultures wi
 [^bradley-2014]: *The Reasons of Atheists/Agnostics for Nonbelief in God's Existence Scale* (Case Western Reserve University, 2014).
 [^rea-2018]: Michael Rea, *The Hiddenness of God* (Oxford University Press, 2018).
 [^anderson-2019]: Charity Anderson, review of Rea, *Notre Dame Philosophical Reviews*, 14 May 2019.
-[^napier-2023]: Stephen Napier, "Is there non-resistant non-belief?", *Religious Studies* 59:4 (2023), 572–588.
+[^napier-2023]: Stephen Napier, "Is there non-resistant non-belief?", *Religious Studies* 59/4 (2023), 572–588.
 [^plantinga-wcb]: Alvin Plantinga, *Warranted Christian Belief* (Oxford University Press, 2000).
-[^henry-2001]: Douglas V. Henry, "Does Reasonable Nonbelief Exist?", *Faith and Philosophy* 18:1 (2001), 75–92.
-[^blanton-2026]: Andrew Blanton, "Non-resistant non-belief is pervasive", *Religious Studies* 62:3 (2026), 547–567.
+[^henry-2001]: Douglas V. Henry, "Does Reasonable Nonbelief Exist?", *Faith and Philosophy* 18/1 (2001), 75–92.
+[^blanton-2026]: Andrew Blanton, "Non-resistant non-belief is pervasive", *Religious Studies* 62/3 (2026), 547–567.

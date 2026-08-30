@@ -54,14 +54,14 @@ Calvin grants the next step himself. On Romans 1:20 he writes that reason conclu
 [^calvin-romans]: John Calvin, *Commentary on Romans*, on 1:20.
 [^calvin-institutes]: John Calvin, *Institutes of the Christian Religion* I.iii.
 [^dundas-2002]: Paul Dundas, *The Jains*, 2nd edn (Routledge, 2002), p. 90.
-[^everett-2005]: Daniel Everett, *Current Anthropology* 46:4 (2005), 632–633.
+[^everett-2005]: Daniel Everett, *Current Anthropology* 46/4 (2005), 632–633.
 [^colapinto-2007]: John Colapinto, "The Interpreter", *The New Yorker*, 16 April 2007.
 [^barkham-2008]: Patrick Barkham, "The power of speech", *The Guardian*, 10 November 2008.
 [^young-2000]: Richard Alan Young, "The Knowledge of God in Romans 1:18–23", *JETS* 43/4 (2000), 695–707.
 [^baker-hytch-2016]: Max Baker-Hytch, "Mutual epistemic dependence and the demographic divine hiddenness problem", *Religious Studies* 52/3 (2016), 375–394.
 [^blanton-2023]: Andrew Blanton, reply to Baker-Hytch, *Religious Studies* (2023).
 [^jarnefelt-2015]: Elisa Järnefelt, Caitlin Canfield and Deborah Kelemen, "The divided mind of a disbeliever", *Cognition* 140 (2015), 72–88.
-[^nevins-2009]: Andrew Nevins, David Pesetsky and Cilene Rodrigues, *Language* 85:2 (2009).
-[^goncalves-2005]: Marco Antônio Gonçalves, *Current Anthropology* 46:4 (2005).
+[^nevins-2009]: Andrew Nevins, David Pesetsky and Cilene Rodrigues, *Language* 85/2 (2009).
+[^goncalves-2005]: Marco Antônio Gonçalves, *Current Anthropology* 46/4 (2005).
 [^braddock-2022]: Matthew Braddock, in Diego Machuca (ed.), *Evolutionary Debunking Arguments* (Routledge, 2022), 160–184.
-[^launonen-2025]: Lari Launonen, *Religious Studies* 61 (2025), 263–279.
+[^launonen-2025]: Lari Launonen, "Non-belief as self-deception?", *Religious Studies* 61 (2025), 263–279.

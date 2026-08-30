@@ -15,3 +15,15 @@ Carried over from a disclosure the node itself made. Nothing else in this node h
 **What would settle it:** the article. How exposure was measured, and whether the authors themselves think it separates the two explanations.
 **Verdict:**
 **Checked by:**
+
+---
+
+### V2. Rooney cited without a page range
+**Status:** open
+**Node:** `Claims/The Suppression Thesis Rests on Possibility`
+**Source:** James Dominic Rooney, *New Blackfriars* 105 (2024)
+**What the node says:** it quotes him at p. 648 on needing to show only that culpable resistance is possible, and at p. 647 on the loss being of a supernatural gift.
+**What is open:** both quoted pages are recorded, but the article's own title and page range are not.
+**What would settle it:** the article record.
+**Verdict:**
+**Checked by:**
