@@ -19,7 +19,7 @@ Read `references/templates.md`, `references/source-policy.md`, `references/citat
 4. The verifier may delete text written in this session. It may not delete text that already existed in the node. Pre-existing problems get reported to the user, never silently cut.
 5. At least half the sources in a node are academic register. Advocacy publishing never carries a fact on its own. See `references/balance.md`.
 6. The finished node is written to its file in the vault, then committed and pushed. Working files never land in the vault.
-7. Only the target node is written. A change any other node needs is reported to the user as a block to paste, never applied. This covers backlinks, links the new node breaks, and errors the research turned up elsewhere.
+7. Only the target node is written, plus the `People/` nodes the names in it need. Person nodes are the one exception to this rule: when the node names someone in its prose and no person node exists, research that person and write it, then say which ones you created. Everything else another node needs is reported to the user as a block to paste, never applied. That covers backlinks, links the new node breaks, and errors the research turned up elsewhere.
 8. Links never run up the stack. An argument may link claims, evidence, people and other arguments, but not another argument in its `Description`. A claim may link claims, evidence and people. An evidence note may link evidence and people. A person node links only other people. See `references/templates.md`.
 
 ## Step 1: Establish the baseline
@@ -96,6 +96,14 @@ Apply the verifier's report:
 Then handle the balance audit. Failing rules are reported to the user, not silently patched. Never pad a section, invent a counter position or hedge a well supported finding to make the numbers balance. If the academic share is under half, say which points could only be reached through advocacy sources and what was tried. An honest gap beats a manufactured debate.
 
 Then run the checklist in `references/style.md`.
+
+## Step 3b: People
+
+Every person the node names in its prose needs a node in `Theology/People/`. Check which ones exist, and for each one that does not, spawn a research agent with `agents/person.md` and write the node from what it returns. The template is in `references/templates.md`.
+
+These are the only nodes outside the target that this skill may create. It may not edit an existing person node without being asked: that is a node like any other, and rule 7 covers it.
+
+Then link the first prose mention of each person in the target node, aliasing where the citation form and the prose form differ: `[[C. A. Coulson|Charles Coulson]]`.
 
 ## Step 4: Deliver
 
