@@ -1918,6 +1918,41 @@ console.log("a preview waits to be asked for")
   )
 }
 
+console.log("a jump between a marker and its citation says where it landed")
+{
+  const source = await client("footnotes.js")
+  const css = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+
+  // The old rule was `li:target`, which stays on for as long as the URL keeps
+  // the hash. One citation sat permanently brighter than the rest of the list,
+  // and clicking the same marker a second time did nothing, because the target
+  // had not changed.
+  check("nothing stays lit off the URL", !/\.footnotes li:target/.test(css))
+
+  const ms = Number(source.match(/const FLASH_MS = (\d+)/)?.[1])
+  check("the mark has a named lifetime", Number.isFinite(ms), String(ms))
+  check("about three seconds lit, then a fade", ms >= 3500 && ms <= 6000, `${ms}ms`)
+
+  const keyframes = css.match(/@keyframes fn-flash [\s\S]*?\n\}/)?.[0] ?? ""
+  check("it holds before it fades", /0%,\s*6\d%/.test(keyframes), keyframes.slice(0, 60))
+  check("and the css runs as long as the timer", /animation: fn-flash 4\.5s/.test(css))
+
+  // Reduced motion gets no fade, so the class has to come off on a timer rather
+  // than on animationend, or the mark would never leave.
+  check("reduced motion still ends", /prefers-reduced-motion[\s\S]{0,200}animation: none/.test(css))
+  check("a timer is what removes it", source.includes("classList.remove(\"fn-flash\")") && source.includes("FLASH_MS"))
+
+  // Jumping twice to the same place has to restart the animation, and it will
+  // not unless the class comes off and the element is reflowed in between.
+  check("a repeat jump restarts the mark", source.includes("void target.offsetWidth"))
+
+  check("going down to the citation marks it", source.includes("flash(document.getElementById(`fn-${ref.dataset.fn}`))"))
+  check("coming back up marks the number", source.includes("event.target.closest(\".fn-back\")"))
+  // Clicking the same link twice fires no hashchange, so the click handlers
+  // cannot be left to it. A link from outside has nothing else.
+  check("and arriving from outside is marked too", source.includes("addEventListener(\"hashchange\""))
+}
+
 console.log("a reference marker sits at the end of what it supports")
 {
   const { readdir } = await import("node:fs/promises")

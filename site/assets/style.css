@@ -1723,8 +1723,34 @@ sup.fn.is-broken {
 .footnotes li {
   margin-bottom: 0.45rem;
 }
-.footnotes li:target .fn-text {
-  color: var(--text);
+/* Jumping between a marker and its citation lands the reader somewhere new, so
+   the destination says where it is and then gets out of the way. This used to
+   be `li:target`, which stays lit for as long as the URL keeps the hash: one
+   reference sat permanently brighter than the rest of the list, and clicking
+   the same marker again did nothing because the target had not changed. */
+@keyframes fn-flash {
+  0%,
+  66% {
+    background-color: var(--highlight-strong);
+    box-shadow: 0 0 0 2px var(--highlight-strong);
+  }
+  100% {
+    background-color: transparent;
+    box-shadow: 0 0 0 2px transparent;
+  }
+}
+.fn-flash {
+  border-radius: 2px;
+  /* Roughly three seconds lit, then a slow fade. */
+  animation: fn-flash 4.5s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  /* No fade, but it still has to end: the class comes off on a timer. */
+  .fn-flash {
+    animation: none;
+    background-color: var(--highlight-strong);
+    box-shadow: 0 0 0 2px var(--highlight-strong);
+  }
 }
 .fn-back {
   text-decoration: none;

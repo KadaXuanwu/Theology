@@ -13,6 +13,29 @@ const OPEN_DELAY = 400
 // Short enough to feel immediate, long enough to cross the gap from the marker
 // into the card without it closing on the way.
 const CLOSE_DELAY = 160
+// Lit for about three seconds, then a slow fade. Must match the fn-flash
+// keyframes, since the class comes off on this timer rather than on
+// animationend: with reduced motion there is no animation to end.
+const FLASH_MS = 4500
+
+const flashing = new Map()
+
+// Marks where a jump landed, in either direction, and then stops.
+function flash(target) {
+  if (!target) return
+  clearTimeout(flashing.get(target))
+  // Restarts the animation when the same place is jumped to twice running.
+  target.classList.remove("fn-flash")
+  void target.offsetWidth
+  target.classList.add("fn-flash")
+  flashing.set(
+    target,
+    setTimeout(() => {
+      target.classList.remove("fn-flash")
+      flashing.delete(target)
+    }, FLASH_MS),
+  )
+}
 
 export function initFootnotes() {
   const card = document.querySelector(".footnote-card")
@@ -95,9 +118,23 @@ export function initFootnotes() {
   // to the foot of the note. Clicking the same marker again lets the jump
   // happen, so the list is still reachable.
   document.addEventListener("click", (event) => {
+    // The arrow at the end of a citation goes back up to where it was used.
+    const back = event.target.closest(".fn-back")
+    if (back) {
+      flash(document.getElementById(back.getAttribute("href").slice(1)))
+      hide()
+      return
+    }
+
     const ref = event.target.closest(".fn-ref")
     if (ref) {
-      if (anchor === ref && !card.hidden) return
+      if (anchor === ref && !card.hidden) {
+        // Second click on a marker whose card is already open: the jump goes
+        // through, so mark the citation it lands on.
+        flash(document.getElementById(`fn-${ref.dataset.fn}`))
+        hide()
+        return
+      }
       event.preventDefault()
       clearTimeout(openTimer)
       clearTimeout(closeTimer)
@@ -106,6 +143,17 @@ export function initFootnotes() {
     }
     if (!event.target.closest(".footnote-card")) hide()
   })
+
+  // Someone arriving on a citation from outside, or using back and forward,
+  // gets the same mark. Clicking the same link twice fires no hashchange, which
+  // is why the click handlers above do not rely on this.
+  const flashFromHash = () => {
+    const id = decodeURIComponent(location.hash.slice(1))
+    if (!/^fn(ref)?-/.test(id)) return
+    flash(document.getElementById(id))
+  }
+  window.addEventListener("hashchange", flashFromHash)
+  flashFromHash()
 
   copy.addEventListener("click", async () => {
     const value = text.textContent.trim()
