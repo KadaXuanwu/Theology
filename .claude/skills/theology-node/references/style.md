@@ -26,6 +26,14 @@ Nothing is ever added to reach a length. Say what the sources carry, then stop.
 
 Any other status has no limit.
 
+## Names
+
+A name a reader does not already know tells them nothing. The first time a person, council or document appears in a node, it gets a clause saying what it is and when. "Thomas Aquinas, the 13th century theologian behind the *Summa Theologiae*". "The Second Vatican Council, the assembly of Catholic bishops that met from 1962 to 1965." Later mentions in the same node use the short form.
+
+A clause is the budget. Anything that needs a sentence of its own is a node, not a gloss: link it if it exists, report it as a split candidate if it does not.
+
+Books of the Bible need no gloss.
+
 ## Voice
 
 Plain, direct, short sentences. Write the way a well read person explains something to a friend, not the way a paper opens.
@@ -63,4 +71,5 @@ Run every item before delivering.
 15. No `[[link]]` runs up the stack, per the link direction table in `references/templates.md`, and the Description of an argument links no other argument
 16. Every paragraph fails the delete test: removing it would cost the node a fact, a source or a limit
 17. The Description's first sentence states the claim, with no setup, scope carving or reader instruction in front of it
-18. Nothing outside the target node was edited. A change another node needs is written out for the user, not applied
+18. Every person, council or document is identified the first time it appears
+19. Nothing outside the target node was edited. A change another node needs is written out for the user, not applied
