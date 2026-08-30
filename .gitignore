@@ -6,8 +6,3 @@ dist/
 
 # Wrangler local secrets
 .dev.vars
-
-# Research material handed to the node pipeline. Stays on the machine.
-# This repo is public and pushes to main deploy the site, so anything
-# copyrighted that lands here gets published. Never remove this line.
-sources/

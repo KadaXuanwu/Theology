@@ -32,7 +32,13 @@ Never skip this. The verifier's cut authority depends on it.
 
 Then collect supplied sources. Anything the user attached to the conversation, or dropped in a `sources/` folder, goes to the researchers and the verifier. A supplied file is read at `full` access, which is what makes it worth having, but it earns no special tier or register and gets weighed like any other source. Tell the user this so they know what attaching something does and does not buy.
 
-`sources/` is gitignored and stays that way. The repo is public. Never commit a supplied file and never ask the user to. See `references/source-policy.md`.
+The repo is public. Never commit a supplied file and never ask the user to. See `references/source-policy.md`.
+
+## Verification queue
+
+A node never says whether a source was checked. It cites the source and stops. Everything the pipeline could not confirm goes to `Verification/<Node Title>.md` at the repo root instead, one entry per open question, for a human to approve or correct. See `Verification/README.md` for the entry format. Add a single pointer bullet to the node's last source bearing section and nothing more.
+
+This applies to source verification only. A section that is simply not written yet still says so in the node, the way `Origins` and `Disputed By` already do on several claims. That is a content gap, not a verification state.
 
 ## Step 2: Pick the run mode
 

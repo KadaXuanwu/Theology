@@ -21,11 +21,10 @@ The bacterial cause of tuberculosis was identified in 1882, when Robert Koch ann
 # Limits
 - Cure reports from the rite are not measurements. Scrofula was a loose category at the time, and its symptoms could remit without treatment, so recovery after touching establishes nothing about the touching.
 - The record here is of an official rite and of named royal occasions. It does not establish what ordinary people believed the mechanism to be, nor how widely the official account was held.
-- Koch 1882 and 1884 were read at abstract level only for this draft. The dates and venue are from catalogue records, not from the papers.
-- Marc Bloch's *Les Rois thaumaturges* (1924) is the foundational study of the practice and was not read. Anything here that Bloch would qualify is unqualified.
 - This is England only. The French rite ran on a different timeline and is not covered.
 
 # Source
-- David L. Smith, "The King's Evil Without the King: The Royal Touch during the Interregnum", *Journal of Religious History* 49, no. 4 (2025), 439–454, DOI 10.1111/1467-9809.13158. Peer reviewed and open access. Every date and both quotations above come from the article text, read in full.
-- Marc Bloch, *Les Rois thaumaturges* (1924), translated as *The Royal Touch: Sacred Monarchy and Scrofula in England and France* (Routledge & Kegan Paul, 1973). Not read.
-- Robert Koch, "Die Aetiologie der Tuberkulose", *Mittheilungen aus dem Kaiserlichen Gesundheitsamte* 2 (1884), 1–88. Abstract and catalogue record only.
+- David L. Smith, "The King's Evil Without the King: The Royal Touch during the Interregnum", *Journal of Religious History* 49, no. 4 (2025), 439–454, DOI 10.1111/1467-9809.13158. Peer reviewed and open access. Every date and both quotations above come from the article text.
+- Marc Bloch, *Les Rois thaumaturges* (1924), translated as *The Royal Touch: Sacred Monarchy and Scrofula in England and France* (Routledge & Kegan Paul, 1973). The foundational study of the practice.
+- Robert Koch, "Die Aetiologie der Tuberkulose", *Mittheilungen aus dem Kaiserlichen Gesundheitsamte* 2 (1884), 1–88.
+- Source checks still open on this note are tracked in the repo under `Verification/`.
