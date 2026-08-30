@@ -6,7 +6,7 @@ tags: [hiddenness, natural-theology, epistemology]
 # Description
 [Romans 1:18](https://www.biblegateway.com/passage/?search=Romans%201:18&version=NIV) says people suppress the truth by their wickedness. Taken as a general account of unbelief, that gives what Lari Launonen labels the suppression thesis: "the theological claim that theistic non-belief results from culpable mistreatment of one's knowledge of God".[^launonen-2025] Max Baker-Hytch calls the wider family sin-based accounts, and separates universal ones, where every case of unbelief is sinful resistance, from partial ones.
 
-This claim is about how the thesis gets defended. Baker-Hytch distinguishes defenders who describe the fallen condition without offering evidence for it from a strand that does claim inductive support. The first group ends up arguing that the thesis is possible rather than that it happens. The second has been answered on the data, and the universal version is now rejected by the people best placed to defend it.
+Baker-Hytch distinguishes defenders who describe the fallen condition without offering evidence for it from a strand that does claim inductive support. The first group ends up arguing that the thesis is possible rather than that it happens. The second has been answered on the data, and the universal version is now rejected by the people best placed to defend it.
 
 # Origins
 J. L. Schellenberg put the charge in *Divine Hiddenness and Human Reason*.[^schellenberg-1993] Answering the Responsibility Argument, he writes at p. 197 that "there seems no non-question-begging way to defend this view", and that the empirical evidence gives no reason to think there have not always been inculpable non-believers.

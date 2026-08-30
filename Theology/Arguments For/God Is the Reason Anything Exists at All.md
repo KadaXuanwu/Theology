@@ -4,7 +4,7 @@ status: sourced
 tags: [cosmology, natural-theology, epistemology]
 ---
 # Description
-A standing objection says God gets slotted in wherever an explanation is missing, so every advance in science takes ground back. The reply here is that this was never the job the claim was doing. God is offered as the reason there is a universe at all, not as the cause of some event inside it. A finished physics would say how things behave once there are things to behave. A law of gravity is already something on this account, and the something is what still needs accounting for.
+God is offered as the reason there is a universe at all, not as the cause of some event inside it. The objection that God gets slotted in wherever an explanation is missing, so that every advance in science takes ground back, is aimed at a different claim. A finished physics would say how things behave once there are things to behave. A law of gravity is already something on this account, and the something is what still needs accounting for.
 
 The distinction is not a modern retreat. Thomas Aquinas separates creating from keeping in existence and treats the second as the first still going on, calling preservation "a continuation of that action whereby He gives existence".[^aquinas-st-1041] He then denies that this makes God the only thing keeping each creature in being, since some creatures depend on other creatures for their preservation as well as on God as their principal cause.[^aquinas-st-1042] The dependence being claimed runs at every moment rather than at a first one, and it is not the kind physics competes for.
 

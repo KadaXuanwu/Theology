@@ -4,15 +4,15 @@ status: sourced
 tags: [hell, justice, hiddenness]
 ---
 # Description
-The case is narrower than the title. Set two people aside: one never heard the Christian claim, the other heard it and turned it down. This node is about the person in between, who heard it, looked into it, and came out unconvinced. Their character is not the issue. Whether they were resisting is, and this one was not.
+Someone hears the Christian claim, looks into it, and comes out unconvinced. On the reading where unbelief itself condemns, [John 3:18](https://www.biblegateway.com/passage/?search=John%203:18&version=NIV) leaves that person condemned already and for ever. Nothing reached in good faith is the kind of thing that earns an endless penalty.
 
-Christianity has answers for the two set aside, and they differ. Aquinas treats the unbelief of someone who has heard nothing as a punishment rather than a sin, while still holding that such people are damned for their other sins. Vatican II and the Catechism go further: those who through no fault of their own do not know the gospel can be saved, if they seek God sincerely and follow their conscience. Where a person understood and refused, the refusal is what gets judged. Neither route reaches the person in between. They heard, so ignorance does not cover them. They did not refuse, so refusal does not describe them. What is left is an eternal outcome attached to a conclusion someone reached in good faith.
+The two usual answers do not reach this case. Aquinas treats the unbelief of someone who has heard nothing as a punishment rather than a sin, while still holding that such people are damned for their other sins. Vatican II and the Catechism go further: those who through no fault of their own do not know the gospel can be saved, if they seek God sincerely and follow their conscience. Where a person understood and refused, the refusal is what gets judged. Someone who heard and stayed unconvinced is neither ignorant nor refusing.
 
-Two things go wrong at once. The first is the trigger: the outcome follows from what the person ended up persuaded of, and nobody picks what to be persuaded of the way they pick what to do. The second is the size. A finite person, working on partial information in a situation nobody calls clear, gets an outcome with no end to it. Nothing about the failure scales to the response.
+What triggers the outcome is what the person ended up persuaded of, and nobody picks that the way they pick what to do. What follows has no end, while the failure is one conclusion drawn on partial information in a situation nobody calls clear.
 
-The gospel carrying the sharpest verse for the condemnation also carries the principle that cuts against it. Twice in that book guilt is made conditional on what a person was handed. Without the message they would not be guilty, and the blind would not be guilty. The guilt lands on those who claimed they could see, and on those who saw the works and hated anyway.
+The same gospel makes guilt conditional on what a person was handed. Without the message they would not be guilty, and the blind would not be guilty. The guilt lands on those who claimed they could see, and on those who saw the works and hated anyway.
 
-Philosophy has a name for this case, non-resistant non-belief, meaning non-belief that does not come from resisting God. The argument stands or falls on whether such people exist in any number.
+Philosophy calls this case non-resistant non-belief, meaning non-belief that does not come from resisting God. The argument stands or falls on whether such people exist in any number.
 
 # Based On
 - [John 3:18](https://www.biblegateway.com/passage/?search=John%203:18&version=NIV) whoever does not believe stands condemned already, in a perfect passive, so the verdict is already in place.
