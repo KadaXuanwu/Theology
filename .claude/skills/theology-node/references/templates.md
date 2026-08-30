@@ -17,7 +17,7 @@ tags: []
 # Related
 ```
 
-- **Description**: the argument in plain prose. What it claims and why someone holds it.
+- **Description**: the argument in plain prose. What it claims and why someone holds it. The first sentence is the claim, not a run up to it. Scope limits go in Limits, not in front of the claim.
 - **Based On**: the passages, claims and evidence it rests on. Link them. If something is asserted here without a source, say so out loud rather than leaving it looking sourced.
 - **Countered By**: the arguments and claims that answer it. Link them. Say which counter is the strong one.
 - **Limits**: where the argument is weaker than it sounds, including cases where accepting it costs something elsewhere.
@@ -39,7 +39,7 @@ tags: []
 # Limits
 ```
 
-- **Description**: the claim stated in two or three sentences.
+- **Description**: the claim stated in two or three sentences, starting with the claim.
 - **Origins**: who made this claim and where. Named scholars, book titles, publishers, years.
 - **Based On**: the evidence nodes, passages and other claims it rests on. Link them.
 - **Carries**: what the claim licenses and how far it goes. Link the claims that lean on it, never an argument. The arguments that use it link down to here and the site lists them under "Linked from".

@@ -14,13 +14,14 @@ Read `references/templates.md`, `references/source-policy.md`, `references/citat
 ## Non negotiables
 
 1. Every factual sentence carries a source the verifier can open. No retrievable source, no entry into the node.
-2. A node marked `sourced` keeps its body between 500 and 2000 words, frontmatter excluded. Aim for about 1000. Go past that only when there is more that genuinely has to be said. Any other status has no limit.
-   Optimise in both directions: at equal content, shorter is better, so cut every phrase that does not earn its place. At equal length, more good sourced facts and arguments is better. Never pad to reach a number.
-3. The verifier may delete text written in this session. It may not delete text that already existed in the node. Pre-existing problems get reported to the user, never silently cut.
-4. At least half the sources in a node are academic register. Advocacy publishing never carries a fact on its own. See `references/balance.md`.
-5. The finished node is written to its file in the vault, then committed and pushed. Working files never land in the vault.
-6. Only the target node is written. A change any other node needs is reported to the user as a block to paste, never applied. This covers backlinks, links the new node breaks, and errors the research turned up elsewhere.
-7. Links never run up the stack. An argument may link claims, evidence and other arguments, but not another argument in its `Description`. A claim may link claims and evidence. An evidence note may link only other evidence. See `references/templates.md`.
+2. Every sentence carries a fact, a source or a limit. A sentence that carries none of the three gets cut however well it reads, and the Description opens on the claim itself with no setup in front of it. This is the rule a finished node fails most often. See the density section in `references/style.md`.
+3. A node marked `sourced` keeps its body between 500 and 2000 words, frontmatter excluded. Those are a floor and a ceiling, not a target. There is no length to write up to. Length follows the sourced content: say what the sources carry, then stop. Any other status has no limit.
+   At equal content, shorter is better, so cut every phrase that does not earn its place. At equal length, more good sourced facts and arguments is better. Never pad to reach a number.
+4. The verifier may delete text written in this session. It may not delete text that already existed in the node. Pre-existing problems get reported to the user, never silently cut.
+5. At least half the sources in a node are academic register. Advocacy publishing never carries a fact on its own. See `references/balance.md`.
+6. The finished node is written to its file in the vault, then committed and pushed. Working files never land in the vault.
+7. Only the target node is written. A change any other node needs is reported to the user as a block to paste, never applied. This covers backlinks, links the new node breaks, and errors the research turned up elsewhere.
+8. Links never run up the stack. An argument may link claims, evidence and other arguments, but not another argument in its `Description`. A claim may link claims and evidence. An evidence note may link only other evidence. See `references/templates.md`.
 
 ## Step 1: Establish the baseline
 
@@ -81,7 +82,7 @@ The writer decides framing. Do not run parallel framing agents. Merged framings 
 
 `agents/verifier.md`. Gets `draft.md`, the source list, the balance ledger, `existing.md` and anything in `sources/`. Does **not** get the researcher notes or the writer's reasoning. That is the point. It re-opens sources itself.
 
-Returns a verdict per factual sentence (`pass`, `fix`, `cut`, `protected-flag`), a recounted balance ledger, and a check for manufactured symmetry in the other direction.
+Returns a verdict per factual sentence (`pass`, `fix`, `cut`, `protected-flag`), a density pass over the sentences that carry no fact, source or limit, a recounted balance ledger, and a check for manufactured symmetry in the other direction.
 
 ### Phase 4: Arbiter (you, in the main conversation)
 
@@ -90,6 +91,7 @@ Apply the verifier's report:
 - `cut` on session-written text: remove it
 - `cut` on protected text: keep it, list it for the user with the reason
 - `fix`: apply the correction, or drop the sentence if the fix cannot be sourced
+- Density `cut` on session-written text: remove it. Do not rewrite it shorter, remove it
 - Re-check the word count after edits. Under 500 means the node is thin, say so rather than padding it.
 
 Then handle the balance audit. Failing rules are reported to the user, not silently patched. Never pad a section, invent a counter position or hedge a well supported finding to make the numbers balance. If the academic share is under half, say which points could only be reached through advocacy sources and what was tried. An honest gap beats a manufactured debate.

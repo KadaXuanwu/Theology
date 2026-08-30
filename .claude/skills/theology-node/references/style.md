@@ -1,5 +1,23 @@
 # Style and final checklist
 
+## Density
+
+Every sentence carries a fact, a source or a limit. A sentence that carries none of the three gets cut, however well it reads. This bites hardest in the Description, which is where padding hides.
+
+The first sentence states the claim. Not what the node is about, not what it is not about, not who the reader should picture. The claim itself, so that someone who reads only that line already has the argument.
+
+Cut on sight:
+
+- Setups and throat clearing. "The case is narrower than the title", "two things go wrong at once", "before getting to that".
+- Scope carving before the claim is on the page. If a distinction does work, make it in the sentence where it does the work. If it only guards against a misreading, it belongs in Limits.
+- Instructions to the reader. "Set two people aside", "imagine", "picture someone who".
+- The title said again in other words.
+- Signposting what a later section will do.
+- A point walked through as a story when the sources state it flat.
+- A sentence whose whole content is that the previous sentence mattered.
+
+The test is deletion. Take out the paragraph. If the node still carries every fact, source and limit it carried before, it stays out.
+
 ## Voice
 
 Plain, direct, short sentences. Write the way a well read person explains something to a friend, not the way a paper opens.
@@ -35,4 +53,6 @@ Run every item before delivering.
 13. Nothing unchecked is presented as checked
 14. Every source read only at snippet, abstract or none access is listed in the delivery notes with its level
 15. No `[[link]]` runs up the stack, per the link direction table in `references/templates.md`, and the Description of an argument links no other argument
-16. Nothing outside the target node was edited. A change another node needs is written out for the user, not applied
+16. Every paragraph fails the delete test: removing it would cost the node a fact, a source or a limit
+17. The Description's first sentence states the claim, with no setup, scope carving or reader instruction in front of it
+18. Nothing outside the target node was edited. A change another node needs is written out for the user, not applied

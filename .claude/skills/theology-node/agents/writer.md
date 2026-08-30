@@ -18,7 +18,9 @@ You are the only agent that writes prose. There is no second framing agent and n
 
 ### 1. Decide what the node is
 
-One sentence, to yourself: what does a reader take away. Everything that does not serve it gets cut. This is how you hit the word budget.
+One sentence: what does a reader take away. Everything that does not serve it gets cut.
+
+That sentence is not a note to yourself. It is the node's first line. Write it down and start there, rather than writing toward it.
 
 ### 2. Triage the research
 
@@ -50,9 +52,13 @@ If this is a rework, preserve existing text where it is still correct. Rewriting
 
 Follow `references/style.md`. Plain wording, short sentences, no dashes as punctuation.
 
-Length targets, roughly:
+Read the density section in `references/style.md` first. Every sentence carries a fact, a source or a limit, and the Description opens on the claim. Padding gets cut by the verifier anyway, so writing it is wasted work.
 
-- Description: 40 to 50 percent of the node
+The word range is a floor and a ceiling, not a target. Say what the sources carry, then stop.
+
+Rough shares, describing what usually happens, not a quota to fill:
+
+- Description: normally the longest section, since it states the claim and why it is held
 - Based On or Evidence or Origins: whatever the sourcing needs
 - Countered By, Disputed By: enough to state the strong counter and say it is the strong one
 - Limits: never empty. A node with no Limits section has not been thought about. Register asymmetry that could not be fixed goes here.

@@ -30,6 +30,8 @@ Compare ignoring whitespace and punctuation drift. If a sentence is a light edit
 
 A factual sentence asserts something checkable: a date, a number, a quotation, an attribution, an event, a position someone holds. Framing and transitions are not factual sentences, but an interpretation attributed to a named person is, because the attribution is checkable.
 
+Keep the framing and transition sentences in a separate list. They skip the source check and go to the density pass in step 4.
+
 ### 2. Mark each as protected or session written
 
 ### 3. Check each factual sentence
@@ -48,7 +50,20 @@ Record the access level you achieved: `full`, `snippet`, `abstract`, `none`.
 
 If a source cannot be opened at all, that is `fix` with reason `unopened`, never `pass`.
 
-### 4. Structural checks
+### 4. Density pass
+
+Read the density section in `references/style.md`. Then take the sentences that carry no fact, no source and no limit, which is most of what step 1 set aside, and rule on each one.
+
+- Session written: `cut`. Do not soften it, do not keep the good half. Cut it.
+- Protected: `protected-flag`, so a human decides.
+
+Then check the Description separately. Its first sentence states the claim. A first sentence that sets the scene, carves out who the node is not about, tells the reader to picture someone or restates the title is `cut` if it was written this session, whatever comes after it.
+
+Apply the delete test to every paragraph in turn: remove it and ask whether the node still carries every fact, source and limit it carried before. If it does, the paragraph goes.
+
+This pass is the one most likely to be skipped because the prose reads well. Reading well is not the test.
+
+### 5. Structural checks
 
 - Body word count between 500 and 2000, frontmatter excluded, but only on a node marked `sourced`. Any other status is exempt. Flag padding, and flag a node sitting near 2000 that could say the same in less
 - Frontmatter and heading order match the template
@@ -57,7 +72,7 @@ If a source cannot be opened at all, that is `fix` with reason `unopened`, never
 - No dashes used as punctuation, en dash in passage references excepted
 - `[[links]]` present and plausible as node titles
 
-### 5. Balance audit
+### 6. Balance audit
 
 Recount the ledger yourself. Do not trust the writer's numbers.
 
@@ -73,7 +88,7 @@ Report every failure with the number, not as a general impression.
 
 Then check the other direction. Read `references/balance.md`, section "The false balance guard". Look for manufactured symmetry: a fringe position dressed up as a live debate, a padded counter section, a well supported finding hedged into mush to make the node feel even handed. Report those too. Over-correction is a real failure and it is the one nobody looks for.
 
-### 6. Adversarial pass
+### 7. Adversarial pass
 
 Try to break the node. For its two or three load bearing claims, ask what would have to be true for this to be false, and go and check that. Report what you find even if it does not change a verdict.
 
@@ -88,6 +103,11 @@ Try to break the node. For its two or three load bearing claims, ask what would 
     ACCESS ACHIEVED: full | snippet | abstract | none
     FINDING: <what the source actually says>
     ACTION: <the correction, or what to remove>
+
+## DENSITY
+<each sentence carrying no fact, source or limit, quoted, with origin and verdict>
+<the Description's first sentence, and whether it states the claim>
+<any paragraph that survives the delete test>
 
 ## STRUCTURAL
 <each check, pass or fail with detail>
@@ -109,6 +129,7 @@ Try to break the node. For its two or three load bearing claims, ask what would 
 ## Rules
 
 - Never mark `pass` on a source you did not open at `full`. Anything less is `fix`.
+- A sentence that carries no fact, no source and no limit is `cut` on sight if it was written this session. Well written padding is still padding.
 - Do not fix by rewording into something vaguer. If the claim cannot be sourced, it is `cut` or `protected-flag`.
 - Do not accept a source that supports a weaker version. Narrower than claimed is `fix`.
 - Do not add facts and do not fix balance yourself. You count and report. The arbiter decides.
