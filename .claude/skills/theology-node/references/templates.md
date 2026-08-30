@@ -70,15 +70,42 @@ tags: []
 
 The Description and Shows split is the load bearing rule of the whole vault. Description is what we actually have. Shows is what people make of it. Do not blur them.
 
+## Person (`People/`)
+
+```
+---
+type: person
+kind: theologian
+status: stub
+tags: []
+---
+# Description
+# Work
+# Stated Position
+# Related
+```
+
+`kind` is what the person is by trade: `theologian`, `philosopher`, `historian`, `archaeologist`, `psychologist`. Open list, same rule as evidence.
+
+- **Description**: who they are, when they lived, what they worked on. Two sentences at most. This is what the site shows when someone hovers a link to them anywhere in the vault, so it carries the weight the prose no longer has to.
+- **Work**: what they published, dated. The works the vault cites, plus the ones they are known for. Link an evidence node where a work already has one.
+- **Stated Position**: what they said in their own words about the question, quoted and cited. If they never stated one, say so. Nothing here is inferred from someone's research, and there is no for, against or neutral label: most working scholars have never published a position on the truth of Christianity, and guessing one from their subject matter is the error this vault exists to avoid.
+- **Related**: other people, one clause each. Teachers, opponents, whoever answered whom.
+
+A person node never says who is right. What the vault uses them for is already on their page under "Linked from", built by the site, so nothing there is maintained by hand.
+
+Word limits do not apply to a person node.
+
 ## Link direction
 
 Links never run up the stack.
 
 | A node in | May link to |
 | --- | --- |
-| `Arguments For`, `Arguments Against` | `Claims`, `Evidence`, and other arguments |
-| `Claims` | `Claims`, `Evidence` |
-| `Evidence` | `Evidence` |
+| `Arguments For`, `Arguments Against` | `Claims`, `Evidence`, `People`, and other arguments |
+| `Claims` | `Claims`, `Evidence`, `People` |
+| `Evidence` | `Evidence`, `People` |
+| `People` | `People` |
 
 The `Description` of an argument may not link another argument. Every other section may.
 
@@ -87,7 +114,7 @@ Upward links are not written by hand. The site builds them and shows them under 
 ## Field values in use
 
 - `status`: `stub`, `drafted`, `sourced`
-- `kind`: `artefact`, `study`, `record`. Open list, see above.
+- `kind`: on evidence `artefact`, `study`, `record`; on a person their trade. Both open lists, see above.
 
 Set `status: sourced` only when every factual sentence passed the verifier.
 

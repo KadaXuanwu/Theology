@@ -30,6 +30,17 @@ export const SECTIONS = [
     label: "Evidence",
     blurb: "Artefacts, studies and texts a claim can point to.",
   },
+  // People are a reference layer rather than a step in the reasoning, so they
+  // take the grey the palette already keeps for anything outside the four
+  // kinds. `pill` overrides the label under the title, which would otherwise
+  // read "Note".
+  {
+    dir: "People",
+    kind: "note",
+    pill: "Person",
+    label: "People",
+    blurb: "The people the nodes name, and what they published.",
+  },
 ]
 
 // Frontmatter here is small and predictable: scalars, inline lists and block

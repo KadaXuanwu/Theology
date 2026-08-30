@@ -24,13 +24,15 @@ A `sourced` node's body runs 500 to 2000 words, frontmatter excluded. Around 100
 
 Nothing is ever added to reach a length. Say what the sources carry, then stop.
 
-Any other status has no limit.
+Any other status has no limit, and neither does a person node. A person node runs as short as the facts about them do.
 
 ## Names
 
-A name a reader does not already know tells them nothing. The first time a person, council or document appears in a node, it gets a clause saying what it is and when. "Thomas Aquinas, the 13th century theologian behind the *Summa Theologiae*". "The Second Vatican Council, the assembly of Catholic bishops that met from 1962 to 1965." Later mentions in the same node use the short form.
+A name a reader does not already know tells them nothing. A person named in the prose links to their node in `People/`, and the site shows who they are on hover, so the prose spends no words on it. A name that appears only in a footnote citation stays a footnote: Metzger cited once for a manuscript point is not a node.
 
-A clause is the budget. Anything that needs a sentence of its own is a node, not a gloss: link it if it exists, report it as a split candidate if it does not.
+Where the person has no node yet, gloss them in a clause on first mention and report the missing node in the delivery. "Thomas Aquinas, the 13th century theologian behind the *Summa Theologiae*". "The Second Vatican Council, the assembly of Catholic bishops that met from 1962 to 1965." Later mentions in the same node use the short form.
+
+A clause is the budget for anything that is not a person: councils, documents, institutions.
 
 Books of the Bible need no gloss.
 
@@ -71,5 +73,5 @@ Run every item before delivering.
 15. No `[[link]]` runs up the stack, per the link direction table in `references/templates.md`, and the Description of an argument links no other argument
 16. Every paragraph fails the delete test: removing it would cost the node a fact, a source or a limit
 17. The Description's first sentence states the claim, with no setup, scope carving or reader instruction in front of it
-18. Every person, council or document is identified the first time it appears
+18. Every person named in the prose is linked to their node, or glossed in a clause and reported as a node to create. Councils and documents are identified the first time they appear
 19. Nothing outside the target node was edited. A change another node needs is written out for the user, not applied

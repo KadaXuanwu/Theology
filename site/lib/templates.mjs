@@ -88,7 +88,7 @@ export function railGraph({
 
 export function notePage({ note, root, dateLabel, sections, notes, assets }) {
   const section = note.section
-  const kindLabel = KIND_LABEL[section.kind] ?? "Note"
+  const kindLabel = section.pill ?? KIND_LABEL[section.kind] ?? "Note"
   const extraKind = note.frontmatter.kind ? ` · ${escapeHtml(note.frontmatter.kind)}` : ""
 
   const tags = note.tags.length

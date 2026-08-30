@@ -7,7 +7,7 @@ description: Research, write and fact check nodes for the Theology vault (Argume
 
 Builds one node for the Theology vault at research grade, then writes it into the vault.
 
-The vault is the `Theology` folder at the repo root, Obsidian style markdown. Folders: `Arguments For`, `Arguments Against`, `Claims`, `Evidence`. Nodes cross reference with `[[Exact File Name]]`.
+The vault is the `Theology` folder at the repo root, Obsidian style markdown. Folders: `Arguments For`, `Arguments Against`, `Claims`, `Evidence`, `People`. Nodes cross reference with `[[Exact File Name]]`.
 
 Read `references/templates.md`, `references/source-policy.md`, `references/citation-style.md`, `references/balance.md` and `references/style.md` before running the pipeline. They are short.
 
@@ -20,7 +20,7 @@ Read `references/templates.md`, `references/source-policy.md`, `references/citat
 5. At least half the sources in a node are academic register. Advocacy publishing never carries a fact on its own. See `references/balance.md`.
 6. The finished node is written to its file in the vault, then committed and pushed. Working files never land in the vault.
 7. Only the target node is written. A change any other node needs is reported to the user as a block to paste, never applied. This covers backlinks, links the new node breaks, and errors the research turned up elsewhere.
-8. Links never run up the stack. An argument may link claims, evidence and other arguments, but not another argument in its `Description`. A claim may link claims and evidence. An evidence note may link only other evidence. See `references/templates.md`.
+8. Links never run up the stack. An argument may link claims, evidence, people and other arguments, but not another argument in its `Description`. A claim may link claims, evidence and people. An evidence note may link evidence and people. A person node links only other people. See `references/templates.md`.
 
 ## Step 1: Establish the baseline
 
