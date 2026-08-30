@@ -6,7 +6,7 @@ Two open. The note's spine, Smith 2025, is open access and was read in full, so 
 
 ---
 
-### V1 — Bloch, the foundational study, not read
+### V1. Bloch, the foundational study, not read
 **Status:** open
 **Node:** `Evidence/The Royal Touch`
 **Source:** Marc Bloch, *Les Rois thaumaturges* (1924), translated as *The Royal Touch: Sacred Monarchy and Scrofula in England and France* (London: Routledge & Kegan Paul, 1973)
@@ -18,7 +18,7 @@ Two open. The note's spine, Smith 2025, is open access and was read in full, so 
 
 ---
 
-### V2 — Koch's dates from catalogue records
+### V2. Koch's dates from catalogue records
 **Status:** open
 **Node:** `Evidence/The Royal Touch`
 **Source:** Robert Koch, announcement to the Berlin Physiological Society, 24 March 1882, published in *Berliner klinische Wochenschrift* that year; "Die Aetiologie der Tuberkulose", *Mittheilungen aus dem Kaiserlichen Gesundheitsamte* 2 (1884), 1–88

@@ -6,7 +6,7 @@ The node is a draft. Its `Disputed By` section is not written yet, which is a co
 
 ---
 
-### V1 — Flew, the locus classicus
+### V1. Flew, the locus classicus
 **Status:** open
 **Node:** `Claims/No Outcome Counts Against It`
 **Source:** Antony Flew, "Theology and Falsification", in Antony Flew and Alasdair MacIntyre (eds.), *New Essays in Philosophical Theology* (SCM Press, 1955)
@@ -18,7 +18,7 @@ The node is a draft. Its `Disputed By` section is not written yet, which is a co
 
 ---
 
-### V2 — Popper, and how far he meant it to reach
+### V2. Popper, and how far he meant it to reach
 **Status:** open
 **Node:** `Claims/No Outcome Counts Against It`
 **Source:** Karl Popper, *Logik der Forschung* (1934), translated as *The Logic of Scientific Discovery* (1959)
@@ -30,7 +30,7 @@ The node is a draft. Its `Disputed By` section is not written yet, which is a co
 
 ---
 
-### V3 — van Elk, read at abstract level
+### V3. van Elk, read at abstract level
 **Status:** open
 **Node:** `Claims/No Outcome Counts Against It`
 **Source:** Michiel van Elk, "'God of the Gaps': A Critical Perspective on the Statistical Inference Theory of Religion", *The International Journal for the Psychology of Religion* 35 (2025), 139–144, DOI 10.1080/10508619.2025.2507556
@@ -42,7 +42,7 @@ The node is a draft. Its `Disputed By` section is not written yet, which is a co
 
 ---
 
-### V4 — the three replies the node names and has not checked
+### V4. the three replies the node names and has not checked
 **Status:** open
 **Node:** `Claims/No Outcome Counts Against It`
 **Source:** Larry Laudan, "The Demise of the Demarcation Problem" (1983); the Duhem and Quine underdetermination literature; any treatment of the difference between unfalsifiable and unsupported

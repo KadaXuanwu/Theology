@@ -20,6 +20,7 @@ Baker-Hytch states it from inside the tradition in "On sin-based responses to di
 - On Rooney's model the loss is of a supernatural gift, so nothing shows up in the faculties themselves: "it is not the case that the current absence of this experience results from some positive harm empirically discoverable in our faculties" (p. 647). He still thinks indirect evidence for the Fall can be weighed.
 - Across 93 studies and 11,653 participants, religious priming "does not... reliably affect non-religious participants". In the subset testing that directly, the mean effect for non-religious and low religiosity participants was g = 0.04, p = .71 (Azim Shariff, Aiyana Willard, Teresa Andersen and Ara Norenzayan, *Personality and Social Psychology Review* 20/1 (2016), 27–48).
 - [[Some Unbelief Isn't Resistance]] holds the cases the thesis has to absorb. [[Humans Are Primed to See Agents and Purpose]] holds the instinct it is usually grounded in, and [[Kelemen 2004]] the study most often cited for it.
+- Source checks still open on this node are tracked in the repo under `Verification/`.
 
 # Carries
 - It bears on what cross-cultural work can settle. If any distribution of belief fits the thesis, [[Peoples, Duda & Marlowe 2016]] answer a different question.
@@ -35,4 +36,4 @@ Baker-Hytch states it from inside the tradition in "On sin-based responses to di
 # Limits
 - Plantinga's position is narrower than the culpable version but not clear of it. He writes that "It is no part of the model to say that damage to the *sensus divinitatis* on the part of a person is due to sin on the part of the same person" (*WCB*, p. 214 n. 257). At p. 215 he does allow that the faculty's deliverances "can easily be suppressed and impeded... by deliberately or semideliberately turning one's attention away". Baker-Hytch and Rooney both list him among sin-based responders.
 - Launonen never calls the thesis untestable. He rejects it because it is unclear what would motivate the self deception, and because lifelong seekers and former believers are hard to explain away. He reports the move that buries theistic intuitions "too deep in the subconscious layers of the mind" (p. 268) without endorsing it.
-- Cortney Hitzeman and Colin Wastell report that the priming effect in atheists tracked earlier exposure to religious behaviour rather than atheism itself (*Journal of Cognition and Culture* 17 (2017), 27–50). The sharpest test here, but on 88 students, and only its abstract could be read.
+- Cortney Hitzeman and Colin Wastell report that the priming effect in atheists tracked earlier exposure to religious behaviour rather than atheism itself (*Journal of Cognition and Culture* 17 (2017), 27–50). The sharpest test here, but on 88 students.

@@ -6,6 +6,12 @@ When a node is built, some of its sources cannot be opened. Journal paywalls, le
 
 Nothing in this folder is published. The site builds from `Theology/` only.
 
+## What a file here does and does not tell you
+
+A file lists what the pipeline knew it could not confirm. It is not an audit. Most of the vault was written before this folder existed, and those entries were recovered from hedges the nodes had already written into themselves, so they cover what somebody happened to flag rather than everything that is open.
+
+**An entry missing is not proof a source was checked.** A node with no file here has not been cleared, it has only never been questioned in writing. Nodes built by the pipeline from now on get a file whether or not anything is open, and say so.
+
 ## How to answer one
 
 Find the entry, fill in **Verdict**, put your name and the date in **Checked by**, and change **Status**.
@@ -22,7 +28,7 @@ You do not need to be exhaustive. A page number confirmed is worth more than a p
 ## Entry format
 
 ```
-### V1 — short title
+### V1. short title
 **Status:** open
 **Node:** `Arguments Against/Some Node`
 **Source:** full citation

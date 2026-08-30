@@ -6,7 +6,7 @@ Nine open. The first four are the ones that would change what the node says.
 
 ---
 
-### V1 — Coulson 1955, the sentence and its page
+### V1. Coulson 1955, the sentence and its page
 **Status:** open
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** C. A. Coulson, *Science and Christian Belief* (Chapel Hill: University of North Carolina Press, 1955)
@@ -18,7 +18,7 @@ Nine open. The first four are the ones that would change what the node says.
 
 ---
 
-### V2 — Barnes 1933, the earliest fixed use
+### V2. Barnes 1933, the earliest fixed use
 **Status:** open
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** E. W. Barnes, *Scientific Theory and Religion* (Cambridge University Press, 1933)
@@ -30,7 +30,7 @@ Nine open. The first four are the ones that would change what the node says.
 
 ---
 
-### V3 — Ganssle's chapter, never read
+### V3. Ganssle's chapter, never read
 **Status:** open
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** Gregory E. Ganssle, "'God of the Gaps' Arguments", ch. 12 in J. B. Stump and Alan G. Padgett (eds.), *The Blackwell Companion to Science and Christianity* (Wiley-Blackwell, 2012), 130–139, DOI 10.1002/9781118241455.ch12
@@ -42,7 +42,7 @@ Nine open. The first four are the ones that would change what the node says.
 
 ---
 
-### V4 — Plantinga's current statement
+### V4. Plantinga's current statement
 **Status:** open
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** Alvin Plantinga, *Where the Conflict Really Lies: Science, Religion, and Naturalism* (Oxford University Press, 2011)
@@ -54,7 +54,7 @@ Nine open. The first four are the ones that would change what the node says.
 
 ---
 
-### V5 — Dawes on what naturalism the record supports
+### V5. Dawes on what naturalism the record supports
 **Status:** open
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** Gregory W. Dawes, "In defense of naturalism", *International Journal for Philosophy of Religion* 70 (2011), 3–25, DOI 10.1007/s11153-011-9291-8
@@ -66,7 +66,7 @@ Nine open. The first four are the ones that would change what the node says.
 
 ---
 
-### V6 — the bullet that was cut for want of a source
+### V6. the bullet that was cut for want of a source
 **Status:** open
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** Graham Oppy, *The Best Argument against God* (Palgrave Macmillan, 2013); Herman Philipse, *God in the Age of Science? A Critique of Religious Reason* (Oxford University Press, 2012)
@@ -78,7 +78,7 @@ Nine open. The first four are the ones that would change what the node says.
 
 ---
 
-### V7 — whether Laplace's result was understood at the time as removing a divine role
+### V7. whether Laplace's result was understood at the time as removing a divine role
 **Status:** open
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** Roger Hahn, *Pierre Simon Laplace, 1749–1827: A Determined Scientist* (Harvard University Press, 2005); Curtis Wilson, "The great inequality of Jupiter and Saturn: from Kepler to Laplace", *Archive for History of Exact Sciences* 33 (1985), 15–290
@@ -90,7 +90,7 @@ Nine open. The first four are the ones that would change what the node says.
 
 ---
 
-### V8 — Russell's page, and which edition
+### V8. Russell's page, and which edition
 **Status:** open
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** Colin A. Russell, "The Conflict of Science and Religion", in Gary B. Ferngren (ed.), *Science and Religion: A Historical Introduction* (Johns Hopkins University Press, 2002)
@@ -102,7 +102,7 @@ Nine open. The first four are the ones that would change what the node says.
 
 ---
 
-### V9 — three sources read at abstract level
+### V9. three sources read at abstract level
 **Status:** open
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** Douglas McKie, "Wöhler's 'Synthetic' Urea and the Rejection of Vitalism: A Chemical Legend", *Nature* 153 (1944), 608–610; Cristine H. Legare, E. Margaret Evans, Karl S. Rosengren and Paul L. Harris, "The coexistence of natural and supernatural explanations across cultures and development", *Child Development* 83 (2012), 779–793; Eugenia Torrance, "God of the Gaps or the God of 'Design and Dominion'? Re-Visiting Newton's Theology", *Zygon* 58 (2023), DOI 10.1111/zygo.12825

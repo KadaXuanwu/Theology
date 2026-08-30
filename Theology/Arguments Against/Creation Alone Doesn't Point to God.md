@@ -24,6 +24,7 @@ Calvin grants the next step himself. On Romans 1:20 he writes that reason conclu
 - [[Some Unbelief Isn't Resistance]] people not fighting God who still do not believe.
 - Paul Dundas, *The Jains*, 2nd edn (Routledge 2002), p. 90, for the Jain denial of a creator.
 - Daniel Everett reports that the Pirahã have no creation stories or myths, and that pressed on it they say only that everything is the same, nothing was created (*Current Anthropology* 46:4 (2005), 632–633). He went to Brazil in 1977 with the Summer Institute of Linguistics to translate the Bible, and later declared himself an atheist (John Colapinto, "The Interpreter", *The New Yorker*, 16 April 2007). Losing his faith wrecked his marriage and estranged him from two of his three children, who resumed contact in 2008 (Patrick Barkham, "The power of speech", *The Guardian*, 10 November 2008).
+- Source checks still open on this node are tracked in the repo under `Verification/`.
 
 # Countered By
 - [[General Revelation Leaves People Without Excuse]] is the argument this one is aimed at.
@@ -36,7 +37,7 @@ Calvin grants the next step himself. On Romans 1:20 he writes that reason conclu
 
 # Limits
 - The forager evidence has its own problems, kept in [[Peoples, Duda & Marlowe 2016]]. Its reconstruction leaves open a single inactive creator among ancestral hunter-gatherers.
-- Matthew Braddock questions whether prehistoric humans really were natural nonbelievers (in Diego Machuca (ed.), *Evolutionary Debunking Arguments*, Routledge 2022, 160–184). His chapter could not be opened here.
+- Matthew Braddock questions whether prehistoric humans really were natural nonbelievers (in Diego Machuca (ed.), *Evolutionary Debunking Arguments*, Routledge 2022, 160–184).
 - Theravāda Buddhism is the weaker partner to Jainism. The Brahmajāla Sutta (Dīgha Nikāya 1) has Brahmā believing himself the creator, and the Buddha traces where that belief comes from and sets it aside. The inference gets made and then dropped.
 - The fairness point, that punishing a wrong guess on evidence this thin is not justice, is a moral premise, not a result of the studies above. Wisdom of Solomon 13:6 concedes the mitigating half of it and overrides it anyway.
 - Lari Launonen, working sympathetically on the suppression thesis, grants that the universal version "seems hopeless" (*Religious Studies* 61 (2025), 263–279). His partial version survives this.

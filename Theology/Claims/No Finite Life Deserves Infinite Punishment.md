@@ -19,6 +19,7 @@ What Adams argues against is what she calls Anselm's principle, that liability t
 - Her legal parallel at page 442. She says it seems the height of immorality to suppose that the guilt incurred in killing someone depends on the dead man's social status.
 - Talbott's dilemma, section 3.1. Someone fully informed who chose separation from God would be acting almost inconceivably irrationally, and someone not fully informed can have the misjudgment corrected without losing their freedom.
 - The ignorance half of that dilemma is handled at [[Some Unbelief Isn't Resistance]].
+- Source checks still open on this node are tracked in the repo under `Verification/`.
 
 # Carries
 - Any defence of endless torment running through Anselm's principle needs another ground.
@@ -29,7 +30,7 @@ What Adams argues against is what she calls Anselm's principle, that liability t
 # Disputed By
 - Anselm, *Cur Deus Homo* I.21, headed "How great a burden sin is", argues that you may not act against God's will even to save the whole of creation. Talbott's entry quotes him saying satisfaction requires paying something greater than that for whose sake you ought not to have sinned. The chapter does not state that guilt is proportional to the majesty of the offended party, which is Adams's reconstruction, though I.20 is headed "That satisfaction ought to be proportionate to guilt".
 - The choice model treats hell as a condition freely embraced rather than a punishment imposed, which removes the premise that hell is a penalty at all. Talbott's entry names C. S. Lewis, Jerry Walls, Richard Swinburne and Raymond VanArragon as holding it, Walls in *Hell: The Logic of Damnation* (University of Notre Dame Press 1992).
-- Talbott's entry and Ragland's both lay out the infinite seriousness argument without naming anyone who currently defends it. Oliver D. Crisp, "Divine Retribution: A Defence", *Sophia* 42:2 (2003), 35–52, defends a retributive view of divine punishment against Talbott, but only the abstract was reachable and it does not name the principle.
+- Talbott's entry and Ragland's both lay out the infinite seriousness argument without naming anyone who currently defends it. Oliver D. Crisp, "Divine Retribution: A Defence", *Sophia* 42:2 (2003), 35–52, defends a retributive view of divine punishment against Talbott.
 
 # Limits
 - It reaches retributive models of hell and nothing else. Against the choice model it has no purchase, because that model denies its target rather than answering it.
@@ -37,5 +38,5 @@ What Adams argues against is what she calls Anselm's principle, that liability t
 - Both principal sources argue toward universalism. Talbott is a universalist, and Ragland's bibliography describes Adams's 1993 chapter as advocating it. The 1975 paper does not: it ends with three options and no verdict.
 - The exits are not settled on the text. Augustine argued from the parallel in Matthew 25:46 that either both are finite or both are unending, and since the life of the saints is unending so is the punishment. Anna Wierzbicka reports that in *Cognitive Semantics* 10 (2024), 321–322. She accepts the parallelism, rejects the assumption that αἰώνιος meant endless, and paraphrases it "no end in view". She is a linguist writing in a semantics journal.
 - The age-long reading is contested. In a reader comment under Ramelli and Konstan's response at *Bryn Mawr Classical Review* 2009.02.51, Michael Pakaluk argues Matthew 25:46 would remain a very big counterexample if the test were asymmetric usage in one context.
-- The sourcing is lopsided in reach. Adams can be read in full, while the current academic case for Anselm's principle could be reached only in abstract. The ACUTE report is 26 years old, and the only reachable claims that conditionalism is gaining ground are advocacy: Bauckham's foreword, and ACUTE reporting others' concerns.
+- The sourcing is lopsided. The ACUTE report is 26 years old, and the claims that conditionalism is gaining ground come from advocacy: Bauckham's foreword, and ACUTE reporting others' concerns.
 - It says nothing about whether anyone is in hell, or whether God is just on other counts.
