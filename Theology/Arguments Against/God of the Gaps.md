@@ -64,7 +64,7 @@ Put in current terms by [[Sean Carroll]]: "Over the past five hundred years, the
 [^plantinga-1997]: Alvin Plantinga, "Methodological Naturalism? Part 2", *Origins & Design* 18/2 (1997), 22–34.
 [^aristotle-meteor]: Aristotle, *Meteorologica* II.9, 369a10–369b11.
 [^seneca-nq]: Seneca, *Naturales Quaestiones* 2.32.2.
-[^schlegel-2024]: K. Schlegel, "Lightning and thunder explanations in encyclopedias", *History of Geo- and Space Sciences* 15 (2024), 71–80.
+[^schlegel-2024]: Kristian Schlegel, "Lightning and thunder explanations in encyclopedias – from ancient Greece to Wikipedia", *History of Geo- and Space Sciences* 15 (2024), 71–80.
 [^white-1896]: Andrew Dickson White, *A History of the Warfare of Science with Theology in Christendom* (D. Appleton, 1896), vol. 1, ch. 11, note 262.
 [^priestley-1775]: Joseph Priestley, *The History and Present State of Electricity*, 3rd ed. (London, 1775), vol. 1, 407–408 and 462–467.
 [^russell-2002]: Colin A. Russell, "The Conflict of Science and Religion", in Gary B. Ferngren (ed.), *Science and Religion: A Historical Introduction* (Johns Hopkins University Press, 2002).

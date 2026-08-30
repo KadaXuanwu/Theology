@@ -40,7 +40,7 @@ Philosophers call this case non-resistant non-belief, meaning unbelief that does
 - [[Creation Alone Doesn't Point to God]] why the looking comes up empty.
 - [[Experiential Confirmation Doesn't Distinguish Religions]] evidence only after commitment.
 
-[^aquinas-st-ii-ii-10]: Aquinas, *Summa Theologiae* II-II q.10 a.1.
+[^aquinas-st-ii-ii-10]: Aquinas, *Summa theologiae* II-II q.10 a.1.
 [^lumen-gentium]: *Lumen Gentium* 16 (1964).
 [^catechism]: *Catechism of the Catholic Church*, §846, §847 and §1260.
 [^plantinga-wcb]: Alvin Plantinga, *Warranted Christian Belief* (Oxford University Press, 2000).

@@ -26,6 +26,6 @@ The bacterial cause of tuberculosis was identified in 1882, when [[Robert Koch]]
 # Source
 - Source checks still open on this note are tracked in the repo under `Verification/`.
 
-[^smith-2025]: David L. Smith, "The King's Evil Without the King: The Royal Touch during the Interregnum", *Journal of Religious History* 49, no. 4 (2025), 439–454, DOI 10.1111/1467-9809.13158. Peer reviewed and open access.
+[^smith-2025]: David L. Smith, "The King's Evil Without the King: The Royal Touch during the Interregnum", *Journal of Religious History* 49/4 (2025), 439–454, DOI 10.1111/1467-9809.13158. Peer reviewed and open access.
 [^bloch-1924]: Marc Bloch, *Les Rois thaumaturges* (1924), translated as *The Royal Touch: Sacred Monarchy and Scrofula in England and France* (Routledge & Kegan Paul, 1973). The foundational study of the practice.
 [^koch-1884]: Robert Koch, "Die Aetiologie der Tuberkulose", *Mittheilungen aus dem Kaiserlichen Gesundheitsamte* 2 (1884), 1–88.
