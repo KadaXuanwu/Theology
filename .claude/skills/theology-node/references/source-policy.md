@@ -37,6 +37,8 @@ Replace any yes or no notion of having read something. Report one of these:
 
 Files the user has provided sit in `sources/` in the working directory, or were attached to the conversation. Check there **before** searching the web.
 
+**`sources/` is gitignored and must stay that way.** This repo is public and a push to `main` deploys the site, so a copyrighted PDF committed here is a copyrighted PDF published to the world. Never `git add` anything from `sources/`, never quote a supplied file at length into a node, and never suggest the user commit one. Read it, cite it properly, quote it the way any paper would, and leave the file where it is. If you ever find `sources/` tracked, stop and tell the user before doing anything else.
+
 A supplied file counts as `full` access, since you can actually read it. That is the whole of the advantage. It does **not** get a tier or a register for having been supplied, and it does not outrank anything: work out its tier and register from what it is, exactly as you would for a source you found yourself. A conference handout the user happens to own is still Tier C. Cite it by its real bibliographic details, not by filename.
 
 ## Known limits of this pipeline

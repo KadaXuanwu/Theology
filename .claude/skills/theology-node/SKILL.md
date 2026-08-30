@@ -32,6 +32,8 @@ Never skip this. The verifier's cut authority depends on it.
 
 Then collect supplied sources. Anything the user attached to the conversation, or dropped in a `sources/` folder, goes to the researchers and the verifier. A supplied file is read at `full` access, which is what makes it worth having, but it earns no special tier or register and gets weighed like any other source. Tell the user this so they know what attaching something does and does not buy.
 
+`sources/` is gitignored and stays that way. The repo is public. Never commit a supplied file and never ask the user to. See `references/source-policy.md`.
+
 ## Step 2: Pick the run mode
 
 - **Full run**: new node, or a rework that adds or changes substance. Run all phases.
