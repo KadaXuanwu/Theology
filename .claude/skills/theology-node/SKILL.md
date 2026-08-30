@@ -30,7 +30,7 @@ If the node already exists, copy it verbatim to `existing.md` in a scratch direc
 
 Never skip this. The verifier's cut authority depends on it.
 
-Then collect supplied sources. Anything the user attached to the conversation, or dropped in a `sources/` folder, goes to the researchers and the verifier. A PDF the user provided is Tier A at full access and beats anything findable online, so tell the user up front that attaching paywalled material they have legitimate access to is the single biggest quality lever available.
+Then collect supplied sources. Anything the user attached to the conversation, or dropped in a `sources/` folder, goes to the researchers and the verifier. A supplied file is read at `full` access, which is what makes it worth having, but it earns no special tier or register and gets weighed like any other source. Tell the user this so they know what attaching something does and does not buy.
 
 ## Step 2: Pick the run mode
 

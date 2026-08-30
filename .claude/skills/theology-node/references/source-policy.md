@@ -35,7 +35,9 @@ Replace any yes or no notion of having read something. Report one of these:
 
 ## Local sources
 
-Files the user has provided sit in `sources/` in the working directory, or were attached to the conversation. Check there **before** searching the web. A PDF the user supplied is Tier A at `full` access and outranks anything findable online. Cite it by its real bibliographic details, not by filename.
+Files the user has provided sit in `sources/` in the working directory, or were attached to the conversation. Check there **before** searching the web.
+
+A supplied file counts as `full` access, since you can actually read it. That is the whole of the advantage. It does **not** get a tier or a register for having been supplied, and it does not outrank anything: work out its tier and register from what it is, exactly as you would for a source you found yourself. A conference handout the user happens to own is still Tier C. Cite it by its real bibliographic details, not by filename.
 
 ## Known limits of this pipeline
 
