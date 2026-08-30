@@ -56,9 +56,9 @@ Read the density section in `references/style.md` first. Every sentence carries 
 
 The word range is a floor and a ceiling, not a target. Say what the sources carry, then stop.
 
-Rough shares, describing what usually happens, not a quota to fill:
+No section has a share to fill. Each one runs as long as its content, so a simple claim gets a short Description even when Based On and Countered By run long.
 
-- Description: normally the longest section, since it states the claim and why it is held
+- Description: the claim and why someone holds it, and nothing else. Four sentences is fine if the point is simple. Detail that belongs to a source goes in Based On, and a qualification goes in Limits
 - Based On or Evidence or Origins: whatever the sourcing needs
 - Countered By, Disputed By: enough to state the strong counter and say it is the strong one
 - Limits: never empty. A node with no Limits section has not been thought about. Register asymmetry that could not be fixed goes here.
