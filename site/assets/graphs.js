@@ -10,7 +10,10 @@ import { mount as mountGraph } from "./graph.js"
 import { noteUrl } from "./nav.js"
 import { readSet, writeSet } from "./store.js"
 
-const HIDDEN_KEY = "hiddenGraphKinds"
+// The key carries a version because the default changed after readers already
+// had a set stored. Reusing the old name would leave anyone who had ever
+// touched the legend with people switched on for ever.
+const HIDDEN_KEY = "hiddenGraphKinds2"
 
 // People are a reference layer, not a step in an argument, and there are more
 // of them than of everything else put together. The rail is too small to carry
@@ -85,7 +88,9 @@ export function initGraphs() {
       else hidden.add(kind)
       writeSet(HIDDEN_KEY, hidden)
       paintToggles()
-      for (const { el, graph } of graphs) graph.setVisibleKinds(kindsFor(el))
+      // A category switched off is a different set of notes, so the graph is
+      // laid out again rather than redrawn with holes in it.
+      rebuild()
     })
   }
 
@@ -99,16 +104,15 @@ export function initGraphs() {
     // different set of notes, so it is a different graph rather than the same
     // one drawn differently.
     const build = () => {
-      for (const { graph } of graphs) graph.destroy()
+      for (const graph of graphs) graph.destroy()
       graphs.length = 0
 
       for (const el of mounts) {
         const driven = el.dataset.graph === "tags"
         const local = el.dataset.graph === "local"
         const focus = focusOf(el, data)
-        graphs.push({
-          el,
-          graph: mountGraph(el, data, {
+        graphs.push(
+          mountGraph(el, data, {
             focus,
             // The rail shows immediate neighbours; the full page view goes a
             // hop further, because one hop leaves most notes looking almost
@@ -123,7 +127,7 @@ export function initGraphs() {
               window.location.href = noteUrl(node.url)
             },
           }),
-        })
+        )
       }
     }
 

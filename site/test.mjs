@@ -878,10 +878,14 @@ console.log("the legend filters the graph")
 
   // the drawing side has to honour it, links included
   const graphSource = await readFile(resolve(repoRoot, "site/assets/graph.js"), "utf8")
-  check("the graph exposes a way to change what is shown", graphSource.includes("function setVisibleKinds"))
+  // A hidden category leaves the data before the layout runs, not after. Drawn
+  // and then removed, its notes still hold their places in the ring the layout
+  // starts from, and the ones left sit around the hole.
+  check("a hidden category is filtered before the layout", /const shown = kinds \? ofKinds\(data, kinds, seeded\) : data/.test(graphSource))
+  check("and before the walk out from the focus", /neighbourhood\(shown, seeds, depth\)/.test(graphSource))
   check(
     "hiding a category drops the links through it",
-    graphSource.includes("shown.has(l.source.id) && shown.has(l.target.id)"),
+    graphSource.includes("kept.has(l.source) && kept.has(l.target)"),
   )
   check("and hiding everything says so rather than going blank", graphSource.includes("Every category is hidden"))
   check(
@@ -895,10 +899,9 @@ console.log("the legend filters the graph")
     "it reaches graphs on pages without a legend",
     appSource.includes("for (const node of data.nodes) allKinds.add(node.kind)"),
   )
-  check(
-    "and every graph on the page updates together",
-    appSource.includes("for (const { el, graph } of graphs) graph.setVisibleKinds(kindsFor(el))"),
-  )
+  // Same rule the tags filter follows: a different set of notes is a different
+  // graph, so switching a category lays it out again rather than repainting it.
+  check("and every graph on the page is laid out again", /paintToggles\(\)\n\s+\/\/[\s\S]{0,160}?rebuild\(\)/.test(appSource))
   // The rail is small enough that the reference layer would crowd out the
   // argument, so it drops people whatever the legend is set to.
   check("the rail never carries the reference layer", /shown\.delete\(PERSON\)/.test(appSource))
@@ -1309,17 +1312,17 @@ console.log("tags are a way in, and they combine")
   const mounts = await client("graphs.js")
   check(
     "picking again rebuilds the map rather than repainting it",
-    /for \(const \{ graph \} of graphs\) graph\.destroy\(\)/.test(mounts) && /rebuild = build/.test(mounts),
+    /for \(const graph of graphs\) graph\.destroy\(\)/.test(mounts) && /rebuild = build/.test(mounts),
   )
   check("the filter is what tells it which notes", /export function setTagFocus/.test(mounts) && /setTagFocus\(matched \? \[\.\.\.matched\] : null\)/.test(app))
   check("the notes it was given are what it focuses on", /if \(el\.dataset\.graph === "tags"\) return tagFocus/.test(mounts))
   // A combination no note carries is an empty graph. Reading an empty focus as
   // "no focus" would answer it with the whole vault instead.
-  check("a combination nothing matches gives an empty map", /const subset = focus === null \? data : neighbourhood\(data, seeds, depth\)/.test(graph))
+  check("a combination nothing matches gives an empty map", /const subset = focus === null \? shown : neighbourhood\(shown, seeds, depth\)/.test(graph))
   check("and says why", /emptyLabel: driven \? "No note carries that combination\." : undefined/.test(mounts))
   // The notice belongs to the mount that wrote it, or the next mount draws its
   // canvas underneath a message about a selection that is over.
-  check("the notice goes when that mount does", /el\.innerHTML = `<p class="graph-empty">\$\{emptyLabel\}<\/p>`[\s\S]*?destroy\(\) \{\r?\n\s*el\.innerHTML = ""/.test(graph))
+  check("the notice goes when that mount does", /el\.innerHTML = `<p class="graph-empty">\$\{message\}<\/p>`[\s\S]*?destroy\(\) \{\r?\n\s*el\.innerHTML = ""/.test(graph))
 
   // What the two depths actually come to, against the real graph.
   const data = await readGraphData()

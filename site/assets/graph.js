@@ -255,12 +255,24 @@ function readColors(root) {
   }
 }
 
+// A hidden category is not in the graph at all: the walk out from the focus
+// never passes through it, and the ring the layout starts from is spread over
+// what is left. Filtering after the layout instead leaves holes in that ring
+// and hops that run through a node nobody can see, which is what the rail
+// looked like when people were drawn and then removed.
+function ofKinds(data, kinds, seeded) {
+  const nodes = data.nodes.filter((n) => kinds.has(n.kind) || seeded.has(n.id))
+  const kept = new Set(nodes.map((n) => n.id))
+  return { nodes, links: data.links.filter((l) => kept.has(l.source) && kept.has(l.target)) }
+}
+
 export function mount(el, data, options = {}) {
   const {
     focus = null,
     depth = 1,
     showLabels = "hover",
     onNavigate,
+    kinds = null,
     emptyLabel = "Nothing links here yet.",
   } = options
 
@@ -273,13 +285,17 @@ export function mount(el, data, options = {}) {
   // A focus of null is the whole map. A focus that is an empty list is not the
   // same thing: it is a selection that came back with nothing, and the honest
   // answer to that is an empty graph rather than every note in the vault.
-  const subset = focus === null ? data : neighbourhood(data, seeds, depth)
+  const shown = kinds ? ofKinds(data, kinds, seeded) : data
+  const subset = focus === null ? shown : neighbourhood(shown, seeds, depth)
   if (subset.nodes.length === 0) {
-    el.innerHTML = `<p class="graph-empty">${emptyLabel}</p>`
+    // Switching every category off is a different emptiness from a note
+    // nothing links to, and saying so is what tells the reader it is their own
+    // filter looking back at them.
+    const message = kinds && shown.nodes.length === 0 ? "Every category is hidden" : emptyLabel
+    el.innerHTML = `<p class="graph-empty">${message}</p>`
     // The message is this mount's, so tearing the mount down takes it away.
     // Without that a later mount draws its canvas underneath the old notice.
     return {
-      setVisibleKinds() {},
       destroy() {
         el.innerHTML = ""
       },
@@ -324,23 +340,6 @@ export function mount(el, data, options = {}) {
       map.get(link.target.id)?.add(link.source.id)
     }
     return map
-  }
-
-  // Hiding a category takes its notes out of the layout entirely, so the links
-  // that ran through them go too and the rest closes up around the gap. What
-  // the graph was opened for is exempt: hiding its category would leave the
-  // reader looking at the neighbourhood of a note that is not on screen.
-  function setVisibleKinds(kinds) {
-    nodes = kinds ? allNodes.filter((n) => kinds.has(n.kind) || seeded.has(n.id)) : allNodes
-    const shown = new Set(nodes.map((n) => n.id))
-    links = allLinks.filter((l) => shown.has(l.source.id) && shown.has(l.target.id))
-    adjacency = buildAdjacency(nodes, links)
-    hovered = null
-    dragging = null
-    canvas.title = ""
-    presettle()
-    fit()
-    draw()
   }
 
   const camera = { x: 0, y: 0, scale: 1 }
@@ -428,16 +427,6 @@ export function mount(el, data, options = {}) {
     if (syncSize(canvas.clientWidth, canvas.clientHeight)) fit()
     if (width === 0) return
     ctx.clearRect(0, 0, width, height)
-
-    if (nodes.length === 0) {
-      ctx.globalAlpha = 1
-      ctx.fillStyle = colors.muted
-      ctx.font = "400 13px system-ui, sans-serif"
-      ctx.textAlign = "center"
-      ctx.textBaseline = "middle"
-      ctx.fillText("Every category is hidden", width / 2, height / 2)
-      return
-    }
 
     const near = hovered ? adjacency.get(hovered.id) : null
     const dimmed = (node) => hovered && node !== hovered && !near.has(node.id)
@@ -804,12 +793,10 @@ export function mount(el, data, options = {}) {
   // place reads as a glitch rather than as an animation, so the reader only
   // ever sees the settled graph. The start positions are seeded, so this lands
   // in the same place every load.
-  if (options.kinds) setVisibleKinds(options.kinds)
-  else presettle()
+  presettle()
   resize()
 
   return {
-    setVisibleKinds,
     destroy() {
       if (frame) cancelAnimationFrame(frame)
       observer.disconnect()
