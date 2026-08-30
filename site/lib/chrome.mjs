@@ -150,7 +150,8 @@ function overlays() {
     <p class="search-hint">Searches titles, tags and body text.</p>
   </div>
 </div>
-<div class="preview-card" hidden></div>`
+<div class="preview-card" hidden></div>
+<div class="footnote-card" hidden><span class="fn-card-text"></span><button type="button" class="fn-copy">Copy</button></div>`
 }
 
 // Only rendered when a chat endpoint is configured, so the pages of a fork

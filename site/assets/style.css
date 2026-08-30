@@ -1683,6 +1683,104 @@ body.is-graph .graph-head .lede {
   color: var(--muted);
 }
 
+/* Footnotes --------------------------------------------------------------- */
+
+/* The marker in the prose. Kept small and quiet: it is a way in to the
+   citation, not something to read past on every sentence. */
+sup.fn {
+  line-height: 0;
+}
+.fn-ref {
+  padding: 0 0.1em;
+  font-size: 0.72em;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  color: var(--muted);
+  border-bottom: 0;
+}
+.fn-ref:hover,
+.fn-ref:focus-visible {
+  color: var(--text);
+}
+sup.fn.is-broken {
+  color: var(--danger, #b3261e);
+  cursor: help;
+}
+
+/* The list under the note. It is the copy of record. The card reads from it,
+   it is what prints, and it is what a reader without JavaScript follows. */
+.footnotes {
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.footnotes ol {
+  margin: 0;
+  padding-left: 1.4rem;
+}
+.footnotes li {
+  margin-bottom: 0.45rem;
+}
+.footnotes li:target .fn-text {
+  color: var(--text);
+}
+.fn-back {
+  text-decoration: none;
+  opacity: 0.6;
+}
+.fn-back:hover {
+  opacity: 1;
+}
+
+/* The card. Same shape as the note preview, but this one takes the pointer,
+   because the whole point is being able to reach the copy button inside it. */
+.footnote-card {
+  position: absolute;
+  z-index: 60;
+  width: 24rem;
+  max-width: calc(100vw - 2rem);
+  padding: 0.8rem 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.footnote-card[hidden] {
+  display: none;
+}
+.footnote-card .fn-card-text {
+  display: block;
+  color: var(--text);
+}
+.footnote-card .fn-copy {
+  margin-top: 0.6rem;
+  padding: 0.25rem 0.6rem;
+  font: inherit;
+  font-size: 0.78rem;
+  color: var(--muted);
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) / 1.6);
+  cursor: pointer;
+}
+.footnote-card .fn-copy:hover {
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+.footnote-card .fn-copy[data-copied] {
+  color: var(--text);
+}
+
+@media print {
+  .footnote-card {
+    display: none;
+  }
+}
+
 /* Responsive -------------------------------------------------------------- */
 
 @media (max-width: 1260px) {

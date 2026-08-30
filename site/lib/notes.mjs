@@ -45,6 +45,12 @@ export function linkNotes(notes, { rootPrefix, warn } = {}) {
     for (const target of renderer.state.broken) {
       warn?.(`${note.title}: [[${target}]] does not match any note`)
     }
+    for (const key of renderer.state.brokenFootnotes) {
+      warn?.(`${note.title}: [^${key}] has no citation at the foot of the note`)
+    }
+    for (const key of renderer.state.orphanFootnotes) {
+      warn?.(`${note.title}: the citation [^${key}] is never cited in the text`)
+    }
 
     note.text = htmlToText(note.html)
     // Every note opens with a Description heading, which says nothing about

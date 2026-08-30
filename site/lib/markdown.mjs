@@ -15,11 +15,54 @@ export function escapeHtml(value) {
 // [[Target]], [[Target|shown text]], [[Target#Heading]] and the two combined.
 const WIKILINK = /^\[\[([^\]|#]+)(?:#([^\]|]+))?(?:\|([^\]]+))?\]\]/
 
+// Footnotes carry the citations. `[^key]` in the prose, `[^key]: ...` at the
+// foot of the note. Obsidian and GitHub both render that shape on their own,
+// which is the point: the raw file has to read properly outside this site.
+const FOOTNOTE_REF = /^\[\^([^\]\s]+)\]/
+const FOOTNOTE_DEF = /^\[\^([^\]\s]+)\]:[ \t]*(.*)$/
+
+// Definitions are lifted out before marked sees the body, so a citation is
+// rendered once and every place that cites it points at the same list item.
+// A line indented under a definition continues it.
+export function extractFootnotes(markdown) {
+  const defs = new Map()
+  const kept = []
+  let open = null
+
+  for (const line of markdown.split(/\r?\n/)) {
+    const def = FOOTNOTE_DEF.exec(line)
+    if (def) {
+      open = def[1]
+      defs.set(open, def[2].trim())
+      continue
+    }
+    if (open && /^[ \t]+\S/.test(line)) {
+      defs.set(open, `${defs.get(open)} ${line.trim()}`.trim())
+      continue
+    }
+    open = null
+    kept.push(line)
+  }
+
+  return { body: kept.join("\n"), defs }
+}
+
 // One renderer per page so headings and links can be collected as they render.
 // `resolve(title)` returns { url, title } for a known note, or null.
 export function createRenderer({ resolve, rootPrefix }) {
-  const state = { headings: [], links: new Set(), broken: [] }
+  const state = {
+    headings: [],
+    links: new Set(),
+    broken: [],
+    footnotes: [],
+    brokenFootnotes: [],
+    orphanFootnotes: [],
+  }
   const usedIds = new Map()
+
+  // Per render: the definitions lifted off the top of the file, the order the
+  // prose first reaches for each one, and how many times each has been cited.
+  const notes = { defs: new Map(), order: [], seen: new Map() }
 
   const headingId = (text) => {
     const base = slugify(text) || "section"
@@ -70,6 +113,41 @@ export function createRenderer({ resolve, rootPrefix }) {
           )}" data-note="${escapeHtml(note.title)}">${text}</a>`
         },
       },
+      {
+        name: "footnote",
+        level: "inline",
+        start: (src) => src.indexOf("[^"),
+        tokenizer(src) {
+          const match = FOOTNOTE_REF.exec(src)
+          if (!match) return undefined
+          return { type: "footnote", raw: match[0], key: match[1] }
+        },
+        renderer(token) {
+          const { key } = token
+          if (!notes.defs.has(key)) {
+            state.brokenFootnotes.push(key)
+            return `<sup class="fn is-broken" title="No footnote named &quot;${escapeHtml(
+              key,
+            )}&quot;">?</sup>`
+          }
+
+          if (!notes.order.includes(key)) notes.order.push(key)
+          const number = notes.order.indexOf(key) + 1
+
+          // A citation used twice needs two distinct anchors, or the jump back
+          // from the list lands on whichever the browser saw first.
+          const nth = (notes.seen.get(key) ?? 0) + 1
+          notes.seen.set(key, nth)
+          const slug = slugify(key)
+          const refId = nth === 1 ? `fnref-${slug}` : `fnref-${slug}-${nth}`
+
+          // An anchor rather than a button, so it still works as a jump to the
+          // list with no JavaScript at all. The card is the enhancement.
+          return `<sup class="fn"><a class="fn-ref" id="${refId}" href="#fn-${slug}" data-fn="${escapeHtml(
+            slug,
+          )}" aria-label="Reference ${number}">${number}</a></sup>`
+        },
+      },
     ],
     renderer: {
       heading({ tokens, depth }) {
@@ -90,8 +168,40 @@ export function createRenderer({ resolve, rootPrefix }) {
     },
   })
 
+  // The list under the note. It is the one copy of each citation: the hover
+  // card reads from it, so there is nothing to keep in step. With no
+  // JavaScript, or on paper, it is the ordinary apparatus a reader expects.
+  const footnoteList = () => {
+    if (!notes.order.length) return ""
+    const items = notes.order
+      .map((key) => {
+        const slug = slugify(key)
+        const html = marked.parseInline(notes.defs.get(key))
+        state.footnotes.push({ key: slug, html })
+        return `<li id="fn-${slug}"><span class="fn-text">${html}</span> <a class="fn-back" href="#fnref-${slug}" aria-label="Back to reference">↩</a></li>`
+      })
+      .join("\n")
+    return `\n<section class="footnotes" aria-label="References">\n<ol>\n${items}\n</ol>\n</section>\n`
+  }
+
   return {
-    render: (markdown) => marked.parse(markdown),
+    render: (markdown) => {
+      const { body, defs } = extractFootnotes(markdown)
+      notes.defs = defs
+      notes.order = []
+      notes.seen = new Map()
+
+      const html = marked.parse(body)
+      const list = footnoteList()
+
+      // A citation nobody cites is dead weight, and silently dropping it is how
+      // a reference goes missing without anyone noticing.
+      for (const key of defs.keys()) {
+        if (!notes.order.includes(key)) state.orphanFootnotes.push(key)
+      }
+
+      return html + list
+    },
     state,
   }
 }
@@ -101,6 +211,9 @@ export function createRenderer({ resolve, rootPrefix }) {
 export function htmlToText(html) {
   return html
     .replace(/<a class="anchor"[^>]*>#<\/a>/g, "")
+    // Reference markers are numbers with no space around them, so left in they
+    // would weld a digit onto the end of a sentence in every excerpt.
+    .replace(/<sup class="fn[^"]*">[\s\S]*?<\/sup>/g, "")
     .replace(/<[^>]+>/g, " ")
     .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")

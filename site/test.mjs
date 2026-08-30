@@ -1918,6 +1918,100 @@ console.log("a preview waits to be asked for")
   )
 }
 
+console.log("a citation is written once and pointed at")
+{
+  const { extractFootnotes } = await import("./lib/markdown.mjs")
+
+  // The definitions come off the body before anything else parses it, so the
+  // prose the reader sees never contains them.
+  const lifted = extractFootnotes(
+    ["Claim one.[^a] Claim two.[^b]", "", "[^a]: Author, *Title* (Press, 2020).", "[^b]: Someone else."].join("\n"),
+  )
+  check("definitions are lifted out of the body", !lifted.body.includes("[^a]:"), lifted.body)
+  check("the reference in the prose stays", lifted.body.includes("Claim one.[^a]"))
+  check("every definition is collected", lifted.defs.size === 2, String(lifted.defs.size))
+  check("with its text", lifted.defs.get("a") === "Author, *Title* (Press, 2020).", lifted.defs.get("a"))
+
+  // A citation long enough to wrap gets indented under itself, the way any
+  // markdown editor will leave it after a reflow.
+  const wrapped = extractFootnotes(["Text.[^long]", "", "[^long]: First part,", "    second part."].join("\n"))
+  check("an indented line continues the citation above it", wrapped.defs.get("long") === "First part, second part.", wrapped.defs.get("long"))
+
+  const dist = resolve(repoRoot, "dist")
+  const page = await readFile(resolve(dist, "evidence/the-royal-touch/index.html"), "utf8")
+
+  const markers = page.match(/<sup class="fn">[\s\S]*?<\/sup>/g) ?? []
+  check("the prose carries reference markers", markers.length >= 3, `${markers.length} markers`)
+
+  // An anchor, not a button: with no JavaScript at all the marker still takes
+  // the reader to the citation. The card is only ever an improvement on that.
+  check("a marker is a link to the citation", markers.every((m) => /href="#fn-[a-z0-9-]+"/.test(m)), markers[0])
+  check("and says which number it is", /aria-label="Reference \d+"/.test(markers[0]), markers[0])
+
+  const list = page.match(/<section class="footnotes"[\s\S]*?<\/section>/)?.[0] ?? ""
+  check("the citations are listed under the note", list.includes("<ol>"), list.slice(0, 60))
+  check("each list item is addressable", /<li id="fn-[a-z0-9-]+">/.test(list), list.slice(0, 200))
+  check("the citation keeps its formatting", list.includes("<em>Journal of Religious History</em>"))
+  check("and offers the way back", list.includes('class="fn-back"'))
+
+  // One citation used three times is still one list entry, or the same
+  // reference would be numbered 1, 2 and 3 in the same note.
+  const smith = (page.match(/href="#fn-smith-2025"/g) ?? []).length
+  const smithEntries = (list.match(/id="fn-smith-2025"/g) ?? []).length
+  check("a citation used repeatedly is listed once", smithEntries === 1 && smith > 1, `${smith} refs, ${smithEntries} entries`)
+
+  // ...but each of those markers needs its own anchor, or the jump back from
+  // the list lands on whichever one the browser happened to see first.
+  const refIds = page.match(/id="fnref-[a-z0-9-]+"/g) ?? []
+  check("while each marker keeps its own anchor", new Set(refIds).size === refIds.length, refIds.join(" "))
+
+  check("the card the markers open is on the page", page.includes('<div class="footnote-card"'))
+  check("with something to copy from", page.includes('class="fn-copy"'))
+}
+
+console.log("a reference marker stays out of the prose that gets quoted")
+{
+  const { htmlToText } = await import("./lib/markdown.mjs")
+  // A marker is a bare number with no space around it, so left in it welds
+  // itself to the end of a sentence in every excerpt and search result.
+  const text = htmlToText('<p>The rite ended in 1732.<sup class="fn"><a class="fn-ref">1</a></sup> Then nothing.</p>')
+  check("the number does not survive into the text", !/1732\.\s*1/.test(text), text)
+  check("the sentence itself does", text.includes("The rite ended in 1732."), text)
+
+  const search = JSON.parse(
+    await readFile(
+      resolve(repoRoot, "dist", (await (await import("node:fs/promises")).readdir(resolve(repoRoot, "dist"))).find((f) => /^search-index\.[a-f0-9]+\.json$/.test(f))),
+      "utf8",
+    ),
+  )
+  const royal = search.find((n) => n.title === "The Royal Touch")
+  check("and no excerpt in the index carries one", royal ? !/\d{4}\.\d/.test(royal.excerpt ?? "") : true, royal?.excerpt ?? "no note")
+}
+
+console.log("the citation card can be reached and taken away")
+{
+  const source = await client("footnotes.js")
+
+  const open = Number(source.match(/const OPEN_DELAY = (\d+)/)?.[1])
+  const close = Number(source.match(/const CLOSE_DELAY = (\d+)/)?.[1])
+  check("opening waits, the way the note preview does", Number.isFinite(open) && open >= 250, `${open}ms`)
+  check("closing waits too", Number.isFinite(close), `${close}ms`)
+  // The gap between the marker and the card is a few pixels of nothing. Closing
+  // the instant the pointer leaves the marker makes the copy button
+  // unreachable, which is the one thing the card exists for.
+  check("but not so fast the card cannot be entered", close > 0 && close < open, `${close}ms close vs ${open}ms open`)
+  check("and entering the card cancels the close", source.includes('event.target.closest(".footnote-card")'))
+
+  // A touch screen has no hover to offer, so the tap has to do it.
+  check("a tap opens the card instead of jumping", source.includes("event.preventDefault()"))
+  check("tapping the same marker again lets the jump happen", source.includes("anchor === ref"))
+
+  check("the card reads the citation from the list", source.includes("getElementById(`fn-${ref.dataset.fn}`)"))
+  // Refusing the clipboard silently would look exactly like copying worked.
+  check("a refused clipboard selects the text instead", source.includes("selectNodeContents"))
+  check("escape closes it", source.includes('event.key === "Escape"'))
+}
+
 console.log("the tab icon has no plate behind it")
 {
   const svg = await readFile(resolve(repoRoot, "site/assets/favicon.svg"), "utf8")
