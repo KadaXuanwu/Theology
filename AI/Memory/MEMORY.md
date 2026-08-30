@@ -9,3 +9,4 @@ Index of things to remember across sessions. One line per memory file.
 - [Link direction](link-direction.md) — nothing links up the stack, and an argument's Description stays clean
 - [One node at a time](one-node-at-a-time.md) — only the node you were told to edit, everything else gets suggested
 - [Palette rules](palette-rules.md) — colour means the map, ink means a source, and why the numbers are measured
+- [Citation year drift](citation-year-drift.md) — DOIs carry the online-first year, so take the year from Crossref
