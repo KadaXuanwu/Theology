@@ -16,8 +16,9 @@ Every note is a node. Nodes link to each other with Obsidian style `[[Exact File
 | `Theology/Arguments Against` | Arguments that challenge it |
 | `Theology/Claims` | Statements an argument depends on, used by both categories |
 | `Theology/Evidence` | Artefacts, studies and texts a claim can point to |
+| `Theology/People` | Anyone a node names: what they worked on, what they published, and what position they stated in their own words |
 
-Each folder has a `_Template.md` with the section headings for that node type. Frontmatter carries `type`, `status` (`stub`, `drafted` or `sourced`) and `tags`.
+Every folder except `People` has a `_Template.md` with the section headings for that node type. Frontmatter carries `type`, `status` (`stub`, `drafted` or `sourced`) and `tags`, plus `kind` on evidence and people, and `born`, `died` and `location` on people.
 
 Nothing gets proved twice. If two arguments need the same claim, the claim becomes its own node and both link to it.
 
@@ -27,9 +28,10 @@ Links never run up the stack.
 
 | A node in | May link to |
 | --- | --- |
-| `Arguments For`, `Arguments Against` | `Claims`, `Evidence`, and other arguments |
-| `Claims` | `Claims`, `Evidence` |
-| `Evidence` | `Evidence` |
+| `Arguments For`, `Arguments Against` | `Claims`, `Evidence`, `People`, and other arguments |
+| `Claims` | `Claims`, `Evidence`, `People` |
+| `Evidence` | `Evidence`, `People` |
+| `People` | `People` |
 
 One extra restriction: the `Description` of an argument may not link another argument. The argument gets stated on its own terms before anything is thrown at it. Every other section may link across.
 
@@ -39,7 +41,7 @@ Nothing points upward by hand, because the site fills that direction in. It work
 
 - Every factual sentence carries a source someone else can open.
 - Limits go in the node, not left out. A weak step in an argument is written down as a weak step.
-- A `sourced` node's body stays between 300 and 1000 words. A stub or a draft can be any length.
+- A `sourced` node's body runs 500 to 2000 words, and most sit around 1000. A stub, a draft or a person node can be any length.
 - At least half the sources are academic register. Advocacy publishing never carries a fact on its own.
 
 ## Website
@@ -71,6 +73,7 @@ The Worker is deployed by hand rather than by CI, so no Cloudflare token is stor
 
 ```
 Theology/                      the vault
+Verification/                  open source checks waiting on a human, never published
 site/                          the static site generator and its assets
 worker/                        the Cloudflare Worker behind the chat bubble
 .github/workflows/deploy.yml   builds and publishes the site on every push

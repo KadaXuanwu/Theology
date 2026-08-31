@@ -1,6 +1,6 @@
 # theology-node
 
-A Claude skill that researches, writes and fact checks a single node for a Theology vault: an Obsidian style markdown collection of `Arguments For`, `Arguments Against`, `Claims` and `Evidence` nodes that cross reference each other with `[[Exact File Name]]` links.
+A Claude skill that researches, writes and fact checks a single node for a Theology vault: an Obsidian style markdown collection of `Arguments For`, `Arguments Against`, `Claims`, `Evidence` and `People` nodes that cross reference each other with `[[Exact File Name]]` links.
 
 The point of the vault is not to settle whether Christianity is true. It is to make every argument traceable back to the claims and evidence it rests on, so a reader can follow the reasoning themselves.
 
@@ -16,15 +16,19 @@ The skill runs a multi agent pipeline over one node:
 | 3 | Verifier, cold | Re-opens every source itself and rules on each factual sentence |
 | 4 | Arbiter | The main conversation applies the verdicts and reports what could not be fixed |
 
+Step 3b sits alongside this: for every person the node names in its prose who has no node in `People/` yet, one more researcher runs and that node gets written too. Those are the only nodes outside the target the skill may create.
+
 The verifier never sees the researcher notes or the writer's reasoning. That is deliberate. It only sees the draft and the sources.
 
 ## Rules the pipeline enforces
 
 - Every factual sentence carries a source the verifier can open. No retrievable source, no entry.
-- A `sourced` node's body stays between 300 and 1000 words. A stub or a draft can be any length.
+- A `sourced` node's body runs 500 to 2000 words, and most sit around 1000. A stub, a draft or a person node can be any length.
 - At least half the sources are academic register. Advocacy publishing never carries a fact on its own.
 - The verifier may cut text written in the current session. It may not cut text that already existed in the node. Pre-existing problems get reported, never silently removed.
 - Gaps are stated plainly instead of padded. A missing counter position is reported, not manufactured.
+- A node never says whether a source was checked. What the pipeline could not confirm goes to `Verification/<Node Title>.md` at the repo root, one entry per open question, for a human to settle.
+- Only the node it was asked for gets written, plus the `People/` nodes the names in it need. Every other change another node needs is posted to chat for the user to apply.
 
 ## Layout
 
@@ -34,7 +38,7 @@ The skill itself lives at `.claude/skills/theology-node` in the repo root, which
 theology-node/
   SKILL.md                 entry point and pipeline definition
   agents/                  one prompt file per agent
-  references/              templates, source tiers, balance rules, style checklist
+  references/              templates, source tiers, citation format, balance rules, style checklist
 ```
 
 `references/` is loaded before the pipeline runs. `agents/` files get pasted into each subagent prompt, since agents start cold and cannot see the conversation.
