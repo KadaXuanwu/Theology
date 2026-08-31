@@ -25,7 +25,7 @@ Always build on top of what is already present and feel free to change or add an
 Don't mention "sides" or similar inside arguments like "Both sides use it, which is why it sits here rather than inside one argument." It's clear by which category the node sits in.
 Claims & Evidence used by both sides.
 
-Links never run up the stack. An argument may link claims, evidence and other arguments, except in its Description, which may not link another argument. A claim may link other claims and evidence, never an argument. An evidence note may link other evidence and nothing above it. The upward direction never gets written by hand. The site works it out and shows it under "Linked from" on every note.
+Links never run up the stack. An argument may link claims, evidence, people and other arguments, except in its Description, which may not link another argument. A claim may link other claims, evidence and people, never an argument. An evidence note may link other evidence and people, nothing above it. A person node links only other people. The upward direction never gets written by hand. The site works it out and shows it under "Linked from" on every note.
 
 Work on one node at a time. Only the node I name gets edited. If the work needs a change in another node, print that change in chat and wait for me to approve it. Never edit a node you were not asked to edit. This is research grade, so a quiet edit I did not ask for is worse than no edit at all.
 

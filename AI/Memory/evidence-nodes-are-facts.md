@@ -5,7 +5,7 @@ metadata:
   type: feedback
 ---
 
-A note in `Theology/Evidence` says what the study found or what the artefact is, and stops there. It does not say which argument the finding helps, does not weigh one reading against another, and does not link to an argument or a claim. Links to other evidence are fine and are the only outgoing links an evidence note should carry.
+A note in `Theology/Evidence` says what the study found or what the artefact is, and stops there. It does not say which argument the finding helps, does not weigh one reading against another, and does not link to an argument or a claim. Links to other evidence, and to the `People/` node of anyone it names, are the only outgoing links an evidence note should carry.
 
 **Why:** Evidence is the shared floor. The same study gets used by nodes that disagree with each other, so a pointer to one of them written into the evidence itself takes a side the folder is not supposed to take, and it duplicates reasoning that already lives in the node doing the arguing. The connection is not lost by leaving it out: arguments and claims link down to the evidence, and the built page lists those under "Linked from", so the note and the graph edge both stay.
 
