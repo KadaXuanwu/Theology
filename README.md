@@ -18,7 +18,7 @@ Every note is a node. Nodes link to each other with Obsidian style `[[Exact File
 | `Theology/Evidence` | Artefacts, studies and texts a claim can point to |
 | `Theology/People` | Anyone a node names: what they worked on, what they published, and what position they stated in their own words |
 
-Every folder except `People` has a `_Template.md` with the section headings for that node type. Frontmatter carries `type`, `status` (`stub`, `drafted` or `sourced`) and `tags`, plus `kind` on evidence and people, and `born`, `died` and `location` on people.
+Each folder has a `_Template.md` with the section headings for that node type. Frontmatter carries `type`, `status` (`stub`, `drafted` or `sourced`) and `tags`, plus `kind` on evidence and people, and `born`, `died` and `location` on people.
 
 Nothing gets proved twice. If two arguments need the same claim, the claim becomes its own node and both link to it.
 
