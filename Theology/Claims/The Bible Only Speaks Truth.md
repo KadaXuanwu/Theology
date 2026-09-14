@@ -1,6 +1,6 @@
 ---
 type: claim
-status: stub
+status: drafted
 tags:
   - scripture
   - inerrancy

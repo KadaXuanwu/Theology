@@ -1,6 +1,6 @@
 ---
 type: argument
-status: stub
+status: drafted
 tags:
   - experience
   - epistemology
