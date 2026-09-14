@@ -61,3 +61,10 @@ The most common way a node ends up slanted is that its own position rests on pee
 - Find the **academic** version of the objection first: the journal article, the university press monograph, the named scholar in print. Popular summaries come second and only as pointers to the real thing.
 - If the strongest objection genuinely exists only in advocacy publishing, say so plainly and mark it. That itself tells the reader something about the state of the debate.
 - Report the best source you found for the objection, with tier and register, on its own line at the end: `BEST COUNTER SOURCE: <tier>, <register>, <reference>`. The writer compares it against the main position's best source.
+
+## Points and leads
+
+The prompt may carry the author's points and the leads from a draft.
+
+- Every point is a mandatory lead. Return the claims that support it, or one entry reading `POINT NOT SUPPORTED: <point> | <what you found instead>`. Silence on a point is a failed run.
+- A lead names where to look and nothing more. Open it, record the access you achieved, and if it does not say what the draft hoped, say so in an entry. Nothing from the draft is a claim until you have returned it with a source.

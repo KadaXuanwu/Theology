@@ -2658,5 +2658,62 @@ console.log("a person's dates are read off the note, not written into it")
   check("nor does a claim", life(claim) === "", life(claim))
 }
 
+console.log("the author's points sit at the foot of the note, as written")
+{
+  const { notePage } = await import("./lib/templates.mjs")
+  const sheet = await readFile(resolve(clientDir, "style.css"), "utf8")
+
+  // Frontmatter, not prose. The same block list form as tags, read by the same
+  // parser, so the list never enters the body, the word count, the search text
+  // or the sentences the pipeline rules on.
+  const parsed = parseFrontmatter(
+    "---\nstatus: stub\npoints:\n  - Explain the spear wound\n  - Compare with Tacitus\n---\n# Description\nBody",
+    "t",
+  )
+  check("points parse as a list", parsed.data.points.length === 2 && parsed.data.points[1] === "Compare with Tacitus")
+  check("and stay out of the body", parsed.body === "# Description\nBody")
+  const bare = parseFrontmatter("---\npoints: []\n---\nBody", "t")
+  check("an empty list is no points", Array.isArray(bare.data.points) && bare.data.points.length === 0)
+
+  const sample = (points) =>
+    notePage({
+      note: {
+        title: "X",
+        frontmatter: {},
+        status: "drafted",
+        tags: [],
+        points,
+        html: "<p>The body.</p>",
+        headings: [],
+        backlinks: [],
+        section: { dir: "Claims", kind: "claim", label: "Claims" },
+      },
+      root: "../../",
+      dateLabel: "Updated today",
+      sections: SECTIONS,
+      notes: [],
+      assets: {},
+    })
+  const block = (html) => html.match(/<details class="points">[\s\S]*?<\/details>/)?.[0] ?? ""
+
+  // Folded by default and placed last: a reader who wants to know what the
+  // author set out to cover opens it, everyone else reads past one line.
+  const page = sample(["Explain the spear wound", "A point with <b>markup</b> & an ampersand"])
+  check("a note with points carries the folded list", block(page).length > 0)
+  check("closed by default", !/<details class="points"[^>]*\sopen/.test(page))
+  check("the count sits on the summary", /<summary>Author's points<span class="tree-count">2<\/span><\/summary>/.test(block(page)))
+  check("each point is kept as written", /<li>Explain the spear wound<\/li>/.test(block(page)))
+  check("and escaped, never rendered", /<li>A point with &lt;b&gt;markup&lt;\/b&gt; &amp; an ampersand<\/li>/.test(block(page)))
+  check("it comes after the prose and the backlinks", page.indexOf('<details class="points">') > page.indexOf("Linked from"))
+  const body = page.match(/<div class="note-body">([\s\S]*?)<\/div>/)?.[1] ?? ""
+  check("and stays out of the prose", body === "<p>The body.</p>", body)
+
+  check("a note with an empty list carries no block", block(sample([])) === "")
+  check("nor does a note that never had the key", block(sample(undefined)) === "")
+
+  check("the summary reads as a control", /\.points summary \{[^}]*cursor: pointer/.test(sheet))
+  check("and keeps its focus ring", /\.points summary:focus-visible \{/.test(sheet))
+}
+
 console.log(failures === 0 ? "\nAll checks passed." : `\n${failures} check(s) failed.`)
 process.exitCode = failures === 0 ? 0 : 1

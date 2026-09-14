@@ -52,3 +52,10 @@ Follow `references/balance.md` and `references/source-policy.md`, which are incl
 - Aim for an academic majority in your own list. If most of what you found is advocacy, say so at the end of your output instead of quietly handing it over.
 - If a point is only reachable through apologetics or counter apologetics sites, report that explicitly as `ACADEMIC LITERATURE NOT REACHABLE` with what you tried. That is a useful finding, not a failure.
 - Check `sources/` in the working directory and any files attached to the conversation before searching the web.
+
+## Points and leads
+
+The prompt may carry the author's points and the leads from a draft.
+
+- Every point is a mandatory lead. Return the claims that support it, or one entry reading `POINT NOT SUPPORTED: <point> | <what you found instead>`. Silence on a point is a failed run.
+- A lead names where to look and nothing more. Open it, record the access you achieved, and if it does not say what the draft hoped, say so in an entry. Nothing from the draft is a claim until you have returned it with a source.

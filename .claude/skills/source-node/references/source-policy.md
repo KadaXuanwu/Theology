@@ -41,6 +41,10 @@ Files the user has provided sit in `sources/` in the working directory, or were 
 
 A supplied file counts as `full` access, since you can actually read it. That is the whole of the advantage. It does **not** get a tier or a register for having been supplied, and it does not outrank anything: work out its tier and register from what it is, exactly as you would for a source you found yourself. A conference handout the user happens to own is still Tier C. Cite it by its real bibliographic details, not by filename.
 
+## Leads from a draft
+
+A drafted node names candidate sources: a work, an author, a year, and the access the drafter achieved. These are leads. A lead says where to look and nothing more. It carries no tier and no register until a researcher has opened it and reported what it says, and nothing enters a sourced node on the strength of a lead. Where a lead turns out not to say what the draft hoped, that is an entry in the researcher's list, not a silent drop.
+
 ## Known limits of this pipeline
 
 - Web search here is weighted to a US index. Non English and continental European scholarship is under-surfaced rather than absent. Search for it deliberately.

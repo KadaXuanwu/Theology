@@ -6,6 +6,7 @@ died:
 location:
 status: stub
 tags: []
+points: []
 ---
 # Description
 # Work

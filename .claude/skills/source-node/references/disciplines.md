@@ -1,0 +1,47 @@
+# Discipline roster
+
+The four fixed researchers cover the primary text, the material record, the scholarly consensus and the counter case. Everything else a node touches is a field from this roster, and `source-node` spawns one domain researcher per field the librarian names, with that field's paragraph pasted into the prompt as its scope.
+
+Each paragraph says what the field owns on this vault's questions, what its Tier A looks like, the names to start from, and the overreach the field is known for. The names are starting points for a search, not a reading list, and not one of them is a source until the researcher has opened the work.
+
+The list is open. When a node needs a field that is not here, add the paragraph and say so in the delivery.
+
+## History of science
+
+Owns what scientists, churches and universities actually did and said in a period, and how a discovery was received when it was new. Tier A: *Isis*, *The British Journal for the History of Science*, *Osiris*, university press monographs, critical editions of correspondence. Start from John Hedley Brooke, Ronald Numbers, Peter Harrison, David Lindberg, Lawrence Principe, Edward Grant. Overreach, in both directions: the conflict thesis of Draper and White, which the field rejects, and its mirror, that Christianity alone produced modern science. A claim about what people thought at the time needs a period source or a historian citing one. The vault's God of the Gaps node shows the lightning rod story dissolving on that test.
+
+## Cognitive science of religion and psychology
+
+Owns how belief forms and persists: what children infer, agency detection, teleological reasoning, analytic thinking and disbelief, the phenomenology of religious experience. Tier A: *Cognition*, *Psychological Science*, *Child Development*, *Religion, Brain & Behavior*, *Journal of Cognition and Culture*, OUP and CUP monographs. Start from Pascal Boyer, Justin Barrett, Deborah Kelemen, Ara Norenzayan, Harvey Whitehouse, Jesse Bering, Will Gervais, Cristine Legare, and Tanya Luhrmann on experience. Overreach: explaining a belief is not refuting it, and Boyer and Barrett both say so; a single unreplicated study reported as a finding. Anything published after 2010 gets its replication status checked before it is used. The vault already carries the Gervais and Norenzayan replication failure as a warning.
+
+## Medicine and forensic pathology
+
+Owns what a human body can survive, what a text's physical details are and are not consistent with, and how a cause of death is established. Tier A: peer reviewed medical journals, forensic pathology textbooks, and above all the field's own review articles. For crucifixion, start from the review by Maslen and Mitchell in the *Journal of the Royal Society of Medicine* (2006) and from what cites it. The only skeletal remains of a crucified man from the period are the heel bone from Giv'at ha-Mivtar, published by Haas in 1970 and re-examined by Zias and Sekeles in 1985; the material researcher owns the find, this field owns the trauma reading. Overreach: there is no body, so every medical account of Jesus's death reasons from a text, and a text is not a clinical record; physicians writing on the crucifixion in medical journals often write to make a case, and the venue does not make the method sound. Report whether the field's later literature cites a paper as sound.
+
+## Cosmology and physics
+
+Owns the beginning of the universe, its fine tuning, the laws, and what "nothing" means in physics. Tier A: *Physical Review D*, *Classical and Quantum Gravity*, *Foundations of Physics*, and for what the physics licenses philosophically, *The British Journal for the Philosophy of Science*, *Philosophy of Science* and *Studies in History and Philosophy of Science*. Start from Sean Carroll, Alan Guth, Alexander Vilenkin, Roger Penrose, George Ellis, Luke Barnes, Don Page, and among philosophers of physics Robin Collins, Neil Manson, Tim Maudlin, David Albert. Overreach: popular books cited for what the physics establishes, on either side; a theorem quoted past its assumptions, the Borde, Guth and Vilenkin result above all; fine tuning numbers without the measure problem; "nothing" meaning a quantum vacuum in one sentence and absence in the next. Cite the paper, not the popularisation, and state its assumptions.
+
+## Evolutionary biology and origin of life
+
+Owns common descent, the fossil record, the origin of life, and what evolution does and does not explain about morality and religion. Tier A: *Nature*, *Science*, *PNAS*, *Evolution*, *Journal of Molecular Evolution*, *Origins of Life and Evolution of Biospheres*. Start from Jerry Coyne, Kenneth Miller, Francisco Ayala, Nick Lane, Eugenie Scott, Simon Conway Morris, Denis Alexander. Overreach: intelligent design literature in its own venues is confessional register whatever its format; the step from evolution to metaphysical naturalism is philosophical, not biological, and needs its own argument; the origin of life is an open research problem, and saying so plainly is the accurate report in both directions.
+
+## Ancient history and classics
+
+Owns Roman and Jewish practice in the period, the non biblical writers, Tacitus, Josephus, Pliny, Suetonius, Lucian, what a Roman execution was, and the dating and transmission of classical texts. Tier A: *Journal of Roman Studies*, *Journal for the Study of Judaism*, *Journal of Jewish Studies*, Mohr Siebeck and Brill monographs, OUP and CUP, the Loeb and Teubner editions. Start from Martin Goodman, Fergus Millar, Helen Bond, Paula Fredriksen, E. P. Sanders, Steve Mason and Louis Feldman on Josephus, and John Granger Cook, *Crucifixion in the Mediterranean World* (Mohr Siebeck, 2014). Overreach: a literary source read as a document; an argument from silence that never asks what should have survived; the Josephus passage on Jesus quoted without the interpolation debate. Apply one dating standard to biblical and non biblical texts and say what it does to both.
+
+## Sociology and anthropology of religion
+
+Owns how religions spread, how people convert, what believers report about their practice, and comparative religion. Tier A: *Journal for the Scientific Study of Religion*, *Sociology of Religion*, *American Anthropologist*, *Current Anthropology*, university press monographs. Pew and similar institutes are Tier B institutional sources. Start from Rodney Stark, Peter Berger, Grace Davie, Talal Asad, Tanya Luhrmann, and Durkheim and Weber as the classics. Overreach: a survey result read as a truth claim; a comparative parallel read as a debunking, when a parallel needs a mechanism before it explains anything.
+
+## Philosophy
+
+Owns the logical form of an argument, what its terms mean, modality, the epistemology of belief and evidence, and ethics. The debaters carry the canon by topic; as a researcher your job is to map who holds what and where they published it. Tier A: *Religious Studies*, *Faith and Philosophy*, *International Journal for Philosophy of Religion*, *Journal of Analytic Theology*, *Noûs*, *Philosophical Review*, OUP and CUP monographs. The *Stanford Encyclopedia of Philosophy* is a signed Tier B reference and the best first stop. Overreach: conceivability arguments doing more than they can; burden of proof used as a trump card; a fallacy named where no argument depends on the move.
+
+## Linguistics
+
+Owns claims about universals of language and thought, recursion, number, and what a language's structure does and does not show about its speakers' concepts. Tier A: *Language*, *Lingua*, *Linguistic Inquiry*, *Cognition*, *Current Anthropology*. The vault's existing case is the Pirahã dispute, Daniel Everett against Andrew Nevins, David Pesetsky and Cilene Rodrigues, a live exchange with published replies on both sides. Overreach: one field site read as a general result; one side of a live exchange cited as settled.
+
+## Not in this roster
+
+Primary text, manuscripts and translation belong to the text researcher. Excavations, inscriptions and artefacts belong to the material researcher. Where the scholarly field stands and who dissents belongs to the scholarship researcher. Do not spawn a domain researcher for any of those.

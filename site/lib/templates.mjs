@@ -141,6 +141,18 @@ export function notePage({ note, root, dateLabel, sections, notes, assets }) {
 </nav>`
     : ""
 
+  // The author's points, kept as written. A folded list at the foot of the
+  // note: a reader who wants to know what the author set out to cover opens
+  // it, and everyone else reads past a single line. A native disclosure, so
+  // it works without script and it prints.
+  const points = note.points?.length
+    ? `<details class="points">
+    <summary>Author's points<span class="tree-count">${note.points.length}</span></summary>
+    <p class="points-note">What the author asked this note to cover, kept as written.</p>
+    <ol>${note.points.map((p) => `<li>${escapeHtml(p)}</li>`).join("")}</ol>
+  </details>`
+    : ""
+
   const main = `<article class="note">
   <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${root}">Overview</a><span aria-hidden="true">/</span><a href="${root}${slugify(section.dir)}/">${escapeHtml(section.label)}</a></nav>
   <h1 class="note-title">${escapeHtml(note.title)}</h1>
@@ -156,6 +168,7 @@ export function notePage({ note, root, dateLabel, sections, notes, assets }) {
     <h2>Linked from</h2>
     ${backlinks}
   </section>
+  ${points}
 </article>`
 
   return shell({

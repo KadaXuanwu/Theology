@@ -2,6 +2,7 @@
 type: argument
 status: stub
 tags: []
+points: []
 ---
 # Description
 # Based On

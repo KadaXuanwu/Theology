@@ -1840,6 +1840,72 @@ sup.fn.is-broken {
   }
 }
 
+/* Author's points ---------------------------------------------------------
+ * What the author asked the note to cover, kept in the frontmatter as written
+ * and shown folded at the foot of the note. Frontmatter rather than prose, so
+ * the list never enters the word count, the search text or the sentences the
+ * pipeline checks. A native disclosure: it works without script and it prints.
+ */
+.points {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.points summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.points summary::-webkit-details-marker {
+  display: none;
+}
+/* The chevron is drawn in borders so it takes the text colour, and turns when
+   the list opens. */
+.points summary::before {
+  content: "";
+  width: 0.38rem;
+  height: 0.38rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-0.1rem) rotate(-45deg);
+  transition: transform 0.15s ease;
+}
+.points[open] summary::before {
+  transform: translateY(-0.15rem) rotate(45deg);
+}
+.points summary:hover {
+  color: var(--text);
+}
+.points summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.points-note {
+  margin: 0.7rem 0 0;
+}
+.points ol {
+  margin: 0.6rem 0 0;
+  padding-left: 1.4rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+.points li {
+  margin-bottom: 0.45rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .points summary::before {
+    transition: none;
+  }
+}
+
 /* Responsive -------------------------------------------------------------- */
 
 @media (max-width: 1260px) {

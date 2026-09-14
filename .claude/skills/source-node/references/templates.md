@@ -1,6 +1,6 @@
 # Node templates
 
-Copy these exactly. Frontmatter keys and heading order do not change.
+Copy these exactly. Frontmatter keys and heading order do not change. `points` is the one optional key; see Points below.
 
 ## Argument (`Arguments For/`, `Arguments Against/`)
 
@@ -9,6 +9,7 @@ Copy these exactly. Frontmatter keys and heading order do not change.
 type: argument
 status: stub
 tags: []
+points: []
 ---
 # Description
 # Based On
@@ -20,7 +21,7 @@ tags: []
 - **Description**: the argument in plain prose. What it claims and why someone holds it. The first sentence is the claim, not a run up to it. Scope limits go in Limits, not in front of the claim.
 - **Based On**: the passages, claims and evidence it rests on. Link them. If something is asserted here without a source, say so out loud rather than leaving it looking sourced.
 - **Countered By**: the arguments and claims that answer it. Link them. Say which counter is the strong one.
-- **Limits**: where the argument is weaker than it sounds, including cases where accepting it costs something elsewhere.
+- **Limits**: where the argument is weaker than it sounds, including cases where accepting it costs something elsewhere. The first bullet is the crux: the one premise the argument stands or falls on, and what would settle it. The rest follow.
 - **Related**: nodes that touch it without countering it.
 
 ## Claim (`Claims/`)
@@ -30,6 +31,7 @@ tags: []
 type: claim
 status: stub
 tags: []
+points: []
 ---
 # Description
 # Origins
@@ -54,6 +56,7 @@ type: evidence
 kind: study
 status: stub
 tags: []
+points: []
 ---
 # Description
 # Shows
@@ -81,6 +84,7 @@ died: 7 March 1274, Fossanova
 location: Paris, Cologne, Rome, Naples
 status: stub
 tags: []
+points: []
 ---
 # Description
 # Work
@@ -130,12 +134,38 @@ tags:
 
 Not `tags: [hell, justice]`. Obsidian rewrites an inline list into the block form the moment the note is opened, which turns every note the vault touches into a diff nobody made.
 
+## Points
+
+`points` is the author's list of what the node must address. It is frontmatter, not prose, so it never counts toward the word count, never goes through the verifier as a sentence and never trips the template check. Written like tags, one per line:
+
+```
+points:
+  - The survival account has to explain the spear wound, not only the odds.
+  - Say what the same evidential standard does to Tacitus.
+```
+
+- One line per point, plain text, no links or markdown. The site shows them folded at the foot of the note, exactly as written, under "Author's points".
+- The author owns the list. No skill adds to it, reorders it or removes from it. A point that could not be carried is reported in chat, and the author decides whether it stays.
+- In `source-node` every point is a mandatory lead: carried into the body with a source, or reported as not carried with the reason. In `draft-node` every point is placed in the draft where it does its work.
+- The key is optional. A node without it, or with `points: []`, has none.
+
+## Status
+
+`status` is a promise about the node. Three values, each with a gate.
+
+**`stub`.** The author's own notes, written by hand from the folder's `_Template.md`. Any length. Headings may be empty or hold one line. Nothing but the author writes a stub, and nothing checks one.
+
+**`drafted`.** The idea in the node's shape, unverified. Every heading is filled or marked as a gap with a `Needs sources` line. The Description opens on the claim. Every `[[link]]` resolves to an existing node and runs down the stack. Sources are leads, each carrying the access the drafter achieved, and nothing is presented as checked. Set by `draft-node`, or by hand when the author has done the same work.
+
+**`sourced`.** Every factual sentence passed the verifier, the body runs 500 to 2000 words, and the balance rules hold or the shortfall is disclosed in the delivery. Set by `source-node`.
+
+A stub or a draft is inspiration for the sourcing run and no more. Its body is not protected and its leads are not sources. The `points` list is the one thing in it that binds.
+
 ## Field values in use
 
-- `status`: `stub`, `drafted`, `sourced`
+- `status`: `stub`, `drafted`, `sourced`. See Status above.
 - `kind`: on evidence `artefact`, `study`, `record`; on a person their trade. Both open lists, see above.
-
-Set `status: sourced` only when every factual sentence passed the verifier.
+- `points`: optional, see Points above.
 
 ## Link conventions
 

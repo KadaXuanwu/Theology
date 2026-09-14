@@ -160,6 +160,10 @@ export async function readVault(vaultDir, warn) {
         frontmatter: data,
         status: data.status ?? null,
         tags: Array.isArray(data.tags) ? data.tags : data.tags ? [data.tags] : [],
+        // The author's points: what they asked the node to cover, kept as
+        // written. Frontmatter rather than body, so the list never enters the
+        // word count, the search text or the sentences the pipeline rules on.
+        points: Array.isArray(data.points) ? data.points : data.points ? [data.points] : [],
         links: [], // filled in once every title is known
         backlinks: [],
       })

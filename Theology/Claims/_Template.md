@@ -2,6 +2,7 @@
 type: claim
 status: stub
 tags: []
+points: []
 ---
 # Description
 # Origins

@@ -44,6 +44,7 @@ Plain, direct, short sentences. Write the way a well read person explains someth
 - No "it's not X, it's Y" constructions. No "delve", "tapestry", "crucial", "it is important to note", "moreover", "in conclusion".
 - No hedging stacks. One qualifier is enough.
 - No "both sides", "critics say" or "believers say" framing inside a node. The folder already tells the reader where the node sits.
+- No debate voice. Nothing reads as an exchange: no "the sceptic argues", "the theologian concedes", "the other camp". The crux is a sentence about the argument, not about who said what.
 - Do not congratulate a position or editorialise about how strong it is, except in Limits and Countered By where saying which case is the strong one is the actual job.
 
 ## Neutrality
@@ -75,3 +76,6 @@ Run every item before delivering.
 17. The Description's first sentence states the claim, with no setup, scope carving or reader instruction in front of it
 18. Every person named in the prose is linked to their node, or glossed in a clause and reported as a node to create. Councils and documents are identified the first time they appear
 19. Nothing outside the target node was edited. A change another node needs is written out for the user, not applied
+20. On an argument node, the first bullet under Limits is the crux: one premise the argument stands or falls on, and what would settle it
+21. Every entry in `points` is carried in the body with a source or reported as not carried with its reason, and the list itself is unchanged
+22. Nothing reads as a debate. No card language, no exchange, no concession reported as a concession

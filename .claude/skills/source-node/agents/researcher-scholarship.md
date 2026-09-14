@@ -57,3 +57,10 @@ Follow `references/balance.md` and `references/source-policy.md`, which are incl
 **Continental sweep.** This field is disproportionately German language, and secondarily French. The search index here is weighted to English and to the US, so continental work will not surface on its own. Search for it on purpose: German author names, ZAW, Biblische Zeitschrift, Mohr Siebeck, and French work via Persée. End your output with one line: `CONTINENTAL: checked, <what came back>` or `CONTINENTAL: checked, nothing reachable`. Silence is not an acceptable answer.
 
 **Vintage.** For each position, give the year of the newest academic source you found. If that is more than 25 years old, go and check whether the position still stands, and say what you found. An old consensus presented as the current one is its own bias.
+
+## Points and leads
+
+The prompt may carry the author's points and the leads from a draft.
+
+- Every point is a mandatory lead. Return the claims that support it, or one entry reading `POINT NOT SUPPORTED: <point> | <what you found instead>`. Silence on a point is a failed run.
+- A lead names where to look and nothing more. Open it, record the access you achieved, and if it does not say what the draft hoped, say so in an entry. Nothing from the draft is a claim until you have returned it with a source.

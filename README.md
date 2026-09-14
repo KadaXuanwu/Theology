@@ -2,7 +2,7 @@
 
 A research vault mapping arguments for and against Christianity, and the claims and evidence each one rests on.
 
-The goal is not to prove one position over the other. It is to make every argument traceable, so a reader can follow the reasoning back to its sources and judge it themselves.
+The goal is not to prove one position over the other. It is to make every argument traceable, so a reader can follow the reasoning back to its sources and judge it themselves. The subject is Christianity. The evidence comes from wherever it comes from: biblical studies, archaeology, history, philosophy, psychology, medicine, the natural sciences.
 
 Read it online at <https://kadaxuanwu.github.io/Theology>.
 
@@ -18,9 +18,21 @@ Every note is a node. Nodes link to each other with Obsidian style `[[Exact File
 | `Theology/Evidence` | Artefacts, studies and texts a claim can point to |
 | `Theology/People` | Anyone a node names: what they worked on, what they published, and what position they stated in their own words |
 
-Each folder has a `_Template.md` with the section headings for that node type. Frontmatter carries `type`, `status` (`stub`, `drafted` or `sourced`) and `tags`, plus `kind` on evidence and people, and `born`, `died` and `location` on people.
+Each folder has a `_Template.md` with the section headings for that node type. Frontmatter carries `type`, `status` and `tags`, plus `kind` on evidence and people, `born`, `died` and `location` on people, and `points`, the author's own list of what the node must cover, shown folded at the foot of the note exactly as written.
 
 Nothing gets proved twice. If two arguments need the same claim, the claim becomes its own node and both link to it.
+
+## Status
+
+`status` is a promise about the node.
+
+| Status | Means | Set by |
+| --- | --- | --- |
+| `stub` | The author's own notes, any shape | By hand |
+| `drafted` | The idea in the node's shape: the claim first, the argument laid out, links in place, every gap named. Unverified | The `draft-node` skill |
+| `sourced` | Every factual sentence passed a cold verifier, 500 to 2000 words, sources balanced or the shortfall disclosed | The `source-node` skill |
+
+A stub or a draft is inspiration for the sourcing run and nothing more. Its body may be rewritten from the evidence up. The `points` list is the one thing in it that binds: every point is carried with a source or reported back as not carried, and nothing edits the list but the author.
 
 ## Link direction
 
@@ -40,9 +52,10 @@ Nothing points upward by hand, because the site fills that direction in. It work
 ## Rules for a node
 
 - Every factual sentence carries a source someone else can open.
-- Limits go in the node, not left out. A weak step in an argument is written down as a weak step.
+- Limits go in the node, not left out. A weak step in an argument is written down as a weak step. On an argument node the first bullet under Limits is the crux, the one premise the argument stands or falls on.
 - A `sourced` node's body runs 500 to 2000 words, and most sit around 1000. A stub, a draft or a person node can be any length.
 - At least half the sources are academic register. Advocacy publishing never carries a fact on its own.
+- The author's `points` are carried or reported back, never dropped.
 
 ## Website
 
@@ -77,10 +90,11 @@ Verification/                  open source checks waiting on a human, never publ
 site/                          the static site generator and its assets
 worker/                        the Cloudflare Worker behind the chat bubble
 .github/workflows/deploy.yml   builds and publishes the site on every push
-.claude/skills/theology-node/  the skill that writes and fact checks nodes
-AI/Skills/Theology Node/       notes on that skill
+.claude/skills/draft-node/     the skill that turns a stub into a draft
+.claude/skills/source-node/    the skill that researches, debates, writes and fact checks a node
+AI/Skills/README.md            notes on both skills
 AI/Memory/                     what I should remember across sessions
 CLAUDE.md                      working instructions for Claude
 ```
 
-`.claude/skills/theology-node` is a Claude skill that runs a multi agent pipeline over one node: a librarian reads the existing vault so new work links instead of repeating, four researchers cover primary text, material evidence, scholarly consensus and the strongest opposing case, a writer builds the node to template, and a verifier reopens every source cold and rules on each factual sentence. Claude Code loads it automatically. See its [README](AI/Skills/Theology%20Node/README.md).
+Two Claude skills build the nodes. `draft-node` is cheap: a librarian reads the vault so the draft links instead of repeating, and a drafter shapes the author's notes to template with the argument laid out, the crux named and every gap written in. `source-node` is the full pipeline: the librarian names the fields the node touches, researchers cover primary text, material evidence, scholarly consensus, the strongest opposing case and one field each from a roster that runs from medicine to cosmology, a skeptic and a theologian argue the node over that evidence with a philosopher ruling on the exchange, a writer builds the node to template, and a verifier reopens every source cold and rules on each factual sentence. Claude Code loads both automatically. See [AI/Skills/README.md](AI/Skills/README.md).

@@ -29,6 +29,8 @@ Every source gets a register alongside its tier. Tier is how reliable it is. Reg
 
 7. **Reachability disclosure.** Where the real state of the field is behind a paywall and only the polemics were openable, the node says the academic literature was not reachable on this point. It does not present the polemics as the state of play.
 
+8. **Out of field papers.** A paper that argues a religious question from inside another field's journal, a physician on the crucifixion, a physicist on fine tuning, is academic register by venue, and the venue says nothing about whether the field accepts the argument. The domain researcher reports whether the field's own later literature cites it as sound, and where it does not, the prose attributes the paper by name: "the authors argue", never "medicine shows".
+
 ## The false balance guard
 
 Read this before applying the rules above.
