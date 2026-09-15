@@ -55,7 +55,7 @@ State which mode you picked in one line before starting.
 
 ## Step 3: Run the pipeline
 
-Spawn agents with the Agent tool, `subagent_type: general-purpose`. For each agent, paste the matching file from `agents/` as the top of the prompt, then append the task specifics: node title and folder, the working thesis, the `points`, `notes.md` where the phase says so, and the outputs of earlier phases.
+Spawn each agent as a fresh subagent with whatever your agent uses to delegate. For each one, paste the matching file from `agents/` as the top of the prompt, then append the task specifics: node title and folder, the working thesis, the `points`, `notes.md` where the phase says so, and the outputs of earlier phases.
 
 The working thesis is one sentence saying what the node claims, taken from the first line of the notes or from the user's message. It is a hypothesis for the run to test, not a fact it starts from.
 
@@ -63,7 +63,7 @@ Agents start cold and cannot see this conversation. Everything they need goes in
 
 ### Models
 
-The librarian, the person researcher and the domain researchers may run on a smaller model: pass `model: "sonnet"` on the Agent call. The writer, the verifier and the philosopher run on the default model, since a mistake there reaches the node or goes unseen. Widen this only against the verifier's own numbers: the fix and cut counts per run are the comparison.
+The librarian, the person researcher and the domain researchers may run on a smaller model, if your agent lets you pick one per subagent. The writer, the verifier and the philosopher run on the default model, since a mistake there reaches the node or goes unseen. Widen this only against the verifier's own numbers: the fix and cut counts per run are the comparison.
 
 ### Phase 0: Librarian (1 agent, runs first)
 
@@ -168,4 +168,4 @@ Keep this wrap up short. The node is the deliverable.
 
 ## Batching
 
-For more than three nodes in one go, use the Workflow tool with the same phase structure instead of spawning agents by hand.
+For more than three nodes in one go, use your agent's workflow or orchestration tool, if it has one, with the same phase structure instead of spawning agents by hand.

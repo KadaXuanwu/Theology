@@ -11,3 +11,4 @@ Index of things to remember across sessions. One line per memory file.
 - [Palette rules](palette-rules.md) — colour means the map, ink means a source, and why the numbers are measured
 - [Citation year drift](citation-year-drift.md) — DOIs carry the online-first year, so take the year from Crossref
 - [Drafts are inspiration](drafts-are-inspiration.md) — a stub or draft body binds nothing; the frontmatter points do, and protection covers sourced text only
+- [Agent agnostic layout](agent-agnostic-layout.md) — instructions in AGENTS.md, skills in .agents/skills, one shim file at the root and why

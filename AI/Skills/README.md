@@ -1,6 +1,6 @@
 # Node skills
 
-Two Claude skills build the nodes of the Theology vault, one per step of a node's life. A node starts as a `stub`, the author's own notes written by hand from the folder's `_Template.md`. `draft-node` turns the stub into a `drafted` node. `source-node` takes the draft to `sourced`. The gates each status has to pass are in `.claude/skills/source-node/references/templates.md`, section "Status".
+Two skills build the nodes of the Theology vault, one per step of a node's life. A node starts as a `stub`, the author's own notes written by hand from the folder's `_Template.md`. `draft-node` turns the stub into a `drafted` node. `source-node` takes the draft to `sourced`. The gates each status has to pass are in `.agents/skills/source-node/references/templates.md`, section "Status".
 
 The point of the vault is not to settle whether Christianity is true. It is to make every argument traceable back to the claims and evidence it rests on, so a reader can follow the reasoning themselves. The subject is Christianity; the evidence comes from theology, biblical studies, archaeology, history, philosophy, psychology, medicine and the natural sciences, and the sourcing pipeline commissions whichever of those a node needs.
 
@@ -45,7 +45,7 @@ Evidence and People nodes skip the debate. Neither has a thesis to argue.
 ## Layout
 
 ```
-.claude/skills/
+.agents/skills/
   draft-node/
     SKILL.md               stub to drafted
     agents/drafter.md
@@ -59,18 +59,16 @@ Evidence and People nodes skip the debate. Neither has a thesis to argue.
 
 ## Models
 
-The librarian, the person researcher, the domain researchers and the drafter may run on a smaller model, `model: "sonnet"` on the Agent call. The writer, the verifier and the philosopher run on the default, since a mistake there reaches the node or goes unseen. Widen this only against the verifier's own fix and cut counts.
+The librarian, the person researcher, the domain researchers and the drafter may run on a smaller model, where the agent lets you pick one per subagent. The writer, the verifier and the philosopher run on the default, since a mistake there reaches the node or goes unseen. Widen this only against the verifier's own fix and cut counts.
 
 ## Install
 
-**Claude Code.** Already installed in this repo under `.claude/skills`. Claude scans that folder at startup, so a new session picks both up on its own. To use them in other projects on one machine, copy both folders to `~/.claude/skills/`. See the [skills docs](https://code.claude.com/docs/en/skills).
+Both skills follow the [Agent Skills](https://agentskills.io/specification) standard and sit in `.agents/skills/`, the folder [Codex](https://developers.openai.com/codex/skills/), [Cursor](https://cursor.com/docs/context/skills), [Gemini CLI](https://geminicli.com/docs/cli/skills/) and [GitHub Copilot](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills) scan at startup, so a new session picks both up on its own. An agent that does not scan that folder is pointed at it by `AGENTS.md` and opens the `SKILL.md` when asked. To use the skills in other projects on one machine, copy both folders to `~/.agents/skills/`, which the same four agents read. `draft-node` reads its references from `source-node`, so the two folders travel together.
 
-**claude.ai.** Zip the `source-node` folder on its own, so `SKILL.md` sits at the top of the archive, then upload it under Settings > Features. This needs a Pro, Max, Team or Enterprise plan with code execution enabled. `draft-node` reads its references from `source-node`, so it only works alongside that folder. See the [Agent Skills overview](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview).
-
-Either way, ask Claude to draft or source a node and the right skill triggers on its own.
+Ask the agent to draft or source a node and the right skill triggers on its own.
 
 ## Adapting it
 
-The skills write the finished node straight into the vault on disk, then commit. If your vault lives somewhere Claude cannot write to, like Google Drive, change the baseline and delivery steps of each `SKILL.md` to fetch the node and post it back as a block to copy. `source-node/agents/librarian.md` is the only other file that knows where the vault is.
+The skills write the finished node straight into the vault on disk, then commit. If your vault lives somewhere the agent cannot write to, like Google Drive, change the baseline and delivery steps of each `SKILL.md` to fetch the node and post it back as a block to copy. `source-node/agents/librarian.md` is the only other file that knows where the vault is.
 
 Source tiers, register definitions and balance rules live in `references/source-policy.md` and `references/balance.md`. The discipline roster in `references/disciplines.md` is what to extend when a node needs a field nobody has covered yet. Those are the files to edit if you want to point the same pipeline at a different subject.

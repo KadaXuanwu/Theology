@@ -7,9 +7,9 @@ description: Turn a stub in the Theology vault into a drafted node. Shapes the a
 
 Turns one stub into one drafted node. It does not source anything.
 
-A stub is the author's own notes, written by hand from the folder's `_Template.md`: an idea, any length, headings empty or one line. A draft is that idea in the shape the finished node will take, with the argument laid out, the links in place and every gap named. The gates for both are in `.claude/skills/source-node/references/templates.md`, section "Status".
+A stub is the author's own notes, written by hand from the folder's `_Template.md`: an idea, any length, headings empty or one line. A draft is that idea in the shape the finished node will take, with the argument laid out, the links in place and every gap named. The gates for both are in `.agents/skills/source-node/references/templates.md`, section "Status".
 
-Read `.claude/skills/source-node/references/templates.md` and `style.md` from the same folder before running. The link direction table and the voice rules apply to a draft as they do to a finished node.
+Read `.agents/skills/source-node/references/templates.md` and `style.md` from the same folder before running. The link direction table and the voice rules apply to a draft as they do to a finished node.
 
 ## What a draft is and is not
 
@@ -32,11 +32,11 @@ The `points` list is the author's. Never add to it, reorder it or remove from it
 
 ## Step 2: Librarian
 
-Spawn `.claude/skills/source-node/agents/librarian.md` with the Agent tool, `subagent_type: general-purpose`, `model: "sonnet"`. Paste the file as the top of the prompt, then the node title, folder and the stub body. It returns the exact titles a draft may link to, what the vault already covers, which nodes link here, and the fields the node touches.
+Spawn a subagent for `.agents/skills/source-node/agents/librarian.md`, on a smaller model if your agent lets you pick one. Paste the file as the top of the prompt, then the node title, folder and the stub body. It returns the exact titles a draft may link to, what the vault already covers, which nodes link here, and the fields the node touches.
 
 ## Step 3: Drafter
 
-Spawn `agents/drafter.md` the same way, `model: "sonnet"` unless the notes are unusually dense. Paste the file, then the stub body as the author's notes, the `points` list, and the librarian's output in full.
+Spawn `agents/drafter.md` the same way, on the smaller model unless the notes are unusually dense. Paste the file, then the stub body as the author's notes, the `points` list, and the librarian's output in full.
 
 The drafter may search and fetch to confirm that a work exists and what it argues. It records the access it achieved on every lead and invents nothing. Where it cannot confirm, it writes `Needs sources` with what would settle it.
 

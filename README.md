@@ -90,11 +90,11 @@ Verification/                  open source checks waiting on a human, never publ
 site/                          the static site generator and its assets
 worker/                        the Cloudflare Worker behind the chat bubble
 .github/workflows/deploy.yml   builds and publishes the site on every push
-.claude/skills/draft-node/     the skill that turns a stub into a draft
-.claude/skills/source-node/    the skill that researches, debates, writes and fact checks a node
+.agents/skills/draft-node/     the skill that turns a stub into a draft
+.agents/skills/source-node/    the skill that researches, debates, writes and fact checks a node
 AI/Skills/README.md            notes on both skills
 AI/Memory/                     what I should remember across sessions
-CLAUDE.md                      working instructions for Claude
+AGENTS.md                      working instructions for the agent
 ```
 
-Two Claude skills build the nodes. `draft-node` is cheap: a librarian reads the vault so the draft links instead of repeating, and a drafter shapes the author's notes to template with the argument laid out, the crux named and every gap written in. `source-node` is the full pipeline: the librarian names the fields the node touches, researchers cover primary text, material evidence, scholarly consensus, the strongest opposing case and one field each from a roster that runs from medicine to cosmology, a skeptic and a theologian argue the node over that evidence with a philosopher ruling on the exchange, a writer builds the node to template, and a verifier reopens every source cold and rules on each factual sentence. Claude Code loads both automatically. See [AI/Skills/README.md](AI/Skills/README.md).
+Two skills build the nodes. `draft-node` is cheap: a librarian reads the vault so the draft links instead of repeating, and a drafter shapes the author's notes to template with the argument laid out, the crux named and every gap written in. `source-node` is the full pipeline: the librarian names the fields the node touches, researchers cover primary text, material evidence, scholarly consensus, the strongest opposing case and one field each from a roster that runs from medicine to cosmology, a skeptic and a theologian argue the node over that evidence with a philosopher ruling on the exchange, a writer builds the node to template, and a verifier reopens every source cold and rules on each factual sentence. Both follow the [Agent Skills](https://agentskills.io) standard and sit in `.agents/skills/`, where Codex, Cursor, Gemini CLI and GitHub Copilot look for them. An agent that reads a differently named instruction file gets a one line shim at the root that imports `AGENTS.md`. See [AI/Skills/README.md](AI/Skills/README.md).
