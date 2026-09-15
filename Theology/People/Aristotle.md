@@ -4,7 +4,7 @@ kind: philosopher
 born: 384 BCE, Stagira
 died: 322 BCE, Chalcis
 location: Athens, Assos, Lesbos and the Macedonian court
-status: sourced
+status: stale
 tags:
   - antiquity
   - philosophy

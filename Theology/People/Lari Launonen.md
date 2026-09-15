@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: University of Helsinki
-status: sourced
+status: stale
 tags:
   - cognition
   - nonbelief

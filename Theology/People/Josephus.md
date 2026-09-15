@@ -4,7 +4,7 @@ kind: historian
 born: AD 37 or 38, Jerusalem
 died: c. AD 100, Rome
 location: Jerusalem, Galilee and Rome
-status: sourced
+status: stale
 tags:
   - antiquity
   - sources

@@ -1,7 +1,7 @@
 ---
 type: person
 kind: linguist
-status: sourced
+status: stale
 tags:
   - linguistics
 ---

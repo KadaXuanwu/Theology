@@ -2,7 +2,7 @@
 type: person
 kind: psychologist
 location: NYU Grossman School of Medicine, New York
-status: sourced
+status: stale
 tags:
   - psychology
 ---

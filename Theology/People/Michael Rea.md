@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 1968
 location: University of Notre Dame, and the University of St Andrews
-status: sourced
+status: stale
 tags:
   - hiddenness
   - analytic-theology

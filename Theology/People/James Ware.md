@@ -3,7 +3,7 @@ type: person
 kind: biblical scholar
 born: 1957
 location: University of Evansville, Indiana
-status: sourced
+status: stale
 tags:
   - new-testament
   - resurrection

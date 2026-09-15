@@ -3,7 +3,7 @@ type: person
 kind: physicist
 born: 5 October 1966
 location: Johns Hopkins University, Baltimore, and previously Caltech
-status: sourced
+status: stale
 tags:
   - cosmology
   - naturalism

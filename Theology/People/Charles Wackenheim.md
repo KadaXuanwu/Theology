@@ -3,7 +3,7 @@ type: person
 kind: theologian
 born: 2 October 1931, Mertzwiller, Alsace
 location: Faculty of Catholic Theology, University of Strasbourg
-status: sourced
+status: stale
 tags:
   - catholic
   - marx

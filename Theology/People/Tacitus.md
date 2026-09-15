@@ -4,7 +4,7 @@ kind: historian
 born: c. AD 56
 died: c. AD 120
 location: Rome, and the province of Asia
-status: sourced
+status: stale
 tags:
   - antiquity
   - sources

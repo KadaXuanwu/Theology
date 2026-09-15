@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 1968
 location: Pasadena City College, California
-status: sourced
+status: stale
 tags:
   - classical-theism
   - aquinas

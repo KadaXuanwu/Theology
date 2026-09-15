@@ -4,7 +4,7 @@ kind: chemist
 born: 13 December 1910, Dudley
 died: 7 January 1974, Oxford
 location: University of Oxford, and King's College London
-status: sourced
+status: stale
 tags:
   - science-and-religion
   - gaps

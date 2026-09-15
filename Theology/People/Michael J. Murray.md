@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: Franklin and Marshall College, Lancaster, and the John Templeton Foundation
-status: sourced
+status: stale
 tags:
   - hiddenness
   - free-will

@@ -3,7 +3,7 @@ type: person
 kind: linguist
 born: 26 July 1951
 location: Bentley University, Waltham, Massachusetts, and field work with the Pirahã in Amazonas
-status: sourced
+status: stale
 tags:
   - linguistics
   - amazonia

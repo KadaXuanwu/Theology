@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 3 January 1950
 location: Wheaton College, Illinois
-status: sourced
+status: stale
 tags:
   - suffering
   - reformed

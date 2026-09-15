@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: University of Otago, Dunedin
-status: sourced
+status: stale
 tags:
   - naturalism
   - philosophy-of-science

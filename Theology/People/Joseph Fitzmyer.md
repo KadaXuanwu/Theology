@@ -4,7 +4,7 @@ kind: biblical scholar
 born: 1920, Philadelphia
 died: 24 December 2016, Merion Station, Pennsylvania
 location: the Catholic University of America, Washington, and Woodstock College
-status: sourced
+status: stale
 tags:
   - new-testament
   - catholic

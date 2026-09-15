@@ -25,7 +25,7 @@ Ask for the node title and folder if not given. Read the file. Record `status` a
 
 - `status: stub`: the normal case.
 - `status: drafted`: a redraft. Same run.
-- `status: sourced`: stop. A sourced node is reworked with `source-node`, not redrafted.
+- `status: sourced` or `status: stale`: stop. A sourced or stale node is reworked with `source-node`, not redrafted.
 - No file: write the user's message into a new file from the folder's `_Template.md` with `status: stub`, then carry on. Say that you did this.
 
 The `points` list is the author's. Never add to it, reorder it or remove from it.

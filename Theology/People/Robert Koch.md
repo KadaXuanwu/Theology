@@ -4,7 +4,7 @@ kind: bacteriologist
 born: 11 December 1843, Clausthal
 died: 27 May 1910, Baden-Baden
 location: the Royal Prussian Institute for Infectious Diseases, Berlin
-status: sourced
+status: stale
 tags:
   - medicine
   - science

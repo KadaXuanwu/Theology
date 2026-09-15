@@ -4,7 +4,7 @@ kind: chemist
 born: 13 March 1733, Birstall Fieldhead, near Leeds
 died: 6 February 1804, Northumberland, Pennsylvania
 location: Birmingham, Leeds, Warrington, London and Pennsylvania
-status: sourced
+status: stale
 tags:
   - science-and-religion
   - unitarian

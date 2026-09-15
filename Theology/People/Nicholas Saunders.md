@@ -3,7 +3,7 @@ type: person
 kind: physicist
 born: 27 June 1974
 location: Brick Court Chambers, London, and the Ian Ramsey Centre, University of Oxford
-status: sourced
+status: stale
 tags:
   - divine-action
   - science-and-religion

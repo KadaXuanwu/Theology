@@ -16,7 +16,7 @@ Read every file in `references/` before running the pipeline. They are short.
 1. Every factual sentence carries a source the verifier can open. No retrievable source, no entry into the node.
 2. Every sentence carries a fact, a source or a limit. A sentence that carries none of the three gets cut however well it reads, and the Description opens on the claim itself with no setup in front of it. This is the rule a finished node fails most often. See the density section in `references/style.md`.
 3. Length is set in `references/style.md`. It is a real gate on a `sourced` node, not a style note. At equal content, shorter is better. At equal length, more good sourced facts and arguments is better.
-4. A stub or a draft is inspiration and nothing more. Its sentences are not protected, its leads are not sources and its outline is not the node's shape. The node is researched from the evidence up. Protection covers text that was already in a `sourced` node when the run started, and nothing else.
+4. A stub or a draft is inspiration and nothing more. Its sentences are not protected, its leads are not sources and its outline is not the node's shape. The node is researched from the evidence up. Protection covers text that was already in a `sourced` or `stale` node when the run started, and nothing else.
 5. The author's `points` are binding. Every one is carried into the body with a source, or reported as not carried with the reason. The list itself is never edited by the pipeline.
 6. At least half the sources in a node are academic register. Advocacy publishing never carries a fact on its own. See `references/balance.md`.
 7. The finished node is written to its file in the vault, then committed and pushed. Working files never land in the vault.
@@ -30,7 +30,7 @@ Ask the user for the node title and folder if not given. Read the node's file an
 
 Then set up two files in a scratch directory outside the vault:
 
-- `existing.md` is the verifier's protection list. If the node's status is `sourced`, copy the body into it verbatim. If the status is `stub` or `drafted`, or the node does not exist, leave it empty. A stub or a draft is not protected.
+- `existing.md` is the verifier's protection list. If the node's status is `sourced` or `stale`, copy the body into it verbatim. If the status is `stub` or `drafted`, or the node does not exist, leave it empty. A stub or a draft is not protected.
 - `notes.md` holds what the run may be inspired by: the body of a stub or a draft, or the user's message when there is no file yet. It goes to the researchers as leads to check and to the writer as notes. Nothing in it is a fact until a researcher returns it with a source.
 
 Never skip this. The verifier's cut authority depends on `existing.md` being right.
@@ -47,8 +47,8 @@ This applies to source verification only. A section that is simply not written y
 
 ## Step 2: Pick the run mode
 
-- **Source**: the node is a stub or a draft, or does not exist yet, or is sourced and the rework adds or changes substance. Run all phases.
-- **Verify only**: the user asks to fact check or re-source a sourced node. Run Phase 0 and Phase 4 only.
+- **Source**: the node is a stub or a draft, or does not exist yet, or is sourced or stale and the rework adds or changes substance. Run all phases.
+- **Verify only**: the user asks to fact check or re-source a sourced or stale node. Run Phase 0 and Phase 4 only.
 - **Touch up**: wording, links, formatting. No agents. Do it inline.
 
 State which mode you picked in one line before starting.

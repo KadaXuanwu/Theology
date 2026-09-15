@@ -2,7 +2,7 @@
 type: person
 kind: Egyptologist
 location: University of British Columbia and Vancouver School of Theology, Vancouver
-status: sourced
+status: stale
 tags:
   - egypt
   - archaeology

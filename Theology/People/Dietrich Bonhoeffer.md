@@ -4,7 +4,7 @@ kind: theologian
 born: 4 February 1906, Breslau
 died: 9 April 1945, Flossenbürg concentration camp
 location: University of Berlin, the Confessing Church seminary at Finkenwalde, and German congregations in Barcelona and London
-status: sourced
+status: stale
 tags:
   - theology
   - confessing-church

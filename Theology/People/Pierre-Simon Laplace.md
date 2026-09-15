@@ -4,7 +4,7 @@ kind: mathematician
 born: 23 March 1749, Beaumont-en-Auge
 died: 5 March 1827, Paris
 location: the École Militaire, the Académie des Sciences and the Bureau des Longitudes, Paris
-status: sourced
+status: stale
 tags:
   - astronomy
   - gaps

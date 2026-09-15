@@ -4,7 +4,7 @@ kind: theologian
 born: 1033, Aosta
 died: 21 April 1109, Canterbury
 location: the Abbey of Bec in Normandy, and Canterbury
-status: sourced
+status: stale
 tags:
   - medieval
   - atonement

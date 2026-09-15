@@ -3,7 +3,7 @@ type: person
 kind: psychologist
 born: 1971
 location: Blueprint 1543, and the University of St Andrews
-status: sourced
+status: stale
 tags:
   - cognition
   - agency-detection

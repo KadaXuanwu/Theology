@@ -2,7 +2,7 @@
 type: person
 kind: linguist
 location: Massachusetts Institute of Technology, Cambridge, Massachusetts
-status: sourced
+status: stale
 tags:
   - linguistics
 ---

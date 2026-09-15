@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: Acadia University, Wolfville
-status: sourced
+status: stale
 tags:
   - hiddenness
   - atheism

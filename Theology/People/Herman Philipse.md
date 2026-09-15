@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 13 May 1951, The Hague
 location: Utrecht University, and Leiden University
-status: sourced
+status: stale
 tags:
   - atheism
   - philosophy-of-religion

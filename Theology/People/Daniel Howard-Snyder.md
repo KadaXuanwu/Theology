@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: Western Washington University, Bellingham
-status: sourced
+status: stale
 tags:
   - hiddenness
   - problem-of-evil

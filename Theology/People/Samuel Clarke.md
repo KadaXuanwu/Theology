@@ -4,7 +4,7 @@ kind: philosopher
 born: 11 October 1675, Norwich
 died: 17 May 1729, London
 location: St James's, Westminster, London, and Gonville and Caius College, Cambridge
-status: sourced
+status: stale
 tags:
   - natural-theology
   - newton

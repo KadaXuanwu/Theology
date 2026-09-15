@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: Hong Kong Baptist University
-status: sourced
+status: stale
 tags:
   - hell
   - hiddenness

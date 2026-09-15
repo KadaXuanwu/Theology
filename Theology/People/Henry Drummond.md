@@ -4,7 +4,7 @@ kind: evangelist
 born: 17 August 1851, Stirling
 died: 11 March 1897, Tunbridge Wells
 location: the Free Church College, Glasgow
-status: sourced
+status: stale
 tags:
   - science-and-religion
   - gaps

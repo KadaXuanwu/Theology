@@ -151,7 +151,7 @@ points:
 
 ## Status
 
-`status` is a promise about the node. Three values, each with a gate.
+`status` is a promise about the node. Four values, each with a gate.
 
 **`stub`.** The author's own notes, written by hand from the folder's `_Template.md`. Any length. Headings may be empty or hold one line. Nothing but the author writes a stub, and nothing checks one.
 
@@ -159,11 +159,13 @@ points:
 
 **`sourced`.** Every factual sentence passed the verifier, the body runs 500 to 2000 words, and the balance rules hold or the shortfall is disclosed in the delivery. Set by `source-node`.
 
+**`stale`.** Was `sourced`, and may no longer meet that gate: it passed a verifier under an earlier version of the pipeline, or findings made since have not been worked in. Its text is protected the way sourced text is, because it did pass a verifier once. Set by hand when the pipeline changes or new work turns up. The skill that takes a node from `stale` back to `sourced` does not exist yet; until it does, `source-node` in Source or Verify only mode is the route.
+
 A stub or a draft is inspiration for the sourcing run and no more. Its body is not protected and its leads are not sources. The `points` list is the one thing in it that binds.
 
 ## Field values in use
 
-- `status`: `stub`, `drafted`, `sourced`. See Status above.
+- `status`: `stub`, `drafted`, `sourced`, `stale`. See Status above.
 - `kind`: on evidence `artefact`, `study`, `record`; on a person their trade. Both open lists, see above.
 - `points`: optional, see Points above.
 

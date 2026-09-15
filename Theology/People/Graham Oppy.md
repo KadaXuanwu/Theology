@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 1960
 location: Monash University, Melbourne
-status: sourced
+status: stale
 tags:
   - atheism
   - philosophy-of-religion

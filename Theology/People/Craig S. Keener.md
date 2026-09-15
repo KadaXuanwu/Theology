@@ -3,7 +3,7 @@ type: person
 kind: biblical scholar
 born: 1960
 location: Asbury Theological Seminary, Wilmore
-status: sourced
+status: stale
 tags:
   - new-testament
   - johannine

@@ -2,7 +2,7 @@
 type: person
 kind: psychologist
 location: Macquarie University, Sydney
-status: sourced
+status: stale
 tags:
   - psychology
   - nonbelief

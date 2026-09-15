@@ -4,7 +4,7 @@ kind: philosopher
 born: 1 July 1646, Leipzig
 died: 14 November 1716, Hanover
 location: the court of Mainz, Paris, and the court of Brunswick at Hanover
-status: sourced
+status: stale
 tags:
   - metaphysics
   - theodicy

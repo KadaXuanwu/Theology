@@ -2,7 +2,7 @@
 type: person
 kind: psychologist
 location: Justice Health and Forensic Mental Health Network, New South Wales
-status: sourced
+status: stale
 tags:
   - psychology
   - nonbelief

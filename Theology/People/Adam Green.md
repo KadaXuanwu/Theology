@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 1981
 location: University of Oklahoma, Norman
-status: sourced
+status: stale
 tags:
   - philosophy-of-religion
   - hiddenness

@@ -3,7 +3,7 @@ type: person
 kind: indologist
 died: 5 April 2023
 location: University of Edinburgh
-status: sourced
+status: stale
 tags:
   - jainism
   - religion

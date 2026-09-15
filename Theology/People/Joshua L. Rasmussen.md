@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: Baylor University, Waco, Texas
-status: sourced
+status: stale
 tags:
   - metaphysics
   - necessary-existence

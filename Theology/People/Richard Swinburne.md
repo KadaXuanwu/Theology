@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 26 December 1934
 location: the University of Oxford, and the University of Keele
-status: sourced
+status: stale
 tags:
   - philosophy-of-religion
   - probability

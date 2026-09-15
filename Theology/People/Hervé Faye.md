@@ -4,7 +4,7 @@ kind: astronomer
 born: 1 October 1814, Saint-Benoît-du-Sault
 died: 4 July 1902, Paris
 location: the Paris Observatory, the École polytechnique and the Académie de Nancy
-status: sourced
+status: stale
 tags:
   - astronomy
   - history-of-science

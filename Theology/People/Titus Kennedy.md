@@ -2,7 +2,7 @@
 type: person
 kind: archaeologist
 location: Discovery Institute, Seattle, and Biola University, La Mirada, California
-status: sourced
+status: stale
 tags:
   - archaeology
   - bible

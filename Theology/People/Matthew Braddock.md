@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: University of Tennessee at Martin
-status: sourced
+status: stale
 tags:
   - nonbelief
   - cognition

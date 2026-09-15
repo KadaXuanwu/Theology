@@ -3,7 +3,7 @@ type: person
 kind: psychologist
 born: 17 September 1980, Alphen aan den Rijn
 location: Leiden University
-status: sourced
+status: stale
 tags:
   - psychology
   - religious-experience

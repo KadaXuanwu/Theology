@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: University of Birmingham
-status: sourced
+status: stale
 tags:
   - hiddenness
   - nonbelief

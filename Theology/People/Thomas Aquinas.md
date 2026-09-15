@@ -4,7 +4,7 @@ kind: theologian
 born: c. 1225, Aquino
 died: 7 March 1274, Fossanova
 location: Paris, Cologne, Rome, Naples
-status: sourced
+status: stale
 tags:
   - catholic
   - scholasticism

@@ -4,7 +4,7 @@ kind: biblical scholar
 born: 17 August 1944, Rochester, New York
 died: 20 January 2018, East Ridge, Tennessee
 location: Temple Baptist Seminary and Chattanooga State Community College, Tennessee
-status: sourced
+status: stale
 tags:
   - new-testament
   - romans

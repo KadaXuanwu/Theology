@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 1945
 location: Calvin University, Grand Rapids, Michigan
-status: sourced
+status: stale
 tags:
   - philosophy-of-science
   - design

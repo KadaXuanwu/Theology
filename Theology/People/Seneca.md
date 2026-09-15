@@ -4,7 +4,7 @@ kind: philosopher
 born: c. 4 BCE, Corduba
 died: 65 CE, Rome
 location: Rome, and Corsica in exile from 41 to 49 CE
-status: sourced
+status: stale
 tags:
   - stoicism
   - antiquity

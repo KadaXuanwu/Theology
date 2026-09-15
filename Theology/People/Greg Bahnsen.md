@@ -4,7 +4,7 @@ kind: apologist
 born: 17 September 1948, Auburn, Washington
 died: 11 December 1995
 location: Reformed Theological Seminary, Jackson, Mississippi, and Orange County, California
-status: sourced
+status: stale
 tags:
   - presuppositionalism
   - reformed

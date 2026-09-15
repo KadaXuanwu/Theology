@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 1954
 location: University of New Brunswick, Fredericton
-status: sourced
+status: stale
 tags:
   - miracles
   - gaps

@@ -4,7 +4,7 @@ kind: reformer
 born: 10 July 1509, Noyon
 died: 27 May 1564, Geneva
 location: Geneva, Strasbourg and Basel
-status: sourced
+status: stale
 tags:
   - reformation
   - general-revelation

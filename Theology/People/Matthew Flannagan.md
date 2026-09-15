@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: Auckland, New Zealand
-status: sourced
+status: stale
 tags:
   - divine-command
   - conquest

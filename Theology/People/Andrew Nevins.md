@@ -2,7 +2,7 @@
 type: person
 kind: linguist
 location: University College London, and the Federal University of Rio de Janeiro
-status: sourced
+status: stale
 tags:
   - linguistics
 ---

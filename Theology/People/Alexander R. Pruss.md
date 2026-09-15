@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 5 January 1973
 location: Baylor University, Waco, Texas
-status: sourced
+status: stale
 tags:
   - metaphysics
   - cosmological-argument

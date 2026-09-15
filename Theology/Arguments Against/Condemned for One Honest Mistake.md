@@ -1,6 +1,6 @@
 ---
 type: argument
-status: sourced
+status: stale
 tags:
   - hell
   - justice

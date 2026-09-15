@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: Ian Ramsey Centre for Science and Religion, University of Oxford
-status: sourced
+status: stale
 tags:
   - philosophy-of-religion
   - aquinas

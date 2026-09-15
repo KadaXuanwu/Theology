@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: Villanova University, Pennsylvania
-status: sourced
+status: stale
 tags:
   - nonbelief
   - epistemology

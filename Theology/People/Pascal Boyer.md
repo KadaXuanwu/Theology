@@ -2,7 +2,7 @@
 type: person
 kind: anthropologist
 location: Washington University in St Louis
-status: sourced
+status: stale
 tags:
   - cognition
   - anthropology

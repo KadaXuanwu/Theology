@@ -2715,5 +2715,51 @@ console.log("the author's points sit at the foot of the note, as written")
   check("and keeps its focus ring", /\.points summary:focus-visible \{/.test(sheet))
 }
 
+console.log("a stale note was verified once and says so everywhere the status shows")
+{
+  const { notePage } = await import("./lib/templates.mjs")
+  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+  const corpus = JSON.parse(await readFile(resolve(repoRoot, "dist", "chat-corpus.json"), "utf8"))
+  const home = await readFile(resolve(repoRoot, "dist", "index.html"), "utf8")
+
+  // Four statuses, three looks. Dashed is unverified, solid is sourced, and
+  // stale is dotted: it passed a verifier under an earlier version of the
+  // pipeline and is due a fresh check, so it must read as neither of the others.
+  check("the sheet styles the stale pill", /\.pill-status\[data-status="stale"\] \{[^}]*border-style: dotted/.test(sheet))
+  check("and not as the unverified pair", !/\.pill-status\[data-status="stale"\][^{]*\{[^}]*dashed/.test(sheet))
+
+  const page = notePage({
+    note: {
+      title: "X",
+      frontmatter: {},
+      status: "stale",
+      tags: [],
+      html: "<p>The body.</p>",
+      headings: [],
+      backlinks: [],
+      section: { dir: "Claims", kind: "claim", label: "Claims" },
+    },
+    root: "../../",
+    dateLabel: "Updated today",
+    sections: SECTIONS,
+    notes: [],
+    assets: {},
+  })
+  check("the note page wears the pill", /<span class="pill pill-status" data-status="stale">stale<\/span>/.test(page))
+
+  // The home page counts stale apart from stub and drafted, since those have
+  // never been checked and stale has. The sentence only appears when there is
+  // something to count, so the check follows the vault as it stands.
+  const staleCount = corpus.notes.filter((n) => n.status === "stale").length
+  const sentence = /\d+ are marked stale: sourced under an earlier version of the process and due a fresh check\./
+  check("the home summary counts stale on its own", staleCount ? sentence.test(home) : !sentence.test(home), `${staleCount} stale notes`)
+  check("and never folds it into the unverified count", !/marked stub or drafted[^.]*stale/.test(home))
+
+  // The chat model sees the same word in the catalogue and is told what it means.
+  check("the catalogue marks a stale note", /\(stale\)/.test(catalogue([{ title: "S", section: "Claims", status: "stale", tags: [], excerpt: "e" }])))
+  const { system } = buildPrompt(corpus, { question: "anything", pageUrl: null })
+  check("the prompt tells the model what stale means", /marked stale were checked under an earlier version/.test(system))
+}
+
 console.log(failures === 0 ? "\nAll checks passed." : `\n${failures} check(s) failed.`)
 process.exitCode = failures === 0 ? 0 : 1

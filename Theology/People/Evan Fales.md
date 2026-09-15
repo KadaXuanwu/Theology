@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 1943
 location: University of Iowa, Iowa City
-status: sourced
+status: stale
 tags:
   - philosophy-of-religion
   - epistemology

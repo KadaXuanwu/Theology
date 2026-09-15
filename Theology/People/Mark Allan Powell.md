@@ -3,7 +3,7 @@ type: person
 kind: biblical scholar
 born: 1953
 location: Trinity Lutheran Seminary, Columbus, Ohio
-status: sourced
+status: stale
 tags:
   - new-testament
   - historical-jesus

@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 21 September 1942
 location: University of Notre Dame, and Syracuse University
-status: sourced
+status: stale
 tags:
   - hiddenness
   - free-will
