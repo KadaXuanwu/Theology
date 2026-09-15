@@ -13,4 +13,4 @@ Since 2026-09-15 the repo is laid out for any coding agent, not one vendor. Work
 
 - Write "the agent", "a subagent", "a smaller model". Never a vendor, product, tool or model name, anywhere but that one shim file. A case insensitive grep for the vendor name before committing should hit only the shim.
 - New instructions go in `AGENTS.md`, never in the shim.
-- If the skills ever need to be slash commands again for that agent, they need a vendor specific skills folder back. That is the user's call, not a quiet fix.
+- The user decided on 2026-09-15 that this is enough. No vendor specific skills folder comes back, so do not suggest one.
