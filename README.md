@@ -12,9 +12,9 @@ Every note is a node. Nodes link to each other with Obsidian style `[[Exact File
 
 | Folder | Holds |
 | --- | --- |
-| `Theology/Arguments For` | Arguments that support the Christian position |
+| `Theology/Arguments For` | Arguments for Christianity from premises that do not assume it. Replies to objections are claims and sit in `Claims` |
 | `Theology/Arguments Against` | Arguments that challenge it |
-| `Theology/Claims` | Statements an argument depends on, used by both categories |
+| `Theology/Claims` | Statements an argument depends on, used by both categories, including the replies an objection gets |
 | `Theology/Evidence` | Artefacts, studies and texts a claim can point to |
 | `Theology/People` | Anyone a node names: what they worked on, what they published, and what position they stated in their own words |
 
