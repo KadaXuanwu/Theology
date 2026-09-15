@@ -18,7 +18,7 @@ Hell is not a torture chamber God sends people to, but the state of living apart
 - C.S. Lewis, *The Problem of Pain* (1940), ch. 8, and *The Great Divorce* (1945). Source of the doors-locked-from-the-inside framing, which is Lewis rather than scripture and should be cited as his.
 
 # Countered By
-- [[Coerced Love Isn't Love]] the choice is not free if refusing it carries an eternal penalty.
+- [[The Threat of Hell Compels the People Who Believe It]] the choice is not free if refusing it carries an eternal penalty.
 - [[Condemned for One Honest Mistake]] someone who never rejected God, only failed to be convinced, has not chosen anything.
 - [[Demanding Belief Without the Proof]] the same point from the evidence side. A choice made without adequate information is not the informed refusal this argument describes.
 - [[No Finite Life Deserves Infinite Punishment]] presses the size of the outcome. This argument answers by denying it is a penalty at all.

@@ -18,7 +18,7 @@ The harder version of the complaint drops the biblical cases. [[Stephen Maitzen]
 The complaint's second half, that the penalty falls on everyone regardless, is put too widely. [[Thomas Aquinas|Aquinas]] holds that anyone following natural reason towards good would be given what salvation needs, by inward inspiration or by a preacher sent, and *Lumen Gentium* 16 says someone ignorant of the gospel through no fault of his own can be saved.[^aquinas-de-veritate][^lumen-gentium]
 
 # Based On
-- The premise it works from: God wants a response that is freely given, which is the standing reason for staying hidden. See [[Coerced Love Isn't Love]].
+- The premise it works from: God wants a response that is freely given, which is the standing reason for staying hidden. See [[The Threat of Hell Compels the People Who Believe It]].
 - [[Some Unbelief Isn't Resistance]] carries the existence claim, that there are people who do not resist God and still do not believe. [[The Suppression Thesis Rests on Possibility]] closes off the answer that they were resisting anyway.
 - [Numbers 14:11](https://www.biblegateway.com/passage/?search=Numbers%2014:11&version=NIV) signs performed, belief in God not produced, and God states it as a complaint rather than as the design. This is the verse that says what Exodus 19:9 is usually quoted for, where the object of the trusting is Moses.
 - [1 Kings 18:38–39](https://www.biblegateway.com/passage/?search=1%20Kings%2018:38-39&version=NIV) fire falls in front of a crowd, and the people respond.

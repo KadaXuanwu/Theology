@@ -39,7 +39,7 @@ Philosophers call this case non-resistant non-belief, meaning unbelief that does
 
 # Related
 - [[Blame Belongs to the Parent, Not the Child]] responsibility a step back.
-- [[Coerced Love Isn't Love]] the penalty from the choice's side.
+- [[The Threat of Hell Compels the People Who Believe It]] the penalty from the choice's side.
 - [[Creation Alone Doesn't Point to God]] why the looking comes up empty.
 - [[Experiential Confirmation Doesn't Distinguish Religions]] evidence only after commitment.
 

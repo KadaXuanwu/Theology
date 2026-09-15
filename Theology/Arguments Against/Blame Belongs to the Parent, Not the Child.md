@@ -22,4 +22,4 @@ When children don't love their parents, we usually see it as a failure of the pa
 - [[Demanding Belief Without the Proof]]
 - [[Condemned for One Honest Mistake]]
 - [[Creation Alone Doesn't Point to God]]
-- [[Coerced Love Isn't Love]]
+- [[The Threat of Hell Compels the People Who Believe It]]

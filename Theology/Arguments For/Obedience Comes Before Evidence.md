@@ -37,5 +37,5 @@ On this reading God is not indifferent to evidence, he sequences it. Confirmatio
 
 # Related
 - [[Personal Relationship with God]] is the same argument stated as method. This node supplies its scriptural basis.
-- [[Coerced Love Isn't Love]] presses on whether a step taken under an eternal penalty counts as a free step at all.
+- [[The Threat of Hell Compels the People Who Believe It]] presses on whether a step taken under an eternal penalty counts as a free step at all.
 - [[Creation Alone Doesn't Point to God]]

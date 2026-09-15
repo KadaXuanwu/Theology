@@ -27,4 +27,4 @@ The best way to confirm that Christianity is true is by experiencing it by yours
 # Related
 - [[Obedience Comes Before Evidence]] is the same argument stated as sequence rather than as method.
 - [[Creation Alone Doesn't Point to God]]
-- [[Coerced Love Isn't Love]]
+- [[The Threat of Hell Compels the People Who Believe It]]

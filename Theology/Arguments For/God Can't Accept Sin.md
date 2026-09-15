@@ -32,5 +32,5 @@ That is why the offer is repentance and covering rather than a pardon issued wit
 # Related
 - [[Hell as Self-Chosen Separation]] is the same idea applied to the outcome rather than the cause.
 - [[Condemned for One Honest Mistake]] this node is the direct reply to it.
-- [[Coerced Love Isn't Love]]
+- [[The Threat of Hell Compels the People Who Believe It]]
 - [[The Covenant Changed with Christ]]

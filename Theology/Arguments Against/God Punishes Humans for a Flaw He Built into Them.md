@@ -23,6 +23,6 @@ God created humans inherently incapable of avoiding sin, then punished them for 
 - It assumes a design frame. Someone reading Genesis 3 as a story about the human condition rather than a manufacturing decision is not touched by it.
 
 # Related
-- [[Coerced Love Isn't Love]] runs the same tension from the other end: freedom is invoked to justify the design, and the penalty is what makes the freedom questionable.
+- [[The Threat of Hell Compels the People Who Believe It]] runs the same tension from the other end: freedom is invoked to justify the design, and the penalty is what makes the freedom questionable.
 - [[The Sacrifice Requirement Is Arbitrary]]
 - [[God Can't Accept Sin]]
