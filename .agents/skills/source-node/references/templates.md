@@ -24,6 +24,8 @@ points: []
 - **Limits**: where the argument is weaker than it sounds, including cases where accepting it costs something elsewhere. The first bullet is the crux: the one premise the argument stands or falls on, and what would settle it. The rest follow.
 - **Related**: nodes that touch it without countering it.
 
+**Which folder.** An argument concludes something about Christianity, its truth or the rational standing of belief in it, from premises a person outside the faith can grant or fight. A node whose premises are Christian teaching and whose conclusion is that an objection fails is a claim, however Christian it reads: it goes in `Claims/`, and the objection it answers links down to it. The test is to delete every premise that is itself a Christian teaching. If the argument still runs, it is an argument. If it collapses, it is a claim. Hell Is Self-Chosen Separation collapses and is a claim. God Is the Reason Anything Exists at All still runs and is an argument.
+
 ## Claim (`Claims/`)
 
 ```

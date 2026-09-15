@@ -1892,7 +1892,7 @@ console.log("a link wears the colour of what it points at")
   check("the highlight is still spent somewhere", (sheet.match(/var\(--highlight/g) ?? []).length >= 3)
 
   // And the pages really do carry the kind the colour is read from.
-  const built = await readFile(resolve(repoRoot, "dist/arguments-for/personal-relationship-with-god/index.html"), "utf8")
+  const built = await readFile(resolve(repoRoot, "dist/arguments-for/religious-experience-is-evidence-for-god/index.html"), "utf8")
   const tagged = [...built.matchAll(/<a class="wikilink"[^>]*data-kind="([^"]+)"/g)].map((m) => m[1])
   check("every wikilink on a page names its kind", tagged.length > 0, `${tagged.length} tagged`)
   check("and names one the stylesheet knows", tagged.every((k) => KINDS.includes(k)), [...new Set(tagged)].join(", "))
