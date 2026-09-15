@@ -7,6 +7,10 @@
 
 const FORCES = {
   repulsion: 5200, // how hard unconnected nodes push apart
+  // The closest two nodes count as for repulsion. Without a floor the inverse
+  // square law hands a pair that passes within a pixel a kick in the thousands,
+  // and the layout never recovers. It first happened at 159 notes.
+  minDistance: 8,
   linkDistance: 78, // rest length of a link
   linkStrength: 0.045,
   centering: 0.012,
@@ -180,7 +184,7 @@ export function stepForces(nodes, links, alpha, alphaTarget = 0) {
         distSq = dx * dx + dy * dy
       }
       const dist = Math.sqrt(distSq)
-      const force = FORCES.repulsion / distSq
+      const force = FORCES.repulsion / Math.max(distSq, FORCES.minDistance * FORCES.minDistance)
       const fx = (dx / dist) * force
       const fy = (dy / dist) * force
       a.vx -= fx
