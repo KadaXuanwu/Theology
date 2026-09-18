@@ -859,13 +859,18 @@ console.log("the legend filters the graph")
   // there are more of them than of everything else, and they carry no
   // argument, so a graph that opened with them would be mostly reference.
   check(
-    "every kind but People starts switched on",
-    toggles.filter((m) => m[1] !== "person").every((m) => m[2] === "true"),
+    "every kind but the reference layers starts switched on",
+    toggles.filter((m) => !["person", "term"].includes(m[1])).every((m) => m[2] === "true"),
   )
   check(
     "and People starts switched off",
     toggles.find((m) => m[1] === "person")?.[2] === "false",
     toggles.find((m) => m[1] === "person")?.[2] ?? "no People toggle",
+  )
+  check(
+    "and so does the Glossary",
+    toggles.find((m) => m[1] === "term")?.[2] === "false",
+    toggles.find((m) => m[1] === "term")?.[2] ?? "no Glossary toggle",
   )
   // Read off SECTIONS rather than written out here: the legend, the tree and
   // the overview all take that one order, and reordering the vault should not
@@ -904,8 +909,8 @@ console.log("the legend filters the graph")
   check("and every graph on the page is laid out again", /paintToggles\(\)\n\s+\/\/[\s\S]{0,160}?rebuild\(\)/.test(appSource))
   // The rail is small enough that the reference layer would crowd out the
   // argument, so it drops people whatever the legend is set to.
-  check("the rail never carries the reference layer", /shown\.delete\(PERSON\)/.test(appSource))
-  check("and the full graphs start without it", /HIDDEN_BY_DEFAULT = \[PERSON\]/.test(appSource))
+  check("the rail never carries the reference layers", /shown\.delete\(PERSON\)/.test(appSource) && /shown\.delete\(TERM\)/.test(appSource))
+  check("and the full graphs start without them", /HIDDEN_BY_DEFAULT = \[PERSON, TERM\]/.test(appSource))
   check(
     "a reader who switches it on is remembered",
     appSource.includes("readSet(HIDDEN_KEY, HIDDEN_BY_DEFAULT)"),
@@ -1691,7 +1696,7 @@ console.log("the reading column is a sheet on a page, not the page itself")
 console.log("a link wears the colour of what it points at")
 {
   const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
-  const KINDS = ["argument-for", "argument-against", "claim", "evidence", "person", "note"]
+  const KINDS = ["argument-for", "argument-against", "claim", "evidence", "person", "term", "note"]
 
   const linear = (c) => (c / 255 <= 0.03928 ? c / 255 / 12.92 : ((c / 255 + 0.055) / 1.055) ** 2.4)
   const rgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16))
@@ -1800,10 +1805,10 @@ console.log("a link wears the colour of what it points at")
   // what this is measuring, and it is the reason the four are not all equally
   // bright. 0.09 in OKLab is about the gap between two neighbouring greys on a
   // ten step ramp: small, but never "did that just move".
-  // Both greys are outside the four the map is made of: a person and a note
-  // from an unknown folder are reference, not a step in an argument, and they
-  // are meant to read as the same kind of thing.
-  const four = KINDS.filter((k) => k !== "note" && k !== "person")
+  // The grey is outside the four the map is made of: a person, a term and a
+  // note from an unknown folder are reference, not a step in an argument, and
+  // they are meant to read as the same kind of thing.
+  const four = KINDS.filter((k) => !["note", "person", "term"].includes(k))
   for (const theme of ["light", "dark"]) {
     for (const eyes of ["deutan", "protan"]) {
       let worst = Infinity
@@ -2759,6 +2764,57 @@ console.log("a stale note was verified once and says so everywhere the status sh
   check("the catalogue marks a stale note", /\(stale\)/.test(catalogue([{ title: "S", section: "Claims", status: "stale", tags: [], excerpt: "e" }])))
   const { system } = buildPrompt(corpus, { question: "anything", pageUrl: null })
   check("the prompt tells the model what stale means", /marked stale were checked under an earlier version/.test(system))
+}
+
+console.log("the lint reads the rules the templates promise")
+{
+  const { HEADINGS, MAY_LINK, lintNote, urlsOf } = await import("./lint.mjs")
+  const sec = (kind, dir) => ({ kind, dir })
+  const S = { arg: sec("argument-against", "Arguments Against"), claim: sec("claim", "Claims"), term: sec("term", "Glossary") }
+  const make = (section, type, body, extra = {}) => ({
+    title: extra.title ?? "X",
+    section,
+    body,
+    frontmatter: { type, status: "sourced", ...extra.fm },
+    status: extra.fm?.status ?? "sourced",
+  })
+  const notes = [
+    make(S.arg, "argument", "", { title: "Other Argument" }),
+    make(S.claim, "claim", "", { title: "A Claim" }),
+    make(S.term, "term", "", { title: "A Term" }),
+  ]
+  const resolveTitle = (t) => notes.find((n) => n.title === t) ?? null
+  const lint = (note, raw = "---\n---\n") => lintNote(note, { resolve: resolveTitle, raw })
+  const argBody = (desc, countered = "- y") => `# Description\n${desc}\n# Based On\n- x\n# Countered By\n${countered}\n# Limits\n- z\n# Related\n- w\n`
+  const claimBody = (desc) => `# Description\n${desc}\n# Origins\nx\n# Based On\nx\n# Carries\nx\n# Disputed By\nx\n# Limits\nx\n`
+  const fails = (note, raw) => lint(note, raw).fails
+
+  const good = lint(make(S.arg, "argument", argBody("Claim.[^a]\n\n[^a]: A source.")))
+  check("a node to template has no failures", good.fails.length === 0, good.fails.join("; "))
+  check("the heading order is the template's", fails(make(S.arg, "argument", "# Description\nx\n# Limits\n- z\n")).some((f) => /headings/.test(f)))
+  check("a claim may not link an argument", fails(make(S.claim, "claim", claimBody("[[Other Argument]]"))).some((f) => /up the stack/.test(f)))
+  check("an argument's Description may not link an argument", fails(make(S.arg, "argument", argBody("[[Other Argument]]"))).some((f) => /Description links/.test(f)))
+  check("but its Countered By may", fails(make(S.arg, "argument", argBody("x", "- [[Other Argument]]"))).length === 0)
+  check("any node may link a term", fails(make(S.claim, "claim", claimBody("[[A Term|term]]"))).length === 0)
+  check("a broken link fails", fails(make(S.arg, "argument", argBody("[[Nope]]"))).some((f) => /matches no note/.test(f)))
+  check("an em dash fails", fails(make(S.arg, "argument", argBody("one \u2014 two"))).some((f) => /em dash/.test(f)))
+  check("an en dash inside a range does not", fails(make(S.arg, "argument", argBody("Genesis 2:16\u201317 and pp. 80\u201382"))).length === 0)
+  check("a spaced en dash does", fails(make(S.arg, "argument", argBody("one \u2013 two"))).some((f) => /en dash as punctuation/.test(f)))
+  check("a spaced hyphen does", fails(make(S.arg, "argument", argBody("one - two"))).some((f) => /hyphen as a dash/.test(f)))
+  check("a citation's own dash is left alone", fails(make(S.arg, "argument", argBody('Claim.[^a]\n\n[^a]: Feser, "Nozick (1938\u20142002)".'))).length === 0)
+  check("a marker without a citation fails", fails(make(S.arg, "argument", argBody("Claim.[^b]"))).some((f) => /no citation/.test(f)))
+  check("a citation nobody cites fails", fails(make(S.arg, "argument", argBody("Claim.\n\n[^b]: Unused."))).some((f) => /never cited/.test(f)))
+  check("an inline tag list fails", fails(make(S.arg, "argument", argBody("x")), "---\ntags: [hell, justice]\n---\n").some((f) => /inline list/.test(f)))
+  check("an empty one does not", fails(make(S.arg, "argument", argBody("x")), "---\ntags: []\n---\n").length === 0)
+  check("an empty heading fails off a stub", fails(make(S.arg, "argument", argBody("x").replace("- w", ""))).some((f) => /Related is empty/.test(f)))
+  check("and passes on one", fails(make(S.arg, "argument", argBody("x").replace("- w", ""), { fm: { status: "stub" } })).length === 0)
+  const thin = lint(make(S.arg, "argument", argBody("Short.")))
+  check("length is a warning, not a failure", thin.fails.length === 0 && thin.warns.some((w) => /under 500/.test(w)), thin.warns.join("; "))
+  check("a long sentence is a warning", lint(make(S.arg, "argument", argBody(Array(40).fill("word").join(" ") + "."))).warns.some((w) => /over 30 words/.test(w)))
+  check("and neither is read on a draft", lint(make(S.arg, "argument", argBody("Short."), { fm: { status: "drafted" } })).warns.length === 0)
+  check("the lint knows every kind the site has", Object.keys(HEADINGS).length === 5 && Object.keys(MAY_LINK).length === 5)
+  const urls = urlsOf(new Map([["a", "See [DNB](https://en.wikisource.org/wiki/Clarke,_Samuel_(1675-1729)) and <https://example.org/x>."]]))
+  check("a source URL keeps its own brackets and loses the link's", urls.join(" ") === "https://en.wikisource.org/wiki/Clarke,_Samuel_(1675-1729) https://example.org/x", urls.join(" "))
 }
 
 console.log(failures === 0 ? "\nAll checks passed." : `\n${failures} check(s) failed.`)

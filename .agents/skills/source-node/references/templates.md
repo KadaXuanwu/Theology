@@ -109,20 +109,43 @@ There is no Related section. A person node links another person inline where it 
 
 A person node never says who is right, and no word limit applies to it.
 
+## Term (`Glossary/`)
+
+```
+---
+type: term
+kind: philosophy
+status: stub
+tags: []
+---
+# Description
+# Source
+```
+
+`kind` is the field the term belongs to: `philosophy`, `logic`, `biblical studies`, `medicine`, `cosmology`, `psychology`. Open list, same rule as evidence.
+
+- **Description**: the definition in one or two plain sentences, in the sense the vault uses it, with the reference work's own wording quoted where it is short. The first sentence is the definition, because it is what the site shows when a reader hovers the term anywhere in the vault. Where the term has another sense a reader might confuse it with, one more sentence says which is meant.
+- **Source**: the signed reference work the definition comes from, linked, with the section.
+
+A term links other terms and nothing else. No word limit applies, and a term is never longer than it has to be. Wikipedia is not a source for a term. The *Stanford Encyclopedia of Philosophy*, the *Internet Encyclopedia of Philosophy*, a signed *Britannica* entry or a field's standard handbook is; `agents/term.md` researches one.
+
 ## Link direction
 
 Links never run up the stack.
 
 | A node in | May link to |
 | --- | --- |
-| `Arguments For`, `Arguments Against` | `Claims`, `Evidence`, `People`, and other arguments |
-| `Claims` | `Claims`, `Evidence`, `People` |
-| `Evidence` | `Evidence`, `People` |
-| `People` | `People` |
+| `Arguments For`, `Arguments Against` | `Claims`, `Evidence`, `People`, `Glossary`, and other arguments |
+| `Claims` | `Claims`, `Evidence`, `People`, `Glossary` |
+| `Evidence` | `Evidence`, `People`, `Glossary` |
+| `People` | `People`, `Glossary` |
+| `Glossary` | `Glossary` |
 
 The `Description` of an argument may not link another argument. Every other section may.
 
 Upward links are not written by hand. The site builds them and shows them under "Linked from", so a claim never lists the arguments that use it.
+
+A term sits under everything, so any node links one on the first use of the term in its prose, aliased to the word as written: `[[Libertarian free will|libertarian]]`. `site/lint.mjs` checks every row of this table on every build.
 
 ## Tags
 
@@ -159,7 +182,7 @@ points:
 
 **`drafted`.** The idea in the node's shape, unverified. Every heading is filled or marked as a gap with a `Needs sources` line. The Description opens on the claim. Every `[[link]]` resolves to an existing node and runs down the stack. Sources are leads, each carrying the access the drafter achieved, and nothing is presented as checked. Set by `draft-node`, or by hand when the author has done the same work.
 
-**`sourced`.** Every factual sentence passed the verifier, the body runs 500 to 2000 words, and the balance rules hold or the shortfall is disclosed in the delivery. Set by `source-node`.
+**`sourced`.** Every factual sentence passed the verifier, the body runs 500 to 2000 words of prose, and the balance rules hold or the shortfall is disclosed in the run record. Set by `source-node`. On a person or a term there is no word range, and `sourced` means every fact was read in the source it cites.
 
 **`stale`.** Was `sourced`, and may no longer meet that gate: it passed a verifier under an earlier version of the pipeline, or findings made since have not been worked in. Its text is protected the way sourced text is, because it did pass a verifier once. Set by hand when the pipeline changes or new work turns up. The skill that takes a node from `stale` back to `sourced` does not exist yet; until it does, `source-node` in Source or Verify only mode is the route.
 
@@ -168,7 +191,7 @@ A stub or a draft is inspiration for the sourcing run and no more. Its body is n
 ## Field values in use
 
 - `status`: `stub`, `drafted`, `sourced`, `stale`. See Status above.
-- `kind`: on evidence `artefact`, `study`, `record`; on a person their trade. Both open lists, see above.
+- `kind`: on evidence `artefact`, `study`, `record`; on a person their trade; on a term its field. All open lists, see above.
 - `points`: optional, see Points above.
 
 ## Link conventions

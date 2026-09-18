@@ -68,3 +68,7 @@ The prompt may carry the author's points and the leads from a draft.
 
 - Every point is a mandatory lead. Return the claims that support it, or one entry reading `POINT NOT SUPPORTED: <point> | <what you found instead>`. Silence on a point is a failed run.
 - A lead names where to look and nothing more. Open it, record the access you achieved, and if it does not say what the draft hoped, say so in an entry. Nothing from the draft is a claim until you have returned it with a source.
+
+## Fields touched
+
+End your output with one line: `FIELDS TOUCHED: <fields from references/disciplines.md your research brushed against and that are not yours, or "none">`. The librarian named the fields at the start from titles. You have now read the sources, and a field the node needs that nobody was sent to is the arbiter's to commission before the debate. Silence here is not an acceptable answer.

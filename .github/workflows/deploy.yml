@@ -49,6 +49,9 @@ jobs:
       - name: Check for broken internal links
         run: node site/linkcheck.mjs
 
+      - name: Lint the notes against the vault's rules
+        run: node site/lint.mjs
+
       - name: Upload artifact
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v5

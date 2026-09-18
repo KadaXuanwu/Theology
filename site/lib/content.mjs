@@ -40,6 +40,15 @@ export const SECTIONS = [
     label: "People",
     blurb: "The people the nodes name, and what they published.",
   },
+  // Terms of art are the second reference layer. A node links a term on its
+  // first use and the hover card shows the definition, so the prose spends no
+  // words on it. Grey like People, and out of the graphs until asked for.
+  {
+    dir: "Glossary",
+    kind: "term",
+    label: "Glossary",
+    blurb: "Terms of art the notes use, each with a sourced definition.",
+  },
 ]
 
 // Frontmatter here is small and predictable: scalars, inline lists and block

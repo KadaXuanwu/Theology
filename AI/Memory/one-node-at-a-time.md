@@ -13,4 +13,4 @@ Work touches one node at a time. Only the node the user named gets written. If t
 
 - Suggest, never apply, when the fix lands outside the target node. This covers backlinks, links a new node breaks, and errors the research turned up elsewhere.
 - The same holds for a rule change that touches the whole vault. Report the list first, edit after approval. See [[link-direction]] for the case that started this.
-- The node pipeline in `.agents/skills/source-node` carries this as a non negotiable, so it writes one file and reports the rest.
+- The node pipeline in `.agents/skills/source-node` carries this as a non negotiable, so it writes one file and reports the rest. Its two exceptions are the `People/` node a name needs and the `Glossary/` entry a term needs: it may create those, never edit existing ones.

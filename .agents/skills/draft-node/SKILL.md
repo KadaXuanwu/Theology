@@ -44,7 +44,7 @@ The drafter may search and fetch to confirm that a work exists and what it argue
 
 Check the draft against the drafted gate in `templates.md`: every heading filled or marked as a gap, the Description opens on the claim, every link resolves to a title the librarian listed and runs down the stack, no dash used as punctuation, the frontmatter unchanged except `status` and any added tags.
 
-Write the node to its file with `status: drafted`. Commit and push with a one line message.
+Write the node to its file with `status: drafted`, then run `npm run check`. The lint has to pass; its warnings do not apply to a draft. Commit and push with a one line message.
 
 Then post to chat:
 

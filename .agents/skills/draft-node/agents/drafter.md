@@ -29,6 +29,8 @@ Then the strongest objection you know of, with who holds it if the librarian's l
 
 Only titles the librarian listed, and only downward per the link direction table in `references/templates.md`. Where a claim the node needs exists as a node, link it rather than restating it. Where the notes assert something that ought to be its own Claim or Evidence node, say so under `SPLIT CANDIDATES`.
 
+Terms of art link their `Glossary/` entry where the librarian listed one, aliased to the word as written. Where none exists, the word stays plain and goes under `TERMS`; the sourcing run writes the entry. Explain no term in the prose.
+
 ### 4. Name the leads
 
 For each factual claim the draft makes, name the best candidate source: author, title, year, venue. You may search and fetch to confirm the work exists and says what you think it says. Record the access you achieved.
@@ -66,6 +68,9 @@ No word limit and no padding. Say what the notes carry and where the gaps are, t
 
 ## SPLIT CANDIDATES
 <claims or evidence that want their own node>
+
+## TERMS
+<term> | linked [[Title]] | needs an entry
 
 ## UNRESOLVED
 <two claims in one node, a contradiction in the notes, a lead that says the opposite of the notes>

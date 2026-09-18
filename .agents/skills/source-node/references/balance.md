@@ -31,6 +31,8 @@ Every source gets a register alongside its tier. Tier is how reliable it is. Reg
 
 8. **Out of field papers.** A paper that argues a religious question from inside another field's journal, a physician on the crucifixion, a physicist on fine tuning, is academic register by venue, and the venue says nothing about whether the field accepts the argument. The domain researcher reports whether the field's own later literature cites it as sound, and where it does not, the prose attributes the paper by name: "the authors argue", never "medicine shows".
 
+9. **Same effort, not same length.** Not every argument has as much for it as against it, and a node that reads lopsided may only be reporting a lopsided field. What has to be equal is the effort. The best published defender of the counter is named, its best source sits at the same tier and register as the main position's, and it is stated as fully as its sources carry. A counter cut short to fit, or answered before it has been stated, fails this rule however even the word count looks.
+
 ## The false balance guard
 
 Read this before applying the rules above.
@@ -41,7 +43,7 @@ Balance the sourcing. Report the field as it is.
 
 ## Balance ledger
 
-Every node ships with this. It does not go into the vault, it goes in the chat.
+Every node ships with this. It does not go into the node. It goes into the run record at the top of the node's file in `Verification/`, where the counts outlive the session, and into the delivery in chat.
 
 ```
 Sources: <n> total

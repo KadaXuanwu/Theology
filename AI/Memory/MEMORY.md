@@ -13,3 +13,6 @@ Index of things to remember across sessions. One line per memory file.
 - [Drafts are inspiration](drafts-are-inspiration.md) — a stub or draft body binds nothing; the frontmatter points do, and protection covers sourced text only
 - [Agent agnostic layout](agent-agnostic-layout.md) — instructions in AGENTS.md, skills in .agents/skills, one shim file at the root and why
 - [Replies are claims](replies-are-claims.md) — Arguments For holds positive cases only; a reply to an objection is a claim, and the strip-the-Christian-premises test decides
+- [Same effort, not same length](same-effort-not-same-length.md) — balance means both sides got the same chance and care, never equal word counts
+- [Glossary terms](glossary-terms.md) — terms of art are glossary nodes with hover definitions, never explained in the prose, never sourced from Wikipedia
+- [Pipeline review 2026-09-18](pipeline-review-2026-09-18.md) — what the research on AI research pipelines showed, what changed, and the three decisions the user made

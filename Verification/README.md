@@ -6,6 +6,30 @@ When a node is built, some of its sources cannot be opened. Journal paywalls, le
 
 Nothing in this folder is published. The site builds from `Theology/` only.
 
+## Run record
+
+A node built by `source-node` opens its file here with a record of the run, before the entries. It is the one place the numbers behind a node outlive the session, so it is complete, and it is short, so someone can read it.
+
+```
+## Run record
+Built: <date>, source-node, <Source | Verify only> mode
+Fields: <the fields commissioned, the ones added after FIELDS TOUCHED marked>
+Sources: <n> total | academic <n> | neutral-secondary <n> | confessional <n> | counter <n> | academic share <percent>
+Best source: main <tier>, <register> | counter <tier>, <register>
+Continental: <checked, what came back | not checked>
+Newest academic source: <year>
+Sentences: <n> checked | <n> supported | <n> fixed | <n> cut | <n> unopened | <n> protected-flag
+Effort: <same | less on the main case | less on the counter>
+Rulings: crux <held in both orders | flipped: A / B> | strong counter <held | flipped: A / B>
+Crux: <the crux line as it stands in Limits>
+Strong counter: <the strong counter line>
+Points: <n> carried | <n> not carried
+Lint: <n> failures | <n> warnings, <each warning and what was done about it>
+Failing balance rules: <list, or none>
+```
+
+The claim lists, debate cards and rulings do not come here. They are working papers and stay in the run's scratch directory. Where a ruling flipped between the two orders, the `Rulings` line names both versions, because an argument whose crux depends on which case the judge read first is a finding about the argument.
+
 ## What a file here does and does not tell you
 
 A file lists what the pipeline knew it could not confirm. It is not an audit. Most of the vault was written before this folder existed, and those entries were recovered from hedges the nodes had already written into themselves, so they cover what somebody happened to flag rather than everything that is open.

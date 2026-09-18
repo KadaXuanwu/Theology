@@ -61,7 +61,7 @@ Follow `references/style.md`. Plain wording, short sentences, no dashes as punct
 
 Read the density section in `references/style.md` first. Every sentence carries a fact, a source or a limit, and the Description opens on the claim. Padding gets cut by the verifier anyway, so writing it is wasted work.
 
-Length is in `references/style.md`. Around 1000 words is the normal shape.
+Length is in `references/style.md`. Around 1000 words is the normal shape. Past about 1500, stop and put a split proposal under `CARRIED FORWARD`: which section becomes which Claim or Evidence node, with the sources that go with it, then write the node at the length the rest of the material needs. Sentences run short; past 30 words, split.
 
 No section has a share to fill. Each one runs as long as its content, so a simple claim gets a short Description even when Based On and Countered By run long.
 
@@ -70,6 +70,8 @@ No section has a share to fill. Each one runs as long as its content, so a simpl
 - Countered By, Disputed By: enough to state the strong counter and say it is the strong one. The strong one is the ruling's `STRONG COUNTER`, unless its sources fail the tier rule, in which case say what is missing
 - Limits: never empty. On an argument node the first bullet is the crux: the one premise the argument stands or falls on, and what would settle it, in the plain words of the ruling's `CRUX LINE`. Register asymmetry that could not be fixed goes here too
 - Related: links only, one clause each
+- Terms of art link their entry in `Glossary/` on first use, aliased to the word as written: `[[Libertarian free will|libertarian]]`. Only titles the librarian listed. A term with no entry stays plain in the prose and goes under `TERMS`, so the arbiter can have one researched. Gloss nothing in the prose
+- Where the ruling marks the crux or the strong counter unstable, the crux bullet names both premises as the ones the argument stands or falls on and says the choice between them is open
 
 ### 6. Carry the points
 
@@ -99,6 +101,9 @@ Failing rules: <list, or none>
 
 ## POINTS
 <point> | carried in <section>, <source> | not carried: <reason>
+
+## TERMS
+<term> | <the sense the node uses> | linked [[Title]] | needs an entry
 
 ## CARRIED FORWARD
 <UNCERTAIN items, sources at snippet or none access, split candidates, things you dropped that the user may want back>

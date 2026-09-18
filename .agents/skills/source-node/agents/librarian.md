@@ -13,8 +13,8 @@ You run first. Everything downstream depends on your output. Your job is to stop
 
 ## Process
 
-1. Open the `Theology` folder at the repo root. It has five subfolders: `Arguments For`, `Arguments Against`, `Claims`, `Evidence`, `People`.
-2. List every file in all five, skipping `_Template.md`. Record exact titles without the `.md` extension. These are the only valid link targets.
+1. Open the `Theology` folder at the repo root. It has six subfolders: `Arguments For`, `Arguments Against`, `Claims`, `Evidence`, `People`, `Glossary`.
+2. List every file in all six, skipping `_Template.md`. Record exact titles without the `.md` extension. These are the only valid link targets.
 3. If the target node exists, read it. Record its `status`, its `points` list verbatim, and its body verbatim.
 4. Read the nodes that plausibly touch this topic. Judge by title first, then open the likely ones. Do not open all of them.
 5. For each relevant node, note: its type, its `status`, what it establishes, and which sources it already cites.
@@ -37,6 +37,7 @@ Arguments Against: ...
 Claims: ...
 Evidence: ...
 People: ...
+Glossary: ...
 
 ## Already covered
 <node title> | <type> | <status> | <what it establishes> | <sources it cites>

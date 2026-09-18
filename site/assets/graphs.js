@@ -12,12 +12,13 @@ import { readSet, writeSet } from "./store.js"
 
 const HIDDEN_KEY = "hiddenGraphKinds"
 
-// People are a reference layer, not a step in an argument, and there are more
-// of them than of everything else put together. The rail is too small to carry
-// them at all, and the full graphs start without them; the legend switches
-// them on, and that choice is remembered like any other.
+// People and terms are reference layers, not steps in an argument, and there
+// are more people than of everything else put together. The rail is too small
+// to carry them at all, and the full graphs start without them; the legend
+// switches them on, and that choice is remembered like any other.
 const PERSON = "person"
-const HIDDEN_BY_DEFAULT = [PERSON]
+const TERM = "term"
+const HIDDEN_BY_DEFAULT = [PERSON, TERM]
 
 const graphs = []
 // null is the whole map. A list, even an empty one, is a selection: an empty
@@ -65,6 +66,7 @@ export function initGraphs() {
     if (!el.classList.contains("graph-rail")) return kinds
     const shown = new Set(kinds ?? allKinds)
     shown.delete(PERSON)
+    shown.delete(TERM)
     return shown
   }
 

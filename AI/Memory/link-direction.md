@@ -11,6 +11,7 @@ Outgoing `[[links]]` never run up the stack.
 - `Claims` may link other `Claims`, `Evidence` and `People`, never an argument.
 - `Evidence` may link other `Evidence` and `People`, nothing above it.
 - `People` may link other `People`, nothing above it.
+- `Glossary` terms sit under everything. Any node may link one, on the first use of the term in its prose, and a term links only other terms. Added 2026-09-18, see [[glossary-terms]].
 
 One extra restriction: the `Description` of an argument may not link another argument. The argument gets stated on its own terms before anything is thrown at it. Every other section on an argument may link across.
 

@@ -46,6 +46,7 @@
   --link-claim: #007255;
   --link-evidence: #9a4587;
   --link-person: #69635d;
+  --link-term: #69635d;
   --link-note: #69635d;
   /* A source is the link that is not a node. It carries no hue at all: colour
      in the prose means the map, and a fifth colour only reads as a fifth kind
@@ -78,9 +79,11 @@
   --argument-against: #c6701e;
   --claim: #009a73;
   --evidence: #9c4789;
-  /* Two greys, and they are meant to look alike: a person and a note from an
-     unknown folder are both outside the four kinds the map is made of. */
+  /* One grey for everything outside the four kinds the map is made of: a
+     person, a term and a note from an unknown folder are reference, not a
+     step in an argument, and are meant to read as the same kind of thing. */
   --person: #8b857f;
+  --term: #8b857f;
   --note: #8b857f;
 
   --header-h: 2.9rem;
@@ -111,6 +114,7 @@
   --link-claim: #4eb08d;
   --link-evidence: #d386be;
   --link-person: #a39e98;
+  --link-term: #a39e98;
   --link-note: #a39e98;
   --link-out: #e6e4e1;
   --highlight: rgba(255, 208, 0, 0.4);
@@ -126,6 +130,7 @@
   --claim: #61cca5;
   --evidence: #cd7bb8;
   --person: #bcb6b0;
+  --term: #bcb6b0;
   --note: #bcb6b0;
   --scrollbar: #3d3d3d;
   --scrollbar-hover: #525252;
@@ -149,6 +154,7 @@
     --link-claim: #4eb08d;
     --link-evidence: #d386be;
     --link-person: #a39e98;
+    --link-term: #a39e98;
     --link-note: #a39e98;
     --link-out: #e6e4e1;
     --highlight: rgba(255, 208, 0, 0.4);
@@ -164,6 +170,7 @@
     --claim: #61cca5;
     --evidence: #cd7bb8;
     --person: #bcb6b0;
+    --term: #bcb6b0;
     --note: #bcb6b0;
     --scrollbar: #3d3d3d;
     --scrollbar-hover: #525252;
@@ -691,6 +698,9 @@ main {
 .dot-person {
   background: var(--person);
 }
+.dot-term {
+  background: var(--term);
+}
 
 /* Right rail -------------------------------------------------------------- */
 
@@ -1036,6 +1046,9 @@ a.wikilink[data-kind="claim"] {
 }
 a.wikilink[data-kind="person"] {
   --link: var(--link-person);
+}
+a.wikilink[data-kind="term"] {
+  --link: var(--link-term);
 }
 a.wikilink[data-kind="evidence"] {
   --link: var(--link-evidence);

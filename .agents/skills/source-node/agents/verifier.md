@@ -50,7 +50,7 @@ Record the access level you achieved: `full`, `snippet`, `abstract`, `none`.
 
 **Snippet is not verification.** A snippet confirms a phrase exists on a page. It does not show context, and it does not tell you whether the author was stating the view or attacking it. A claim about what an author argues cannot pass on snippet or abstract access. Mark it `fix` with reason `snippet only`.
 
-If a source cannot be opened at all, that is `fix` with reason `unopened`, never `pass`.
+If a source cannot be opened at all, the verdict is `unopened`, never `pass`. Say whether the sentence is load bearing, because the arbiter cuts a load bearing one and sends the rest to the Verification file.
 
 ### 4. Density pass
 
@@ -74,6 +74,8 @@ This pass is the one most likely to be skipped because the prose reads well. Rea
 - On an argument node, the first bullet under Limits names the crux: one premise the argument stands or falls on, and what would settle it
 - On evidence nodes, Description carries no interpretation
 - No dashes used as punctuation, en dash in passage references excepted
+- Sentences over 30 words, each with its count. `fix` on the ones carrying two claims, a note on the rest
+- Every term of art links its entry in `Glossary/` on first use, and no term is explained in the prose
 - Nothing reads as an exchange: no "the sceptic", "the theologian", "both sides", "the other camp", "conceded"
 - `[[links]]` present and plausible as node titles
 
@@ -92,11 +94,15 @@ Recount the ledger yourself. Do not trust the writer's numbers.
 
 Report every failure with the number, not as a general impression.
 
+Then the effort check, rule 9 in `references/balance.md`. The strong counter names its best published defender, its best source sits at the same tier and register as the main position's, and it is stated as fully as its sources carry. The verdict is `same effort`, `less effort on the main case` or `less effort on the counter`, with the sentence or the gap that shows it. Length and count are not the test. A lopsided field reported as lopsided passes; a counter cut short, or answered before it has been stated, fails.
+
 Then check the other direction. Read `references/balance.md`, section "The false balance guard". Look for manufactured symmetry: a fringe position dressed up as a live debate, a padded counter section, a well supported finding hedged into mush to make the node feel even handed. Report those too. Over-correction is a real failure and it is the one nobody looks for.
 
 ### 7. Adversarial pass
 
 Try to break the node. For its two or three load bearing claims, ask what would have to be true for this to be false, and go and check that. Report what you find even if it does not change a verdict.
+
+Then the inference check. For each sentence that joins two sourced facts into a conclusion, find the source that draws that conclusion. Where none does and the sentence reads as sourced fact, it is `fix`: rewrite it so it reads as the argument's own step, or move the marker back to the fact it supports. Where a fact a source states about one thing has been applied to another, it is `fix` or `cut`. This is the error that survives citation checking, because every marker points at something true.
 
 ## Output
 
@@ -104,7 +110,7 @@ Try to break the node. For its two or three load bearing claims, ask what would 
 ## VERDICTS
 <n>. SENTENCE: <the sentence, quoted>
     ORIGIN: protected | session
-    VERDICT: pass | fix | cut | protected-flag
+    VERDICT: pass | fix | cut | unopened | protected-flag
     SOURCE CHECKED: <URL or reference>
     ACCESS ACHIEVED: full | snippet | abstract | none
     FINDING: <what the source actually says>
@@ -124,17 +130,23 @@ Try to break the node. For its two or three load bearing claims, ask what would 
 
 ## ADVERSARIAL
 <what you tried to break and what happened>
+<the inference check: each sentence ruled on, or "none found">
 
 ## COULD NOT VERIFY
 <sources at snippet, abstract or none access, and what rests on them>
 
 ## SUMMARY
-<sentences checked, passed, fixed, cut, flagged. Balance rules failing.>
+Sentences: <n> checked | <n> supported | <n> fixed | <n> cut | <n> unopened | <n> protected-flag
+Effort: same | less on the main case | less on the counter
+Balance rules failing: <list, or none>
+<the two things that matter most, if either holds: the node rests on one unopenable source; the academic share is under half>
+
+The first three lines are copied into the run record as they stand, so keep the form.
 ```
 
 ## Rules
 
-- Never mark `pass` on a source you did not open at `full`. Anything less is `fix`.
+- Never mark `pass` on a source you did not open at `full`. Anything less is `fix`, or `unopened` when nothing could be opened at all.
 - A sentence that carries no fact, no source and no limit is `cut` on sight if it was written this session. Well written padding is still padding.
 - Do not fix by rewording into something vaguer. If the claim cannot be sourced, it is `cut` or `protected-flag`.
 - Do not accept a source that supports a weaker version. Narrower than claimed is `fix`.

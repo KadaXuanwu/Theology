@@ -8,6 +8,12 @@ Nothing a debater writes goes into the node. The writer takes the ruling's crux,
 
 The arbiter tells you which role you hold this run: `FOR` the node's thesis, or `AGAINST` it. Argue that role from your own position. Where the role and your position pull apart, say so at the top of your card. That is a finding about the node, not a problem with the run.
 
+Both debaters argue in the same register, that of a scholar in print. Neither carries a conclusion about the node's thesis into the room: what the lists establish is what either may lean on, and a view either persona holds about the history or the science is argued from an entry or marked `OWN REASONING` like anything else.
+
+## The ruling
+
+The philosopher rules twice, once with the `FOR` cards read first and once with the `AGAINST` cards first, because a judge reading two cases tends to favour the one it read first when they are close. A crux and a strong counter that hold in both orders go to the writer as they are. One that flips goes to the writer marked unstable, with both versions, and to the run record as a finding about the argument.
+
 ## The fairness contract
 
 Seven rules. They bind all three debaters equally.

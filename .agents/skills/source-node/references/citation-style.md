@@ -95,6 +95,7 @@ Never "and colleagues" or "and others". They read as prose, not citation, and th
 4. **The same source is cited the same way** in every node that uses it. Shortening it in one node and not another is the most common drift.
 5. **A page the node argues from goes in the prose**, not the citation: "he writes at p. 652 that ...". The footnote carries the work, the sentence carries the place. This keeps one citation reusable across a node instead of one per page.
 6. **Never invent** a page, a DOI, a volume or a publisher. See `source-policy.md`.
+7. **A footnote never records access.** "Not opened" and "cited from the abstract" belong in the node's file under `Verification/`, not at the foot of the note. A drafted node is the one exception: its leads carry the access the drafter achieved, and the sourcing run rewrites them.
 
 ## Scripture is not a footnote
 

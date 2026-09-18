@@ -30,7 +30,7 @@ Replace any yes or no notion of having read something. Report one of these:
 2. A load bearing claim, meaning one the node's conclusion collapses without, needs Tier A at `full` access.
 3. Tier C is only citable for the existence and popularity of a position. Attribute it by name.
 4. Numbers, dates and quotations need the source that carries them, not one that repeats them.
-5. Where the source is a book or paywalled article that could not be opened, cite it precisely (author, title, publisher, year, page if known), mark access `none` or `abstract`, and list it in the delivery notes as not independently checked. Never present it as verified.
+5. Where the source is a book or paywalled article that could not be opened, cite it precisely (author, title, publisher, year, page if known) and give it one entry in `Verification/<Node Title>.md`. The footnote says nothing about access: the node cites the source the way any paper would. By rule 2 a load bearing claim cannot rest on such a source at all; the verifier's `unopened` verdict is what sends the sentence one way or the other.
 6. Never invent a page number, a DOI, a catalogue number or a journal volume.
 
 ## Local sources
@@ -51,4 +51,4 @@ A drafted node names candidate sources: a work, an author, a year, and the acces
 - JSTOR, Brill, De Gruyter, Mohr Siebeck, Cambridge Core and most journal and monograph paywalls cannot be fetched. Expect rule 5 often.
 - Worth trying before falling back: museum catalogues, Archive.org and Open Library, SBL's open access series, Persée for French work, university repositories and author uploaded copies, DOAJ.
 
-Say all of this plainly in the delivery notes. A citation chain that looks research grade but was never opened is worse than an honest gap.
+Say all of this plainly in the run record and the delivery. A citation chain that looks research grade but was never opened is worse than an honest gap.

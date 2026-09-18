@@ -20,13 +20,13 @@ The drafter may search and fetch to confirm a work exists and says what it seems
 | Phase | Agent | Job |
 | --- | --- | --- |
 | 0 | Librarian | Reads the vault: what exists, what covers part of the topic, which sources are already cited, which nodes link here, which fields the node touches |
-| 1 | Researchers, in parallel | Primary text, material evidence, scholarly consensus, the strongest published case for the opposite reading, and one domain researcher per field the node touches: medicine, cosmology, cognitive science, history of science and the rest, from the roster in `references/disciplines.md` |
-| 2 | Debate | A skeptic and a theologian argue for and against the node's thesis over the researchers' claim lists, two rounds with forced concessions. A philosopher rules: formal reconstruction, premise grades, the crux, the strong counter, and who answered whom. Requests for missing sources go to one more targeted researcher |
+| 1 | Researchers, in parallel | Primary text, material evidence, scholarly consensus, the strongest published case for the opposite reading, and one domain researcher per field the node touches: medicine, cosmology, cognitive science, history of science and the rest, from the roster in `references/disciplines.md`. Each ends by naming the fields it brushed against, and a field the librarian missed gets its researcher before the debate |
+| 2 | Debate | A skeptic and a theologian, both written as scholars in print, argue for and against the node's thesis over the researchers' claim lists, two rounds with forced concessions. A philosopher rules twice, with the cards in swapped order: formal reconstruction, premise grades, the crux, the strong counter, and who answered whom. A crux that flips between the orders is a finding. Requests for missing sources go to one more targeted researcher |
 | 3 | Writer | Builds the node to template and word budget, the argument in the ruling's form, the crux as the first bullet under Limits |
-| 4 | Verifier, cold | Re-opens every source itself and rules on each factual sentence. Never sees the research notes, the cards or the ruling |
-| 5 | Arbiter | The main conversation applies the verdicts and reports what could not be fixed |
+| 4 | Verifier, cold | Re-opens every source itself and rules on each factual sentence, on whether each side got the same effort, and on sentences that join sourced facts into a conclusion no source draws. Never sees the research notes, the cards or the ruling |
+| 5 | Arbiter | The main conversation applies the verdicts, writes the run record into `Verification/`, runs `npm run check` and reports what could not be fixed |
 
-Step 3b sits alongside this: for every person the node names in its prose who has no node in `People/` yet, one more researcher runs and that node gets written too. Those are the only nodes outside the target the skill may create.
+Step 3b sits alongside this: for every person the node names in its prose who has no node in `People/` yet, and every term of art with no entry in `Glossary/`, one more researcher runs and that node gets written too. Those are the only nodes outside the target the skill may create.
 
 Evidence and People nodes skip the debate. Neither has a thesis to argue.
 
@@ -39,8 +39,11 @@ Evidence and People nodes skip the debate. Neither has a thesis to argue.
 - A `sourced` node's body runs 500 to 2000 words, and most sit around 1000. A stub, a draft or a person node can be any length.
 - At least half the sources are academic register. Advocacy publishing never carries a fact on its own.
 - Gaps are stated plainly instead of padded. A missing counter position is reported, not manufactured.
-- A node never says whether a source was checked. What the pipeline could not confirm goes to `Verification/<Node Title>.md` at the repo root, one entry per open question, for a human to settle.
-- Only the node it was asked for gets written, plus the `People/` nodes the names in it need. Every other change another node needs is posted to chat for the user to apply.
+- A node never says whether a source was checked. What the pipeline could not confirm goes to `Verification/<Node Title>.md` at the repo root, one entry per open question, for a human to settle. The same file opens with the run record: fields, ledger, the verifier's counts, whether the two rulings agreed, the crux and the strong counter. Short and complete; the cards and claim lists are not kept.
+- The counter gets the same effort as the main case, not the same length. Its best defender is named and its best source sits at the same tier and register. A lopsided field is reported as lopsided.
+- A term of art is never explained in the prose. It links its entry in `Glossary/`, and the site shows the definition on hover.
+- `npm run check` runs `site/lint.mjs` over the vault. Template headings, link direction, dashes, footnotes, inline lists and dead source URLs fail the build; length and sentence length warn.
+- Only the node it was asked for gets written, plus the `People/` nodes the names in it need and the `Glossary/` entries its terms need. Every other change another node needs is posted to chat for the user to apply.
 
 ## Layout
 
@@ -51,7 +54,7 @@ Evidence and People nodes skip the debate. Neither has a thesis to argue.
     agents/drafter.md
   source-node/
     SKILL.md               drafted to sourced, verify only, touch up
-    agents/                one prompt file per agent: librarian, four researchers, the domain researcher, three debaters, writer, verifier, person
+    agents/                one prompt file per agent: librarian, four researchers, the domain researcher, three debaters, writer, verifier, person, term
     references/            templates and status gates, source tiers, citation format, balance rules, style checklist, debate rules, the discipline roster
 ```
 
@@ -59,7 +62,7 @@ Evidence and People nodes skip the debate. Neither has a thesis to argue.
 
 ## Models
 
-The librarian, the person researcher, the domain researchers and the drafter may run on a smaller model, where the agent lets you pick one per subagent. The writer, the verifier and the philosopher run on the default, since a mistake there reaches the node or goes unseen. Widen this only against the verifier's own fix and cut counts.
+The librarian, the person and term researchers, the domain researchers and the drafter may run on a smaller model, where the agent lets you pick one per subagent. The writer, the verifier and the philosopher run on the default, since a mistake there reaches the node or goes unseen. The two debaters run on different model families where the agent offers them. Widen any of this only against the run records' fixed and cut counts.
 
 ## Install
 
