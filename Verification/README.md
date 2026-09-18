@@ -8,7 +8,7 @@ Nothing in this folder is published. The site builds from `Theology/` only.
 
 ## Run record
 
-A node built by `source-node` opens its file here with a record of the run, before the entries. It is the one place the numbers behind a node outlive the session, so it is complete, and it is short, so someone can read it.
+A node built by `source-node` or refreshed by `refresh-node` opens its file here with a record of the run, before the entries. It is the one place the numbers behind a node outlive the session, so it is complete, and it is short, so someone can read it.
 
 ```
 ## Run record
@@ -27,6 +27,8 @@ Points: <n> carried | <n> not carried
 Lint: <n> failures | <n> warnings, <each warning and what was done about it>
 Failing balance rules: <list, or none>
 ```
+
+A refresh writes the same record. Its `Built` line reads `refresh-node, Refresh mode` and ends with the outcome, `to sourced` or `stayed sourced-stale, <why>`. `Fields` names the sentences re-sourced or reads `none`, and `Rulings` reads `not run`, since a refresh holds no debate. On a person or a term the record is the `Built`, `Sentences` and `Lint` lines, and the file exists only when something is open or a sentence was removed.
 
 The claim lists, debate cards and rulings do not come here. They are working papers and stay in the run's scratch directory. Where a ruling flipped between the two orders, the `Rulings` line names both versions, because an argument whose crux depends on which case the judge read first is a finding about the argument.
 

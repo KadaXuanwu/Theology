@@ -184,7 +184,7 @@ points:
 
 **`sourced`.** Every factual sentence passed the verifier, the body runs 500 to 2000 words of prose, and the balance rules hold or the shortfall is disclosed in the run record. Set by `source-node`. On a person or a term there is no word range, and `sourced` means every fact was read in the source it cites.
 
-**`sourced-stale`.** Was `sourced`, and may no longer meet that gate. The name says both halves: it passed once, and it is due again. It passed a verifier under an earlier version of the pipeline, or findings made since have not been worked in. Its text is protected the way sourced text is, because it did pass a verifier once. Set by hand when the pipeline changes or new work turns up. The skill that takes a node from `sourced-stale` back to `sourced` does not exist yet; until it does, `source-node` in Source or Verify only mode is the route.
+**`sourced-stale`.** Was `sourced`, and may no longer meet that gate. The name says both halves: it passed once, and it is due again. It passed a verifier under an earlier version of the pipeline, or findings made since have not been worked in. Its text is protected the way sourced text is, because it did pass a verifier once. Set by hand when the pipeline changes or new work turns up. `refresh-node` takes it back to `sourced` when the text can still keep the promise, and hands it to `source-node` in Source mode when it needs new substance.
 
 A stub or a draft is inspiration for the sourcing run and no more. Its body is not protected and its leads are not sources. The `points` list is the one thing in it that binds.
 

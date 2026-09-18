@@ -1,6 +1,6 @@
 # Node skills
 
-Two skills build the nodes of the Theology vault, one per step of a node's life. A node starts as a `stub`, the author's own notes written by hand from the folder's `_Template.md`. `draft-node` turns the stub into a `drafted` node. `source-node` takes the draft to `sourced`. The gates each status has to pass are in `.agents/skills/source-node/references/templates.md`, section "Status".
+Three skills build the nodes of the Theology vault, one per step of a node's life. A node starts as a `stub`, the author's own notes written by hand from the folder's `_Template.md`. `draft-node` turns the stub into a `drafted` node. `source-node` takes the draft to `sourced`. A `sourced` node that an older pipeline built, or that has something wrong in it, is marked `sourced-stale` by hand, and `refresh-node` takes it back to `sourced`. The gates each status has to pass are in `.agents/skills/source-node/references/templates.md`, section "Status".
 
 The point of the vault is not to settle whether Christianity is true. It is to make every argument traceable back to the claims and evidence it rests on, so a reader can follow the reasoning themselves. The subject is Christianity; the evidence comes from theology, biblical studies, archaeology, history, philosophy, psychology, medicine and the natural sciences, and the sourcing pipeline commissions whichever of those a node needs.
 
@@ -30,6 +30,20 @@ Step 3b sits alongside this: for every person the node names in its prose who ha
 
 Evidence and People nodes skip the debate. Neither has a thesis to argue.
 
+## refresh-node
+
+Cheap by design: no researchers, no debate. The node's own text is the input, and the whole of it is protected.
+
+| Step | Agent | Job |
+| --- | --- | --- |
+| 2 | None | Lint, template keys, citation form, footnotes that record access, names and terms with no link. Fixed inline |
+| 3 | Person, term | Fills a person's `born`, `died` and `location`, writes the `People/` and `Glossary/` nodes the prose needs |
+| 4 | Verifier, cold | The same verifier as `source-node`, with an addendum: builds the ledger from the footnotes, names which Limits bullet is the crux, applies the density, inference and effort checks the old pipeline lacked, and flags rather than cuts |
+| 5 | One targeted researcher per failed source | One pass. A source that carries the claim replaces the failed one, and the verifier re-checks only those sentences |
+| 6, 7 | The main conversation | Applies the verdicts, gates, writes the run record, commits |
+
+A refresh may correct a sentence to its source, replace a failed source, remove a sentence that carries nothing or that nothing carries, fill a frontmatter field, reorder Limits so the crux comes first, and link people and terms. It may not rewrite for style, write a crux or a counter the node lacks, add a fact, or remove a sentence whose loss changes what the node claims. The last is the user's decision and the node stays stale until it is made. Every change to the stale text is quoted in the delivery, before and after. Where the node needs new substance, the refresh keeps its fixes, leaves the status, and names `source-node` in Source mode as the route.
+
 ## Rules the pipeline enforces
 
 - Every factual sentence carries a source the verifier can open. No retrievable source, no entry.
@@ -52,13 +66,15 @@ Evidence and People nodes skip the debate. Neither has a thesis to argue.
   draft-node/
     SKILL.md               stub to drafted
     agents/drafter.md
+  refresh-node/
+    SKILL.md               sourced-stale to sourced, no agents or references of its own
   source-node/
     SKILL.md               drafted to sourced, verify only, touch up
     agents/                one prompt file per agent: librarian, four researchers, the domain researcher, three debaters, writer, verifier, person, term
     references/            templates and status gates, source tiers, citation format, balance rules, style checklist, debate rules, the discipline roster
 ```
 
-`draft-node` reads the shared references and the librarian from `source-node`, so there is one policy in the repo rather than two. `references/` is read before a pipeline runs. `agents/` files get pasted into each subagent prompt, since agents start cold and cannot see the conversation.
+`draft-node` and `refresh-node` read the shared references and agents from `source-node`, so there is one policy in the repo rather than three. `references/` is read before a pipeline runs. `agents/` files get pasted into each subagent prompt, since agents start cold and cannot see the conversation.
 
 ## Models
 
@@ -66,9 +82,9 @@ The librarian, the person and term researchers, the domain researchers and the d
 
 ## Install
 
-Both skills follow the [Agent Skills](https://agentskills.io/specification) standard and sit in `.agents/skills/`, the folder [Codex](https://developers.openai.com/codex/skills/), [Cursor](https://cursor.com/docs/context/skills), [Gemini CLI](https://geminicli.com/docs/cli/skills/) and [GitHub Copilot](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills) scan at startup, so a new session picks both up on its own. An agent that does not scan that folder is pointed at it by `AGENTS.md` and opens the `SKILL.md` when asked. To use the skills in other projects on one machine, copy both folders to `~/.agents/skills/`, which the same four agents read. `draft-node` reads its references from `source-node`, so the two folders travel together.
+Both skills follow the [Agent Skills](https://agentskills.io/specification) standard and sit in `.agents/skills/`, the folder [Codex](https://developers.openai.com/codex/skills/), [Cursor](https://cursor.com/docs/context/skills), [Gemini CLI](https://geminicli.com/docs/cli/skills/) and [GitHub Copilot](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills) scan at startup, so a new session picks both up on its own. An agent that does not scan that folder is pointed at it by `AGENTS.md` and opens the `SKILL.md` when asked. To use the skills in other projects on one machine, copy both folders to `~/.agents/skills/`, which the same four agents read. `draft-node` and `refresh-node` read their references and agents from `source-node`, so the three folders travel together.
 
-Ask the agent to draft or source a node and the right skill triggers on its own.
+Ask the agent to draft, source or refresh a node and the right skill triggers on its own.
 
 ## Adapting it
 
