@@ -51,4 +51,4 @@ Philosophers call this case non-resistant non-belief, meaning unbelief that does
 [^napier-2023]: Stephen Napier, "Is there non-resistant non-belief?", *Religious Studies* 59/4 (2023), 572–588.
 [^anselm-cdh]: Anselm, *Cur Deus Homo* I.21.
 [^adams-1975]: Marilyn McCord Adams, "Hell and the God of Justice", *Religious Studies* 11/4 (1975), 433–447.
-[^metzger-1994]: Bruce M. Metzger, *A Textual Commentary on the Greek New Testament*, 2nd edn (1994).
+[^metzger-1994]: Bruce M. Metzger, *A Textual Commentary on the Greek New Testament*, 2nd edn (Deutsche Bibelgesellschaft, 1994).
