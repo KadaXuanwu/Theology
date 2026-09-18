@@ -184,7 +184,7 @@ points:
 
 **`sourced`.** Every factual sentence passed the verifier, the body runs 500 to 2000 words of prose, and the balance rules hold or the shortfall is disclosed in the run record. Set by `source-node`. On a person or a term there is no word range, and `sourced` means every fact was read in the source it cites.
 
-**`sourced-stale`.** Was `sourced`, and may no longer meet that gate. The name says both halves: it passed once, and it is due again. It passed a verifier under an earlier version of the pipeline, or findings made since have not been worked in. Its text is protected the way sourced text is, because it did pass a verifier once. Set by hand when the pipeline changes or new work turns up. `refresh-node` takes it back to `sourced` when the text can still keep the promise, and hands it to `source-node` in Source mode when it needs new substance.
+**`sourced-stale`.** Was `sourced`, and may no longer meet that gate. The name says both halves: it passed once, and it is due again. It passed a verifier under an earlier version of the pipeline, or findings made since have not been worked in. Its text is protected the way sourced text is, because it did pass a verifier once. Set by hand when the pipeline changes or new work turns up. `refresh-node` takes it back to `sourced` at the same standard as a full run: it researches what the node lacks or gets wrong, debates when a finding bears on the thesis, and re-verifies every sentence cold.
 
 A stub or a draft is inspiration for the sourcing run and no more. Its body is not protected and its leads are not sources. The `points` list is the one thing in it that binds.
 

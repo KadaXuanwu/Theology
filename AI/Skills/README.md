@@ -32,17 +32,18 @@ Evidence and People nodes skip the debate. Neither has a thesis to argue.
 
 ## refresh-node
 
-Cheap by design: no researchers, no debate. The node's own text is the input, and the whole of it is protected.
+The full pipeline's standard with less of its work, because the node has already done part of it. Each agent is the `source-node` prompt plus a short addendum from the refresh skill.
 
-| Step | Agent | Job |
+| Phase | Agent | Job |
 | --- | --- | --- |
-| 2 | None | Lint, template keys, citation form, footnotes that record access, names and terms with no link. Fixed inline |
-| 3 | Person, term | Fills a person's `born`, `died` and `location`, writes the `People/` and `Glossary/` nodes the prose needs |
-| 4 | Verifier, cold | The same verifier as `source-node`, with an addendum: builds the ledger from the footnotes, names which Limits bullet is the crux, applies the density, inference and effort checks the old pipeline lacked, and flags rather than cuts |
-| 5 | One targeted researcher per failed source | One pass. A source that carries the claim replaces the failed one, and the verifier re-checks only those sentences |
-| 6, 7 | The main conversation | Applies the verdicts, gates, writes the run record, commits |
+| 0 | Librarian | As in `source-node`, plus claim list `E`, the node's footnoted sentences with tier and register, and a gap map: fields touched against fields heard from, passages and finds without a primary source, best source each side, vintage, whether Limits names a crux |
+| 1 | Researchers, in parallel | Steelman, scholarship and one domain researcher per field always; text and material when the node leans on passages or finds. Each returns only the delta: `ADDS` what the node lacks, `CORRECTS` an entry, `CHALLENGES` an entry, plus the newest work in scope |
+| 2 | Debate | Runs when a finding bears on the thesis, the node has no crux, or the counter is under sourced. Whole when it runs: two rounds, the philosopher twice, and a `DELTA` block ruling `KEEP`, `CHANGE`, `ADD` or `DROP` per section. Skipped when the lists hold only corrections |
+| 3 | Writer | Copies every `KEEP` section verbatim, changes only what the ruling, a correction or the template requires, and lists every protected sentence it changed, before and after |
+| 4 | Verifier, cold | Not lite. Every sentence against its source, the whole old body protected, plus the density, inference and effort checks the old pipeline lacked, and a `CRUX` line |
+| 5 | Arbiter | Applies the verdicts. A flagged protected sentence is fixed from its source, re-sourced by one targeted pass, removed when nothing carries it and the claim survives without it, or left for the user when its loss would change the claim |
 
-A refresh may correct a sentence to its source, replace a failed source, remove a sentence that carries nothing or that nothing carries, fill a frontmatter field, reorder Limits so the crux comes first, and link people and terms. It may not rewrite for style, write a crux or a counter the node lacks, add a fact, or remove a sentence whose loss changes what the node claims. The last is the user's decision and the node stays stale until it is made. Every change to the stale text is quoted in the delivery, before and after. Where the node needs new substance, the refresh keeps its fixes, leaves the status, and names `source-node` in Source mode as the route.
+A person or term target takes a short path: the mechanical pass, one person or term agent, the verifier, the arbiter. Every change to old text reaches the delivery quoted with the finding that caused it, and a node with a sentence left for the user stays `sourced-stale` until the user rules.
 
 ## Rules the pipeline enforces
 

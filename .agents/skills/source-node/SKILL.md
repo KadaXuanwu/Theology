@@ -50,7 +50,7 @@ Every Source run also writes a run record at the top of that file, in the form `
 
 ## Step 2: Pick the run mode
 
-- **Source**: the node is a stub or a draft, or does not exist yet, or is sourced or sourced-stale and the rework adds or changes substance. Run all phases.
+- **Source**: the node is a stub or a draft, or does not exist yet, or is sourced and the rework adds or changes substance. Run all phases. A sourced-stale node goes through `refresh-node` unless the user asks for a rebuild.
 - **Verify only**: the user asks to fact check a sourced node without changing its status. Run Phase 0 and Phase 4 only. To take a sourced-stale node back to sourced, use `refresh-node`.
 - **Touch up**: wording, links, formatting. No agents. Do it inline.
 

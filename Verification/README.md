@@ -28,7 +28,7 @@ Lint: <n> failures | <n> warnings, <each warning and what was done about it>
 Failing balance rules: <list, or none>
 ```
 
-A refresh writes the same record. Its `Built` line reads `refresh-node, Refresh mode` and ends with the outcome, `to sourced` or `stayed sourced-stale, <why>`. `Fields` names the sentences re-sourced or reads `none`, and `Rulings` reads `not run`, since a refresh holds no debate. On a person or a term the record is the `Built`, `Sentences` and `Lint` lines, and the file exists only when something is open or a sentence was removed.
+A refresh writes the same record. Its `Built` line reads `refresh-node, Refresh mode` and ends with the outcome, `to sourced` or `stayed sourced-stale, <why>`. `Rulings` reads `not run, <why>` where the researchers returned nothing that bore on the thesis and the debate was skipped. On a person or a term the record is the `Built`, `Sentences` and `Lint` lines, and the file exists only when something is open or a sentence was removed.
 
 The claim lists, debate cards and rulings do not come here. They are working papers and stay in the run's scratch directory. Where a ruling flipped between the two orders, the `Rulings` line names both versions, because an argument whose crux depends on which case the judge read first is a finding about the argument.
 
