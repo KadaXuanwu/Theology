@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 1971
 location: Baylor University, Waco, Texas
-status: stale
+status: sourced-stale
 tags:
   - hiddenness
   - nonbelief

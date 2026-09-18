@@ -2730,14 +2730,14 @@ console.log("a stale note was verified once and says so everywhere the status sh
   // Four statuses, three looks. Dashed is unverified, solid is sourced, and
   // stale is dotted: it passed a verifier under an earlier version of the
   // pipeline and is due a fresh check, so it must read as neither of the others.
-  check("the sheet styles the stale pill", /\.pill-status\[data-status="stale"\] \{[^}]*border-style: dotted/.test(sheet))
-  check("and not as the unverified pair", !/\.pill-status\[data-status="stale"\][^{]*\{[^}]*dashed/.test(sheet))
+  check("the sheet styles the stale pill", /\.pill-status\[data-status="sourced-stale"\] \{[^}]*border-style: dotted/.test(sheet))
+  check("and not as the unverified pair", !/\.pill-status\[data-status="sourced-stale"\][^{]*\{[^}]*dashed/.test(sheet))
 
   const page = notePage({
     note: {
       title: "X",
       frontmatter: {},
-      status: "stale",
+      status: "sourced-stale",
       tags: [],
       html: "<p>The body.</p>",
       headings: [],
@@ -2750,20 +2750,20 @@ console.log("a stale note was verified once and says so everywhere the status sh
     notes: [],
     assets: {},
   })
-  check("the note page wears the pill", /<span class="pill pill-status" data-status="stale">stale<\/span>/.test(page))
+  check("the note page wears the pill", /<span class="pill pill-status" data-status="sourced-stale">sourced-stale<\/span>/.test(page))
 
   // The home page counts stale apart from stub and drafted, since those have
   // never been checked and stale has. The sentence only appears when there is
   // something to count, so the check follows the vault as it stands.
-  const staleCount = corpus.notes.filter((n) => n.status === "stale").length
-  const sentence = /\d+ are marked stale: sourced under an earlier version of the process and due a fresh check\./
+  const staleCount = corpus.notes.filter((n) => n.status === "sourced-stale").length
+  const sentence = /\d+ are marked sourced-stale: sourced under an earlier version of the process and due a fresh check\./
   check("the home summary counts stale on its own", staleCount ? sentence.test(home) : !sentence.test(home), `${staleCount} stale notes`)
   check("and never folds it into the unverified count", !/marked stub or drafted[^.]*stale/.test(home))
 
   // The chat model sees the same word in the catalogue and is told what it means.
-  check("the catalogue marks a stale note", /\(stale\)/.test(catalogue([{ title: "S", section: "Claims", status: "stale", tags: [], excerpt: "e" }])))
+  check("the catalogue marks a stale note", /\(sourced-stale\)/.test(catalogue([{ title: "S", section: "Claims", status: "sourced-stale", tags: [], excerpt: "e" }])))
   const { system } = buildPrompt(corpus, { question: "anything", pageUrl: null })
-  check("the prompt tells the model what stale means", /marked stale were checked under an earlier version/.test(system))
+  check("the prompt tells the model what stale means", /marked sourced-stale were checked under an earlier version/.test(system))
 }
 
 console.log("the lint reads the rules the templates promise")

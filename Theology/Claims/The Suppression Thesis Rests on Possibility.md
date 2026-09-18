@@ -1,6 +1,6 @@
 ---
 type: claim
-status: stale
+status: sourced-stale
 tags:
   - hiddenness
   - natural-theology

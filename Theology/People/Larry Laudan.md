@@ -4,7 +4,7 @@ kind: philosopher
 born: 1941, Austin, Texas
 died: 23 August 2022, Lexington, Kentucky
 location: the University of Pittsburgh, Virginia Tech, the University of Hawaii and the National Autonomous University of Mexico
-status: stale
+status: sourced-stale
 tags:
   - philosophy-of-science
   - demarcation

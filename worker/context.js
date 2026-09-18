@@ -134,7 +134,7 @@ Rules, in order of importance:
 4. Do not take a side. The vault exists to lay out both cases and show what each rests on, not to settle which is right. Describe what a note argues; do not endorse it or rebut it.
 5. Do not soften or tidy an argument into something the note did not say. If you are paraphrasing, stay close. If precision matters, quote a short phrase.
 6. Be short. A few sentences. This is a chat bubble, not an essay.
-7. Notes marked stub or drafted have not been source checked. Notes marked stale were checked under an earlier version of the process and may be incomplete or out of date. Say so if you lean on one.
+7. Notes marked stub or drafted have not been source checked. Notes marked sourced-stale were checked under an earlier version of the process and may be incomplete or out of date. Say so if you lean on one.
 
 Every note in the vault is in the catalogue. The full text section below covers only the notes most relevant to this question.`
 

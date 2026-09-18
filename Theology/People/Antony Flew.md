@@ -4,7 +4,7 @@ kind: philosopher
 born: 11 February 1923, London
 died: 8 April 2010, Reading
 location: the universities of Keele and Reading
-status: stale
+status: sourced-stale
 tags:
   - atheism
   - falsification

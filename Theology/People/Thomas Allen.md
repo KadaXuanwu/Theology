@@ -3,7 +3,7 @@ type: person
 kind: physician
 died: 1684
 location: London, and Bethlem Hospital
-status: stale
+status: sourced-stale
 tags:
   - royal-touch
   - medicine

@@ -3,7 +3,7 @@ type: person
 kind: biblical scholar
 born: 24 July 1957
 location: Azusa Pacific University, Azusa
-status: stale
+status: sourced-stale
 tags:
   - new-testament
   - resurrection

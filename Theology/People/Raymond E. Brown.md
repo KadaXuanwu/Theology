@@ -4,7 +4,7 @@ kind: biblical scholar
 born: 22 May 1928, the Bronx, New York
 died: 8 August 1998, Menlo Park, California
 location: Union Theological Seminary, New York, and St Mary's Seminary, Baltimore
-status: stale
+status: sourced-stale
 tags:
   - new-testament
   - johannine

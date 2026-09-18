@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 30 July 1986
 location: Wycliffe Hall, University of Oxford
-status: stale
+status: sourced-stale
 tags:
   - hiddenness
   - epistemology

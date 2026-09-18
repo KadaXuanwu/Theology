@@ -1,6 +1,6 @@
 ---
 type: argument
-status: stale
+status: sourced-stale
 tags:
   - cosmology
   - natural-theology

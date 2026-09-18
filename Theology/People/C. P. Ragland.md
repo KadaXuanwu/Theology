@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: Saint Louis University
-status: stale
+status: sourced-stale
 tags:
   - hell
   - philosophy-of-religion

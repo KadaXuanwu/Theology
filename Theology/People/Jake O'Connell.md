@@ -2,7 +2,7 @@
 type: person
 kind: biblical scholar
 location: Assumption College, Massachusetts, and the University of Chester
-status: stale
+status: sourced-stale
 tags:
   - resurrection
   - new-testament

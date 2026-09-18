@@ -2,7 +2,7 @@
 type: person
 kind: anthropologist
 location: Department of Archaeology and Anthropology, University of Cambridge
-status: stale
+status: sourced-stale
 tags:
   - anthropology
   - foragers

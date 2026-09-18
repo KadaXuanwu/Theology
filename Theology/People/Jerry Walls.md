@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 21 April 1955
 location: Houston Christian University, and Asbury Theological Seminary, Kentucky
-status: stale
+status: sourced-stale
 tags:
   - hell
   - heaven

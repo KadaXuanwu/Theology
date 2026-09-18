@@ -48,7 +48,7 @@ export const MAY_LINK = {
   term: ["term"],
 }
 
-const STATUSES = ["stub", "drafted", "sourced", "stale"]
+const STATUSES = ["stub", "drafted", "sourced", "sourced-stale"]
 // Prose words on a sourced node, footnote definitions excluded. People and
 // terms have no limit.
 export const WORDS = { min: 500, max: 2000 }

@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: Saginaw Valley State University, Michigan
-status: stale
+status: sourced-stale
 tags:
   - philosophy-of-science
   - divine-action

@@ -4,7 +4,7 @@ kind: historian
 born: 7 November 1832, Homer, New York
 died: 4 November 1918, Ithaca, New York
 location: Cornell University, Ithaca, and the University of Michigan, Ann Arbor
-status: stale
+status: sourced-stale
 tags:
   - history-of-science
   - conflict-thesis

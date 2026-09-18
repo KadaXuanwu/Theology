@@ -4,7 +4,7 @@ kind: literary scholar
 born: 29 November 1898, Belfast
 died: 22 November 1963, Oxford
 location: Magdalen College, Oxford, and Magdalene College, Cambridge
-status: stale
+status: sourced-stale
 tags:
   - apologetics
   - hell

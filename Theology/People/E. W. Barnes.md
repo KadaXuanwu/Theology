@@ -4,7 +4,7 @@ kind: mathematician
 born: 1 April 1874
 died: 29 November 1953, Sussex
 location: Trinity College, Cambridge, and the Diocese of Birmingham
-status: stale
+status: sourced-stale
 tags:
   - science-and-religion
 ---

@@ -3,7 +3,7 @@ type: person
 kind: anthropologist
 born: 1941
 location: Fordham University, New York
-status: stale
+status: sourced-stale
 tags:
   - anthropology
   - agency-detection

@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 15 November 1932, Ann Arbor, Michigan
 location: University of Notre Dame, and Calvin University, Grand Rapids
-status: stale
+status: sourced-stale
 tags:
   - epistemology
   - philosophy-of-religion

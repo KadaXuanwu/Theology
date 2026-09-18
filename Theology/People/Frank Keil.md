@@ -3,7 +3,7 @@ type: person
 kind: psychologist
 born: 23 May 1952
 location: Yale University, New Haven, and Cornell University, Ithaca
-status: stale
+status: sourced-stale
 tags:
   - cognition
   - psychology

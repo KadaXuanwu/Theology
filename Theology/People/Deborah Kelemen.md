@@ -2,7 +2,7 @@
 type: person
 kind: psychologist
 location: Boston University
-status: stale
+status: sourced-stale
 tags:
   - cognition
   - psychology

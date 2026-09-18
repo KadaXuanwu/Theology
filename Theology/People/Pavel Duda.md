@@ -2,7 +2,7 @@
 type: person
 kind: anthropologist
 location: University of South Bohemia, České Budějovice
-status: stale
+status: sourced-stale
 tags:
   - anthropology
   - phylogenetics

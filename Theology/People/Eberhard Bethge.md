@@ -4,7 +4,7 @@ kind: theologian
 born: 28 August 1909, Warchau
 died: 18 March 2000, Wachtberg
 location: Finkenwalde, Berlin, London, and the University of Bonn
-status: stale
+status: sourced-stale
 tags:
   - theology
   - confessing-church

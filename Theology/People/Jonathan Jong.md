@@ -2,7 +2,7 @@
 type: person
 kind: psychologist
 location: Coventry University, the University of Oxford, and the Center of Theological Inquiry, Princeton
-status: stale
+status: sourced-stale
 tags:
   - psychology
   - religious-belief

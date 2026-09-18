@@ -64,10 +64,10 @@ function* notePages({ notes, sections, assets }) {
 
 function* homePage({ notes, sections, assets }) {
   const unfinished = notes.filter((n) => n.status === "stub" || n.status === "drafted").length
-  const stale = notes.filter((n) => n.status === "stale").length
+  const stale = notes.filter((n) => n.status === "sourced-stale").length
   const summary = `<p class="summary">${notes.length} notes, ${countLinks(notes)} links between them.${
     unfinished ? ` ${unfinished} are still marked stub or drafted and have not been through source verification.` : ""
-  }${stale ? ` ${stale} are marked stale: sourced under an earlier version of the process and due a fresh check.` : ""}</p>`
+  }${stale ? ` ${stale} are marked sourced-stale: sourced under an earlier version of the process and due a fresh check.` : ""}</p>`
 
   yield {
     path: "index.html",

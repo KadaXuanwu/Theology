@@ -2,7 +2,7 @@
 type: person
 kind: physicist
 location: Max Planck Institute for Solar System Research, Katlenburg-Lindau, and Copernicus Gesellschaft, Germany
-status: stale
+status: sourced-stale
 tags:
   - science
   - history-of-science

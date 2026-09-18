@@ -890,7 +890,7 @@ main {
 /* Stale sits between the two: it was verified once, under an earlier version of
    the process, and is due a fresh check. Dotted, so it reads as neither the
    dashed unverified pill nor the solid sourced one. */
-.pill-status[data-status="stale"] {
+.pill-status[data-status="sourced-stale"] {
   border-style: dotted;
 }
 

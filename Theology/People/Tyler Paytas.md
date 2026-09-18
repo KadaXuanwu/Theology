@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: Australian Catholic University
-status: stale
+status: sourced-stale
 tags:
   - hiddenness
   - free-will

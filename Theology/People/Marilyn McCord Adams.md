@@ -4,7 +4,7 @@ kind: philosopher
 born: 12 October 1943, Oak Park, Illinois
 died: 22 March 2017, Princeton, New Jersey
 location: UCLA, Yale, and the University of Oxford
-status: stale
+status: sourced-stale
 tags:
   - hell
   - problem-of-evil

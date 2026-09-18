@@ -3,7 +3,7 @@ type: person
 kind: theologian
 born: 11 August 1972
 location: University of St Andrews, and Fuller Theological Seminary, Pasadena
-status: stale
+status: sourced-stale
 tags:
   - analytic-theology
   - reformed

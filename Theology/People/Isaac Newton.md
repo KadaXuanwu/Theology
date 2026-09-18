@@ -4,7 +4,7 @@ kind: physicist
 born: 25 December 1642, Woolsthorpe, Lincolnshire
 died: 20 March 1727, Kensington, London
 location: Trinity College, Cambridge, and the Royal Mint, London
-status: stale
+status: sourced-stale
 tags:
   - science-and-religion
   - gaps

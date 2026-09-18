@@ -4,7 +4,7 @@ kind: Egyptologist
 born: 1932, Aberdeen
 died: 6 February 2025
 location: University of Liverpool
-status: stale
+status: sourced-stale
 tags:
   - egypt
   - old-testament

@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 1981
 location: Concordia University of Edmonton
-status: stale
+status: sourced-stale
 tags:
   - hiddenness
   - philosophy-of-religion

@@ -2,7 +2,7 @@
 type: person
 kind: psychologist
 location: University of Texas at Austin
-status: stale
+status: sourced-stale
 tags:
   - cognition
   - psychology

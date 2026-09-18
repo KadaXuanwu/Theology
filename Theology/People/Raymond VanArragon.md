@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: Bethel University, St Paul, Minnesota
-status: stale
+status: sourced-stale
 tags:
   - hell
   - hiddenness

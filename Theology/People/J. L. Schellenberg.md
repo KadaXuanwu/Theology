@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 1959
 location: Mount Saint Vincent University, Halifax
-status: stale
+status: sourced-stale
 tags:
   - hiddenness
   - nonbelief

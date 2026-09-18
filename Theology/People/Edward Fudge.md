@@ -4,7 +4,7 @@ kind: theologian
 born: 13 July 1944
 died: 25 November 2017, Houston
 location: Houston, Texas
-status: stale
+status: sourced-stale
 tags:
   - hell
   - annihilationism

@@ -3,7 +3,7 @@ type: person
 kind: linguist
 born: 10 March 1938, Warsaw
 location: Australian National University, Canberra
-status: stale
+status: sourced-stale
 tags:
   - linguistics
   - semantics

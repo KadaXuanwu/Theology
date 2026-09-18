@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: Palm Beach Atlantic University, Florida
-status: stale
+status: sourced-stale
 tags:
   - apologetics
   - conquest

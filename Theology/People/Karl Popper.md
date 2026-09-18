@@ -4,7 +4,7 @@ kind: philosopher
 born: 28 July 1902, Vienna
 died: 17 September 1994, Croydon
 location: the London School of Economics, and Canterbury University College, Christchurch
-status: stale
+status: sourced-stale
 tags:
   - philosophy-of-science
   - falsification

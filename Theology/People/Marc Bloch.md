@@ -4,7 +4,7 @@ kind: historian
 born: 6 July 1886, Lyon
 died: 16 June 1944, Saint-Didier-de-Formans
 location: the universities of Strasbourg, Paris and Montpellier
-status: stale
+status: sourced-stale
 tags:
   - history
   - royal-touch

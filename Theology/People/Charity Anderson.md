@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: Baylor University, Waco, Texas
-status: stale
+status: sourced-stale
 tags:
   - hiddenness
   - epistemology

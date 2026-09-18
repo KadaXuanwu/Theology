@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: Washington University in St Louis, and Baylor University
-status: stale
+status: sourced-stale
 tags:
   - hell
   - epistemology

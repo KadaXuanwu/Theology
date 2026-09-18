@@ -4,7 +4,7 @@ kind: philosopher
 born: 20 January 1922, Scarborough
 died: 9 February 2012, Birmingham
 location: the University of Birmingham, and Claremont Graduate University, California
-status: stale
+status: sourced-stale
 tags:
   - pluralism
   - problem-of-evil

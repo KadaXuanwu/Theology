@@ -2,7 +2,7 @@
 type: person
 kind: religion scholar
 location: University of Helsinki, and Boston University
-status: stale
+status: sourced-stale
 tags:
   - cognition
   - nonbelief

@@ -4,7 +4,7 @@ kind: historian
 born: 15 July 1896, Tredegar, Monmouthshire
 died: 28 August 1967, London
 location: University College London
-status: stale
+status: sourced-stale
 tags:
   - history-of-science
 ---

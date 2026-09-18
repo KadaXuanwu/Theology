@@ -4,7 +4,7 @@ kind: historian
 born: 1928, London
 died: 17 May 2013
 location: the Open University, Milton Keynes
-status: stale
+status: sourced-stale
 tags:
   - history-of-science
   - conflict-thesis

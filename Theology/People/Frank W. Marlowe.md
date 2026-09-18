@@ -4,7 +4,7 @@ kind: anthropologist
 born: 17 April 1954, Forney, Texas
 died: 25 September 2019, Athens, Georgia
 location: Harvard University, Florida State University, Durham University, and the University of Cambridge
-status: stale
+status: sourced-stale
 tags:
   - anthropology
   - foragers

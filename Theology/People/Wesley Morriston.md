@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: University of Colorado Boulder
-status: stale
+status: sourced-stale
 tags:
   - philosophy-of-religion
 ---

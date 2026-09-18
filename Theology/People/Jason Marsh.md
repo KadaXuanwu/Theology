@@ -2,7 +2,7 @@
 type: person
 kind: philosopher
 location: St Olaf College, Northfield
-status: stale
+status: sourced-stale
 tags:
   - hiddenness
   - nonbelief

@@ -4,7 +4,7 @@ kind: psychologist
 born: 11 January 1842, New York City
 died: 26 August 1910, Chocorua, New Hampshire
 location: Harvard University, Cambridge, Massachusetts
-status: stale
+status: sourced-stale
 tags:
   - psychology
   - religious-experience

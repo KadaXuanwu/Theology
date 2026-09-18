@@ -2,7 +2,7 @@
 type: person
 kind: theologian
 location: University of Helsinki
-status: stale
+status: sourced-stale
 tags:
   - design
   - science-and-religion

@@ -3,7 +3,7 @@ type: person
 kind: biblical scholar
 born: 1946, London
 location: Ridley Hall, Cambridge, and the University of St Andrews
-status: stale
+status: sourced-stale
 tags:
   - new-testament
   - eyewitnesses

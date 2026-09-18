@@ -4,7 +4,7 @@ kind: palaeontologist
 born: 24 April 1933, Boston
 died: 9 July 2015, Sturgeon Bay, Wisconsin
 location: University of Chicago, Field Museum of Natural History, University of Rochester
-status: stale
+status: sourced-stale
 tags:
   - science
 ---

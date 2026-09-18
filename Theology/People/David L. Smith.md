@@ -3,7 +3,7 @@ type: person
 kind: historian
 born: 1963
 location: Selwyn College, Cambridge
-status: stale
+status: sourced-stale
 tags:
   - history
 ---

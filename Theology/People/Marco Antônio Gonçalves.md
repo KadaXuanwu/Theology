@@ -3,7 +3,7 @@ type: person
 kind: anthropologist
 born: 1960
 location: Federal University of Rio de Janeiro
-status: stale
+status: sourced-stale
 tags:
   - anthropology
   - amazonia

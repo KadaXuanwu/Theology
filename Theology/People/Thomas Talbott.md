@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 1941
 location: Willamette University, Salem, Oregon
-status: stale
+status: sourced-stale
 tags:
   - universalism
   - hell

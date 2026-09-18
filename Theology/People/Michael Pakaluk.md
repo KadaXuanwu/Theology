@@ -3,7 +3,7 @@ type: person
 kind: philosopher
 born: 6 November 1957
 location: the Catholic University of America, Washington
-status: stale
+status: sourced-stale
 tags:
   - ethics
   - gospels

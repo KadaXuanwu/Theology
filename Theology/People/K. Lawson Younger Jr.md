@@ -3,7 +3,7 @@ type: person
 kind: Assyriologist
 born: 1953
 location: Trinity Evangelical Divinity School, Deerfield, Illinois
-status: stale
+status: sourced-stale
 tags:
   - ancient-near-east
   - conquest
