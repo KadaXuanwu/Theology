@@ -11,7 +11,11 @@ import { noteUrl } from "./nav.js"
 import { onSourcedChange, sourcedOnly } from "./sourced.js"
 import { readSet, writeSet } from "./store.js"
 
-const HIDDEN_KEY = "hiddenGraphKinds"
+// The stored value is the list of kinds the reader hid, so a kind that did not
+// exist when it was written looks shown rather than never decided. The key is
+// versioned for that: a new reference layer with a hidden default bumps it,
+// and the one choice a reader made before is asked again.
+const HIDDEN_KEY = "hiddenGraphKinds.2"
 
 // People and terms are reference layers, not steps in an argument, and there
 // are more people than of everything else put together. The rail is too small
