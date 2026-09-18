@@ -300,7 +300,6 @@ h3 {
   display: inline-flex;
   align-items: center;
   gap: 2px;
-  margin-right: auto;
   padding: 2px;
   border: 1px solid var(--border);
   border-radius: calc(var(--radius) + 2px);
@@ -332,6 +331,45 @@ h3 {
 .view-tab .icon {
   width: 1rem;
   height: 1rem;
+}
+
+/* Only what passed the verifier. The same shape as the view switch beside it,
+   and pressed it takes the accent the active view does, so the two read as
+   one row of ways to narrow the page. It pushes the rest of the header right,
+   which the view switch did before it. The head script applies the remembered
+   choice before first paint, and the rule at the end is what hides the rest. */
+.sourced-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: calc(1.85rem + 6px);
+  margin-right: auto;
+  padding: 0 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 2px);
+  background: var(--surface);
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 540;
+  white-space: nowrap;
+  cursor: pointer;
+  flex: none;
+}
+.sourced-toggle:hover {
+  color: var(--text);
+  background: var(--bg-soft);
+}
+.sourced-toggle[aria-pressed="true"] {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.sourced-toggle .icon {
+  width: 1rem;
+  height: 1rem;
+}
+:root[data-sourced-only] li:has(> a[data-status]:not([data-status="sourced"])) {
+  display: none;
 }
 
 .icon-button {
@@ -1967,7 +2005,8 @@ sup.fn.is-broken {
   }
   .search-open span,
   .search-open kbd,
-  .view-tab span {
+  .view-tab span,
+  .sourced-toggle span {
     display: none;
   }
   /* No room for the name on a phone. The control keeps its full list when it

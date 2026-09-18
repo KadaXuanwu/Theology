@@ -8,6 +8,7 @@
 // still are with no script running. This turns them into toggles.
 
 import { setTagFocus } from "./graphs.js"
+import { onSourcedChange, passes, sourcedOnly, sourcedTotal } from "./sourced.js"
 import { escapeHtml } from "./text.js"
 
 const CLOSE_ICON =
@@ -28,7 +29,8 @@ export function initTags() {
   const chosen = document.querySelector(".tag-selected")
   const modeButtons = [...document.querySelectorAll(".tag-mode-option")]
   const clear = document.querySelector(".tag-clear")
-  const total = Number(picker.dataset.total) || rows.length
+  // The header's Sourced switch narrows the whole vault, so the total follows it.
+  const total = () => (sourcedOnly() ? sourcedTotal() : Number(picker.dataset.total) || rows.length)
 
   // Every tag, and the notes under it. This is the whole index the filter works
   // from, which is why the map view needs no list of notes to count.
@@ -85,10 +87,13 @@ export function initTags() {
 
     for (const chip of chips) {
       chip.setAttribute("aria-pressed", String(selected.includes(chip.dataset.tag)))
+      const count = chip.querySelector(".tree-count")
+      if (count) count.textContent = String([...covers.get(chip.dataset.tag)].filter(passes).length)
     }
 
     for (const row of rows) {
-      const on = !matched || matched.has(titleOf.get(row))
+      const title = titleOf.get(row)
+      const on = (!matched || matched.has(title)) && passes(title)
       row.hidden = !on
       for (const mark of row.querySelectorAll(".result-tag")) {
         mark.classList.toggle("is-on", selected.includes(mark.dataset.tag))
@@ -103,10 +108,9 @@ export function initTags() {
       if (label) label.textContent = String(live.length)
     }
 
-    const shown = matched ? matched.size : total
-    count.textContent = selected.length
-      ? `${shown} of ${total} notes`
-      : `${total} ${total === 1 ? "note" : "notes"}`
+    const all = total()
+    const shown = matched ? [...matched].filter(passes).length : all
+    count.textContent = selected.length ? `${shown} of ${all} notes` : `${all} ${all === 1 ? "note" : "notes"}`
 
     // Its own row under the controls, one line high whether it holds nothing or
     // a dozen, so picking a tag never shifts what is below it.
@@ -188,5 +192,6 @@ export function initTags() {
     paint()
   })
 
+  onSourcedChange(paint)
   paint()
 }

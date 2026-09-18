@@ -3,6 +3,7 @@
 
 import { loadNotes } from "./data.js"
 import { noteUrl } from "./nav.js"
+import { sourcedOnly } from "./sourced.js"
 import { escapeHtml, escapeRegex } from "./text.js"
 
 // A title match says what a note is about; a body match may be one passing
@@ -137,7 +138,8 @@ export function initSearch() {
   input?.addEventListener("input", async () => {
     const query = input.value.trim().toLowerCase()
     const notes = await loadNotes()
-    matches = query ? rank(notes, query) : []
+    const pool = sourcedOnly() ? notes.filter((n) => n.status === "sourced") : notes
+    matches = query ? rank(pool, query) : []
     activeIndex = 0
     render(matches, query)
   })

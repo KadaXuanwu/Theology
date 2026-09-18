@@ -8,12 +8,16 @@ import { initFootnotes } from "./footnotes.js"
 import { initGraphs } from "./graphs.js"
 import { initPreviews } from "./preview.js"
 import { initSearch } from "./search.js"
+import { initSourced } from "./sourced.js"
 import { initTags } from "./tags.js"
 import { initAppearance } from "./theme.js"
 import { initContents } from "./toc.js"
 import { initTree } from "./tree.js"
 
 initAppearance()
+// Before anything that lists notes, so the counts and the filters below read
+// the switch rather than race it.
+initSourced()
 initTree()
 initSearch()
 initPreviews()

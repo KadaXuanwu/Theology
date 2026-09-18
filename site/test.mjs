@@ -1324,7 +1324,7 @@ console.log("tags are a way in, and they combine")
   // A combination no note carries is an empty graph. Reading an empty focus as
   // "no focus" would answer it with the whole vault instead.
   check("a combination nothing matches gives an empty map", /const subset = focus === null \? shown : neighbourhood\(shown, seeds, depth\)/.test(graph))
-  check("and says why", /emptyLabel: driven \? "No note carries that combination\." : undefined/.test(mounts))
+  check("and says why", /emptyLabel: driven \? "No note carries that combination\." : sourcedOnly\(\) \? "No sourced note here\." : undefined/.test(mounts))
   // The notice belongs to the mount that wrote it, or the next mount draws its
   // canvas underneath a message about a selection that is over.
   check("the notice goes when that mount does", /el\.innerHTML = `<p class="graph-empty">\$\{message\}<\/p>`[\s\S]*?destroy\(\) \{\r?\n\s*el\.innerHTML = ""/.test(graph))
@@ -2815,6 +2815,48 @@ console.log("the lint reads the rules the templates promise")
   check("the lint knows every kind the site has", Object.keys(HEADINGS).length === 5 && Object.keys(MAY_LINK).length === 5)
   const urls = urlsOf(new Map([["a", "See [DNB](https://en.wikisource.org/wiki/Clarke,_Samuel_(1675-1729)) and <https://example.org/x>."]]))
   check("a source URL keeps its own brackets and loses the link's", urls.join(" ") === "https://en.wikisource.org/wiki/Clarke,_Samuel_(1675-1729) https://example.org/x", urls.join(" "))
+}
+
+console.log("a switch in the header shows only sourced notes")
+{
+  const dist = resolve(repoRoot, "dist")
+  const page = await readFile(resolve(dist, "index.html"), "utf8")
+  const note = await readFile(resolve(dist, "claims/jesus-existed/index.html"), "utf8")
+  const sheet = await readFile(resolve(repoRoot, "site/assets/style.css"), "utf8")
+  const [sourced, search, graphs, tags] = await Promise.all(["sourced.js", "search.js", "graphs.js", "tags.js"].map(client))
+  const graph = await readGraphData()
+
+  const at = (needle) => page.indexOf(needle)
+  check("the header carries the switch", /<button type="button" class="sourced-toggle" aria-pressed="false"/.test(page))
+  check(
+    "right of the view switch and before the font picker",
+    at('class="view-switch"') < at('class="sourced-toggle"') && at('class="sourced-toggle"') < at('class="font-picker"'),
+  )
+
+  // What it hides by: every link to a note in a list names the note's status.
+  const tree = page.match(/<nav class="tree"[\s\S]*?<\/nav>/)?.[0] ?? ""
+  const treeLinks = [...tree.matchAll(/data-note="[^"]*"( data-status="[^"]+")?/g)]
+  check("every note in the tree carries its status", treeLinks.length > 0 && treeLinks.every((m) => m[1]))
+  check("so does every card on a list page", /<li><a href="[^"]*" data-note="[^"]*" data-status="/.test(page))
+  check("and every note a page is linked from", /class="backlinks"[\s\S]*?data-note="[^"]*" data-status="/.test(note))
+  check("and every node on the map", graph.nodes.every((n) => typeof n.status === "string"))
+
+  // Applied before first paint, like the theme, and hidden by the sheet rather
+  // than by script, so nothing unsourced flashes onto the page.
+  const headScript = page.match(/<script>([\s\S]*?)<\/script>/)?.[1] ?? ""
+  check(
+    "the head script applies the remembered choice",
+    headScript.includes('localStorage.getItem("sourcedOnly")==="1"') && headScript.includes("d.dataset.sourcedOnly"),
+  )
+  check("the sheet hides what is not sourced", sheet.includes(':root[data-sourced-only] li:has(> a[data-status]:not([data-status="sourced"]))'))
+  check("the label gives way on a phone", /\.sourced-toggle span \{\s*display: none/.test(sheet))
+  check("the choice is remembered", sourced.includes('writeText(KEY, sourcedOnly() ? "1" : "0")'))
+
+  // Every list the client builds itself reads the switch too.
+  check("the search filters its index", /sourcedOnly\(\) \? notes\.filter\(\(n\) => n\.status === "sourced"\)/.test(search))
+  check("the graphs drop unsourced nodes but keep the one they were opened on", /n\.status === "sourced" \|\| n\.id === keep/.test(graphs))
+  check("and rebuild on a change", /onSourcedChange\(\(\) => rebuild\(\)\)/.test(graphs))
+  check("the tags filter counts only what passes", /passes\(title\)/.test(tags) && /onSourcedChange\(paint\)/.test(tags))
 }
 
 console.log(failures === 0 ? "\nAll checks passed." : `\n${failures} check(s) failed.`)

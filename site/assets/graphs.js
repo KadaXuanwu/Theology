@@ -8,6 +8,7 @@
 import { loadGraph } from "./data.js"
 import { mount as mountGraph } from "./graph.js"
 import { noteUrl } from "./nav.js"
+import { onSourcedChange, sourcedOnly } from "./sourced.js"
 import { readSet, writeSet } from "./store.js"
 
 const HIDDEN_KEY = "hiddenGraphKinds"
@@ -43,6 +44,16 @@ function focusOf(el, data) {
   // A tag's rail names its notes outright, the way a note's names one.
   if (el.dataset.focusList) return el.dataset.focusList.split("|").filter(Boolean)
   return el.dataset.graph === "local" ? el.dataset.focus : null
+}
+
+// With the header's Sourced switch on, an unsourced note is not on the map at
+// all, the same way a hidden category is not. The one note a graph was opened
+// on stays, the way a seeded node stays through the legend.
+function onlySourced(data, keep) {
+  if (!sourcedOnly()) return data
+  const nodes = data.nodes.filter((n) => n.status === "sourced" || n.id === keep)
+  const ids = new Set(nodes.map((n) => n.id))
+  return { nodes, links: data.links.filter((l) => ids.has(l.source) && ids.has(l.target)) }
 }
 
 export function initGraphs() {
@@ -93,6 +104,10 @@ export function initGraphs() {
     })
   }
 
+  // The switch changes which notes are on the map, so it rebuilds like the
+  // legend does.
+  onSourcedChange(() => rebuild())
+
   if (mounts.length === 0) return
 
   loadGraph().then((data) => {
@@ -109,9 +124,10 @@ export function initGraphs() {
       for (const el of mounts) {
         const driven = el.dataset.graph === "tags"
         const local = el.dataset.graph === "local"
-        const focus = focusOf(el, data)
+        const shown = onlySourced(data, local ? el.dataset.focus : null)
+        const focus = focusOf(el, shown)
         graphs.push(
-          mountGraph(el, data, {
+          mountGraph(el, shown, {
             focus,
             // The rail shows immediate neighbours; the full page view goes a
             // hop further, because one hop leaves most notes looking almost
@@ -121,7 +137,7 @@ export function initGraphs() {
             // section in the rail has too many notes to name at that size.
             showLabels: el.dataset.labels ?? (local || (driven && focus) ? "always" : "hover"),
             kinds: kindsFor(el),
-            emptyLabel: driven ? "No note carries that combination." : undefined,
+            emptyLabel: driven ? "No note carries that combination." : sourcedOnly() ? "No sourced note here." : undefined,
             onNavigate: (node) => {
               window.location.href = noteUrl(node.url)
             },

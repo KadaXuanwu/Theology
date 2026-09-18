@@ -29,6 +29,7 @@ export const graphData = (notes) =>
       id: n.title,
       url: n.url,
       kind: n.section.kind,
+      status: n.status,
       degree: n.links.length + n.backlinks.length,
     })),
     links: dedupeLinks(notes),

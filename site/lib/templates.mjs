@@ -3,7 +3,7 @@
 // Each page hands its middle column and its right rail to `shell`, which is
 // what makes the header, the tree and the overlays the same on all of them.
 
-import { shell } from "./chrome.mjs"
+import { shell, statusAttr } from "./chrome.mjs"
 import { slugify } from "./content.mjs"
 import { icon } from "./icons.mjs"
 import { escapeHtml } from "./markdown.mjs"
@@ -129,7 +129,7 @@ export function notePage({ note, root, dateLabel, sections, notes, assets }) {
     ? `<ul class="card-list">${note.backlinks
         .map(
           (b) =>
-            `<li><a href="${root}${b.url}/" data-note="${escapeHtml(b.title)}"><span class="dot dot-${b.section.kind}"></span><span class="card-title">${escapeHtml(b.title)}</span></a></li>`,
+            `<li><a href="${root}${b.url}/" data-note="${escapeHtml(b.title)}"${statusAttr(b)}><span class="dot dot-${b.section.kind}"></span><span class="card-title">${escapeHtml(b.title)}</span></a></li>`,
         )
         .join("")}</ul>`
     : `<p class="muted">Nothing links here yet.</p>`
@@ -207,7 +207,7 @@ export function listPage({
   ${group.blurb ? `<p class="muted">${escapeHtml(group.blurb)}</p>` : ""}
   <ul class="card-list">${group.items
     .map(
-      (n) => `<li><a href="${root}${n.url}/" data-note="${escapeHtml(n.title)}">
+      (n) => `<li><a href="${root}${n.url}/" data-note="${escapeHtml(n.title)}"${statusAttr(n)}>
       <span class="card-head"><span class="card-title">${escapeHtml(n.title)}</span>${n.status && n.status !== "sourced" ? `<span class="pill pill-status" data-status="${escapeHtml(n.status)}">${escapeHtml(n.status)}</span>` : ""}</span>
       <span class="card-excerpt">${escapeHtml(n.shortExcerpt)}</span>
     </a></li>`,
@@ -289,7 +289,7 @@ export function tagIndexPage({ tags, root, sections, notes, assets }) {
           const marks = n.tags
             .map((t) => `<span class="result-tag" data-tag="${escapeHtml(t)}">#${escapeHtml(t)}</span>`)
             .join("")
-          return `<li><a href="${root}${n.url}/" data-note="${escapeHtml(n.title)}">
+          return `<li><a href="${root}${n.url}/" data-note="${escapeHtml(n.title)}"${statusAttr(n)}>
       <span class="card-head"><span class="dot dot-${section.kind}"></span><span class="card-title">${escapeHtml(n.title)}</span></span>
       <span class="result-tags">${marks}</span>
     </a></li>`
