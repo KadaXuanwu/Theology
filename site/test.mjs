@@ -1463,6 +1463,9 @@ console.log("the reader picks the reading font")
   // A phone header has no room for the name, so the closed control shows a
   // mark instead. Opening it still lists the faces in full.
   check("the closed control shrinks to a mark on a phone", sheet.includes('content: "Aa";'))
+  // A tap leaves hover stuck on, and hover repaints the colour, so the picked
+  // face's name was drawn over the mark until hover hid it too.
+  check("and a stuck hover keeps it a mark", /\.font-select,\s*\.font-select:hover \{[^}]*color: transparent/.test(sheet))
   check("and the list it opens is still coloured for the theme", sheet.includes(".font-select option {"))
   check("the client remembers the next pick", appSource.includes('writeText("font", select.value)'))
   check(
@@ -2827,7 +2830,9 @@ console.log("a switch in the header shows only sourced notes")
   const graph = await readGraphData()
 
   const at = (needle) => page.indexOf(needle)
-  check("the header carries the switch", /<button type="button" class="sourced-toggle" aria-pressed="false"/.test(page))
+  // On is the default: a first visit shows the vault the way the author can
+  // vouch for it, and only a reader who switched it off sees the rest.
+  check("the header carries the switch, on", /<button type="button" class="sourced-toggle" aria-pressed="true"/.test(page))
   check(
     "right of the view switch and before the font picker",
     at('class="view-switch"') < at('class="sourced-toggle"') && at('class="sourced-toggle"') < at('class="font-picker"'),
@@ -2846,7 +2851,7 @@ console.log("a switch in the header shows only sourced notes")
   const headScript = page.match(/<script>([\s\S]*?)<\/script>/)?.[1] ?? ""
   check(
     "the head script applies the remembered choice",
-    headScript.includes('localStorage.getItem("sourcedOnly")==="1"') && headScript.includes("d.dataset.sourcedOnly"),
+    headScript.includes('localStorage.getItem("sourcedOnly")!=="0"') && headScript.includes("d.dataset.sourcedOnly"),
   )
   check("the sheet hides what is not sourced", sheet.includes(':root[data-sourced-only] li:has(> a[data-status]:not([data-status="sourced"]))'))
   check("the label gives way on a phone", /\.sourced-toggle span \{\s*display: none/.test(sheet))

@@ -2010,8 +2010,11 @@ sup.fn.is-broken {
     display: none;
   }
   /* No room for the name on a phone. The control keeps its full list when it
-     opens, so only the closed state is shortened to a mark. */
-  .font-select {
+     opens, so only the closed state is shortened to a mark. A tap leaves the
+     hover state stuck on, so hover has to hide the name too, or the picked
+     face's name is drawn over the mark. */
+  .font-select,
+  .font-select:hover {
     width: 2.8rem;
     padding: 0 1.2rem 0 0.5rem;
     color: transparent;

@@ -45,7 +45,7 @@ export function shell({
 <script>
 /* Set the theme and the reading font before first paint, so the page never
    flashes one and settles on the other. */
-(function(){try{var d=document.documentElement;var t=localStorage.getItem("theme");if(t==="light"||t==="dark")d.dataset.theme=t;var f=localStorage.getItem("font");if(${JSON.stringify(FONT_IDS)}.indexOf(f)>-1)d.dataset.font=f;if(localStorage.getItem("sourcedOnly")==="1")d.dataset.sourcedOnly=""}catch(e){}})()
+(function(){try{var d=document.documentElement;var t=localStorage.getItem("theme");if(t==="light"||t==="dark")d.dataset.theme=t;var f=localStorage.getItem("font");if(${JSON.stringify(FONT_IDS)}.indexOf(f)>-1)d.dataset.font=f;if(localStorage.getItem("sourcedOnly")!=="0")d.dataset.sourcedOnly=""}catch(e){}})()
 </script>
 </head>
 <body class="${[rightRail ? "has-right" : "", bodyClass].filter(Boolean).join(" ")}"${notes.some((n) => n.url === current) ? ` data-note-url="${escapeHtml(current)}"` : ""}>
@@ -95,7 +95,7 @@ function header({ root, view, textUrl, graphUrl }) {
   <button class="icon-button nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="explorer">${icon("menu")}</button>
   <a class="site-title" href="${root}">Theology</a>
   <div class="view-switch" role="group" aria-label="View">${tab("text", "Text", textUrl, "text")}${tab("graph", "Graph", graphUrl, "graph")}</div>
-  <button type="button" class="sourced-toggle" aria-pressed="false" title="Show only notes that passed source verification">${icon("check")}<span>Sourced</span></button>
+  <button type="button" class="sourced-toggle" aria-pressed="true" title="Show only notes that passed source verification">${icon("check")}<span>Sourced</span></button>
   ${fontPicker()}
   <button class="search-open" aria-label="Search notes">${icon("search")}<span>Search</span><kbd>/</kbd></button>
   <button class="icon-button theme-toggle" aria-label="Switch theme">${icon("sun")}${icon("moon")}</button>
