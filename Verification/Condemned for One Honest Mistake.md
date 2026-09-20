@@ -5,7 +5,7 @@ Open source checks for `Theology/Arguments Against/Condemned for One Honest Mist
 ## Run record
 Built: 19 September 2026, refresh-node, Refresh mode, stayed sourced-stale, the verifier never ran
 Fields: philosophy, church history and historical theology (both named by the librarian); cognitive science of religion and psychology, sociology and anthropology of religion (both added after three researchers named them on FIELDS TOUCHED); plus the primary text and steelman researchers, and two targeted passes after the debate
-Sources: 35 total | academic 27 | neutral-secondary 4 | confessional 4 | counter 0 | academic share 77%, as the writer counted it and nobody recounted it
+Sources: 29 footnoted after the split | academic share not recounted since the verifier did not run. The writer's own count before the split was 35 total, academic 27, neutral-secondary 4, confessional 4, counter 0, an academic share of 77%.
 Best source: main Tier A, academic, full (Bullivant 2011; Schellenberg 2015; Schaff's critical edition) | counter Tier A, academic, full (Bernard's ICC John 1928; Newman and Nida 1980)
 Continental: checked in four scopes. Reached at full: Pollack's German bibliography; Söding's Bochum lecture script; Ratzinger 1972 and Rahner 1961/1966 through Bullivant's translations; Bauer only at second hand through a 1953 Edinburgh thesis. Found and not openable: Frey, *Die johanneische Eschatologie*, which contests the realised reading of the tense the node leans on; Zumstein's French commentary; Gasser, Kreiner and Weidner 2020. Mohr Siebeck, De Gruyter and Kohlhammer all returned 403.
 Newest academic source: 2026 (Blanton)
@@ -15,7 +15,8 @@ Rulings: crux held in both orders | strong counter held in both orders
 Crux: "The argument turns on what the not-believing in John 3:18 is. Whether the verse's own stated ground reaches a person who was not convinced, or only a person who refused, decides the case."
 Strong counter: what the verse condemns is not a verdict on a question, since the object of believing through the passage is a person and not a proposition, and the next sentence gives the content of that not-believing as loving darkness and staying away from the light.
 Points: none. The node's frontmatter carries no `points` key.
-Lint: 0 failures | 0 warnings on this node. The 56 word sentence that warned on the draft was split, which the style rule requires.
+Lint: 0 failures | 0 warnings on this node, and none on any node created for it. The 56 word sentence that warned on the draft was split, which the style rule requires.
+Second pass, 20 September 2026: the author approved three follow-ups. The size half moved into [[No Finite Life Deserves Infinite Punishment]], the tradition's side moved into a new claim, [[Invincible Ignorance Excuses Unbelief]], and sixteen person nodes were built. The body went from 1953 words to 1730.
 Failing balance rules: rule 4, four confessional-register sources and no counter-register source, left unpadded and disclosed. Rule 6, vintage: the load-bearing exegesis is Bernard 1928 and Sanday and Headlam 1902, and every commentary opened on John 3:18 across two passes dates from between 1880 and 1953. That is stated in the node's own crux bullet.
 
 **Why the node did not reach `sourced`.** One gate failed: every factual sentence must have passed the verifier, and none was checked. The node keeps `sourced-stale`, which is honest in both halves: it passed a verifier once, under the old text, and it is due again. Everything the run fixed is kept. Phase 4 has to be re-run before the status can change.
@@ -83,14 +84,14 @@ Failing balance rules: rule 4, four confessional-register sources and no counter
 ---
 
 ### V6. People named in the node's prose with no node in `People/`
-**Status:** open
+**Status:** corrected
 **Node:** `Arguments Against/Condemned for One Honest Mistake`
 **Source:** the node's own prose
 **What the node says:** it names Francisco de Vitoria, Stephen Bullivant, J. H. Bernard, Rik Peels, Teresa Morgan, Chris Seglenieks, R. Zachary Manis, Nikk Effingham, Kenneth Einar Himma, Karl Rahner, Denny Burk, Richard Feldman, Lindsay Rettler, Theodore Drange and Peter Berger, none of whom has a node. Albert Schweitzer was already named in the protected text and has none either.
 **What is open:** the style rule says a person named in the prose links their node. Sixteen person nodes is more than this run could research, and the run was cut short by rate limits before any of them could be built.
 **What would settle it:** either sixteen person nodes, or a pass that moves the names that do no work into footnotes, where the style rule lets a name that appears only in a citation stay.
-**Verdict:**
-**Checked by:**
+**Verdict:** corrected. All sixteen were researched and written on 20 September 2026, at `drafted`, and every name in the prose now links one. Two corrections came out of it that touch other claims. R. Zachary Manis left Southwest Baptist University in 2021 when it closed its philosophy programme and holds no university post now, so present tense "Professor of Philosophy" would be wrong anywhere in the vault. Ralph Martin was dismissed from Sacred Heart Major Seminary on 23 July 2025. Two dating conflicts are carried rather than resolved: Vitoria's birth year spans 1483 to 1493 across three reference works, and Bernard's birth is 27 July 1860 at Sooree in the *Dictionary of Irish Biography* against 27 November 1860 at Raniganj in Wikipedia, which is the date consistent with its own "aged 66". Both are stated in the person nodes.
+**Checked by:** the refresh run, 20 September 2026
 
 ---
 
@@ -101,5 +102,17 @@ Failing balance rules: rule 4, four confessional-register sources and no counter
 **What the node says:** nothing. It was dropped for this reason.
 **What is open:** the primary text researcher read the outline as two headings, "18 Glaube und Unglaube" then "19ff. Das Gericht", so that v.18 and the judgment are separate. The scholarship researcher read the same outline as putting the ground of the judgment in vv.19–21. An outline of headings read two ways corroborates neither reading, and both debate cards leaned on it as if it settled something.
 **What would settle it:** Söding's running exegesis of John 3:18–21 rather than his outline, or a commentary.
+**Verdict:**
+**Checked by:**
+
+---
+
+### V8. The three follow-ups were written without a verifier either
+**Status:** open
+**Node:** `Claims/Invincible Ignorance Excuses Unbelief`, `Claims/No Finite Life Deserves Infinite Punishment`, `Glossary/Non-resistant non-belief`, `Glossary/Invincible ignorance`, and sixteen nodes in `People/`
+**Source:** all of them
+**What the node says:** the claim node carries the invincible ignorance material that used to sit in the argument, the two glossary entries define its terms of art, and the person nodes carry the lives.
+**What is open:** the same gap as V2. Every one of these was researched by an agent that opened its sources and reported access honestly, and none was checked cold by a second agent. They are all at `drafted` for that reason. The person nodes rest largely on institutional pages and publisher bios, which is the right register for the job, but two birth dates rest on Wikipedia and are marked as such in the nodes: Theodore Drange's and Peter Berger's.
+**What would settle it:** a verifier pass over each.
 **Verdict:**
 **Checked by:**
