@@ -1,6 +1,6 @@
 ---
 type: claim
-status: stub
+status: drafted
 tags:
   - atonement
   - sacrifice
@@ -8,29 +8,58 @@ tags:
 points: []
 ---
 # Description
-God does not drop the penalty for sin, he moves it. Justice means the sentence is carried out, and love means the guilty do not carry it, so Christ carries it in their place.
+The penalty for sin is not waived but moved. Christ undergoes it, and the people who owed it go free. Justice is held to require that the sentence fall on someone, and mercy to consist in its falling on a substitute. On this account the cross discharges the debt rather than setting it aside, and God discharges it himself in the person of the Son. The account is called penal substitution.
 
 # Origins
-Not Anselm. Packer's line is the clean statement of the difference: Anselm's satisfactio is compensation for dishonour done, where the Reformers made it "the undergoing of vicarious punishment (poena) to meet the claims on us of God's holy law and wrath" (J. I. Packer, "What Did the Cross Achieve? The Logic of Penal Substitution", Tyndale Bulletin 1974). So Calvin and the Reformers, Institutes II.16. Check whether Luther belongs there, the literature is split. Anselm, Cur Deus Homo 1098, treats satisfaction as the alternative to punishment rather than punishment borne by someone else.
+The Reformers are the source, and the break with what came before is a redefinition. J. I. Packer, the Anglican theologian whose 1974 *Tyndale Bulletin* article is the standard modern statement of the doctrine, puts it this way: [[Anselm]]'s *Cur Deus Homo*, written between 1095 and 1098, "saw Christ's satisfactio for our sins as the offering of compensation or damages for dishonour done", where the Reformers "saw it as the undergoing of vicarious punishment (poena) to meet the claims on us of God's holy law and wrath".[^packer-1974]
+
+Anselm's own structure bears that out. At I.12 he holds that "it is not right to cancel sin without compensation or punishment", and at I.15 that "satisfaction or punishment must needs follow every sin".[^anselm-cdh] Satisfaction is there as the alternative to punishment. A substitute undergoing the punishment is not in the scheme.
+
+[[John Calvin]] states the transfer outright. At *Institutes* II.16.5 he writes that "our acquittal is in this that the guilt which made us liable to punishment was transferred to the head of the Son of God", and at II.16.6 that the curse that lay on us was "taken from us by being transferred to him".[^calvin-institutes] At II.16.10 he adds that Christ had to "feel the weight of divine vengeance" and, "like a sponsor and surety for the guilty", "undertook and paid all the penalties which must have been exacted from them".[^calvin-institutes]
+
+Whether Luther belongs beside Calvin here is contested. Packer names "Luther, Calvin, Zwingli, Melanchthon and their reforming contemporaries" as the pioneers of the idea,[^packer-1974] and the *Stanford Encyclopedia of Philosophy* says penal substitution "has strong roots in Luther and Calvin", with considerable debate over whether there are earlier precursors.[^thurow-sep] Needs sources for the other reading. Gustaf Aulén, the Swedish theologian whose *Christus Victor* (SPCK, 1931) set the classic account against what he called the Latin one, is the candidate, and Packer quotes him calling the Latin account "juridical in its inmost essence".[^packer-1974] Where Aulén places Luther is the open question, and his book has not been opened here.
 
 # Based On
-- Isaiah 53:5-6
-- 2 Corinthians 5:21
-- Galatians 3:13
-- 1 Peter 2:24
-- Romans 3:25-26
+- [Isaiah 53:5–6](https://www.biblegateway.com/passage/?search=Isaiah%2053:5-6&version=NIV), "he was pierced for our transgressions", and "the Lord has laid on him the iniquity of us all". This is the transfer language the whole claim runs on, and its subject is disputed. See Limits.
+- [2 Corinthians 5:21](https://www.biblegateway.com/passage/?search=2%20Corinthians%205:21&version=NIV), "God made him who had no sin to be sin for us". The NIV carries an alternative in its own footnote, "Or be a sin offering", which is a different mechanism. See Limits.
+- [Galatians 3:13](https://www.biblegateway.com/passage/?search=Galatians%203:13&version=NIV), "Christ redeemed us from the curse of the law by becoming a curse for us", quoting Deuteronomy 21:23.
+- [1 Peter 2:24](https://www.biblegateway.com/passage/?search=1%20Peter%202:24&version=NIV), "He himself bore our sins in his body on the cross", itself a quotation of Isaiah 53.
+- [Romans 3:25–26](https://www.biblegateway.com/passage/?search=Romans%203:25-26&version=NIV), where God presents Christ "as a sacrifice of atonement, through the shedding of his blood", so as "to be just and the one who justifies those who have faith in Jesus". The verse names the problem the claim exists to solve, which is how God stays just while acquitting.
 
 # Carries
-Two halves, and the first is the one the vault is missing. First, the retributive premise: a penalty for sin exists and cannot simply be waived, because a ruler who cancels his own sentence has made his word worth nothing. Second, the mechanism: the penalty can be discharged by someone other than the offender. God Can't Accept Sin gets at the first half through holiness rather than justice, and its own Limits say it explains the need for a remedy and not the remedy. This is the remedy.
+Two things, and they come apart.
+
+The first is the retributive premise: a penalty for sin exists and cannot simply be dropped. Anselm's version is that if sin is passed over unpunished, "with God there will be no difference between the guilty and the not guilty".[^anselm-cdh] Packer's version is that the doctrine "presupposes a penalty (poena) due to us from God the Judge for wrong done and failure to meet his claims", and that the retributive principle has God's sanction.[^packer-1974] [[God Can't Accept Sin]] reaches the same requirement through holiness rather than through justice, and its own Limits say that it explains the need for a remedy and not the remedy.
+
+The second is the mechanism: the penalty can be discharged by someone other than the offender. The first half does not give you this, and nearly every objection below attacks it rather than the premise.
+
+Taken together they license a forgiveness that costs something and is still free to the person forgiven, with God's justice and his mercy met by one act rather than traded against each other.
 
 # Disputed By
-- Guilt is not transferable. Punishing the innocent stays unjust however willing they are, and no court treats a sentence as served because a volunteer took it. If justice is satisfied by someone suffering rather than by the guilty answering, justice has been redefined to fit.
-- It sets the Father against the Son. Steve Chalke and Alan Mann, The Lost Message of Jesus, 2003, the "cosmic child abuse" phrase.
-- Joel Green and Mark Baker, Recovering the Scandal of the Cross, 2000, on the other side of it.
-- Defenders: Steve Jeffery, Michael Ovey and Andrew Sach, Pierced for Our Transgressions, 2007. Oliver D. Crisp has written on it and is already in the vault.
+- Punishment is not transferable. Mark Murphy, writing in *Faith and Philosophy*, argues that penal substitution "fails for conceptual reasons", because punishment is expressive action that condemns the party punished, and so does not move from a guilty to an innocent party.[^murphy-2009] He puts a vicarious punishment account in its place, on which the guilty person's punishment consists in the suffering of an innocent to whom he or she bears a special relationship.[^murphy-2009] This is the strong counter. It grants the retributive premise and denies only the mechanism, so it cannot be answered by defending retribution.
+- David Lewis, the Princeton philosopher, makes the same point from ordinary practice. A burglar's devoted friend does not serve the burglar's sentence, and the authorities would decline the offer out of hand.[^lewis-1997] He writes at p. 204 that the debt metaphor misleads: in a debt what is required is that the creditor not lose, in a debt of punishment what is required is that the debtor suffer, and there is no creditor. His conclusion is not a refutation. Because we tolerate a friend paying a serious fine, he holds that "all of us, not just some Christians, are of two minds about penal substitution".[^lewis-1997]
+- The objection is old. Faustus Socinus, the antitrinitarian writer, made it in 1578 in *De Jesu Christo Servatore*: pardon does not square with taking satisfaction, transferring punishment from the guilty to the innocent does not square with justice, and the temporary death of one is no substitute for the eternal death of many. Packer, who is defending the doctrine, calls that critique classic and says it held the attention of the view's exponents for more than a century.[^packer-1974]
+- It divides the Father from the Son. Needs sources. Steve Chalke and Alan Mann, *The Lost Message of Jesus* (Zondervan, 2003), pp. 182–183, is the usual reference, seen here at snippet level only. The sentence there is a denial, that the cross is not "a form of cosmic child abuse, a vengeful Father, punishing his Son for an offence he has not even committed". The charge is that penal substitution makes the cross look like that, not that the cross is that, and the popular misquotation should not be repeated. Calvin had already moved to block the charge at *Institutes* II.16.11, where he denies that God was ever "hostile to him or angry with him" while holding that Christ "bore the weight of the divine anger".[^calvin-institutes]
+- Needs sources. Joel Green and Mark Baker, *Recovering the Scandal of the Cross* (InterVarsity Press, 2000), argue against giving penal substitution the central place. Only the publisher page has been seen. The *Stanford Encyclopedia of Philosophy* records their position as a kaleidoscope approach, on which every theory is a culturally conditioned and limited way of understanding the cross.[^thurow-sep]
+- The full penalty is not paid. If what is due for sin is eternal separation from God, Christ did not undergo it, so the sentence was not served. The philosopher Eleonore Stump's version is that Christ plainly does not suffer eternal separation from God, so the full punishment due for sin goes unpaid.[^thurow-sep] [[No Finite Life Deserves Infinite Punishment]] attacks the size of the penalty rather than its existence, and if it succeeds this objection loses its target.
+- Defenders. Needs sources. Steve Jeffery, Michael Ovey and Andrew Sach, *Pierced for Our Transgressions* (2007), is the standard modern defence and has been seen only at the publisher page. Needs sources. William Lane Craig, "Is penal substitution unjust?", *International Journal for Philosophy of Religion* 83/3 (2018), 231–244, answers the justice objection directly and has not been opened. The *Stanford Encyclopedia of Philosophy* reports his replies as his 2020 book states them: God as lawgiver has the authority to impute human sin to Christ, and if God accepts a substitute then accepting one is just.[^thurow-sep]
+- [[Oliver D. Crisp]] has published two nearby alternatives rather than a defence. Non-penal substitution has Christ repent on behalf of fallen human beings, a version of McLeod Campbell's vicarious penitence drawn from Jonathan Edwards.[^crisp-2007] Penal non-substitution is the governmental account, which he defends in its New England form.[^crisp-2008]
 
 # Limits
-- The retributive premise is the crux. If a penalty can be justly waived, nothing below it is needed.
-- It says the penalty was borne. It does not say why the penalty had to be a death, which is the question The Sacrifice Requirement Is Arbitrary actually asks.
-- One theory among several. Satisfaction (Anselm) and Christus Victor answer the same texts differently.
-- The substitute is raised on the third day, 1 Corinthians 15:3-4, so what the substitute bore is not simply a death that stands.
+- The retributive premise is the crux. If God may justly waive a penalty he announced, nothing below it is needed and the mechanism has no work to do. [[Hell Is Self-Chosen Separation]] makes that move from the other end, treating the outcome as a condition a person holds on to rather than a sentence God hands down. What would settle it is an account of divine justice that says whether a sentence God himself pronounced can be dropped without cost.
+- It says the penalty was borne. It does not say why the penalty had to be a death, or why blood in particular, which is the question The Sacrifice Requirement Is Arbitrary asks. [[The Covenant Changed with Christ]] ends the animal system without answering it either.
+- One account among several. The *Stanford Encyclopedia of Philosophy* sets it beside Anselm's satisfaction, moral influence, Christus Victor and participation accounts, and says that nearly everything written on the atonement since defines itself as a defence, development or rejection of Anselm.[^thurow-sep] [[Richard Swinburne]]'s account is substitutionary without being penal, which Lewis marks as a theory of penitential rather than penal substitution.[^lewis-1997]
+- The substitute is raised on the third day, which [[Jesus Resurrected]] carries from [1 Corinthians 15:3–4](https://www.biblegateway.com/passage/?search=1%20Corinthians%2015:3-4&version=NIV). Whatever was borne, it was not a death that stands.
+- Isaiah 53 does the heaviest lifting and its subject is disputed. The biblical scholars Marc Brettler and Amy-Jill Levine hold that the servant initially referred to an individual living in Babylon, and that read within Isaiah 40–55, where God calls Israel and Jacob his servant, the figure can be taken as a symbol for the nation exiled and then restored.[^brettler-levine-2019]
+- The NIV's own footnote at 2 Corinthians 5:21 offers "Or be a sin offering". A sin offering is not a punished substitute, so on that reading the verse is about sacrifice rather than penalty.
+- The claim is about the mechanism of the cross. It says nothing about who is covered by it, or on what terms.
+
+[^packer-1974]: J. I. Packer, [What Did the Cross Achieve? The Logic of Penal Substitution](https://www.tyndalebulletin.org/article/30636-what-did-the-cross-achieve-the-logic-of-penal-substitution), *Tyndale Bulletin* 25 (1974), 3–45.
+[^anselm-cdh]: Anselm, *Cur Deus Homo* I.12 and I.15, in the [Deane translation](https://sourcebooks.fordham.edu/basis/anselm-curdeus.asp). The sourcing run should check the wording against a modern edition.
+[^calvin-institutes]: John Calvin, [*Institutes of the Christian Religion*](https://ccel.org/ccel/calvin/institutes.iv.xvii.html) II.16.5, II.16.6, II.16.10 and II.16.11.
+[^thurow-sep]: Joshua C. Thurow, [Atonement](https://plato.stanford.edu/entries/atonement/), *Stanford Encyclopedia of Philosophy*, published 5 April 2023.
+[^murphy-2009]: Mark C. Murphy, "Not Penal Substitution but Vicarious Punishment", *Faith and Philosophy* 26/3 (2009), 253–273. Cited from the abstract, not opened.
+[^lewis-1997]: David Lewis, [Do We Believe in Penal Substitution?](https://andrewmbailey.com/dkl/Penal_Substitution.pdf), *Philosophical Papers* 26/3 (1997), 203–209.
+[^crisp-2007]: Oliver D. Crisp, "Non-Penal Substitution", *International Journal of Systematic Theology* 9/4 (2007), 415–433. Cited from the abstract, not opened.
+[^crisp-2008]: Oliver D. Crisp, "Penal Non-substitution", *The Journal of Theological Studies* 59/1 (2008), 140–168. Cited from the abstract, not opened.
+[^brettler-levine-2019]: Marc Brettler and Amy-Jill Levine, "Isaiah's Suffering Servant: Before and After Christianity", *Interpretation: A Journal of Bible and Theology* 73/2 (2019), 158–173.
