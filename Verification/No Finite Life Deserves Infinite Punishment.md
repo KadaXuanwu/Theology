@@ -39,3 +39,27 @@ Carried over from disclosures the node itself made. Nothing else in this node ha
 **What would settle it:** the article record. Title and page range.
 **Verdict:**
 **Checked by:**
+
+---
+
+### V4. The retributivist defenders and the jaywalker point were never checked cold
+**Status:** open
+**Node:** `Claims/No Finite Life Deserves Infinite Punishment`, and in `People/`: Kenneth Einar Himma, Nikk Effingham
+**Source:** Nikk Effingham, "Would God Really Send Me to Hell for Stealing a Wispa Bar?", *Sophia* 63 (2024), 85–97; Kenneth Einar Himma, "Eternally incorrigible", *Religious Studies* 39/1 (2003), 61–78; Thomas Talbott, "Heaven and Hell in Christian Thought", *Stanford Encyclopedia of Philosophy*
+**What the node says:** Effingham argues the Anselmian divine injury response works against the logical problem of hell but not the evidential one; Himma sets out the continuing sin response; Talbott's entry compares a king who executes the jaywalker and the murderer alike.
+**What is open:** these lines and the two person nodes were added on 20 September 2026 during the refresh of Condemned for One Honest Mistake, and no verifier opened their sources.
+**What would settle it:** a verifier pass over the three sentences and the two person nodes.
+**Verdict:**
+**Checked by:**
+
+---
+
+### V5. Cutter's answer to the proportionality problem is not cited
+**Status:** open
+**Node:** `Claims/No Finite Life Deserves Infinite Punishment`
+**Source:** Brian Cutter, "Hell and Proportionality", *Oxford Studies in Philosophy of Religion* (forthcoming); penultimate draft on PhilArchive
+**What the node says:** nothing. It is not cited.
+**What is open:** the 20 September 2026 refresh of Condemned for One Honest Mistake found it as the live unargued answer on proportionality. Cutter grants that no one's earthly deeds merit infinite punishment and instead denies that everlasting suffering amounts to an infinitely severe punishment. PhilArchive returned 403 to two passes, so it was reached only at snippet and could not carry a sentence.
+**What would settle it:** the full text. If it says what the snippet says, it belongs in Countered By as the strongest current answer to this node.
+**Verdict:**
+**Checked by:**
