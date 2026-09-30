@@ -18,6 +18,7 @@ What Adams argues against is what she calls Anselm's principle, that liability t
 - Adams's counterexample at page 443. Schweitzer slaps White, and Green, an unsavoury character, slaps Schweitzer. Adams holds Schweitzer's slap is if anything the more culpable, since his long standing habits of self control mean more should be expected of him. Guilt tracks the offender, not the person offended.
 - Her legal parallel at page 442. She says it seems the height of immorality to suppose that the guilt incurred in killing someone depends on the dead man's social status.
 - Talbott's dilemma, section 3.1. Someone fully informed who chose separation from God would be acting almost inconceivably irrationally, and someone not fully informed can have the misjudgment corrected without losing their freedom.
+- The objection has a second prong that turns retributivism against itself. If the slightest offence against God already merits permanent loss, the grading a retributive account requires collapses, and Talbott's entry puts it that we would hardly regard a king who executes every law-breaker, the jaywalker no less than the murderer, as just.[^talbott-sep]
 - The ignorance half of that dilemma is handled at [[Some Unbelief Isn't Resistance]].
 - Source checks still open on this node are tracked in the repo under `Verification/`.
 
@@ -31,6 +32,7 @@ What Adams argues against is what she calls Anselm's principle, that liability t
 - Anselm, *Cur Deus Homo* I.21, headed "How great a burden sin is", argues that you may not act against God's will even to save the whole of creation. Talbott's entry quotes him saying satisfaction requires paying something greater than that for whose sake you ought not to have sinned. The chapter does not state that guilt is proportional to the majesty of the offended party, which is Adams's reconstruction, though I.20 is headed "That satisfaction ought to be proportionate to guilt".
 - The choice model treats hell as a condition freely embraced rather than a punishment imposed, which removes the premise that hell is a penalty at all. Talbott's entry names [[C. S. Lewis]], [[Jerry Walls]], [[Richard Swinburne]] and [[Raymond VanArragon]] as holding it, Walls in *Hell: The Logic of Damnation*.[^walls-1992]
 - Talbott's entry and Ragland's both lay out the infinite seriousness argument without naming anyone who currently defends it. [[Oliver D. Crisp]] defends a retributive view of divine punishment against Talbott.[^crisp-2003]
+- Two more defend it in print this century. [[Nikk Effingham]] argues the Anselmian divine injury response works, and concludes it answers the logical problem of hell but not the evidential one.[^effingham-2024] [[Kenneth Einar Himma]] sets out the continuing sin response, on which the damned go on sinning in hell and so extend the penalty themselves.[^himma-2003]
 
 # Limits
 - It reaches retributive models of hell and nothing else. Against the choice model it has no purchase, because that model denies its target rather than answering it.
@@ -50,5 +52,7 @@ What Adams argues against is what she calls Anselm's principle, that liability t
 [^acute-2000]: Evangelical Alliance ACUTE, *The Nature of Hell* (Paternoster, 2000).
 [^walls-1992]: Jerry Walls, *Hell: The Logic of Damnation* (University of Notre Dame Press, 1992).
 [^crisp-2003]: Oliver D. Crisp, "Divine Retribution: A Defence", *Sophia* 42/2 (2003), 35–52.
+[^effingham-2024]: Nikk Effingham, "Would God Really Send Me to Hell for Stealing a Wispa Bar?", *Sophia* 63 (2024), 85–97.
+[^himma-2003]: Kenneth Einar Himma, "Eternally incorrigible: the continuing-sin response to the proportionality problem of hell", *Religious Studies* 39/1 (2003), 61–78.
 [^wierzbicka-2024]: Anna Wierzbicka, *Cognitive Semantics* 10 (2024).
 [^bmcr-2009]: Reader comment under Ramelli and Konstan's response, *Bryn Mawr Classical Review* 2009.02.51.
