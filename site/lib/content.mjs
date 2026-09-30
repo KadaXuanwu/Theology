@@ -173,6 +173,9 @@ export async function readVault(vaultDir, warn) {
         // written. Frontmatter rather than body, so the list never enters the
         // word count, the search text or the sentences the pipeline rules on.
         points: Array.isArray(data.points) ? data.points : data.points ? [data.points] : [],
+        // The models the sourcing run used, written by source-node and
+        // refresh-node. Drafting and stubs never set it.
+        sourcedWith: Array.isArray(data["sourced-with"]) ? data["sourced-with"] : data["sourced-with"] ? [data["sourced-with"]] : [],
         links: [], // filled in once every title is known
         backlinks: [],
       })

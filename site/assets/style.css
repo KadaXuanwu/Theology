@@ -1897,6 +1897,13 @@ sup.fn.is-broken {
   }
 }
 
+/* The models that sourced the note, set very small at its foot. */
+.sourced-with {
+  margin: 2rem 0 0;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
 /* Author's points ---------------------------------------------------------
  * What the author asked the note to cover, kept in the frontmatter as written
  * and shown folded at the foot of the note. Frontmatter rather than prose, so

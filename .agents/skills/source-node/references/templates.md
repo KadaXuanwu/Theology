@@ -1,6 +1,6 @@
 # Node templates
 
-Copy these exactly. Frontmatter keys and heading order do not change. `points` is the one optional key; see Points below.
+Copy these exactly. Frontmatter keys and heading order do not change. `points` is the one optional key the author writes; see Points below. `sourced-with` is written by a sourcing run and nothing else; see Sourced with below.
 
 ## Argument (`Arguments For/`, `Arguments Against/`)
 
@@ -174,6 +174,21 @@ points:
 - In `source-node` every point is a mandatory lead: carried into the body with a source, or reported as not carried with the reason. In `draft-node` every point is placed in the draft where it does its work.
 - The key is optional. A node without it, or with `points: []`, has none.
 
+## Sourced with
+
+`sourced-with` names the models that sourced the node. `source-node` and `refresh-node` write it when they set `sourced` or `sourced-stale`, and nothing else does. Written like tags, one public model name per line:
+
+```
+sourced-with:
+  - <model name>
+  - <model name>
+```
+
+- Every model that ran any agent in the sourcing run, the one running the skill included, by the name of the model that actually answered. An alias such as a family name can resolve to different versions within one run, so read the served model from the agent's own records, not from what was requested.
+- A person or term node the run sourced lists the models that worked on it: its person or term agent, the verifier and the agent that wrote it.
+- A refresh replaces the list with its own run's models. Drafting and stubs never write it, and the lint fails a stub or draft that carries it.
+- Where the models of an earlier run are not known, leave the key out and say so. The site prints the list very small at the foot of the note, as "Sourced with A + B".
+
 ## Status
 
 `status` is a promise about the node. Four values, each with a gate.
@@ -193,6 +208,7 @@ A stub or a draft is inspiration for the sourcing run and no more. Its body is n
 - `status`: `stub`, `drafted`, `sourced`, `sourced-stale`. See Status above.
 - `kind`: on evidence `artefact`, `study`, `record`; on a person their trade; on a term its field. All open lists, see above.
 - `points`: optional, see Points above.
+- `sourced-with`: set by the sourcing run, see Sourced with above.
 
 ## Link conventions
 

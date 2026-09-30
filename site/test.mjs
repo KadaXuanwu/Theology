@@ -2723,6 +2723,46 @@ console.log("the author's points sit at the foot of the note, as written")
   check("and keeps its focus ring", /\.points summary:focus-visible \{/.test(sheet))
 }
 
+console.log("a sourced note names the models that sourced it, very small at its foot")
+{
+  const { notePage } = await import("./lib/templates.mjs")
+  const sheet = await readFile(resolve(clientDir, "style.css"), "utf8")
+
+  const parsed = parseFrontmatter("---\nstatus: sourced\nsourced-with:\n  - Model A\n  - Model B\n---\nBody", "t")
+  check("the models parse as a list", parsed.data["sourced-with"].join("|") === "Model A|Model B")
+
+  const sample = (status, sourcedWith) =>
+    notePage({
+      note: {
+        title: "X",
+        frontmatter: {},
+        status,
+        tags: [],
+        points: ["A point"],
+        sourcedWith,
+        html: "<p>The body.</p>",
+        headings: [],
+        backlinks: [],
+        section: { dir: "Claims", kind: "claim", label: "Claims" },
+      },
+      root: "../../",
+      dateLabel: "Updated today",
+      sections: SECTIONS,
+      notes: [],
+      assets: {},
+    })
+  const line = (html) => html.match(/<p class="sourced-with">[\s\S]*?<\/p>/)?.[0] ?? ""
+
+  const page = sample("sourced", ["Model A", "Model <B>"])
+  check("a sourced note names its models", line(page) === '<p class="sourced-with">Sourced with Model A + Model &lt;B&gt;</p>', line(page))
+  check("last thing in the note", page.indexOf('class="sourced-with"') > page.indexOf('<details class="points">') && page.indexOf('class="sourced-with"') < page.indexOf("</article>"))
+  check("a stale note keeps the line", line(sample("sourced-stale", ["Model A"])) !== "")
+  check("a draft never shows it", line(sample("drafted", ["Model A"])) === "")
+  check("nor does a stub", line(sample("stub", ["Model A"])) === "")
+  check("nor a note without the key", line(sample("sourced", [])) === "" && line(sample("sourced", undefined)) === "")
+  check("and it is set small", /\.sourced-with \{[^}]*font-size: 0\.7rem/.test(sheet))
+}
+
 console.log("a stale note was verified once and says so everywhere the status shows")
 {
   const { notePage } = await import("./lib/templates.mjs")
@@ -2816,6 +2856,12 @@ console.log("the lint reads the rules the templates promise")
   check("a long sentence is a warning", lint(make(S.arg, "argument", argBody(Array(40).fill("word").join(" ") + "."))).warns.some((w) => /over 30 words/.test(w)))
   check("and neither is read on a draft", lint(make(S.arg, "argument", argBody("Short."), { fm: { status: "drafted" } })).warns.length === 0)
   check("the lint knows every kind the site has", Object.keys(HEADINGS).length === 5 && Object.keys(MAY_LINK).length === 5)
+  const models = { "sourced-with": ["Model A"] }
+  check("a sourced note without its models is a warning", good.warns.some((w) => /no sourced-with/.test(w)), good.warns.join("; "))
+  check("and not once it names them", !lint(make(S.arg, "argument", argBody("Short."), { fm: models })).warns.some((w) => /sourced-with/.test(w)))
+  check("a draft that names models fails", fails(make(S.arg, "argument", argBody("x"), { fm: { ...models, status: "drafted" } })).some((f) => /sourced-with on a drafted/.test(f)))
+  check("so does a stub", fails(make(S.arg, "argument", argBody("x"), { fm: { ...models, status: "stub" } })).some((f) => /sourced-with on a stub/.test(f)))
+  check("an inline model list fails", fails(make(S.arg, "argument", argBody("x"), { fm: models }), "---\nsourced-with: [Model A]\n---\n").some((f) => /inline list/.test(f)))
   const urls = urlsOf(new Map([["a", "See [DNB](https://en.wikisource.org/wiki/Clarke,_Samuel_(1675-1729)) and <https://example.org/x>."]]))
   check("a source URL keeps its own brackets and loses the link's", urls.join(" ") === "https://en.wikisource.org/wiki/Clarke,_Samuel_(1675-1729) https://example.org/x", urls.join(" "))
 }

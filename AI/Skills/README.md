@@ -50,6 +50,7 @@ A person or term target takes a short path: the mechanical pass, one person or t
 - Every factual sentence carries a source the verifier can open. No retrievable source, no entry.
 - A stub or a draft is inspiration. Its sentences are not protected, its leads are not sources and its outline is not the node's shape. Protection covers text that was already in a `sourced` node when the run started.
 - The author's `points`, a list in the frontmatter, are binding. Every one is carried into the body with a source or reported as not carried with the reason. No skill edits the list.
+- A sourcing run writes `sourced-with`, the models it ran on, and the site prints them very small at the foot of the note. Drafting never writes it.
 - The debate is internal. Nothing from it is quoted as a debate in the node.
 - A `sourced` node's body runs 500 to 2000 words, and most sit around 1000. A stub, a draft or a person node can be any length.
 - At least half the sources are academic register. Advocacy publishing never carries a fact on its own.

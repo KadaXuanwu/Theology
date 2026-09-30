@@ -154,6 +154,13 @@ export function notePage({ note, root, dateLabel, sections, notes, assets }) {
   </details>`
     : ""
 
+  // Which models sourced the note. Only the sourcing run counts, so a stub or
+  // a draft shows nothing even if the key is there.
+  const sourcedWith =
+    ["sourced", "sourced-stale"].includes(note.status) && note.sourcedWith?.length
+      ? `<p class="sourced-with">Sourced with ${note.sourcedWith.map((m) => escapeHtml(m)).join(" + ")}</p>`
+      : ""
+
   const main = `<article class="note">
   <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${root}">Overview</a><span aria-hidden="true">/</span><a href="${root}${slugify(section.dir)}/">${escapeHtml(section.label)}</a></nav>
   <h1 class="note-title">${escapeHtml(note.title)}</h1>
@@ -170,6 +177,7 @@ export function notePage({ note, root, dateLabel, sections, notes, assets }) {
     ${backlinks}
   </section>
   ${points}
+  ${sourcedWith}
 </article>`
 
   return shell({

@@ -194,7 +194,7 @@ The node goes to `sourced` when all of these hold:
 
 Otherwise the node keeps `sourced-stale`. Keep every fix that was made, and say in the run record and the delivery which line failed and why.
 
-Write the node to `Theology/<Folder>/<Exact Title>.md`. The frontmatter is as it was, `points` included, with `status` set here and the fields the run filled. Write the run record at the top of `Verification/<Node Title>.md`, above any entries already there, in the form `Verification/README.md` gives, with `Built: <date>, refresh-node, Refresh mode` and the outcome on that line; `Rulings` reads `not run, <why>` when the debate was skipped. On a person or a term the record is the `Built`, `Sentences` and `Lint` lines, and the file is written only when an entry is open or a sentence was removed. Run `npm run check`. Commit and push with a one line message.
+Write the node to `Theology/<Folder>/<Exact Title>.md`. The frontmatter is as it was, `points` included, with `status` set here, the fields the run filled, and `sourced-with` replaced by this run's models as references/templates.md gives it. Write the run record at the top of `Verification/<Node Title>.md`, above any entries already there, in the form `Verification/README.md` gives, with `Built: <date>, refresh-node, Refresh mode` and the outcome on that line; `Rulings` reads `not run, <why>` when the debate was skipped. On a person or a term the record is the `Built`, `Sentences` and `Lint` lines, and the file is written only when an entry is open or a sentence was removed. Run `npm run check`. Commit and push with a one line message.
 
 Then post to chat:
 

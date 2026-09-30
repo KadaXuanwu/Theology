@@ -16,3 +16,4 @@ Index of things to remember across sessions. One line per memory file.
 - [Same effort, not same length](same-effort-not-same-length.md) — balance means both sides got the same chance and care, never equal word counts
 - [Glossary terms](glossary-terms.md) — terms of art are glossary nodes with hover definitions, never explained in the prose, never sourced from Wikipedia
 - [Pipeline review 2026-09-18](pipeline-review-2026-09-18.md) — what the research on AI research pipelines showed, what changed, and the three decisions the user made
+- [Sourced with](sourced-with.md) — sourced notes name their models at the foot of the page; only the sourcing run writes the list

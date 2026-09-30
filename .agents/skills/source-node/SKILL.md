@@ -160,7 +160,7 @@ Then link the first prose mention of each person and each term in the target nod
 
 ## Step 4: Deliver
 
-Set the status. `sourced` when every factual sentence passed or was fixed, the body is at least 500 words, and every heading is filled. Otherwise the node keeps `drafted`, and the delivery says what stands between it and `sourced`. The rest of the frontmatter is written back as it was, `points` included.
+Set the status. `sourced` when every factual sentence passed or was fixed, the body is at least 500 words, and every heading is filled. Otherwise the node keeps `drafted`, and the delivery says what stands between it and `sourced`. The rest of the frontmatter is written back as it was, `points` included. On `sourced`, write `sourced-with` as references/templates.md gives it, on the node and on every person and term node the run sourced.
 
 Write the finished node to `Theology/<Folder>/<Exact Title>.md`. Write the run record at the top of `Verification/<Node Title>.md`, with its entries under it. Run `npm run check`. Then commit and push.
 

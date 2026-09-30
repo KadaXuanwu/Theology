@@ -106,10 +106,15 @@ export function lintNote(note, { resolve: resolveTitle, raw }) {
   if (!STATUSES.includes(note.status)) fails.push(`status is "${note.status ?? ""}"`)
   // Obsidian rewrites an inline list into the block form the moment a note is
   // opened, so an inline list is a diff nobody made waiting to happen.
-  for (const m of raw.matchAll(/^(tags|points):[ \t]*\[([^\]]*)\]/gm)) {
+  for (const m of raw.matchAll(/^(tags|points|sourced-with):[ \t]*\[([^\]]*)\]/gm)) {
     if (m[2].trim() !== "") fails.push(`${m[1]} is an inline list, write it one per line`)
   }
   if (type === "term" && !fm.kind) warns.push("no kind in the frontmatter")
+  // Only a sourcing run names its models. A draft that carries the key would
+  // claim a run that never happened.
+  const models = [].concat(fm["sourced-with"] ?? [])
+  if (models.length && ["stub", "drafted"].includes(note.status)) fails.push(`sourced-with on a ${note.status} note`)
+  if (note.status === "sourced" && !models.length) warns.push("no sourced-with in the frontmatter")
 
   const { body: prose, defs } = extractFootnotes(note.body)
   const parts = sections(prose)
