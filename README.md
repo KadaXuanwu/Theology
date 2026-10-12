@@ -4,7 +4,7 @@ A research vault mapping arguments for and against Christianity, and the claims 
 
 The goal is not to prove one position over the other. It is to make every argument traceable, so a reader can follow the reasoning back to its sources and judge it themselves. The subject is Christianity. The evidence comes from wherever it comes from: biblical studies, archaeology, history, philosophy, psychology, medicine, the natural sciences.
 
-Read it online at <https://kadaxuanwu.github.io/Theology>.
+Read it online at <a href="https://kadaxuanwu.github.io/Theology" target="_blank" rel="noopener">kadaxuanwu.github.io/Theology</a>.
 
 ## How it works
 
