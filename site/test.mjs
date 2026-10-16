@@ -47,9 +47,10 @@ const readGraphData = async () => {
 
 // The client is a handful of modules that app.js pulls together, so a check on
 // what a page does reads the module that owns the behaviour. `wholeClient` is
-// for the few rules that are only true across several of them at once.
+// for the few rules that are only true across several of them at once. A
+// Windows checkout hands the modules back with CRLF, so they are read as LF.
 const clientDir = resolve(repoRoot, "site/assets")
-const client = (name) => readFile(resolve(clientDir, name), "utf8")
+const client = async (name) => (await readFile(resolve(clientDir, name), "utf8")).replace(/\r\n/g, "\n")
 const wholeClient = async () => {
   const { readdir } = await import("node:fs/promises")
   const names = (await readdir(clientDir)).filter((f) => f.endsWith(".js"))
@@ -1879,7 +1880,7 @@ console.log("a link wears the colour of what it points at")
   check("the underline stays on", !/text-decoration:\s*none/.test(sheet.match(/^a \{[^}]*\}/m)?.[0] ?? ""))
   check("and the arrow stays on a link off the site", /^a\.external::after \{/m.test(sheet))
   const mix = (rule) => Number(sheet.match(rule)?.[1]?.match(/var\(--link\) (\d+)%/)?.[1] ?? 0)
-  const bothLinks = mix(/^a\.wikilink,\na\.external \{([^}]*)\}/m)
+  const bothLinks = mix(/^a\.wikilink,\r?\na\.external \{([^}]*)\}/m)
   // Not `^a\.external \{`: that line also ends the selector list above, so it
   // would read the shared rule's underline back as the outward one's.
   const outward = mix(/a\.external \{([^}]*--link:[^}]*)\}/)

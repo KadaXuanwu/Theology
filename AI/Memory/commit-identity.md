@@ -15,4 +15,4 @@ The repo's commits are authored as `Claude <noreply@anthropic.com>`. The Windows
 
 - Check `git log -5 --format='%an <%ae>'` before committing on a new machine; if the identity is missing, use the `-c` form above.
 - The same laptop had no Node.js until 2026-10-12, when the user had it installed with `winget install OpenJS.NodeJS.LTS`. In a shell started before that, refresh `Path` from the machine and user environment first.
-- One site test, "and every graph on the page is laid out again", fails on Windows checkouts only: `core.autocrlf` gives `site/assets/graphs.js` CRLF line endings and the test's regex expects `\n`. It passes on the committed LF text and in CI. Message style is in [[commit-message-style]].
+- `core.autocrlf` gives Windows checkouts CRLF line endings. `site/test.mjs` reads client modules through `client()`, which turns them back into LF; a regex run on any other source file needs `\r?\n`, not `\n`. Message style is in [[commit-message-style]].
