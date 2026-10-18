@@ -1,6 +1,6 @@
-# Unbelief Clusters by Country, Not by Motive
+# Belief in God Follows Birthplace
 
-Open source checks for `Theology/Claims/Unbelief Clusters by Country, Not by Motive.md`. Format is in [README.md](README.md).
+Open source checks for `Theology/Claims/Belief in God Follows Birthplace.md`. Format is in [README.md](README.md).
 
 ## Run record
 Built: 2026-10-18, source-node, Source mode. Split out of `Arguments Against/Demanding Belief Without the Proof` at the author's request, carrying the demographic strand verified there on 2026-10-16.
@@ -22,7 +22,7 @@ Failing balance rules: 4 flagged only (the one confessional source is Lumen Gent
 
 ### V1. Hick on the accidents of birth
 **Status:** open
-**Node:** `Claims/Unbelief Clusters by Country, Not by Motive`
+**Node:** `Claims/Belief in God Follows Birthplace`
 **Source:** John Hick, *An Interpretation of Religion: Human Responses to the Transcendent* (Yale University Press and Macmillan, 1989), 2
 **What the node says:** that a person's religion almost always depends on "the accidents of birth", with Thailand and Saudi Arabia among his examples.
 **What is open:** the book could not be opened. The wording reached the researchers through a textbook chapter quoting "some ninety-nine percent of cases", not through Hick's page.
@@ -32,7 +32,7 @@ Failing balance rules: 4 flagged only (the one confessional source is Lumen Gent
 
 ### V2. Baker-Hytch 2016 in its published text
 **Status:** open
-**Node:** `Claims/Unbelief Clusters by Country, Not by Motive`
+**Node:** `Claims/Belief in God Follows Birthplace`
 **Source:** Max Baker-Hytch, "Mutual epistemic dependence and the demographic divine hiddenness problem", *Religious Studies* 52/3 (2016), 375–394
 **What the node says:** the strong counter: testimony makes clustering expected whether or not God exists, three trade-offs God might value, a favourable balance claimed, and an aim to cast doubt rather than refute.
 **What is open:** the steelman researcher read the accepted manuscript on the Oxford Research Archive; the verifier reached the abstract only. The content is confirmed in full through Blanton 2025, pp. 701–702, and the *Stanford Encyclopedia of Philosophy*. The published pagination, including whether the testimony sentence sits on p. 376 or p. 377, is unchecked. This carries over V3 in `Demanding Belief Without the Proof`.
@@ -42,7 +42,7 @@ Failing balance rules: 4 flagged only (the one confessional source is Lumen Gent
 
 ### V3. Marsh 2008 in its own text
 **Status:** open
-**Node:** `Claims/Unbelief Clusters by Country, Not by Motive`
+**Node:** `Claims/Belief in God Follows Birthplace`
 **Source:** Jason Marsh, "Do the demographics of theistic belief disconfirm theism? A reply to Maitzen", *Religious Studies* 44/4 (2008), 465–471
 **What the node says:** that Marsh supposes some persons would refuse to love God in any geographic circumstance, and that God places them among non-believers "to keep these individuals innocent for a later time" (pp. 467–468).
 **What is open:** both quotations are confirmed word for word through Maitzen's reply (2008, p. 474), read in full, and the encyclopedia. Marsh's article itself was never opened. This carries over V4 in `Demanding Belief Without the Proof`.
@@ -52,7 +52,7 @@ Failing balance rules: 4 flagged only (the one confessional source is Lumen Gent
 
 ### V4. Mawson 2012
 **Status:** open
-**Node:** `Claims/Unbelief Clusters by Country, Not by Motive`
+**Node:** `Claims/Belief in God Follows Birthplace`
 **Source:** T. J. Mawson, "The Rationality of Classical Theism and Its Demographics", in *Scientific Approaches to the Philosophy of Religion*, ed. Yujin Nagasawa (Palgrave Macmillan, 2012), 184–201
 **What the node says:** that Mawson offers three stories that fit the pattern: freedom with culture shaping receptivity, a deadline for belief at the Last Judgment, and election.
 **What is open:** the chapter is paywalled; its content is confirmed through the encyclopedia's account (pp. 191–192 and 194 as it cites them). The page range 184–201 is confirmed by Crossref and the publisher's contents list.
@@ -62,7 +62,7 @@ Failing balance rules: 4 flagged only (the one confessional source is Lumen Gent
 
 ### V5. Bullivant on Aquinas's assumption
 **Status:** open
-**Node:** `Claims/Unbelief Clusters by Country, Not by Motive`
+**Node:** `Claims/Belief in God Follows Birthplace`
 **Source:** Stephen Bullivant, "Sine Culpa? Vatican II and Inculpable Ignorance", *Theological Studies* 72/1 (2011), 70–86
 **What the node says:** that Aquinas's promise to the person raised in the woods assumed the gospel had already been preached everywhere.
 **What is open:** this run's verifier could not open the article. The church history researcher of the argument's run read it in full and gives pp. 75–76 and n. 51; the argument's verifier read p. 73 in the same PDF on theologicalstudies.net.

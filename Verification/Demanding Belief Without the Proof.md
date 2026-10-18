@@ -17,7 +17,7 @@ Strong counter: Guilt follows the light a person was given; Aquinas and Lumen Ge
 Points: none in the frontmatter
 Lint: 0 failures | 0 warnings on the node (1995 words)
 Failing balance rules: 4 flagged (all advocacy is confessional: the five church documents, cited for what those churches teach). The rule 2 failure the verifier found (Sullivan alone carrying the 1208 to 1863 dating) was resolved by dropping the sentence.
-Split, 2026-10-18: the demographic strand (Maitzen, Baker-Hytch, Blanton, Marsh, Maitzen 2008, the Pew 2023 Thai figures) moved to `Claims/Unbelief Clusters by Country, Not by Motive`, which has its own record. Two cut sentences came back, the Pew Africa limit and Reeves on the verb for doubt, re-checked cold: 7 checked | 5 supported | 2 fixed. The node now runs to 1950 words.
+Split, 2026-10-18: the demographic strand (Maitzen, Baker-Hytch, Blanton, Marsh, Maitzen 2008, the Pew 2023 Thai figures) moved to `Claims/Belief in God Follows Birthplace`, which has its own record. Two cut sentences came back, the Pew Africa limit and Reeves on the verb for doubt, re-checked cold: 7 checked | 5 supported | 2 fixed. The node now runs to 1950 words.
 
 ---
 
@@ -48,7 +48,7 @@ Split, 2026-10-18: the demographic strand (Maitzen, Baker-Hytch, Blanton, Marsh,
 **What the node says:** that people rely on testimony for much of what they know, so belief clusters geographically either way, and that the reply assumes destiny is not fixed by belief at death.
 **What is open:** the article itself was not opened. The wording is quoted in full inside Blanton's reply, which cites p. 377, and in the *Stanford Encyclopedia of Philosophy*, which cites p. 376, so the node now gives no page. The "inclusive theism" step rests on the encyclopedia's account. The earlier note that the paper is also cited in `Creation Alone Doesn't Point to God` was wrong: that node cites Baker-Hytch's 2014 thesis.
 **What would settle it:** the article, opened at pp. 376–377.
-**Verdict:** The sentence moved with the demographic strand to `Claims/Unbelief Clusters by Country, Not by Motive` on 2026-10-18, where this check stays open as V2.
+**Verdict:** The sentence moved with the demographic strand to `Claims/Belief in God Follows Birthplace` on 2026-10-18, where this check stays open as V2.
 **Checked by:** refresh-node run, 2026-10-18 (pipeline, not a human)
 
 ### V4. Marsh's reply to Maitzen
@@ -58,7 +58,7 @@ Split, 2026-10-18: the demographic strand (Maitzen, Baker-Hytch, Blanton, Marsh,
 **What the node says:** that Marsh supposes those deprived of the chance to believe here would, had they believed, have freely rejected God in their earthly lives whatever God had created, and that the geography is where God places them to secure a later conversion.
 **What is open:** the article was not opened. The sentence follows the *Stanford Encyclopedia of Philosophy*'s quotation of pp. 467–468. Maitzen's reply, read in full, quotes Marsh at p. 467 in narrower terms: some persons would refuse to love God whatever geographic circumstance they were in. Which wording is Marsh's own is unchecked.
 **What would settle it:** the article at pp. 467–468.
-**Verdict:** The sentence moved with the demographic strand to `Claims/Unbelief Clusters by Country, Not by Motive` on 2026-10-18, where this check stays open as V3.
+**Verdict:** The sentence moved with the demographic strand to `Claims/Belief in God Follows Birthplace` on 2026-10-18, where this check stays open as V3.
 **Checked by:** refresh-node run, 2026-10-18 (pipeline, not a human)
 
 ### V5. Murray 2002 and the scope of the incentive claim
