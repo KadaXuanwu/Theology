@@ -37,7 +37,7 @@ Baker-Hytch states it from inside the tradition.[^baker-hytch-2025] Of the autho
 - Baker-Hytch treats the thesis as having testable content. At p. 658 he sets out the argument that sin-based accounts are "strongly disconfirmed", then resists its second premise.
 
 # Limits
-- Plantinga's position is narrower than the culpable version but not clear of it. He writes that "It is no part of the model to say that damage to the *sensus divinitatis* on the part of a person is due to sin on the part of the same person", at p. 214 n. 257.[^plantinga-wcb] At p. 215 he does allow that the faculty's deliverances "can easily be suppressed and impeded... by deliberately or semideliberately turning one's attention away". Baker-Hytch and Rooney both list him among sin-based responders.
+- Plantinga's position is narrower than the culpable version but not clear of it. He writes that "It is no part of the model to say that damage to the *sensus divinitatis* on the part of a person is due to sin on the part of the same person", at p. 214 n. 22.[^plantinga-wcb] At p. 215 he does allow that the faculty's deliverances "can easily be suppressed and impeded... by deliberately or semideliberately turning one's attention away". Baker-Hytch and Rooney both list him among sin-based responders.
 - Launonen never calls the thesis untestable. He rejects it because it is unclear what would motivate the self deception, and because lifelong seekers and former believers are hard to explain away. He reports the move that buries theistic intuitions "too deep in the subconscious layers of the mind", at p. 268, without endorsing it.[^launonen-2025]
 - [[Cortney Hitzeman]] and [[Colin Wastell]] report that the priming effect in atheists tracked earlier exposure to religious behaviour rather than atheism itself.[^hitzeman-2017] The sharpest test here, but on 88 students.
 
@@ -46,7 +46,7 @@ Baker-Hytch states it from inside the tradition.[^baker-hytch-2025] Of the autho
 [^fales-2003]: Evan Fales, "Alvin Plantinga's *Warranted Christian Belief*", *Noûs* 37/2 (2003), 353–370.
 [^baker-hytch-2025]: Max Baker-Hytch, "On sin-based responses to divine hiddenness", *Religious Studies* 61/3 (2025), 650–664.
 [^plantinga-wcb]: Alvin Plantinga, *Warranted Christian Belief* (Oxford University Press, 2000).
-[^rooney-2024]: James Dominic Rooney, *New Blackfriars* 105 (2024).
+[^rooney-2024]: James Dominic Rooney, "We Deserve It: An Augustinian Response to Divine Hiddenness Arguments", *New Blackfriars* 105/6 (2024), 636–650.
 [^shariff-2016]: Azim Shariff, Aiyana Willard, Teresa Andersen and Ara Norenzayan, *Personality and Social Psychology Review* 20/1 (2016), 27–48.
 [^bahnsen-1996]: Greg Bahnsen, *Always Ready* (Covenant Media, 1996), ch. 26.
 [^jong-2012]: Jonathan Jong et al., *Journal of Experimental Social Psychology* 48 (2012), 983–989.
