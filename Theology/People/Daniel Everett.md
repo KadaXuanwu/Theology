@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - linguistics
   - amazonia
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Daniel Everett is a linguist at Bentley University who spent decades with the Pirahã of the Amazon. He went as a missionary and left without his religion, and his claim that the language has no recursion is contested.[^everett-about]

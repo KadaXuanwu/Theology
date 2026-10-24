@@ -5,6 +5,9 @@ location: University College London, and the Federal University of Rio de Janeir
 status: sourced-stale
 tags:
   - linguistics
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Andrew Nevins is a linguist at University College London, with a second post at the Federal University of Rio de Janeiro. He taught at Harvard before moving to UCL in 2010, and is first author of the reassessment of the Pirahã recursion claim.[^ucl-nevins][^nevins-2009]

@@ -3,6 +3,9 @@ type: term
 kind: moral theology
 status: sourced
 tags: []
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Ignorance that cannot be dispelled by the reasonable diligence a person could be expected to exercise, and which therefore excuses the resulting act from moral fault. The *New Catholic Encyclopedia* explains that such ignorance "causes the act to be involuntary", since "what is unknown cannot be the object of volition", and contrasts it with vincible ignorance, which due effort could have removed.[^nce-ignorance] Aquinas defines it as ignorance that "obviously cannot be overcome even by effort", and holds that "invincible ignorance is never a sin".[^bullivant-2011] The colloquial "invincibly ignorant", meaning stubbornly wrong, is the reverse of the technical sense.

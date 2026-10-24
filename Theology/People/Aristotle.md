@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - antiquity
   - philosophy
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Aristotle studied under Plato at the Academy, tutored Alexander, and founded the Lyceum in Athens. His explanations of weather and the sky give no god a causal role, which is why the *Meteorologica* turns up in arguments about what counts as a gap.[^sep-aristotle]

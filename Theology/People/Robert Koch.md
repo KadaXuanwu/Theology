@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - medicine
   - science
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Robert Koch was a German bacteriologist who identified the organisms behind anthrax, tuberculosis and cholera, and set out the postulates for showing that a microbe causes a disease. He took the 1905 Nobel Prize in Physiology or Medicine for the tuberculosis work.[^nobel-koch][^rki-koch]

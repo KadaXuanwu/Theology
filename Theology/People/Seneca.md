@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - stoicism
   - antiquity
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Seneca the Younger was a Roman Stoic philosopher, tutor and then adviser to Nero, who ordered his death after the Pisonian conspiracy. His *Naturales Quaestiones* sets out natural explanations of weather and the sky alongside the religious readings of the same events.[^sep-seneca][^iep-seneca]

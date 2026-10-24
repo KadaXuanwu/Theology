@@ -114,7 +114,10 @@ export function lintNote(note, { resolve: resolveTitle, raw }) {
   // claim a run that never happened.
   const models = [].concat(fm["sourced-with"] ?? [])
   if (models.length && ["stub", "drafted"].includes(note.status)) fails.push(`sourced-with on a ${note.status} note`)
-  if (note.status === "sourced" && !models.length) warns.push("no sourced-with in the frontmatter")
+  // A stale note passed a sourcing run too, and the site prints its models the
+  // same way, so it is held to the same rule. Reading only "sourced" here once
+  // let 119 stale notes go without the key unnoticed.
+  if (["sourced", "sourced-stale"].includes(note.status) && !models.length) warns.push("no sourced-with in the frontmatter")
 
   const { body: prose, defs } = extractFootnotes(note.body)
   const parts = sections(prose)

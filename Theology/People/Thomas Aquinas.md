@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - catholic
   - scholasticism
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Thomas Aquinas was an Italian Dominican friar who held a chair of theology at Paris and taught in Cologne, Rome and Naples. Robert Pasnau calls him the greatest figure of thirteenth century Europe in philosophy and theology.[^pasnau-sep]

@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - atheism
   - falsification
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Antony Flew was a philosopher who held chairs at Keele and Reading. "Theology and Falsification" is his, and so is the argument that atheism should be the default until theism is shown, which he later gave up.[^ebsco-flew][^reading-flew]

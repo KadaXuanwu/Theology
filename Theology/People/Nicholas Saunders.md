@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - divine-action
   - science-and-religion
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Nicholas Saunders studied physics and theology, worked at CERN and lectured at Cambridge before becoming a barrister in London. *Divine Action and Modern Science* is his one monograph, and its conclusion is that the quantum route to divine action does not work.[^brickcourt-saunders][^ramsey-saunders]

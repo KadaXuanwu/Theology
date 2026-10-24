@@ -5,6 +5,9 @@ tags:
   - hell
   - justice
   - hiddenness
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 [John 3:18](https://www.biblegateway.com/passage/?search=John%203:18&version=NIV) says whoever does not believe stands condemned already, which takes in someone who heard the Christian claim, looked into it and was not convinced. It gives the ground as well: "because they have not believed". Taken at face value, that lands on a person whose only failing was reaching an honest conclusion, and an honest conclusion cannot deserve a penalty without end.

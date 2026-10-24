@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - antiquity
   - sources
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Flavius Josephus was a Jewish priest who commanded in Galilee during the revolt, surrendered to the Romans and wrote his histories in Rome under imperial patronage. The *Antiquities* carries the two passages about Jesus that the vault's material on non-Christian sources turns on.[^britannica-josephus]

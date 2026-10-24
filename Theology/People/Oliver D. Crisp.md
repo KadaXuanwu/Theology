@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - analytic-theology
   - reformed
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Oliver D. Crisp is a theologian at St Andrews, where he co-directs the Logos Institute, and was at Fuller Theological Seminary from 2011 to 2019. He works in analytic theology and in the Reformed tradition.[^standrews-crisp][^loc-crisp]

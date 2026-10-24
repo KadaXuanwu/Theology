@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - hell
   - philosophy-of-religion
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 C. P. Ragland is a philosopher at Saint Louis University, where he chairs the department. Most of his work is on Descartes, and a second strand is on hell and divine justice.[^slu-ragland]

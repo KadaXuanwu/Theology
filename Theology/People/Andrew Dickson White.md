@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - history-of-science
   - conflict-thesis
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Andrew Dickson White was a historian, the first president of Cornell, and a United States minister to Germany and Russia. His two volume history of the warfare of science with theology is one of the two books the conflict thesis rests on.[^britannica-white]

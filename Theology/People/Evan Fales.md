@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - philosophy-of-religion
   - epistemology
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Evan Fales is a philosopher, emeritus at the University of Iowa, who works on causation, perception and religious experience. He is one of the standing critics of Plantinga's reformed epistemology.[^iowa-fales][^loc-fales]

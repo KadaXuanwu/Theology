@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - philosophy-of-science
   - falsification
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Karl Popper was a philosopher of science who spent the war years in New Zealand and then held the chair in logic and scientific method at the London School of Economics from 1949 to 1969. Falsifiability is his, and so is most of what the vault says about what makes a claim testable.[^britannica-popper][^sep-popper]

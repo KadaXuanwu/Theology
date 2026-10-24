@@ -2860,6 +2860,7 @@ console.log("the lint reads the rules the templates promise")
   const models = { "sourced-with": ["Model A"] }
   check("a sourced note without its models is a warning", good.warns.some((w) => /no sourced-with/.test(w)), good.warns.join("; "))
   check("and not once it names them", !lint(make(S.arg, "argument", argBody("Short."), { fm: models })).warns.some((w) => /sourced-with/.test(w)))
+  check("a stale note without its models is a warning too", lint(make(S.arg, "argument", argBody("x"), { fm: { status: "sourced-stale" } })).warns.some((w) => /no sourced-with/.test(w)))
   check("a draft that names models fails", fails(make(S.arg, "argument", argBody("x"), { fm: { ...models, status: "drafted" } })).some((f) => /sourced-with on a drafted/.test(f)))
   check("so does a stub", fails(make(S.arg, "argument", argBody("x"), { fm: { ...models, status: "stub" } })).some((f) => /sourced-with on a stub/.test(f)))
   check("an inline model list fails", fails(make(S.arg, "argument", argBody("x"), { fm: models }), "---\nsourced-with: [Model A]\n---\n").some((f) => /inline list/.test(f)))

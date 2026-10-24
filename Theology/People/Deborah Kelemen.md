@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - cognition
   - psychology
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Deborah Kelemen is a psychologist at Boston University and directs its Child Cognition Laboratory. Her work is on how children and adults reason about purpose and design in nature.[^bu-kelemen]

@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - royal-touch
   - medicine
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Thomas Allen was a physician at Bethlem Hospital and physician in ordinary to Charles II. The 1665 pamphlet on the royal hand is attributed to him, though the attribution rests on later secondary sources.[^munk-allen][^wellcome-allen]

@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - ancient-near-east
   - conquest
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 K. Lawson Younger Jr is an Assyriologist and biblical scholar, emeritus at Trinity Evangelical Divinity School. *Ancient Conquest Accounts* is the study that put the biblical conquest narratives beside Assyrian, Hittite and Egyptian ones and found the same conventions.[^tiu-younger][^bas-younger]

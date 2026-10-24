@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - psychology
   - religious-experience
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 William James was a psychologist and philosopher who taught at Harvard for most of his career, first in physiology, then in philosophy and psychology. His Gifford Lectures on religious experience are the standard reference point for treating conversion and mysticism as things to be studied rather than settled.[^sep-james][^iep-james]

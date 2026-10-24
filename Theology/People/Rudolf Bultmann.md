@@ -6,6 +6,9 @@ died: 30 July 1976, Marburg
 location: University of Marburg, with earlier posts at Breslau and Giessen
 status: sourced
 tags: []
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Rudolf Bultmann was a German New Testament scholar, professor at Marburg from 1921 to 1951.[^nce-bultmann] His 1941 lecture "Neues Testament und Mythologie" argued that the New Testament "must be stripped of its mythological trappings and restated in language that addresses man in his existential condition".[^nce-bultmann]

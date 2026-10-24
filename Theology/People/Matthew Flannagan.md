@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - divine-command
   - conquest
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Matthew Flannagan is a New Zealand philosopher and theologian who works on divine command ethics and on the conquest texts. He wrote *Did God Really Command Genocide?* with Paul Copan.[^mandm-flannagan][^orcid-flannagan]

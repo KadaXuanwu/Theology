@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - science-and-religion
   - gaps
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Isaac Newton was Lucasian Professor of Mathematics at Cambridge, then Warden and Master of the Royal Mint, and president of the Royal Society from 1703. Query 31 of the *Opticks*, where the planetary system is said to need reformation, is the passage Leibniz attacked and the standard worked example of a gap that later closed.[^sep-newton][^abbey-newton]

@@ -8,6 +8,9 @@ status: sourced
 tags:
   - new-testament
   - romans
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 C. E. B. Cranfield was a New Testament scholar at the University of Durham and the New Testament editor of the International Critical Commentary. His commentary on Romans in that series runs to two volumes.[^dunn-2016]

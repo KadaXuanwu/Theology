@@ -6,6 +6,9 @@ died: 26 August 2011
 location: Durham University
 status: sourced
 tags: []
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 C. K. Barrett was a British New Testament scholar and Methodist minister who taught at Durham University from 1945, as professor of divinity from 1958 until he retired in 1982.[^dunn-2013] His commentary on John was first published in 1955 and revised in 1978.[^guardian-barrett]

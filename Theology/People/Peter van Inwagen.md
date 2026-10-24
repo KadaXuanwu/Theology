@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - hiddenness
   - free-will
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Peter van Inwagen is a philosopher at Notre Dame known for work on free will, material objects and the problem of evil.[^nd-vaninwagen] His contribution to the hiddenness debate asks what a public divine sign could actually establish.[^vaninwagen-2002]

@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - philosophy-of-religion
   - hiddenness
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Adam Green is a philosopher at the University of Oklahoma who works on divine hiddenness and on social epistemology. He writes the Stanford Encyclopedia entry on hiddenness with Daniel Howard-Snyder.[^ou-green][^sep-hiddenness]

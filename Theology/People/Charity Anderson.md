@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - hiddenness
   - epistemology
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Charity Anderson is a philosopher at Baylor University who works on evidence and on divine hiddenness. Her position is that the evidential force of hiddenness is weaker than the argument needs.[^baylor-anderson]

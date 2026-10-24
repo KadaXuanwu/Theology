@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - philosophy-of-religion
   - aquinas
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Andrew Pinsent is a philosopher at Oxford's Ian Ramsey Centre for Science and Religion, and was a particle physicist on the DELPHI experiment at CERN before taking a second doctorate in philosophy. He is a Catholic priest of the diocese of Arundel and Brighton.[^ramsey-pinsent]

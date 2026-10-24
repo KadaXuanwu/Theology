@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - naturalism
   - philosophy-of-science
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Gregory W. Dawes is a philosopher at the University of Otago, appointed jointly in philosophy and religion. He defends a naturalism that is provisional and answerable to evidence rather than assumed, and keeps it apart from the procedural rule that science does not appeal to the supernatural.[^otago-dawes]

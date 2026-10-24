@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - presuppositionalism
   - reformed
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Greg Bahnsen was a Reformed apologist and minister in the Orthodox Presbyterian Church who taught apologetics and ethics at Reformed Theological Seminary. He is the best known defender of the presuppositional argument, that Christianity has to be true for anything to be provable at all.[^opc-bahnsen]

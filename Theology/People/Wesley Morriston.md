@@ -5,6 +5,9 @@ location: University of Colorado Boulder
 status: sourced-stale
 tags:
   - philosophy-of-religion
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Wesley Morriston is a philosopher of religion, emeritus at the University of Colorado Boulder. He writes on divine command ethics, on the kalam cosmological argument and on the conquest texts.[^colorado-morriston]

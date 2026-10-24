@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - hell
   - hiddenness
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 James Dominic Rooney is a philosopher at Hong Kong Baptist University and a Dominican friar. He works on metaphysics and on the analytic defence of hell and of divine hiddenness.[^hkbu-rooney][^orcid-rooney]

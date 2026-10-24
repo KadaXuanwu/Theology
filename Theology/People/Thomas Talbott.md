@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - universalism
   - hell
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Thomas Talbott is a philosopher, emeritus at Willamette University, where he taught for thirty four years. *The Inescapable Love of God* is the analytic case for Christian universalism, that no one is finally lost.[^willamette-talbott][^loc-talbott]

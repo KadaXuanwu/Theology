@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - apologetics
   - conquest
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Paul Copan is a philosopher at Palm Beach Atlantic University, where he holds the Pledger Family chair in philosophy and ethics. He works on the moral objections to the Old Testament and on the conquest texts.[^pba-copan][^copan-cv]

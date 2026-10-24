@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - new-testament
   - johannine
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Craig S. Keener is a New Testament scholar at Asbury Theological Seminary who writes very large commentaries and works on the credibility of miracle reports.[^asbury-keener] His two volume commentary on John and his study of miracle accounts are both what the vault cites him for.[^keener-2003][^keener-2011]

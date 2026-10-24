@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - psychology
   - religious-experience
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Michiel van Elk is a cognitive psychologist at Leiden University who works on the psychology and neuroscience of religious and psychedelic experience. He founded its PRSM lab.[^leiden-van-elk][^loc-van-elk]

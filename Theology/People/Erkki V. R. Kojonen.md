@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - design
   - science-and-religion
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Erkki V. R. Kojonen is a theologian at the University of Helsinki who works on design arguments and on how much the god of the gaps objection actually reaches. He also edits Areiopagi.[^helsinki-kojonen][^esssat-kojonen]

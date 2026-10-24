@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - hiddenness
   - free-will
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Tyler Paytas is a philosopher at Australian Catholic University who works on Kant's ethics and on philosophy of religion.[^paytas-cv] He defends an autonomy based account of divine hiddenness drawn from Kant, which grants that a person could still transgress while certain of God and locates the loss elsewhere.[^paytas-2017]

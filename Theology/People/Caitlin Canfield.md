@@ -5,6 +5,9 @@ location: NYU Grossman School of Medicine, New York
 status: sourced-stale
 tags:
   - psychology
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Caitlin Canfield is a developmental psychologist at NYU, working on parenting, poverty and school readiness. Her one paper in the cognitive science of religion was written during her doctorate at Boston University.[^nyu-canfield][^jarnefelt-2015]

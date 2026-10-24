@@ -3,6 +3,9 @@ type: term
 kind: philosophy
 status: sourced
 tags: []
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 The thesis that free will and determinism cannot both hold, or in Kadri Vihvelin's words, "the thesis that no deterministic world is a free will world".[^vihvelin-2022] Compatibilism is its denial, the claim that some deterministic worlds are free will worlds. Incompatibilism on its own says nothing about whether anyone has free will; [[Libertarian free will]] adds that we do.

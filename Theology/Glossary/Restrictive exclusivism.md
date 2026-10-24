@@ -3,6 +3,9 @@ type: term
 kind: theology
 status: sourced
 tags: []
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 The view that salvation is restricted to those who come to explicit faith in Christ in this life, so that those who die without hearing the gospel are lost. Gavin D'Costa defines it as holding "that salvation is restricted to those who respond to the preaching of the gospel in this life", with the "concomitant" that "those who do not hear the gospel are lost".[^dcosta-2022] Dale Tuggy's entry puts it as the position that "explicit knowledge of the gospel of Jesus Christ is necessary for salvation".[^tuggy-iep] "Restrictivism" is also sometimes proposed as a neutral name for exclusivism as a whole, which is a wider sense.[^tuggy-iep]

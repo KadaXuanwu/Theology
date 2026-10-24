@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - pluralism
   - problem-of-evil
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 John Hick was a philosopher of religion who held the H. G. Wood chair at Birmingham and the Danforth chair at Claremont. He built the soul making answer to the problem of evil, and the pluralist account on which the religions are different human responses to one transcendent reality.[^the-hick][^iep-hick]

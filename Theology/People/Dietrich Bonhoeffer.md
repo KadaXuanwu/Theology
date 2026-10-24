@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - theology
   - confessing-church
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Dietrich Bonhoeffer was a German theologian who taught in Berlin, ran the Confessing Church seminary at Finkenwalde, joined the resistance through the Abwehr and was hanged at Flossenbürg weeks before the war ended. The prison letters are where he calls God no stopgap.[^ushmm-bonhoeffer][^iep-bonhoeffer]

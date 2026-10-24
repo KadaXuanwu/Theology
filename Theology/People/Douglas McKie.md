@@ -7,6 +7,9 @@ location: University College London
 status: sourced-stale
 tags:
   - history-of-science
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Douglas McKie was a historian of chemistry at University College London, where he held the chair in history and philosophy of science from 1957. He co-founded *Annals of Science* and edited it until his death.[^acs-mckie]

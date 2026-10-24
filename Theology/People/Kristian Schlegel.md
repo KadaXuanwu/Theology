@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - science
   - history-of-science
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Kristian Schlegel is an ionospheric physicist who was a senior scientist at the Max-Planck-Institut für Aeronomie, later the Max Planck Institute for Solar System Research, from 1968 to 2002. He edits *History of Geo- and Space Sciences*, which is where his work on how encyclopedias explained lightning belongs.[^hgss-board]

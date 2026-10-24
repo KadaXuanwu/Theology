@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - philosophy-of-science
   - demarcation
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Larry Laudan was a philosopher of science who founded the department of history and philosophy of science at Pittsburgh. His argument that no proposed criterion cleanly separates science from non-science is the standing objection to demarcation.[^laudan-obituary]

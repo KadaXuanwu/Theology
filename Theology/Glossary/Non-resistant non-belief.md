@@ -3,6 +3,9 @@ type: term
 kind: philosophy
 status: sourced
 tags: []
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 The absence of belief that God exists in someone who is capable of a personal relationship with God and is not resisting God. The *Stanford Encyclopedia of Philosophy* gives it as J. L. Schellenberg's premise that "there is at least one capable finite person S and time t such that S is or was at t nonresistantly in a state of nonbelief in relation to the proposition that God exists".[^sep-hiddenness] Resistance means shutting the door on God oneself, and Schellenberg's examples include "careless investigation of one sort or another in relation to the existence of God".[^sep-hiddenness] The term is about how the non-belief came about. Schellenberg's earlier "reasonable" or "inculpable" non-belief is one kind of it.[^teeninga-iep]

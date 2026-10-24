@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - hiddenness
   - analytic-theology
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Michael Rea is a philosopher at Notre Dame, where he directs the Center for Philosophy of Religion. He gave the Gifford Lectures in 2017, and his answer to hiddenness is that divine love need not take the form a person expects.[^nd-rea][^loc-rea]

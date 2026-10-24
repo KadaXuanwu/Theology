@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - new-testament
   - johannine
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Raymond E. Brown was a Sulpician priest and New Testament scholar, and the most cited commentator on John's gospel of his century.[^brown-biography] His two volume Anchor Bible commentary on John is the reference the vault uses for that gospel, and he twice served on the Pontifical Biblical Commission.[^sulpicians-brown]

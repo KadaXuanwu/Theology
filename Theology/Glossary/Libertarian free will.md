@@ -3,6 +3,9 @@ type: term
 kind: philosophy
 status: sourced
 tags: []
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 The view that people have free will and that free will cannot exist in a determined world, so determinism is false. Kadri Vihvelin's entry gives Peter van Inwagen's wording: a libertarian is "an incompatibilist who believes that we in fact have free will and this entails that determinism is false, in the right kind of way".[^vihvelin-2022] What libertarians share is the negative condition that a free action is "not causally determined by factors beyond one's control"; they divide over what more is needed.[^oconnor-2022]

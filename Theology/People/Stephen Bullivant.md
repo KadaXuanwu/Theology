@@ -4,6 +4,9 @@ kind: theologian
 location: St Mary's University, Twickenham, and the University of Notre Dame Australia, Sydney
 status: sourced
 tags: []
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Stephen Bullivant is a Catholic theologian and sociologist of religion at St Mary's University, Twickenham, where he directs the Benedict XVI Centre for Religion and Society.[^stmarys-bullivant] His books treat atheism, disaffiliation from the churches, and what Catholic teaching says about the salvation of unbelievers.[^stmarys-bullivant]

@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - history
   - royal-touch
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Marc Bloch was a French historian who co-founded the *Annales* with Lucien Febvre, joined the resistance and was shot by the Germans in 1944. *Les Rois thaumaturges* is the foundational study of the royal touch.[^britannica-bloch][^cercleshoah-bloch]

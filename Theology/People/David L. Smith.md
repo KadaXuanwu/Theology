@@ -6,6 +6,9 @@ location: Selwyn College, Cambridge
 status: sourced-stale
 tags:
   - history
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 David L. Smith is a historian of seventeenth century Britain, a fellow of Selwyn College, Cambridge, since 1988. He works on parliaments, the constitution and the civil wars.[^selwyn-smith][^ca-smith]

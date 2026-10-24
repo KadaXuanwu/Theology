@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - theology
   - confessing-church
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Eberhard Bethge was a German theologian, one of the first ordinands under Bonhoeffer at Finkenwalde, and the friend the prison letters were written to. He edited and published them, and wrote the standard biography.[^dewiki-bethge][^gnd-bethge]

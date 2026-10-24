@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - psychology
   - nonbelief
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Cortney Hitzeman is a psychologist who now works in forensic mental health in New South Wales. She is first author of the implicit theism study written at Macquarie University.[^hitzeman-2017]

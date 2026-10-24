@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - atheism
   - philosophy-of-religion
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Graham Oppy is a philosopher at Monash University who works on arguments for and against the existence of God. *The Best Argument against God* runs on parsimony rather than on any of the usual complaints.[^monash-oppy][^loc-oppy]

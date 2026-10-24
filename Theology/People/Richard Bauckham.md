@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - new-testament
   - eyewitnesses
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Richard Bauckham is a New Testament scholar, emeritus at St Andrews, now a senior scholar at Ridley Hall in Cambridge. *Jesus and the Eyewitnesses* is the case that the gospels rest on named eyewitness testimony rather than on anonymous tradition.[^bauckham-cv][^ridley-bauckham]

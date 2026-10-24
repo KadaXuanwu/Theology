@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - hell
   - annihilationism
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Edward Fudge was a theologian and lawyer who made the modern case for conditional immortality, the view that the lost are destroyed rather than kept alive in torment. He preached in Churches of Christ before practising law in Houston.[^chronicle-fudge][^loc-fudge]

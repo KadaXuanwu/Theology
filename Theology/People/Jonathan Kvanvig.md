@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - hell
   - epistemology
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Jonathan Kvanvig is a philosopher, now retired from Washington University in St Louis, who taught at Baylor and Missouri before that. *The Problem of Hell* is the analytic statement of what a defensible doctrine of hell would have to look like.[^kvanvig-site][^kvanvig-cv]

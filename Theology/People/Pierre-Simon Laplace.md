@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - astronomy
   - gaps
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Pierre-Simon Laplace was a French mathematician and astronomer whose work on the stability of the solar system closed the gap Newton had filled with occasional divine repair. He also wrote the standard early treatment of probability.[^mactutor-laplace][^britannica-laplace]

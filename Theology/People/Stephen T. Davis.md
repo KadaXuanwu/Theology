@@ -4,6 +4,9 @@ kind: philosopher
 location: Claremont McKenna College, Claremont, California
 status: sourced
 tags: []
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Stephen T. Davis is a philosopher of religion and emeritus Russell K. Pitzer Professor of Philosophy at Claremont McKenna College.[^cmc-davis] His books and articles treat the resurrection and the fate of those who never hear the gospel.[^cmc-davis]

@@ -8,6 +8,9 @@ status: sourced
 tags:
   - love
   - free-will
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Immanuel Kant lectured at the University of Königsberg for his whole career, unsalaried at first and then in the chair of logic and metaphysics, and wrote the three Critiques there.[^sep-kant] The vault cites his distinction between love as an inclination, which cannot be commanded, and practical love, which can.[^kant-groundwork]

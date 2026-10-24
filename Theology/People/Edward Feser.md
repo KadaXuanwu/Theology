@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - classical-theism
   - aquinas
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Edward Feser is a philosopher at Pasadena City College who argues for classical theism in the Aristotelian and Thomist line, against both the new atheism and much of contemporary theistic personalism.[^feser-about][^gnd-feser]

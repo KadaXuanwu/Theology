@@ -8,6 +8,9 @@ status: sourced
 tags:
   - hebrew-bible
   - natural-theology
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 James Barr was a scholar of the Hebrew Bible and of biblical language who held the Regius chair of Hebrew at Oxford and later taught at Vanderbilt. His Gifford Lectures at Edinburgh were published as *Biblical Faith and Natural Theology*.[^knight-2008][^gifford-barr]

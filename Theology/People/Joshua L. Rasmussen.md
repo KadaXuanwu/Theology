@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - metaphysics
   - necessary-existence
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Joshua L. Rasmussen is a philosopher at Baylor University, and was at Azusa Pacific before 2024. He works on necessary existence and on arguments from contingency.[^baylor-rasmussen][^dailynous-rasmussen]

@@ -7,6 +7,9 @@ location: Hippo Regius, Carthage, Rome, Milan
 status: sourced
 tags:
   - love
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Augustine taught rhetoric at Carthage, Rome and Milan, was baptised at Milan, and spent the rest of his life at Hippo Regius in Roman North Africa as priest and then bishop.[^sep-augustine][^cathen-augustine] He is also counted a philosopher, and his homilies on 1 John give the vault its account of fear as the first stage of charity.[^augustine-1john]

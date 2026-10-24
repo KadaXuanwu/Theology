@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - atheism
   - philosophy-of-religion
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Herman Philipse is a philosopher, emeritus at Utrecht, who held a chair at Leiden from 1985 to 2003. *God in the Age of Science?* argues that religious belief fails as an explanation on the standards used everywhere else.[^utrecht-philipse][^leiden-philipse]

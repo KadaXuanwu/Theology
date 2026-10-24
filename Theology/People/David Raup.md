@@ -7,6 +7,9 @@ location: University of Chicago, Field Museum of Natural History, University of 
 status: sourced-stale
 tags:
   - science
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 David Raup was a palaeontologist who worked on extinction and on what the fossil record can and cannot show about it. He taught at Rochester and Chicago and was dean of science at the Field Museum.[^uchicago-raup]

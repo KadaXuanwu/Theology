@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - science-and-religion
   - gaps
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Charles Alfred Coulson was a theoretical chemist, Rouse Ball Professor of Mathematics at Oxford from 1952 and then its first professor of theoretical chemistry. He was an accredited Methodist lay preacher from 1929, sat on the central committee of the World Council of Churches and chaired Oxfam.[^mactutor-coulson][^kalthoff-coulson]

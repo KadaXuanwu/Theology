@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - philosophy-of-science
   - design
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Del Ratzsch is a philosopher of science, emeritus at Calvin University, who works on design arguments and on the limits of what natural science settles.[^calvin-ratzsch][^loc-ratzsch]

@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - new-testament
   - romans
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Richard Alan Young was a New Testament scholar who taught at Temple Baptist Seminary and Chattanooga State. He wrote the exegetical study of Romans 1:18–23 that the vault's material on general revelation uses.[^young-obituary][^young-2000]

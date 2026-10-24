@@ -7,6 +7,9 @@ status: sourced
 tags:
   - philosophy-of-religion
   - kierkegaard
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 C. Stephen Evans is a philosopher of religion and a Kierkegaard scholar, University Professor of Philosophy and Humanities at Baylor University.[^baylor-evans][^baylor-2001][^loc-evans] His *Natural Signs and Knowledge of God* reads the arguments for God as resting on natural signs, in the world and in human experience, that are widely open and easy to resist.[^wynn-2013]

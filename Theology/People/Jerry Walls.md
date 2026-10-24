@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - hell
   - heaven
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Jerry Walls is a philosopher who taught at Asbury Theological Seminary from 1987 and then at Houston Christian University until his retirement in 2025. His trilogy on hell, heaven and purgatory is the standard analytic treatment of the free choice reading of damnation.[^wiki-walls][^loc-walls]

@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - science-and-religion
   - gaps
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Henry Drummond was a Scottish evangelist and writer who lectured on natural science at the Free Church College in Glasgow and worked for two years in the Moody and Sankey missions. *The Ascent of Man* is where he attacks the habit of hunting for gaps in nature to put God into.[^eb1911-drummond][^smith-drummond]

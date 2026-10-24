@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - metaphysics
   - cosmological-argument
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Alexander R. Pruss is a philosopher at Baylor University who works on the principle of sufficient reason, causation and infinity. He holds doctorates in both philosophy and mathematics.[^pruss-cv][^baylor-pruss]

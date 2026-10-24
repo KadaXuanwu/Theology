@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - new-testament
   - historical-jesus
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Mark Allan Powell is a New Testament scholar who taught at Trinity Lutheran Seminary from 1987 until 2018 and held its Leatherman chair. He works on narrative criticism and on the historical Jesus.[^loc-powell][^workingpreacher-powell]

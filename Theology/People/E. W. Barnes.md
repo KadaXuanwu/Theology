@@ -7,6 +7,9 @@ location: Trinity College, Cambridge, and the Diocese of Birmingham
 status: sourced-stale
 tags:
   - science-and-religion
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Ernest William Barnes was a Cambridge mathematician who became Bishop of Birmingham in 1924 and held the see until 1952. His Gifford Lectures at Aberdeen were printed in 1933 as *Scientific Theory and Religion*, which carries the earliest known fixed use of the phrase god of the gaps.[^mactutor-barnes][^gifford-barnes]

@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - cosmology
   - naturalism
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Sean M. Carroll is a theoretical physicist and cosmologist, Homewood Professor of Natural Philosophy at Johns Hopkins. He argues that theism has been progressively stripped of explanatory work in the natural world and fails as a scientific hypothesis.[^carroll-cv]

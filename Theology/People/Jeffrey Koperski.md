@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - philosophy-of-science
   - divine-action
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Jeffrey Koperski is a philosopher at Saginaw Valley State University who works on physics, divine action and the laws of nature. He writes the Stanford Encyclopedia entry on teleological arguments with Del Ratzsch.[^svsu-koperski][^sep-teleological]

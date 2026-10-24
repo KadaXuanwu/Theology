@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - hiddenness
   - nonbelief
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Andrew Blanton is a doctoral researcher in philosophy at the University of Birmingham, working on empirically informed answers to the problem of divine hiddenness.[^birmingham-blanton]

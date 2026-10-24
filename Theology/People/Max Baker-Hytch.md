@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - hiddenness
   - epistemology
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Max Baker-Hytch is a philosopher at Wycliffe Hall, Oxford, who works on religious epistemology, on the demographics of belief and on sin based accounts of non-belief.[^wycliffe-baker-hytch][^oxford-baker-hytch]

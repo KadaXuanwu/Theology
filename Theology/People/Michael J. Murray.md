@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - hiddenness
   - free-will
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Michael J. Murray is a philosopher of religion who held the Shadek chair at Franklin and Marshall College and later ran programmes at the John Templeton Foundation.[^avdf-murray][^vatican-murray] His paper on coercion is the standard statement of the reply that God stays hidden to protect morally significant freedom.[^murray-1993]

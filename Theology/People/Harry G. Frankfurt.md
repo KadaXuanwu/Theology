@@ -8,6 +8,9 @@ status: sourced
 tags:
   - free-will
   - love
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Harry Frankfurt taught philosophy at Rockefeller University, Yale and Princeton, where he was emeritus after 2002.[^wiki-frankfurt][^loc-frankfurt] His work on the will runs from the 1971 paper on freedom of the will to *The Reasons of Love*, and his 1973 essay gives the test on which a threat coerces only when it overbears the will.[^frankfurt-1971][^honderich-1973][^gillham-2020]

@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - cognition
   - psychology
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Cristine H. Legare is a psychologist at the University of Texas at Austin who directs its Center for Applied Cognitive Science. Her work is on how natural and supernatural explanations sit side by side in the same people, across cultures and across a lifetime.[^ut-legare]

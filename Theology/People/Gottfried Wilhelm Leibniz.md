@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - metaphysics
   - theodicy
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Gottfried Wilhelm Leibniz was a philosopher and mathematician who spent forty years as librarian and court historian at Hanover. His correspondence with Samuel Clarke is where Newton's need for God to correct the planets is attacked, and the *Theodicy* is where the goodness of God is defended against the evil in the world.[^sep-leibniz][^iep-leibniz]

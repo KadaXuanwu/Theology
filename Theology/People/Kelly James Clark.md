@@ -7,6 +7,9 @@ status: sourced
 tags:
   - philosophy-of-religion
   - cognitive-science-of-religion
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Kelly James Clark is a philosopher of religion who studied under [[Alvin Plantinga]] at Notre Dame and is a distinguished professor of philosophy at Ibn Haldun University in Istanbul. He works on Reformed epistemology and, with [[Justin Barrett]], on what the cognitive science of religion means for it.[^ihu-clark][^clark-barrett-2010]

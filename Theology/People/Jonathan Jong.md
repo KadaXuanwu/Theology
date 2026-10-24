@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - psychology
   - religious-belief
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Jonathan Jong is a psychologist of religion who works on death anxiety and belief, and an Anglican priest. He now publishes as Jonathan Lewis-Jong.[^jong-site][^newatlantis-jong]

@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - hiddenness
   - nonbelief
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Jason Marsh is a philosopher at St Olaf College who works on divine hiddenness, the cognitive science of religion and bioethics.[^stolaf-marsh] He replied to Maitzen's demographic argument and has since argued that unbelief among prehistoric humans is the harder case for theism than the modern demographic pattern.[^marsh-2008][^marsh-2013]

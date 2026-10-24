@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - medieval
   - atonement
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Anselm of Canterbury was a monk of Bec who became Archbishop of Canterbury in 1093. *Cur Deus Homo* is where the satisfaction account of the atonement is set out, and the *Proslogion* is where the ontological argument first appears.[^sep-anselm][^iep-anselm]

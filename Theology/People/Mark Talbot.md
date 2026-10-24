@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - suffering
   - reformed
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Mark Talbot is a philosopher, emeritus at Wheaton College, who writes on suffering and on the philosophical implications of Reformed theology.[^wheaton-talbot][^loc-talbot]

@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - psychology
   - nonbelief
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Colin Wastell is a psychologist at Macquarie University, where he founded the counselling psychology programme. His research is on reasoning, including the implicit reasoning behind religious and non-religious belief.[^conversation-wastell]

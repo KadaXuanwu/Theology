@@ -5,6 +5,9 @@ location: St. Bonaventure University, St. Bonaventure, New York
 status: sourced
 tags:
   - hell
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Alex R. Gillham teaches philosophy at St. Bonaventure University, with research in ethics and ancient philosophy.[^sbu-gillham] His two 2020 papers propose and defend the Unpopulated Hell View, on which hell exists but no one is ever sent there.[^gillham-2020a][^gillham-2020]

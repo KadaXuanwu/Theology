@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - cognition
   - nonbelief
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Elisa Järnefelt studies whether people who reject creation still read nature as made on purpose. Her doctorate is in the study of religion at Helsinki, and the experimental work behind it was done at Boston University with Deborah Kelemen.[^jarnefelt-site]

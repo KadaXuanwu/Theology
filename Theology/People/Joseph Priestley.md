@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - science-and-religion
   - unitarian
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Joseph Priestley was a chemist and a dissenting minister who isolated oxygen and wrote the standard history of electricity. He was a Unitarian who denied the Trinity, the atonement and Christ's divinity while arguing for Christianity itself.[^britannica-priestley][^iep-priestley]

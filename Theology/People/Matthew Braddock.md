@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - nonbelief
   - cognition
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Matthew Braddock is a philosopher at the University of Tennessee at Martin who works on what the cognitive science of religion supports. He argues both against the problem of natural non-belief and for theism from common consent.[^philpeople-braddock]

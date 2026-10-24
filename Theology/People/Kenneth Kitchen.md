@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - egypt
   - old-testament
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Kenneth Kitchen was an Egyptologist at Liverpool from 1951 until his retirement in 1996, and Brunner Professor of Egyptology there. *On the Reliability of the Old Testament* is the fullest case that the Hebrew Bible's historical claims hold up against the ancient near eastern record.[^ees-kitchen][^davey-kitchen]

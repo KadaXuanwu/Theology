@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - anthropology
   - foragers
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Frank W. Marlowe was a human behavioural ecologist who spent years in the field with the Hadza of Tanzania. His work on forager societies is the base much of the comparative work on religion among hunter gatherers rests on.[^marlowe-memoriam]

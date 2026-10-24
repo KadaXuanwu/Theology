@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - hell
   - problem-of-evil
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Marilyn McCord Adams was a philosopher and an Episcopal priest who held chairs at UCLA and Yale and was Regius Professor of Divinity at Oxford from 2004 to 2009. Her work on horrendous evils and on the justice of hell is what the vault's material on proportionality rests on.[^uc-adams]

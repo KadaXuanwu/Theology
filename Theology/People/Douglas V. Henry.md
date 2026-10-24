@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - hiddenness
   - nonbelief
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Douglas V. Henry is a philosopher at Baylor University and dean of its Honors College. His two papers on reasonable non-belief are the standing challenge to Schellenberg's claim that such non-belief exists.[^baylor-henry][^baylor-phil-henry]

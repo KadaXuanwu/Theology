@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - new-testament
   - resurrection
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Keith H. Reeves is a New Testament scholar at Azusa Pacific University who works on Matthew's resurrection narrative and on computer assisted biblical research.[^apu-reeves] His article on Matthew 28:17 argues the doubt in that verse belongs to the eleven rather than to an unnamed subgroup of them.[^reeves-1998]

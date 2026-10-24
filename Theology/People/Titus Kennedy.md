@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - archaeology
   - bible
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Titus Kennedy is an archaeologist who writes on the archaeology of the biblical world. He is a research fellow at the Discovery Institute's Center for Science and Culture and an adjunct professor at Biola University.[^discovery-kennedy]

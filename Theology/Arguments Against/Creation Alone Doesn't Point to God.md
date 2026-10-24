@@ -5,6 +5,9 @@ tags:
   - hiddenness
   - natural-theology
   - anthropology
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Creation alone does not leave every person "[[General Revelation Leaves People Without Excuse|without excuse]]". The verdict needs a knowledge some peoples show no sign of having, or a moral premise the world does not supply. [Romans 1:20](https://www.biblegateway.com/passage/?search=Romans%201:20&version=NIV) says God's eternal power and divine nature have been clear from what he made, so people are without excuse. [Romans 1:21](https://www.biblegateway.com/passage/?search=Romans%201:21&version=NIV) gives the ground: "although they knew God", they did not glorify him or give thanks. The verse names power and divinity, not a person, a name or a moral demand.

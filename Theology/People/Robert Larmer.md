@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - miracles
   - gaps
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Robert Larmer is a philosopher at the University of New Brunswick who works on miracles and on divine agency. His argument is that god of the gaps reasoning is not automatically fallacious, and that the progress of science could in principle widen a gap rather than close it.[^unb-larmer][^larmer-2002]

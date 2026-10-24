@@ -6,6 +6,9 @@ died: August 1927
 location: Trinity College Dublin, and St Patrick's Cathedral, Dublin
 status: sourced
 tags: []
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 J. H. Bernard was an Irish churchman and scholar: Dean of St Patrick's Cathedral from 1902, Bishop of Ossory from 1911, Archbishop of Dublin from 1915, and Provost of Trinity College Dublin from 1919 until his death.[^tcd-bernard] His two volume commentary on John for the International Critical Commentary was published after his death, edited by A. H. McNeile.[^bernard-1928]

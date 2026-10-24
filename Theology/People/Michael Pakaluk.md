@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - ethics
   - gospels
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Michael Pakaluk is a philosopher at the Catholic University of America and a member of the Pontifical Academy of St Thomas Aquinas. He works on Aristotle's ethics and on the gospels.[^cua-pakaluk][^loc-pakaluk]

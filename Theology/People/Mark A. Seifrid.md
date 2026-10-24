@@ -6,6 +6,9 @@ status: sourced
 tags:
   - new-testament
   - romans
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Mark A. Seifrid is a New Testament scholar and emeritus professor of exegetical theology at Concordia Seminary in St. Louis, after 23 years teaching New Testament at the Southern Baptist Theological Seminary. He works on Paul's teaching on justification and on Romans.[^concordia-2015][^concordia-emeritus][^seifrid-1998]

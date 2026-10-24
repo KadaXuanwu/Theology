@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - natural-theology
   - newton
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Samuel Clarke was an English philosopher and clergyman, rector of St James's Westminster from 1709 and chaplain to Queen Anne. He answered Leibniz on Newton's behalf, and his Boyle Lectures are a standard piece of eighteenth century natural theology.[^sep-clarke][^dnb-clarke]

@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - apologetics
   - hell
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 C. S. Lewis was a scholar of medieval and renaissance literature who taught at Oxford for nearly thirty years and then held the Cambridge chair in the subject. He is the most read Christian apologist of the twentieth century, and the source of the reading of hell as a door locked from the inside.[^cslewis-chronology]

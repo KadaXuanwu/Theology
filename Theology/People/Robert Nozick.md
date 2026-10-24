@@ -7,6 +7,9 @@ location: Harvard University, Cambridge, Massachusetts
 status: sourced
 tags:
   - free-will
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Robert Nozick taught philosophy at Harvard after short posts at Princeton and Rockefeller University, and his *Anarchy, State, and Utopia* won the National Book Award.[^sep-nozick][^iep-nozick] His 1969 essay on coercion gave the conditions for a coercive threat that later analyses of threats and offers start from.[^sep-coercion]

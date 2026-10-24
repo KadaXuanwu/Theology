@@ -5,6 +5,9 @@ location: Massachusetts Institute of Technology, Cambridge, Massachusetts
 status: sourced-stale
 tags:
   - linguistics
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 David Pesetsky is a linguist at MIT, where he is Ferrari P. Ward Professor of Modern Languages and Linguistics. He works on syntax, and is one of the three authors who challenged the claim that Pirahã lacks recursion.[^mit-pesetsky][^nevins-2009]

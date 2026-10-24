@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - resurrection
   - new-testament
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Jake O'Connell is a New Testament scholar who has written on the resurrection appearances and on divine hiddenness. His argument is that collective hallucinations are documented and so cannot be ruled out in advance as an explanation of the appearances.[^oconnell-2009]

@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - hiddenness
   - philosophy-of-religion
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Travis Dumsday is a philosopher at Concordia University of Edmonton who works on divine hiddenness and on the metaphysics of science.[^concordia-dumsday] He has published a long run of papers on hiddenness, each proposing a different reason God might stay hidden, and his survey of the free will reply is the one the vault uses for where that reply stands.[^dumsday-2010]

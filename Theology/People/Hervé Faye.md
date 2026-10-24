@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - astronomy
   - history-of-science
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Hervé Faye was a French astronomer who worked under Arago at the Paris Observatory, held the chair of astronomy at the École polytechnique and presided over the Bureau des longitudes. His *Sur l'origine du monde* is where the Laplace and Napoleon anecdote is denied.[^bnf-faye][^newadvent-faye]

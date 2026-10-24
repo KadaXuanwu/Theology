@@ -7,6 +7,9 @@ location: Harvard University, Cambridge, Massachusetts; Pontifical Biblical Inst
 status: sourced
 tags:
   - love
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 William L. Moran was an Assyriologist, a Jesuit for much of his career, who taught at the Pontifical Biblical Institute in Rome and then at Harvard, where he held the Andrew W. Mellon chair in the humanities.[^gazette-moran] He edited the Amarna letters and argued that the love Deuteronomy commands is the covenant loyalty of Near Eastern treaty language.[^moran-1963][^openlibrary-amarna]

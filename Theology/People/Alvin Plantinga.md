@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - epistemology
   - philosophy-of-religion
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Alvin Plantinga is a philosopher, emeritus at Notre Dame, who taught at Calvin from 1963 to 1982. His reformed epistemology is the standard case that belief in God can be rational without an argument behind it, and it is what most of the vault's warrant material answers.[^nd-plantinga][^templeton-plantinga]

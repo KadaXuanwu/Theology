@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - anthropology
   - phylogenetics
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Pavel Duda is an evolutionary anthropologist at the University of South Bohemia who applies phylogenetic methods to human cultural history. He is a co-author of the survey of religion in forager societies.[^jcu-duda][^peoples-2016]

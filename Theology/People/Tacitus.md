@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - antiquity
   - sources
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Publius Cornelius Tacitus was a Roman historian, suffect consul in 97 and proconsul of Asia around 112. *Annals* 15.44 is the earliest non-Christian account of the execution of Christ under Pontius Pilate.[^britannica-tacitus]

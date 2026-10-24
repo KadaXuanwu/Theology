@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - hell
   - hiddenness
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Raymond VanArragon is a philosopher at Bethel University in Minnesota, where he is also dean of faculty. He works on hell, on religious diversity and on whether someone could freely reject God for ever.[^bethel-vanarragon]

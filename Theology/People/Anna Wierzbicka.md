@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - linguistics
   - semantics
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Anna Wierzbicka is a linguist, emerita at the Australian National University, who built the natural semantic metalanguage: a small set of concepts she argues are present in every language. Her later books apply it to the sayings of Jesus and to Christian doctrine.[^anu-wierzbicka][^anu-press-wierzbicka]

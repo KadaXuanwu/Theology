@@ -6,6 +6,9 @@ status: sourced-stale
 tags:
   - nonbelief
   - epistemology
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Stephen Napier is a philosopher at Villanova University working on epistemology and applied ethics. His argument against non-resistant non-belief is that the putative cases are either resistant after all or not of a kind a loving God would rule out.[^philpeople-napier][^napier-2023]

@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - hiddenness
   - nonbelief
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 J. L. Schellenberg is a philosopher at Mount Saint Vincent University in Halifax. The hiddenness argument is his, and so is the term non-resistant non-belief that the vault's material on honest unbelief turns on.[^schellenberg-site]

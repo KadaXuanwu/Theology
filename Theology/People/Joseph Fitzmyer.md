@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - new-testament
   - catholic
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Joseph Fitzmyer was a Jesuit biblical scholar and a member of the Pontifical Biblical Commission. His Anchor Bible commentaries on Luke, Romans and Acts are standard reference works.[^ncr-fitzmyer][^america-fitzmyer]

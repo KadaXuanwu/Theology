@@ -187,7 +187,7 @@ sourced-with:
 - Every model that ran any agent in the sourcing run, the one running the skill included, by the name of the model that actually answered. An alias such as a family name can resolve to different versions within one run, so read the served model from the agent's own records, not from what was requested.
 - A person or term node the run sourced lists the models that worked on it: its person or term agent, the verifier and the agent that wrote it.
 - A refresh replaces the list with its own run's models. Drafting and stubs never write it, and the lint fails a stub or draft that carries it.
-- Where the models of an earlier run are not known, leave the key out and say so. The site prints the list very small at the foot of the note, as "Sourced with A + B".
+- Every `sourced` and `sourced-stale` note carries the key, and the lint warns on one that does not. Where an earlier run's models were never recorded, list Claude Opus 5.5 and Claude Sonnet 5.5: the author set that default on 24 October 2026, when the notes sourced before the key existed were filled in. The site prints the list very small at the foot of the note, as "Sourced with A + B".
 
 ## Status
 

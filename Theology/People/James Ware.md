@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - new-testament
   - resurrection
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 James Ware is a New Testament scholar, emeritus at the University of Evansville, who works on Paul and on the resurrection texts.[^evansville-ware][^loc-ware]

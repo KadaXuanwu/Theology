@@ -8,6 +8,9 @@ status: sourced-stale
 tags:
   - history-of-science
   - conflict-thesis
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Colin A. Russell was a historian of science who founded and led the Open University's department of history of science and technology. His chapter in Ferngren's *Science and Religion* is the standard short statement of why the conflict thesis fails as history.[^faraday-russell][^ou-russell]

@@ -7,6 +7,9 @@ status: sourced-stale
 tags:
   - catholic
   - marx
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
 ---
 # Description
 Charles Wackenheim is a Catholic priest of the diocese of Strasbourg and was professor of fundamental theology in the university's faculty of Catholic theology from 1975 to 1992. His first book is a study of Marx's critique of religion.[^netdba-wackenheim][^idref-wackenheim]
