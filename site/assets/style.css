@@ -2223,7 +2223,7 @@ sup.fn.is-broken {
   display: flex;
   flex-direction: column;
   width: min(28rem, calc(100vw - 2.5rem));
-  height: min(36rem, calc(100vh - 8rem));
+  height: min(42rem, calc(100vh - 8rem));
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 0.75rem;
@@ -2370,7 +2370,7 @@ sup.fn.is-broken {
     left: 0.75rem;
     bottom: 0.75rem;
     width: auto;
-    height: min(36rem, calc(100vh - 2rem));
+    height: min(42rem, calc(100vh - 2rem));
   }
   /* The panel covers the whole width on a phone, so the button underneath it
      would only be something to hit by accident. */
