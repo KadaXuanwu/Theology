@@ -1,6 +1,6 @@
-# Blame Belongs to the Parent, Not the Child
+# God Takes a Father's Rights but Not His Duties
 
-Open source checks for `Theology/Arguments Against/Blame Belongs to the Parent, Not the Child.md`. Format is in [README.md](README.md).
+Open source checks for `Theology/Arguments Against/God Takes a Father's Rights but Not His Duties.md`. Format is in [README.md](README.md).
 
 ## Run record
 Built: 2026-10-31, source-node, Source mode, to sourced
@@ -22,7 +22,7 @@ Failing balance rules: 1 on the strict count by venue only; 4 (two church statem
 
 ### V1. Whether the Lord's will caused the refusal of Eli's sons
 **Status:** open
-**Node:** `Arguments Against/Blame Belongs to the Parent, Not the Child`
+**Node:** `Arguments Against/God Takes a Father's Rights but Not His Duties`
 **Source:** P. Kyle McCarter Jr., *I Samuel*, Anchor Bible 8 (Doubleday, 1980); Ralph W. Klein, *1 Samuel*, Word Biblical Commentary 10 (Word, 1983)
 **What the node says:** Limits: "Eli is the strongest text and the least settled. The same account says his sons did not listen "for it was the Lord's will to put them to death" ... Whether that will caused the refusal was not checked in a modern commentary read in full."
 **What is open:** both commentaries were reached only as search-inside fragments. McCarter reads 1 Samuel 2:25 as causal (Yahweh intended "that they sin and die", p. 84 inferred); Klein compares it to the hardening of Pharaoh's heart, with the sentence cut off. H. P. Smith's 1899 ICC commentary reads it as hardening too.
@@ -34,7 +34,7 @@ Failing balance rules: 1 on the strict count by venue only; 4 (two church statem
 
 ### V2. Davies and Murphy known only through Hadsell
 **Status:** open
-**Node:** `Arguments Against/Blame Belongs to the Parent, Not the Child`
+**Node:** `Arguments Against/God Takes a Father's Rights but Not His Duties`
 **Source:** Brian Davies, *The Reality of God and the Problem of Evil* (Continuum, 2006), 88–101; Mark C. Murphy, *God's Own Ethics* (Oxford University Press, 2017), 70–75
 **What the node says:** Countered By: "Hadsell reports the modern objection that duties to creatures would "require seeing God as a moral agent" or are "incompatible with one of God's perfections", citing Brian Davies and Murphy."
 **What is open:** the sentence quotes Hadsell 2025, p. 832, which was read in full. Neither book was opened, so whether each says what Hadsell attributes to it is unchecked. Reviews of Murphy (Miller 2020, Duncan 2018) were read and agree in outline.
@@ -46,7 +46,7 @@ Failing balance rules: 1 on the strict count by venue only; 4 (two church statem
 
 ### V3. Modern commentary on Deuteronomy 29–30 and Ephesians 6:4
 **Status:** open
-**Node:** `Arguments Against/Blame Belongs to the Parent, Not the Child`
+**Node:** `Arguments Against/God Takes a Father's Rights but Not His Duties`
 **Source:** S. R. Driver, *Deuteronomy*, ICC, 2nd edn (1896), 352; T. K. Abbott, *Ephesians and Colossians*, ICC (1897), 178
 **What the node says:** Based On cites Driver for Israel being "reproached accordingly with its unfilial disposition" and Abbott for Ephesians 6:4 marking that "the obligation was not all on the side of the children". Limits discloses the dates.
 **What is open:** Jeffrey Tigay (JPS Torah Commentary, 1996) and Duane Christensen (WBC 6B) on Deuteronomy 29:4 and 30:6 were reached only as fragments; Tigay holds that God's renewal of the heart follows Israel's return. No modern Ephesians commentary was reached.
@@ -58,7 +58,7 @@ Failing balance rules: 1 on the strict count by venue only; 4 (two church statem
 
 ### V4. Burke 2013 page range
 **Status:** open
-**Node:** `Arguments Against/Blame Belongs to the Parent, Not the Child`
+**Node:** `Arguments Against/God Takes a Father's Rights but Not His Duties`
 **Source:** Trevor J. Burke, "The Parable of the Prodigal Father", *Tyndale Bulletin* 64/2 (2013), 217–238
 **What the node says:** the citation for the prodigal son sentence in Countered By.
 **What is open:** Crossref carries no pages. The open PDF's running heads run from 219 to 237, which fits 217–238 with a title page and a blank, but the range is not confirmed from a table of contents.

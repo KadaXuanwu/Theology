@@ -40,7 +40,7 @@ In the older forms, from [[Augustine]] and [[Thomas Aquinas|Aquinas]] to the Lut
 - Part of the dispute is over what counts as an answer. [Romans 9:19–20](https://www.biblegateway.com/passage/?search=Romans%209:19-20&version=NIV) meets the objection by denying the creature the right to talk back to God, and Augustine calls the fates of two like infants "an insoluble problem".[^augustine-enchiridion]
 
 # Related
-- [[Blame Belongs to the Parent, Not the Child]] the maker's share of the fault.
+- [[God Takes a Father's Rights but Not His Duties]] the maker's share of the fault.
 - [[God Can't Accept Sin]] whose Limits ask who answers for the mismatch.
 - [[Demanding Belief Without the Proof]] the same principle applied to belief.
 - [[Condemned for One Honest Mistake]] a penalty without a personal fault.

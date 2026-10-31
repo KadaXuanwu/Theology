@@ -42,7 +42,7 @@ The case is the careful part of what philosophers call [[Non-resistant non-belie
 - "One honest mistake" is the argument's own framing, not the tradition's. No teaching cited here condemns anyone for an honest conclusion as such: John and Westminster presume the unbelief is a fault, and Rooney places damnation in serious sin. It also mixes two complaints, the penalty's size and the evidence's sufficiency. The second is [[Demanding Belief Without the Proof]].
 
 # Related
-- [[Blame Belongs to the Parent, Not the Child]] responsibility a step back.
+- [[God Takes a Father's Rights but Not His Duties]] responsibility a step back.
 - [[The Threat of Hell Compels the People Who Believe It]] the penalty from the choice's side.
 - [[Creation Alone Doesn't Point to God]] why the looking comes up empty.
 - [[Experiential Confirmation Doesn't Distinguish Religions]] evidence only after commitment.

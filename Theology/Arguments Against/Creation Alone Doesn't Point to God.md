@@ -55,7 +55,7 @@ For people with no such awareness the verdict needs a further premise. Universal
 # Related
 - [[Demanding Belief Without the Proof]] the other half: God could have left better evidence.
 - [[Condemned for One Honest Mistake]]
-- [[Blame Belongs to the Parent, Not the Child]]
+- [[God Takes a Father's Rights but Not His Duties]]
 - [[God of the Gaps]]
 - [[Belief in God Can Be Rational Without Argument]]
 - [[Belief Isn't Directly Chosen]]
