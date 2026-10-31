@@ -1,28 +1,83 @@
 ---
 type: argument
-status: drafted
+status: sourced
 tags:
   - sin
   - free-will
   - genesis
+sourced-with:
+  - Claude Opus 5.5
+  - Claude Sonnet 5.5
+  - Claude Fable 5.1
 ---
 # Description
-God created humans inherently incapable of avoiding sin, then punished them for sinning, and despite seeing this fail with the first humans, never revised the design. This points to either incompetence or injustice, not the wisdom and goodness attributed to him.
+A God who lets humans be born with a bent toward sin, foreseeing that it makes sin certain, and then punishes them for sinning, is unjust or unwise. On the Christian doctrine of [[Original sin|original sin]], everyone born after Adam starts life in "an inherited state of disordered desire and ignorance".[^timpe-sep] The Catholic Church's *Catechism* calls the nature so passed on "inclined to sin".[^catechism] Most who hold the doctrine have held that acts of sin are then inevitable.[^timpe-sep] On [[John Calvin|Calvin]]'s account God foresaw the fall of the first man and the ruin of his descendants, and "at his own pleasure arranged it".[^calvin-institutes]
+
+In the older forms, from [[Augustine]] and [[Thomas Aquinas|Aquinas]] to the Lutheran and Reformed confessions, the inherited condition itself carries guilt or a penalty, infants included.[^augustine-enchiridion][^aquinas-de-malo][^augsburg][^westminster-confession] No one deserves a penalty for a condition he did not choose and could not avoid, so there the punishment is unjust. Views that reject inherited guilt hold that "we are justly punished only for our actual sinful actions and dispositions".[^timpe-sep] Against them the charge is that the judge foresaw and allowed the bent that made those sins certain. If God did not foresee it, making humans so was a risk that failed. If he did, calling the design unwise needs a better one to have been open to him. "Built in" means here that God made a nature able to fall and lets the fallen state pass on by birth.
 
 # Based On
-- [Genesis 2:16–17](https://www.biblegateway.com/passage/?search=Genesis%202:16-17&version=NIV) the command and death penalty.
-- [Genesis 3:16–19](https://www.biblegateway.com/passage/?search=Genesis%203:16-19&version=NIV) the punishment after the fall.
-- [Romans 5:12](https://www.biblegateway.com/passage/?search=Romans%205:12&version=NIV) sin and death entering through one man.
+- The passages in play are [Genesis 2:16–17](https://www.biblegateway.com/passage/?search=Genesis%202:16-17&version=NIV), the command and its penalty, and [Romans 5:12](https://www.biblegateway.com/passage/?search=Romans%205:12&version=NIV), on sin and death through one man. [Genesis 8:21](https://www.biblegateway.com/passage/?search=Genesis%208:21&version=NIV) and [Psalm 51:5](https://www.biblegateway.com/passage/?search=Psalm%2051:5&version=NIV) speak of an early bent to evil.
+- Augustine: "the mildest punishment of all will fall upon those who have added no actual sin, to the original sin they brought with them".[^augustine-enchiridion] Aquinas makes that penalty the loss of the vision of God, unfelt by infants who do not know what they lack.[^aquinas-de-malo] The Lutheran Augsburg Confession calls the inherited fault "truly sin, condemning and bringing eternal death".[^augsburg] The Westminster Confession, the Reformed confession of 1647, says "the guilt of this sin was imputed" to Adam's posterity.[^westminster-confession] The Council of Trent's 1546 decree on original sin has baptism remit "the guilt of original sin" in infants "who could not as yet commit any sin of themselves".[^trent-1546]
+- A 1984 paper gives a "formally valid" argument that four plausible principles rule out guilt passed on by physical inheritance. It starts from this: "it seems impossible that anyone should literally be sinful and guilty antecedent to having acted wrongly".[^quinn-1984] It notes that views dropping the physical model escape the argument, such as one on which God treats Adam's descendants as one with Adam.[^quinn-1984]
+- Augustine quotes his opponent [[Julian of Eclanum]]: "he does not sin who cannot be other than he was created".[^augustine-julian] Augustine applies the principle to the first humans: had they lacked the help they needed, "they certainly would not have fallen by their own fault".[^augustine-correptione] Calvin writes that a nature by which man "either could not or would not sin" "might have been more excellent", though God was not bound to give it.[^calvin-institutes]
+- A 2021 paper asks how one is to blame "for my poor performance in light of the poor cards I have been dealt (original inclination)". Keeping the inclination without the guilt, it says, leaves "very bad constitutive moral luck".[^anderson-2021]
+- On wisdom, [[J. L. Mackie]] asks at p. 164 why God could not "have made men such that they always freely choose the good". A God who did not know future free choices is further from evil, he writes, but at p. 176 "open to a charge of gross negligence or recklessness".[^mackie-1982]
 
 # Countered By
-- [[The Covenant Changed with Christ]] is the closest thing in the vault to an answer, since it says the design was revised. Whether that counts depends on whether a rescue after the fact answers the objection to the original build.
-- Needs the free-will defence written up properly as its own node. The standard reply is that a being capable of genuine love has to be capable of refusing, so the capacity to sin is not a flaw but the price of the thing God wanted.
+- The strong counter is the doctrine without inherited guilt, joined to the claim that each sin could have been refused. The Catechism calls original sin "sin" only "in an analogical sense", "contracted" and not "committed". It says original sin "does not have the character of a personal fault in any of Adam's descendants".[^catechism] The denial of original guilt is found in the Catholic and "many of the Orthodox traditions".[^timpe-sep] Among philosophers, views without original guilt are held by [[Oliver D. Crisp|Oliver Crisp]], [[Alvin Plantinga|Plantinga]] and [[Richard Swinburne|Swinburne]], among others.[^timpe-sep] Aquinas holds that a person "can avoid each but not every act of sin, except by grace". The failure to prepare for grace is his own, so "the fact that he cannot avoid sin without grace does not excuse him from sin".[^aquinas-st-i-ii-109] For the justified, aided by grace, Trent's 1547 decree on justification holds that "God commands not impossibilities".[^trent-1547]
+- Swinburne writes that "To inherit a debt is not however to inherit guilt". Blame, he holds, needs [[Libertarian free will|libertarian free will]], the power "to act one way or a different way despite all the causal influences to which we are subject".[^swinburne-2013] He is reported as holding sinful acts "almost unavoidable" but not inevitable.[^timpe-2023] On his view, then, each punished sin was one the sinner could have refused.
+- Plantinga's [[Free will defence|free will defence]] answers the charge in its logical form. Its heart, at p. 31, is that "it is possible that God could not have created a universe containing moral good ... without creating one that also contained moral evil".[^plantinga-1974] Two of its defenders call it "the most influential response to the logical problem of evil".[^pawl-timpe-2009] It claims only that this is possible.[^plantinga-1974] So it meets the charge that a good maker of sinners is inconsistent, not that he chose badly. It needs freedom of the libertarian kind: on a [[Compatibilism|compatibilist]] view the defence "is rendered impotent".[^pawl-timpe-2009]
+- In the Talmud God says "I created an evil inclination, ... and I created Torah as its antidote". Job's plea that God made the righteous and the wicked is called an attempt "to exempt the whole world from judgment".[^talmud] A 1927 survey calls God's creation of the impulse "the constant assertion or assumption" of the sources, at p. 481.[^moore-1927] The introduction to a 2021 volume on the evil inclination reports a recent reading of the earliest rabbinic sources. In them the inclination is a tempter living within humans, and so "answerable for human sinfulness".[^aitken-2021]
+- Original guilt "is defended by very few philosophers".[^timpe-sep] Aquinas holds that guilt "is essentially something voluntary", and that "all men born of Adam may be considered as one man".[^aquinas-st-i-ii-81] [[Michael Rea]] argues that original guilt does not contradict the principle that one is responsible only for what one could have prevented.[^timpe-sep] The clash comes from adding that no one born after Adam could have prevented his sin or their own corruption. Rea develops two theories that deny this, one realist and one drawing on [[Middle knowledge|Molinism]].[^timpe-sep] Augustine holds that had none been redeemed, "no one could justly have questioned the justice of God".[^augustine-enchiridion]
+- A 1902 Romans commentary holds at p. 346 that had man not been created "so as to need this mercy, we should never have known the Love of God".[^sanday-headlam-1902] [[The Penalty Falls on a Substitute]] and [[The Covenant Changed with Christ]] carry the rescue. It speaks to wisdom only, since mercy is not desert.
 
 # Limits
-- "Inherently incapable of avoiding sin" is stronger than the texts say. Genesis has humans capable of obeying and choosing not to. The argument would be on firmer ground pressing on the inherited condition in Romans 5:12 than on the original pair.
-- It assumes a design frame. Someone reading Genesis 3 as a story about the human condition rather than a manufacturing decision is not touched by it.
+- Against the views that reject inherited guilt the argument turns on one premise. A God who foresaw everyone would sin, and allowed the bent that makes it certain, cannot justly punish sins each could have refused. Aquinas holds that one can avoid each sin but not all of them.[^aquinas-st-i-ii-109] Trent holds that no justified person can avoid all venial sins through life without a special privilege.[^trent-1547] As a claim about what the sinner deserves the premise is at its weakest, since each act could have been refused. It is strongest as a claim about whether the one who set the odds may be the one who punishes. An account of [[Moral standing to blame|standing to blame]] applied to a judge who set the conditions of the wrong would settle it. The full texts of a 2025 paper on control and divine blame and a 2013 book on Augustinian culpability would narrow it.[^visala-vainio-2025][^couenhoven-2013] Neither was reachable in full, nor was Swinburne's 1989 *Responsibility and Atonement*. Whether "each but not every" is coherent on a libertarian view is itself disputed.[^franks-2012][^timpe-2023]
+- On standing, one paper holds that "So long as God gives us free will, then God will have the standing to blame".[^todd-2018] Another denies standing to a God who determines sin, "even if sinners deserve both blame and punishment". On Molinism, it finds standing "isn't obviously compromised" where sin is "a foreseen but undesired and unintended side effect".[^capes-2025] A third holds that Augustine's account fits the justice of damnation "only supposing a corrupted human nature", not dispositions "natural (in the sense of being original)".[^pedersen-2021] So the charge is strongest where God arranged the fall, as Calvin says, or where the bent is part of how humans were made. Swinburne holds that "the inheritance is also genetic".[^swinburne-2013] On his account that genetic proneness is not Adam's doing, so part of the bent belongs to how humans are made.[^timpe-sep]
+- The argument does not reach the first pair. Augustine holds that "the first man was able not to sin".[^augustine-correptione] Nor can the argument say God never changed course: [Ezekiel 36:26](https://www.biblegateway.com/passage/?search=Ezekiel%2036:26&version=NIV) promises "a new heart".
+- Augustine's form leans above all on a reading of Romans 5:12 that the Greek does not support. The verse ends "because all sinned", the reading a 2022 survey finds by far the most common in current exegesis.[^marecek-2022] A history of doctrine calls an exegesis built on the Old Latin "in whom" "mistaken and based on a false reading", at p. 354. At p. 363 it finds Augustine reading the verse the same way.[^kelly-1959] The 1902 commentary says at p. 132 that Paul "nowhere says how" Adam's effects were passed on.[^sanday-headlam-1902]
+- "Punish" covers three things: a penalty for one's own fault, the loss of the vision of God, and death and toil passed on from Adam. Aquinas calls the loss a fitting penalty for contracted fault, and death a penalty of original sin.[^aquinas-de-malo] [[Robert Merrihew Adams]] reports that the thesis that we are accountable only for voluntary acts "commands very wide support", and argues against it. He holds that only voluntary acts and omissions "are rightly punished by the state, or even by a university or a club". He leaves open whether God may punish involuntary states.[^adams-1985] Whether the rule reaches God's penalties, in any of the three senses, is open.
+- Part of the dispute is over what counts as an answer. [Romans 9:19–20](https://www.biblegateway.com/passage/?search=Romans%209:19-20&version=NIV) meets the objection by denying the creature the right to talk back to God, and Augustine calls the fates of two like infants "an insoluble problem".[^augustine-enchiridion]
 
 # Related
-- [[The Threat of Hell Compels the People Who Believe It]] runs the same tension from the other end: freedom is invoked to justify the design, and the penalty is what makes the freedom questionable.
-- [[The Sacrifice Requirement Is Arbitrary]]
-- [[God Can't Accept Sin]]
+- [[Blame Belongs to the Parent, Not the Child]] the maker's share of the fault.
+- [[God Can't Accept Sin]] whose Limits ask who answers for the mismatch.
+- [[Demanding Belief Without the Proof]] the same principle applied to belief.
+- [[Condemned for One Honest Mistake]] a penalty without a personal fault.
+- [[The Threat of Hell Compels the People Who Believe It]] the free will reply from the penalty's side.
+- [[No Finite Life Deserves Infinite Punishment]] the size of the penalty.
+- [[The Sacrifice Requirement Is Arbitrary]] the terms of the remedy.
+
+[^catechism]: *Catechism of the Catholic Church*, [§404 and §405](https://www.vatican.va/archive/ENG0015/__P1C.HTM).
+[^timpe-sep]: Kevin Timpe, ["Sin in Christian Thought"](https://plato.stanford.edu/entries/sin-christian/), *Stanford Encyclopedia of Philosophy*, revised 7 November 2025.
+[^calvin-institutes]: John Calvin, *Institutes of the Christian Religion*, trans. Henry Beveridge (Calvin Translation Society, 1845), I.15.8 and III.23.7.
+[^augustine-enchiridion]: Augustine, [*Enchiridion*](https://www.newadvent.org/fathers/1302.htm) 93, 95 and 99.
+[^aquinas-de-malo]: Aquinas, *Quaestiones disputatae de malo* q.5 aa.1–4.
+[^augsburg]: Augsburg Confession, art. 2, in Philip Schaff, *The Creeds of Christendom*, vol. 3 (Harper, 1877).
+[^westminster-confession]: Westminster Confession of Faith (1647) 6.3–6.4, in Philip Schaff, *The Creeds of Christendom*, vol. 3 (Harper, 1877).
+[^trent-1546]: Council of Trent, Session 5 (1546), [Decree on Original Sin](https://history.hanover.edu/texts/trent/ct05.html), canons 4 and 5, trans. J. Waterworth (Dolman, 1848).
+[^quinn-1984]: Philip L. Quinn, "Original Sin, Radical Evil and Moral Identity", *Faith and Philosophy* 1/2 (1984), 188–202.
+[^augustine-julian]: Augustine, *Against Julian* 2.1.2, trans. Matthew A. Schumacher, Fathers of the Church 35 (Fathers of the Church, Inc., 1957).
+[^augustine-correptione]: Augustine, [*De correptione et gratia*](https://www.newadvent.org/fathers/1513.htm) 11.32 and 12.33.
+[^anderson-2021]: Mark B. Anderson, "On Responsibility and Original Sin: A Molinist Suggestion", *Faith and Philosophy* 38/1 (2021), 5–25.
+[^mackie-1982]: J. L. Mackie, *The Miracle of Theism: Arguments for and against the Existence of God* (Clarendon Press, 1982).
+[^aquinas-st-i-ii-109]: Aquinas, *Summa theologiae* I-II q.109 a.8.
+[^trent-1547]: Council of Trent, Session 6 (1547), [Decree on Justification](https://history.hanover.edu/texts/trent/ct06.html), ch. 11 and canon 23, trans. J. Waterworth (Dolman, 1848).
+[^swinburne-2013]: Richard Swinburne, "Responsibility, Atonement, and Forgiveness", in *Debating Christian Theism*, ed. J. P. Moreland, C. Meister and K. A. Sweis (Oxford University Press, 2013), 361–371.
+[^timpe-2023]: Kevin Timpe, "The Inevitability of Sin", *TheoLogica* 7/2 (2023), 7–34.
+[^plantinga-1974]: Alvin Plantinga, *God, Freedom, and Evil* (Harper & Row, 1974).
+[^pawl-timpe-2009]: Timothy Pawl and Kevin Timpe, "Incompatibilism, Sin, and Free Will in Heaven", *Faith and Philosophy* 26/4 (2009), 398–419.
+[^talmud]: Babylonian Talmud, [Kiddushin 30b](https://www.sefaria.org/Kiddushin.30b) and [Bava Batra 16a](https://www.sefaria.org/Bava_Batra.16a), William Davidson Edition (Koren Talmud Bavli, Noé Edition).
+[^moore-1927]: George Foot Moore, *Judaism in the First Centuries of the Christian Era: The Age of the Tannaim*, vol. 1 (Harvard University Press, 1927).
+[^aitken-2021]: J. K. Aitken, H. M. Patmore and I. Rosen-Zvi, ["Introduction"](https://assets.cambridge.org/97811084/70827/excerpt/9781108470827_excerpt.pdf), in *The Evil Inclination in Early Judaism and Christianity*, ed. James Aitken, Hector M. Patmore and Ishay Rosen-Zvi (Cambridge University Press, 2021), 1–12.
+[^aquinas-st-i-ii-81]: Aquinas, *Summa theologiae* I-II q.81 a.1.
+[^sanday-headlam-1902]: William Sanday and Arthur C. Headlam, *A Critical and Exegetical Commentary on the Epistle to the Romans*, 5th edn (T&T Clark, 1902).
+[^visala-vainio-2025]: Aku Visala and Olli-Pekka Vainio, "Original sin, control, and divine blame: some critical reflections on the moderate doctrine of original sin", *Religious Studies* 61/1 (2025), 78–92.
+[^couenhoven-2013]: Jesse Couenhoven, *Stricken by Sin, Cured by Christ: Agency, Necessity, and Culpability in Augustinian Theology* (Oxford University Press, 2013), chs. 6–7.
+[^franks-2012]: W. Paul Franks, "Original Sin and Broad Free-Will Defense", *Philosophia Christi* 14/2 (2012), 353–371.
+[^todd-2018]: Patrick Todd, "Does God Have the Moral Standing to Blame?", *Faith and Philosophy* 35/1 (2018), 33–55.
+[^capes-2025]: Justin A. Capes, "Theological Determinism and God's Standing to Blame", *Faith and Philosophy* 41/4 (2025), 531–551.
+[^pedersen-2021]: Daniel J. Pedersen, "Blame, Damnation, and Evolved Dispositions: A Dilemma", *Modern Theology* 37/2 (2021), 458–475.
+[^marecek-2022]: Petr Mareček, ["Význam ἐφ᾿ ᾧ v Řím 5,12"](https://www.studiatheologica.eu/pdfs/sth/2021/04/03.pdf), *Studia Theologica* 23/4 (2022), 37–50.
+[^kelly-1959]: J. N. D. Kelly, *Early Christian Doctrines* (Harper & Brothers, 1959).
+[^adams-1985]: Robert Merrihew Adams, "Involuntary Sins", *The Philosophical Review* 94/1 (1985), 3–31.
