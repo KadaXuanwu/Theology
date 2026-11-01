@@ -32,7 +32,7 @@ What the argument reaches for is a being that could not have failed to exist, wi
 
 # Limits
 - The claim is wider than the record supports, and this line is reasoning rather than a sourced finding. The same theologians defend miracles and providence, and the creeds are claims about events. What holds is narrower: the contingency argument depends on no gap, so closing gaps does not touch it. That covers one argument, not theism as practised.
-- [[Nicholas Saunders]] separates general divine action, creating and keeping things in being, from special divine action, miracles and answered prayer. Reviewers report he finds the attempts to square the second with quantum theory and chaos theory still far from a satisfactory account.[^saunders-2002] The immunity claimed here covers only the first kind.
+- [[Nicholas Saunders]] separates general divine action, creating and keeping things in being, from special divine action, God bringing about physical effects that would not have happened had he not acted. In his Preface (p. xvii) he concludes that neither the quantum nor the chaos approach to special divine action "survives detailed scientific and theological scrutiny", which leaves "very little detailed contemporary support" for it.[^saunders-2002] Two reviewers report that he still rates Arthur Peacocke's whole and part model the best account on offer (p. 213), a model his Preface calls a bold metaphysical assertion.[^tracy-2003][^yong-2008] The immunity claimed here covers only the first kind.
 - [[Justin Barrett]] and [[Frank Keil]] found people using an anthropomorphic God concept inconsistent with their own stated theology, across three studies with 52, 81 and 13 subjects.[^barrett-keil-1996] Whatever this argument defends, it is not obviously the concept people run on.
 - It sits badly beside other nodes, again reasoning rather than a source. [[Religious Experience Is Evidence for God]] and [[Obedience Comes Before Evidence]] put the evidence in lived experience, and [[General Revelation Leaves People Without Excuse]] rests on [Romans 1:20](https://www.biblegateway.com/passage/?search=Romans%201:20&version=NIV) and God's nature being seen from what has been made. Both are observational claims. [[Creation Alone Doesn't Point to God]] treats unfalsifiability as fatal, so it cannot be a virtue here.
 
@@ -50,4 +50,6 @@ What the argument reaches for is a being that could not have failed to exist, wi
 [^oppy-2006]: Graham Oppy, *Arguing about Gods* (Cambridge University Press, 2006).
 [^feser-2021]: Edward Feser, "Oppy on Thomistic cosmological arguments", *Religious Studies* (2021).
 [^saunders-2002]: Nicholas Saunders, *Divine Action and Modern Science* (Cambridge University Press, 2002).
-[^barrett-keil-1996]: Justin Barrett and Frank Keil, *Cognitive Psychology* 31 (1996).
+[^tracy-2003]: Thomas Tracy, [review of *Divine Action and Modern Science*](https://ndpr.nd.edu/reviews/divine-action-and-modern-science/), *Notre Dame Philosophical Reviews*, 9 October 2003.
+[^yong-2008]: Amos Yong, "Divining 'Divine Action' in Theology-and-Science: A Review Essay", *Zygon* 43/1 (2008), 191–200.
+[^barrett-keil-1996]: Justin L. Barrett and Frank C. Keil, "Conceptualizing a Nonnatural Entity: Anthropomorphism in God Concepts", *Cognitive Psychology* 31/3 (1996), 219–247.

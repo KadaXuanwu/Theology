@@ -7,12 +7,12 @@ Carried over from the 20 September 2026 refresh of Condemned for One Honest Mist
 ---
 
 ### V1. The claim and the nodes built with it were never checked cold
-**Status:** pending
+**Status:** partial
 **Kind:** unchecked
 **Node:** `Claims/Invincible Ignorance Excuses Unbelief`, `Glossary/Invincible ignorance`, and in `People/`: Francis A. Sullivan, Francisco de Vitoria, Karl Rahner, Nicholas J. Healy Jr., Peter Berger, Ralph Martin
 **Source:** all of them
 **What the node says:** the claim carries the invincible ignorance material that used to sit in the argument, the glossary entry defines its term of art, and the person nodes carry the lives.
-**What is open:** the claim node itself was not verified in this run and is due a `source-node` run, which must carry every point in its frontmatter. The verifier marked these sentences `unopened`. In Francisco de Vitoria: the footnote `britannica-vitoria`, which cites *Encyclopaedia Britannica* (403 on curl and WebFetch). In Karl Rahner: the Stated Position quotation and its footnote `rahner-dialogue` (*Karl Rahner in Dialogue*, p. 207, borrow only, page not seen), and the footnote `britannica-rahner`, which cites *Encyclopaedia Britannica* (403). Every `fix` and `cut` in the Verdict is not yet applied to the nodes.
+**What is open:** the claim node itself was not verified in this run and is due a `source-node` run, which must carry every point in its frontmatter. The verifier marked these sentences `unopened`. In Karl Rahner: the Stated Position quotation and its footnote `rahner-dialogue` (*Karl Rahner in Dialogue*, p. 207, borrow only, page not seen).
 **What would settle it:** a verifier pass over each. The claim is due a `source-node` run, which must carry every point in its frontmatter.
 **Needs:** a source-node run
 **Tried:** 2026-11-01, clear-queue: no finder or checker; a cold verifier pass, sentence by sentence, over the glossary entry and the six person nodes. Checked, pass, fix, cut, unopened: Invincible ignorance 7/4/3/0/0; Sullivan 11/6/4/1/0; Vitoria 15/6/8/0/1; Rahner 15/5/7/0/3; Healy 11/9/2/0/0; Berger 15/9/6/0/0; Martin 12/6/6/0/0. Britannica refused curl and WebFetch; the claim node was not run.
@@ -70,5 +70,5 @@ Carried over from the 20 September 2026 refresh of Condemned for One Honest Mist
 - Citation. Description, second sentence. The book was not opened. Martin's own summary of it on p. 5 of his response carries the claim, where he writes of the temptation to presume that such people are saved, and Healy 2015, pp. 44–46, reads the book the same way. Now: `...is read too optimistically.[^martin-2012]` Change to: `...is read too optimistically.[^martin-2012][^martin-response]`
 - Citation. Work, *A Life in the Spirit*. The cited page names no book; OSV News names the memoir and its subject. Now: `*A Life in the Spirit: A Memoir*, on the early Catholic charismatic renewal.[^cwr-martin]` Change to: `*A Life in the Spirit: A Memoir*, on the early Catholic charismatic renewal.[^osv-martin]`
 
-Change for the node, not yet made: all of the above.
+Change for the node, made 2026-11-01: all of the above. Not made: the note on the Source line of Invincible ignorance that Nealy alone signs the Moral Aspect section, for which no wording was given. Nothing in the nodes rests on the two Britannica footnotes the verifier marked `unopened`, since both were removed. The Thompson sentence was narrowed when applied: "Logic textbooks use the phrase" reads "In logic teaching the phrase names", since its one source is a single college teaching page.
 **Checked by:** clear-queue run, 2026-11-01 (pipeline, not a human)

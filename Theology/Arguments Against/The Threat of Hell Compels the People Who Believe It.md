@@ -61,7 +61,7 @@ What a threat produces is fear and compliance. On [[William L. Moran|Moran]]'s r
 [^aristotle-ne]: Aristotle, *Nicomachean Ethics* III.1, 1110a4–1110a19.
 [^aquinas-st-i-ii-6]: Aquinas, *Summa theologiae* I-II q.6 aa.4–6.
 [^olsaretti-2004]: Serena Olsaretti, *Liberty, Desert and the Market* (Cambridge University Press, 2004), 139.
-[^moran-1963]: William L. Moran, "The Ancient Near Eastern Background of the Love of God in Deuteronomy", *Catholic Biblical Quarterly* 25 (1963), 77–87.
+[^moran-1963]: William L. Moran, "The Ancient Near Eastern Background of the Love of God in Deuteronomy", *Catholic Biblical Quarterly* 25/1 (1963), 77–87.
 [^grant-2019]: Deena Grant, ["How to Love God: Deuteronomy, Early Rabbinic Literature, and Gospel Texts"](https://irstudies.org/index.php/jirs/article/download/351/339), *Journal of Interreligious Studies* 26 (2019), 58–74.
 [^aquinas-st-ii-ii-19]: Aquinas, *Summa theologiae* II-II q.19 aa.2–8.
 [^augustine-1john]: Augustine, [*Homilies on the First Epistle of John*](https://www.ccel.org/ccel/schaff/npnf107.iv.xii.html), Homily 9.

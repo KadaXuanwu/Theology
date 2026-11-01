@@ -90,14 +90,13 @@ Failing balance rules: 4 (advocacy from one camp only: the confessional sources 
 ---
 
 ### V6. Page numbers read from deposited or unpaged copies
-**Status:** pending
+**Status:** corrected
 **Kind:** page
 **Node:** `Arguments Against/Creation Alone Doesn't Point to God`
 **Source:** Jason Marsh, "Darwin and the Problem of Natural Nonbelief", *The Monist* 96/3 (2013), 349–376; Aku Visala and Justin L. Barrett, "In What Senses Might Religion Be Natural?", in *The Naturalness of Belief*, ed. Paul Copan and Charles Taliaferro (Lexington Books, 2018), 67–84; Helen De Cruz and Johan De Smedt, "Intuitions and Arguments", *European Journal for Philosophy of Religion* 9/2 (2017), 57–82
 **What the node says:** Marsh at pp. 360 and 373; Visala and Barrett and De Cruz and De Smedt quoted without page numbers.
-**What is open:** the node needs p. 63 added to the De Cruz and De Smedt quotation. Marsh: pp. 360 and 373 are not checked against the printed *Monist*, and no copy of the printed article was reached. Visala and Barrett: the three quotations have no wording check in print and no pages, because the only open copy's repository record says restricted access and was not opened.
+**What is open:** nothing
 **What would settle it:** the printed versions, to confirm Marsh's pages and add pages for the two quotations.
-**Needs:** Marsh 2013, Darwin and the Problem of Natural Nonbelief
 **Tried:** 2026-11-01, clear-queue: Crossref for all three, records match the footnotes; De Cruz and De Smedt, the journal's own typeset PDF, opened in full; Visala and Barrett, Helsinki repository record marked restricted, file not opened; Internet Archive full-text search and web search for its quotations, nothing; Marsh, OpenAlex lists only a PhilPapers deposit and a CiteSeerX record, publisher PDF 403, PhilPapers 403, CiteSeerX copy 404, no Wayback capture used.
-**Verdict:** De Cruz and De Smedt, read in the journal's own typeset PDF, *European Journal for Philosophy of Religion* 9/2 (2017), pp. 57–82: "Humans are not intuitive creationists" stands on p. 63, in section 3.1 on the teleological argument. The node's frame, that seeing purpose is not yet seeing design, matches pp. 62–63. Marsh and Visala and Barrett were not read; only their records, which match the footnotes. Change for the node, not yet made: replace `"Humans are not intuitive creationists".[^decruz-2017]` with `"Humans are not intuitive creationists" (p. 63).[^decruz-2017]`
+**Verdict:** De Cruz and De Smedt, read in the journal's own typeset PDF, *European Journal for Philosophy of Religion* 9/2 (2017), pp. 57–82: "Humans are not intuitive creationists" stands on p. 63, in section 3.1 on the teleological argument. The node's frame, that seeing purpose is not yet seeing design, matches pp. 62–63. Marsh and Visala and Barrett were not read; only their records, which match the footnotes. Change for the node, made 2026-11-01: replace `"Humans are not intuitive creationists".[^decruz-2017]` with `"Humans are not intuitive creationists" (p. 63).[^decruz-2017]`
 **Checked by:** clear-queue run, 2026-11-01 (pipeline, not a human)

@@ -69,7 +69,7 @@ Where philosophers attach conditions to forgiveness, they fall on the wrongdoer:
 [^gane-2022]: Roy E. Gane, ["Sacrifice and the Old Testament"](https://www.saet.ac.uk/Christianity/SacrificeandtheOldTestament), *St Andrews Encyclopaedia of Theology*, published 17 August 2022, §2.3.
 [^schramm-2008]: Wolfgang Schramm, [*Ein Compendium sumerisch-akkadischer Beschwörungen*](https://univerlag.uni-goettingen.de/bitstream/handle/3/isbn-978-3-940344-17-5/GBAO_Bd2_schramm.pdf), Göttinger Beiträge zum Alten Orient 2 (Universitätsverlag Göttingen, 2008), 34–39, 199.
 [^feder-2011]: Yitzhaq Feder, [*Blood Expiation in Hittite and Biblical Ritual: Origins, Context, and Meaning*](https://www.sbl-site.org/assets/pdfs/pubs/064702P.front.pdf), Writings from the Ancient World Supplements 2 (Society of Biblical Literature, 2011), 1–3.
-[^maimonides-guide]: Maimonides, [*Guide for the Perplexed*](https://www.sefaria.org/Guide_for_the_Perplexed,_Part_3.32) III.32, trans. M. Friedländer (1903).
+[^maimonides-guide]: Maimonides, [*Guide for the Perplexed*](https://www.sefaria.org/Guide_for_the_Perplexed,_Part_3.32) III.32, trans. M. Friedländer, 2nd edn (Routledge, 1904), 323.
 [^hengel-1981]: Martin Hengel, *The Atonement: The Origins of the Doctrine in the New Testament*, trans. John Bowden (SCM Press, 1981).
 [^hick-1994]: John Hick, "Is the Doctrine of the Atonement a Mistake?", in *Reason and the Christian Religion: Essays in Honour of Richard Swinburne*, ed. Alan G. Padgett (Clarendon Press, 1994), 247–263.
 [^martin-1991]: Michael Martin, *The Case Against Christianity* (Temple University Press, 1991), 252–264.

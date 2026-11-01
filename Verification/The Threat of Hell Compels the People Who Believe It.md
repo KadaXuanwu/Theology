@@ -98,15 +98,15 @@ Built by the `source-node` pipeline on 15 September 2026. Every load bearing sou
 ---
 
 ### V6. Moran 1963, issue number
-**Status:** pending
+**Status:** corrected
 **Kind:** metadata
 **Node:** `Arguments Against/The Threat of Hell Compels the People Who Believe It`
 **Source:** William L. Moran, "The Ancient Near Eastern Background of the Love of God in Deuteronomy", *Catholic Biblical Quarterly* 25 (1963), 77–87
 **What the node says:** cites volume and pages, no issue.
-**What is open:** nothing about the source. The node's footnote still gives the volume without the issue.
+**What is open:** nothing
 **What would settle it:** the issue's table of contents or a library catalogue record.
 **Tried:** 2026-11-01, clear-queue: Crossref and OpenAlex, where *CBQ* 1963 is not indexed; JSTOR and IxTheo bot checks; the Tübingen KeiBi record, no issue; the journal's own index to volume 25 on Internet Archive; a third-party index of *CBQ* by issue; two citing works in print.
-**Verdict:** the issue is 25/1. The third-party index of *CBQ* by issue lists the article in 25.1 (January 1963) at 77–87, between McKenzie (71–76) and Murphy (88–93), with 25.2 opening at 119. The journal's own index to volume 25 gives the same pages and neighbours, and J. A. Thompson's *The Ancient Near Eastern Treaties and the Old Testament* cites it as "C.B.Q., XXV, 1, 1963". The issue's own contents page was not seen. Change for the node, not yet made: in footnote `moran-1963`, "*Catholic Biblical Quarterly* 25 (1963), 77–87" becomes "*Catholic Biblical Quarterly* 25/1 (1963), 77–87".
+**Verdict:** the issue is 25/1. The third-party index of *CBQ* by issue lists the article in 25.1 (January 1963) at 77–87, between McKenzie (71–76) and Murphy (88–93), with 25.2 opening at 119. The journal's own index to volume 25 gives the same pages and neighbours, and J. A. Thompson's *The Ancient Near Eastern Treaties and the Old Testament* cites it as "C.B.Q., XXV, 1, 1963". The issue's own contents page was not seen. Change for the node, made 2026-11-01: in footnote `moran-1963`, "*Catholic Biblical Quarterly* 25 (1963), 77–87" becomes "*Catholic Biblical Quarterly* 25/1 (1963), 77–87".
 **Checked by:** clear-queue run, 2026-11-01 (pipeline, not a human)
 
 ---

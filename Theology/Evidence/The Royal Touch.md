@@ -17,7 +17,7 @@ The bacterial cause of tuberculosis was identified in 1882, when [[Robert Koch]]
 
 # Shows
 - A specific supernatural mechanism for a specific named illness was set out in an official printed liturgy of a state church, practised by named monarchs on datable occasions, and later removed from that liturgy.
-- The sequence is: rite annexed 1634, last touchings 1714, rite removed from the printed materials 1732, bacterial cause identified 1882. The claim was dropped roughly 150 years before the natural explanation of the illness existed.
+- The sequence is: rite annexed 1634, last touching by a reigning monarch 1714, rite removed from the English printings of the Prayer Book 1732, bacterial cause identified 1882. The exiled Stuarts kept touching until Henry, Cardinal York, died in 1807.[^smith-2025] The reigning crown dropped the claim roughly 150 years before the natural explanation of the illness existed.
 - [[David L. Smith|David Smith]] gives the end of the practice as following the Hanoverian succession rather than following any medical finding.[^smith-2025]
 
 # Limits

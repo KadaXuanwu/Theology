@@ -23,5 +23,5 @@ Deborah Kelemen, [Are Children "Intuitive Theists"? Reasoning About Purpose and 
 
 Follow-ups: Kelemen, Rottman and Seston on scientists under time pressure,[^kelemen-2013] and Rottman and colleagues on the China replication.[^rottman-2017]
 
-[^kelemen-2013]: Kelemen, Rottman and Seston, *Journal of Experimental Psychology: General* 142 (2013).
-[^rottman-2017]: Rottman et al., *Religion, Brain & Behavior* 7 (2017).
+[^kelemen-2013]: Deborah Kelemen, Joshua Rottman and Rebecca Seston, [Professional Physical Scientists Display Tenacious Teleological Tendencies: Purpose-Based Reasoning as a Cognitive Default](https://doi.org/10.1037/a0030399), *Journal of Experimental Psychology: General* 142 (2013), 1074–1083.
+[^rottman-2017]: Joshua Rottman, Liqi Zhu, Wen Wang, Rebecca Seston Schillaci, Kelly J. Clark and Deborah Kelemen, [Cultural Influences on the Teleological Stance: Evidence from China](https://doi.org/10.1080/2153599X.2015.1118402), *Religion, Brain & Behavior* 7 (2017), 17–26.

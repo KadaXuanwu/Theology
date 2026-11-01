@@ -35,7 +35,7 @@ The objection is still in working use. [[Michiel van Elk]] objects to a recent s
 
 # Disputed By
 - Needs writing, and this section is the reason the node is a draft rather than sourced. Three real replies exist and none of them is checked yet.
-- Falsifiability failed as a line between science and everything else. The demarcation project is not the consensus position in current philosophy of science, and [[Larry Laudan]]'s paper is the one usually cited for that.[^laudan-1983] If it holds, the Popper framing above has to go and the Bayesian framing has to carry the node on its own.
+- Falsifiability failed as a line between science and everything else. Falsifiability on its own is widely criticized as that line, and [[Larry Laudan]]'s paper is the one usually cited for the stronger claim that the demarcation project itself is dead.[^laudan-1983] That stronger claim is contested, since later work defends demarcation by several criteria at once.[^hansson-2025] If it holds, the Popper framing above has to go and the Bayesian framing has to carry the node on its own.
 - No claim is tested alone. On the point Duhem and Quine press, any prediction depends on a bundle of background assumptions, so a failed prediction never tells you which member of the bundle to give up. Adding an auxiliary assumption to save a theory is something every working science does, which means the escape clause cannot be illegitimate merely for being an escape clause. What is needed is a rule separating a principled auxiliary from an ad hoc one, and that rule is the whole difficulty.
 - Unfalsifiable is not the same as unsupported. Historical and existence claims often rule nothing out about the future yet are still settled by evidence.
 
@@ -47,5 +47,6 @@ The objection is still in working use. [[Michiel van Elk]] objects to a recent s
 
 [^popper-1934]: Karl Popper, *Logik der Forschung* (1934), translated as *The Logic of Scientific Discovery* (1959).
 [^flew-1955]: Antony Flew, "Theology and Falsification", in Antony Flew and Alasdair MacIntyre (eds.), *New Essays in Philosophical Theology* (SCM Press, 1955).
-[^van-elk-2025]: Michiel van Elk, *The International Journal for the Psychology of Religion* 35 (2025), 139–144.
-[^laudan-1983]: Larry Laudan, "The Demise of the Demarcation Problem" (1983).
+[^van-elk-2025]: Michiel van Elk, "'God of the Gaps': A Critical Perspective on the Statistical Inference Theory of Religion", *The International Journal for the Psychology of Religion* 35/3 (2025), 139–144.
+[^laudan-1983]: Larry Laudan, "The Demise of the Demarcation Problem", in *Physics, Philosophy and Psychoanalysis*, ed. R. S. Cohen and Larry Laudan (Reidel, 1983), 111–127.
+[^hansson-2025]: Sven Ove Hansson, "Science and Pseudo-Science", *Stanford Encyclopedia of Philosophy*, revised 28 July 2025, sections 4.3 and 5.

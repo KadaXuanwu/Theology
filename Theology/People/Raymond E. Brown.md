@@ -2,7 +2,7 @@
 type: person
 kind: biblical scholar
 born: 22 May 1928, the Bronx, New York
-died: 8 August 1998, Menlo Park, California
+died: 8 August 1998, Redwood City, California
 location: Union Theological Seminary, New York, and St Mary's Seminary, Baltimore
 status: sourced-stale
 tags:
@@ -26,4 +26,4 @@ None found in print. He was ordained in 1953 and sat on the Pontifical Biblical 
 
 
 [^brown-biography]: Ronald D. Witherup and Michael L. Barré, ["Biography and Bibliography of the Publications of Raymond E. Brown, S.S."](https://raymondebrownss.weebly.com/uploads/2/0/5/9/20590956/raymond_brown_life_in_abundance_253-289.pdf), appendix to *Life in Abundance*, 253–289. Source of the birth and death dates, the posts and the publication list. The Library of Congress name authority heading is "Brown, Raymond E. (Raymond Edward), 1928-1998".
-[^sulpicians-brown]: Society of the Priests of Saint Sulpice, ["Brown, Father Raymond E., S.S."](https://sulpicians.org/project/brown-father-raymond-e-s-s/). Witherup places his death at St Patrick's Seminary in Menlo Park; press obituaries reported a hospital in nearby Redwood City and could not be opened to check.
+[^sulpicians-brown]: Society of the Priests of Saint Sulpice, ["Brown, Father Raymond E., S.S."](https://sulpicians.org/project/brown-father-raymond-e-s-s/). Witherup (p. 256) writes that he died at St Patrick's Seminary in Menlo Park, where he lived. Fitzmyer's [*New Catholic Encyclopedia* entry](https://www.encyclopedia.com/religion/encyclopedias-almanacs-transcripts-and-maps/brown-raymond-edward) has him die of a heart attack at Sequoia Hospital in Redwood City, and Phyllis Trible's tribute in the *Christian Century* (7 October 1998) also gives Redwood City.

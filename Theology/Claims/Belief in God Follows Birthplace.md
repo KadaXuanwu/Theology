@@ -66,7 +66,7 @@ Maitzen set Saudi Arabia, "at least 95 per cent theistic", against Thailand, "at
 [^gervais-2021]: Will M. Gervais, Maxine B. Najle and Nava Caluori, "The Origins of Religious Disbelief: A Dual Inheritance Approach", *Social Psychological and Personality Science* 12/7 (2021), 1369–1379.
 [^blanton-2026]: Andrew Blanton, "Non-resistant non-belief is pervasive", *Religious Studies* 62/3 (2026), 547–567.
 [^blanton-2025]: Andrew Blanton, "Divine hiddenness, the demographics of theism, and mutual epistemic dependence: a response to Max Baker-Hytch", *Religious Studies* 61/3 (2025), 700–716.
-[^baker-hytch-2016]: Max Baker-Hytch, "Mutual epistemic dependence and the demographic divine hiddenness problem", *Religious Studies* 52/3 (2016), 375–394.
+[^baker-hytch-2016]: Max Baker-Hytch, "Mutual epistemic dependence and the demographic divine hiddenness problem", *Religious Studies* 52/3 (2016), 375–394; accepted manuscript, https://ora.ox.ac.uk/objects/uuid:41f0e000-2ab3-4bc7-860a-a7adebaa81f5/files/m5004d584c93f1de3e7437b1116e33658.
 [^sep-hiddenness]: Daniel Howard-Snyder and Adam Green, ["Hiddenness of God"](https://plato.stanford.edu/entries/divine-hiddenness/), *Stanford Encyclopedia of Philosophy*, revised 8 July 2022.
 [^schellenberg-2017]: J. L. Schellenberg, "Divine hiddenness: Part 2 (recent enlargements of the discussion)", *Philosophy Compass* 12/4 (2017), e12413.
 [^marsh-2008]: Jason Marsh, "Do the demographics of theistic belief disconfirm theism? A reply to Maitzen", *Religious Studies* 44/4 (2008), 465–471.

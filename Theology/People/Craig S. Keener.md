@@ -1,7 +1,7 @@
 ---
 type: person
 kind: biblical scholar
-born: 1960
+born: 4 July 1960
 location: Asbury Theological Seminary, Wilmore
 status: sourced-stale
 tags:
@@ -24,7 +24,7 @@ Craig S. Keener is a New Testament scholar at Asbury Theological Seminary who wr
 He describes himself as a former atheist and says that witnessing a miracle would not have converted him instantly but "would have gotten my attention and turned me into an inquirer".[^keener-ct]
 
 
-[^asbury-keener]: Asbury Theological Seminary, ["Craig Keener"](https://asburyseminary.edu/faculty/craig-keener/), faculty page. He has held the F. M. and Ada Thompson chair since 2011, took his doctorate at Duke in 1991, and was president of the Evangelical Theological Society in 2020. The birth year is from Library of Congress name authority n92072611; a full date of 4 July 1960 circulates but is uncited.
+[^asbury-keener]: Asbury Theological Seminary, ["Craig Keener"](https://asburyseminary.edu/faculty/craig-keener/), faculty page. He has held the F. M. and Ada Thompson chair since 2011, took his doctorate at Duke in 1991, and was president of the Evangelical Theological Society in 2020. The date of birth, 4 July 1960, is from Library of Congress name authority n92072611 (field 046), which takes it from the publisher's CIP galley for *Paul, Women & Wives* (1992).
 [^keener-site]: Craig Keener, ["About Craig"](https://craigkeener.com/about-craig/), his own site.
 [^keener-2003]: Craig S. Keener, *The Gospel of John: A Commentary*, 2 vols (Hendrickson, 2003).
 [^keener-2011]: Craig S. Keener, *Miracles: The Credibility of the New Testament Accounts*, 2 vols (Baker Academic, 2011).
