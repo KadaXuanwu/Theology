@@ -42,7 +42,9 @@ The repo is public. Never commit a supplied file and never ask the user to. See 
 
 ## Verification queue
 
-A node never says whether a source was checked. It cites the source and stops. Everything the pipeline could not confirm goes to `Verification/<Node Title>.md` at the repo root instead, one entry per open question, for a human to approve or correct. See `Verification/README.md` for the entry format. Add a single pointer bullet to the node's last source bearing section and nothing more.
+A node never says whether a source was checked. It cites the source and stops. Everything the pipeline could not confirm goes to `Verification/<Node Title>.md` at the repo root instead, one entry per open question. See `Verification/README.md` for the entry format, with its Kind, Needs and Tried lines. Add a single pointer bullet to the node's last source bearing section and nothing more.
+
+Two kinds of entry are never written. A missing title, forename, volume, issue or page range is looked up through the record routes in `references/access-routes.md` and goes in the footnote; it is queued only if every record route failed. A source read in a copy other than the version of record is cited as that copy under citation style rule 8, and is not queued. Every entry that is written gets its full attempt from `clear-queue` before the commit, so nothing reaches the gap list untried.
 
 This applies to source verification only. A section that is simply not written yet still says so in the node, the way `Origins` and `Disputed By` already do on several claims. That is a content gap, not a verification state.
 
@@ -162,7 +164,7 @@ Then link the first prose mention of each person and each term in the target nod
 
 Set the status. `sourced` when every factual sentence passed or was fixed, the body is at least 500 words, and every heading is filled. Otherwise the node keeps `drafted`, and the delivery says what stands between it and `sourced`. The rest of the frontmatter is written back as it was, `points` included. On `sourced`, write `sourced-with` as references/templates.md gives it, on the node and on every person and term node the run sourced.
 
-Write the finished node to `Theology/<Folder>/<Exact Title>.md`. Write the run record at the top of `Verification/<Node Title>.md`, with its entries under it. Run `npm run check`. Then commit and push.
+Write the finished node to `Theology/<Folder>/<Exact Title>.md`. Write the run record at the top of `Verification/<Node Title>.md`, with its entries under it. Run `.agents/skills/clear-queue/SKILL.md` on that file, with the node as named and this run's own attempts as the first Tried line of each entry. Run `npm run check`. Then commit and push.
 
 Then post to chat:
 
@@ -173,7 +175,7 @@ Then post to chat:
 5. The run record's counts and ledger as the verifier recounted them, any failing rule, and the effort verdict
 6. Any new Claim or Evidence node the research surfaced that is worth splitting out, with a one line reason
 7. Any change another node needs, written out as a block the user can paste
-8. The Verification entries added, one line each, and any lint warning left standing with the reason
+8. The Verification entries added and where `clear-queue` left each, one line each, and any lint warning left standing with the reason
 
 Keep this wrap up short. The node is the deliverable.
 

@@ -49,6 +49,6 @@ A drafted node names candidate sources: a work, an author, a year, and the acces
 
 - Web search here is weighted to a US index. Non English and continental European scholarship is under-surfaced rather than absent. Search for it deliberately.
 - JSTOR, Brill, De Gruyter, Mohr Siebeck, Cambridge Core and most journal and monograph paywalls cannot be fetched. Expect rule 5 often.
-- Worth trying before falling back: museum catalogues, Archive.org and Open Library, SBL's open access series, Persée for French work, university repositories and author uploaded copies, DOAJ.
+- `access-routes.md` lists the routes by what is missing, with what each can confirm. Also worth trying before falling back: museum catalogues, Archive.org and Open Library, SBL's open access series, Persée for French work, university repositories and author uploaded copies, DOAJ.
 
 Say all of this plainly in the run record and the delivery. A citation chain that looks research grade but was never opened is worse than an honest gap.

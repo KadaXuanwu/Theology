@@ -2868,6 +2868,58 @@ console.log("the lint reads the rules the templates promise")
   check("a source URL keeps its own brackets and loses the link's", urls.join(" ") === "https://en.wikisource.org/wiki/Clarke,_Samuel_(1675-1729) https://example.org/x", urls.join(" "))
 }
 
+console.log("the queue reads its own entries and lists the gaps")
+{
+  const { anchor, lintEntry, nodesOf, parseQueue, renderGaps } = await import("./queue.mjs")
+  const file = [
+    "# A Node",
+    "",
+    "## Run record",
+    "Built: 2026-11-01, source-node, Source mode",
+    "**Status:** not an entry",
+    "",
+    "---",
+    "",
+    "### V1. Smith's page, and which edition",
+    "**Status:** partial",
+    "**Kind:** page",
+    "**Node:** `Claims/A Node`, and `People/Jane Smith`",
+    "**Source:** Smith, *Book* (Press, 1990)",
+    "**What is open:** the page",
+    "**Needs:** Smith 1990, Book",
+    "**Tried:** 2026-11-01, clear-queue: full text search found the phrase",
+    "2026-11-02, clear-queue: no preview",
+    "",
+    "---",
+    "",
+    "### V2. A record",
+    "**Status:** confirmed",
+    "**Node:** `Claims/A Node`",
+    "**Source:** x",
+    "**What is open:** nothing",
+  ].join("\r\n")
+  const [one, two, ...rest] = parseQueue(file, "A Node.md")
+  check("entries start at their headings, not at the run record", one?.id === "V1" && two?.id === "V2" && rest.length === 0)
+  check("a field runs on over the lines under it", one.fields.Tried.split("\n").length === 2, one.fields.Tried)
+  check("every node an entry names is read", nodesOf(one).join("|") === "Claims/A Node|People/Jane Smith")
+  check("a well formed gap has nothing to say", lintEntry(one).fails.length + lintEntry(one).warns.length === 0)
+  const bad = { ...one, fields: { ...one.fields, Status: "done", Kind: "book" } }
+  check("an unknown status fails", lintEntry(bad).fails.some((f) => /status "done"/.test(f)))
+  check("so does an unknown kind", lintEntry(bad).fails.some((f) => /kind "book"/.test(f)))
+  check("a node the vault lacks fails", lintEntry(one, (n) => n !== "People/Jane Smith").fails.some((f) => /People\/Jane Smith/.test(f)))
+  const untried = { ...one, fields: { ...one.fields, Tried: undefined, Kind: undefined } }
+  check("a gap not yet tried is a warning", lintEntry(untried).warns.includes("never tried") && lintEntry(untried).warns.includes("no kind"))
+  check("a settled entry needs no attempt or kind", lintEntry(two).warns.length === 0)
+  check("anchors follow GitHub's", anchor("V1. Smith's page, and which edition") === "v1-smiths-page-and-which-edition")
+  const pending = { ...one, id: "V3", title: "Wrong date", fields: { ...one.fields, Status: "pending" } }
+  const gaps = renderGaps([one, two, pending])
+  check("the gap list counts what is open", /1 pending, 1 partial, 0 open\. 1 closed\./.test(gaps), gaps.split("\n")[4])
+  check("a known error comes first under its node", gaps.indexOf("[V3]") < gaps.indexOf("[V1]"))
+  check("a settled entry is not a gap", !gaps.includes("[V2]"))
+  check("one work closes every gap that needs it", /\*\*Smith 1990, Book\*\* closes 2:/.test(gaps))
+  check("and the links reach the entry", gaps.includes("(A%20Node.md#v1-smiths-page-and-which-edition)"))
+}
+
 console.log("a switch in the header shows only sourced notes")
 {
   const dist = resolve(repoRoot, "dist")

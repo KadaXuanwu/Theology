@@ -1,6 +1,6 @@
 # Node skills
 
-Three skills build the nodes of the Theology vault, one per step of a node's life. A node starts as a `stub`, the author's own notes written by hand from the folder's `_Template.md`. `draft-node` turns the stub into a `drafted` node. `source-node` takes the draft to `sourced`. A `sourced` node that an older pipeline built, or that has something wrong in it, is marked `sourced-stale` by hand, and `refresh-node` takes it back to `sourced`. The gates each status has to pass are in `.agents/skills/source-node/references/templates.md`, section "Status".
+Three skills build the nodes of the Theology vault, one per step of a node's life, and a fourth, `clear-queue`, works the gaps they leave in `Verification/`. A node starts as a `stub`, the author's own notes written by hand from the folder's `_Template.md`. `draft-node` turns the stub into a `drafted` node. `source-node` takes the draft to `sourced`. A `sourced` node that an older pipeline built, or that has something wrong in it, is marked `sourced-stale` by hand, and `refresh-node` takes it back to `sourced`. The gates each status has to pass are in `.agents/skills/source-node/references/templates.md`, section "Status".
 
 The point of the vault is not to settle whether Christianity is true. It is to make every argument traceable back to the claims and evidence it rests on, so a reader can follow the reasoning themselves. The subject is Christianity; the evidence comes from theology, biblical studies, archaeology, history, philosophy, psychology, medicine and the natural sciences, and the sourcing pipeline commissions whichever of those a node needs.
 
@@ -45,6 +45,18 @@ The full pipeline's standard with less of its work, because the node has already
 
 A person or term target takes a short path: the mechanical pass, one person or term agent, the verifier, the arbiter. Every change to old text reaches the delivery quoted with the finding that caused it, and a node with a sentence left for the user stays `sourced-stale` until the user rules.
 
+## clear-queue
+
+Every entry in `Verification/` gets a full attempt before anyone is asked to look at it. It runs at the end of every `source-node` and `refresh-node` run on that node's file, and on its own over one file or the whole queue.
+
+| Step | Agent | Job |
+| --- | --- | --- |
+| 1 | Finder | Works the routes in `references/access-routes.md` for each entry's kind: records for citation details, free copies of articles, full-text search for books. Logs every route it tried |
+| 2 | Checker, cold | Gets only where the finder says the answer is, re-opens it and rules `confirmed`, `partial`, `wrong`, `open` or `unresolvable`, held to what each kind of access can confirm |
+| 3 | Arbiter | Narrows each entry to what is still missing, names the work that would close it, fixes citation details in the node when the node was named, and writes every other change as `pending` |
+
+`npm run queue` writes `Verification/_Gaps.md` from the entries: every gap by node, and by the book or article that would close it. `npm run check` fails on a malformed entry and warns when the list is out of date.
+
 ## Rules the pipeline enforces
 
 - Every factual sentence carries a source the verifier can open. No retrievable source, no entry.
@@ -55,7 +67,7 @@ A person or term target takes a short path: the mechanical pass, one person or t
 - A `sourced` node's body runs 500 to 2000 words, and most sit around 1000. A stub, a draft or a person node can be any length.
 - At least half the sources are academic register. Advocacy publishing never carries a fact on its own.
 - Gaps are stated plainly instead of padded. A missing counter position is reported, not manufactured.
-- A node never says whether a source was checked. What the pipeline could not confirm goes to `Verification/<Node Title>.md` at the repo root, one entry per open question, for a human to settle. The same file opens with the run record: fields, ledger, the verifier's counts, whether the two rulings agreed, the crux and the strong counter. Short and complete; the cards and claim lists are not kept.
+- A node never says whether a source was checked. What the pipeline could not confirm goes to `Verification/<Node Title>.md` at the repo root, one entry per open question. `clear-queue` makes a full attempt on each, and what it cannot close stays listed in `Verification/_Gaps.md`. The same file opens with the run record: fields, ledger, the verifier's counts, whether the two rulings agreed, the crux and the strong counter. Short and complete; the cards and claim lists are not kept.
 - The counter gets the same effort as the main case, not the same length. Its best defender is named and its best source sits at the same tier and register. A lopsided field is reported as lopsided.
 - A term of art is never explained in the prose. It links its entry in `Glossary/`, and the site shows the definition on hover.
 - `npm run check` runs `site/lint.mjs` over the vault. Template headings, link direction, dashes, footnotes, inline lists and dead source URLs fail the build; length and sentence length warn.
@@ -70,6 +82,9 @@ A person or term target takes a short path: the mechanical pass, one person or t
     agents/drafter.md
   refresh-node/
     SKILL.md               sourced-stale to sourced, no agents or references of its own
+  clear-queue/
+    SKILL.md               works the gaps in Verification/
+    agents/finder.md, agents/checker.md
   source-node/
     SKILL.md               drafted to sourced, verify only, touch up
     agents/                one prompt file per agent: librarian, four researchers, the domain researcher, three debaters, writer, verifier, person, term
@@ -86,7 +101,7 @@ The librarian, the person and term researchers, the domain researchers and the d
 
 Both skills follow the [Agent Skills](https://agentskills.io/specification) standard and sit in `.agents/skills/`, the folder [Codex](https://developers.openai.com/codex/skills/), [Cursor](https://cursor.com/docs/context/skills), [Gemini CLI](https://geminicli.com/docs/cli/skills/) and [GitHub Copilot](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills) scan at startup, so a new session picks both up on its own. An agent that does not scan that folder is pointed at it by `AGENTS.md` and opens the `SKILL.md` when asked. To use the skills in other projects on one machine, copy both folders to `~/.agents/skills/`, which the same four agents read. `draft-node` and `refresh-node` read their references and agents from `source-node`, so the three folders travel together.
 
-Ask the agent to draft, source or refresh a node and the right skill triggers on its own.
+Ask the agent to draft, source or refresh a node, or to clear the verification queue, and the right skill triggers on its own.
 
 ## Adapting it
 

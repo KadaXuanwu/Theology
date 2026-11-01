@@ -9,7 +9,8 @@
     "serve": "node site/serve.mjs",
     "test": "node site/test.mjs",
     "linkcheck": "node site/linkcheck.mjs",
-    "check": "node site/build.mjs && node site/test.mjs && node site/linkcheck.mjs && node site/lint.mjs"
+    "queue": "node site/queue.mjs",
+    "check": "node site/build.mjs && node site/test.mjs && node site/linkcheck.mjs && node site/lint.mjs && node site/queue.mjs --check"
   },
   "dependencies": {
     "marked": "^18.0.10"

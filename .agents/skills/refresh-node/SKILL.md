@@ -45,7 +45,7 @@ Set up the scratch directory outside the vault:
 - `existing.md`: the body, verbatim. Every sentence in it is protected.
 - `notes.md`: the user's message, if it names anything. Otherwise empty. The node is not notes; it is the case as it stands.
 
-Read `Verification/<Node Title>.md` if it exists. Its open entries go to the researcher whose scope owns each one as leads, and its run record, if any, says what the last run commissioned. Collect supplied sources as `source-node` does: read at `full` access, no tier or register for being supplied, never committed.
+Read `Verification/<Node Title>.md` if it exists. Its `open`, `partial` and `pending` entries go to the researcher whose scope owns each one as leads, with their Tried lines so nobody repeats a dead route, and its run record, if any, says what the last run commissioned. Collect supplied sources as `source-node` does: read at `full` access, no tier or register for being supplied, never committed.
 
 ## Step 2: Mechanical pass
 
@@ -194,7 +194,7 @@ The node goes to `sourced` when all of these hold:
 
 Otherwise the node keeps `sourced-stale`. Keep every fix that was made, and say in the run record and the delivery which line failed and why.
 
-Write the node to `Theology/<Folder>/<Exact Title>.md`. The frontmatter is as it was, `points` included, with `status` set here, the fields the run filled, and `sourced-with` replaced by this run's models as references/templates.md gives it. Write the run record at the top of `Verification/<Node Title>.md`, above any entries already there, in the form `Verification/README.md` gives, with `Built: <date>, refresh-node, Refresh mode` and the outcome on that line; `Rulings` reads `not run, <why>` when the debate was skipped. On a person or a term the record is the `Built`, `Sentences` and `Lint` lines, and the file is written only when an entry is open or a sentence was removed. Run `npm run check`. Commit and push with a one line message.
+Write the node to `Theology/<Folder>/<Exact Title>.md`. The frontmatter is as it was, `points` included, with `status` set here, the fields the run filled, and `sourced-with` replaced by this run's models as references/templates.md gives it. Write the run record at the top of `Verification/<Node Title>.md`, above any entries already there, in the form `Verification/README.md` gives, with `Built: <date>, refresh-node, Refresh mode` and the outcome on that line; `Rulings` reads `not run, <why>` when the debate was skipped. On a person or a term the record is the `Built`, `Sentences` and `Lint` lines, and the file is written only when an entry is open or a sentence was removed. Run `.agents/skills/clear-queue/SKILL.md` on that file, with the node as named and this run's own attempts as the first Tried line of each new entry. Run `npm run check`. Commit and push with a one line message.
 
 Then post to chat:
 
@@ -206,7 +206,7 @@ Then post to chat:
 6. One line per point: carried where with which source, or not carried and why
 7. Frontmatter filled with its sources, and the person and term nodes created
 8. The run record's counts and ledger, any failing rule, the effort verdict and the `CRUX` line
-9. The `Verification/` entries added or closed, one line each, and any lint warning left standing with the reason
+9. The `Verification/` entries added or closed and where `clear-queue` left each, one line each, and any lint warning left standing with the reason
 10. Any change another node needs, as a block to paste
 
 Keep it short. The node is the deliverable.
