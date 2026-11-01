@@ -1,6 +1,6 @@
 ---
 name: citation-year-drift
-description: Journal years in this vault drift because Cambridge and Wiley stamp the DOI at online-first, not at the issue.
+description: Journal years drift because Cambridge and Wiley stamp the DOI at online-first; journals take the issue year from Crossref, books the year on their copyright page.
 metadata:
   type: project
 ---
@@ -25,3 +25,5 @@ O'Connell's DOI is literally `10.1111/j.1468-2265.2011.00705.x` for a 2013 issue
 **Not every mismatch is drift.** `[^calvin-institutes]` read `I.iii` in one node and `I.3–5` in another, which looked like the same failure and was not. Opening the *Institutes* showed both were right and pointing at different spans: I.3 is the implanted knowledge argued from the universality of religion, citing Cicero and Plato and no scripture at all, which is what `Creation Alone` rests on; I.4 adds the smothering and I.5 the knowledge conspicuous in creation, so `General Revelation` needs all three. Only the numeral was wrong, since the vault writes divisions in arabic (`Ia.104.1`, `Cur Deus Homo I.21`). Both footnotes now name the chapters, so nobody re-flags them.
 
 The lesson is worth more than the fix: a metadata lookup settles a journal year, and nothing else. A primary text cited by division has to be opened.
+
+**Books take the imprint year.** On 2026-11-01 the user chose 2002 for Murray's "Deus Absconditus" in *Divine Hiddenness: New Essays*: Crossref and Cambridge Core give a December 2001 print date, the book's own copyright page says "First published 2002". So Crossref settles a journal issue's year, and a book takes the year its copyright page prints. Now citation style rule 9.

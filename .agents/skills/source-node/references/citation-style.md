@@ -101,6 +101,7 @@ Never "and colleagues" or "and others". They read as prose, not citation, and th
    Author, "Title", *Journal* 61/3 (2025), 650–664; accepted manuscript, <URL>.
    ```
    This is part of the citation, not an access note under rule 7. It tells the reader which text the words come from, so the version is never left open in `Verification/`.
+9. **A book's year is the one its copyright page prints.** A publisher's database can date the release a month ahead: Crossref and Cambridge Core give *Divine Hiddenness: New Essays* December 2001, its imprint says "First published 2002", and the vault cites 2002. A journal article takes its issue's year, which Crossref's print date gives and the DOI often does not.
 
 ## Scripture is not a footnote
 

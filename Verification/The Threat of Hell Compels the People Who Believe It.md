@@ -127,17 +127,17 @@ Built by the `source-node` pipeline on 15 September 2026. Every load bearing sou
 ---
 
 ### V8. Murray 2001, published pages not seen
-**Status:** open
+**Status:** partial
 **Kind:** copy
 **Node:** `Arguments Against/The Threat of Hell Compels the People Who Believe It`
 **Source:** Michael J. Murray, "Deus Absconditus", in *Divine Hiddenness: New Essays*, ed. Daniel Howard-Snyder and Paul K. Moser (Cambridge University Press, 2001), 62–82, DOI 10.1017/CBO9780511606090.004
 **What the node says:** that the chapter answers only for people indifferent enough to threats to receive a clear revelation and stay free, and does not take up the believer convinced of hell through teaching.
-**What is open:** the printed chapter's wording at the four passages read in the manuscript of 21 August 2001 (manuscript pp. 2, 17, 20–21 and 24), and the printed pages they fall on. Under citation style rule 8 the footnote could instead cite the manuscript, once the address it was read at is found again. Also the year: Crossref's print date is 3 December 2001 and Cambridge Core gives 2001, but the book's own imprint page reads "First published 2002". The contents page confirms pp. 62–82.
+**What is open:** the printed chapter's wording at the four passages read in the manuscript of 21 August 2001 (manuscript pp. 2, 17, 20–21 and 24), and the printed pages they fall on. Under citation style rule 8 the footnote could instead cite the manuscript, once the address it was read at is found again.
 **What would settle it:** the printed chapter, for the wording at those passages.
-**Needs:** Murray 2001, Deus Absconditus
+**Needs:** Murray 2002, Deus Absconditus
 **Tried:** 2026-11-01, clear-queue: Crossref and OpenAlex (pp. 62–82, no open copy); the Cambridge Core chapter page, text gated, and the book's front matter PDF, read for its contents and imprint; Internet Archive, where the volume's scan is dark and full-text search finds only citing works; Google Books bot check; PhilPapers 403; no author copy found.
-**Verdict:**
-**Checked by:**
+**Verdict:** pp. 62–82 confirmed by the book's contents page and Crossref. The year is 2002, the year the book's own imprint page prints ("First published 2002"), where Crossref and Cambridge Core give December 2001; the author chose the imprint year on 1 November 2026, and the node and the Michael J. Murray person node now cite 2002, in line with every other citation of the volume in the vault.
+**Checked by:** clear-queue run, 2026-11-01 (pipeline, not a human); the year by the author
 
 ---
 
