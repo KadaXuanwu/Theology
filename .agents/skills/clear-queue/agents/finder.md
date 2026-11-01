@@ -13,7 +13,7 @@ Your very next action is a file write: create the output file at the path you we
 
 ## Rules
 
-- Never sign in, register, borrow a book, or pass a bot check. A page that answers with a challenge, a login or a refusal is a dead route: note it and move on. Do not change the user agent or other headers to get past a refusal.
+- Never sign in, register, borrow a book, or pass a bot check. A page that answers with a challenge, a login or a refusal is a dead route: note it and move on. Do not change the user agent or other headers to get past a refusal, and do not reach a refused page through a Wayback capture: a capture counts only where the live address is gone. A whole in-copyright book a user uploaded is searched, never downloaded or read through, and a file whose repository record says restricted is not opened.
 - Never put the user's name or email into a request or a form.
 - Never invent a page, a DOI, a volume or an issue. Report a page only when you saw it printed on the page, in the source's own pagination, or in a record that states it.
 - Name the version of every copy: published, accepted manuscript, submitted manuscript, reprint, web text, a scan of another printing or edition.

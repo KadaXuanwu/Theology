@@ -84,7 +84,7 @@ Every entry in `Verification/` gets a full attempt before anyone is asked to loo
     SKILL.md               sourced-stale to sourced, no agents or references of its own
   clear-queue/
     SKILL.md               works the gaps in Verification/
-    agents/finder.md, agents/checker.md
+    agents/finder.md, agents/checker.md, agents/arbiter.md
   source-node/
     SKILL.md               drafted to sourced, verify only, touch up
     agents/                one prompt file per agent: librarian, four researchers, the domain researcher, three debaters, writer, verifier, person, term

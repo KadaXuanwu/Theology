@@ -12,7 +12,8 @@ Your very next action is a file write: create the output file at the path you we
    - does it confirm what the node says, with the page or section
    - does it confirm part of it, and what does it leave
    - does it show the node wrong: then quote the node's words, say what the source says instead, and write the replacement for the node, sentence or citation
-4. Hold the ruling to the table "What a finding earns" in `access-routes.md`. A snippet never confirms what an author argues. An abstract confirms the abstract and not the body. A review reports a book second hand. A record confirms the citation and nothing it says.
+4. Use only copies the route rules in `access-routes.md` allow. A Wayback capture of a page whose live address answers with a bot check, and a file marked restricted, count as not opened. A user's upload of a whole in-copyright book counts as snippets from its full-text search.
+5. Hold the ruling to the table "What a finding earns" in `access-routes.md`. A snippet never confirms what an author argues. An abstract confirms the abstract and not the body. A review reports a book second hand. A record confirms the citation and nothing it says.
 
 ## Rulings
 

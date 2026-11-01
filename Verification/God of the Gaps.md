@@ -22,50 +22,62 @@ People and terms: Charles Darwin, William Paley, Miles K. Donahue and Michał He
 ---
 
 ### V1. Coulson 1955, the sentence and its page
-**Status:** open
+**Status:** partial
+**Kind:** page
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** C. A. Coulson, *Science and Christian Belief* (Chapel Hill: University of North Carolina Press, 1955)
 **What the node says:** Charles Coulson, often credited with the phrase, wrote in 1955 "There is no 'God of the gaps'", adding that gaps of that kind have "the unpreventable habit of shrinking". Cited at p. 20.
-**What is open:** the page has still not been seen. In the 2026-10-21 refresh it was read from the running heads of a continuous full text snippet of the 1955 printing, and the wording is confirmed in a quotation in *America* 95/1 (7 April 1956), 40. Oleksowicz, *Scientia et Fides* 2/1 (2014), 101, gives p. 20 for the first clause only. Larmer 2002, note 1, cites the same sentence at p. 32 of the 1958 Fontana printing, and the vault's Coulson person node gives p. 22, so the disagreement may be edition drift.
+**What is open:** the page. It is not seen in any copy: both 1955 printings are lending scans that answer search snippets only. Larmer 2002, note 1, gives p. 32 for the 1958 Fontana printing, and the vault's Coulson person node gives p. 22. The finder suggests the p. 22 belongs to a later sentence, which McGrath 2008 and Trigg 1998 cite as p. 22 after citing p. 20 for this one; the checker did not test that.
 **What would settle it:** the 1955 UNC Press or 1955 OUP printing in hand. Confirm the page, and confirm both clauses sit on it.
-**Verdict:**
-**Checked by:**
+**Needs:** Coulson 1955, Science and Christian Belief
+**Tried:** 2026-11-01, clear-queue: Internet Archive full text search of the whole sentence (one unbroken run in the UNC and OUP 1955 lending scans, no page given); page map files (403, 401); search inside (not available); Google Books (429, then records with no preview); web search (no page text); citing works that give p. 20 (five at snippet, Torrance 2023 in full).
+**Verdict:** Both clauses stand together as one unbroken sentence in full text snippets of the UNC Press 1955 scan, with no running head between them, and the node's two quotations match that wording. The OUP 1955 scan reads the same. No page image or page map was open, so no page was seen. Torrance, *Zygon* 58/1 (2023), 65, read in full, cites p. 20 for the sentence just before this one, and Trigg, *Rationality and Religion* (1998), note 7, gives p. 20 at snippet. Those are citing works and adjacency, not the page seen.
+**Checked by:** clear-queue run, 2026-11-01 (pipeline, not a human)
 
 ---
 
 ### V2. Barnes 1933, the earliest fixed use
-**Status:** open
+**Status:** partial
+**Kind:** page
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** E. W. Barnes, *Scientific Theory and Religion* (Cambridge University Press, 1933)
 **What the node says:** the earliest fixed use found so far, in the revised printed form of his Gifford Lectures: "They have made him God of the gaps in human knowledge". In the same passage he refused God as the trigger of the cosmic beginning. Cited at p. 409.
-**What is open:** the page comes from continuous full text snippets, not a page image. The wording and the "God of the trigger" context are confirmed verbatim in *Science News Letter* 24/647 (2 September 1933), 157. "Found so far" rests on full text searches of earlier print; Google Books Ngram counts for 1869, 1914 and 1932 were not identified. Whether the sentence was spoken at Aberdeen in 1927 to 1929 or added for print is still unknown.
+**What is open:** p. 409 of the 1933 Cambridge printing, which no copy shows as a page: the eight scans are lending scans that answer search snippets only. Whether the sentence was spoken at Aberdeen in 1927 to 1929 or added for print is unknown. "Found so far" rests on full text searches of earlier print. Google Books Ngram counts for the phrase in 1869, 1914 and 1932 are not identified.
 **What would settle it:** the 1933 Cambridge printing in hand for the page; the Ngram hits identified for the date.
-**Verdict:**
-**Checked by:**
+**Needs:** Barnes 1933, Scientific Theory and Religion
+**Tried:** 2026-11-01, clear-queue: Internet Archive full text search (gaps and trigger sentences unbroken in all eight Barnes lending scans, no page given; none borrowed); *Science News Letter* 24/647 (public, read, same paragraph); *Philosophy* 8/32 review (public, read in full); Laird 1942 (public, read at the passage); Google Books Ngram (counts only); Google Books search (bot check).
+**Verdict:** Two citing works read in full put neighbouring sentences of the passage at p. 409 of the 1933 printing, though neither quotes the gaps sentence. The *Philosophy* 8/32 review (October 1933), p. 476, quotes Barnes's line that behind the physical universe he sees God as creator, at "(p. 409)". Laird, *Theism and Cosmology* (1942), p. 305 n. 2, cites p. 409 for "The God of the trigger". In snippets of the 1933 Cambridge scans the gaps sentence runs straight into the trigger sentence with no running head between, so it sits on the page Laird gives, and the sentence on seeing God as creator is followed directly by the running head of p. 410. The node's quotation matches the 1933 wording. The review calls the lectures extensively supplemented since delivery, which fits "revised printed form" but does not say whether this sentence was added.
+**Checked by:** clear-queue run, 2026-11-01 (pipeline, not a human)
 
 ---
 
 ### V3. Ganssle's chapter, never read
-**Status:** open
+**Status:** partial
+**Kind:** lead
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** Gregory E. Ganssle, "'God of the Gaps' Arguments", ch. 12 in J. B. Stump and Alan G. Padgett (eds.), *The Blackwell Companion to Science and Christianity* (Wiley-Blackwell, 2012), 130–139, DOI 10.1002/9781118241455.ch12
 **What the node says:** nothing. It is not cited, because not one word of it was read.
-**What is open:** the field's dedicated reference treatment of the argument. Still paywalled and unread in the 2026-10-21 refresh. Torrance 2023 paraphrases it at p. 134, and Larmer 2022 (*Filozoficzne Aspekty Genezy* 18) says it rebuts the charge that gap arguments are fallacious.
+**What is open:** the chapter's own argument, pp. 130–139, which was not seen: Wiley's page answers 403 and no open copy exists. Torrance 2023 (p. 134 and notes 15 and 16), Larmer, *Filozoficzne Aspekty Genezy* 18 (2021; the earlier entry said 2022), p. 99 n. 27, and Kojonen 2016, n. 7, report Ganssle second hand, and none says whether he comes down for or against the shrinking gaps induction. The node does not cite him.
 **What would settle it:** the chapter. Does Ganssle come down for or against the shrinking gaps induction, and does he give a reason the node does not already have.
-**Verdict:**
-**Checked by:**
+**Needs:** Ganssle 2012, God of the Gaps Arguments
+**Tried:** 2026-11-01, clear-queue: Crossref (record, pp. 130–139); OpenAlex and Semantic Scholar (closed, no copy); DOAJ (no result); Wiley chapter page (403, challenge); PhilPapers (403); Google Books (bot check); Internet Archive (book not in the library, no review of the chapter); web search (no copy); Torrance 2023, Kojonen 2016 and Larmer 2021 read in full, second hand only.
+**Verdict:** What three citing works report of Ganssle, second hand, read in full in their open access versions. Torrance, *Zygon* 58/1 (2023), p. 77 notes 15 and 16, credits Ganssle (p. 134) with the point that any project that depends on empirical evidence is liable to revision in the face of future empirical advances, and pairs him with Kojonen 2016, p. 308, on provisionality. On p. 65 she lists him among works in which the reading of Newton as the paradigm gaps arguer persists. Larmer, *Filozoficzne Aspekty Genezy* 18 (2021), p. 99 n. 27, gives Ganssle as "see also" after his own 2002 rebuttal of the charge that gap arguments commit the fallacy ad ignorantiam. Kojonen, n. 7, cites Ganssle with Sober and Rhoda on absence of evidence as evidence of absence. None reports whether Ganssle holds the shrinking gaps induction sound. The node does not cite Ganssle, so nothing in it changes.
+**Checked by:** clear-queue run, 2026-11-01 (pipeline, not a human)
 
 ---
 
 ### V4. Plantinga's current statement
-**Status:** open
+**Status:** partial
+**Kind:** page
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** Alvin Plantinga, *Where the Conflict Really Lies: Science, Religion, and Naturalism* (Oxford University Press, 2011); Plantinga, "Methodological Naturalism?", in Robert T. Pennock (ed.), *Intelligent Design Creationism and Its Critics* (MIT Press, 2001), ch. 13
 **What the node says:** it now cites the essay in *Perspectives on Science and Christian Faith* 49/3 (1997), 143–154, read in full: gap theology treats God as "a kind of large-scale hypothesis postulated to explain what cannot be explained otherwise", and it "is worlds apart from serious Christian theism".
-**What is open:** the venue is still confessional, which is the one balance rule this node flags. The MIT Press reprint would move the citation to an academic press if its wording matches; it was located by catalogue but not opened. The 2011 book was again not opened.
+**What is open:** the page of the two quoted phrases in the MIT Press 2001 printing (ch. 13 opens p. 339), which the footnote needs before it can move there. The scan is a lending scan that answers search snippets only. The footnote still cites the 1997 *Perspectives on Science and Christian Faith* article, a confessional venue, which is the one balance rule this node flags. The 2011 book was not opened: the chapter and page of its gaps discussion are unknown.
 **What would settle it:** the MIT Press reprint, checked against the two quoted phrases; or the 2011 book, with the chapter and page of its gaps discussion.
-**Verdict:**
-**Checked by:**
+**Needs:** Plantinga 2001, Methodological Naturalism?
+**Tried:** 2026-11-01, clear-queue: Internet Archive full text search (both phrases in the 2001 MIT Press lending scan in the node's wording, no page given; the 1996 *Facets of Faith and Science* printing reads "can not"); contents list (ch. 13 opens p. 339); 1997 text at asa3.org (same words); Plantinga 2011 lending scan (four searches, no snippet, not opened).
+**Verdict:** Both phrases the node quotes stand in the MIT Press 2001 printing, ch. 13, in the node's wording, with "cannot" as one word. The contents list gives ch. 13 as "Methodological Naturalism?" at p. 339. This is snippet access to a lending scan with no page map, so no page was seen for either phrase. The 1996 *Facets of Faith and Science* printing reads "can not". The node's 1997 citation stands.
+**Checked by:** clear-queue run, 2026-11-01 (pipeline, not a human)
 
 ---
 
@@ -83,11 +95,14 @@ People and terms: Charles Darwin, William Paley, Miles K. Donahue and Michał He
 
 ### V6. the bullet that was cut for want of a source
 **Status:** open
+**Kind:** lead
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** Graham Oppy, *The Best Argument against God* (Palgrave Macmillan, 2013); Herman Philipse, *God in the Age of Science? A Critique of Religious Reason* (Oxford University Press, 2012)
 **What the node says:** nothing. A Limits bullet arguing that this is not the professional case against theism was written and then removed.
-**What is open:** neither book was opened in the 2026-10-21 refresh either. Philipse's chapter 10, "The Immunization of Theism" (pp. 161–189), argues a god of the gaps dilemma on its abstract, though not an induction on closed gaps, so the old claim that he bypasses the retreat narrative may not hold. A Polish review of Oppy (*Roczniki Filozoficzne* 63/2) gives his criteria as simplicity, fit, scope and predictive success, with no gap premise.
+**What is open:** whether gap shrinkage is a premise in Oppy 2013 or in Philipse 2012, ch. 10 (pp. 161–189). Neither book was read. In the Internet Archive Oppy is only a user upload of a Palgrave trial PDF, so it counts at snippet access: searches for "gap", "gaps" and "retreat" return no hit, which is absence in search and not a reading. A Polish review (*Roczniki Filozoficzne* 63/2) gives his criteria as simplicity, fit, scope and predictive success. Philipse 2012 was not opened. His own later summary, *Religious Studies* 53/3 (2017), 317–318, argues from theism's refuted factual claims and from Swinburne's immunization, not from closed gaps, so the old claim that he bypasses the retreat narrative may not hold.
 **What would settle it:** either book. Does gap shrinkage appear as a premise anywhere in it.
+**Needs:** Philipse 2012, God in the Age of Science?
+**Tried:** 2026-11-01, clear-queue: Internet Archive (Oppy only as a user upload of a Palgrave trial PDF, snippet access; no hit for gap, retreat or God of the gaps; Philipse 2012 not in the library); Philipse 2017 (publisher PDF at Utrecht, read in full); Pinsent's review of Philipse in *Notre Dame Philosophical Reviews* (read, no mention of gaps); Crossref and OpenAlex (chapter records, closed, no abstract); OUP and Stanford pages (empty); web search (no review of Oppy).
 **Verdict:**
 **Checked by:**
 
@@ -142,47 +157,59 @@ People and terms: Charles Darwin, William Paley, Miles K. Donahue and Michał He
 ---
 
 ### V11. Bonhoeffer's German, in the critical edition
-**Status:** open
+**Status:** partial
+**Kind:** page
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** Dietrich Bonhoeffer to Eberhard Bethge, 29 May 1944, in *Widerstand und Ergebung*, ed. Christian Gremmels, Eberhard Bethge and Renate Bethge, Dietrich Bonhoeffer Werke 8 (Gütersloher Verlagshaus, 1998), 454–455
 **What the node says:** Bonhoeffer wrote that God must not figure "als Lückenbüßer unserer unvollkommenen Erkenntnis".
-**What is open:** DBW 8 itself was not opened. The wording matches Bethge's edition and reproductions that cite DBW 8, 454–456. The DBW 8 contents list the letter as no. 152, dated 29 and 30 May 1944, from p. 453. One 2010 quotation of DBW 8 reads "immer weiter weg geschoben" in the next clause, where every Bethge printing reads "immer wieder weggeschoben", so no further German should be quoted unchecked.
+**What is open:** DBW 8 itself, pp. 454–455, for the exact wording of the quoted phrase in the critical edition and whether it sits on p. 454 alone or runs to 455. All page evidence is snippet level, from citing works. *Glaube und Denken* 23 (2010) quotes the next clause as "immer weiter weg geschoben", where every Bethge printing reads "immer wieder weggeschoben"; whether that is DBW 8's own reading is undecided, and the node quotes neither.
 **What would settle it:** DBW 8 in hand, pp. 454–455.
-**Verdict:**
-**Checked by:**
+**Needs:** Bonhoeffer 1998, Widerstand und Ergebung
+**Tried:** 2026-11-01, clear-queue: Internet Archive (DBW 8 not in the library; Bethge printings of 1952, 1977, 1978 and 1983 and three citing works searched at snippet; DBWE 8 text file 403); Google Books (429, bot check); web search (a course handout citing 454–456, no critical text); DBW 8 contents list (letter 152 from p. 453, no letter text).
+**Verdict:** The German wording of the phrase, ending "Lückenbüßer unserer unvollkommenen Erkenntnis", stands in every Bethge printing searched and in *Glaube und Denken* 23 (2010), whose notes cite DBW 8, 454 and 454f. DBWE 16 has the editorial note "DBW 8:454–55" for the stopgap passage, and Bethge's biography (2000), n. 230, reads "DBW 8: 454". DBWE 8, translated from DBW 8, renders the word as "stopgap [Lückenbüßer]". Three independent citing works agree on 454 for the passage, and DBWE 16 matches the node's 454–455. All of this is snippet access. DBW 8 was not seen.
+**Checked by:** clear-queue run, 2026-11-01 (pipeline, not a human)
 
 ---
 
 ### V12. Dawes and Smith 2018, the body
-**Status:** open
+**Status:** partial
+**Kind:** content
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** Gregory W. Dawes and Tiddy Smith, "The naturalism of the sciences", *Studies in History and Philosophy of Science Part A* 67 (2018), 22–31
 **What the node says:** in Countered By, that defending science's naturalism by pointing to superseded theistic explanations "is inconsistent with the history of the sciences", and that the sciences "have never invoked divine agency", so it is not the case that they "once employed theistic explanations and then abandoned them".
-**What is open:** all three quotations come from the abstract; the article was not reachable. Whether the paper confines "the sciences" to science after the seventeenth century, and how it treats Newton and Boyle, is not known. A hostile secondary quotes p. 28: "So the existence of a norm is consistent with its occasional violation."
+**What is open:** the body of the article, pp. 22–31: whether "the sciences" is confined to modern science, how Newton's arrangement claim and Boyle are handled, and whether Dawes withdraws or qualifies his 2011 statement of the record. The node's three quotations rest on the abstract only. A hostile blog (scienceandculture.com, 20 July 2018) quotes a sentence it places on p. 28, "So the existence of a norm is consistent with its occasional violation." That is second hand.
 **What would settle it:** the article. How does it handle Newton's arrangement claim, and does Dawes withdraw the 2011 record.
-**Verdict:**
-**Checked by:**
+**Needs:** Dawes and Smith 2018, The naturalism of the sciences
+**Tried:** 2026-11-01, clear-queue: Crossref and OpenAlex (record, closed, no open copy); Unpaywall and Semantic Scholar (closed); Europe PMC (abstract only, subscription); ScienceDirect, PhilPapers and PhilArchive (403); Otago repository (script shell, no file); web search (a blog quoting the abstract and one body sentence).
+**Verdict:** All three quotations the node uses stand in the published abstract (Europe PMC record, PMID 29458944) with the node's sense: defending naturalism by superseded theistic explanations is "inconsistent with the history of the sciences"; the sciences "have never invoked divine agency"; and it is not the case that they once employed theistic explanations and then abandoned them. The abstract names the position "domain naturalism", and its last sentence says the naturalism of the sciences is as old as science itself. The body was not seen.
+**Checked by:** clear-queue run, 2026-11-01 (pipeline, not a human)
 
 ---
 
 ### V13. Henry 2025 on Harvey, the body
-**Status:** open
+**Status:** partial
+**Kind:** content
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** John Henry, "The role of God in William Harvey's theory of epigenesis: some theological reactions", *The Seventeenth Century* 40/5 (2025), 759–780
 **What the node says:** a natural philosopher put God's direct action in a gap, the development of the embryo, a move some theologians recognised as "highly unusual".
-**What is open:** only the abstract was read; the full text sits behind a bot check.
+**What is open:** the body of the article, pp. 759–780: the quotation in context, which theologians recognised the move, and the page of "highly unusual". The abstract does not name them. The publisher's full text and PDF answer 403.
 **What would settle it:** the article, for the quotation in context and for who recognised the move.
-**Verdict:**
-**Checked by:**
+**Needs:** Henry 2025, The role of God in William Harvey's theory of epigenesis
+**Tried:** 2026-11-01, clear-queue: Crossref and OpenAlex (record and abstract; the only copy is the publisher's PDF); tandfonline full text and PDF (403, bot check); web search (publisher pages only); Internet Archive Scholar (verification page); CORE (403); Wayback not used, since the live page answers a bot check.
+**Verdict:** The node's sentence holds as far as the abstract goes (OpenAlex record, published version, open access licence, vol. 40 no. 5, pp. 759–780). Henry says his article supports recent claims that Harvey resorted to God's direct intervention to explain epigenetic development, since Harvey held that no natural secondary cause had the necessary "wisdom and foresight". Naturalists did not address this turn, but some theologians did, and the abstract says it was recognised that Harvey made a "highly unusual" move for a natural philosopher. Citation details match Crossref and OpenAlex. The body was not seen.
+**Checked by:** clear-queue run, 2026-11-01 (pipeline, not a human)
 
 ---
 
 ### V14. sources read in a version other than the one cited
-**Status:** open
+**Status:** partial
+**Kind:** copy
 **Node:** `Arguments Against/God of the Gaps`
 **Source:** J. Brian Pitts, *The British Journal for the Philosophy of Science* 59/4 (2008), 675–708; George F. R. Ellis, "Issues in the Philosophy of Cosmology", in *Philosophy of Physics* (Elsevier, 2007), 1183–1285; Maarten Boudry, Stefaan Blancke and Johan Braeckman, *Foundations of Science* 15/3 (2010), 227–244; Mikael Leidenhag, *Zygon* 54/4 (2019), 909–931; Robert Larmer, *International Journal for Philosophy of Religion* 52/3 (2002), 129–142
 **What the node says:** the sentences citing each of them, all of which passed.
-**What is open:** each was read in full, but not in the published version: Pitts in the 2007 preprint, Ellis in the arXiv version, Boudry et al. and Leidenhag in accepted manuscripts, Larmer in the author copy at theistic.net, which carries no page numbers. Only Larmer's p. 131 is pinned, through Kojonen's quotation of it. Wording could differ slightly from the print, and no page in the prose rests on these copies except where stated.
+**What is open:** the published wording of Boudry, Blancke and Braeckman 2010 (the quotation "might have succeeded" and its page) and of Larmer 2002 (the five quotations and their pages beyond p. 131, pinned through Kojonen; Leidenhag pins p. 129 for a sentence the node does not use). Boudry et al. were read in an accepted manuscript and Larmer in the author copy at theistic.net, which has no page numbers; Springer shows only a purchase page for both. The BJPS 2008 printing of Pitts is also unseen. Its 2018 reprint exists only as a user upload, so it counts at snippet access. The finder saw two phrases in it that differ from the 2007 preprint; that is unconfirmed, and the node's paraphrase holds in both.
 **What would settle it:** the published versions, checked against the quoted wording.
-**Verdict:**
-**Checked by:**
+**Needs:** Larmer 2002, Is there anything wrong with 'God of the gaps' reasoning?
+**Tried:** 2026-11-01, clear-queue: Crossref (page ranges match the node); OpenAlex (Leidenhag open, Boudry accepted copy at Ghent not opened, Larmer closed); Leidenhag published PDF at zygonjournal.org (read in full); Pitts 2007 preprint (read) and 2018 reprint (user upload, snippets only); Ellis arXiv (read) and Elsevier volume (user upload, snippets only); Springer pages for Boudry and Larmer (purchase page only); CORE and PhilPapers (403).
+**Verdict:** Leidenhag, published version (zygonjournal.org, *Zygon* 54/4 (2019)), p. 929 n. 5, reports Larmer's point that those who argue for specific cases of divine intervention do not typically do so only on the basis of ignorance, so the node's "One later paper endorses it" holds. Pitts, 2007 preprint, section 10, cites Larmer 2002 among those who argue the worries are "overstated philosophically" and says that even if some gaps arguments for theism are good, the Big Bang singularity argument is a bad one, because it has no relevant difference from stellar collapse. Snippets of the 2018 reprint carry the same section heading and sentences, which supports the node's paraphrase. Ellis: the arXiv version, read at the passage, and snippets of the published Elsevier pages carry Thesis D1 and Thesis D2 and the two sentences the node paraphrases; the node gives no Ellis page. Boudry et al. and Larmer were not seen in the published version.
+**Checked by:** clear-queue run, 2026-11-01 (pipeline, not a human)

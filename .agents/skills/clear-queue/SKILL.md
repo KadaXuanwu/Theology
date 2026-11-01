@@ -29,7 +29,7 @@ An `unchecked` entry does not go to the finder. Run `source-node`'s `agents/veri
 
 ## Step 2: Finder
 
-`agents/finder.md`, one fresh subagent per file, on the smaller model. More than six entries in a file: split them, six to a finder. Paste the agent file, then the entries verbatim, the node's body, `access-routes.md`, and the path of a scratch file outside the vault for its findings.
+`agents/finder.md`, one fresh subagent per file, on the smaller model. More than six entries in a file: split them, four or five to a finder. The agent host caps how many agents run at once (20 in Claude Code); queue the rest. Paste the agent file, then the entries verbatim, the node's body, `access-routes.md`, and the path of a scratch file outside the vault for its findings.
 
 Where the run is the last step of a node run, give the finder that run's attempts too, so it starts from the routes the run did not try.
 
@@ -41,7 +41,7 @@ The checker re-opens every location itself. A location it cannot open is a rulin
 
 ## Step 4: Arbiter
 
-You, in the main conversation. For each entry:
+You, in the main conversation, for one file. On a whole queue run, `agents/arbiter.md` runs as one fresh subagent per file once its checker is done, and you read every `pending` change and every flag it returns before the commit. For each entry:
 
 - **Status** is the checker's ruling, held to the table in `access-routes.md`. Never higher. `wrong` becomes `corrected` when the node may be edited and the change is a citation detail, otherwise `pending`.
 - **What is open** is rewritten to what is still missing and nothing else. On a closed entry it reads `nothing`.
