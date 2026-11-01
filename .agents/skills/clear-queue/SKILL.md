@@ -45,7 +45,7 @@ You, in the main conversation. For each entry:
 
 - **Status** is the checker's ruling, held to the table in `access-routes.md`. Never higher. `wrong` becomes `corrected` when the node may be edited and the change is a citation detail, otherwise `pending`.
 - **What is open** is rewritten to what is still missing and nothing else. On a closed entry it reads `nothing`.
-- **Needs** is the one work that would close what is left, as `Surname Year, Short Title`. Use the spelling `_Gaps.md` already has for that work. Leave it out on a closed or `pending` entry.
+- **Needs** is the one work that would close what is left, as `Surname Year, Short Title`. Use the spelling `_Gaps.md` already has for that work. Leave it out on a closed entry, and on a `pending` one with nothing left to fetch.
 - **Tried** gets one more line: `<date>, clear-queue: ` and each route with what it returned, a clause each. Earlier lines stay.
 - **Verdict** says what was confirmed and from what: the location, the page or section, the version. On a `pending` entry it ends with the change for the node, word for word. An entry still `open` leaves it empty.
 - **Checked by** reads `clear-queue run, <date> (pipeline, not a human)` wherever there is a verdict.

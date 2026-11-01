@@ -2,8 +2,6 @@
 
 Open source checks for `Theology/Arguments Against/God of the Gaps.md`. Format is in [README.md](README.md).
 
-Nine open. V1, V2, V11 and V14 are page and wording checks on sentences the node quotes; V12 is the one that could change what the node says.
-
 ## Run record
 Built: 2026-10-21, refresh-node, Refresh mode, to sourced
 Fields: history of science; philosophy; cognitive science of religion and psychology; church history and historical theology; ancient history and classics; cosmology and physics; evolutionary biology and origin of life; sociology and anthropology of religion (added after FIELDS TOUCHED). Text researcher on the printed primary texts; no material researcher, since the node uses no artefacts.

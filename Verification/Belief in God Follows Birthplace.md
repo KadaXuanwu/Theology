@@ -21,51 +21,64 @@ Failing balance rules: 4 flagged only (the one confessional source is Lumen Gent
 ---
 
 ### V1. Hick on the accidents of birth
-**Status:** open
+**Status:** partial
+**Kind:** page
 **Node:** `Claims/Belief in God Follows Birthplace`
 **Source:** John Hick, *An Interpretation of Religion: Human Responses to the Transcendent* (Yale University Press and Macmillan, 1989), 2
 **What the node says:** that a person's religion almost always depends on "the accidents of birth", with Thailand and Saudi Arabia among his examples.
-**What is open:** the book could not be opened. The wording reached the researchers through a textbook chapter quoting "some ninety-nine percent of cases", not through Hick's page.
+**What is open:** page 2 from Hick's own printing. The wording is confirmed in snippets of two 1989 printings, which give no page. The page rests on two citing works.
 **What would settle it:** the book at p. 2.
-**Verdict:**
-**Checked by:**
+**Needs:** Hick 1989, An Interpretation of Religion
+**Tried:** 2026-11-01, clear-queue: Internet Archive full text search of the passage (hits in the 1989 Yale and Macmillan scans and the 2004 edition, snippets only); the scans' text files (refused, lending); Open Library search inside (its page field is the image count, no page); Google Books (quota error, then a bot check); web search, which found Stairs's chapter "Religious Diversity", read in full, citing p. 2.
+**Verdict:** The wording stands in the 1989 Yale and the 1989 Macmillan printings, in full text snippets of the Internet Archive lending scans, which give no page: the "accidents of birth" sentence, the figure of "ninety-nine per cent of cases", and the examples of Thailand, Saudi Arabia and Mexico. The node's "almost always" and its two examples match. The page is p. 2 in two citing works, Stairs's textbook chapter and a snippet of the *Blackwell Guide to the Philosophy of Religion*. Hick's own page 2 was not read.
+**Checked by:** clear-queue run, 2026-11-01 (pipeline, not a human)
 
 ### V2. Baker-Hytch 2016 in its published text
-**Status:** open
+**Status:** pending
+**Kind:** copy
 **Node:** `Claims/Belief in God Follows Birthplace`
 **Source:** Max Baker-Hytch, "Mutual epistemic dependence and the demographic divine hiddenness problem", *Religious Studies* 52/3 (2016), 375–394
 **What the node says:** the strong counter: testimony makes clustering expected whether or not God exists, three trade-offs God might value, a favourable balance claimed, and an aim to cast doubt rather than refute.
-**What is open:** the steelman researcher read the accepted manuscript on the Oxford Research Archive; the verifier reached the abstract only. The content is confirmed in full through Blanton 2025, pp. 701–702, and the *Stanford Encyclopedia of Philosophy*. The published pagination, including whether the testimony sentence sits on p. 376 or p. 377, is unchecked. This carries over V3 in `Demanding Belief Without the Proof`.
+**What is open:** the footnote does not yet cite the accepted manuscript that the content was confirmed in. The published pagination is unread, and no sentence in the node rests on it. This carries over V3 in `Demanding Belief Without the Proof`.
 **What would settle it:** the published article.
-**Verdict:**
-**Checked by:**
+**Tried:** 2026-11-01, clear-queue: Crossref and the Cambridge Core page (record, pages 375–394; the PDF is paywalled); OpenAlex (no open copy) and PhilArchive (403); Semantic Scholar, once, which led to the accepted manuscript at the Oxford Research Archive, read in full; Blanton 2025, read in full, and the *Stanford Encyclopedia of Philosophy* entry, for the published pages (they differ by one page on the testimony sentence); Baker-Hytch 2025 and Green 2025 (no page for the 2016 paper); Internet Archive full text (nothing usable).
+**Verdict:** The accepted manuscript on the Oxford Research Archive, read in full (headed "Forthcoming in Religious Studies", paginated 1 to 20 on its own), carries what the node says. Mutual epistemic dependence produces geographic clustering of religious beliefs (p. 2). There are three pairs of competing goods, with a balance he calls favourable but not uniquely optimal (pp. 6, 8, 9). The aim is to cast significant doubt on Maitzen's contention, not to refute it (p. 18). The afterlife passage (p. 17) fits the node's line on destiny after death. The node gives no pinpoint for 2016, so nothing in it rests on the published pages. The encyclopedia and Blanton disagree by one page on the testimony sentence; that question belongs to the pinpoint in `Demanding Belief Without the Proof`. Change for the node, not yet made: in `Claims/Belief in God Follows Birthplace`, replace the footnote `[^baker-hytch-2016]: Max Baker-Hytch, "Mutual epistemic dependence and the demographic divine hiddenness problem", *Religious Studies* 52/3 (2016), 375–394.` with `[^baker-hytch-2016]: Max Baker-Hytch, "Mutual epistemic dependence and the demographic divine hiddenness problem", *Religious Studies* 52/3 (2016), 375–394; accepted manuscript, https://ora.ox.ac.uk/objects/uuid:41f0e000-2ab3-4bc7-860a-a7adebaa81f5/files/m5004d584c93f1de3e7437b1116e33658.`
+**Checked by:** clear-queue run, 2026-11-01 (pipeline, not a human)
 
 ### V3. Marsh 2008 in its own text
 **Status:** open
+**Kind:** page
 **Node:** `Claims/Belief in God Follows Birthplace`
 **Source:** Jason Marsh, "Do the demographics of theistic belief disconfirm theism? A reply to Maitzen", *Religious Studies* 44/4 (2008), 465–471
 **What the node says:** that Marsh supposes some persons would refuse to love God in any geographic circumstance, and that God places them among non-believers "to keep these individuals innocent for a later time" (pp. 467–468).
-**What is open:** both quotations are confirmed word for word through Maitzen's reply (2008, p. 474), read in full, and the encyclopedia. Marsh's article itself was never opened. This carries over V4 in `Demanding Belief Without the Proof`.
+**What is open:** Marsh's article itself, which no route opened (abstract only). Both quotations and the pages 467 and 468 are known only through Maitzen's reply (2008, p. 474) and the encyclopedia. This carries over V4 in `Demanding Belief Without the Proof`.
 **What would settle it:** the article at pp. 467–468.
+**Needs:** Marsh 2008, Do the demographics of theistic belief disconfirm theism?
+**Tried:** 2026-11-01, clear-queue: Crossref and the Cambridge Core page (record, pages 465–471, abstract only, PDF paywalled); OpenAlex and Semantic Scholar (no open copy); the author's site and CV (article listed, no copy); PhilPapers (403) and IA Scholar (bot check); DOAJ (not listed); Internet Archive full text of both quoted phrases (no hits); Maitzen's reply, read in full, and the *Stanford Encyclopedia of Philosophy* entry, which quote both phrases with pages 467 and 468.
 **Verdict:**
 **Checked by:**
 
 ### V4. Mawson 2012
-**Status:** open
+**Status:** partial
+**Kind:** content
 **Node:** `Claims/Belief in God Follows Birthplace`
 **Source:** T. J. Mawson, "The Rationality of Classical Theism and Its Demographics", in *Scientific Approaches to the Philosophy of Religion*, ed. Yujin Nagasawa (Palgrave Macmillan, 2012), 184–201
 **What the node says:** that Mawson offers three stories that fit the pattern: freedom with culture shaping receptivity, a deadline for belief at the Last Judgment, and election.
-**What is open:** the chapter is paywalled; its content is confirmed through the encyclopedia's account (pp. 191–192 and 194 as it cites them). The page range 184–201 is confirmed by Crossref and the publisher's contents list.
+**What is open:** Mawson's own text on two points. That he offers all three as stories fitting the pattern: snippets show phrases, not his stance, and the encyclopedia is one second hand account. And the freedom story, which no snippet reached. The chapter's pages are unread.
 **What would settle it:** the chapter.
-**Verdict:**
-**Checked by:**
+**Needs:** Mawson 2012, The Rationality of Classical Theism and Its Demographics
+**Tried:** 2026-11-01, clear-queue: Crossref and the Springer Link page (pages 184–201; abstract only, the rest paywalled); OpenAlex and Semantic Scholar (no open copy); PhilPapers (403) and the Oxford faculty page (404); Internet Archive full text search of a whole book upload, snippets only, the upload not opened (chapter heads, the election and deadline sentences; the freedom passage returned nothing); the *Stanford Encyclopedia of Philosophy* entry, read in full; a review in *Philosophische Rundschau*, record only.
+**Verdict:** Crossref gives Palgrave Macmillan, 2012, pages 184–201, as the node has it. The encyclopedia's bibliography gives 184–204, and Crossref is the record. Full text snippets from a scan of the Palgrave printing, under the chapter's own running heads, show two of the passages the encyclopedia quotes: the election story, which it cites at 2012: 191–192, and the sentence on deadlines, at 2012: 194. The snippets give no page. The encyclopedia (revised 8 July 2022, read in full) reports that Mawson finds the demographics expectable on two auxiliary hypotheses, freedom with culture shaping receptivity and a deadline at the Last Judgment, and quotes the election story beside Marsh's. The node's three stories follow that account.
+**Checked by:** clear-queue run, 2026-11-01 (pipeline, not a human)
 
 ### V5. Bullivant on Aquinas's assumption
-**Status:** open
+**Status:** confirmed
+**Kind:** page
 **Node:** `Claims/Belief in God Follows Birthplace`
 **Source:** Stephen Bullivant, "Sine Culpa? Vatican II and Inculpable Ignorance", *Theological Studies* 72/1 (2011), 70–86
 **What the node says:** that Aquinas's promise to the person raised in the woods assumed the gospel had already been preached everywhere.
-**What is open:** this run's verifier could not open the article. The church history researcher of the argument's run read it in full and gives pp. 75–76 and n. 51; the argument's verifier read p. 73 in the same PDF on theologicalstudies.net.
+**What is open:** nothing
 **What would settle it:** the article at pp. 75–76.
-**Verdict:**
-**Checked by:**
+**Tried:** 2026-11-01, clear-queue: Crossref (record, pages 70–86); web search, which found the journal's own article page; its PDF on theologicalstudies.net, read in full under the printed running heads and byte for byte the same as the copy on the journal's S3 host.
+**Verdict:** The journal's own typeset PDF (*Theological Studies* 72/1, March 2011, printed pages 70–86), read in full. At the foot of p. 75 and the top of p. 76 Bullivant says Aquinas could only envisage a person brought up "in the woods", on the assumption that the gospel had by then been preached throughout the whole world. The De veritate passage follows on p. 76 (n. 17). The node's sentence matches. Note 51 on p. 82 cautions against reading too much into Aquinas's single example; it adds a caveat and does not contradict the node. Optional, not made: add "(2011, pp. 75–76)" after "everywhere" in the node.
+**Checked by:** clear-queue run, 2026-11-01 (pipeline, not a human)

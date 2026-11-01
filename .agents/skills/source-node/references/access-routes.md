@@ -21,6 +21,7 @@ A record closes a `metadata` entry. It confirms nothing about what the source sa
 3. **DOAJ**, keyless, for open access journals: `https://doaj.org/api/search/articles/<terms>`.
 4. **PhilArchive, PhilPapers, CORE**: they refuse a plain `curl` (403). Try the web fetch tool. If a bot check answers, drop the route.
 5. **Semantic Scholar**, `openAccessPdf`: refuses keyless requests (429) most of the time. Try once and move on.
+6. **The Wayback Machine**, keyless: `https://web.archive.org/web/*/<URL>` for a copy that was once public and is now gone, where the live address answers 404 or no longer exists. Say which capture was read and its date. Never use a capture to reach a page whose live address answers with a bot check, a login or a paywall: that is getting past the check by another door.
 
 Note the version of every copy found. An accepted manuscript read in full confirms what the article argues and, almost always, its wording. It does not confirm the published pages. See citation style rule 8.
 
@@ -31,7 +32,7 @@ Note the version of every copy found. An accepted manuscript read in full confir
 3. **Older printed texts in full**: Internet Archive's public domain scans, Gallica, MDZ (the Munich digital collections), e-rara, Persée for French journals, CCEL and New Advent for older translations of church texts, the Vatican's site for papal and conciliar texts, Corpus Thomisticum for Aquinas in Latin.
 4. **Jewish texts**: Sefaria, keyless, `https://www.sefaria.org/api/v3/texts/<ref>`, with the Hebrew or Aramaic and the William Davidson English. That English sets the translation in bold and the added explanation in plain type, so the bold alone is what the text says.
 5. **Reviews of the book** in academic journals, read in full. A review reports what a book argues. It is a second hand account, so it moves a `content` entry to `partial`, never to `confirmed`.
-6. **Never**: HathiTrust answers with a Cloudflare challenge, and so does BASE's search page. Academia.edu and ResearchGate want an account or a bot check.
+6. **Never**: HathiTrust answers with a Cloudflare challenge, and so does BASE's search page. Academia.edu and ResearchGate want an account or a bot check. A whole in-copyright book uploaded by a user, such as a shadow library file re-posted to Internet Archive, is not downloaded or read through; its full-text search snippets count as snippets, like any other.
 
 ## What a finding earns
 

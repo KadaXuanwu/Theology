@@ -87,7 +87,7 @@ If the answer changes the node, change the node too and mark it `corrected`. If 
 **Checked by:**
 ```
 
-**Needs** names the one work that would close what is left, as `Surname Year, Short Title`, spelled the same in every file so the gap list can group it. Use `a verifier pass` for an `unchecked` entry. Leave it out once the entry is closed or `pending`, since nothing is left to fetch.
+**Needs** names the one work that would close what is left, as `Surname Year, Short Title`, spelled the same in every file so the gap list can group it. Use `a verifier pass` for an `unchecked` entry. Leave it out once the entry is closed, and on a `pending` entry with nothing left to fetch.
 
 **Tried** gets one line per attempt, each starting with its date and who made it, and is never cleared. An entry with no **Tried** line has not had its attempt yet, and the gap list says so.
 

@@ -45,24 +45,30 @@ Failing balance rules: 4 (advocacy from one camp only: the confessional sources 
 ---
 
 ### V3. Fitzmyer's note on Romans 1:20, not opened
-**Status:** open
+**Status:** partial
+**Kind:** page
 **Node:** `Arguments Against/Creation Alone Doesn't Point to God`
 **Source:** Joseph Fitzmyer, *Romans*, Anchor Bible 33 (Doubleday, 1993), note on 1:20
 **What the node says:** Paul's argument echoes Wisdom of Solomon 13:1–9, "a parallel Joseph Fitzmyer draws at his note on 1:20". The parallel itself is also carried by Young, *JETS* 43/4 (2000), p. 700, read in full.
-**What is open:** no open copy of Fitzmyer was found, so the attribution to his note on 1:20 is unchecked. His p. 281 words in the Description are cited through Young's quotation.
+**What is open:** the page of both phrases quoted in the Description, which still rests on Young's quotation at p. 281. Whether the Wisdom parallel stands in the note on 1:20 or only in Fitzmyer's comment on the section. No snippet shows him citing the range Wisdom 13:1–9: the snippets show 13:1–19 with 14:22–31, and 13:4.
 **What would settle it:** Fitzmyer's commentary opened at the note on 1:20 and at p. 281.
-**Verdict:**
-**Checked by:**
+**Needs:** Fitzmyer 1993, Romans
+**Tried:** 2026-11-01, clear-queue: Internet Archive full-text search for the quoted words, five hits, snippets only; lending text and page files of three Fitzmyer scans, 401; Google Books API, 429; web search, no page with the note; a user-uploaded Anchor Bible bundle on Internet Archive, not opened; the cold re-search of the 1993 lending scan, both phrases found as snippets with no page numbers.
+**Verdict:** Both phrases the Description quotes stand in the 1993 Doubleday printing, worded as the node gives them. Read as full-text search snippets of the Internet Archive lending scan of that printing (romansnewtransla0000unse), which carry no page numbers. They come from two neighbouring sentences on the same knowing in 1:21, so the node's join is fair but is a splice. The same printing ties Paul's argument to the Wisdom tradition: a passage on Wisdom 13:1–19 and 14:22–31, and Paul's terms traced to Wisdom 13:4, 2:23, 7:26 and 18:9. A snippet shows the phrase and not the page or what Fitzmyer argues around it.
+**Checked by:** clear-queue run, 2026-11-01 (pipeline, not a human)
 
 ---
 
 ### V4. Clark and Barrett 2010, not opened by the verifier
 **Status:** open
+**Kind:** content
 **Node:** `Arguments Against/Creation Alone Doesn't Point to God`
 **Source:** Kelly James Clark and Justin L. Barrett, "Reformed Epistemology and the Cognitive Science of Religion", *Faith and Philosophy* 27/2 (2010), 174–189
 **What the node says:** in Countered By, that the sense of God "may be reliable in producing belief in a divinity", and that by their own count its reliability for belief in Yahweh alone "is less than 1/2" (p. 187).
-**What is open:** a researcher read the article in full through an archived copy, but the cold verifier could not open it: the open PDF at place.asburyseminary.edu sits behind a bot check and no other copy loaded.
+**What is open:** both quotations and p. 187. The body of the article was not reached: the only open PDF, at place.asburyseminary.edu, sits behind a bot check and no other copy loaded. The record matches the footnote.
 **What would settle it:** the article opened at pp. 182–189, from https://place.asburyseminary.edu/cgi/viewcontent.cgi?article=2146&context=faithandphilosophy or a library copy.
+**Needs:** Clark and Barrett 2010, Reformed Epistemology and the Cognitive Science of Religion
+**Tried:** 2026-11-01, clear-queue: Asbury PDF and Calvin Digital Commons copy, 403 bot check; Asbury landing page, citation only; Crossref and OpenAlex, record matches the footnote, Asbury PDF the only open copy; Semantic Scholar, same URL; typeset.io copy, 403 or empty; DOAJ, CORE, PhilPapers, Penner PDF, no copy; Google Books, 429 or 500; Kvandal 2020 and Baker-Hytch thesis read, no figure; Internet Archive full-text search, the wording only in a different Clark and Barrett publication, nothing for the 1/2 figure.
 **Verdict:**
 **Checked by:**
 
@@ -70,22 +76,28 @@ Failing balance rules: 4 (advocacy from one camp only: the confessional sources 
 
 ### V5. Braddock's chapter, the verifier reached only the abstract
 **Status:** open
+**Kind:** content
 **Node:** `Arguments Against/Creation Alone Doesn't Point to God`
 **Source:** Matthew Braddock, "Natural Nonbelief in God", in *Evolutionary Debunking Arguments*, ed. Diego E. Machuca (Routledge, 2022), 160–184
 **What the node says:** in Limits, the "empirical jury" quotation and his two further moves, worded as the abstract words them.
-**What is open:** the wording matches the abstract. The chapter itself, with its pages (165, 170, 176 and §8.4 per the researcher), was not opened by the verifier.
+**What is open:** whether the chapter's body argues as the abstract says, and the pinpoint pages (165, 170, 176 and §8.4 per the researcher). Only the publisher's abstract was opened. The citation matches Crossref.
 **What would settle it:** the chapter opened, to confirm the abstract's summary matches the argument and to add pinpoint pages.
+**Needs:** Braddock 2022, Natural Nonbelief in God
+**Tried:** 2026-11-01, clear-queue: Crossref, record only, pp. 160–184; OpenAlex, no open location; publisher chapter page, abstract only, its PDF link returns the landing page; PhilArchive record and file, 403 bot check; Wayback capture of the PhilArchive file, not counted and not opened; web search and Internet Archive full-text search, nothing beyond the record and abstract.
 **Verdict:**
 **Checked by:**
 
 ---
 
 ### V6. Page numbers read from deposited or unpaged copies
-**Status:** open
+**Status:** pending
+**Kind:** page
 **Node:** `Arguments Against/Creation Alone Doesn't Point to God`
 **Source:** Jason Marsh, "Darwin and the Problem of Natural Nonbelief", *The Monist* 96/3 (2013), 349–376; Aku Visala and Justin L. Barrett, "In What Senses Might Religion Be Natural?", in *The Naturalness of Belief*, ed. Paul Copan and Charles Taliaferro (Lexington Books, 2018), 67–84; Helen De Cruz and Johan De Smedt, "Intuitions and Arguments", *European Journal for Philosophy of Religion* 9/2 (2017), 57–82
 **What the node says:** Marsh at pp. 360 and 373; Visala and Barrett and De Cruz and De Smedt quoted without page numbers.
-**What is open:** Marsh was read in a PhilPapers deposit that may be the submitted version, so pp. 360 and 373 need checking against print. Visala and Barrett and De Cruz and De Smedt were read in accepted manuscripts with no journal or book pagination.
+**What is open:** the node needs p. 63 added to the De Cruz and De Smedt quotation. Marsh: pp. 360 and 373 are not checked against the printed *Monist*, and no copy of the printed article was reached. Visala and Barrett: the three quotations have no wording check in print and no pages, because the only open copy's repository record says restricted access and was not opened.
 **What would settle it:** the printed versions, to confirm Marsh's pages and add pages for the two quotations.
-**Verdict:**
-**Checked by:**
+**Needs:** Marsh 2013, Darwin and the Problem of Natural Nonbelief
+**Tried:** 2026-11-01, clear-queue: Crossref for all three, records match the footnotes; De Cruz and De Smedt, the journal's own typeset PDF, opened in full; Visala and Barrett, Helsinki repository record marked restricted, file not opened; Internet Archive full-text search and web search for its quotations, nothing; Marsh, OpenAlex lists only a PhilPapers deposit and a CiteSeerX record, publisher PDF 403, PhilPapers 403, CiteSeerX copy 404, no Wayback capture used.
+**Verdict:** De Cruz and De Smedt, read in the journal's own typeset PDF, *European Journal for Philosophy of Religion* 9/2 (2017), pp. 57–82: "Humans are not intuitive creationists" stands on p. 63, in section 3.1 on the teleological argument. The node's frame, that seeing purpose is not yet seeing design, matches pp. 62–63. Marsh and Visala and Barrett were not read; only their records, which match the footnotes. Change for the node, not yet made: replace `"Humans are not intuitive creationists".[^decruz-2017]` with `"Humans are not intuitive creationists" (p. 63).[^decruz-2017]`
+**Checked by:** clear-queue run, 2026-11-01 (pipeline, not a human)
