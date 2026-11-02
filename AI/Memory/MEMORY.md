@@ -20,3 +20,4 @@ Index of things to remember across sessions. One line per memory file.
 - [Commit identity](commit-identity.md) — commits are authored as Claude <noreply@anthropic.com>; pass it per commit on a PC with no git identity
 - [Subagent stalls](subagent-stalls.md) — long pipeline agents die on the watchdog; have them write reports to scratch as they go, then resume them
 - [Verification queue system](verification-queue-system.md) — the pipeline works every queue entry, partial closures count, _Gaps.md shows what is left; the user does not review entries
+- [Graph settle test](graph-settle-test.md) — the layout "comes to rest" test runs on the real graph near its tick limit; new nodes can fail it with nothing wrong
