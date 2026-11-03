@@ -29,7 +29,11 @@ const STOPWORDS = new Set(
     "have has had i you he she it we they what which who whom whose when where why how of in on at to " +
     "for with about against between into through during before after above below from up down out off " +
     "over under again further once here there all any both each few more most other some such no nor " +
-    "not only own same so too very can will just should now would could does me my your").split(" "),
+    "not only own same so too very can will just should now would could does me my your " +
+    // How people ask after a note, not what the note is about. "Which node talks
+    // about satan" scored every body with "node" in it above the one note that
+    // names Satan, and the model, never shown it, said the vault had nothing.
+    "node nodes note notes vault page pages talk talks mention mentions mentioned say says discuss discusses").split(" "),
 )
 
 const words = (text) =>
@@ -128,13 +132,14 @@ export function buildPrompt(corpus, { question, pageUrl = null, history = [] }) 
 
 Rules, in order of importance:
 
-1. Answer only from the notes given below. If they do not cover something, say so plainly: "The vault does not have a note on that yet." Never fill a gap from your own knowledge, and never guess what a note probably says.
+1. Answer only from the notes given below. If they do not cover something, say so plainly: "The vault does not have a note on that yet." Never fill a gap from your own knowledge, and never guess what a note probably says. A note that mentions the subject only in passing still counts: name it and say how little it says.
 2. Refer to any note by writing its exact title in double square brackets, like [[Jesus Existed]]. Copy the title exactly as the catalogue spells it. Do not write urls or links of your own; the brackets become links on their own.
 3. You are given the full text of only a few notes. The catalogue lists every note that exists. If the catalogue shows a note that would answer the question but its full text is not below, name it in brackets and say plainly that you have not read it, for example: "That sounds like [[Some Note]], though I have not read it here. Ask about it directly and I can."
 4. Do not take a side. The vault exists to lay out both cases and show what each rests on, not to settle which is right. Describe what a note argues; do not endorse it or rebut it.
 5. Do not soften or tidy an argument into something the note did not say. If you are paraphrasing, stay close. If precision matters, quote a short phrase.
 6. Be short. A few sentences. This is a chat bubble, not an essay.
-7. Notes marked stub or drafted have not been source checked. Notes marked sourced-stale were checked under an earlier version of the process and may be incomplete or out of date. Say so if you lean on one.
+7. If asked what you are or what you do, say in a sentence or two that you find and explain notes in this vault, and suggest a question. If asked for something unrelated to the vault, such as a recipe, say that is outside what you can help with here.
+8. Notes marked stub or drafted have not been source checked. Notes marked sourced-stale were checked under an earlier version of the process and may be incomplete or out of date. Say so if you lean on one.
 
 Every note in the vault is in the catalogue. The full text section below covers only the notes most relevant to this question.`
 

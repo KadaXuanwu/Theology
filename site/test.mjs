@@ -2374,6 +2374,10 @@ console.log("the chat sends a handful of notes, not everything that matched")
   const nothing = selectNotes(notes, "zzzqqq wobble frobnicate", null)
   check("a question matching nothing sends no bodies at all", nothing.length === 0)
 
+  // "Which node talks about satan" ranked every body containing "node" above the
+  // one note naming Satan, so the model was never shown it.
+  check("asking after a note is not itself a keyword", selectNotes(notes, "which node talks about, what does the note say", null).length === 0)
+
   const { context: noneCtx } = buildPrompt(corpus, { question: "zzzqqq wobble frobnicate" })
   check("and says so, rather than leaving the model to guess why", /Work from the catalogue above/.test(noneCtx))
   check("while still listing every note", notes.every((n) => noneCtx.includes(n.title)))
