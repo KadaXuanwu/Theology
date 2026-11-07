@@ -322,7 +322,9 @@ console.log("the layout is settled before it is shown")
   const steps = settle(first)
   const took = Date.now() - started
   check("settles within the step budget", steps < 600, `${steps} steps`)
-  check("cheap enough to do before painting", took < 120, `${took}ms`)
+  // A wall clock bound, so it leaves room for GitHub's runners, which are
+  // slower than a desktop: at 120 ms the deploy failed now and then.
+  check("cheap enough to do before painting", took < 250, `${took}ms`)
 
   const second = build()
   settle(second)
