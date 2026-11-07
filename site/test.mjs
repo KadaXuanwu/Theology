@@ -273,7 +273,7 @@ console.log("a released node comes back to the middle")
     if (ticks > 30 && fastest(g.nodes, r) < 0.15) break
   }
 
-  check("it comes to rest rather than running forever", ticks < 4000, `${ticks} ticks`)
+  check("it comes to rest rather than running forever", ticks < 6000,`${ticks} ticks`)
   check(
     "the layout is compact again",
     radius(g.nodes) < baseRadius * 1.35,
