@@ -43,5 +43,5 @@ The scriptural pattern of obeying before confirmation is a separate case, carrie
 - [[Religious Experience Is Evidence for God]]
 - [[Belief in God Can Be Rational Without Argument]]
 
-[^james-1896]: William James, "The Will to Believe", *The New World* 5 (1896), 327–347. Text checked against the 1897 collection *The Will to Believe and Other Essays in Popular Philosophy* on Project Gutenberg; the journal pagination is from Wikisource's citation, not checked against the 1896 pages.
+[^james-1896]: William James, "The Will to Believe", *The New World* 5/18 (1896), 327–347; text from *The Will to Believe and Other Essays in Popular Philosophy* (Longmans, Green, 1897; 1912 impression), [Project Gutenberg](https://www.gutenberg.org/cache/epub/26659/pg26659.txt).
 [^clifford-1877]: W. K. Clifford, "The Ethics of Belief", *Contemporary Review* 29 (1877), 289–309. Text checked against the full text in the Internet Infidels library; the journal pagination is from a secondary listing, not checked against the 1877 pages.

@@ -24,5 +24,5 @@ Blaise Pascal was a French mathematician and physicist who turned to religious w
 # Stated Position
 In the *Pensées* he writes that "the true religion must necessarily teach us both that there is in man some great source of greatness, and a great source of wretchedness". He proposes to "examine all the religions of the world, and see if there be any other than the Christian which is sufficient for this purpose", and answers that "All other religions have not been able to do so" (Brunschvicg 430).[^pascal-1670]
 
-[^sep-pascal]: Desmond Clarke, ["Blaise Pascal"](https://plato.stanford.edu/entries/pascal/), *Stanford Encyclopedia of Philosophy*, revised 22 June 2015. It gives the birth and death dates and places, his move to Rouen in 1640, a year after his father, and the dates of the works.
+[^sep-pascal]: Desmond Clarke and William Wood, ["Blaise Pascal"](https://plato.stanford.edu/entries/pascal/), *Stanford Encyclopedia of Philosophy*, revised 22 June 2015. It gives the birth and death dates and places, his move to Rouen in 1640, a year after his father, and the dates of the works.
 [^pascal-1670]: Blaise Pascal, [*Pensées*](https://www.gutenberg.org/cache/epub/18269/pg18269.txt) (first published 1670), trans. W. F. Trotter (E. P. Dutton, 1958), cited by Brunschvicg number.
