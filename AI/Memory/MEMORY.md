@@ -22,3 +22,4 @@ Index of things to remember across sessions. One line per memory file.
 - [Verification queue system](verification-queue-system.md) — the pipeline works every queue entry, partial closures count, _Gaps.md shows what is left; the user does not review entries
 - [Graph settle test](graph-settle-test.md) — the layout "comes to rest" test runs on the real graph near its tick limit; new nodes can fail it with nothing wrong
 - [CI test flake](ci-test-flake.md) — the deploy's Test step fails now and then on GitHub because of the 120 ms timing check; the log needs a login
+- [Quotes from raw text](quotes-from-raw-text.md) — fetch tools summarise and reference works misframe; check quotes against the raw page and the author
