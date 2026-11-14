@@ -19,6 +19,7 @@ Lint: 0 failures | warnings on the node: one DOI (Moyise, MDPI) answers 403, unv
 Failing balance rules: 3 on the step from unity to one author (best main source confessional, best counter academic), disclosed in Limits. 4: advocacy is confessional only (McDowell, the Westminster Confession, Calvin, Trent, Hays's interview), with no counter advocacy; McDowell carries only his own figures and the others only their own statements. 6: Jaffee 1999 not rechecked, dated in the prose; Goodacre 2001 at the 25 year line.
 People and terms: Emanuel Tov, Karel van der Toorn, Bernard M. Levinson, Richard B. Hays, Elliott Sober and Josh McDowell written as person nodes; Masoretic Text as a glossary entry. Cold check: 46 checked | 36 supported | 10 fixed | 0 cut | 0 unopened, all applied.
 Process notes: the author stopped the run after the ruling and resumed it from the writer step. Two dates that rested only on the 1909 and 1910 Catholic Encyclopedia (when Irenaeus took office, when Eusebius finished his history) were dropped rather than carried on a confessional source.
+Split: 2026-11-09, at the author's request three strands moved to claims (Later Biblical Writers Drew on Earlier Ones; Jews Used Several Forms of the Hebrew Bible Text Before One Remained; The Bible's Core Was in Use Early and Its Edges Stayed Open for Centuries); the node was shortened to 1620 words and its changed sentences cold checked: 15 checked | 14 supported | 1 fixed | 0 cut | 0 unopened | 0 protected-flag, applied with the two links the check asked for (Josephus, canon).
 
 ---
 
