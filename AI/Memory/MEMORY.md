@@ -23,3 +23,4 @@ Index of things to remember across sessions. One line per memory file.
 - [Graph settle test](graph-settle-test.md) — the layout "comes to rest" test runs on the real graph near its tick limit; new nodes can fail it with nothing wrong
 - [CI test flake](ci-test-flake.md) — the deploy's Test step fails now and then on GitHub because of the 120 ms timing check; the log needs a login
 - [Quotes from raw text](quotes-from-raw-text.md) — fetch tools summarise and reference works misframe; check quotes against the raw page and the author
+- [Open Library dead route](open-library-dead-route.md) — its records answer scripts with a bot check; person and term nodes cite publisher or catalogue pages instead
