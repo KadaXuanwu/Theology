@@ -28,3 +28,22 @@ export function readSet(key, fallback = []) {
 }
 
 export const writeSet = (key, values) => writeText(key, JSON.stringify([...values]))
+
+// Things that belong to this tab and this visit only, like where a list was
+// scrolled to. Another tab has its own place in the list, so these do not go
+// in localStorage with the choices above.
+export function readSession(key) {
+  try {
+    return sessionStorage.getItem(key)
+  } catch {
+    return null
+  }
+}
+
+export function writeSession(key, value) {
+  try {
+    sessionStorage.setItem(key, value)
+  } catch {
+    /* nothing to do, the next page just starts from the top */
+  }
+}

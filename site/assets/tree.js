@@ -1,9 +1,10 @@
 // The sidebar: the folder tree, the menu button that opens it on a phone, and
 // keeping the note being read in view inside it.
 
-import { readSet, writeSet } from "./store.js"
+import { readSession, readSet, writeSession, writeSet } from "./store.js"
 
 const COLLAPSED_KEY = "collapsedFolders"
+const SCROLL_KEY = "treeScroll"
 
 // Folders render open. Only a folder the reader collapsed themselves stays
 // collapsed, and that is remembered. Navigating never closes anything.
@@ -45,12 +46,22 @@ function initMobileNav(sidebar) {
   })
 }
 
-// Following a link is a full page load, so the tree always comes back scrolled
-// to the top. On a vault this size the note that was just opened is often below
-// the fold, which reads as nothing being selected at all. Bring it into view,
-// and only when it is not already there, so the tree does not jump on a note
-// near the top.
-function showCurrent(sidebar) {
+// Following a link is a full page load, so the tree comes back scrolled to the
+// top. Put it back where the reader left it, so the entry they clicked is still
+// under the cursor on the next page instead of somewhere else in the list.
+export function keepScroll(sidebar, page = window) {
+  if (!sidebar) return
+  const left = Number(readSession(SCROLL_KEY))
+  if (left > 0) sidebar.scrollTop = left
+  page.addEventListener("pagehide", () => writeSession(SCROLL_KEY, String(sidebar.scrollTop)))
+}
+
+// The note being read is not always one the reader clicked in the tree. A link
+// in the text, a search hit or a first visit can open a note whose entry is
+// below the fold, which reads as nothing being selected at all. Bring it into
+// view, and only when it is not already there, so a tree that was put back
+// where it was does not move a second time.
+export function showCurrent(sidebar) {
   const here = sidebar?.querySelector('[aria-current="page"]')
   const item = here?.getBoundingClientRect()
   // A folder the reader collapsed hides the entry, and a hidden entry has no
@@ -69,5 +80,8 @@ export function initTree() {
   const sidebar = document.getElementById("explorer")
   initFolders()
   initMobileNav(sidebar)
+  // After the folders, because a collapsed folder changes how far there is to
+  // scroll, and before the current entry is looked for.
+  keepScroll(sidebar)
   showCurrent(sidebar)
 }

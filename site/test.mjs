@@ -19,6 +19,7 @@ import {
 import { splitAtOpenLink } from "../worker/stream.js"
 import { BROKEN, DECLINED, NO_ANSWER, TOO_BUSY, TOO_SLOW, noAnswer } from "../worker/providers.js"
 import { loadHistory, render, saveHistory } from "./assets/chat.js"
+import { keepScroll, showCurrent } from "./assets/tree.js"
 import { SECTIONS, parseFrontmatter, slugify } from "./lib/content.mjs"
 import { createRenderer, htmlToText } from "./lib/markdown.mjs"
 import {
@@ -1953,6 +1954,81 @@ console.log("the tree comes back to the note you are reading")
   const tree = built.match(/<aside class="sidebar"[\s\S]*?<\/aside>/)?.[0] ?? ""
   const marked = tree.match(/aria-current="page"/g) ?? []
   check("a page really does mark one", marked.length === 1, `${marked.length} marked`)
+}
+
+console.log("the tree stays where the reader left it")
+{
+  // Clicking an entry is a full page load. The tree used to come back at the
+  // top and then scroll just far enough to show the entry, so whatever was
+  // clicked landed at the bottom edge of the list every time.
+  const store = new Map()
+  globalThis.sessionStorage = {
+    getItem: (k) => store.get(k) ?? null,
+    setItem: (k, v) => store.set(k, v),
+  }
+
+  // A tree 3000 tall in a box 600 tall, with the current entry 1400 down it.
+  const tree = (entryAt) => {
+    const sidebar = {
+      scrollTop: 0,
+      scrollHeight: 3000,
+      clientHeight: 600,
+      getBoundingClientRect: () => ({ top: 0, bottom: 600 }),
+      querySelector: () => ({
+        getBoundingClientRect: () => ({ top: entryAt - sidebar.scrollTop, bottom: entryAt + 24 - sidebar.scrollTop, height: 24 }),
+      }),
+    }
+    return sidebar
+  }
+  const page = () => {
+    const heard = {}
+    return { addEventListener: (name, fn) => (heard[name] = fn), leave: () => heard.pagehide() }
+  }
+
+  const before = tree(1400)
+  const leaving = page()
+  keepScroll(before, leaving)
+  before.scrollTop = 1200
+  leaving.leave()
+
+  const after = tree(1400)
+  keepScroll(after, page())
+  showCurrent(after)
+  check("the next page opens the tree at the same place", after.scrollTop === 1200, String(after.scrollTop))
+
+  // A note opened from a link in the text can be anywhere in the tree.
+  const elsewhere = tree(2500)
+  keepScroll(elsewhere, page())
+  showCurrent(elsewhere)
+  const top = 2500 - elsewhere.scrollTop
+  check("an entry that is still out of view is brought into it", top >= 0 && top + 24 <= 600, String(elsewhere.scrollTop))
+
+  store.set("treeScroll", "not a number")
+  const garbage = tree(100)
+  keepScroll(garbage, page())
+  check("garbage in storage leaves the tree at the top", garbage.scrollTop === 0, String(garbage.scrollTop))
+
+  globalThis.sessionStorage = {
+    getItem() {
+      throw new Error("blocked")
+    },
+    setItem() {
+      throw new Error("blocked")
+    },
+  }
+  const blocked = tree(1400)
+  const blockedPage = page()
+  keepScroll(blocked, blockedPage)
+  blockedPage.leave() // must not throw
+  showCurrent(blocked)
+  check("blocked storage falls back to finding the entry", blocked.scrollTop > 0, String(blocked.scrollTop))
+  delete globalThis.sessionStorage
+
+  const order = (await client("tree.js")).match(/export function initTree\(\) \{[\s\S]*?\n\}/)?.[0] ?? ""
+  check(
+    "folders collapse first, then the place is put back, then the entry is found",
+    /initFolders\(\)[\s\S]*keepScroll\(sidebar\)[\s\S]*showCurrent\(sidebar\)/.test(order),
+  )
 }
 
 console.log("a preview waits to be asked for")
