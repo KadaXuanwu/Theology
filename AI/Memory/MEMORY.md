@@ -24,3 +24,4 @@ Index of things to remember across sessions. One line per memory file.
 - [CI test flake](ci-test-flake.md) — the deploy's Test step fails now and then on GitHub because of the 120 ms timing check; the log needs a login
 - [Quotes from raw text](quotes-from-raw-text.md) — fetch tools summarise and reference works misframe; check quotes against the raw page and the author
 - [Open Library dead route](open-library-dead-route.md) — its records answer scripts with a bot check; person and term nodes cite publisher or catalogue pages instead
+- [Bash heredoc apostrophes](bash-heredoc-apostrophes.md) — a heredoc with an odd number of apostrophes fails in the desktop Bash tool; write the file and run it
