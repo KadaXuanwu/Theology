@@ -17,7 +17,7 @@ About 15,000 fragments from roughly 900 to 1000 separate manuscripts, found betw
 
 # Shows
 - Copies of the Hebrew Bible a thousand years older than the medieval manuscripts the printed Hebrew Bible was based on.
-- Several textual forms circulating at the same time. Emanuel Tov's classification puts roughly 60 percent close to the later Masoretic text, about 5 percent close to the Samaritan Pentateuch, about 5 percent close to the Hebrew behind the Greek translation, and about 10 percent aligned with none of them.
+- Several textual forms circulating at the same time. Emanuel Tov's 2008 count covers the Qumran copies large enough to classify. Of the Torah copies, 48 percent are close to the later Masoretic text, or as close to it as to the Samaritan Pentateuch. Another 6.5 percent are close to the Samaritan Pentateuch, 4.5 percent to the Hebrew behind the Greek translation, and 41 percent are aligned with none of them. Of the copies of the other books, 44 percent are close to the Masoretic text, 3 percent to the Hebrew behind the Greek, and 53 percent are aligned with none.
 - A library of non biblical Jewish writing from the same period, which is where [[4Q521 Messianic Apocalypse]] and [[4Q246 Son of God Text]] come from.
 
 # Limits
@@ -26,4 +26,4 @@ About 15,000 fragments from roughly 900 to 1000 separate manuscripts, found betw
 - One community's library in one place. It is not a random sample of what Jews elsewhere were reading.
 
 # Source
-Overview and catalogue: [The Leon Levy Dead Sea Scrolls Digital Library](https://www.deadseascrolls.org.il/). Redating study: Mladen Popović et al., ["Dating ancient manuscripts using radiocarbon and AI-based writing style analysis"](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0323185), *PLOS ONE*, 4 June 2025. Text classification: Emanuel Tov, *Textual Criticism of the Hebrew Bible*, 3rd edition (Fortress Press, 2012). Needs the DJD volume references for the individual manuscripts named above.
+Overview and catalogue: [The Leon Levy Dead Sea Scrolls Digital Library](https://www.deadseascrolls.org.il/). Redating study: Mladen Popović et al., ["Dating ancient manuscripts using radiocarbon and AI-based writing style analysis"](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0323185), *PLOS ONE*, 4 June 2025. Text classification: Emanuel Tov, ["The Biblical Texts from the Judean Desert: An Overview and Analysis"](http://www.emanueltov.info/docs/papers/10.bibletexts.2008.pdf), in *Hebrew Bible, Greek Bible, and Qumran: Collected Essays*, TSAJ 121 (Mohr Siebeck, 2008), 128–154, read in the author's copy. General handbook: Emanuel Tov, *Textual Criticism of the Hebrew Bible*, 3rd edition (Fortress Press, 2012). Needs the DJD volume references for the individual manuscripts named above.
